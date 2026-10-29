@@ -1,0 +1,34 @@
+{%- comment -%}
+  One accordion row for mt-accordion (assets/mt-faq.js, assets/mt-faq.css).
+
+  Accepts:
+  - prefix: {String} unique prefix, for example the section id
+  - id: {String} row id, unique inside the prefix
+  - title: {String} question or title
+  - body: {String} answer HTML
+  - open: {Boolean} start open
+  - attrs: {String} extra attributes, for example block.shopify_attributes
+
+  Usage:
+  {% render 'mt-acc-item', prefix: section.id, id: block.id, title: block.settings.question, body: block.settings.answer, attrs: block.shopify_attributes %}
+{%- endcomment -%}
+{%- assign uid = prefix | append: '-' | append: id -%}
+<div class="mt-acc-item" {{ attrs }}>
+  <h3>
+    <button
+      class="mt-acc-q"
+      type="button"
+      id="MtAccQ-{{ uid }}"
+      aria-expanded="{% if open %}true{% else %}false{% endif %}"
+      aria-controls="MtAccA-{{ uid }}"
+    >
+      <span>{{ title | escape }}</span>
+      <span class="mt-pm">{%- render 'mt-icon', icon: 'plus' -%}</span>
+    </button>
+  </h3>
+  <div class="mt-acc-a{% if open %} is-open{% endif %}" id="MtAccA-{{ uid }}" role="region" aria-labelledby="MtAccQ-{{ uid }}">
+    <div {% unless open %}inert{% endunless %}>
+      <div class="mt-acc-in mt-rte">{{ body }}</div>
+    </div>
+  </div>
+</div>

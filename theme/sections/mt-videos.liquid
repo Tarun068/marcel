@@ -1,0 +1,245 @@
+{%- liquid
+  assign shown = 0
+  for block in section.blocks
+    if block.settings.video_url != blank or block.settings.video != blank
+      assign shown = shown | plus: 1
+    endif
+  endfor
+-%}
+
+{%- if shown > 0 or request.design_mode -%}
+{%- style -%}
+  .mt-videos-row { display: grid; grid-template-columns: repeat(var(--mt-cols, 3), minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 900px) {
+    .mt-videos-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 600px) {
+    .mt-videos-row { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 78%; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 16px; margin: 0 -16px; padding: 4px 16px 12px; scrollbar-width: thin; }
+    .mt-video { scroll-snap-align: start; }
+  }
+  .mt-video { display: grid; gap: 12px; align-content: start; }
+  mt-video { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: var(--mt-r-lg); overflow: hidden; background: var(--mt-navy); }
+  .mt-videos--portrait mt-video { aspect-ratio: 9 / 16; }
+  mt-video img, mt-video iframe, mt-video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
+  .mt .mt-video-play { position: absolute; inset: 0; display: grid; place-items: center; width: 100%; background: linear-gradient(180deg, rgba(13, 38, 59, 0) 50%, rgba(13, 38, 59, .45)); }
+  .mt-video-play span { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 99px; background: rgba(255, 255, 255, .94); color: var(--mt-navy); box-shadow: 0 10px 30px -10px rgba(0, 0, 0, .5); transition: transform .2s; }
+  .mt-video-play:hover span { transform: scale(1.06); }
+  .mt-video-play svg { width: 24px; height: 24px; margin-left: 4px; fill: currentColor; }
+  .mt-video-dur { position: absolute; right: 10px; bottom: 10px; z-index: 1; padding: 3px 9px; border-radius: 99px; background: rgba(13, 38, 59, .8); color: #FFFFFF; font-size: 12px; font-weight: 800; font-variant-numeric: tabular-nums; pointer-events: none; }
+  mt-video.is-playing .mt-video-dur { display: none; }
+  .mt .mt-video h3 { font-size: 18px; line-height: 1.25; letter-spacing: -.01em; }
+  .mt-video small { display: block; margin-top: 4px; font-size: 13.5px; color: var(--mt-ink-3); }
+  .mt-videos-foot { display: grid; gap: 14px; margin-top: 22px; }
+{%- endstyle -%}
+  {%- capture btn_link -%}{% render 'mt-link-to', key: section.settings.button_to, url: section.settings.button_link %}{%- endcapture -%}
+  <script src="{{ 'mt-videos.js' | asset_url }}" defer="defer"></script>
+  <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-videos' %}{% if section.settings.shape == 'portrait' %} mt-videos--portrait{% endif %}">
+    <div class="mt-wrap">
+      {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
+
+      {%- if shown == 0 -%}
+        <p class="mt-placeholder">Add Video blocks with a YouTube or Vimeo link, or a video uploaded to Shopify. This section stays hidden on the live store until then.</p>
+      {%- else -%}
+        <div class="mt-videos-row" style="--mt-cols: {{ shown | at_most: section.settings.columns }};">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign v = block.settings.video
+              assign u = block.settings.video_url
+              assign kind = 'hosted'
+              if v == blank
+                assign kind = u.type
+              endif
+            -%}
+            {%- if v != blank or u != blank -%}
+            <div class="mt-video" {{ block.shopify_attributes }}>
+              <mt-video data-kind="{{ kind }}"{% if kind != 'hosted' %} data-id="{{ u.id | escape }}"{% endif %} data-title="{{ block.settings.title | escape }}">
+                {%- if block.settings.cover != blank -%}
+                  {{- block.settings.cover | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 901px) 33vw, (min-width: 601px) 50vw, 80vw', alt: '' -}}
+                {%- elsif kind == 'hosted' and v.preview_image != blank -%}
+                  {{- v.preview_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 901px) 33vw, (min-width: 601px) 50vw, 80vw', alt: '' -}}
+                {%- elsif kind == 'youtube' -%}
+                  {% # theme-check-disable-next-line RemoteAsset %}
+                  <img src="https://i.ytimg.com/vi/{{ u.id | escape }}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+                {%- endif -%}
+                {%- if kind == 'hosted' -%}
+                  <template>{{ v | video_tag: controls: true, autoplay: true, playsinline: true, preload: 'none' }}</template>
+                {%- endif -%}
+                <button type="button" class="mt-video-play" aria-label="{{ section.settings.play_label | escape }}: {{ block.settings.title | escape }}">
+                  <span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12-7.5z"/></svg></span>
+                </button>
+                {%- if block.settings.duration != blank -%}<span class="mt-video-dur">{{ block.settings.duration | escape }}</span>{%- endif -%}
+              </mt-video>
+              {%- if block.settings.title != blank or block.settings.expert != blank -%}
+                <div>
+                  {%- if block.settings.title != blank -%}<h3>{{ block.settings.title | escape }}</h3>{%- endif -%}
+                  {%- if block.settings.expert != blank -%}<small>{{ block.settings.expert | escape }}</small>{%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.note != blank or section.settings.button_label != blank -%}
+        <div class="mt-videos-foot">
+          {%- if section.settings.note != blank -%}<p class="mt-fine">{{ section.settings.note }}</p>{%- endif -%}
+          {%- if section.settings.button_label != blank -%}
+            <div class="mt-btn-row">
+              <a class="mt-btn mt-btn-secondary" href="{{ btn_link }}"{% if section.settings.button_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>{{ section.settings.button_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Marcel expert videos",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 9,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Short, captioned videos from doctors and the MARCEL team. The section stays hidden until a video is added. Only describe an expert as recommending MARCEL with their permission."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Understand OSMF with experts"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Short videos that answer common questions"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "Doctors and the MARCEL team explain reduced mouth opening, the signs to watch for and how MARCEL OMR Therapy™ works."
+    },
+    {
+      "type": "select",
+      "id": "shape",
+      "label": "Video shape",
+      "options": [
+        {
+          "value": "landscape",
+          "label": "Landscape (16:9)"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait reels (9:16)"
+        }
+      ],
+      "default": "landscape"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Videos per row on desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "text",
+      "id": "play_label",
+      "label": "Play button label",
+      "info": "Read by screen readers.",
+      "default": "Play video"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "note",
+      "label": "Note",
+      "default": "Videos are for general education and do not replace a consultation."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Talk to a MARCEL OSMF Consultant"
+    },
+    {
+      "type": "select",
+      "id": "button_to",
+      "label": "Button opens",
+      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "default": "consult"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button custom link"
+    },
+    {"type":"header","content":"Section style"},
+    {"type":"select","id":"background","label":"Background","options":[{"value":"paper","label":"White"},{"value":"mist","label":"Light"},{"value":"tint","label":"Tinted"},{"value":"navy","label":"Navy"}],"default":"mist"},
+    {"type":"checkbox","id":"sheet","label":"Rounded top edge","info":"Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.","default":false},
+    {"type":"select","id":"spacing","label":"Spacing","options":[{"value":"normal","label":"Normal"},{"value":"tight","label":"Compact"},{"value":"none","label":"None"}],"default":"normal"}
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "label": "YouTube or Vimeo link",
+          "accept": [
+            "youtube",
+            "vimeo"
+          ]
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Or a video uploaded to Shopify",
+          "info": "Used instead of the link when both are set."
+        },
+        {
+          "type": "image_picker",
+          "id": "cover",
+          "label": "Cover image",
+          "info": "Optional. YouTube videos use their own thumbnail."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "What is reduced mouth opening?"
+        },
+        {
+          "type": "text",
+          "id": "expert",
+          "label": "Expert",
+          "info": "Name and qualification, as approved by the expert."
+        },
+        {
+          "type": "text",
+          "id": "duration",
+          "label": "Length",
+          "info": "For example: 1:45"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel expert videos"
+    }
+  ]
+}
+{% endschema %}

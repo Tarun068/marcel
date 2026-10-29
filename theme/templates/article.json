@@ -1,0 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "mt-main-article",
+      "settings": {
+        "home_label": "Home",
+        "parent_label": "Understand OSMF",
+        "hero_background": "tint",
+        "read_label": "[n] min read",
+        "show_meta": false,
+        "show_author": false,
+        "show_image": true,
+        "cta_heading": "Check your OSMF stage",
+        "cta_text": "The MARCEL OSMF Self-Check gives an initial indication. It cannot diagnose OSMF.",
+        "cta_label": "Check Your OSMF Stage",
+        "show_more": true,
+        "more_label": "Keep reading",
+        "more_images": false,
+        "parent_link": "/pages/understand-osmf"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

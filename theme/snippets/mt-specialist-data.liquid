@@ -1,0 +1,49 @@
+{%- comment -%}
+  OSMF Care Specialist directory as JSON for the specialist finder.
+  Reads metaobject entries of type "osmf_specialist" (Content > Metaobjects). Fields used:
+  name, qualification, registration, clinic_name, address, area, city, state, pincode,
+  phone, hours, map_link, latitude, longitude, photo.
+  With no entries yet, the three sample profiles from the client's demo are shown in the
+  theme editor only, so they never appear on the live store.
+{%- endcomment -%}
+{%- assign people = shop.metaobjects.osmf_specialist.values -%}
+<script type="application/json" data-mt-specialists>
+  {%- if people.size > 0 -%}
+    { "sample": false, "list": [
+      {%- for p in people -%}
+        {%- liquid
+          assign photo = ''
+          if p.photo.value != blank
+            assign photo = p.photo.value | image_url: width: 160
+          endif
+        -%}
+        {
+          "id": {{ p.system.handle | json }},
+          "name": {{ p.name.value | default: '' | json }},
+          "qualification": {{ p.qualification.value | default: '' | json }},
+          "registration": {{ p.registration.value | default: '' | json }},
+          "clinic": {{ p.clinic_name.value | default: '' | json }},
+          "address": {{ p.address.value | default: '' | json }},
+          "area": {{ p.area.value | default: '' | json }},
+          "city": {{ p.city.value | default: '' | json }},
+          "state": {{ p.state.value | default: '' | json }},
+          "pin": {{ p.pincode.value | default: '' | json }},
+          "phone": {{ p.phone.value | default: '' | json }},
+          "hours": {{ p.hours.value | default: '' | json }},
+          "map": {{ p.map_link.value | default: '' | json }},
+          "lat": {{ p.latitude.value | default: '' | json }},
+          "lng": {{ p.longitude.value | default: '' | json }},
+          "photo": {{ photo | json }}
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ] }
+  {%- elsif request.design_mode -%}
+    { "sample": true, "list": [
+      { "id": "sample-1", "name": "Dr. A. Mehta", "qualification": "Sample profile", "registration": "", "clinic": "Sample clinic", "address": "", "area": "Bopal", "city": "Ahmedabad", "state": "Gujarat", "pin": "380058", "phone": "+91 90000 00001", "hours": "", "map": "", "lat": "23.0333", "lng": "72.4633", "photo": "" },
+      { "id": "sample-2", "name": "Dr. S. Patel", "qualification": "Sample profile", "registration": "", "clinic": "Sample clinic", "address": "", "area": "Adajan", "city": "Surat", "state": "Gujarat", "pin": "395009", "phone": "+91 90000 00002", "hours": "", "map": "", "lat": "21.1959", "lng": "72.7933", "photo": "" },
+      { "id": "sample-3", "name": "Dr. R. Shah", "qualification": "Sample profile", "registration": "", "clinic": "Sample clinic", "address": "", "area": "Alkapuri", "city": "Vadodara", "state": "Gujarat", "pin": "390007", "phone": "+91 90000 00003", "hours": "", "map": "", "lat": "22.3106", "lng": "73.1691", "photo": "" }
+    ] }
+  {%- else -%}
+    { "sample": false, "list": [] }
+  {%- endif -%}
+</script>

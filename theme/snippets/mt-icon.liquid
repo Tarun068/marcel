@@ -1,0 +1,13 @@
+{%- comment -%}
+  Renders an icon from the Marcel sprite (snippets/mt-icon-sprite.liquid).
+
+  Accepts:
+  - icon: {String} icon name, e.g. 'arrow-right', 'whatsapp', 's-burn'
+  - class: {String} extra classes (optional)
+
+  Usage:
+  {% render 'mt-icon', icon: 'arrow-right' %}
+{%- endcomment -%}
+{%- if icon != blank and icon != 'none' -%}
+  <svg class="mt-i{% if class != blank %} {{ class }}{% endif %}" aria-hidden="true" focusable="false"><use href="#mt-i-{{ icon }}"/></svg>
+{%- endif -%}

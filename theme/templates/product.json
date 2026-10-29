@@ -1,0 +1,123 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "mt-main-product",
+      "settings": {
+        "cta_to": "consult",
+        "cta2_to": "therapy",
+        "home_label": "Home",
+        "shop_label": "Products",
+        "image_fit": "cover",
+        "gallery_label": "Product images and details",
+        "how_title": "How to use",
+        "how_thumb": "How to use",
+        "routine_title": "Your routine",
+        "routine_thumb": "Routine",
+        "ingredients_title": "Key ingredients",
+        "ingredients_thumb": "Ingredients",
+        "free_title": "Made with care",
+        "kit_inside_title": "What’s inside",
+        "kit_thumb": "In the kit",
+        "kit_heading": "In this kit",
+        "best_prefix": "Best for",
+        "add_label": "Add to cart",
+        "sold_out_label": "Sold out",
+        "variant_style": "cards",
+        "pack_label": "Pack size",
+        "show_buy_now": true,
+        "qty_label": "Quantity",
+        "minus_label": "Decrease quantity",
+        "plus_label": "Increase quantity",
+        "acc_how": "How to use",
+        "acc_kit": "What’s in the kit",
+        "acc_routine": "Your daily routine",
+        "acc_ingredients": "Ingredients",
+        "acc_whats_in": "What’s in it",
+        "free_note": "Full ingredient list as printed on the pack.",
+        "acc_caution": "Caution and storage",
+        "acc_stage": "Which stage is it for?",
+        "show_description": true,
+        "acc_about": "About this product",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight",
+        "cta_label": "Talk to a MARCEL OSMF Consultant",
+        "cta2_label": "Explore MARCEL OMR Therapy™"
+      },
+      "blocks": {
+        "perk_1": {
+          "type": "perk",
+          "settings": {
+            "icon": "box",
+            "text": "Discreet packaging"
+          }
+        },
+        "perk_2": {
+          "type": "perk",
+          "settings": {
+            "icon": "truck",
+            "text": "Delivery across India"
+          }
+        },
+        "accordion_1": {
+          "type": "accordion",
+          "settings": {
+            "title": "Delivery and returns",
+            "text": "<p>Ships across India in discreet packaging. Delivery times are shown at checkout.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "perk_1",
+        "perk_2",
+        "accordion_1"
+      ]
+    },
+    "related": {
+      "type": "mt-related-products",
+      "settings": {
+        "source": "metafield",
+        "intent": "related",
+        "limit": 3,
+        "eyebrow": "Also in MARCEL OMR Therapy™",
+        "heading": "Related products",
+        "details_label": "View product details",
+        "add_label": "Add to cart",
+        "sold_out_label": "Sold out",
+        "image_fit": "cover",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "cta": {
+      "type": "mt-cta-band",
+      "settings": {
+        "eyebrow": "Need guidance?",
+        "heading": "Not sure what to do next?",
+        "text": "Explore MARCEL OMR Therapy™ or connect with our team to understand the next steps.",
+        "button_1_label": "Talk to a MARCEL OSMF Consultant",
+        "button_1_to": "consult",
+        "button_2_label": "Find an OSMF Specialist Doctor",
+        "button_2_to": "specialists",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related",
+    "cta"
+  ]
+}

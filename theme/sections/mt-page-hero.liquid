@@ -1,0 +1,712 @@
+{{ 'mt-pages.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign fallback_title = page.title | default: collection.title | default: blog.title | default: shop.name
+  assign current = section.settings.current_label | default: fallback_title
+  assign stats = section.blocks | where: 'type', 'stat'
+  assign searches = section.blocks | where: 'type', 'search'
+  assign hero_text = section.settings.text
+  if hero_text == blank and collection.description != blank
+    assign hero_text = collection.description | strip_html | truncatewords: 40
+  endif
+-%}
+{%- capture btn1_link -%}{% render 'mt-link-to', key: section.settings.button_1_to, url: section.settings.button_1_link %}{%- endcapture -%}
+{%- capture btn2_link -%}{% render 'mt-link-to', key: section.settings.button_2_to, url: section.settings.button_2_link %}{%- endcapture -%}
+{%- capture back_link -%}{% render 'mt-link-to', key: section.settings.back_to, url: section.settings.back_link %}{%- endcapture -%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-phero' %}">
+  <div class="mt-wrap{% if stats.size > 0 %} mt-phero-grid{% endif %}">
+    <div>
+      {%- if section.settings.show_crumbs -%}
+        <nav class="mt-crumbs" aria-label="Breadcrumb">
+          <a href="{{ routes.root_url }}">{{ section.settings.home_label | escape }}</a>
+          {%- if section.settings.parent_label != blank -%}
+            {%- render 'mt-icon', icon: 'chevron-right' -%}
+            <a href="{{ section.settings.parent_link | default: routes.root_url }}">{{ section.settings.parent_label | escape }}</a>
+          {%- endif -%}
+          {%- render 'mt-icon', icon: 'chevron-right' -%}
+          <span aria-current="page">{{ current | escape }}</span>
+        </nav>
+      {%- endif -%}
+      {%- if section.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+      <h1 class="mt-h1">{{ section.settings.heading | default: fallback_title }}</h1>
+      {%- if hero_text != blank -%}
+        <p class="mt-lead">{{ hero_text }}</p>
+      {%- endif -%}
+      {%- if section.settings.button_1_label != blank or section.settings.button_2_label != blank -%}
+        <div class="mt-btn-row mt-phero-btns">
+          {%- if section.settings.button_1_label != blank -%}
+            <a class="mt-btn mt-btn-primary" href="{{ btn1_link }}"{% if section.settings.button_1_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>{{ section.settings.button_1_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>
+          {%- endif -%}
+          {%- if section.settings.button_2_label != blank -%}
+            <a class="mt-btn mt-btn-secondary" href="{{ btn2_link }}"{% if section.settings.button_2_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>{{ section.settings.button_2_label | escape }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.note != blank -%}<p class="mt-fine mt-phero-note">{{ section.settings.note }}</p>{%- endif -%}
+      {%- if section.settings.back_label != blank -%}
+        <a class="mt-link mt-phero-back" href="{{ back_link }}">{%- render 'mt-icon', icon: 'arrow-left' -%}{{ section.settings.back_label | escape }}</a>
+      {%- endif -%}
+      {%- for block in searches -%}
+        <form class="mt-find-form" action="{{ block.settings.link | default: request.path }}" method="get" role="search" data-mt-search-form {{ block.shopify_attributes }}>
+          <label class="mt-search-box">
+            {%- render 'mt-icon', icon: block.settings.icon -%}
+            <span class="visually-hidden">{{ block.settings.placeholder | escape }}</span>
+            <input type="search" name="{{ block.settings.param | default: 'q' }}" placeholder="{{ block.settings.placeholder | escape }}" autocomplete="off">
+          </label>
+          <button class="mt-btn mt-btn-primary" type="submit">{{ block.settings.button_label | escape }}</button>
+        </form>
+      {%- endfor -%}
+    </div>
+    {%- if stats.size > 0 -%}
+      <div class="mt-phero-stats">
+        {%- for block in stats -%}
+          <div class="mt-phero-stat" {{ block.shopify_attributes }}>
+            <b>
+              {%- if block.settings.value != blank -%}
+                {{- block.settings.value | escape -}}
+              {%- else -%}
+                {%- render 'mt-icon', icon: block.settings.icon -%}
+              {%- endif -%}
+            </b>
+            <span>{{ block.settings.label | escape }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel page header",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_crumbs",
+      "label": "Show breadcrumbs",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "home_label",
+      "label": "Home label",
+      "default": "Home"
+    },
+    {
+      "type": "text",
+      "id": "parent_label",
+      "label": "Parent page label",
+      "info": "Optional middle step, for example ‘OSMF guide’."
+    },
+    {
+      "type": "url",
+      "id": "parent_link",
+      "label": "Parent page link"
+    },
+    {
+      "type": "text",
+      "id": "current_label",
+      "label": "Current page label",
+      "info": "Empty uses the page title."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Empty uses the page title."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text",
+      "info": "On collection pages, empty uses the collection description."
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "button_1_label",
+      "label": "Button 1"
+    },
+    {
+      "type": "select",
+      "id": "button_1_to",
+      "label": "Button 1 opens",
+      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "default": "test"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Button 1 custom link"
+    },
+    {
+      "type": "text",
+      "id": "button_2_label",
+      "label": "Button 2"
+    },
+    {
+      "type": "select",
+      "id": "button_2_to",
+      "label": "Button 2 opens",
+      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "default": "consult"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Button 2 custom link"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "note",
+      "label": "Note under the buttons"
+    },
+    {
+      "type": "text",
+      "id": "back_label",
+      "label": "Back link",
+      "info": "Optional, e.g. Back to MARCEL OMR Therapy™ Overview."
+    },
+    {
+      "type": "select",
+      "id": "back_to",
+      "label": "Back link opens",
+      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "default": "therapy"
+    },
+    {
+      "type": "url",
+      "id": "back_link",
+      "label": "Back link custom URL"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "tint"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "none"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Number",
+          "info": "Leave empty to show the icon instead.",
+          "default": "26"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "arrow-right",
+              "label": "Arrow"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "video",
+              "label": "Video call"
+            },
+            {
+              "value": "whatsapp",
+              "label": "WhatsApp"
+            },
+            {
+              "value": "clinic",
+              "label": "Clinic"
+            },
+            {
+              "value": "doctor",
+              "label": "Doctor"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "flask",
+              "label": "Research flask"
+            },
+            {
+              "value": "patent",
+              "label": "Patent document"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "users",
+              "label": "People"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "india",
+              "label": "Globe"
+            },
+            {
+              "value": "pin",
+              "label": "Location pin"
+            },
+            {
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "value": "mail",
+              "label": "Email"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "truck",
+              "label": "Delivery"
+            },
+            {
+              "value": "box",
+              "label": "Package"
+            },
+            {
+              "value": "bag",
+              "label": "Shopping bag"
+            },
+            {
+              "value": "search",
+              "label": "Search"
+            },
+            {
+              "value": "info",
+              "label": "Info"
+            },
+            {
+              "value": "alert",
+              "label": "Alert"
+            },
+            {
+              "value": "refresh",
+              "label": "Refresh"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "target",
+              "label": "Target"
+            },
+            {
+              "value": "chart",
+              "label": "Chart"
+            },
+            {
+              "value": "home",
+              "label": "Home"
+            },
+            {
+              "value": "grid",
+              "label": "Grid"
+            },
+            {
+              "value": "test",
+              "label": "Self-check"
+            },
+            {
+              "value": "book",
+              "label": "Guide"
+            },
+            {
+              "value": "drop",
+              "label": "Drop"
+            },
+            {
+              "value": "sun",
+              "label": "Sun"
+            },
+            {
+              "value": "moon",
+              "label": "Moon"
+            },
+            {
+              "value": "bowl",
+              "label": "Food bowl"
+            },
+            {
+              "value": "ban",
+              "label": "Quit habit"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "s-open",
+              "label": "Symptom: mouth opening"
+            },
+            {
+              "value": "s-burn",
+              "label": "Symptom: burning"
+            },
+            {
+              "value": "s-tight",
+              "label": "Symptom: tightness"
+            },
+            {
+              "value": "s-ulcer",
+              "label": "Symptom: ulcers"
+            },
+            {
+              "value": "s-bands",
+              "label": "Symptom: white bands"
+            },
+            {
+              "value": "s-tongue",
+              "label": "Symptom: tongue"
+            },
+            {
+              "value": "s-pain",
+              "label": "Symptom: pain"
+            }
+          ],
+          "default": "patent"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Years of development"
+        }
+      ]
+    },
+    {
+      "type": "search",
+      "name": "Search box",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "arrow-right",
+              "label": "Arrow"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "video",
+              "label": "Video call"
+            },
+            {
+              "value": "whatsapp",
+              "label": "WhatsApp"
+            },
+            {
+              "value": "clinic",
+              "label": "Clinic"
+            },
+            {
+              "value": "doctor",
+              "label": "Doctor"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "flask",
+              "label": "Research flask"
+            },
+            {
+              "value": "patent",
+              "label": "Patent document"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "users",
+              "label": "People"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "india",
+              "label": "Globe"
+            },
+            {
+              "value": "pin",
+              "label": "Location pin"
+            },
+            {
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "value": "mail",
+              "label": "Email"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "truck",
+              "label": "Delivery"
+            },
+            {
+              "value": "box",
+              "label": "Package"
+            },
+            {
+              "value": "bag",
+              "label": "Shopping bag"
+            },
+            {
+              "value": "search",
+              "label": "Search"
+            },
+            {
+              "value": "info",
+              "label": "Info"
+            },
+            {
+              "value": "alert",
+              "label": "Alert"
+            },
+            {
+              "value": "refresh",
+              "label": "Refresh"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "target",
+              "label": "Target"
+            },
+            {
+              "value": "chart",
+              "label": "Chart"
+            },
+            {
+              "value": "home",
+              "label": "Home"
+            },
+            {
+              "value": "grid",
+              "label": "Grid"
+            },
+            {
+              "value": "test",
+              "label": "Self-check"
+            },
+            {
+              "value": "book",
+              "label": "Guide"
+            },
+            {
+              "value": "drop",
+              "label": "Drop"
+            },
+            {
+              "value": "sun",
+              "label": "Sun"
+            },
+            {
+              "value": "moon",
+              "label": "Moon"
+            },
+            {
+              "value": "bowl",
+              "label": "Food bowl"
+            },
+            {
+              "value": "ban",
+              "label": "Quit habit"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "s-open",
+              "label": "Symptom: mouth opening"
+            },
+            {
+              "value": "s-burn",
+              "label": "Symptom: burning"
+            },
+            {
+              "value": "s-tight",
+              "label": "Symptom: tightness"
+            },
+            {
+              "value": "s-ulcer",
+              "label": "Symptom: ulcers"
+            },
+            {
+              "value": "s-bands",
+              "label": "Symptom: white bands"
+            },
+            {
+              "value": "s-tongue",
+              "label": "Symptom: tongue"
+            },
+            {
+              "value": "s-pain",
+              "label": "Symptom: pain"
+            }
+          ],
+          "default": "pin"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder",
+          "default": "Enter your city or pincode"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Search"
+        },
+        {
+          "type": "text",
+          "id": "param",
+          "label": "Search parameter name",
+          "default": "q"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Search page",
+          "info": "Empty searches on this page."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel page header"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,405 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "mt-page-hero",
+      "settings": {
+        "show_crumbs": true,
+        "home_label": "Home",
+        "button_1_to": "test",
+        "button_2_to": "consult",
+        "back_to": "therapy",
+        "background": "tint",
+        "sheet": false,
+        "spacing": "none",
+        "current_label": "Clinical evidence",
+        "eyebrow": "Clinical evidence & research",
+        "heading": "Development guided by evaluation and continued learning",
+        "text": "Clinical assessment and scientific investigation form important parts of the MARCEL development journey. Where research is ongoing, it is described as ongoing research."
+      }
+    },
+    "study": {
+      "type": "mt-evidence",
+      "settings": {
+        "eyebrow": "Clinical research evidence",
+        "heading": "What the 2026 clinical study found",
+        "text": "A clinical study was conducted in 2026 to evaluate MARCEL OMR Therapy™ in people with OSMF.",
+        "hero_value": "14.86 mm",
+        "hero_extra": "(71.25%)",
+        "hero_label": "Average increase in mouth opening",
+        "hero_text": "Average change reported in the study group. Individual results vary.",
+        "group_1_title": "Reported relief in chief complaints",
+        "group_1_text": "Percentage of participants who reported relief",
+        "group_2_title": "Changes in clinical findings",
+        "group_2_text": "Percentage of participants with improvement",
+        "caveat": "The study had Institutional Ethics Committee approval and was registered with the Clinical Trials Registry of India (CTRI). Clinical findings must be interpreted in the context of the study design, methods, sample size, duration and limitations. Individual results vary and are not guaranteed.",
+        "button_to": "evidence",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal",
+        "anchor": "clinical-study"
+      },
+      "blocks": {
+        "meta_1": {
+          "type": "meta",
+          "settings": {
+            "label": "Study design",
+            "value": "Prospective, randomized, parallel-group, active-controlled, open-label clinical trial"
+          }
+        },
+        "meta_2": {
+          "type": "meta",
+          "settings": {
+            "label": "Ethics approval",
+            "value": "RAPMC/IEC/PROJECT/04/2026"
+          }
+        },
+        "meta_3": {
+          "type": "meta",
+          "settings": {
+            "label": "CTRI registration",
+            "value": "CTRI/2026/03/128345"
+          }
+        },
+        "stat_1_1": {
+          "type": "stat_1",
+          "settings": {
+            "value": "77.97%",
+            "label": "Burning sensation"
+          }
+        },
+        "stat_1_2": {
+          "type": "stat_1",
+          "settings": {
+            "value": "77.78%",
+            "label": "Taste alteration"
+          }
+        },
+        "stat_1_3": {
+          "type": "stat_1",
+          "settings": {
+            "value": "15.25%",
+            "label": "Salivation"
+          }
+        },
+        "stat_1_4": {
+          "type": "stat_1",
+          "settings": {
+            "value": "70.83%",
+            "label": "Intolerance to spicy food"
+          }
+        },
+        "stat_1_5": {
+          "type": "stat_1",
+          "settings": {
+            "value": "71.88%",
+            "label": "Pain in mouth"
+          }
+        },
+        "stat_2_1": {
+          "type": "stat_2",
+          "settings": {
+            "value": "66.07%",
+            "label": "Colour of oral mucosa"
+          }
+        },
+        "stat_2_2": {
+          "type": "stat_2",
+          "settings": {
+            "value": "47.37%",
+            "label": "Ulceration"
+          }
+        },
+        "stat_2_3": {
+          "type": "stat_2",
+          "settings": {
+            "value": "57.14%",
+            "label": "Consistency"
+          }
+        },
+        "stat_2_4": {
+          "type": "stat_2",
+          "settings": {
+            "value": "66.67%",
+            "label": "Fibrous bands"
+          }
+        }
+      },
+      "block_order": [
+        "meta_1",
+        "meta_2",
+        "meta_3",
+        "stat_1_1",
+        "stat_1_2",
+        "stat_1_3",
+        "stat_1_4",
+        "stat_1_5",
+        "stat_2_1",
+        "stat_2_2",
+        "stat_2_3",
+        "stat_2_4"
+      ]
+    },
+    "clinical": {
+      "type": "mt-journey",
+      "settings": {
+        "eyebrow": "Clinical evidence",
+        "heading": "Clinical studies in academic institutions",
+        "text": "",
+        "center": false,
+        "layout": "timeline",
+        "columns": 4,
+        "note": "",
+        "button_label": "",
+        "button_to": "journey",
+        "button2_to": "consult",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal",
+        "anchor": "clinical-evaluations"
+      },
+      "blocks": {
+        "phase_1": {
+          "type": "phase",
+          "settings": {
+            "when": "November 2008",
+            "icon": "clinic",
+            "title": "Clinical evaluation at Government Dental Colleges",
+            "text": "Early clinical evaluation of the developing formulation at Government Dental College, Ahmedabad and Government Dental College, Jamnagar."
+          }
+        },
+        "phase_2": {
+          "type": "phase",
+          "settings": {
+            "when": "R.A. Podar Ayurvedic Medical College, Mumbai",
+            "icon": "test",
+            "title": "Clinical study",
+            "text": "Final report pending."
+          }
+        },
+        "phase_3": {
+          "type": "phase",
+          "settings": {
+            "when": "September 2026",
+            "icon": "users",
+            "title": "Nanded Randomized Controlled Clinical Study (RCT)",
+            "text": "A separate clinical study from Investigation 4, the Human OSMF Fibrosis-Remodelling / Reversal Study."
+          }
+        }
+      },
+      "block_order": [
+        "phase_1",
+        "phase_2",
+        "phase_3"
+      ]
+    },
+    "research": {
+      "type": "mt-journey",
+      "settings": {
+        "eyebrow": "Ongoing research",
+        "heading": "MARCEL OSMF Fibrosis Reversal Research Programme",
+        "text": "Ongoing investigations and evidence generation. Status: ongoing — final reports and integrated conclusions are pending.",
+        "center": false,
+        "layout": "cards",
+        "columns": 3,
+        "note": "Research objectives and preliminary observations should not be interpreted as established proof of clinical efficacy or fibrosis reversal.",
+        "button_label": "",
+        "button_to": "journey",
+        "button2_to": "consult",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal",
+        "anchor": "research"
+      },
+      "blocks": {
+        "phase_1": {
+          "type": "phase",
+          "settings": {
+            "when": "Investigation 1",
+            "icon": "flask",
+            "title": "In-vitro anti-fibrotic mechanism",
+            "text": "Investigate relevant cellular biological activity and generate preliminary anti-fibrotic evidence."
+          }
+        },
+        "phase_2": {
+          "type": "phase",
+          "settings": {
+            "when": "Investigation 2",
+            "icon": "flask",
+            "title": "Molecular mechanism & biomarkers",
+            "text": "Investigate relevant molecular pathways and fibrosis-associated biomarkers."
+          }
+        },
+        "phase_3": {
+          "type": "phase",
+          "settings": {
+            "when": "Investigation 3",
+            "icon": "flask",
+            "title": "Histopathology & tissue remodelling",
+            "text": "Investigate whether biological activity corresponds to measurable structural and tissue-level changes."
+          }
+        },
+        "phase_4": {
+          "type": "phase",
+          "settings": {
+            "when": "Planning",
+            "icon": "test",
+            "title": "Human clinical development planning",
+            "text": "Protocol, population, endpoints, comparator, sample size, ethics, registration and study procedures for human fibrosis-remodelling research."
+          }
+        },
+        "phase_5": {
+          "type": "phase",
+          "settings": {
+            "when": "Investigation 4",
+            "icon": "users",
+            "title": "Human OSMF fibrosis-remodelling / reversal study",
+            "text": "A separate investigation designed to evaluate clinical, biological and tissue-level outcomes in patients with established OSMF."
+          }
+        },
+        "phase_6": {
+          "type": "phase",
+          "settings": {
+            "when": "Integration",
+            "icon": "chart",
+            "title": "Integrated scientific evidence assessment",
+            "text": "Cellular → Molecular → Tissue → Human clinical."
+          }
+        }
+      },
+      "block_order": [
+        "phase_1",
+        "phase_2",
+        "phase_3",
+        "phase_4",
+        "phase_5",
+        "phase_6"
+      ]
+    },
+    "ip": {
+      "type": "mt-journey",
+      "settings": {
+        "eyebrow": "IP, regulatory, quality & manufacturing",
+        "heading": "Building a strong IP, regulatory and manufacturing foundation",
+        "text": "",
+        "center": false,
+        "layout": "timeline",
+        "columns": 4,
+        "note": "Patent applications are described as applications until a patent is granted.",
+        "button_label": "",
+        "button_to": "journey",
+        "button2_to": "consult",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal",
+        "anchor": "ip-regulatory"
+      },
+      "blocks": {
+        "phase_1": {
+          "type": "phase",
+          "settings": {
+            "when": "2008",
+            "icon": "patent",
+            "title": "First patent granted",
+            "text": ""
+          }
+        },
+        "phase_2": {
+          "type": "phase",
+          "settings": {
+            "when": "8 May 2025",
+            "icon": "patent",
+            "title": "Indian patent application filed",
+            "text": "Application No. 202521044814."
+          }
+        },
+        "phase_3": {
+          "type": "phase",
+          "settings": {
+            "when": "2025–2026",
+            "icon": "book",
+            "title": "Regulatory dossier & licensing",
+            "text": "Compilation of applicable quality, scientific, manufacturing and regulatory documentation and pursuit of the applicable licensing pathway."
+          }
+        },
+        "phase_4": {
+          "type": "phase",
+          "settings": {
+            "when": "2025–2026",
+            "icon": "box",
+            "title": "GMP manufacturing, scale-up & process validation",
+            "text": ""
+          }
+        },
+        "phase_5": {
+          "type": "phase",
+          "settings": {
+            "when": "2026",
+            "icon": "shield",
+            "title": "Quality, GMP & regulatory compliance certifications",
+            "text": "ISO 9001:2015 · ISO 14001:2015 · ISO 22000:2018 · GMP · FDA regulatory compliance."
+          }
+        },
+        "phase_6": {
+          "type": "phase",
+          "settings": {
+            "when": "2026",
+            "icon": "patent",
+            "title": "30 trademark applications filed",
+            "text": ""
+          }
+        },
+        "phase_7": {
+          "type": "phase",
+          "settings": {
+            "when": "2026",
+            "icon": "india",
+            "title": "PCT international patent filing",
+            "text": "International patent protection pathway initiated through PCT filing."
+          }
+        }
+      },
+      "block_order": [
+        "phase_1",
+        "phase_2",
+        "phase_3",
+        "phase_4",
+        "phase_5",
+        "phase_6",
+        "phase_7"
+      ]
+    },
+    "cta": {
+      "type": "mt-cta-band",
+      "settings": {
+        "eyebrow": "Measure. Document. Analyse. Improve.",
+        "heading": "Questions about the evidence?",
+        "text": "Healthcare professionals can contact the MARCEL team for research and clinical information.",
+        "button_1_label": "Professional enquiry",
+        "button_1_to": "custom",
+        "button_2_label": "Explore MARCEL OMR Therapy™",
+        "button_2_to": "therapy",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight",
+        "button_1_link": "/pages/healthcare-professionals#enquiry"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "study",
+    "clinical",
+    "research",
+    "ip",
+    "cta"
+  ]
+}

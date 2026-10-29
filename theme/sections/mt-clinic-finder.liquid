@@ -1,0 +1,191 @@
+{%- style -%}
+  .mt-clinic-band { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); overflow: hidden; border-radius: var(--mt-r-xl); background: var(--mt-tint); }
+  .mt-clinic-copy { padding: clamp(26px, 4vw, 48px); }
+  .mt-clinic-copy .mt-h2 { font-size: clamp(26px, 19px + 1.6vw, 38px); }
+  .mt-clinic-search { position: relative; display: grid; align-content: center; padding: clamp(84px, 7vw, 96px) clamp(26px, 4vw, 48px) clamp(26px, 4vw, 48px); background-color: var(--mt-aqua-soft); background-image: radial-gradient(rgba(var(--mt-aqua-rgb), .45) 1.4px, transparent 1.6px); background-size: 18px 18px; }
+  .mt-clinic-pin { position: absolute; right: 26px; top: 22px; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: var(--mt-teal); color: var(--mt-on-dark); }
+  .mt-clinic-pin .mt-i { transform: rotate(45deg); width: 24px; height: 24px; }
+  @media (max-width: 860px) {
+    .mt-clinic-band { grid-template-columns: minmax(0, 1fr); }
+    .mt-clinic-pin { display: none; }
+    .mt-clinic-search { padding-top: 26px; }
+  }
+  .mt-quick-cities { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 16px; }
+  .mt-quick-cities a { padding: 7px 13px; border-radius: 99px; background: var(--mt-paper); font-size: 14px; font-weight: 700; color: var(--mt-ink); }
+  .mt-quick-cities a:hover { background: var(--mt-teal); color: var(--mt-on-dark); }
+{%- endstyle -%}
+
+{%- liquid
+  assign clinics_link = section.settings.link | default: settings.mt_link_clinics | default: routes.search_url
+  assign cities = section.settings.cities | split: ','
+-%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-clinics' %}">
+  <div class="mt-wrap">
+    <div class="mt-clinic-band">
+      <div class="mt-stack mt-clinic-copy">
+        {%- if section.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2 class="mt-h2">{{ section.settings.heading }}</h2>{%- endif -%}
+        {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+      </div>
+      <div class="mt-clinic-search">
+        <span class="mt-clinic-pin" aria-hidden="true">{%- render 'mt-icon', icon: 'clinic' -%}</span>
+        <form class="mt-find-form" action="{{ clinics_link }}" method="get" role="search">
+          <label class="mt-search-box">
+            {%- render 'mt-icon', icon: 'pin' -%}
+            <span class="visually-hidden">{{ section.settings.placeholder | escape }}</span>
+            <input type="text" name="{{ section.settings.param | default: 'q' }}" placeholder="{{ section.settings.placeholder | escape }}" autocomplete="postal-code">
+          </label>
+          <button class="mt-btn mt-btn-primary" type="submit">{{ section.settings.button_label | escape }}</button>
+        </form>
+        {%- if section.settings.cities != blank -%}
+          <div class="mt-quick-cities">
+            {%- if section.settings.cities_label != blank -%}
+              <span class="mt-small mt-muted">{{ section.settings.cities_label | escape }}</span>
+            {%- endif -%}
+            {%- for city in cities -%}
+              {%- assign city = city | strip -%}
+              {%- if city != blank -%}
+                <a href="{{ clinics_link }}?city={{ city | url_encode }}">{{ city | escape }}</a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel clinic finder",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Near you"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find an OSMF Specialist Doctor"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "Search by city or PIN code for verified MARCEL OSMF Care Specialists who offer an in-clinic, in-person consultation."
+    },
+    {
+      "type": "header",
+      "content": "Search"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Clinic finder page",
+      "info": "Empty uses the Find an OSMF Specialist page from Theme settings."
+    },
+    {
+      "type": "text",
+      "id": "param",
+      "label": "Search parameter name",
+      "info": "Name of the query parameter the clinic page reads.",
+      "default": "q"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Placeholder",
+      "default": "Enter your city or PIN code"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Find specialists"
+    },
+    {
+      "type": "text",
+      "id": "cities_label",
+      "label": "Popular cities label",
+      "default": "Popular:"
+    },
+    {
+      "type": "text",
+      "id": "cities",
+      "label": "Popular cities",
+      "info": "Separate with commas. Each links to the clinic page with ?city=…",
+      "default": "Ahmedabad, Vadodara, Surat, Mumbai, Delhi"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "tight"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel clinic finder"
+    }
+  ]
+}
+{% endschema %}

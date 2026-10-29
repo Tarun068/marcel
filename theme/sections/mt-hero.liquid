@@ -1,0 +1,373 @@
+{{ 'mt-hero.css' | asset_url | stylesheet_tag }}
+
+{%- capture btn1_link -%}{% render 'mt-link-to', key: section.settings.button_1_to, url: section.settings.button_1_link %}{%- endcapture -%}
+{%- capture btn2_link -%}{% render 'mt-link-to', key: section.settings.button_2_to, url: section.settings.button_2_link %}{%- endcapture -%}
+{%- liquid
+  assign trust_blocks = section.blocks | where: 'type', 'trust'
+  assign pillar_blocks = section.blocks | where: 'type', 'pillar'
+-%}
+
+<section class="mt mt-hero mt-bg-{{ section.settings.background }}{% if section.settings.pattern %} mt-hero--pattern{% endif %}{% if section.settings.heading_font == 'serif' %} mt-hero--serif{% endif %}">
+  <div class="mt-wrap mt-hero-grid">
+    <div class="mt-hero-copy">
+      {%- if section.settings.pill_text != blank -%}
+        <span class="mt-hero-pill">
+          {%- if section.settings.pill_icon != 'none' -%}<span class="mt-hero-pill-dot">{%- render 'mt-icon', icon: section.settings.pill_icon -%}</span>{%- endif -%}
+          {{- section.settings.pill_text | escape -}}
+        </span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h1 class="mt-display">{{ section.settings.heading }}</h1>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="mt-lead">{{ section.settings.text }}</p>
+      {%- endif -%}
+      {%- if section.settings.tagline != blank -%}
+        <p class="mt-hero-tagline">{{ section.settings.tagline | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.button_1_label != blank or section.settings.button_2_label != blank -%}
+        <div class="mt-btn-row mt-hero-ctas">
+          {%- if section.settings.button_1_label != blank -%}
+            <a class="mt-btn mt-btn-primary" href="{{ btn1_link }}">
+              {{- section.settings.button_1_label | escape -}}
+              {%- render 'mt-icon', icon: 'arrow-right' -%}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.button_2_label != blank -%}
+            <a class="mt-btn mt-btn-secondary" href="{{ btn2_link }}">
+              {%- render 'mt-icon', icon: section.settings.button_2_icon -%}
+              {{- section.settings.button_2_label | escape -}}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if trust_blocks.size > 0 -%}
+        <ul class="mt-trust-row">
+          {%- for block in trust_blocks -%}
+            <li {{ block.shopify_attributes }}>
+              {%- render 'mt-icon', icon: block.settings.icon -%}
+              {{- block.settings.text | escape -}}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.image != blank -%}
+      <div class="mt-hero-photo">
+        {{
+          section.settings.image
+          | image_url: width: 1400
+          | image_tag: loading: 'eager', fetchpriority: 'high', alt: section.settings.image.alt, sizes: '(min-width: 990px) 46vw, 100vw', widths: '480, 720, 960, 1200, 1400'
+        }}
+        {%- if section.settings.photo_note != blank -%}
+          <span class="mt-hero-photo-note">{{ section.settings.photo_note | escape }}</span>
+        {%- endif -%}
+      </div>
+    {%- elsif section.settings.default_image -%}
+      <div class="mt-hero-photo">
+        <img src="{{ 'mt-hero-doctor.webp' | asset_url }}" alt="" width="1000" height="1000" fetchpriority="high">
+        {%- if section.settings.photo_note != blank -%}
+          <span class="mt-hero-photo-note">{{ section.settings.photo_note | escape }}</span>
+        {%- endif -%}
+      </div>
+    {%- elsif pillar_blocks.size > 0 -%}
+      <div class="mt-hero-card">
+        {%- if section.settings.card_title != blank -%}<p class="mt-mini-h">{{ section.settings.card_title | escape }}</p>{%- endif -%}
+        <ol class="mt-hero-pillars">
+          {%- for block in pillar_blocks -%}
+            <li {{ block.shopify_attributes }}>
+              <span class="mt-wico">{%- render 'mt-icon', icon: block.settings.icon -%}</span>
+              <span>
+                <b>{{ block.settings.title | escape }}</b>
+                {%- if block.settings.text != blank -%}<small>{{ block.settings.text | escape }}</small>{%- endif -%}
+              </span>
+            </li>
+          {%- endfor -%}
+        </ol>
+        {%- if section.settings.card_note != blank -%}<p class="mt-fine">{{ section.settings.card_note | escape }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel hero",
+  "class": "mt-hero-section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "fade",
+          "label": "Tinted fade"
+        }
+      ],
+      "default": "fade"
+    },
+    {
+      "type": "checkbox",
+      "id": "pattern",
+      "label": "Honeycomb pattern",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "pill_icon",
+      "label": "Eyebrow icon",
+      "options": [{"value":"none","label":"None"},{"value":"arrow-right","label":"Arrow"},{"value":"check","label":"Check"},{"value":"video","label":"Video call"},{"value":"whatsapp","label":"WhatsApp"},{"value":"clinic","label":"Clinic"},{"value":"doctor","label":"Doctor"},{"value":"calendar","label":"Calendar"},{"value":"clock","label":"Clock"},{"value":"shield","label":"Shield"},{"value":"flask","label":"Research flask"},{"value":"patent","label":"Patent document"},{"value":"leaf","label":"Leaf"},{"value":"users","label":"People"},{"value":"heart","label":"Heart"},{"value":"india","label":"Globe"},{"value":"pin","label":"Location pin"},{"value":"phone","label":"Phone"},{"value":"mail","label":"Email"},{"value":"lock","label":"Lock"},{"value":"truck","label":"Delivery"},{"value":"box","label":"Package"},{"value":"bag","label":"Shopping bag"},{"value":"search","label":"Search"},{"value":"info","label":"Info"},{"value":"alert","label":"Alert"},{"value":"refresh","label":"Refresh"},{"value":"sparkle","label":"Sparkle"},{"value":"star","label":"Star"},{"value":"target","label":"Target"},{"value":"chart","label":"Chart"},{"value":"home","label":"Home"},{"value":"grid","label":"Grid"},{"value":"test","label":"Self-check"},{"value":"book","label":"Guide"},{"value":"drop","label":"Drop"},{"value":"sun","label":"Sun"},{"value":"moon","label":"Moon"},{"value":"bowl","label":"Food bowl"},{"value":"ban","label":"Quit habit"},{"value":"ruler","label":"Ruler"},{"value":"s-open","label":"Symptom: mouth opening"},{"value":"s-burn","label":"Symptom: burning"},{"value":"s-tight","label":"Symptom: tightness"},{"value":"s-ulcer","label":"Symptom: ulcers"},{"value":"s-bands","label":"Symptom: white bands"},{"value":"s-tongue","label":"Symptom: tongue"},{"value":"s-pain","label":"Symptom: pain"}],
+      "default": "shield"
+    },
+    {
+      "type": "text",
+      "id": "pill_text",
+      "label": "Eyebrow",
+      "default": "Care beyond teeth, gums & enamel"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading font",
+      "options": [
+        {
+          "value": "serif",
+          "label": "Serif, like the mockup"
+        },
+        {
+          "value": "sans",
+          "label": "Same as the rest of the site"
+        }
+      ],
+      "default": "serif"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Italic words show in teal.",
+      "default": "A structured approach to <em>oral mucosal care</em>"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "Symptom management and functional improvement — supported by clinical evaluation and ongoing research."
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Restore • Recover • Renew"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "button_1_label",
+      "label": "Button 1",
+      "default": "Check Your OSMF Stage"
+    },
+    {
+      "type": "select",
+      "id": "button_1_to",
+      "label": "Button 1 opens",
+      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "default": "test"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Button 1 custom link"
+    },
+    {
+      "type": "text",
+      "id": "button_2_label",
+      "label": "Button 2",
+      "default": "Explore MARCEL OMR Therapy™"
+    },
+    {
+      "type": "select",
+      "id": "button_2_to",
+      "label": "Button 2 opens",
+      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "default": "therapy"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Button 2 custom link"
+    },
+    {
+      "type": "select",
+      "id": "button_2_icon",
+      "label": "Button 2 icon",
+      "options": [{"value":"none","label":"None"},{"value":"arrow-right","label":"Arrow"},{"value":"check","label":"Check"},{"value":"video","label":"Video call"},{"value":"whatsapp","label":"WhatsApp"},{"value":"clinic","label":"Clinic"},{"value":"doctor","label":"Doctor"},{"value":"calendar","label":"Calendar"},{"value":"clock","label":"Clock"},{"value":"shield","label":"Shield"},{"value":"flask","label":"Research flask"},{"value":"patent","label":"Patent document"},{"value":"leaf","label":"Leaf"},{"value":"users","label":"People"},{"value":"heart","label":"Heart"},{"value":"india","label":"Globe"},{"value":"pin","label":"Location pin"},{"value":"phone","label":"Phone"},{"value":"mail","label":"Email"},{"value":"lock","label":"Lock"},{"value":"truck","label":"Delivery"},{"value":"box","label":"Package"},{"value":"bag","label":"Shopping bag"},{"value":"search","label":"Search"},{"value":"info","label":"Info"},{"value":"alert","label":"Alert"},{"value":"refresh","label":"Refresh"},{"value":"sparkle","label":"Sparkle"},{"value":"star","label":"Star"},{"value":"target","label":"Target"},{"value":"chart","label":"Chart"},{"value":"home","label":"Home"},{"value":"grid","label":"Grid"},{"value":"test","label":"Self-check"},{"value":"book","label":"Guide"},{"value":"drop","label":"Drop"},{"value":"sun","label":"Sun"},{"value":"moon","label":"Moon"},{"value":"bowl","label":"Food bowl"},{"value":"ban","label":"Quit habit"},{"value":"ruler","label":"Ruler"},{"value":"s-open","label":"Symptom: mouth opening"},{"value":"s-burn","label":"Symptom: burning"},{"value":"s-tight","label":"Symptom: tightness"},{"value":"s-ulcer","label":"Symptom: ulcers"},{"value":"s-bands","label":"Symptom: white bands"},{"value":"s-tongue","label":"Symptom: tongue"},{"value":"s-pain","label":"Symptom: pain"}],
+      "default": "shield"
+    },
+    {
+      "type": "header",
+      "content": "Right side"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photo",
+      "info": "A real photo works best. Square or slightly tall, at least 1200 px wide."
+    },
+    {
+      "type": "checkbox",
+      "id": "default_image",
+      "label": "Show the built-in doctor illustration when no photo is chosen",
+      "info": "Turn off to show the Pillar blocks as a card instead.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "photo_note",
+      "label": "Photo note",
+      "info": "Optional small text on the photo."
+    },
+    {
+      "type": "text",
+      "id": "card_title",
+      "label": "Card title",
+      "default": "The MARCEL 3-Pillar Approach"
+    },
+    {
+      "type": "text",
+      "id": "card_note",
+      "label": "Card note",
+      "default": "Individual responses to care vary."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Pillar",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [{"value":"none","label":"None"},{"value":"arrow-right","label":"Arrow"},{"value":"check","label":"Check"},{"value":"video","label":"Video call"},{"value":"whatsapp","label":"WhatsApp"},{"value":"clinic","label":"Clinic"},{"value":"doctor","label":"Doctor"},{"value":"calendar","label":"Calendar"},{"value":"clock","label":"Clock"},{"value":"shield","label":"Shield"},{"value":"flask","label":"Research flask"},{"value":"patent","label":"Patent document"},{"value":"leaf","label":"Leaf"},{"value":"users","label":"People"},{"value":"heart","label":"Heart"},{"value":"india","label":"Globe"},{"value":"pin","label":"Location pin"},{"value":"phone","label":"Phone"},{"value":"mail","label":"Email"},{"value":"lock","label":"Lock"},{"value":"truck","label":"Delivery"},{"value":"box","label":"Package"},{"value":"bag","label":"Shopping bag"},{"value":"search","label":"Search"},{"value":"info","label":"Info"},{"value":"alert","label":"Alert"},{"value":"refresh","label":"Refresh"},{"value":"sparkle","label":"Sparkle"},{"value":"star","label":"Star"},{"value":"target","label":"Target"},{"value":"chart","label":"Chart"},{"value":"home","label":"Home"},{"value":"grid","label":"Grid"},{"value":"test","label":"Self-check"},{"value":"book","label":"Guide"},{"value":"drop","label":"Drop"},{"value":"sun","label":"Sun"},{"value":"moon","label":"Moon"},{"value":"bowl","label":"Food bowl"},{"value":"ban","label":"Quit habit"},{"value":"ruler","label":"Ruler"},{"value":"s-open","label":"Symptom: mouth opening"},{"value":"s-burn","label":"Symptom: burning"},{"value":"s-tight","label":"Symptom: tightness"},{"value":"s-ulcer","label":"Symptom: ulcers"},{"value":"s-bands","label":"Symptom: white bands"},{"value":"s-tongue","label":"Symptom: tongue"},{"value":"s-pain","label":"Symptom: pain"}],
+          "default": "shield"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Oral mucosal care"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Care for the mouth. Support comfort."
+        }
+      ]
+    },
+    {
+      "type": "trust",
+      "name": "Trust point",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [{"value":"none","label":"None"},{"value":"arrow-right","label":"Arrow"},{"value":"check","label":"Check"},{"value":"video","label":"Video call"},{"value":"whatsapp","label":"WhatsApp"},{"value":"clinic","label":"Clinic"},{"value":"doctor","label":"Doctor"},{"value":"calendar","label":"Calendar"},{"value":"clock","label":"Clock"},{"value":"shield","label":"Shield"},{"value":"flask","label":"Research flask"},{"value":"patent","label":"Patent document"},{"value":"leaf","label":"Leaf"},{"value":"users","label":"People"},{"value":"heart","label":"Heart"},{"value":"india","label":"Globe"},{"value":"pin","label":"Location pin"},{"value":"phone","label":"Phone"},{"value":"mail","label":"Email"},{"value":"lock","label":"Lock"},{"value":"truck","label":"Delivery"},{"value":"box","label":"Package"},{"value":"bag","label":"Shopping bag"},{"value":"search","label":"Search"},{"value":"info","label":"Info"},{"value":"alert","label":"Alert"},{"value":"refresh","label":"Refresh"},{"value":"sparkle","label":"Sparkle"},{"value":"star","label":"Star"},{"value":"target","label":"Target"},{"value":"chart","label":"Chart"},{"value":"home","label":"Home"},{"value":"grid","label":"Grid"},{"value":"test","label":"Self-check"},{"value":"book","label":"Guide"},{"value":"drop","label":"Drop"},{"value":"sun","label":"Sun"},{"value":"moon","label":"Moon"},{"value":"bowl","label":"Food bowl"},{"value":"ban","label":"Quit habit"},{"value":"ruler","label":"Ruler"},{"value":"s-open","label":"Symptom: mouth opening"},{"value":"s-burn","label":"Symptom: burning"},{"value":"s-tight","label":"Symptom: tightness"},{"value":"s-ulcer","label":"Symptom: ulcers"},{"value":"s-bands","label":"Symptom: white bands"},{"value":"s-tongue","label":"Symptom: tongue"},{"value":"s-pain","label":"Symptom: pain"}],
+          "default": "flask"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Clinically evaluated"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel hero",
+      "blocks": [
+        {
+          "type": "pillar",
+          "settings": {
+            "icon": "shield",
+            "title": "Oral mucosal care",
+            "text": "Care for the mouth. Support comfort."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon": "s-open",
+            "title": "Functional support",
+            "text": "Support what matters in daily life: mouth opening, chewing and oral function."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon": "chart",
+            "title": "Guided care & progress",
+            "text": "Track. Review. Stay supported."
+          }
+        },
+        {
+          "type": "trust",
+          "settings": {
+            "icon": "flask",
+            "text": "Clinically evaluated"
+          }
+        },
+        {
+          "type": "trust",
+          "settings": {
+            "icon": "test",
+            "text": "CTRI-registered clinical study"
+          }
+        },
+        {
+          "type": "trust",
+          "settings": {
+            "icon": "calendar",
+            "text": "26-year development journey"
+          }
+        },
+        {
+          "type": "trust",
+          "settings": {
+            "icon": "patent",
+            "text": "Patent application filed"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

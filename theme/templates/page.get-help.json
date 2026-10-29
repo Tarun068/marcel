@@ -1,0 +1,200 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "mt-page-hero",
+      "settings": {
+        "show_crumbs": true,
+        "home_label": "Home",
+        "button_1_to": "test",
+        "button_2_to": "consult",
+        "back_to": "therapy",
+        "background": "tint",
+        "sheet": false,
+        "spacing": "none",
+        "current_label": "Get Help",
+        "eyebrow": "Patient support",
+        "heading": "Get the right support",
+        "text": "MARCEL offers two different kinds of support. The MARCEL OSMF Consultant gives programme guidance by phone. OSMF Specialist doctors give qualified clinical assessment in person."
+      }
+    },
+    "support": {
+      "type": "mt-support",
+      "settings": {
+        "eyebrow": "Two support routes",
+        "heading": "Programme guidance or clinical assessment",
+        "text": "",
+        "center": false,
+        "note": "The MARCEL OSMF Consultant gives programme information and care navigation. The consultant does not diagnose OSMF, confirm your stage, prescribe or replace a doctor. Diagnosis, staging and treatment decisions are made by a qualified healthcare professional.",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      },
+      "blocks": {
+        "route_1": {
+          "type": "route",
+          "settings": {
+            "icon": "phone",
+            "eyebrow": "Option A",
+            "title": "MARCEL OSMF Consultant",
+            "subtitle": "In-house, on-call consultation · booking fee adjusted against an eligible MARCEL product purchase",
+            "text": "Discuss your concerns remotely and understand the next step.",
+            "button_label": "Talk to a MARCEL OSMF Consultant",
+            "link_to": "consult",
+            "link2_to": "whatsapp",
+            "points": "Programme information\nGuidance on navigating the website and pathway information\nExplaining programme components and next steps\nContact coordination and support",
+            "button2_label": "WhatsApp the Patient HelpDesk"
+          }
+        },
+        "route_2": {
+          "type": "route",
+          "settings": {
+            "icon": "doctor",
+            "eyebrow": "Option B",
+            "title": "OSMF Specialist Doctors",
+            "subtitle": "In-clinic, in-person consultation",
+            "text": "A doctor can examine your mouth, assess mouth opening and evaluate oral tissue changes directly.",
+            "button_label": "Find an OSMF Specialist Doctor",
+            "link_to": "specialists",
+            "link2_to": "whatsapp",
+            "points": "Qualified clinical assessment\nEvaluation of symptoms and mouth opening\nProfessional guidance on diagnosis and appropriate management",
+            "button2_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "route_1",
+        "route_2"
+      ]
+    },
+    "faq": {
+      "type": "mt-faq",
+      "settings": {
+        "eyebrow": "Choosing support",
+        "heading": "Consultation questions",
+        "open_first": false,
+        "one_at_a_time": false,
+        "schema_markup": true,
+        "show_help": true,
+        "help_title": "Have questions?",
+        "help_text": "Our In-house OSMF Consultant can help with programme questions and your next step.",
+        "whatsapp_label": "WhatsApp the Patient HelpDesk",
+        "link_label": "",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal",
+        "link": "/pages/faq"
+      },
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "What is the difference between an OSMF Consultant and an OSMF Specialist doctor?",
+            "answer": "<p>An OSMF Consultant provides an in-house on-call consultation, allowing you to discuss your concerns and understand the next step remotely. An OSMF Specialist doctor provides an in-clinic, in-person consultation, where the doctor can examine your mouth, assess mouth opening and evaluate oral tissue changes directly.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Which consultation should I choose?",
+            "answer": "<p>If you want to discuss your symptoms and understand how to proceed, start with the OSMF Consultant on-call service. If you need a direct examination, have significant difficulty opening your mouth, or notice a persistent ulcer, unexplained lump, bleeding or another concerning change, arrange an in-clinic consultation with an OSMF Specialist doctor.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Can I follow care from home if I cannot visit a clinic?",
+            "answer": "<p>An on-call consultation can help you discuss your symptoms and understand the next step without travelling first. If an examination is needed, the consultant can advise you to visit an OSMF Specialist doctor in person.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use MARCEL OMR Therapy™ while receiving treatment from another doctor?",
+            "answer": "<p>Tell the OSMF Consultant or your treating doctor about the medicines, procedures and oral products you are currently using. Do not stop or change prescribed treatment on your own. They can help you decide whether the approaches can be used together and whether an in-person assessment is needed.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Do I need surgery if my mouth opening is very limited?",
+            "answer": "<p>Not everyone with OSMF needs surgery. The decision depends on the degree of restriction and the clinical findings. An OSMF Specialist doctor can examine you and discuss appropriate options, including whether non-surgical care, a procedure or a combination should be considered.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5"
+      ]
+    },
+    "enquiry": {
+      "type": "mt-enquiry",
+      "settings": {
+        "anchor": "enquiry",
+        "eyebrow": "Contact MARCEL",
+        "heading": "Send us an enquiry",
+        "text": "Choose the type of enquiry so it reaches the right team.",
+        "show_whatsapp": true,
+        "whatsapp_label": "WhatsApp the Patient HelpDesk",
+        "whatsapp_note": "For questions about the programme and your next step",
+        "phone_note": "Call the MARCEL team",
+        "email_note": "For professional, business and research enquiries",
+        "form_heading": "Your enquiry",
+        "type_label": "Enquiry type",
+        "types": "Patient HelpDesk\nSpecialist / clinic enquiry\nProfessional enquiry\nBusiness enquiry\nResearch / collaboration enquiry",
+        "name_label": "Full name",
+        "phone_label": "Phone number",
+        "email_label": "Email ID",
+        "city_label": "City",
+        "message_label": "Your message",
+        "submit_label": "Send enquiry",
+        "success_text": "Thank you. Your enquiry has reached the MARCEL team.",
+        "fine": "Please do not send personal medical records through this form. For an examination, see an OSMF Specialist doctor.",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "links": {
+      "type": "mt-text-links",
+      "settings": {
+        "label": "More pages",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      },
+      "blocks": {
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "lead": "Want to understand the therapy first?",
+            "label": "Explore MARCEL OMR Therapy™",
+            "link_to": "therapy",
+            "back": false
+          }
+        }
+      },
+      "block_order": [
+        "link_1"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "support",
+    "faq",
+    "enquiry",
+    "links"
+  ]
+}

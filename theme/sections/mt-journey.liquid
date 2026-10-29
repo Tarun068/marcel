@@ -1,0 +1,316 @@
+{{ 'mt-pages.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  .mt-phases { position: relative; display: grid; grid-template-columns: repeat(var(--mt-cols, 4), minmax(0, 1fr)); gap: 14px; counter-reset: mt-phase; }
+  @media (max-width: 1000px) {
+    .mt-phases { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 600px) {
+    .mt-phases { grid-template-columns: minmax(0, 1fr); }
+  }
+  .mt-phase { display: grid; gap: 10px; align-content: start; padding: 22px; border-radius: var(--mt-r-lg); background: var(--mt-paper); border: 1px solid var(--mt-line); border-top: 4px solid var(--tone, var(--mt-teal)); }
+  .mt-bg-paper .mt-phase { background: var(--mt-mist); border-color: transparent; border-top-color: var(--tone, var(--mt-teal)); }
+  .mt-phase-when { display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--tone, var(--mt-teal)); }
+  .mt-phase-when .mt-i { width: 18px; height: 18px; }
+  .mt .mt-phase h3 { font-size: 21px; line-height: 1.2; letter-spacing: -.015em; }
+  .mt-phase p { font-size: 15px; line-height: 1.55; }
+  .mt-phase .mt-checks li { font-size: 14.5px; }
+  .mt-phase-foot { margin-top: 4px; padding-top: 12px; border-top: 1px solid var(--mt-line); font-size: 14.5px; font-weight: 700; color: var(--mt-ink); }
+
+  /* Timeline layout: a vertical list with a line, used for the development journey. */
+  .mt-phases--timeline { grid-template-columns: minmax(0, 1fr); gap: 0; max-width: 860px; }
+  .mt-phases--timeline .mt-phase { position: relative; grid-template-columns: 150px minmax(0, 1fr); column-gap: 28px; padding: 0 0 30px; border: 0; border-radius: 0; background: none; }
+  .mt-phases--timeline .mt-phase::before { content: ""; position: absolute; left: 150px; top: 6px; width: 12px; height: 12px; margin-left: 8px; border-radius: 99px; background: var(--tone, var(--mt-teal)); box-shadow: 0 0 0 5px var(--mt-section-bg, var(--mt-paper)); }
+  .mt-phases--timeline .mt-phase:not(:last-child)::after { content: ""; position: absolute; left: 163px; top: 22px; bottom: 0; width: 2px; background: var(--mt-line-2); }
+  .mt-phases--timeline .mt-phase-when { grid-row: span 4; align-self: start; padding-top: 2px; font-size: 15px; letter-spacing: .02em; text-transform: none; }
+  .mt-phases--timeline .mt-phase > :not(.mt-phase-when) { grid-column: 2; padding-left: 20px; }
+  .mt-phases--timeline .mt-phase-foot { border: 0; padding-top: 0; }
+  @media (max-width: 600px) {
+    .mt-phases--timeline .mt-phase { grid-template-columns: minmax(0, 1fr); padding-left: 30px; }
+    .mt-phases--timeline .mt-phase::before { left: 0; margin-left: 0; }
+    .mt-phases--timeline .mt-phase:not(:last-child)::after { left: 5px; }
+    .mt-phases--timeline .mt-phase-when { grid-row: auto; }
+    .mt-phases--timeline .mt-phase > :not(.mt-phase-when) { grid-column: 1; padding-left: 0; }
+  }
+  .mt-journey-foot { display: grid; gap: 16px; margin-top: 22px; }
+  .mt-journey-foot--center { justify-items: center; text-align: center; }
+  .mt-journey-foot--center .mt-callout { max-width: 860px; }
+  .mt-journey-foot--center .mt-btn-row { justify-content: center; }
+
+  /* Flow layout: large icons joined by arrows, then a vertical list on smaller screens. */
+  .mt-phases--flow { gap: 18px; }
+  .mt-phases--flow .mt-phase { position: relative; justify-items: center; gap: 8px; padding: 0; border: 0; border-radius: 0; background: none; text-align: center; }
+  .mt-bg-paper .mt-phases--flow .mt-phase { background: none; }
+  .mt-phase-ico { position: relative; z-index: 1; display: grid; place-items: center; width: 76px; height: 76px; margin-bottom: 6px; border-radius: 99px; background: var(--mt-paper); box-shadow: inset 0 0 0 2px var(--tone, var(--mt-teal)); color: var(--tone, var(--mt-teal)); }
+  .mt-bg-paper .mt-phase-ico { background: var(--mt-mist); }
+  .mt-phase-ico .mt-i { width: 36px; height: 36px; stroke-width: 1.5; }
+  .mt-phases--flow .mt-phase-when { justify-content: center; }
+  .mt .mt-phases--flow .mt-phase h3 { font-size: 18px; }
+  .mt-phases--flow .mt-phase p { font-size: 14.5px; }
+  @media (min-width: 1001px) {
+    .mt-phases--flow .mt-phase:not(:last-child)::after { content: ""; position: absolute; top: 37px; left: calc(50% + 46px); width: calc(100% + 18px - 92px); border-top: 2px dashed var(--mt-line-2); }
+    .mt-phases--flow .mt-phase:not(:last-child)::before { content: ""; position: absolute; top: 33px; left: calc(150% + 18px - 54px); width: 8px; height: 8px; border-top: 2px solid var(--mt-line-2); border-right: 2px solid var(--mt-line-2); transform: rotate(45deg); }
+  }
+  @media (max-width: 1000px) {
+    .mt-phases--flow { grid-template-columns: minmax(0, 1fr); gap: 0; max-width: 620px; }
+    .mt-phases--flow .mt-phase { grid-template-columns: 60px minmax(0, 1fr); column-gap: 18px; row-gap: 4px; justify-items: start; padding-bottom: 24px; text-align: left; }
+    .mt-phases--flow .mt-phase > :not(.mt-phase-ico) { grid-column: 2; }
+    .mt-phase-ico { grid-row: span 3; width: 60px; height: 60px; margin: 0; }
+    .mt-phase-ico .mt-i { width: 28px; height: 28px; }
+    .mt-phases--flow .mt-phase:not(:last-child)::after { content: ""; position: absolute; left: 29px; top: 64px; bottom: 4px; border-left: 2px dashed var(--mt-line-2); }
+  }
+{%- endstyle -%}
+
+{%- assign phases = section.blocks | where: 'type', 'phase' -%}
+{%- capture href -%}{% render 'mt-link-to', key: section.settings.button_to, url: section.settings.button_link %}{%- endcapture -%}
+{%- capture href2 -%}{% render 'mt-link-to', key: section.settings.button2_to, url: section.settings.button2_link %}{%- endcapture -%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-journey' %}"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handleize }}"{% endif %}>
+  <div class="mt-wrap">
+    {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text, center: section.settings.center -%}
+    <ol class="mt-phases{% if section.settings.layout != 'cards' %} mt-phases--{{ section.settings.layout }}{% endif %}" style="--mt-cols: {{ phases.size | at_most: section.settings.columns }};">
+      {%- for block in phases -%}
+        {%- assign points = block.settings.points | newline_to_br | split: '<br />' -%}
+        <li class="mt-phase"{% if block.settings.tone != blank %} style="--tone: {{ block.settings.tone }};"{% endif %} {{ block.shopify_attributes }}>
+          {%- if section.settings.layout == 'flow' -%}
+            <span class="mt-phase-ico">{%- render 'mt-icon', icon: block.settings.icon -%}</span>
+            {%- if block.settings.when != blank -%}<span class="mt-phase-when">{{ block.settings.when | escape }}</span>{%- endif -%}
+          {%- else -%}
+            <span class="mt-phase-when">{%- render 'mt-icon', icon: block.settings.icon -%}{{ block.settings.when | escape }}</span>
+          {%- endif -%}
+          {%- if block.settings.title != blank -%}<h3>{{ block.settings.title | escape }}</h3>{%- endif -%}
+          {%- if block.settings.text != blank -%}<p>{{ block.settings.text | escape }}</p>{%- endif -%}
+          {%- if block.settings.points != blank -%}
+            <ul class="mt-checks">
+              {%- for line in points -%}
+                {%- assign item = line | strip -%}
+                {%- if item != blank -%}<li>{%- render 'mt-icon', icon: 'check' -%}<span>{{ item | escape }}</span></li>{%- endif -%}
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+          {%- if block.settings.foot != blank -%}<p class="mt-phase-foot">{{ block.settings.foot | escape }}</p>{%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ol>
+    {%- if section.settings.note != blank or section.settings.button_label != blank -%}
+      <div class="mt-journey-foot{% if section.settings.center %} mt-journey-foot--center{% endif %}">
+        {%- if section.settings.note != blank -%}
+          <div class="mt-callout mt-callout--muted">{%- render 'mt-icon', icon: 'info' -%}<span>{{ section.settings.note }}</span></div>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank or section.settings.button2_label != blank -%}
+          <div class="mt-btn-row">
+            {%- if section.settings.button_label != blank -%}<a class="mt-btn mt-btn-primary" href="{{ href }}">{{ section.settings.button_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>{%- endif -%}
+            {%- if section.settings.button2_label != blank -%}<a class="mt-btn mt-btn-secondary" href="{{ href2 }}">{{ section.settings.button2_label | escape }}</a>{%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel phases",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 16,
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Link name",
+      "info": "Optional, for links like #care-journey."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The 12-Week Care Journey"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Four phases to organise routine and follow-up"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "The phases are a care-planning framework, not a promise of a specific result by a fixed date."
+    },
+    {
+      "type": "checkbox",
+      "id": "center",
+      "label": "Centre the heading",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "cards",
+          "label": "Cards in a row"
+        },
+        {
+          "value": "timeline",
+          "label": "Vertical timeline"
+        },
+        {
+          "value": "flow",
+          "label": "Flow with arrows"
+        }
+      ],
+      "default": "cards"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Cards per row on desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "inline_richtext",
+      "id": "note",
+      "label": "Note",
+      "default": "Individual experiences vary. This is not a clinical-trial timeline or a guarantee of tissue restoration or specific improvement."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button",
+      "default": "Explore the 12-Week Care Journey"
+    },
+    {
+      "type": "select",
+      "id": "button_to",
+      "label": "Button opens",
+      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "default": "journey"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button custom link"
+    },
+    {
+      "type": "text",
+      "id": "button2_label",
+      "label": "Second button"
+    },
+    {
+      "type": "select",
+      "id": "button2_to",
+      "label": "Second button opens",
+      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "default": "consult"
+    },
+    {
+      "type": "url",
+      "id": "button2_link",
+      "label": "Second button custom link"
+    },
+    {"type":"header","content":"Section style"},
+    {"type":"select","id":"background","label":"Background","options":[{"value":"paper","label":"White"},{"value":"mist","label":"Light"},{"value":"tint","label":"Tinted"},{"value":"navy","label":"Navy"}],"default":"paper"},
+    {"type":"checkbox","id":"sheet","label":"Rounded top edge","info":"Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.","default":false},
+    {"type":"select","id":"spacing","label":"Spacing","options":[{"value":"normal","label":"Normal"},{"value":"tight","label":"Compact"},{"value":"none","label":"None"}],"default":"normal"}
+  ],
+  "blocks": [
+    {
+      "type": "phase",
+      "name": "Phase",
+      "settings": [
+        {
+          "type": "text",
+          "id": "when",
+          "label": "When",
+          "default": "Weeks 1–2"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [{"value":"none","label":"None"},{"value":"arrow-right","label":"Arrow"},{"value":"check","label":"Check"},{"value":"video","label":"Video call"},{"value":"whatsapp","label":"WhatsApp"},{"value":"clinic","label":"Clinic"},{"value":"doctor","label":"Doctor"},{"value":"calendar","label":"Calendar"},{"value":"clock","label":"Clock"},{"value":"shield","label":"Shield"},{"value":"flask","label":"Research flask"},{"value":"patent","label":"Patent document"},{"value":"leaf","label":"Leaf"},{"value":"users","label":"People"},{"value":"heart","label":"Heart"},{"value":"india","label":"Globe"},{"value":"pin","label":"Location pin"},{"value":"phone","label":"Phone"},{"value":"mail","label":"Email"},{"value":"lock","label":"Lock"},{"value":"truck","label":"Delivery"},{"value":"box","label":"Package"},{"value":"bag","label":"Shopping bag"},{"value":"search","label":"Search"},{"value":"info","label":"Info"},{"value":"alert","label":"Alert"},{"value":"refresh","label":"Refresh"},{"value":"sparkle","label":"Sparkle"},{"value":"star","label":"Star"},{"value":"target","label":"Target"},{"value":"chart","label":"Chart"},{"value":"home","label":"Home"},{"value":"grid","label":"Grid"},{"value":"test","label":"Self-check"},{"value":"book","label":"Guide"},{"value":"drop","label":"Drop"},{"value":"sun","label":"Sun"},{"value":"moon","label":"Moon"},{"value":"bowl","label":"Food bowl"},{"value":"ban","label":"Quit habit"},{"value":"ruler","label":"Ruler"},{"value":"s-open","label":"Symptom: mouth opening"},{"value":"s-burn","label":"Symptom: burning"},{"value":"s-tight","label":"Symptom: tightness"},{"value":"s-ulcer","label":"Symptom: ulcers"},{"value":"s-bands","label":"Symptom: white bands"},{"value":"s-tongue","label":"Symptom: tongue"},{"value":"s-pain","label":"Symptom: pain"}],
+          "default": "calendar"
+        },
+        {
+          "type": "color",
+          "id": "tone",
+          "label": "Colour",
+          "info": "Optional."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Relief"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Establish the routine and focus on comfort."
+        },
+        {
+          "type": "textarea",
+          "id": "points",
+          "label": "Points",
+          "info": "One per line."
+        },
+        {
+          "type": "text",
+          "id": "foot",
+          "label": "Closing line"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel phases",
+      "blocks": [
+        {
+          "type": "phase",
+          "settings": {
+            "when": "Weeks 1–2",
+            "title": "Relief",
+            "text": "Establish the routine and focus on comfort."
+          }
+        },
+        {
+          "type": "phase",
+          "settings": {
+            "when": "Weeks 3–6",
+            "title": "Activation",
+            "text": "Build consistency and follow prescribed exercises."
+          }
+        },
+        {
+          "type": "phase",
+          "settings": {
+            "when": "Weeks 6–10",
+            "title": "Restoration",
+            "text": "Continue the routine and review comfort and function with professional guidance."
+          }
+        },
+        {
+          "type": "phase",
+          "settings": {
+            "when": "Weeks 11–12",
+            "title": "Reinforcement",
+            "text": "Reinforce daily habits and follow-up."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

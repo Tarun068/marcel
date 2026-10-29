@@ -1,0 +1,262 @@
+{{ 'mt-footer.css' | asset_url | stylesheet_tag }}
+
+{%- capture wa_url -%}{% render 'mt-wa-url' %}{%- endcapture -%}
+{%- liquid
+  assign year = 'now' | date: '%Y'
+  assign copyright = section.settings.copyright | replace: '[year]', year
+  assign payments = section.settings.payment_labels | split: ','
+-%}
+
+<footer class="mt mt-footer">
+  <div class="mt-wrap">
+    <div class="mt-foot-grid" style="--mt-foot-cols: {{ section.blocks.size | at_least: 1 }};">
+      <div class="mt-foot-brand">
+        <a class="mt-foot-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
+          {%- render 'mt-logo', image: section.settings.logo, light: true, tagline: true, sizes: '200px' -%}
+        </a>
+        {%- if section.settings.description != blank -%}
+          <p>{{ section.settings.description | escape | newline_to_br }}</p>
+        {%- endif -%}
+        {%- if section.settings.show_contact -%}
+          <div class="mt-foot-contact">
+            {%- if settings.mt_phone != blank -%}
+              <a href="tel:{{ settings.mt_phone | remove: ' ' }}">
+                {%- render 'mt-icon', icon: 'phone' -%}
+                {{- settings.mt_phone | escape -}}
+              </a>
+            {%- endif -%}
+            {%- if settings.mt_email != blank -%}
+              <a href="mailto:{{ settings.mt_email }}">
+                {%- render 'mt-icon', icon: 'mail' -%}
+                {{- settings.mt_email | escape -}}
+              </a>
+            {%- endif -%}
+            {%- if settings.mt_whatsapp_number != blank and section.settings.whatsapp_label != blank -%}
+              <a href="{{ wa_url }}" target="_blank" rel="noopener">
+                {%- render 'mt-icon', icon: 'whatsapp' -%}
+                {{- section.settings.whatsapp_label | escape -}}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        <div class="mt-foot-col" {{ block.shopify_attributes }}>
+          {%- if block.settings.heading != blank -%}
+            <b>{{ block.settings.heading | escape }}</b>
+          {%- endif -%}
+          {%- case block.type -%}
+            {%- when 'menu' -%}
+              {%- for link in block.settings.menu.links -%}
+                <a href="{{ link.url }}">{{ link.title | escape }}</a>
+              {%- endfor -%}
+            {%- when 'policies' -%}
+              {%- for policy in shop.policies -%}
+                <a href="{{ policy.url }}">{{ policy.title | escape }}</a>
+              {%- endfor -%}
+              {%- if block.settings.menu != blank -%}
+                {%- for link in block.settings.menu.links -%}
+                  <a href="{{ link.url }}">{{ link.title | escape }}</a>
+                {%- endfor -%}
+              {%- endif -%}
+          {%- endcase -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.disclaimer != blank -%}
+      <div class="mt-disclaimer">{{ section.settings.disclaimer }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.ai_heading != blank -%}
+      {%- liquid
+        assign ai_prompt = section.settings.ai_prompt | url_encode | replace: '+', '%20'
+        assign ai_list = section.settings.ai_tools | split: ','
+      -%}
+      <div class="mt-ai-row">
+        <span>{{ section.settings.ai_heading | escape }}</span>
+        <div class="mt-ai-links">
+          {%- for tool in ai_list -%}
+            {%- assign t = tool | strip | downcase -%}
+            {%- case t -%}
+              {%- when 'chatgpt' -%}<a href="https://chatgpt.com/?q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">ChatGPT</a>
+              {%- when 'perplexity' -%}<a href="https://www.perplexity.ai/search?q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">Perplexity</a>
+              {%- when 'claude' -%}<a href="https://claude.ai/new?q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">Claude</a>
+              {%- when 'google' -%}<a href="https://www.google.com/search?udm=50&q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">Google AI Mode</a>
+              {%- when 'grok' -%}<a href="https://grok.com/?q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">Grok</a>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="mt-foot-bottom">
+      <span>{{ copyright }}</span>
+      {%- if section.settings.payment_labels != blank -%}
+        <div class="mt-pay-row" aria-label="Payment options">
+          {%- for p in payments -%}
+            <span>{{ p | strip | escape }}</span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Marcel footer",
+  "class": "mt-footer-section",
+  "enabled_on": {
+    "groups": [
+      "footer"
+    ]
+  },
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image for dark background",
+      "info": "Leave empty to use the white Marcel mark with the logo text."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "A structured approach to oral mucosal care for people living with Oral Submucous Fibrosis (OSMF)."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_contact",
+      "label": "Show contact details",
+      "info": "Phone, email and WhatsApp from Theme settings.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_label",
+      "label": "WhatsApp link label",
+      "default": "WhatsApp the Patient HelpDesk"
+    },
+    {
+      "type": "richtext",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "default": "<p>This website provides general information and is not a substitute for an examination or advice from a qualified healthcare professional. MARCEL OMR Therapy™ does not guarantee a cure or reversal of OSMF. The MARCEL OSMF Self-Check is preliminary and cannot diagnose OSMF. Please seek prompt professional assessment for persistent or worsening symptoms or any unusual oral change.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Ask AI for a summary"
+    },
+    {
+      "type": "text",
+      "id": "ai_heading",
+      "label": "Heading",
+      "info": "Leave empty to hide the row.",
+      "default": "Ask AI for a summary of MARCEL:"
+    },
+    {
+      "type": "textarea",
+      "id": "ai_prompt",
+      "label": "Question sent to the AI",
+      "default": "Summarise what MARCEL OMR Therapy™ (marceltherapy.com) is, who it is for, and how its OSMF Self-Check, OSMF Consultant and OSMF Specialist support work."
+    },
+    {
+      "type": "text",
+      "id": "ai_tools",
+      "label": "AI tools",
+      "info": "Separate with commas. Choose from: chatgpt, perplexity, claude, google, grok.",
+      "default": "chatgpt, perplexity, google, claude, grok"
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright text",
+      "info": "[year] is replaced with the current year.",
+      "default": "© [year] MARCEL OMR Therapy™ by JanSuta Pharmaceuticals. MARCEL® is a registered trademark of JanSuta Pharmaceuticals."
+    },
+    {
+      "type": "text",
+      "id": "payment_labels",
+      "label": "Payment options",
+      "info": "Separate with commas.",
+      "default": "UPI, Cards, Net banking, Cash on delivery"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "footer"
+        }
+      ]
+    },
+    {
+      "type": "policies",
+      "name": "Policies column",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Lists the store policies from Settings > Policies."
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Policies"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Extra links",
+          "info": "Optional, shown after the policies."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel footer",
+      "blocks": [
+        {
+          "type": "menu",
+          "settings": {
+            "heading": "Shop"
+          }
+        },
+        {
+          "type": "menu",
+          "settings": {
+            "heading": "Get help"
+          }
+        },
+        {
+          "type": "menu",
+          "settings": {
+            "heading": "Learn"
+          }
+        },
+        {
+          "type": "policies",
+          "settings": {
+            "heading": "Policies"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

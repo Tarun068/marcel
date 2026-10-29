@@ -1,0 +1,196 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "mt-main-product",
+      "settings": {
+        "cta_to": "consult",
+        "cta2_to": "foundation",
+        "home_label": "Home",
+        "shop_label": "Products",
+        "image_fit": "cover",
+        "gallery_label": "Product images and details",
+        "how_title": "How to use",
+        "how_thumb": "How to use",
+        "routine_title": "Your routine",
+        "routine_thumb": "Routine",
+        "ingredients_title": "Key ingredients",
+        "ingredients_thumb": "Ingredients",
+        "free_title": "Made with care",
+        "kit_inside_title": "What’s inside",
+        "kit_thumb": "In the kit",
+        "kit_heading": "In this kit",
+        "best_prefix": "Best for",
+        "add_label": "Buy MARCEL Smile™ – [price]",
+        "sold_out_label": "Sold out",
+        "variant_style": "cards",
+        "pack_label": "Pack size",
+        "show_buy_now": true,
+        "qty_label": "Quantity",
+        "minus_label": "Decrease quantity",
+        "plus_label": "Increase quantity",
+        "acc_how": "How to use",
+        "acc_kit": "What’s in the kit",
+        "acc_routine": "Your daily routine",
+        "acc_ingredients": "Ingredients",
+        "acc_whats_in": "What’s in it",
+        "free_note": "Full ingredient list as printed on the pack.",
+        "acc_caution": "Caution and storage",
+        "acc_stage": "Which stage is it for?",
+        "show_description": false,
+        "acc_about": "About this product",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight",
+        "headline": "Oral care beyond teeth & gums™",
+        "supporting": "The Real Total Oral Care",
+        "intro": "<p>You already look after your teeth and gums. MARCEL Smile™ invites you to care for the soft tissues inside your mouth too, as part of a more complete daily routine.</p>",
+        "details": "MRP inclusive of all taxes",
+        "how_lines": "Take a pea-sized amount.\nBrush thoroughly for at least two minutes, preferably twice daily, or as directed by a qualified professional.\nSpit out and rinse your mouth with water.",
+        "safety": "",
+        "pack_notes": "30 g | Compact pack – handy for travel\n100 g | Larger pack – best value for home",
+        "cta_label": "",
+        "cta2_label": ""
+      },
+      "blocks": {
+        "perk_1": {
+          "type": "perk",
+          "settings": {
+            "icon": "box",
+            "text": "Discreet packaging"
+          }
+        },
+        "perk_2": {
+          "type": "perk",
+          "settings": {
+            "icon": "truck",
+            "text": "Delivery across India"
+          }
+        },
+        "accordion_1": {
+          "type": "accordion",
+          "settings": {
+            "title": "Delivery and returns",
+            "text": "<p>Ships across India in discreet packaging. Delivery times are shown at checkout.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "perk_1",
+        "perk_2",
+        "accordion_1"
+      ]
+    },
+    "matters": {
+      "type": "mt-guide",
+      "settings": {
+        "show_toc": false,
+        "toc_title": "On this page",
+        "read_label": "[n] min read",
+        "no_articles": "Articles will appear here once they are published.",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      },
+      "blocks": {
+        "chapter_1": {
+          "type": "chapter",
+          "settings": {
+            "heading": "Your whole mouth matters.",
+            "toc_label": "Your whole mouth matters",
+            "anchor": "whole-mouth"
+          }
+        },
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Teeth matter. Healthy gums matter. Enamel matters. Fresh breath matters. And the soft tissues lining the inside of your mouth matter, too.</p><p>MARCEL Smile™ brings these tissues into your daily oral care, so your routine looks after more than just teeth and gums.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "chapter_1",
+        "text_1"
+      ]
+    },
+    "inside": {
+      "type": "mt-icon-cards",
+      "settings": {
+        "eyebrow": "What’s inside",
+        "heading": "Five things that make MARCEL Smile™ different",
+        "center": false,
+        "columns": "5",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      },
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "icon": "leaf",
+            "title": "Premium Herbal Complex",
+            "text": "A blend of plant extracts.",
+            "link_to": "custom"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Natural flavors",
+            "text": "",
+            "link_to": "custom"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "icon": "drop",
+            "title": "No artificial sweeteners",
+            "text": "Naturally pleasant taste.",
+            "link_to": "custom"
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "icon": "shield",
+            "title": "No parabens",
+            "text": "No synthetic preservatives.",
+            "link_to": "custom"
+          }
+        },
+        "card_5": {
+          "type": "card",
+          "settings": {
+            "icon": "check",
+            "title": "No SLS",
+            "text": "No harsh foaming agent.",
+            "link_to": "custom"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4",
+        "card_5"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "matters",
+    "inside"
+  ]
+}

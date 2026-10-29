@@ -1,0 +1,361 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "mt-page-hero",
+      "settings": {
+        "show_crumbs": true,
+        "home_label": "Home",
+        "button_1_to": "test",
+        "button_2_to": "consult",
+        "back_to": "therapy",
+        "background": "tint",
+        "sheet": false,
+        "spacing": "none",
+        "current_label": "About",
+        "eyebrow": "About MARCEL",
+        "heading": "A journey towards better oral function",
+        "text": "MARCEL OMR Therapy™ has evolved through years of development, clinical assessment and continued work focused on Oral Submucous Fibrosis (OSMF). JanSuta Pharmaceuticals is the organisation behind the platform."
+      },
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "value": "26",
+            "icon": "patent",
+            "label": "Years of development, 2000–2026"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "value": "2008",
+            "icon": "patent",
+            "label": "First patent granted"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "value": "2026",
+            "icon": "patent",
+            "label": "CTRI-registered clinical study"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "value": "30",
+            "icon": "patent",
+            "label": "Trademark applications filed"
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4"
+      ]
+    },
+    "quest": {
+      "type": "mt-founder",
+      "settings": {
+        "quote_position": "left",
+        "quote_eyebrow": "",
+        "quote": "",
+        "name": "Kandarp Bakshi",
+        "role": "Founder, JanSuta Pharmaceuticals",
+        "heading_size": "large",
+        "heading": "From an idea to a continuing journey in OSMF care",
+        "text": "The MARCEL journey began around 2000 with the recognition of a clinical need and the development of a therapeutic concept focused on Oral Submucous Fibrosis.",
+        "link_label": "",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal",
+        "story_eyebrow": "Our quest",
+        "body": "<p>What followed was a journey spanning formulation development, product testing, clinical assessments, scientific investigations, intellectual-property development and commercialisation. The first patent was granted in 2008.</p><p>Today, MARCEL OMR Therapy™ continues to evolve through clinical evaluation, research initiatives and patient-support activities.</p>"
+      }
+    },
+    "timeline": {
+      "type": "mt-journey",
+      "settings": {
+        "eyebrow": "Our development journey",
+        "heading": "From a clinical need to a structured oral-care approach",
+        "text": "A 26-year journey of development, evidence generation and continuous evolution. The timeline distinguishes completed milestones from ongoing activities and future opportunities.",
+        "center": false,
+        "layout": "timeline",
+        "columns": 4,
+        "note": "",
+        "button_label": "Explore clinical evidence",
+        "button_to": "evidence",
+        "button2_to": "consult",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      },
+      "blocks": {
+        "phase_1": {
+          "type": "phase",
+          "settings": {
+            "when": "2000–2008",
+            "icon": "flask",
+            "title": "Foundation & early development",
+            "text": "Understanding the clinical problem, developing the therapeutic concept, screening candidate ingredients and progressing towards lead formulation development. First patent granted in 2008."
+          }
+        },
+        "phase_2": {
+          "type": "phase",
+          "settings": {
+            "when": "2012–2022",
+            "icon": "chart",
+            "title": "Product development & market learning",
+            "text": "Technical development and standardisation, alpha and beta product testing, product maturation, scale-up and market learning."
+          }
+        },
+        "phase_3": {
+          "type": "phase",
+          "settings": {
+            "when": "2025–2026",
+            "icon": "test",
+            "title": "Evidence generation, regulatory & scale-up",
+            "text": "Clinical evidence generation, regulatory dossier and licensing activities, GMP manufacturing and scale-up, quality-related activities and continued intellectual-property development."
+          }
+        },
+        "phase_4": {
+          "type": "phase",
+          "settings": {
+            "when": "2026",
+            "icon": "india",
+            "title": "Commercialisation",
+            "text": "Market introduction, distribution expansion, healthcare professional engagement, patient access and awareness."
+          }
+        },
+        "phase_5": {
+          "type": "phase",
+          "settings": {
+            "when": "Beyond 2026",
+            "icon": "target",
+            "title": "Continuous development",
+            "text": "Further evidence generation, ongoing research, real-world clinical experience and exploration of future applications, subject to appropriate evaluation."
+          }
+        }
+      },
+      "block_order": [
+        "phase_1",
+        "phase_2",
+        "phase_3",
+        "phase_4",
+        "phase_5"
+      ]
+    },
+    "pillars": {
+      "type": "mt-journey",
+      "settings": {
+        "eyebrow": "The MARCEL 3-Pillar Approach",
+        "heading": "Three connected pillars. One structured approach to OSMF care.",
+        "text": "MARCEL OMR Therapy™ brings together oral mucosal care, functional support and guided progress.",
+        "center": false,
+        "layout": "cards",
+        "columns": 3,
+        "note": "",
+        "button_label": "Explore MARCEL OMR Therapy™",
+        "button_to": "therapy",
+        "button2_to": "consult",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      },
+      "blocks": {
+        "phase_1": {
+          "type": "phase",
+          "settings": {
+            "when": "01 — Oral mucosal care",
+            "icon": "shield",
+            "title": "Care for the mouth. Support comfort.",
+            "text": "A structured oral-care regimen designed to support oral mucosal health and help manage common OSMF-related discomfort such as burning, tightness and difficulty with eating."
+          }
+        },
+        "phase_2": {
+          "type": "phase",
+          "settings": {
+            "when": "02 — Functional support",
+            "icon": "s-open",
+            "title": "Support what matters in daily life.",
+            "text": "Regular mouth-opening exercises and, where appropriate, an optional mouth-opening device as an adjunct.",
+            "foot": "Focus: Mouth opening • Chewing • Oral function"
+          }
+        },
+        "phase_3": {
+          "type": "phase",
+          "settings": {
+            "when": "03 — Guided care & progress",
+            "icon": "chart",
+            "title": "Track. Review. Stay supported.",
+            "text": "Progress tracking, the 3-Week Progress Tracker, scheduled reviews and the In-house OSMF Consultant, with guidance towards MARCEL OSMF Care Specialists where clinical assessment is required.",
+            "foot": "Focus: Progress tracking • Guidance • Specialist care"
+          }
+        }
+      },
+      "block_order": [
+        "phase_1",
+        "phase_2",
+        "phase_3"
+      ]
+    },
+    "values": {
+      "type": "mt-icon-cards",
+      "settings": {
+        "eyebrow": "What guides us",
+        "heading": "Care built around responsibility, transparency and progress",
+        "center": false,
+        "columns": "3",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      },
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "icon": "shield",
+            "title": "Clinical responsibility",
+            "text": "OSMF is a complex condition requiring appropriate assessment, and individual responses to care can vary.",
+            "link_to": "custom"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "icon": "flask",
+            "title": "Evidence & continued research",
+            "text": "We value documented clinical observations, structured evaluation and continued research to better understand outcomes.",
+            "link_to": "custom"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "icon": "heart",
+            "title": "Patient-centred support",
+            "text": "We aim to help patients understand their symptoms, follow their care routine and track their progress with appropriate guidance.",
+            "link_to": "custom"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3"
+      ]
+    },
+    "team": {
+      "type": "mt-founder",
+      "settings": {
+        "quote_position": "right",
+        "quote_eyebrow": "",
+        "quote": "",
+        "name": "Dr. Niyati Thakker, BDS",
+        "role": "MARCEL OSMF Clinical Consultant",
+        "heading_size": "large",
+        "heading": "A clinical point of contact for our specialist network",
+        "text": "Dr. Niyati Thakker, BDS, has joined JanSuta Pharmaceuticals as MARCEL OSMF Clinical Consultant.",
+        "link_label": "",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal",
+        "story_eyebrow": "Our team",
+        "body": "<p>As the MARCEL® OSMF Care Specialist network grows, she serves as a key clinical point of contact for participating doctors: helping them understand MARCEL OMR Therapy™, supporting clinical orientation and facilitating coordination with the JanSuta team.</p>"
+      }
+    },
+    "history": {
+      "type": "mt-guide",
+      "settings": {
+        "show_toc": false,
+        "toc_title": "On this page",
+        "read_label": "[n] min read",
+        "no_articles": "Articles will appear here once they are published.",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      },
+      "blocks": {
+        "chapter_1": {
+          "type": "chapter",
+          "settings": {
+            "heading": "Brand history",
+            "toc_label": "Brand history",
+            "anchor": "brand-history"
+          }
+        },
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>FIBREX was re-branded as MARCEL (Poly Herbal Oral Rinse) in 2014. MARCEL® (Poly Herbal Oral Rinse) was then re-branded as MARCEL Ora-Shield™, effective 1 January 2026. Historical names may appear in legacy records but are not current product names.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "chapter_1",
+        "text_1"
+      ]
+    },
+    "cta": {
+      "type": "mt-cta-band",
+      "settings": {
+        "eyebrow": "Care • Function • Guidance",
+        "heading": "The journey continues",
+        "text": "Our aim is to make the OSMF care journey more understandable, measurable and supportive, while recognising the importance of professional assessment and continued scientific evaluation.",
+        "button_1_label": "Explore Clinical Evidence",
+        "button_1_to": "evidence",
+        "button_2_label": "Take the MARCEL OSMF Self-Check",
+        "button_2_to": "test",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      }
+    },
+    "disclaimer": {
+      "type": "mt-guide",
+      "settings": {
+        "show_toc": false,
+        "toc_title": "On this page",
+        "read_label": "[n] min read",
+        "no_articles": "Articles will appear here once they are published.",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      },
+      "blocks": {
+        "fine_1": {
+          "type": "fine",
+          "settings": {
+            "text": "Individual responses to care vary. MARCEL OMR Therapy™ does not guarantee a cure or reversal of OSMF. Clinical findings and research observations must be interpreted in the context of the relevant study methods and limitations. Professional assessment may be required for diagnosis, disease staging and decisions about appropriate care."
+          }
+        }
+      },
+      "block_order": [
+        "fine_1"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "quest",
+    "timeline",
+    "pillars",
+    "values",
+    "team",
+    "history",
+    "cta",
+    "disclaimer"
+  ]
+}

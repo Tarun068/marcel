@@ -1,0 +1,95 @@
+{%- comment -%}
+  Marcel design system: brand font, colour tokens (from Theme settings > Marcel brand) and base styles.
+  Every colour has a fallback so the page still looks right before the theme settings are saved.
+  Rendered in layout/theme.liquid after base.css so it can override Dawn defaults.
+{%- endcomment -%}
+{{ 'mt-figtree.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+
+{%- liquid
+  assign teal = settings.mt_color_teal | default: '#077C87'
+  assign aqua = settings.mt_color_aqua | default: '#1AA7B4'
+  assign mint = settings.mt_color_mint | default: '#8FE3E9'
+  assign navy = settings.mt_color_navy | default: '#0B2A45'
+-%}
+
+{% style %}
+  @font-face {
+    font-family: 'Figtree';
+    font-style: normal;
+    font-weight: 300 900;
+    font-display: swap;
+    src: url('{{ 'mt-figtree.woff2' | asset_url }}') format('woff2');
+  }
+  @font-face {
+    font-family: 'Fraunces';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('{{ 'mt-fraunces.woff2' | asset_url }}') format('woff2');
+  }
+  @font-face {
+    font-family: 'Fraunces';
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('{{ 'mt-fraunces-italic.woff2' | asset_url }}') format('woff2');
+  }
+
+  :root {
+    --mt-ink: {{ settings.mt_color_ink | default: '#0C2A3D' }};
+    --mt-ink-2: {{ settings.mt_color_ink_2 | default: '#3A5263' }};
+    --mt-ink-3: {{ settings.mt_color_ink_3 | default: '#5F7584' }};
+    --mt-line: {{ settings.mt_color_line | default: '#DCE7ED' }};
+    --mt-line-2: {{ settings.mt_color_line_2 | default: '#C5D6DF' }};
+    --mt-paper: {{ settings.mt_color_paper | default: '#FFFFFF' }};
+    --mt-mist: {{ settings.mt_color_mist | default: '#F3F8FA' }};
+    --mt-tint: {{ settings.mt_color_tint | default: '#E5F2F4' }};
+    --mt-pack-bg: {{ settings.mt_color_pack_bg | default: '#ECF4FA' }};
+    --mt-navy: {{ navy }};
+    --mt-navy-rgb: {{ navy | color_extract: 'red' }}, {{ navy | color_extract: 'green' }}, {{ navy | color_extract: 'blue' }};
+    --mt-navy-2: {{ settings.mt_color_navy_2 | default: '#13395B' }};
+    --mt-navy-3: {{ settings.mt_color_navy_3 | default: '#08223A' }};
+    --mt-navy-ink: {{ settings.mt_color_navy_ink | default: '#C4D6E3' }};
+    --mt-teal: {{ teal }};
+    --mt-teal-2: {{ settings.mt_color_teal_2 | default: '#05656E' }};
+    --mt-teal-rgb: {{ teal | color_extract: 'red' }}, {{ teal | color_extract: 'green' }}, {{ teal | color_extract: 'blue' }};
+    --mt-aqua: {{ aqua }};
+    --mt-aqua-rgb: {{ aqua | color_extract: 'red' }}, {{ aqua | color_extract: 'green' }}, {{ aqua | color_extract: 'blue' }};
+    --mt-aqua-soft: {{ settings.mt_color_aqua_soft | default: '#D6EFF1' }};
+    --mt-mint: {{ mint }};
+    --mt-mint-rgb: {{ mint | color_extract: 'red' }}, {{ mint | color_extract: 'green' }}, {{ mint | color_extract: 'blue' }};
+    --mt-blue: {{ settings.mt_color_blue | default: '#1F3E88' }};
+    --mt-on-dark: #FFFFFF;
+    --mt-wa: #25D366;
+    --mt-wa-ink: #0B6B33;
+    --mt-wa-soft: #E5F7EA;
+    --mt-good: #2B9759;
+    --mt-warn: #7A4A00;
+    --mt-warn-bg: #FFF4E2;
+    --mt-warn-line: #F1D19E;
+    --mt-lip-1: #EBA59E;
+    --mt-lip-2: #CB7B76;
+    --mt-cav-1: #7A2A38;
+    --mt-cav-2: #471420;
+    --mt-skin-1: #E3B08A;
+    --mt-skin-2: #C68B63;
+    --mt-nail: #F3D6C4;
+    --mt-tooth: #FFFFFF;
+    --mt-tooth-gap: #E3EAEE;
+
+    --mt-font: 'Figtree', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    --mt-serif: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+    --mt-wrap: {{ settings.mt_page_width | default: 1200 }}px;
+    --mt-header-h: 72px;
+
+    {%- if settings.mt_use_brand_fonts != false %}
+      --font-body-family: var(--mt-font);
+      --font-body-style: normal;
+      --font-heading-family: var(--mt-font);
+      --font-heading-style: normal;
+      --font-heading-weight: 800;
+    {%- endif %}
+  }
+{% endstyle %}
+
+{{ 'mt-base.css' | asset_url | stylesheet_tag }}

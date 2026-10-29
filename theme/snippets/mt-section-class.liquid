@@ -1,0 +1,23 @@
+{%- comment -%}
+  Outputs the wrapper classes for a Marcel section from its style settings.
+
+  Accepts:
+  - s: {Object} section.settings (uses background, sheet, spacing)
+  - extra: {String} extra classes (optional)
+
+  Usage:
+  <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-faq' %}">
+{%- endcomment -%}
+{%- liquid
+  assign bg = s.background | default: 'paper'
+  echo 'mt mt-section mt-bg-' | append: bg
+  if s.sheet
+    echo ' mt-sheet'
+  endif
+  if s.spacing == 'tight' or s.spacing == 'none'
+    echo ' mt-section--' | append: s.spacing
+  endif
+  if extra != blank
+    echo ' ' | append: extra
+  endif
+-%}

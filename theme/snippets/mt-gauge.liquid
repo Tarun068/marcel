@@ -1,0 +1,47 @@
+{%- comment -%}
+  Mouth-opening gauge: a mouth with stacked fingers next to a millimetre ruler.
+
+  Accepts:
+  - fingers: {Number} 0–3 (0 = less than one finger)
+  - color: {String} CSS colour for the ruler bracket (optional)
+  - caption: {String} small label under the mm value (optional)
+  - size: {String} 'sm' for the compact version (optional)
+
+  Usage:
+  {% render 'mt-gauge', fingers: 3, caption: 'your opening' %}
+{%- endcomment -%}
+{%- liquid
+  assign f = fingers | default: 3 | plus: 0
+  case f
+    when 0
+      assign mm = 11
+    when 1
+      assign mm = 20
+    when 2
+      assign mm = 30
+    else
+      assign f = 3
+      assign mm = 45
+  endcase
+  assign gc = color | default: 'var(--mt-navy)'
+-%}
+<div
+  class="mt-gauge{% if size == 'sm' %} mt-gauge--sm{% endif %}"
+  data-mt-gauge
+  data-f="{{ f }}"
+  style="--mm: {{ mm }}; --gc: {{ gc }};"
+  role="img"
+  aria-label="Mouth opening about {{ mm }} millimetres"
+>
+  <span class="mt-mouth">
+    <span class="mt-cavity">
+      <span class="mt-teeth mt-teeth--top"></span>
+      <span class="mt-fingers"><i class="mt-finger"></i><i class="mt-finger"></i><i class="mt-finger"></i></span>
+      <span class="mt-teeth mt-teeth--bottom"></span>
+    </span>
+  </span>
+  <span class="mt-ruler" aria-hidden="true">
+    <span class="mt-ruler-bracket"></span>
+    <span class="mt-ruler-mm"><b data-mt-mm>&asymp; {{ mm }} mm</b><small data-mt-caption>{{ caption | default: 'opening' | escape }}</small></span>
+  </span>
+</div>

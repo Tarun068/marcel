@@ -1,0 +1,246 @@
+{{ 'mt-pages.css' | asset_url | stylesheet_tag }}
+{{ 'mt-booking.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mt-specialists.js' | asset_url }}" defer="defer"></script>
+
+{%- capture consult_link -%}{% render 'mt-link-to', key: 'consult' %}{%- endcapture -%}
+{%- assign s = section.settings -%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-clinics-page' %}">
+  <div class="mt-wrap">
+    <mt-specialists>
+      {%- render 'mt-specialist-data' -%}
+      <script type="application/json" data-mt-text>
+        {
+          "allStates": {{ s.all_states | json }},
+          "allCities": {{ s.all_label | json }},
+          "countOne": {{ s.count_one | json }},
+          "countMany": {{ s.count_many | json }},
+          "whereAll": {{ s.where_all | json }},
+          "whereSearch": {{ s.where_search | json }},
+          "nearYou": {{ s.near_you | json }},
+          "role": {{ s.role_label | json }},
+          "reg": {{ s.registration_label | json }},
+          "directions": {{ s.directions_label | json }},
+          "call": {{ s.call_label | json }},
+          "emptyTitle": {{ s.empty_title | json }},
+          "locating": {{ s.locating_label | json }},
+          "noLocation": {{ s.no_location | json }},
+          "km": {{ s.km_label | json }}
+        }
+      </script>
+
+      <div class="mt-finder-tools">
+        <div class="mt-field mt-finder-state">
+          <label for="MtSpecState-{{ section.id }}">{{ s.state_label | escape }}</label>
+          <select class="mt-input" id="MtSpecState-{{ section.id }}" data-mt-state></select>
+        </div>
+        <button type="button" class="mt-btn mt-btn-secondary mt-btn-sm" data-mt-locate>
+          {%- render 'mt-icon', icon: 'pin' -%}{{ s.locate_label | escape }}
+        </button>
+      </div>
+      <div class="mt-chips mt-clinic-chips" role="group" aria-label="{{ s.chips_label | escape }}" data-mt-chips></div>
+      <div class="mt-result-line">
+        <span data-mt-count aria-live="polite"></span>
+        {%- if s.sample_label != blank -%}<span class="mt-tag-sample" data-mt-sample hidden>{{ s.sample_label | escape }}</span>{%- endif -%}
+      </div>
+      <p class="mt-err" data-mt-locate-msg hidden></p>
+      <div class="mt-clinic-grid" data-mt-list></div>
+
+      <div class="mt-empty" data-mt-empty hidden>
+        {%- render 'mt-icon', icon: 'doctor' -%}
+        <h3 class="mt-h3" data-mt-empty-title></h3>
+        {%- if s.empty_text != blank -%}<p class="mt-muted">{{ s.empty_text | escape }}</p>{%- endif -%}
+        <div class="mt-btn-row">
+          {%- if s.empty_consult_label != blank -%}
+            <a class="mt-btn mt-btn-primary" href="{{ consult_link }}">{{ s.empty_consult_label | escape }}</a>
+          {%- endif -%}
+          <button type="button" class="mt-btn mt-btn-secondary" data-mt-city="" data-mt-reset>{{ s.empty_all_label | escape }}</button>
+        </div>
+      </div>
+
+      {%- if s.note != blank -%}
+        <div class="mt-callout mt-callout--muted mt-finder-note">{%- render 'mt-icon', icon: 'info' -%}<span>{{ s.note }}</span></div>
+      {%- endif -%}
+    </mt-specialists>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel specialist finder",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Specialists come from metaobject entries of type ‘osmf_specialist’. Add a Marcel page header with a Search box block above this section. The finder reads ?q= (city or PIN code), ?city= and ?state= from links. Sample profiles show in the theme editor only."
+    },
+    {
+      "type": "text",
+      "id": "sample_label",
+      "label": "Sample tag (theme editor only)",
+      "default": "Sample profiles"
+    },
+    {
+      "type": "header",
+      "content": "Filters"
+    },
+    {
+      "type": "text",
+      "id": "state_label",
+      "label": "State label",
+      "default": "State"
+    },
+    {
+      "type": "text",
+      "id": "all_states",
+      "label": "All states",
+      "default": "All states"
+    },
+    {
+      "type": "text",
+      "id": "chips_label",
+      "label": "City filter label (for screen readers)",
+      "default": "Filter by city"
+    },
+    {
+      "type": "text",
+      "id": "all_label",
+      "label": "All cities",
+      "default": "All cities"
+    },
+    {
+      "type": "text",
+      "id": "locate_label",
+      "label": "Location button",
+      "default": "Use my current location"
+    },
+    {
+      "type": "text",
+      "id": "locating_label",
+      "label": "Finding location",
+      "default": "Finding your location…"
+    },
+    {
+      "type": "text",
+      "id": "no_location",
+      "label": "Location unavailable",
+      "default": "We couldn’t get your location. Please search by city or PIN code."
+    },
+    {
+      "type": "text",
+      "id": "km_label",
+      "label": "Distance",
+      "info": "[n] is the distance.",
+      "default": "about [n] km away"
+    },
+    {
+      "type": "text",
+      "id": "count_one",
+      "label": "Count, one specialist",
+      "info": "[n] is the number, [where] the place.",
+      "default": "[n] OSMF Care Specialist in [where]"
+    },
+    {
+      "type": "text",
+      "id": "count_many",
+      "label": "Count, several specialists",
+      "default": "[n] OSMF Care Specialists in [where]"
+    },
+    {
+      "type": "text",
+      "id": "where_all",
+      "label": "Place name for everywhere",
+      "default": "India"
+    },
+    {
+      "type": "text",
+      "id": "where_search",
+      "label": "Place name for a search",
+      "default": "your search"
+    },
+    {
+      "type": "text",
+      "id": "near_you",
+      "label": "Place name for location search",
+      "default": "order of distance from you"
+    },
+    {
+      "type": "header",
+      "content": "Cards"
+    },
+    {
+      "type": "text",
+      "id": "role_label",
+      "label": "Role",
+      "default": "MARCEL OSMF Care Specialist"
+    },
+    {
+      "type": "text",
+      "id": "registration_label",
+      "label": "Registration label",
+      "default": "Reg. no."
+    },
+    {
+      "type": "text",
+      "id": "call_label",
+      "label": "Call button",
+      "default": "Call clinic"
+    },
+    {
+      "type": "text",
+      "id": "directions_label",
+      "label": "Directions button",
+      "default": "Get directions"
+    },
+    {
+      "type": "header",
+      "content": "No results"
+    },
+    {
+      "type": "text",
+      "id": "empty_title",
+      "label": "Heading",
+      "info": "[where] is the search.",
+      "default": "No OSMF Care Specialist listed for [where] yet"
+    },
+    {
+      "type": "textarea",
+      "id": "empty_text",
+      "label": "Text",
+      "default": "We are adding verified specialists. Meanwhile, a MARCEL OSMF Consultant can discuss your concerns and guide your next step."
+    },
+    {
+      "type": "text",
+      "id": "empty_consult_label",
+      "label": "Consultant button",
+      "default": "Talk to a MARCEL OSMF Consultant"
+    },
+    {
+      "type": "text",
+      "id": "empty_all_label",
+      "label": "Show all button",
+      "default": "Show all specialists"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "note",
+      "label": "Note",
+      "default": "Only verified OSMF Care Specialist information is listed. Please call the clinic to confirm hours and appointments. The clinic visit is with the healthcare professional, not with MARCEL."
+    },
+    {"type":"header","content":"Section style"},
+    {"type":"select","id":"background","label":"Background","options":[{"value":"paper","label":"White"},{"value":"mist","label":"Light"},{"value":"tint","label":"Tinted"},{"value":"navy","label":"Navy"}],"default":"paper"},
+    {"type":"checkbox","id":"sheet","label":"Rounded top edge","info":"Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.","default":false},
+    {"type":"select","id":"spacing","label":"Spacing","options":[{"value":"normal","label":"Normal"},{"value":"tight","label":"Compact"},{"value":"none","label":"None"}],"default":"tight"}
+  ],
+  "presets": [
+    {
+      "name": "Marcel specialist finder"
+    }
+  ]
+}
+{% endschema %}

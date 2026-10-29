@@ -1,0 +1,158 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "mt-page-hero",
+      "settings": {
+        "show_crumbs": true,
+        "home_label": "Home",
+        "button_1_to": "test",
+        "button_2_to": "consult",
+        "back_to": "therapy",
+        "background": "tint",
+        "sheet": false,
+        "spacing": "none",
+        "parent_label": "Get Help",
+        "parent_link": "/pages/get-help",
+        "current_label": "Find an OSMF Specialist",
+        "eyebrow": "MARCEL OSMF Care Specialist directory",
+        "heading": "Find an OSMF Care Specialist near you",
+        "text": "Enter your city or PIN code to find verified OSMF Care Specialists in the same city, prioritising clinics in your PIN-code area and nearby localities."
+      },
+      "blocks": {
+        "search_1": {
+          "type": "search",
+          "settings": {
+            "icon": "pin",
+            "placeholder": "Your city or PIN code",
+            "button_label": "Find specialists",
+            "param": "q"
+          }
+        }
+      },
+      "block_order": [
+        "search_1"
+      ]
+    },
+    "finder": {
+      "type": "mt-specialists",
+      "settings": {
+        "sample_label": "Sample profiles",
+        "state_label": "State",
+        "all_states": "All states",
+        "chips_label": "Filter by city",
+        "all_label": "All cities",
+        "locate_label": "Use my current location",
+        "locating_label": "Finding your location…",
+        "no_location": "We couldn’t get your location. Please search by city or PIN code.",
+        "km_label": "about [n] km away",
+        "count_one": "[n] OSMF Care Specialist in [where]",
+        "count_many": "[n] OSMF Care Specialists in [where]",
+        "where_all": "India",
+        "where_search": "your search",
+        "near_you": "order of distance from you",
+        "role_label": "MARCEL OSMF Care Specialist",
+        "registration_label": "Reg. no.",
+        "call_label": "Call clinic",
+        "directions_label": "Get directions",
+        "empty_title": "No OSMF Care Specialist listed for [where] yet",
+        "empty_text": "We are adding verified specialists. Meanwhile, a MARCEL OSMF Consultant can discuss your concerns and guide your next step.",
+        "empty_consult_label": "Talk to a MARCEL OSMF Consultant",
+        "empty_all_label": "Show all specialists",
+        "note": "Only verified OSMF Care Specialist information is listed. Please call the clinic to confirm hours and appointments. The clinic visit is with the healthcare professional, not with MARCEL.",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      }
+    },
+    "how": {
+      "type": "mt-steps",
+      "settings": {
+        "layout": "row",
+        "eyebrow": "How it works",
+        "heading": "How patients can find care",
+        "link_label": "",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal",
+        "text": "",
+        "button_label": ""
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Enter your city and PIN code",
+            "text": "Results stay within your city and show the same and neighbouring PIN-code areas first."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Review specialist details",
+            "text": "Compare verified clinic locations and contact information."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Contact or navigate",
+            "text": "Call the clinic or open turn-by-turn directions in Maps."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
+    },
+    "support": {
+      "type": "mt-support",
+      "settings": {
+        "eyebrow": "Not ready for a clinic visit?",
+        "heading": "Talk to a MARCEL OSMF Consultant first",
+        "text": "Discuss your concerns by phone and understand whether an in-person examination is needed.",
+        "center": false,
+        "note": "",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      },
+      "blocks": {
+        "route_1": {
+          "type": "route",
+          "settings": {
+            "icon": "phone",
+            "eyebrow": "Option A",
+            "title": "MARCEL OSMF Consultant",
+            "subtitle": "In-house, on-call consultation",
+            "text": "Discuss your concerns remotely and understand the next step.",
+            "button_label": "Talk to a MARCEL OSMF Consultant",
+            "link_to": "consult",
+            "link2_to": "whatsapp",
+            "points": "Programme information and next steps\nGuidance on the MARCEL OMR Therapy™ pathways\nHelp finding a professional assessment",
+            "button2_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "route_1"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "finder",
+    "how",
+    "support"
+  ]
+}

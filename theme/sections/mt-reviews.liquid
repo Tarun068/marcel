@@ -1,0 +1,246 @@
+{%- liquid
+  assign shown = 0
+  for block in section.blocks
+    if block.settings.consent and block.settings.quote != blank
+      assign shown = shown | plus: 1
+    endif
+  endfor
+-%}
+
+{%- if shown > 0 or request.design_mode -%}
+{%- style -%}
+  .mt-reviews-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+  @media (max-width: 700px) {
+    .mt-reviews-row { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 86%; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 16px; margin: 0 -16px; padding: 4px 16px 12px; scrollbar-width: thin; }
+    .mt-review { scroll-snap-align: start; }
+  }
+  .mt-review { display: grid; gap: 14px; align-content: start; padding: 22px; border-radius: var(--mt-r-lg); background: var(--mt-paper); border: 1px solid var(--mt-line); }
+  .mt-bg-paper .mt-review { background: var(--mt-mist); border-color: transparent; }
+  .mt-review-stars { display: flex; gap: 2px; color: #E0A21B; }
+  .mt-review-stars .mt-i { width: 18px; height: 18px; fill: currentColor; stroke: none; }
+  .mt-review-stars .is-off { color: var(--mt-line-2); }
+  .mt-review blockquote { margin: 0; font-size: 16px; line-height: 1.6; color: var(--mt-ink); }
+  .mt-review-ba { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .mt-review-ba figure { position: relative; margin: 0; aspect-ratio: 1 / 1; border-radius: var(--mt-r); overflow: hidden; background: var(--mt-mist); }
+  .mt-review-ba img { width: 100%; height: 100%; object-fit: cover; }
+  .mt-review-ba figcaption { position: absolute; left: 8px; bottom: 8px; padding: 3px 9px; border-radius: 99px; background: rgba(13, 38, 59, .78); color: #FFFFFF; font-size: 12px; font-weight: 800; }
+  .mt-review-who { display: flex; align-items: center; gap: 12px; padding-top: 14px; border-top: 1px solid var(--mt-line); }
+  .mt-review-who b { display: block; color: var(--mt-ink); }
+  .mt-review-who small { display: block; font-size: 13px; color: var(--mt-ink-3); }
+  .mt-review-foot { display: grid; gap: 12px; margin-top: 22px; }
+  .mt-review-foot .mt-fine { max-width: 72ch; }
+{%- endstyle -%}
+  <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-reviews' %}">
+    <div class="mt-wrap">
+      {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
+
+      {%- if shown == 0 -%}
+        <p class="mt-placeholder">Add Review blocks with real patient reviews and tick “Patient agreed to publish”. This section stays hidden on the live store until then.</p>
+      {%- else -%}
+        <div class="mt-reviews-row">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.consent and block.settings.quote != blank -%}
+              <article class="mt-review" {{ block.shopify_attributes }}>
+                {%- if block.settings.rating > 0 -%}
+                  <div class="mt-review-stars" role="img" aria-label="{{ block.settings.rating }} / 5">
+                    {%- for i in (1..5) -%}
+                      <span{% if i > block.settings.rating %} class="is-off"{% endif %}>{%- render 'mt-icon', icon: 'star' -%}</span>
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+                <blockquote>{{ block.settings.quote | escape | newline_to_br }}</blockquote>
+                {%- if block.settings.before_image != blank and block.settings.after_image != blank -%}
+                  <div class="mt-review-ba">
+                    <figure>
+                      {{- block.settings.before_image | image_url: width: 400 | image_tag: loading: 'lazy', widths: '200, 300, 400', sizes: '(min-width: 701px) 180px, 40vw', alt: section.settings.before_label -}}
+                      <figcaption>{{ section.settings.before_label | escape }}</figcaption>
+                    </figure>
+                    <figure>
+                      {{- block.settings.after_image | image_url: width: 400 | image_tag: loading: 'lazy', widths: '200, 300, 400', sizes: '(min-width: 701px) 180px, 40vw', alt: section.settings.after_label -}}
+                      <figcaption>{{ section.settings.after_label | escape }}</figcaption>
+                    </figure>
+                  </div>
+                {%- endif -%}
+                <div class="mt-review-who">
+                  <span class="mt-initials">
+                    {%- if block.settings.photo != blank -%}
+                      {{- block.settings.photo | image_url: width: 96 | image_tag: loading: 'lazy', alt: '' -}}
+                    {%- else -%}
+                      {{- block.settings.name | slice: 0 | upcase | escape -}}
+                    {%- endif -%}
+                  </span>
+                  <span>
+                    <b>{{ block.settings.name | escape }}</b>
+                    {%- capture meta -%}{{ block.settings.place | escape }}{% if block.settings.place != blank and block.settings.context != blank %} · {% endif %}{{ block.settings.context | escape }}{%- endcapture -%}
+                    {%- if meta != blank -%}<small>{{ meta }}</small>{%- endif -%}
+                    {%- if block.settings.source != blank -%}<small>{{ block.settings.source | escape }}</small>{%- endif -%}
+                  </span>
+                </div>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.note != blank or section.settings.link_label != blank -%}
+        <div class="mt-review-foot">
+          {%- if section.settings.note != blank -%}<p class="mt-fine">{{ section.settings.note }}</p>{%- endif -%}
+          {%- if section.settings.link_label != blank and section.settings.link != blank -%}
+            <a class="mt-link" href="{{ section.settings.link }}" target="_blank" rel="noopener">{{ section.settings.link_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Marcel patient reviews",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Use real reviews only, with the patient’s permission. A review shows only when “Patient agreed to publish” is ticked, and the section stays hidden until at least one does."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Patient stories"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Experiences shared by people on the MARCEL journey"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "note",
+      "label": "Note",
+      "default": "Shared with permission. Each person’s experience is their own; results vary and are not guaranteed."
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "Read our reviews on Google"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link",
+      "info": "For example, your Google Business Profile reviews page. Empty hides the link."
+    },
+    {
+      "type": "text",
+      "id": "before_label",
+      "label": "Before photo label",
+      "default": "Before"
+    },
+    {
+      "type": "text",
+      "id": "after_label",
+      "label": "After photo label",
+      "default": "After"
+    },
+    {"type":"header","content":"Section style"},
+    {"type":"select","id":"background","label":"Background","options":[{"value":"paper","label":"White"},{"value":"mist","label":"Light"},{"value":"tint","label":"Tinted"},{"value":"navy","label":"Navy"}],"default":"paper"},
+    {"type":"checkbox","id":"sheet","label":"Rounded top edge","info":"Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.","default":false},
+    {"type":"select","id":"spacing","label":"Spacing","options":[{"value":"normal","label":"Normal"},{"value":"tight","label":"Compact"},{"value":"none","label":"None"}],"default":"normal"}
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "consent",
+          "label": "Patient agreed to publish",
+          "info": "Tick only when you have the patient’s permission to show this review and any photos.",
+          "default": false
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Review"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "info": "First name and initial is enough."
+        },
+        {
+          "type": "text",
+          "id": "place",
+          "label": "City"
+        },
+        {
+          "type": "text",
+          "id": "context",
+          "label": "Journey",
+          "info": "For example: Foundation pathway, week 12."
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source",
+          "info": "For example: Google review."
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star rating",
+          "info": "0 hides the stars.",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "default": 0
+        },
+        {
+          "type": "image_picker",
+          "id": "photo",
+          "label": "Photo"
+        },
+        {
+          "type": "header",
+          "content": "Before and after"
+        },
+        {
+          "type": "paragraph",
+          "content": "Optional. Use unedited photos taken the same way, and only with consent. Both are needed for the pair to show."
+        },
+        {
+          "type": "image_picker",
+          "id": "before_image",
+          "label": "Before"
+        },
+        {
+          "type": "image_picker",
+          "id": "after_image",
+          "label": "After"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel patient reviews"
+    }
+  ]
+}
+{% endschema %}

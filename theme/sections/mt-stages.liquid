@@ -1,0 +1,345 @@
+{{ 'mt-pages.css' | asset_url | stylesheet_tag }}
+{{ 'mt-stages.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mt-stages.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign steps = section.blocks | where: 'type', 'step'
+  assign stages = section.blocks | where: 'type', 'stage'
+  assign extra = 'mt-stages'
+  if section.settings.heading_font == 'serif'
+    assign extra = 'mt-stages mt-stages--serif'
+  endif
+-%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: extra %}"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handleize }}"{% endif %}>
+  <div class="mt-wrap">
+    {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
+
+    {%- if steps.size > 0 -%}
+      <ol class="mt-prog" style="--mt-cols: {{ steps.size }};">
+        {%- for block in steps -%}
+          {%- assign next = steps[forloop.index] | default: block -%}
+          <li class="mt-pstep" style="--c: {{ block.settings.color }}; --c2: {{ next.settings.color }};" {{ block.shopify_attributes }}>
+            <span class="mt-pdot"></span>
+            <b>{{ block.settings.title | escape }}</b>
+            {%- if block.settings.text != blank -%}<small>{{ block.settings.text | escape }}</small>{%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ol>
+    {%- endif -%}
+
+    {%- if stages.size > 0 -%}
+      <mt-stage-tabs class="mt-stage-explorer">
+        <div class="mt-stabs" role="tablist" aria-label="{{ section.settings.tabs_label | escape }}">
+          {%- for block in stages -%}
+            <button
+              type="button"
+              class="mt-stab"
+              role="tab"
+              id="MtStab-{{ block.id }}"
+              aria-controls="MtSpanel-{{ block.id }}"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+              {% unless forloop.first %}tabindex="-1"{% endunless %}
+              style="--c: {{ block.settings.color }};"
+              {{ block.shopify_attributes }}
+            >
+              <span class="mt-hex">{{ block.settings.number | escape }}</span>
+              {{- block.settings.name | escape -}}
+              {%- if block.settings.range != blank -%}<small>{{ block.settings.range | escape }}</small>{%- endif -%}
+            </button>
+          {%- endfor -%}
+        </div>
+
+        {%- for block in stages -%}
+          {%- liquid
+            assign notice = block.settings.notice | newline_to_br | split: '<br />'
+            assign helps = block.settings.helps | newline_to_br | split: '<br />'
+          -%}
+          {%- capture btn_link -%}{% render 'mt-link-to', key: block.settings.button_to, url: block.settings.button_link %}{%- endcapture -%}
+          {%- capture link2 -%}{% render 'mt-link-to', key: block.settings.link_to, url: block.settings.link %}{%- endcapture -%}
+          <div
+            class="mt-spanel"
+            role="tabpanel"
+            id="MtSpanel-{{ block.id }}"
+            aria-labelledby="MtStab-{{ block.id }}"
+            style="--c: {{ block.settings.color }};"
+            {% unless forloop.first %}hidden{% endunless %}
+          >
+            <div class="mt-smedia">
+              {%- if block.settings.image != blank -%}
+                {%- assign alt = block.settings.image.alt | default: block.settings.title -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 1100
+                  | image_tag: loading: 'lazy', alt: alt, widths: '400, 600, 800, 1100', sizes: '(min-width: 861px) 40vw, 92vw'
+                }}
+              {%- else -%}
+                <span class="mt-smedia-ph">
+                  <span class="mt-hex mt-hex--lg">{{ block.settings.number | escape }}</span>
+                  {%- if block.settings.range != blank -%}<b>{{ block.settings.range | escape }}</b>{%- endif -%}
+                  {%- if request.design_mode -%}<small>Add a stage image in the theme editor.</small>{%- endif -%}
+                </span>
+              {%- endif -%}
+            </div>
+            <div class="mt-sinfo">
+              <h3><span>{{ block.settings.title | escape }}</span></h3>
+              {%- if block.settings.text != blank -%}<p>{{ block.settings.text | escape }}</p>{%- endif -%}
+              {%- if block.settings.notice != blank or block.settings.helps != blank -%}
+                <div class="mt-two-col">
+                  {%- if block.settings.notice != blank -%}
+                    <div>
+                      <p class="mt-mini-h">{{ section.settings.notice_label | escape }}</p>
+                      <ul class="mt-dots">
+                        {%- for line in notice -%}
+                          {%- assign item = line | strip -%}
+                          {%- if item != blank -%}<li>{{ item | escape }}</li>{%- endif -%}
+                        {%- endfor -%}
+                      </ul>
+                    </div>
+                  {%- endif -%}
+                  {%- if block.settings.helps != blank -%}
+                    <div>
+                      <p class="mt-mini-h">{{ section.settings.helps_label | escape }}</p>
+                      <ul class="mt-checks">
+                        {%- for line in helps -%}
+                          {%- assign item = line | strip -%}
+                          {%- if item != blank -%}<li>{%- render 'mt-icon', icon: 'check' -%}<span>{{ item | escape }}</span></li>{%- endif -%}
+                        {%- endfor -%}
+                      </ul>
+                    </div>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+              {%- if block.settings.button_label != blank or block.settings.link_label != blank -%}
+                <div class="mt-btn-row">
+                  {%- if block.settings.button_label != blank -%}
+                    <a class="mt-btn mt-btn-primary" href="{{ btn_link }}">
+                      {{- block.settings.button_label | escape -}}
+                      {%- render 'mt-icon', icon: 'arrow-right' -%}
+                    </a>
+                  {%- endif -%}
+                  {%- if block.settings.link_label != blank -%}
+                    <a class="mt-link" href="{{ link2 }}">{{ block.settings.link_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </mt-stage-tabs>
+    {%- endif -%}
+
+    {%- if section.settings.note != blank -%}
+      <p class="mt-fine mt-stages-note">{{ section.settings.note }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel stages",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 16,
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Link name",
+      "info": "Optional, for links like #stages."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Know your stage"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What’s happening inside your mouth?"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "OSMF usually develops slowly, over months or years of chewing. Knowing your stage helps you take the right step at the right time."
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading font",
+      "options": [
+        {
+          "value": "serif",
+          "label": "Serif, like the mockup"
+        },
+        {
+          "value": "sans",
+          "label": "Same as the rest of the site"
+        }
+      ],
+      "default": "serif"
+    },
+    {
+      "type": "text",
+      "id": "tabs_label",
+      "label": "Stage tabs label",
+      "info": "Read by screen readers.",
+      "default": "OSMF stages"
+    },
+    {
+      "type": "text",
+      "id": "notice_label",
+      "label": "Symptoms list heading",
+      "default": "What you may notice"
+    },
+    {
+      "type": "text",
+      "id": "helps_label",
+      "label": "Next-steps list heading",
+      "default": "What helps"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "note",
+      "label": "Note",
+      "default": "Stage ranges follow the MARCEL OSMF Self-Check. Only a qualified healthcare professional can diagnose OSMF and confirm its stage."
+    },
+    {"type":"header","content":"Section style"},
+    {"type":"select","id":"background","label":"Background","options":[{"value":"paper","label":"White"},{"value":"mist","label":"Light"},{"value":"tint","label":"Tinted"},{"value":"navy","label":"Navy"}],"default":"paper"},
+    {"type":"checkbox","id":"sheet","label":"Rounded top edge","info":"Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.","default":false},
+    {"type":"select","id":"spacing","label":"Spacing","options":[{"value":"normal","label":"Normal"},{"value":"tight","label":"Compact"},{"value":"none","label":"None"}],"default":"normal"}
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Timeline step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Healthy mouth"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Normal and comfortable"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Colour",
+          "default": "#0A8A96"
+        }
+      ]
+    },
+    {
+      "type": "stage",
+      "name": "Stage tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Tab label",
+          "default": "Stage 1"
+        },
+        {
+          "type": "text",
+          "id": "range",
+          "label": "Mouth opening",
+          "default": "More than 35 mm"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Colour",
+          "default": "#2B9759"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Shown on the left of the panel. Landscape works best, around 4:3."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Stage 1"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description"
+        },
+        {
+          "type": "textarea",
+          "id": "notice",
+          "label": "What you may notice",
+          "info": "One point per line."
+        },
+        {
+          "type": "textarea",
+          "id": "helps",
+          "label": "What helps",
+          "info": "One point per line."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Am I in this stage?"
+        },
+        {
+          "type": "select",
+          "id": "button_to",
+          "label": "Button opens",
+          "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+          "default": "test"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button custom link"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Second link label"
+        },
+        {
+          "type": "select",
+          "id": "link_to",
+          "label": "Second link opens",
+          "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+          "default": "foundation"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Second link custom URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel stages"
+    }
+  ]
+}
+{% endschema %}

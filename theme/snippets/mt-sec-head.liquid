@@ -1,0 +1,21 @@
+{%- comment -%}
+  Section heading: eyebrow, heading and intro text.
+
+  Accepts:
+  - eyebrow: {String}
+  - heading: {String} inline rich text
+  - text: {String} inline rich text
+  - center: {Boolean} centre the heading
+  - tag: {String} heading tag, default 'h2'
+
+  Usage:
+  {% render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text %}
+{%- endcomment -%}
+{%- if eyebrow != blank or heading != blank or text != blank -%}
+  {%- assign tag = tag | default: 'h2' -%}
+  <div class="mt-sec-head{% if center %} mt-sec-head--center{% endif %}">
+    {%- if eyebrow != blank -%}<span class="mt-eyebrow">{{ eyebrow | escape }}</span>{%- endif -%}
+    {%- if heading != blank -%}<{{ tag }} class="mt-h2">{{ heading }}</{{ tag }}>{%- endif -%}
+    {%- if text != blank -%}<p class="mt-lead">{{ text }}</p>{%- endif -%}
+  </div>
+{%- endif -%}

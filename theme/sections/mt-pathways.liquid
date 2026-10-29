@@ -1,0 +1,257 @@
+{{ 'mt-pages.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  .mt-paths { display: grid; grid-template-columns: repeat(var(--mt-cols, 2), minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+  @media (max-width: 960px) {
+    .mt-paths { grid-template-columns: minmax(0, 1fr); }
+  }
+  .mt-path { --tone: var(--mt-teal); display: flex; flex-direction: column; overflow: hidden; border-radius: var(--mt-r-xl); background: var(--mt-paper); border: 1px solid var(--mt-line); }
+  .mt-path--blue { --tone: var(--mt-blue); }
+  .mt-path--red { --tone: #C23838; }
+  .mt-path-head { display: grid; gap: 4px; padding: 20px 24px; background: var(--tone); color: rgba(255, 255, 255, .86); }
+  .mt-path-head small { font-size: 12.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: rgba(255, 255, 255, .8); }
+  .mt .mt-path-head h3 { color: var(--mt-on-dark); font-size: clamp(21px, 18px + .7vw, 26px); line-height: 1.15; letter-spacing: -.015em; }
+  .mt-path-head p { font-size: 15px; }
+  .mt-path-body { display: flex; flex-direction: column; gap: 16px; flex: 1; padding: 22px 24px 24px; }
+  .mt-path-bands { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+  .mt-path-band { display: grid; gap: 2px; padding: 12px 14px; border-radius: var(--mt-r); background: var(--mt-mist); }
+  .mt-path-band b { font-size: 15px; color: var(--mt-ink); }
+  .mt-path-band span { font-size: 14px; font-weight: 700; color: var(--tone); font-variant-numeric: tabular-nums; }
+  .mt-path .mt-checks .mt-i { color: var(--tone); }
+  .mt-path-media { position: relative; overflow: hidden; border-radius: var(--mt-r); background: var(--mt-pack-bg); aspect-ratio: 16 / 9; }
+  .mt-path-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+  .mt-path-foot { margin-top: auto; display: grid; gap: 12px; }
+  .mt-path-foot p { font-size: 15px; font-weight: 600; color: var(--mt-ink); }
+  .mt .mt-path-foot .mt-btn { width: 100%; }
+  .mt .mt-path--red .mt-path-foot .mt-btn-primary { background: #C23838; }
+  .mt-paths-note { margin-top: 18px; }
+{%- endstyle -%}
+
+{%- assign paths = section.blocks | where: 'type', 'pathway' -%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-pathways' %}"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handleize }}"{% endif %}>
+  <div class="mt-wrap">
+    {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text, center: section.settings.center -%}
+    <div class="mt-paths" style="--mt-cols: {{ paths.size | at_most: 3 }};">
+      {%- for block in paths -%}
+        {%- liquid
+          assign bands = block.settings.bands | newline_to_br | split: '<br />'
+          assign points = block.settings.points | newline_to_br | split: '<br />'
+        -%}
+        {%- capture href -%}{% render 'mt-link-to', key: block.settings.link_to, url: block.settings.link %}{%- endcapture -%}
+        <article class="mt-path mt-path--{{ block.settings.tone }}" {{ block.shopify_attributes }}>
+          <header class="mt-path-head">
+            {%- if block.settings.stages != blank -%}<small>{{ block.settings.stages | escape }}</small>{%- endif -%}
+            <h3>{{ block.settings.title | escape }}</h3>
+            {%- if block.settings.subtitle != blank -%}<p>{{ block.settings.subtitle | escape }}</p>{%- endif -%}
+          </header>
+          <div class="mt-path-body">
+            {%- if block.settings.bands != blank -%}
+              <div class="mt-path-bands">
+                {%- for line in bands -%}
+                  {%- assign parts = line | strip | split: '|' -%}
+                  {%- if parts.size > 0 -%}
+                    <div class="mt-path-band"><b>{{ parts[0] | strip | escape }}</b>{% if parts[1] != blank %}<span>{{ parts[1] | strip | escape }}</span>{% endif %}</div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+            {%- if block.settings.image != blank -%}
+              <div class="mt-path-media">
+                {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 560px, 92vw', widths: '300, 450, 600, 900' }}
+              </div>
+            {%- endif -%}
+            {%- if block.settings.points != blank -%}
+              <ul class="mt-checks">
+                {%- for line in points -%}
+                  {%- assign item = line | strip -%}
+                  {%- if item != blank -%}<li>{%- render 'mt-icon', icon: 'check' -%}<span>{{ item | escape }}</span></li>{%- endif -%}
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+            <div class="mt-path-foot">
+              {%- if block.settings.summary != blank -%}<p>{{ block.settings.summary | escape }}</p>{%- endif -%}
+              {%- if block.settings.button_label != blank -%}
+                <div class="mt-btn-row"><a class="mt-btn mt-btn-primary" href="{{ href }}">{{ block.settings.button_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a></div>
+              {%- endif -%}
+            </div>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.note != blank -%}
+      <div class="mt-callout mt-callout--muted mt-paths-note">{%- render 'mt-icon', icon: 'info' -%}<span>{{ section.settings.note }}</span></div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel pathways",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Link name",
+      "info": "Optional, for links like #pathways."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Choose your pathway"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Which MARCEL OMR Therapy™ is appropriate for your stage?"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "Your mouth opening and symptoms help indicate the stage of OSMF. A qualified healthcare professional must assess and confirm the diagnosis and stage."
+    },
+    {
+      "type": "checkbox",
+      "id": "center",
+      "label": "Centre the heading",
+      "default": false
+    },
+    {
+      "type": "inline_richtext",
+      "id": "note",
+      "label": "Note under the cards",
+      "default": "MARCEL OMR Therapy™ is intended to support OSMF management in appropriate patients. This information is for education only. Please consult a MARCEL OSMF Care Specialist or a qualified healthcare professional for individual assessment and guidance."
+    },
+    {"type":"header","content":"Section style"},
+    {"type":"select","id":"background","label":"Background","options":[{"value":"paper","label":"White"},{"value":"mist","label":"Light"},{"value":"tint","label":"Tinted"},{"value":"navy","label":"Navy"}],"default":"mist"},
+    {"type":"checkbox","id":"sheet","label":"Rounded top edge","info":"Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.","default":false},
+    {"type":"select","id":"spacing","label":"Spacing","options":[{"value":"normal","label":"Normal"},{"value":"tight","label":"Compact"},{"value":"none","label":"None"}],"default":"normal"}
+  ],
+  "blocks": [
+    {
+      "type": "pathway",
+      "name": "Pathway",
+      "settings": [
+        {
+          "type": "select",
+          "id": "tone",
+          "label": "Colour",
+          "options": [
+            {
+              "value": "teal",
+              "label": "Teal"
+            },
+            {
+              "value": "blue",
+              "label": "Blue"
+            },
+            {
+              "value": "red",
+              "label": "Red (warning)"
+            }
+          ],
+          "default": "teal"
+        },
+        {
+          "type": "text",
+          "id": "stages",
+          "label": "Stages",
+          "default": "Stage 1 – 2"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "MARCEL OMR Therapy™ Foundation"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "For earlier-stage OSMF symptoms and functional restriction."
+        },
+        {
+          "type": "textarea",
+          "id": "bands",
+          "label": "Mouth-opening bands",
+          "info": "One per line: stage | band.",
+          "default": "Stage 1 | More than 35 mm, with symptoms\nStage 2 | 26 – 35 mm"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Optional, for example the kit pack."
+        },
+        {
+          "type": "textarea",
+          "id": "points",
+          "label": "Points",
+          "info": "One per line.",
+          "default": "Burning or cheek tightness\nDifficulty chewing may be present\nModerate restriction in mouth opening"
+        },
+        {
+          "type": "text",
+          "id": "summary",
+          "label": "Closing line",
+          "default": "May be considered based on individual assessment."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button",
+          "default": "Explore MARCEL OMR Therapy™ Foundation"
+        },
+        {
+          "type": "select",
+          "id": "link_to",
+          "label": "Button opens",
+          "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+          "default": "foundation"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Custom link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel pathways",
+      "blocks": [
+        {
+          "type": "pathway",
+          "settings": {
+            "tone": "teal"
+          }
+        },
+        {
+          "type": "pathway",
+          "settings": {
+            "tone": "blue",
+            "stages": "Stage 3 – 4",
+            "title": "MARCEL OMR Therapy™ Advance",
+            "subtitle": "For greater restriction in mouth opening and oral function.",
+            "bands": "Stage 3 | 15 – 25 mm\nStage 4 | Less than 15 mm",
+            "points": "Greater restriction in mouth opening\nDifficulty chewing common\nDifficulty in tongue movement may be present",
+            "summary": "May be considered with professional guidance.",
+            "button_label": "Explore MARCEL OMR Therapy™ Advance",
+            "link_to": "advance"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

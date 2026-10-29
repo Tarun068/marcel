@@ -1,0 +1,37 @@
+{%- comment -%}
+  Product pack image: the chosen image, else the product image, else a pack illustration.
+
+  Accepts:
+  - image: {Object} image (optional)
+  - art: {String} 'ora-care' | 'ora-shield' | 'smile' | 'none'
+  - alt: {String} alt text
+  - sizes: {String} sizes attribute
+  - fit: {String} 'cover' | 'contain'
+  - kit: {Array} kit item products, drawn together when there is no image or art (optional)
+{%- endcomment -%}
+<span class="mt-pack{% if fit == 'contain' %} mt-pack--contain{% endif %}">
+  {%- if image != blank -%}
+    {{
+      image
+      | image_url: width: 900
+      | image_tag: loading: 'lazy', alt: alt, sizes: sizes, widths: '180, 300, 450, 600, 900'
+    }}
+  {%- elsif art == 'device' -%}
+    <span class="mt-packfb mt-pack-icon" role="img" aria-label="{{ alt | escape }}">{%- render 'mt-icon', icon: 's-open' -%}</span>
+  {%- elsif art != blank and art != 'none' -%}
+    <svg class="mt-packfb" viewBox="0 0 400 400" role="img" aria-label="{{ alt | escape }}"><use href="#mt-pack-{{ art }}"/></svg>
+  {%- elsif kit.size > 0 -%}
+    <span class="mt-pack-kit" role="img" aria-label="{{ alt | escape }}">
+      {%- for item in kit limit: 3 -%}
+        {%- assign item_art = item.metafields.marcel.art.value -%}
+        {%- if item_art != blank and item_art != 'none' and item_art != 'device' -%}
+          <svg viewBox="0 0 400 400" aria-hidden="true"><use href="#mt-pack-{{ item_art }}"/></svg>
+        {%- elsif item.featured_image -%}
+          {{ item.featured_image | image_url: width: 400 | image_tag: loading: 'lazy', alt: '', widths: '200, 400' }}
+        {%- endif -%}
+      {%- endfor -%}
+    </span>
+  {%- else -%}
+    {{ 'product-1' | placeholder_svg_tag: 'mt-packfb mt-packfb--placeholder' }}
+  {%- endif -%}
+</span>

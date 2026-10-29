@@ -1,0 +1,555 @@
+{{ 'mt-pages.css' | asset_url | stylesheet_tag }}
+{{ 'mt-test.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mt-self-test.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign result_link = section.settings.result_link | default: settings.mt_link_result | default: '/pages/self-check-result'
+-%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-test-sec' %}">
+  <div class="mt-wrap">
+    <mt-self-test class="mt-test-shell" data-result-url="{{ result_link }}" data-send="{{ section.settings.send_leads }}">
+      <script type="application/json" data-mt-questions>
+        [
+          {%- for block in section.blocks -%}
+            {%- assign lines = block.settings.options | newline_to_br | split: '<br />' -%}
+            {
+              "id": {{ block.settings.qid | json }},
+              "short": {{ block.settings.short | json }},
+              "q": {{ block.settings.question | json }},
+              "help": {{ block.settings.help | default: '' | json }},
+              "options": [
+                {%- assign first = true -%}
+                {%- for line in lines -%}
+                  {%- assign parts = line | strip | split: '|' -%}
+                  {%- if parts.size > 1 -%}
+                    {%- unless first -%},{%- endunless -%}
+                    {%- assign first = false -%}
+                    { "v": {{ parts[0] | strip | json }}, "l": {{ parts[1] | strip | json }}, "h": {{ parts[2] | default: '' | strip | json }}, "s": {{ parts[3] | default: '' | strip | json }} }
+                  {%- endif -%}
+                {%- endfor -%}
+              ]
+            }{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ]
+      </script>
+      <script type="application/json" data-mt-text>
+        {
+          "of": {{ section.settings.of_label | json }},
+          "question": {{ section.settings.question_label | json }},
+          "caption": {{ section.settings.gauge_caption | json }},
+          "severity": {
+            "none": {{ section.settings.sev_none | json }},
+            "mild": {{ section.settings.sev_mild | json }},
+            "moderate": {{ section.settings.sev_moderate | json }},
+            "extreme": {{ section.settings.sev_extreme | json }},
+            "range": {{ section.settings.sev_range | json }},
+            "single": {{ section.settings.sev_single | json }}
+          }
+        }
+      </script>
+
+      <template data-mt-gauge-template>
+        {%- render 'mt-gauge', fingers: 3, caption: section.settings.gauge_caption -%}
+      </template>
+
+      <div class="mt-test-top">
+        <button type="button" class="mt-icon-btn mt-test-back" data-mt-back aria-label="{{ section.settings.back_label | escape }}">
+          {%- render 'mt-icon', icon: 'arrow-left' -%}
+        </button>
+        <div class="mt-test-bar" aria-hidden="true"><span data-mt-bar></span></div>
+        <span class="mt-test-count" data-mt-count></span>
+      </div>
+
+      <div class="mt-test-card" data-mt-question aria-live="polite">
+        <noscript><p>{{ section.settings.noscript_text | escape }}</p></noscript>
+      </div>
+
+      <div class="mt-test-card" data-mt-lead hidden>
+        <div class="mt-stack-sm">
+          <span class="mt-eyebrow">{{ section.settings.lead_eyebrow | escape }}</span>
+          <h1 class="mt-test-title">{{ section.settings.lead_heading | escape }}</h1>
+          <p class="mt-test-help">{{ section.settings.lead_text | escape }}</p>
+        </div>
+        {%- form 'contact', id: 'MtSelfTestLead', class: 'mt-form-grid', data-mt-lead-form: '', novalidate: 'novalidate' -%}
+          <input type="hidden" name="contact[source]" value="{{ section.settings.source_label | escape }}">
+          <input type="hidden" name="contact[result]" value="" data-mt-field="result">
+          <input type="hidden" name="contact[symptoms]" value="" data-mt-field="severity">
+          <input type="hidden" name="contact[answers]" value="" data-mt-field="answers">
+          {%- comment -%} Shopify's contact form needs an email; the store's own address is used so the lead reaches the team. {%- endcomment -%}
+          <input type="hidden" name="contact[email]" value="{{ shop.email }}">
+          <div class="mt-form-grid mt-form-grid--2">
+            <div class="mt-field">
+              <label for="MtLeadName">{{ section.settings.name_label | escape }} <span class="mt-opt-label">{{ section.settings.optional_label | escape }}</span></label>
+              <input class="mt-input" id="MtLeadName" name="contact[name]" autocomplete="name">
+            </div>
+            <div class="mt-field">
+              <label for="MtLeadPhone">{{ section.settings.phone_label | escape }} <span class="mt-opt-label">{{ section.settings.optional_label | escape }}</span></label>
+              <div class="mt-phone">
+                <span>+91</span>
+                <input class="mt-input" id="MtLeadPhone" name="contact[phone]" inputmode="numeric" autocomplete="tel-national" maxlength="10" placeholder="{{ section.settings.phone_placeholder | escape }}">
+              </div>
+            </div>
+          </div>
+          <p class="mt-err" data-mt-error hidden>{{ section.settings.phone_error | escape }}</p>
+          <div class="mt-btn-row">
+            <button class="mt-btn mt-btn-primary" type="submit">
+              {{- section.settings.submit_label | escape -}}
+              {%- render 'mt-icon', icon: 'arrow-right' -%}
+            </button>
+            <button class="mt-btn mt-btn-secondary" type="button" data-mt-skip>{{ section.settings.skip_label | escape }}</button>
+          </div>
+          {%- if section.settings.lead_fine != blank -%}<p class="mt-fine">{{ section.settings.lead_fine | escape }}</p>{%- endif -%}
+        {%- endform -%}
+      </div>
+
+      <div class="mt-test-card" data-mt-analysing hidden>
+        <div class="mt-analysing">
+          <span class="mt-spinner" aria-hidden="true"></span>
+          <h2 class="mt-test-title">{{ section.settings.analysing_title | escape }}</h2>
+          <p class="mt-muted">{{ section.settings.analysing_text | escape }}</p>
+        </div>
+      </div>
+
+      {%- if section.settings.points != blank -%}
+        {%- assign points = section.settings.points | split: ',' -%}
+        <ul class="mt-test-side">
+          {%- for point in points -%}
+            {%- assign p = point | strip -%}
+            {%- case forloop.index -%}
+              {%- when 1 -%}{%- assign ico = 'lock' -%}
+              {%- when 2 -%}{%- assign ico = 'ruler' -%}
+              {%- else -%}{%- assign ico = 'info' -%}
+            {%- endcase -%}
+            <li>{%- render 'mt-icon', icon: ico -%}{{ p | escape }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      {%- if section.settings.disclaimer != blank -%}
+        <p class="mt-fine mt-test-note">{{ section.settings.disclaimer | escape }}</p>
+      {%- endif -%}
+    </mt-self-test>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel OSMF Self-Check",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Scoring follows the MARCEL OSMF Self-Check Master Matrix v1.0: mouth opening sets the stage, tongue difficulty (Yes / Often) raises it by one, and the other symptoms only change the symptom summary. Under 5 mm with a persistent ulcer or confirmed carcinoma gives Stage 5. Keep the question IDs and answer values."
+    },
+    {
+      "type": "url",
+      "id": "result_link",
+      "label": "Result page",
+      "info": "Empty uses the result page from Theme settings."
+    },
+    {
+      "type": "text",
+      "id": "question_label",
+      "label": "Question label",
+      "info": "[n] is the question number, [total] the number of questions.",
+      "default": "Question [n] of [total]"
+    },
+    {
+      "type": "text",
+      "id": "of_label",
+      "label": "Counter",
+      "info": "[n] and [total] as above.",
+      "default": "[n]/[total]"
+    },
+    {
+      "type": "text",
+      "id": "gauge_caption",
+      "label": "Gauge caption",
+      "default": "your opening"
+    },
+    {
+      "type": "text",
+      "id": "back_label",
+      "label": "Back button label (for screen readers)",
+      "default": "Previous question"
+    },
+    {
+      "type": "text",
+      "id": "points",
+      "label": "Points under the card",
+      "info": "Separate with commas.",
+      "default": "Private and confidential, Based on your mouth opening, Not a diagnosis"
+    },
+    {
+      "type": "textarea",
+      "id": "disclaimer",
+      "label": "Small print under the card",
+      "default": "The MARCEL OSMF Self-Check gives an initial indication of your possible stage. It cannot diagnose OSMF or confirm your stage. A qualified healthcare professional must assess and confirm the diagnosis and stage."
+    },
+    {
+      "type": "text",
+      "id": "noscript_text",
+      "label": "Message when JavaScript is off",
+      "default": "Please turn on JavaScript to use the self-check, or talk to a MARCEL OSMF Consultant."
+    },
+    {
+      "type": "header",
+      "content": "Symptom summary"
+    },
+    {
+      "type": "paragraph",
+      "content": "Answers to the five symptom questions: No = mild, Occasional = moderate, Yes / Often = extreme. The summary never changes the stage."
+    },
+    {
+      "type": "text",
+      "id": "sev_none",
+      "label": "All answers ‘No’",
+      "default": "No symptoms reported"
+    },
+    {
+      "type": "text",
+      "id": "sev_mild",
+      "label": "Mild",
+      "default": "Mild"
+    },
+    {
+      "type": "text",
+      "id": "sev_moderate",
+      "label": "Moderate",
+      "default": "Moderate"
+    },
+    {
+      "type": "text",
+      "id": "sev_extreme",
+      "label": "Extreme",
+      "default": "Extreme"
+    },
+    {
+      "type": "text",
+      "id": "sev_range",
+      "label": "Mixed answers",
+      "info": "[from] and [to] are replaced, e.g. Mild to Moderate Symptoms.",
+      "default": "[from] to [to] Symptoms"
+    },
+    {
+      "type": "text",
+      "id": "sev_single",
+      "label": "One level only",
+      "info": "[level] is replaced, e.g. Moderate Symptoms.",
+      "default": "[level] Symptoms"
+    },
+    {
+      "type": "header",
+      "content": "Last step"
+    },
+    {
+      "type": "checkbox",
+      "id": "send_leads",
+      "label": "Send name and number to the store email",
+      "info": "Uses Shopify’s contact form, so the team gets an email with the answers and the result.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "source_label",
+      "label": "Message label in your inbox",
+      "default": "OSMF Self-Check"
+    },
+    {
+      "type": "text",
+      "id": "lead_eyebrow",
+      "label": "Eyebrow",
+      "default": "All done"
+    },
+    {
+      "type": "text",
+      "id": "lead_heading",
+      "label": "Heading",
+      "default": "Your result is ready"
+    },
+    {
+      "type": "textarea",
+      "id": "lead_text",
+      "label": "Text",
+      "default": "Want a copy on WhatsApp and a follow-up from our In-house OSMF Consultant? Add your number. This step is optional."
+    },
+    {
+      "type": "text",
+      "id": "name_label",
+      "label": "Name label",
+      "default": "Your name"
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "Phone label",
+      "default": "WhatsApp number"
+    },
+    {
+      "type": "text",
+      "id": "phone_placeholder",
+      "label": "Phone placeholder",
+      "default": "10-digit mobile"
+    },
+    {
+      "type": "text",
+      "id": "optional_label",
+      "label": "Optional marker",
+      "default": "(optional)"
+    },
+    {
+      "type": "text",
+      "id": "phone_error",
+      "label": "Phone error",
+      "default": "Enter a 10-digit mobile number, or leave it blank."
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Submit label",
+      "default": "Show my result"
+    },
+    {
+      "type": "text",
+      "id": "skip_label",
+      "label": "Skip label",
+      "default": "Skip and show result"
+    },
+    {
+      "type": "text",
+      "id": "lead_fine",
+      "label": "Small print",
+      "default": "We use your number only to send your report and follow up about your care. We never share your details."
+    },
+    {
+      "type": "text",
+      "id": "analysing_title",
+      "label": "Loading heading",
+      "default": "Reading your answers…"
+    },
+    {
+      "type": "text",
+      "id": "analysing_text",
+      "label": "Loading text",
+      "default": "Matching your mouth opening and symptoms to the self-check stages"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "mist"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "tight"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "select",
+          "id": "qid",
+          "label": "Question ID",
+          "info": "Used by the scoring. Each ID should appear once.",
+          "options": [
+            {
+              "value": "opening",
+              "label": "Mouth opening (sets the stage)"
+            },
+            {
+              "value": "ulcer",
+              "label": "Persistent ulcer (only under 5 mm)"
+            },
+            {
+              "value": "carcinoma",
+              "label": "Confirmed carcinoma (only under 5 mm)"
+            },
+            {
+              "value": "burning",
+              "label": "Q1 Burning with spicy food"
+            },
+            {
+              "value": "cheek",
+              "label": "Q2 Cheek tightness / stiffness"
+            },
+            {
+              "value": "chewing",
+              "label": "Q3 Difficulty chewing"
+            },
+            {
+              "value": "open_difficulty",
+              "label": "Q4 Difficulty opening mouth"
+            },
+            {
+              "value": "tongue",
+              "label": "Q5 Difficulty moving tongue (can raise the stage)"
+            }
+          ],
+          "default": "burning"
+        },
+        {
+          "type": "text",
+          "id": "short",
+          "label": "Short label",
+          "info": "Shown on the result page next to the answer.",
+          "default": "Burning"
+        },
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Do you feel burning in your mouth when you eat spicy food?"
+        },
+        {
+          "type": "textarea",
+          "id": "help",
+          "label": "Help text"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Answers",
+          "info": "One per line: value | answer | hint | short answer. Keep the values: mouth opening gt35, 26to35, 15to25, lt15, lt5; symptoms no, occasional, often; ulcer and carcinoma yes, no.",
+          "default": "no | No | |\noccasional | Occasional | |\noften | Yes / Often | | Yes / Often"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel OSMF Self-Check",
+      "blocks": [
+        {
+          "type": "question",
+          "settings": {
+            "qid": "opening",
+            "short": "Mouth opening",
+            "question": "How wide can you open your mouth?",
+            "help": "Measure between the edges of your upper and lower front teeth, or count how many fingers fit when stacked one above the other. Don’t force it.",
+            "options": "gt35 | More than 35 mm | About 3 fingers or more | Over 35 mm\n26to35 | 26 to 35 mm | About 2 fingers | 26–35 mm\n15to25 | 15 to 25 mm | About 1 finger | 15–25 mm\nlt15 | Less than 15 mm | Less than 1 finger | Under 15 mm\nlt5 | Less than 5 mm | The mouth barely opens | Under 5 mm"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "qid": "ulcer",
+            "short": "Persistent ulcer",
+            "question": "Do you have a chronic or persistent ulcer in your mouth?",
+            "help": "An ulcer or sore that has not healed for 2 weeks or more.",
+            "options": "yes | Yes | |\nno | No / Not sure | | No"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "qid": "carcinoma",
+            "short": "Confirmed carcinoma",
+            "question": "Has oral cancer (carcinoma) been confirmed by a biopsy?",
+            "help": "Confirmed by a histopathology report from a doctor.",
+            "options": "yes | Yes, confirmed | | Yes\nno | No / Not confirmed | | No"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "qid": "burning",
+            "short": "Burning with spicy food",
+            "question": "Do you feel burning in your mouth when you eat spicy food?",
+            "options": "no | No | |\noccasional | Occasional | |\noften | Yes / Often | | Yes / Often"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "qid": "cheek",
+            "short": "Cheek tightness",
+            "question": "Do your cheeks feel tight or stiff on the inside?",
+            "options": "no | No | |\noccasional | Occasional | |\noften | Yes / Often | | Yes / Often"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "qid": "chewing",
+            "short": "Difficulty chewing",
+            "question": "Do you find it difficult to chew food?",
+            "options": "no | No | |\noccasional | Occasional | |\noften | Yes / Often | | Yes / Often"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "qid": "open_difficulty",
+            "short": "Difficulty opening mouth",
+            "question": "Do you find it difficult to open your mouth fully?",
+            "options": "no | No | |\noccasional | Occasional | |\noften | Yes / Often | | Yes / Often"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "qid": "tongue",
+            "short": "Difficulty moving tongue",
+            "question": "Do you find it difficult to move your tongue or stick it out?",
+            "options": "no | No | |\noccasional | Occasional | |\noften | Yes / Often | | Yes / Often"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

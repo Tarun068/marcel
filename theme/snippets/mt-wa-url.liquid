@@ -1,0 +1,18 @@
+{%- comment -%}
+  Outputs a wa.me link for the WhatsApp number in Theme settings > Marcel contact and links.
+
+  Accepts:
+  - message: {String} prefilled message (optional, defaults to the theme setting)
+
+  Usage:
+  {%- capture wa_url -%}{% render 'mt-wa-url' %}{%- endcapture -%}
+{%- endcomment -%}
+{%- liquid
+  assign digits = settings.mt_whatsapp_number | remove: ' ' | remove: '+' | remove: '-' | remove: '(' | remove: ')'
+  assign msg = message | default: settings.mt_whatsapp_message
+  echo 'https://wa.me/' | append: digits
+  if msg != blank
+    assign q = msg | url_encode | replace: '+', '%20'
+    echo '?text=' | append: q
+  endif
+-%}

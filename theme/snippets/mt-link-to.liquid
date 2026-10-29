@@ -1,0 +1,43 @@
+{%- comment -%}
+  Outputs the URL of a key MARCEL destination, from Theme settings > Marcel contact and links.
+
+  Accepts:
+  - key: {String} therapy | foundation | advance | journey | test | result | help | consult | specialists | evidence | whatsapp | products | custom
+  - url: {String} link used when key is 'custom' (optional)
+  - message: {String} WhatsApp message (optional, for key 'whatsapp')
+
+  Usage:
+  {%- capture url -%}{% render 'mt-link-to', key: 'consult' %}{%- endcapture -%}
+{%- endcomment -%}
+{%- liquid
+  case key
+    when 'therapy'
+      echo settings.mt_link_therapy | default: '/pages/marcel-omr-therapy'
+    when 'foundation'
+      echo settings.mt_link_foundation | default: '/pages/foundation-kit'
+    when 'advance'
+      echo settings.mt_link_advance | default: '/pages/advance-kit'
+    when 'journey'
+      echo settings.mt_link_journey | default: '/pages/12-week-care-journey'
+    when 'test'
+      echo settings.mt_link_test | default: '/pages/osmf-self-check'
+    when 'result'
+      echo settings.mt_link_result | default: '/pages/self-check-result'
+    when 'help'
+      echo settings.mt_link_help | default: '/pages/get-help'
+    when 'consult'
+      echo settings.mt_link_consult | default: '/pages/osmf-consultant'
+    when 'specialists'
+      echo settings.mt_link_clinics | default: '/pages/find-osmf-specialist'
+    when 'evidence'
+      echo settings.mt_link_evidence | default: '/pages/clinical-evidence'
+    when 'products'
+      echo routes.all_products_collection_url
+    when 'whatsapp'
+      render 'mt-wa-url', message: message
+    when 'custom'
+      echo url | default: routes.root_url
+    else
+      echo routes.root_url
+  endcase
+-%}

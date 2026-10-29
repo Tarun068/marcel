@@ -1,0 +1,50 @@
+{%- comment -%}
+  Add-to-cart button that uses Dawn's product-form (opens the cart drawer).
+  Falls back to a link when no product is chosen yet.
+
+  Accepts:
+  - product: {Object} product to add (optional)
+  - form_id: {String} unique form id
+  - section_id: {String} section id
+  - label: {String} button label
+  - class: {String} button classes
+  - fallback_url: {String} link when no product is set
+  - sold_out_label: {String} label when the product is unavailable
+
+  Usage:
+  {% render 'mt-buy-button', product: product, form_id: 'MtForm-1', section_id: section.id, label: 'Add to cart', class: 'mt-btn mt-btn-primary mt-btn-sm' %}
+{%- endcomment -%}
+{%- if product != blank -%}
+  {%- assign variant = product.selected_or_first_available_variant -%}
+  <product-form class="mt-product-form" data-section-id="{{ section_id }}" data-hide-errors="true">
+    {%- form 'product', product, id: form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+      <input type="hidden" name="id" value="{{ variant.id }}" disabled>
+      <input type="hidden" name="quantity" value="1">
+      <button
+        type="submit"
+        name="add"
+        class="{{ class }}"
+        {% unless variant.available %}
+          disabled
+        {% endunless %}
+      >
+        <span class="mt-btn-label">
+          {%- render 'mt-icon', icon: 'bag' -%}
+          {%- if variant.available -%}
+            {{- label | escape -}}
+          {%- else -%}
+            {{- sold_out_label | default: 'Sold out' | escape -}}
+          {%- endif -%}
+        </span>
+        {%- render 'loading-spinner' -%}
+      </button>
+    {%- endform -%}
+  </product-form>
+{%- else -%}
+  <a class="{{ class }}" href="{{ fallback_url | default: routes.all_products_collection_url }}">
+    <span class="mt-btn-label">
+      {%- render 'mt-icon', icon: 'bag' -%}
+      {{- label | escape -}}
+    </span>
+  </a>
+{%- endif -%}

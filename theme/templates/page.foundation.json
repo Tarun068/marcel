@@ -1,0 +1,390 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "mt-page-hero",
+      "settings": {
+        "show_crumbs": true,
+        "home_label": "Home",
+        "button_1_to": "consult",
+        "button_2_to": "test",
+        "back_to": "therapy",
+        "background": "tint",
+        "sheet": false,
+        "spacing": "none",
+        "parent_label": "MARCEL OMR Therapy™",
+        "parent_link": "/pages/marcel-omr-therapy",
+        "current_label": "Foundation Kit",
+        "eyebrow": "MARCEL OMR Therapy™ Foundation Kit · Stage 1 & Stage 2 OSMF",
+        "heading": "Build a Strong Foundation for OSMF Care",
+        "text": "MARCEL OMR Therapy™ Foundation Kit is intended for individuals assessed by a qualified healthcare professional as having Stage 1 or Stage 2 Oral Submucous Fibrosis (OSMF). The routine includes MARCEL Ora-Care™ Oral Spray, MARCEL Smile™ Toothpaste, prescribed mouth/jaw exercises when advised, and professional guidance as appropriate.",
+        "button_1_label": "Talk to a MARCEL OSMF Consultant",
+        "button_2_label": "Check Your OSMF Stage",
+        "note": "If you have not been assessed, the MARCEL OSMF SELF CHECK™ can provide an initial indication of your possible stage. It cannot diagnose OSMF or confirm your stage.",
+        "back_label": "Back to MARCEL OMR Therapy™ Overview"
+      }
+    },
+    "components": {
+      "type": "mt-components",
+      "settings": {
+        "eyebrow": "What Foundation care includes",
+        "heading": "The components of the Foundation routine",
+        "columns": "3",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      },
+      "blocks": {
+        "component_1": {
+          "type": "component",
+          "settings": {
+            "art": "ora-care",
+            "icon": "s-open",
+            "title": "MARCEL Ora-Care™ Oral Spray",
+            "size": "50 mL",
+            "text": "The core therapy component of Foundation, used as part of a structured daily routine. Use it according to the approved product label or the directions of your physician or MARCEL OSMF Consultant. Follow prescribed mouth/jaw exercises after each application only as instructed.",
+            "button_label": "Explore MARCEL Ora-Care™",
+            "link_to": "product",
+            "show_price": false,
+            "link": "/products/marcel-ora-care"
+          }
+        },
+        "component_2": {
+          "type": "component",
+          "settings": {
+            "art": "smile",
+            "icon": "s-open",
+            "title": "MARCEL Smile™ Toothpaste",
+            "size": "30 g",
+            "text": "Supports everyday oral hygiene as part of the Foundation routine. Use according to the product label and maintain regular brushing habits.",
+            "button_label": "Explore MARCEL Smile™",
+            "link_to": "product",
+            "show_price": false,
+            "link": "/products/marcel-smile"
+          }
+        },
+        "component_3": {
+          "type": "component",
+          "settings": {
+            "art": "none",
+            "icon": "s-open",
+            "title": "Prescribed Mouth/Jaw Exercises",
+            "size": "When advised",
+            "text": "Exercises may form part of your care routine when recommended by your healthcare professional. Follow the instructions you have been given. Do not force movements or continue through pain.",
+            "button_label": "Learn the Recommended Mouth Exercises",
+            "link_to": "custom",
+            "show_price": false,
+            "link": "/pages/12-week-care-journey#exercises"
+          }
+        }
+      },
+      "block_order": [
+        "component_1",
+        "component_2",
+        "component_3"
+      ]
+    },
+    "routine": {
+      "type": "mt-steps",
+      "settings": {
+        "layout": "journey",
+        "eyebrow": "Follow your recommended routine",
+        "heading": "Your Foundation routine",
+        "link_label": "",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal",
+        "text": "Your exact routine and product directions should follow the approved labels and your healthcare professional’s advice.",
+        "button_label": ""
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Get an appropriate professional assessment and confirm the care pathway.",
+            "text": ""
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Use MARCEL Ora-Care™ Oral Spray according to the approved label or professional advice.",
+            "text": ""
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Perform prescribed mouth/jaw exercises as instructed.",
+            "text": ""
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "Maintain daily oral hygiene with MARCEL Smile™ Toothpaste.",
+            "text": ""
+          }
+        },
+        "step_5": {
+          "type": "step",
+          "settings": {
+            "title": "Attend follow-up appointments and report new or worsening symptoms.",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5"
+      ]
+    },
+    "journey": {
+      "type": "mt-journey",
+      "settings": {
+        "eyebrow": "Your care journey",
+        "heading": "Four phases to organise routine and follow-up",
+        "text": "The phases are a care-planning framework, not a promise of a specific result by a fixed date.",
+        "center": false,
+        "layout": "cards",
+        "columns": 4,
+        "note": "Individual experiences vary. This is not a clinical-trial timeline or a guarantee of tissue restoration or specific improvement.",
+        "button_label": "Explore the 12-Week Care Journey",
+        "button_to": "journey",
+        "button2_to": "consult",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      },
+      "blocks": {
+        "phase_1": {
+          "type": "phase",
+          "settings": {
+            "when": "Weeks 1–2",
+            "icon": "calendar",
+            "title": "Relief",
+            "text": "Establish the routine and focus on comfort."
+          }
+        },
+        "phase_2": {
+          "type": "phase",
+          "settings": {
+            "when": "Weeks 3–6",
+            "icon": "calendar",
+            "title": "Activation",
+            "text": "Build consistency and follow prescribed exercises."
+          }
+        },
+        "phase_3": {
+          "type": "phase",
+          "settings": {
+            "when": "Weeks 6–10",
+            "icon": "calendar",
+            "title": "Restoration",
+            "text": "Continue the routine and review comfort and function with professional guidance."
+          }
+        },
+        "phase_4": {
+          "type": "phase",
+          "settings": {
+            "when": "Weeks 11–12",
+            "icon": "calendar",
+            "title": "Reinforcement",
+            "text": "Reinforce daily habits and follow-up."
+          }
+        }
+      },
+      "block_order": [
+        "phase_1",
+        "phase_2",
+        "phase_3",
+        "phase_4"
+      ]
+    },
+    "important": {
+      "type": "mt-guide",
+      "settings": {
+        "show_toc": false,
+        "toc_title": "On this page",
+        "read_label": "[n] min read",
+        "no_articles": "Articles will appear here once they are published.",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      },
+      "blocks": {
+        "chapter_1": {
+          "type": "chapter",
+          "settings": {
+            "heading": "Important to know",
+            "toc_label": "Important to know",
+            "anchor": "important"
+          }
+        },
+        "checklist_1": {
+          "type": "checklist",
+          "settings": {
+            "items": "Foundation Kit is intended for individuals assessed as having Stage 1 or Stage 2 OSMF. A qualified healthcare professional should confirm the diagnosis, stage and appropriate care pathway.\nThe programme does not replace professional diagnosis, treatment or follow-up.\nStopping gutkha, pan masala, supari, tobacco and other areca-nut products is an important part of OSMF management. Seek professional help if you need support to stop.",
+            "columns": "1"
+          }
+        },
+        "callout_1": {
+          "type": "callout",
+          "settings": {
+            "style": "alert",
+            "icon": "alert",
+            "text": "<p><strong>Seek prompt professional assessment</strong> if you notice a persistent ulcer, unexplained bleeding, a new lump or worsening symptoms.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "chapter_1",
+        "checklist_1",
+        "callout_1"
+      ]
+    },
+    "support": {
+      "type": "mt-support",
+      "settings": {
+        "eyebrow": "Need guidance?",
+        "heading": "Not sure whether Foundation is appropriate for you?",
+        "text": "A MARCEL OSMF Consultant can help you understand the next steps and guide you towards suitable professional assessment.",
+        "center": false,
+        "note": "The MARCEL OSMF Consultant gives programme information and next-step guidance. Diagnosis, staging and treatment decisions are made by a qualified healthcare professional.",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      },
+      "blocks": {
+        "route_1": {
+          "type": "route",
+          "settings": {
+            "icon": "phone",
+            "eyebrow": "Option A",
+            "title": "MARCEL OSMF Consultant",
+            "subtitle": "In-house, on-call consultation",
+            "text": "Discuss your concerns remotely and understand the next step.",
+            "button_label": "Talk to a MARCEL OSMF Consultant",
+            "link_to": "consult",
+            "link2_to": "test",
+            "points": "Programme information and next steps\nGuidance on the MARCEL OMR Therapy™ pathways\nHelp finding a professional assessment",
+            "button2_label": "Check Your OSMF Stage"
+          }
+        },
+        "route_2": {
+          "type": "route",
+          "settings": {
+            "icon": "doctor",
+            "eyebrow": "Option B",
+            "title": "OSMF Specialist Doctors",
+            "subtitle": "In-clinic, in-person consultation",
+            "text": "A doctor can examine your mouth, assess mouth opening and evaluate oral tissue changes directly.",
+            "button_label": "Find an OSMF Specialist Doctor",
+            "link_to": "specialists",
+            "link2_to": "whatsapp",
+            "points": "Qualified clinical assessment\nEvaluation of symptoms and mouth opening\nProfessional guidance on diagnosis and management",
+            "button2_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "route_1",
+        "route_2"
+      ]
+    },
+    "cta": {
+      "type": "mt-cta-band",
+      "settings": {
+        "eyebrow": "Foundation pathway",
+        "heading": "Start with a structured routine",
+        "text": "If the Foundation Kit has been recommended for you, explore its components and follow your personalised care advice.",
+        "button_1_label": "Talk to a MARCEL OSMF Consultant",
+        "button_1_to": "consult",
+        "button_2_label": "Explore MARCEL Ora-Care™",
+        "button_2_to": "custom",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight",
+        "button_2_link": "/products/marcel-ora-care"
+      }
+    },
+    "crosslinks": {
+      "type": "mt-text-links",
+      "settings": {
+        "label": "More pages",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      },
+      "blocks": {
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "lead": "Looking for the other pathway?",
+            "label": "Explore MARCEL OMR Therapy™ Advance",
+            "link_to": "advance",
+            "back": false
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "lead": "",
+            "label": "Back to MARCEL OMR Therapy™ Overview",
+            "link_to": "therapy",
+            "back": true
+          }
+        }
+      },
+      "block_order": [
+        "link_1",
+        "link_2"
+      ]
+    },
+    "disclaimer": {
+      "type": "mt-guide",
+      "settings": {
+        "show_toc": false,
+        "toc_title": "On this page",
+        "read_label": "[n] min read",
+        "no_articles": "Articles will appear here once they are published.",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      },
+      "blocks": {
+        "fine_1": {
+          "type": "fine",
+          "settings": {
+            "text": "MARCEL OMR Therapy™ Foundation Kit is intended to support OSMF management as part of a broader care plan. It does not replace professional medical diagnosis, treatment or emergency care. The self-check is preliminary and cannot diagnose OSMF. Individual experiences and outcomes may vary. Consult a qualified healthcare professional for personalised guidance. Use products according to their approved labels and directions."
+          }
+        }
+      },
+      "block_order": [
+        "fine_1"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "components",
+    "routine",
+    "journey",
+    "important",
+    "support",
+    "cta",
+    "crosslinks",
+    "disclaimer"
+  ]
+}

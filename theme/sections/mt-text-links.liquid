@@ -1,0 +1,99 @@
+{%- style -%}
+  .mt-text-links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px 32px; padding: 22px; border-radius: var(--mt-r-lg); border: 1px solid var(--mt-line); text-align: center; }
+  .mt-text-links p { font-size: 15.5px; }
+  .mt-text-links .mt-link { display: inline-flex; }
+{%- endstyle -%}
+
+{%- if section.blocks.size > 0 -%}
+  <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-text-links-sec' %}">
+    <div class="mt-wrap">
+      <nav class="mt-text-links" aria-label="{{ section.settings.label | escape }}">
+        {%- for block in section.blocks -%}
+          {%- capture href -%}{% render 'mt-link-to', key: block.settings.link_to, url: block.settings.link %}{%- endcapture -%}
+          <p {{ block.shopify_attributes }}>
+            {%- if block.settings.lead != blank -%}{{ block.settings.lead | escape }} {% endif -%}
+            <a class="mt-link" href="{{ href }}">
+              {%- if block.settings.back -%}{%- render 'mt-icon', icon: 'arrow-left' -%}{%- endif -%}
+              {{- block.settings.label | escape -}}
+              {%- unless block.settings.back -%}{%- render 'mt-icon', icon: 'arrow-right' -%}{%- endunless -%}
+            </a>
+          </p>
+        {%- endfor -%}
+      </nav>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Marcel text links",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label (for screen readers)",
+      "default": "More pages"
+    },
+    {"type":"header","content":"Section style"},
+    {"type":"select","id":"background","label":"Background","options":[{"value":"paper","label":"White"},{"value":"mist","label":"Light"},{"value":"tint","label":"Tinted"},{"value":"navy","label":"Navy"}],"default":"paper"},
+    {"type":"checkbox","id":"sheet","label":"Rounded top edge","info":"Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.","default":false},
+    {"type":"select","id":"spacing","label":"Spacing","options":[{"value":"normal","label":"Normal"},{"value":"tight","label":"Compact"},{"value":"none","label":"None"}],"default":"tight"}
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "lead",
+          "label": "Text before the link",
+          "default": "Looking for the other pathway?"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Link label",
+          "default": "Explore MARCEL OMR Therapy™ Advance"
+        },
+        {
+          "type": "select",
+          "id": "link_to",
+          "label": "Link opens",
+          "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+          "default": "advance"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Custom link"
+        },
+        {
+          "type": "checkbox",
+          "id": "back",
+          "label": "Show as a back link",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel text links",
+      "blocks": [
+        {
+          "type": "link",
+          "settings": {}
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

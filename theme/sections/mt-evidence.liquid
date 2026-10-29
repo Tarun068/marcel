@@ -1,0 +1,289 @@
+{{ 'mt-pages.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  .mt-ev-top { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(22px, 4vw, 48px); align-items: start; margin-bottom: 22px; }
+  @media (max-width: 900px) {
+    .mt-ev-top { grid-template-columns: minmax(0, 1fr); }
+  }
+  .mt-ev-top .mt-sec-head { margin-bottom: 0; }
+  .mt-ev-meta { display: grid; gap: 0; border-radius: var(--mt-r-lg); background: var(--mt-paper); border: 1px solid var(--mt-line); }
+  .mt-bg-paper .mt-ev-meta { background: var(--mt-mist); border-color: transparent; }
+  .mt-ev-meta div { display: grid; gap: 2px; padding: 14px 18px; border-top: 1px solid var(--mt-line); }
+  .mt-ev-meta div:first-child { border-top: 0; }
+  .mt-ev-meta small { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--mt-ink-3); }
+  .mt-ev-meta b { font-size: 15px; color: var(--mt-ink); }
+  .mt-ev-hero { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 28px; align-items: center; padding: clamp(22px, 3.5vw, 34px); border-radius: var(--mt-r-xl); background: var(--mt-navy); color: var(--mt-navy-ink); }
+  .mt-ev-hero b { font-size: clamp(44px, 30px + 3vw, 72px); font-weight: 800; line-height: 1; letter-spacing: -.035em; color: var(--mt-on-dark); font-variant-numeric: tabular-nums; }
+  .mt-ev-hero b small { font-size: .42em; letter-spacing: -.01em; color: var(--mt-mint); }
+  .mt .mt-ev-hero h3 { color: var(--mt-on-dark); font-size: clamp(20px, 17px + .7vw, 26px); line-height: 1.2; }
+  @media (max-width: 620px) {
+    .mt-ev-hero { grid-template-columns: minmax(0, 1fr); }
+  }
+  .mt-ev-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+  @media (max-width: 900px) {
+    .mt-ev-groups { grid-template-columns: minmax(0, 1fr); }
+  }
+  .mt-ev-group { display: grid; gap: 14px; align-content: start; padding: 22px; border-radius: var(--mt-r-xl); background: var(--mt-paper); border: 1px solid var(--mt-line); }
+  .mt-bg-paper .mt-ev-group { background: var(--mt-mist); border-color: transparent; }
+  .mt .mt-ev-group h3 { font-size: 19px; line-height: 1.25; }
+  .mt-ev-group > p { margin-top: -8px; font-size: 14.5px; color: var(--mt-ink-3); }
+  .mt-ev-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+  .mt-ev-stat { display: grid; gap: 4px; padding: 14px; border-radius: var(--mt-r); background: var(--mt-mist); }
+  .mt-bg-paper .mt-ev-stat { background: var(--mt-paper); }
+  .mt-ev-stat b { font-size: 24px; font-weight: 800; line-height: 1.05; color: var(--mt-teal); font-variant-numeric: tabular-nums; }
+  .mt-ev-stat span { font-size: 14px; font-weight: 600; line-height: 1.3; color: var(--mt-ink); }
+  .mt-ev-foot { display: grid; gap: 16px; margin-top: 18px; }
+{%- endstyle -%}
+
+{%- liquid
+  assign s = section.settings
+  assign meta = section.blocks | where: 'type', 'meta'
+  assign group_1 = section.blocks | where: 'type', 'stat_1'
+  assign group_2 = section.blocks | where: 'type', 'stat_2'
+-%}
+{%- capture href -%}{% render 'mt-link-to', key: s.button_to, url: s.button_link %}{%- endcapture -%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-evidence' %}"{% if s.anchor != blank %} id="{{ s.anchor | handleize }}"{% endif %}>
+  <div class="mt-wrap">
+    <div class="mt-ev-top">
+      {%- render 'mt-sec-head', eyebrow: s.eyebrow, heading: s.heading, text: s.text -%}
+      {%- if meta.size > 0 -%}
+        <div class="mt-ev-meta">
+          {%- for block in meta -%}
+            <div {{ block.shopify_attributes }}><small>{{ block.settings.label | escape }}</small><b>{{ block.settings.value | escape }}</b></div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if s.hero_value != blank -%}
+      <div class="mt-ev-hero mt-on-dark">
+        <b>{{ s.hero_value | escape }}{% if s.hero_extra != blank %} <small>{{ s.hero_extra | escape }}</small>{% endif %}</b>
+        <div class="mt-stack-sm">
+          <h3>{{ s.hero_label | escape }}</h3>
+          {%- if s.hero_text != blank -%}<p>{{ s.hero_text | escape }}</p>{%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if group_1.size > 0 or group_2.size > 0 -%}
+      <div class="mt-ev-groups">
+        {%- for n in (1..2) -%}
+          {%- liquid
+            if n == 1
+              assign list = group_1
+              assign title = s.group_1_title
+              assign sub = s.group_1_text
+            else
+              assign list = group_2
+              assign title = s.group_2_title
+              assign sub = s.group_2_text
+            endif
+          -%}
+          {%- if list.size > 0 -%}
+            <div class="mt-ev-group">
+              <h3>{{ title | escape }}</h3>
+              {%- if sub != blank -%}<p>{{ sub | escape }}</p>{%- endif -%}
+              <div class="mt-ev-stats">
+                {%- for block in list -%}
+                  <div class="mt-ev-stat" {{ block.shopify_attributes }}><b>{{ block.settings.value | escape }}</b><span>{{ block.settings.label | escape }}</span></div>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="mt-ev-foot">
+      {%- if s.caveat != blank -%}
+        <div class="mt-callout mt-callout--muted">{%- render 'mt-icon', icon: 'info' -%}<span>{{ s.caveat }}</span></div>
+      {%- endif -%}
+      {%- if s.button_label != blank -%}
+        <div class="mt-btn-row"><a class="mt-btn mt-btn-secondary" href="{{ href }}">{{ s.button_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a></div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel clinical evidence",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Link name",
+      "info": "Optional, for links like #clinical-study."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Clinical research evidence"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What the 2026 clinical study found"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "A clinical study was conducted in 2026 to evaluate MARCEL OMR Therapy™ in people with OSMF."
+    },
+    {
+      "type": "header",
+      "content": "Main result"
+    },
+    {
+      "type": "text",
+      "id": "hero_value",
+      "label": "Value",
+      "default": "14.86 mm"
+    },
+    {
+      "type": "text",
+      "id": "hero_extra",
+      "label": "Extra value",
+      "default": "(71.25%)"
+    },
+    {
+      "type": "text",
+      "id": "hero_label",
+      "label": "Label",
+      "default": "Average increase in mouth opening"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_text",
+      "label": "Text",
+      "default": "Average change reported in the study group. Individual results vary."
+    },
+    {
+      "type": "header",
+      "content": "Groups"
+    },
+    {
+      "type": "text",
+      "id": "group_1_title",
+      "label": "Group 1 title",
+      "default": "Reported relief in chief complaints"
+    },
+    {
+      "type": "text",
+      "id": "group_1_text",
+      "label": "Group 1 text",
+      "default": "Percentage of participants who reported relief"
+    },
+    {
+      "type": "text",
+      "id": "group_2_title",
+      "label": "Group 2 title",
+      "default": "Changes in clinical findings"
+    },
+    {
+      "type": "text",
+      "id": "group_2_text",
+      "label": "Group 2 text",
+      "default": "Percentage of participants with improvement"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "caveat",
+      "label": "Note",
+      "default": "Clinical findings must be interpreted in the context of the study design, methods, sample size, duration and limitations. They are not a guarantee of results for any individual."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button"
+    },
+    {
+      "type": "select",
+      "id": "button_to",
+      "label": "Button opens",
+      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "default": "evidence"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button custom link"
+    },
+    {"type":"header","content":"Section style"},
+    {"type":"select","id":"background","label":"Background","options":[{"value":"paper","label":"White"},{"value":"mist","label":"Light"},{"value":"tint","label":"Tinted"},{"value":"navy","label":"Navy"}],"default":"paper"},
+    {"type":"checkbox","id":"sheet","label":"Rounded top edge","info":"Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.","default":false},
+    {"type":"select","id":"spacing","label":"Spacing","options":[{"value":"normal","label":"Normal"},{"value":"tight","label":"Compact"},{"value":"none","label":"None"}],"default":"normal"}
+  ],
+  "blocks": [
+    {
+      "type": "meta",
+      "name": "Study detail",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Study design"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "A prospective, randomized, parallel-group, active-controlled, open-label clinical trial"
+        }
+      ]
+    },
+    {
+      "type": "stat_1",
+      "name": "Group 1 figure",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "77.97%"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Burning sensation"
+        }
+      ]
+    },
+    {
+      "type": "stat_2",
+      "name": "Group 2 figure",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "66.07%"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Colour of oral mucosa"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel clinical evidence"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,168 @@
+{{ 'mt-pages.css' | asset_url | stylesheet_tag }}
+{{ 'mt-article.css' | asset_url | stylesheet_tag }}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-blog' %}">
+  <div class="mt-wrap">
+    {%- paginate blog.articles by section.settings.per_page -%}
+      {%- if section.settings.show_tags and blog.all_tags.size > 0 -%}
+        <nav class="mt-chips mt-blog-tags" aria-label="{{ section.settings.tags_label | escape }}">
+          <a class="mt-fchip" href="{{ blog.url }}" {% if current_tags == blank %}aria-current="page"{% endif %}>{{ section.settings.all_label | escape }}</a>
+          {%- for tag in blog.all_tags -%}
+            {%- assign t = tag | downcase -%}
+            {%- unless t contains 'icon:' -%}
+              <a class="mt-fchip" href="{{ blog.url }}/tagged/{{ tag | handleize }}" {% if current_tags contains tag %}aria-current="page"{% endif %}>{{ tag | escape }}</a>
+            {%- endunless -%}
+          {%- endfor -%}
+        </nav>
+      {%- endif -%}
+
+      <div class="mt-art-grid">
+        {%- for article in blog.articles -%}
+          {%- render 'mt-article-card', article: article, read_label: section.settings.read_label, show_image: section.settings.show_images, sizes: '(min-width: 1200px) 380px, (min-width: 600px) 45vw, 92vw' -%}
+        {%- else -%}
+          <p class="mt-placeholder">{{ section.settings.empty_text | escape }}</p>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="mt-pagination" aria-label="Pagination">
+          {%- if paginate.previous -%}
+            <a class="mt-btn mt-btn-secondary mt-btn-sm" href="{{ paginate.previous.url }}">{%- render 'mt-icon', icon: 'arrow-left' -%}{{ section.settings.prev_label | escape }}</a>
+          {%- endif -%}
+          <span class="mt-count-text">{{ paginate.current_page }} / {{ paginate.pages }}</span>
+          {%- if paginate.next -%}
+            <a class="mt-btn mt-btn-secondary mt-btn-sm" href="{{ paginate.next.url }}">{{ section.settings.next_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>
+          {%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel article list",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "range",
+      "id": "per_page",
+      "label": "Articles per page",
+      "min": 6,
+      "max": 24,
+      "step": 3,
+      "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "show_images",
+      "label": "Show article images",
+      "info": "Without an image, cards show an icon. Add a tag like icon:ruler to choose it.",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "read_label",
+      "label": "Read time label",
+      "info": "[n] is the minutes.",
+      "default": "[n] min read"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "Show tag filters",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tags_label",
+      "label": "Tag filters label (for screen readers)",
+      "default": "Filter articles"
+    },
+    {
+      "type": "text",
+      "id": "all_label",
+      "label": "All label",
+      "default": "All"
+    },
+    {
+      "type": "text",
+      "id": "empty_text",
+      "label": "Empty text",
+      "default": "No articles yet."
+    },
+    {
+      "type": "text",
+      "id": "prev_label",
+      "label": "Previous page label",
+      "default": "Previous"
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "Next page label",
+      "default": "Next"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "tight"
+    }
+  ]
+}
+{% endschema %}

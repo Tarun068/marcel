@@ -1,0 +1,205 @@
+{{ 'mt-pages.css' | asset_url | stylesheet_tag }}
+{{ 'mt-article.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+  assign words = article.content | strip_html | split: ' ' | size
+  assign minutes = words | plus: 179 | divided_by: 180 | floor | at_least: 1
+  assign read = s.read_label | default: '[n] min read' | replace: '[n]', minutes
+  assign cta_link = s.cta_link | default: settings.mt_link_test | default: routes.root_url
+  assign lead = article.excerpt | strip_html | strip
+-%}
+
+<article class="mt mt-article-page">
+  <div class="mt-phero mt-bg-{{ s.hero_background }}">
+    <div class="mt-wrap-narrow">
+      <nav class="mt-crumbs" aria-label="Breadcrumb">
+        <a href="{{ routes.root_url }}">{{ s.home_label | escape }}</a>
+        {%- if s.parent_label != blank -%}
+          {%- render 'mt-icon', icon: 'chevron-right' -%}
+          <a href="{{ s.parent_link | default: routes.root_url }}">{{ s.parent_label | escape }}</a>
+        {%- endif -%}
+        {%- render 'mt-icon', icon: 'chevron-right' -%}
+        <a href="{{ blog.url }}" aria-current="page">{{ blog.title | escape }}</a>
+      </nav>
+      <span class="mt-eyebrow">{{ blog.title | escape }} · {{ read | escape }}</span>
+      <h1 class="mt-h1">{{ article.title | escape }}</h1>
+      {%- if lead != blank -%}<p class="mt-lead">{{ lead | escape }}</p>{%- endif -%}
+      {%- if s.show_meta -%}
+        <p class="mt-fine mt-article-meta">
+          {{- article.published_at | time_tag: format: 'date' -}}
+          {%- if s.show_author and article.author != blank %} · {{ article.author | escape }}{% endif -%}
+        </p>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="mt-section mt-section--tight mt-bg-paper mt-article-wrap">
+    <div class="mt-wrap-narrow mt-article">
+      {%- if s.show_image and article.image -%}
+        <div class="mt-article-image">
+          {{ article.image | image_url: width: 1600 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 860px) 820px, 100vw', widths: '400, 600, 820, 1200, 1600' }}
+        </div>
+      {%- endif -%}
+
+      <div class="mt-article-body">{{ article.content }}</div>
+
+      {%- if s.cta_heading != blank -%}
+        <div class="mt-cta-box mt-on-dark">
+          <span>
+            <b>{{ s.cta_heading | escape }}</b>
+            {%- if s.cta_text != blank -%}<span>{{ s.cta_text | escape }}</span>{%- endif -%}
+          </span>
+          <a class="mt-btn mt-btn-light" href="{{ cta_link }}">
+            {{- s.cta_label | escape -}}
+            {%- render 'mt-icon', icon: 'arrow-right' -%}
+          </a>
+        </div>
+      {%- endif -%}
+
+      {%- if s.show_more -%}
+        {%- capture more -%}
+          {%- assign shown = 0 -%}
+          {%- for item in blog.articles -%}
+            {%- if item.id != article.id and shown < 3 -%}
+              {%- render 'mt-article-card', article: item, read_label: s.read_label, show_image: s.more_images, sizes: '(min-width: 860px) 260px, (min-width: 600px) 45vw, 92vw' -%}
+              {%- assign shown = shown | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+        {%- if more != blank -%}
+          <div class="mt-keep-reading">
+            <p class="mt-mini-h">{{ s.more_label | escape }}</p>
+            <div class="mt-art-grid">{{ more }}</div>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Marcel article",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "home_label",
+      "label": "Breadcrumb: home",
+      "default": "Home"
+    },
+    {
+      "type": "text",
+      "id": "parent_label",
+      "label": "Breadcrumb: parent page",
+      "default": "Understand OSMF"
+    },
+    {
+      "type": "url",
+      "id": "parent_link",
+      "label": "Parent page link"
+    },
+    {
+      "type": "select",
+      "id": "hero_background",
+      "label": "Header background",
+      "options": [
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "paper",
+          "label": "White"
+        }
+      ],
+      "default": "tint"
+    },
+    {
+      "type": "text",
+      "id": "read_label",
+      "label": "Read time label",
+      "info": "[n] is the minutes.",
+      "default": "[n] min read"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_meta",
+      "label": "Show date",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show author",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "Show featured image",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "text",
+      "id": "cta_heading",
+      "label": "Heading",
+      "default": "Check your OSMF stage"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Text",
+      "default": "The MARCEL OSMF Self-Check gives an initial indication. It cannot diagnose OSMF."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Check Your OSMF Stage"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link",
+      "info": "Empty uses the self-check page."
+    },
+    {
+      "type": "header",
+      "content": "Keep reading"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_more",
+      "label": "Show more articles",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "more_label",
+      "label": "Heading",
+      "default": "Keep reading"
+    },
+    {
+      "type": "checkbox",
+      "id": "more_images",
+      "label": "Show article images",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

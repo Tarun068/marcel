@@ -1,0 +1,314 @@
+{{ 'mt-pages.css' | asset_url | stylesheet_tag }}
+{{ 'mt-faq.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  .mt-faq-page .mt-faq-side { position: sticky; top: calc(var(--mt-header-h) + 20px); }
+  .mt-faq-page .mt-help-card { margin-top: 0; }
+  .mt-faq-cats { margin-bottom: 24px; }
+  .mt-faq-group + .mt-faq-group { margin-top: 36px; }
+  .mt .mt-faq-group h2 { margin-bottom: 12px; font-size: 22px; line-height: 1.25; letter-spacing: -.015em; }
+  @media (max-width: 900px) {
+    .mt-faq-page .mt-faq-side { position: relative; top: auto; }
+    .mt-faq-page .mt-help-card { display: none; }
+    .mt-faq-page .mt-faq-help-end { display: grid; margin-top: 32px; }
+  }
+  .mt-faq-help-end { display: none; }
+{%- endstyle -%}
+<script src="{{ 'mt-faq.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'mt-filter.js' | asset_url }}" defer="defer"></script>
+
+{%- capture wa_url -%}{% render 'mt-wa-url' %}{%- endcapture -%}
+{%- liquid
+  assign s = section.settings
+  assign cats = section.blocks | where: 'type', 'category'
+  assign link = s.link | default: settings.mt_link_consult | default: routes.root_url
+  assign first_q = true
+-%}
+
+{%- capture help -%}
+  {%- if s.help_title != blank -%}<b>{{ s.help_title | escape }}</b>{%- endif -%}
+  {%- if s.help_text != blank -%}<p class="mt-small">{{ s.help_text | escape }}</p>{%- endif -%}
+  {%- if s.whatsapp_label != blank and settings.mt_whatsapp_number != blank -%}
+    <div class="mt-btn-row">
+      <a class="mt-btn mt-btn-wa mt-btn-sm" href="{{ wa_url }}" target="_blank" rel="noopener">
+        {%- render 'mt-icon', icon: 'whatsapp' -%}
+        {{- s.whatsapp_label | escape -}}
+      </a>
+    </div>
+  {%- endif -%}
+  {%- if s.link_label != blank -%}
+    <a class="mt-link" href="{{ link }}">
+      {{- s.link_label | escape -}}
+      {%- render 'mt-icon', icon: 'arrow-right' -%}
+    </a>
+  {%- endif -%}
+{%- endcapture -%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-faq-page' %}">
+  <mt-filter class="mt-wrap mt-faq-layout">
+    <div class="mt-faq-side">
+      {%- if s.show_filters and cats.size > 1 -%}
+        <div class="mt-chips mt-faq-cats" role="group" aria-label="{{ s.filter_label | escape }}">
+          <button type="button" class="mt-fchip" data-mt-filter="all" aria-pressed="true">{{ s.all_label | escape }}</button>
+          {%- for block in cats -%}
+            <button type="button" class="mt-fchip" data-mt-filter="{{ block.settings.title | handleize }}" aria-pressed="false">{{ block.settings.chip_label | default: block.settings.title | escape }}</button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      {%- if s.show_help -%}<div class="mt-help-card">{{ help }}</div>{%- endif -%}
+    </div>
+
+    <div class="mt-faq-main">
+      {%- liquid
+        assign qs = ''
+        assign group_type = 'general'
+        assign group_title = ''
+        assign group_attrs = ''
+      -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'category' -%}
+          {%- if qs != blank or group_title != blank -%}
+            <div class="mt-faq-group" data-type="{{ group_type }}" {{ group_attrs }}>
+              {%- if group_title != blank -%}<h2>{{ group_title | escape }}</h2>{%- endif -%}
+              <mt-accordion class="mt-acc" data-single="{{ s.one_at_a_time }}">{{ qs }}</mt-accordion>
+            </div>
+          {%- endif -%}
+          {%- liquid
+            assign qs = ''
+            assign group_type = block.settings.title | handleize
+            assign group_title = block.settings.title
+            assign group_attrs = block.shopify_attributes
+          -%}
+        {%- else -%}
+          {%- liquid
+            assign open = false
+            if first_q and s.open_first
+              assign open = true
+            endif
+            assign first_q = false
+          -%}
+          {%- capture qs -%}{{ qs }}{%- render 'mt-acc-item', prefix: section.id, id: block.id, title: block.settings.question, body: block.settings.answer, open: open, attrs: block.shopify_attributes -%}{%- endcapture -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if qs != blank or group_title != blank -%}
+        <div class="mt-faq-group" data-type="{{ group_type }}" {{ group_attrs }}>
+          {%- if group_title != blank -%}<h2>{{ group_title | escape }}</h2>{%- endif -%}
+          <mt-accordion class="mt-acc" data-single="{{ s.one_at_a_time }}">{{ qs }}</mt-accordion>
+        </div>
+      {%- endif -%}
+      {%- if s.show_help -%}<div class="mt-help-card mt-faq-help-end">{{ help }}</div>{%- endif -%}
+    </div>
+  </mt-filter>
+</section>
+
+{%- if s.schema_markup -%}
+  {%- assign questions = section.blocks | where: 'type', 'question' -%}
+  {%- if questions.size > 0 -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {%- for block in questions -%}
+            {
+              "@type": "Question",
+              "name": {{ block.settings.question | json }},
+              "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.answer | strip_html | json }} }
+            }{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ]
+      }
+    </script>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Marcel FAQ page",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Add a Category block, then the Question blocks that belong to it."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_filters",
+      "label": "Show category filters",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "filter_label",
+      "label": "Filters label (for screen readers)",
+      "default": "Filter questions"
+    },
+    {
+      "type": "text",
+      "id": "all_label",
+      "label": "All label",
+      "default": "All"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Open the first question",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "one_at_a_time",
+      "label": "Open one answer at a time",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "schema_markup",
+      "label": "Add FAQ markup for search engines",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Help card"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_help",
+      "label": "Show help card",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "help_title",
+      "label": "Title",
+      "default": "Can’t find your answer?"
+    },
+    {
+      "type": "textarea",
+      "id": "help_text",
+      "label": "Text",
+      "default": "Our In-house OSMF Consultant can help with programme questions and your next step."
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_label",
+      "label": "WhatsApp button",
+      "default": "WhatsApp the Patient HelpDesk"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "Talk to a MARCEL OSMF Consultant"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link",
+      "info": "Empty uses the consultation page."
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "tight"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "About OSMF"
+        },
+        {
+          "type": "text",
+          "id": "chip_label",
+          "label": "Filter label",
+          "info": "Empty uses the title."
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What is OSMF?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Oral Submucous Fibrosis (OSMF) is a long-term condition in which the lining of the mouth becomes stiff and loses its stretch.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel FAQ page"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,680 @@
+{{ 'mt-pages.css' | asset_url | stylesheet_tag }}
+{{ 'mt-booking.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mt-booking.js' | asset_url }}" defer="defer"></script>
+
+{%- capture test_default -%}{% render 'mt-link-to', key: 'test' %}{%- endcapture -%}
+{%- capture result_default -%}{% render 'mt-link-to', key: 'result' %}{%- endcapture -%}
+{%- liquid
+  assign s = section.settings
+  assign test_link = s.test_link | default: test_default
+  assign fee_product = s.booking_product
+  assign fee_variant = fee_product.selected_or_first_available_variant
+  if fee_product != blank
+    assign fee = fee_variant.price | money_without_trailing_zeros
+  else
+    assign fee = s.fee_fallback
+  endif
+  assign pay_label = s.pay_label | replace: '[fee]', fee
+  assign fee_title = s.fee_title | replace: '[fee]', fee
+  assign consent = s.consent_text | replace: '[fee]', fee
+  assign wa_pretty = settings.mt_phone | default: settings.mt_whatsapp_number
+  assign help = s.help_text | replace: '[phone]', wa_pretty
+  assign optional = s.optional_label | escape
+  assign required = s.required_mark | escape
+  assign group_lines = s.slot_groups | newline_to_br | split: '<br />'
+  assign stage_lines = s.stage_titles | newline_to_br | split: '<br />'
+  assign form_id = 'MtBookForm-' | append: section.id
+-%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-booking' %}">
+  <div class="mt-wrap">
+    <mt-booking
+      class="mt-book"
+      data-days="{{ s.days_count }}"
+      data-lead="{{ s.lead_minutes }}"
+      data-closed="{{ s.closed_days | escape }}"
+      data-result-url="{{ result_default }}"
+      {% if fee_product != blank and fee_variant.available %}
+        data-variant="{{ fee_variant.id }}"
+        data-cart="{{ routes.cart_url }}"
+        data-cart-add="{{ routes.cart_add_url }}"
+        data-cart-change="{{ routes.cart_change_url }}"
+      {% endif %}
+    >
+      <script type="application/json" data-mt-text>
+        {
+          "groups": [
+            {%- assign first = true -%}
+            {%- for line in group_lines -%}
+              {%- assign parts = line | strip | split: '|' -%}
+              {%- if parts.size > 1 -%}
+                {%- unless first %},{% endunless -%}
+                {%- assign first = false -%}
+                {%- assign slots = parts[1] | split: ',' -%}
+                { "label": {{ parts[0] | strip | json }}, "slots": [{%- for x in slots -%}{{ x | strip | json }}{% unless forloop.last %},{% endunless %}{%- endfor -%}] }
+              {%- endif -%}
+            {%- endfor -%}
+          ],
+          "stages": {
+            {%- assign first = true -%}
+            {%- for line in stage_lines -%}
+              {%- assign parts = line | strip | split: '|' -%}
+              {%- if parts.size > 1 -%}
+                {%- unless first %},{% endunless -%}
+                {%- assign first = false -%}
+                {{ parts[0] | strip | json }}: { "title": {{ parts[1] | strip | json }}, "color": {{ parts[2] | default: '#077C87' | strip | json }} }
+              {%- endif -%}
+            {%- endfor -%}
+          },
+          "next": {{ s.done_next | newline_to_br | split: '<br />' | json }},
+          "today": {{ s.today_label | json }},
+          "tomorrow": {{ s.tomorrow_label | json }},
+          "closed": {{ s.closed_label | json }},
+          "notChosen": {{ s.not_chosen | json }},
+          "notTaken": {{ s.not_taken | json }},
+          "unavailable": {{ s.unavailable_label | json }},
+          "booked": {{ s.done_heading | json }},
+          "errName": {{ s.err_name | json }},
+          "errAge": {{ s.err_age | json }},
+          "errPhone": {{ s.err_phone | json }},
+          "errEmail": {{ s.err_email | json }},
+          "errAddress": {{ s.err_address | json }},
+          "errSlot": {{ s.err_slot | json }},
+          "errConsent": {{ s.err_consent | json }},
+          "errSend": {{ s.err_send | json }},
+          "props": {
+            "name": {{ s.prop_name | json }},
+            "age": {{ s.prop_age | json }},
+            "phone": {{ s.prop_phone | json }},
+            "email": {{ s.prop_email | json }},
+            "address": {{ s.prop_address | json }},
+            "date": {{ s.prop_date | json }},
+            "slot": {{ s.prop_slot | json }},
+            "id": {{ s.prop_id | json }},
+            "result": {{ s.prop_result | json }}
+          }
+        }
+      </script>
+
+      <div class="mt-book-main">
+        {%- form 'contact', id: form_id, class: 'mt-book-step', novalidate: 'novalidate', data-mt-book-form: '', data-step: 'form' -%}
+          {%- if form.posted_successfully? -%}<span hidden data-mt-posted></span>{%- endif -%}
+          <input type="hidden" name="contact[email]" value="{{ shop.email }}" data-mt-store-email>
+          <input type="hidden" name="contact[source]" value="{{ s.source_label | escape }}">
+          <input type="hidden" name="contact[booking_id]" value="" data-mt-field="id">
+          <input type="hidden" name="contact[booking_when]" value="" data-mt-field="when">
+          <input type="hidden" name="contact[self_check_result]" value="" data-mt-field="result">
+
+          <div class="mt-stack-sm">
+            <h2 class="mt-book-h">{{ s.details_heading | escape }}</h2>
+            {%- if s.details_text != blank -%}<p class="mt-muted">{{ s.details_text | escape }}</p>{%- endif -%}
+          </div>
+          <div class="mt-form-grid mt-form-grid--2">
+            <div class="mt-field">
+              <label for="MtBookName-{{ section.id }}">{{ s.name_label | escape }} <span class="mt-req">{{ required }}</span></label>
+              <input class="mt-input" id="MtBookName-{{ section.id }}" name="contact[name]" autocomplete="name" required>
+            </div>
+            <div class="mt-field">
+              <label for="MtBookAge-{{ section.id }}">{{ s.age_label | escape }} <span class="mt-req">{{ required }}</span></label>
+              <input class="mt-input" id="MtBookAge-{{ section.id }}" name="contact[age]" inputmode="numeric" maxlength="3" required>
+            </div>
+            <div class="mt-field">
+              <label for="MtBookPhone-{{ section.id }}">{{ s.phone_label | escape }} <span class="mt-req">{{ required }}</span></label>
+              <div class="mt-phone">
+                <span>+91</span>
+                <input class="mt-input" id="MtBookPhone-{{ section.id }}" name="contact[phone]" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="10" placeholder="{{ s.phone_placeholder | escape }}" required>
+              </div>
+            </div>
+            <div class="mt-field">
+              <label for="MtBookEmail-{{ section.id }}">{{ s.email_label | escape }} <span class="mt-opt-label">{{ optional }}</span></label>
+              <input class="mt-input" id="MtBookEmail-{{ section.id }}" name="contact[patient_email]" type="email" autocomplete="email">
+            </div>
+          </div>
+          <div class="mt-field">
+            <label for="MtBookAddress-{{ section.id }}">{{ s.address_label | escape }} <span class="mt-req">{{ required }}</span></label>
+            <textarea class="mt-input mt-input--short" id="MtBookAddress-{{ section.id }}" name="contact[address]" autocomplete="street-address" required></textarea>
+          </div>
+
+          <div class="mt-stack-sm mt-book-gap">
+            <h2 class="mt-book-h">{{ s.slot_heading | escape }}</h2>
+            {%- if s.slot_text != blank -%}<p class="mt-muted">{{ s.slot_text | escape }}</p>{%- endif -%}
+          </div>
+          <div class="mt-book-when">
+            <div class="mt-days" role="group" aria-label="{{ s.days_label | escape }}" data-mt-days></div>
+            <div class="mt-book-groups" data-mt-slots></div>
+          </div>
+
+          <div class="mt-fee-box">
+            <b>{{ fee }}</b>
+            <span><strong>{{ fee_title | escape }}</strong>{% if s.fee_text != blank %}<small>{{ s.fee_text | escape }}</small>{% endif %}</span>
+          </div>
+          <label class="mt-check-row" for="MtBookConsent-{{ section.id }}">
+            <input type="checkbox" id="MtBookConsent-{{ section.id }}" name="contact[consent]" value="Yes" required data-mt-consent>
+            <span>{{ consent | escape }} <span class="mt-req">{{ required }}</span></span>
+          </label>
+          <p class="mt-err" role="alert" data-mt-error hidden></p>
+          <div class="mt-book-nav">
+            {%- if s.terms_note != blank -%}<p class="mt-fine">{{ s.terms_note | escape }}</p>{%- endif -%}
+            <button type="submit" class="mt-btn mt-btn-primary" data-mt-submit>
+              <span class="mt-btn-label">
+                {%- if fee_product != blank and fee_variant.available -%}{{ pay_label | escape }}{%- else -%}{{ s.request_label | escape }}{%- endif -%}
+                {%- render 'mt-icon', icon: 'arrow-right' -%}
+              </span>
+              {%- render 'loading-spinner' -%}
+            </button>
+          </div>
+        {%- endform -%}
+
+        {%- comment -%} Shown after a booking request is sent (when no fee product is set). {%- endcomment -%}
+        <div class="mt-done-box" data-step="done" hidden>
+          <span class="mt-done-check">{%- render 'mt-icon', icon: 'check' -%}</span>
+          <div class="mt-stack-sm">
+            <span class="mt-eyebrow">{{ s.done_eyebrow | escape }}</span>
+            <h2 class="mt-h2" data-mt-done-title>{{ s.done_heading | escape }}.</h2>
+            <p class="mt-lead" data-mt-done-when></p>
+          </div>
+          <p>{{ s.booking_id_label | escape }} <span class="mt-booking-id" data-mt-done-id></span></p>
+          <div class="mt-done-next">
+            <p class="mt-mini-h">{{ s.next_label | escape }}</p>
+            <ol class="mt-next-list" data-mt-done-next></ol>
+          </div>
+          <button type="button" class="mt-link" data-mt-new>
+            {{- s.new_label | escape -}}
+            {%- render 'mt-icon', icon: 'arrow-right' -%}
+          </button>
+        </div>
+      </div>
+
+      <aside class="mt-book-summary">
+        <h3 class="mt-h3">{{ s.summary_title | escape }}</h3>
+        <div class="mt-sum-rows">
+          <div class="mt-sum-row">
+            {%- render 'mt-icon', icon: 'phone' -%}
+            <span><small>{{ s.sum_type | escape }}</small><b>{{ s.type_value | escape }}</b></span>
+          </div>
+          <div class="mt-sum-row">
+            {%- render 'mt-icon', icon: 'clock' -%}
+            <span><small>{{ s.sum_when | escape }}</small><b data-mt-sum="when">{{ s.not_chosen | escape }}</b></span>
+          </div>
+          <div class="mt-sum-row">
+            {%- render 'mt-icon', icon: 'test' -%}
+            <span>
+              <small>{{ s.sum_result | escape }}</small><b data-mt-sum="result">{{ s.not_taken | escape }}</b>
+              <a class="mt-small mt-sum-link" href="{{ test_link }}" data-mt-sum-test>{{ s.take_now | escape }}</a>
+            </span>
+          </div>
+          <div class="mt-sum-row">
+            {%- render 'mt-icon', icon: 'shield' -%}
+            <span><small>{{ s.sum_fee | escape }}</small><b>{{ fee }}</b>{% if s.fee_text != blank %}<span class="mt-fine">{{ s.fee_text | escape }}</span>{% endif %}</span>
+          </div>
+        </div>
+        {%- if s.role_note != blank -%}<p class="mt-callout mt-callout--muted">{%- render 'mt-icon', icon: 'info' -%}<span>{{ s.role_note | escape }}</span></p>{%- endif -%}
+        {%- if help != blank -%}<p class="mt-fine">{{ help | escape }}</p>{%- endif -%}
+      </aside>
+    </mt-booking>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel consultant booking",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Books an in-house MARCEL OSMF Consultant call. Choose the booking-fee product below: the visitor’s details and slot are attached to it and they go straight to checkout. Without a product, the form sends a booking request to the store email instead."
+    },
+    {
+      "type": "product",
+      "id": "booking_product",
+      "label": "Booking-fee product",
+      "info": "For example a ₹50 product called ‘MARCEL OSMF Consultation booking’. Hide it from search and collections."
+    },
+    {
+      "type": "text",
+      "id": "fee_fallback",
+      "label": "Fee shown when no product is chosen",
+      "default": "₹50"
+    },
+    {
+      "type": "url",
+      "id": "test_link",
+      "label": "Self-check page",
+      "info": "Empty uses Theme settings."
+    },
+    {
+      "type": "text",
+      "id": "source_label",
+      "label": "Message label in your inbox",
+      "default": "OSMF Consultant booking request"
+    },
+    {
+      "type": "header",
+      "content": "Your details"
+    },
+    {
+      "type": "text",
+      "id": "details_heading",
+      "label": "Heading",
+      "default": "Your details"
+    },
+    {
+      "type": "text",
+      "id": "details_text",
+      "label": "Text",
+      "default": "Please complete the required fields so our in-house consultation team can contact you."
+    },
+    {
+      "type": "text",
+      "id": "name_label",
+      "label": "Name label",
+      "default": "Full name"
+    },
+    {
+      "type": "text",
+      "id": "age_label",
+      "label": "Age label",
+      "default": "Age"
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "Phone label",
+      "default": "Phone number"
+    },
+    {
+      "type": "text",
+      "id": "phone_placeholder",
+      "label": "Phone placeholder",
+      "default": "10-digit mobile"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email label",
+      "default": "Email ID"
+    },
+    {
+      "type": "text",
+      "id": "address_label",
+      "label": "Address label",
+      "default": "Address"
+    },
+    {
+      "type": "text",
+      "id": "optional_label",
+      "label": "Optional tag",
+      "default": "(optional)"
+    },
+    {
+      "type": "text",
+      "id": "required_mark",
+      "label": "Required mark",
+      "default": "*"
+    },
+    {
+      "type": "header",
+      "content": "Slot"
+    },
+    {
+      "type": "text",
+      "id": "slot_heading",
+      "label": "Heading",
+      "default": "Select your consultation slot"
+    },
+    {
+      "type": "text",
+      "id": "slot_text",
+      "label": "Text",
+      "default": "Choose a preferred date and time. Final availability will be confirmed by MARCEL."
+    },
+    {
+      "type": "textarea",
+      "id": "slot_groups",
+      "label": "Time slots",
+      "info": "One group per line: name | times separated by commas. Times are in IST.",
+      "default": "Morning | 10:00 AM – 10:15 AM, 10:15 AM – 10:30 AM, 10:30 AM – 10:45 AM, 10:45 AM – 11:00 AM, 11:00 AM – 11:15 AM, 11:15 AM – 11:30 AM, 11:30 AM – 11:45 AM, 11:45 AM – 12:00 PM\nAfternoon | 03:00 PM – 03:15 PM, 03:15 PM – 03:30 PM, 03:30 PM – 03:45 PM, 03:45 PM – 04:00 PM, 04:00 PM – 04:15 PM, 04:15 PM – 04:30 PM, 04:30 PM – 04:45 PM, 04:45 PM – 05:00 PM"
+    },
+    {
+      "type": "text",
+      "id": "closed_days",
+      "label": "Closed days",
+      "info": "Short day names separated by commas, e.g. Sun.",
+      "default": "Sun"
+    },
+    {
+      "type": "range",
+      "id": "days_count",
+      "label": "Days to show",
+      "min": 3,
+      "max": 14,
+      "step": 1,
+      "default": 7
+    },
+    {
+      "type": "range",
+      "id": "lead_minutes",
+      "label": "Earliest booking today",
+      "info": "Minutes from now.",
+      "min": 0,
+      "max": 240,
+      "step": 15,
+      "unit": "min",
+      "default": 60
+    },
+    {
+      "type": "text",
+      "id": "days_label",
+      "label": "Days label (for screen readers)",
+      "default": "Choose a day"
+    },
+    {
+      "type": "text",
+      "id": "today_label",
+      "label": "Today",
+      "default": "Today"
+    },
+    {
+      "type": "text",
+      "id": "tomorrow_label",
+      "label": "Tomorrow",
+      "default": "Tomorrow"
+    },
+    {
+      "type": "text",
+      "id": "closed_label",
+      "label": "Closed day",
+      "default": "Closed"
+    },
+    {
+      "type": "text",
+      "id": "unavailable_label",
+      "label": "Slot not available (for screen readers)",
+      "default": "not available"
+    },
+    {
+      "type": "header",
+      "content": "Fee and confirmation"
+    },
+    {
+      "type": "text",
+      "id": "fee_title",
+      "label": "Fee title",
+      "info": "[fee] is replaced by the price.",
+      "default": "Consultation booking fee"
+    },
+    {
+      "type": "text",
+      "id": "fee_text",
+      "label": "Fee note",
+      "default": "Adjusted against an eligible MARCEL product purchase*"
+    },
+    {
+      "type": "textarea",
+      "id": "consent_text",
+      "label": "Consent text",
+      "info": "[fee] is replaced by the price.",
+      "default": "I understand that a [fee] consultation fee is payable to reserve the slot and will be adjusted against an eligible MARCEL product purchase under the published terms. I agree that MARCEL may use my submitted details to manage this consultation request."
+    },
+    {
+      "type": "text",
+      "id": "pay_label",
+      "label": "Pay button",
+      "info": "[fee] is replaced by the price.",
+      "default": "Continue to [fee] payment"
+    },
+    {
+      "type": "text",
+      "id": "request_label",
+      "label": "Button when no product is chosen",
+      "default": "Send booking request"
+    },
+    {
+      "type": "textarea",
+      "id": "terms_note",
+      "label": "Terms note",
+      "default": "*Eligible products, the adjustment period and how to redeem it are set out in our consultation terms."
+    },
+    {
+      "type": "text",
+      "id": "err_name",
+      "label": "Name error",
+      "default": "Enter your full name."
+    },
+    {
+      "type": "text",
+      "id": "err_age",
+      "label": "Age error",
+      "default": "Enter your age."
+    },
+    {
+      "type": "text",
+      "id": "err_phone",
+      "label": "Phone error",
+      "default": "Enter a 10-digit mobile number."
+    },
+    {
+      "type": "text",
+      "id": "err_email",
+      "label": "Email error",
+      "default": "Enter a valid email address, or leave it blank."
+    },
+    {
+      "type": "text",
+      "id": "err_address",
+      "label": "Address error",
+      "default": "Enter your address."
+    },
+    {
+      "type": "text",
+      "id": "err_slot",
+      "label": "Slot error",
+      "default": "Choose a date and time slot."
+    },
+    {
+      "type": "text",
+      "id": "err_consent",
+      "label": "Consent error",
+      "default": "Please accept the booking terms to continue."
+    },
+    {
+      "type": "text",
+      "id": "err_send",
+      "label": "Send error",
+      "default": "We couldn’t continue to payment. Please try again, or message us on WhatsApp."
+    },
+    {
+      "type": "header",
+      "content": "Details sent to the order"
+    },
+    {
+      "type": "text",
+      "id": "prop_name",
+      "label": "Name",
+      "default": "Patient name"
+    },
+    {
+      "type": "text",
+      "id": "prop_age",
+      "label": "Age",
+      "default": "Age"
+    },
+    {
+      "type": "text",
+      "id": "prop_phone",
+      "label": "Phone",
+      "default": "Phone"
+    },
+    {
+      "type": "text",
+      "id": "prop_email",
+      "label": "Email",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "prop_address",
+      "label": "Address",
+      "default": "Address"
+    },
+    {
+      "type": "text",
+      "id": "prop_date",
+      "label": "Date",
+      "default": "Consultation date"
+    },
+    {
+      "type": "text",
+      "id": "prop_slot",
+      "label": "Slot",
+      "default": "Time slot"
+    },
+    {
+      "type": "text",
+      "id": "prop_id",
+      "label": "Booking reference",
+      "default": "Booking reference"
+    },
+    {
+      "type": "text",
+      "id": "prop_result",
+      "label": "Self-check result",
+      "default": "Self-check result"
+    },
+    {
+      "type": "textarea",
+      "id": "stage_titles",
+      "label": "Self-check result names",
+      "info": "One per line: result key | name | colour.",
+      "default": "healthy | No signs of OSMF yet | #0A8A96\nstage1 | Possible Stage 1 | #2B9759\nstage2 | Possible Stage 2 | #C4860B\nstage3 | Possible Stage 3 | #D5602A\nstage4 | Possible Stage 4 | #C23838\ninvestigate | Under 5 mm, investigation advised | #C23838\nstage5 | Possible Stage 5 | #C23838"
+    },
+    {
+      "type": "header",
+      "content": "Summary"
+    },
+    {
+      "type": "text",
+      "id": "summary_title",
+      "label": "Heading",
+      "default": "Your consultation"
+    },
+    {
+      "type": "text",
+      "id": "sum_type",
+      "label": "Type label",
+      "default": "Consultation"
+    },
+    {
+      "type": "text",
+      "id": "type_value",
+      "label": "Type",
+      "default": "In-house MARCEL OSMF Consultant, on call"
+    },
+    {
+      "type": "text",
+      "id": "sum_when",
+      "label": "When",
+      "default": "When"
+    },
+    {
+      "type": "text",
+      "id": "sum_result",
+      "label": "Result",
+      "default": "Self-check result"
+    },
+    {
+      "type": "text",
+      "id": "sum_fee",
+      "label": "Fee",
+      "default": "Booking fee"
+    },
+    {
+      "type": "text",
+      "id": "not_chosen",
+      "label": "Not chosen",
+      "default": "Not chosen yet"
+    },
+    {
+      "type": "text",
+      "id": "not_taken",
+      "label": "Self-check not taken",
+      "default": "Not taken yet"
+    },
+    {
+      "type": "text",
+      "id": "take_now",
+      "label": "Self-check link",
+      "default": "Check your OSMF stage"
+    },
+    {
+      "type": "textarea",
+      "id": "role_note",
+      "label": "Role note",
+      "default": "The OSMF Consultant discusses your concerns and guides the next step. For an examination, diagnosis or treatment, please see an OSMF Specialist doctor."
+    },
+    {
+      "type": "text",
+      "id": "help_text",
+      "label": "Help text",
+      "info": "[phone] is replaced by the phone number from Theme settings.",
+      "default": "Need help? WhatsApp [phone]"
+    },
+    {
+      "type": "header",
+      "content": "Request sent (no product)"
+    },
+    {
+      "type": "text",
+      "id": "done_eyebrow",
+      "label": "Eyebrow",
+      "default": "Request received"
+    },
+    {
+      "type": "text",
+      "id": "done_heading",
+      "label": "Heading",
+      "info": "The first name is added after it.",
+      "default": "Thank you"
+    },
+    {
+      "type": "text",
+      "id": "booking_id_label",
+      "label": "Reference label",
+      "default": "Booking reference"
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "Next steps heading",
+      "default": "What happens next"
+    },
+    {
+      "type": "textarea",
+      "id": "done_next",
+      "label": "Next steps",
+      "info": "One per line.",
+      "default": "Our in-house consultation team will contact you to confirm the slot and the booking fee.\nKeep your self-check result handy for the call.\nFor an examination, the consultant may advise you to see an OSMF Specialist doctor in person."
+    },
+    {
+      "type": "text",
+      "id": "new_label",
+      "label": "New booking link",
+      "default": "Make another booking"
+    },
+    {"type":"header","content":"Section style"},
+    {"type":"select","id":"background","label":"Background","options":[{"value":"paper","label":"White"},{"value":"mist","label":"Light"},{"value":"tint","label":"Tinted"},{"value":"navy","label":"Navy"}],"default":"paper"},
+    {"type":"checkbox","id":"sheet","label":"Rounded top edge","info":"Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.","default":false},
+    {"type":"select","id":"spacing","label":"Spacing","options":[{"value":"normal","label":"Normal"},{"value":"tight","label":"Compact"},{"value":"none","label":"None"}],"default":"tight"}
+  ],
+  "presets": [
+    {
+      "name": "Marcel consultant booking"
+    }
+  ]
+}
+{% endschema %}

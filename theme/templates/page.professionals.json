@@ -1,0 +1,171 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "mt-page-hero",
+      "settings": {
+        "show_crumbs": true,
+        "home_label": "Home",
+        "button_1_to": "custom",
+        "button_2_to": "evidence",
+        "back_to": "therapy",
+        "background": "tint",
+        "sheet": false,
+        "spacing": "none",
+        "current_label": "For healthcare professionals",
+        "eyebrow": "For dentists and healthcare professionals",
+        "heading": "MARCEL OMR Therapy™ for healthcare professionals",
+        "text": "Information about the therapy, OSMF, clinical evidence, research and the MARCEL OSMF Care Specialist network.",
+        "button_1_label": "Professional enquiry",
+        "button_1_link": "#enquiry",
+        "button_2_label": "Explore clinical evidence"
+      }
+    },
+    "resources": {
+      "type": "mt-icon-cards",
+      "settings": {
+        "eyebrow": "Professional pathway",
+        "heading": "Everything in one place",
+        "center": false,
+        "columns": "3",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      },
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "icon": "shield",
+            "title": "MARCEL OMR Therapy™ overview",
+            "text": "The 3-pillar approach, the Foundation and Advance pathways and the 12-week care journey.",
+            "link_to": "therapy",
+            "link_label": "Read the overview"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "icon": "book",
+            "title": "OSMF information",
+            "text": "Causes, risk factors, symptoms, mouth opening and stages.",
+            "link_to": "custom",
+            "link_label": "Understand OSMF",
+            "link": "/pages/understand-osmf"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "icon": "test",
+            "title": "Clinical evidence",
+            "text": "The 2026 CTRI-registered study and earlier clinical evaluations.",
+            "link_to": "evidence",
+            "link_label": "See the evidence"
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "icon": "flask",
+            "title": "Research",
+            "text": "The ongoing MARCEL OSMF research programme and its status.",
+            "link_to": "custom",
+            "link_label": "View research",
+            "link": "/pages/clinical-evidence#research"
+          }
+        },
+        "card_5": {
+          "type": "card",
+          "settings": {
+            "icon": "box",
+            "title": "Product information",
+            "text": "MARCEL Ora-Care™, Ora-Shield™, Smile™ and the MO Device.",
+            "link_to": "products",
+            "link_label": "View products"
+          }
+        },
+        "card_6": {
+          "type": "card",
+          "settings": {
+            "icon": "doctor",
+            "title": "OSMF Care Specialist pathway",
+            "text": "Join the MARCEL OSMF Care Specialist network and appear in the specialist finder.",
+            "link_to": "custom",
+            "link_label": "Send an enquiry",
+            "link": "#enquiry"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4",
+        "card_5",
+        "card_6"
+      ]
+    },
+    "contact": {
+      "type": "mt-founder",
+      "settings": {
+        "quote_position": "left",
+        "quote_eyebrow": "",
+        "quote": "",
+        "name": "Dr. Niyati Thakker, BDS",
+        "role": "MARCEL OSMF Clinical Consultant",
+        "heading_size": "large",
+        "heading": "A designated clinical contact for participating doctors",
+        "text": "Dr. Niyati Thakker supports doctors in the MARCEL OSMF Care Specialist network.",
+        "link_label": "",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal",
+        "story_eyebrow": "Your clinical contact",
+        "body": "<ul><li>A designated clinical contact for participating doctors</li><li>Orientation to the MARCEL OMR Therapy™ approach</li><li>Communication and professional coordination with the JanSuta team</li></ul>"
+      }
+    },
+    "enquiry": {
+      "type": "mt-enquiry",
+      "settings": {
+        "anchor": "enquiry",
+        "eyebrow": "Professional enquiry",
+        "heading": "Contact the MARCEL professional team",
+        "text": "For clinical information, research collaboration or joining the OSMF Care Specialist network.",
+        "show_whatsapp": false,
+        "whatsapp_label": "WhatsApp the Patient HelpDesk",
+        "whatsapp_note": "For questions about the programme and your next step",
+        "phone_note": "Call the MARCEL team",
+        "email_note": "For professional, business and research enquiries",
+        "form_heading": "Your enquiry",
+        "type_label": "Enquiry type",
+        "types": "Professional enquiry\nBecome a MARCEL OSMF Care Specialist\nResearch / collaboration enquiry\nBusiness enquiry",
+        "name_label": "Full name",
+        "phone_label": "Phone number",
+        "email_label": "Email ID",
+        "city_label": "City",
+        "message_label": "Your message",
+        "submit_label": "Send enquiry",
+        "success_text": "Thank you. Your enquiry has reached the MARCEL team.",
+        "fine": "Please do not send personal medical records through this form. For an examination, see an OSMF Specialist doctor.",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "resources",
+    "contact",
+    "enquiry"
+  ]
+}

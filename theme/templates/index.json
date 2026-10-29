@@ -1,0 +1,1440 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "mt-hero",
+      "blocks": {
+        "pillar_1": {
+          "type": "pillar",
+          "settings": {
+            "icon": "shield",
+            "title": "Oral mucosal care",
+            "text": "Care for the mouth. Support comfort."
+          }
+        },
+        "pillar_2": {
+          "type": "pillar",
+          "settings": {
+            "icon": "s-open",
+            "title": "Functional support",
+            "text": "Support what matters in daily life: mouth opening, chewing and oral function."
+          }
+        },
+        "pillar_3": {
+          "type": "pillar",
+          "settings": {
+            "icon": "chart",
+            "title": "Guided care & progress",
+            "text": "Track. Review. Stay supported."
+          }
+        },
+        "trust_1": {
+          "type": "trust",
+          "settings": {
+            "icon": "flask",
+            "text": "Clinically evaluated"
+          }
+        },
+        "trust_2": {
+          "type": "trust",
+          "settings": {
+            "icon": "test",
+            "text": "CTRI-registered clinical study"
+          }
+        },
+        "trust_3": {
+          "type": "trust",
+          "settings": {
+            "icon": "calendar",
+            "text": "26-year development journey"
+          }
+        },
+        "trust_4": {
+          "type": "trust",
+          "settings": {
+            "icon": "patent",
+            "text": "Patent application filed"
+          }
+        }
+      },
+      "block_order": [
+        "pillar_1",
+        "pillar_2",
+        "pillar_3",
+        "trust_1",
+        "trust_2",
+        "trust_3",
+        "trust_4"
+      ],
+      "settings": {
+        "background": "fade",
+        "pattern": false,
+        "pill_icon": "shield",
+        "pill_text": "Care beyond teeth, gums & enamel",
+        "heading_font": "serif",
+        "heading": "A structured approach to <em>oral mucosal care</em>",
+        "text": "Symptom management and functional improvement — supported by clinical evaluation and ongoing research.",
+        "tagline": "Restore • Recover • Renew",
+        "button_1_label": "Check Your OSMF Stage",
+        "button_1_to": "test",
+        "button_1_link": "",
+        "button_2_label": "Explore MARCEL OMR Therapy™",
+        "button_2_to": "therapy",
+        "button_2_link": "",
+        "button_2_icon": "shield",
+        "image": "shopify://shop_images/df562fd0-b9e9-450b-a93a-23a73f0874f7.png",
+        "default_image": true,
+        "photo_note": "",
+        "card_title": "The MARCEL 3-Pillar Approach",
+        "card_note": "Individual responses to care vary."
+      }
+    },
+    "stats": {
+      "type": "mt-stats",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "value": "26",
+            "label": "Years of development, 2000–2026"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "value": "2008",
+            "label": "First patent granted"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "value": "2026",
+            "label": "CTRI-registered clinical study"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "value": "30",
+            "label": "Trademark applications filed"
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4"
+      ],
+      "disabled": true,
+      "settings": {
+        "overlap": true
+      }
+    },
+    "symptoms": {
+      "type": "mt-symptoms",
+      "blocks": {
+        "symptom_1": {
+          "type": "symptom",
+          "settings": {
+            "icon": "s-open",
+            "title": "Difficulty opening mouth",
+            "short": "Your mouth no longer opens as wide as before.",
+            "text": "Your jaw doesn’t open as wide as it used to, and even a two-finger gap starts to feel like a stretch. Mouth opening is the main measure used to describe the stage of OSMF."
+          }
+        },
+        "symptom_2": {
+          "type": "symptom",
+          "settings": {
+            "icon": "s-burn",
+            "title": "Burning while eating",
+            "short": "Spicy or sour food stings more than it used to.",
+            "text": "A sharp, burning feeling that flares up with spicy or sour food. If everyday meals have started to sting, the inside of your mouth needs a closer look."
+          }
+        },
+        "symptom_3": {
+          "type": "symptom",
+          "settings": {
+            "icon": "s-tight",
+            "title": "Tightness inside mouth",
+            "short": "Cheeks or lips feel stiff and less flexible.",
+            "text": "A stiff, band-like tightness across the cheeks or inner lips, as if the tissue has less give. Doctors check for this tightening during an oral exam."
+          }
+        },
+        "symptom_4": {
+          "type": "symptom",
+          "settings": {
+            "icon": "s-ulcer",
+            "title": "Ulcers",
+            "short": "Sores or raw patches that are slow to heal.",
+            "text": "Small sores or raw patches that last longer than a normal mouth ulcer. Any ulcer that doesn’t heal within two weeks should be checked by a doctor."
+          }
+        },
+        "symptom_5": {
+          "type": "symptom",
+          "settings": {
+            "icon": "s-bands",
+            "title": "White bands",
+            "short": "Pale, firm streaks along the cheeks or gums.",
+            "text": "Pale, fibrous streaks or patches along the cheeks or gums. They can feel leathery to the touch and are a common sign of tissue changes."
+          }
+        },
+        "symptom_6": {
+          "type": "symptom",
+          "settings": {
+            "icon": "s-tongue",
+            "title": "Reduced tongue movement",
+            "short": "Harder to stick out or move your tongue.",
+            "text": "Trouble sticking your tongue out fully or moving it from side to side. A tongue that feels tied down is worth mentioning to a doctor."
+          }
+        },
+        "symptom_7": {
+          "type": "symptom",
+          "settings": {
+            "icon": "s-pain",
+            "title": "Pain while eating",
+            "short": "Chewing hurts, especially harder foods.",
+            "text": "Discomfort or pain while chewing, especially with harder or drier foods. If mealtimes have started to hurt, don’t ignore it."
+          }
+        }
+      },
+      "block_order": [
+        "symptom_1",
+        "symptom_2",
+        "symptom_3",
+        "symptom_4",
+        "symptom_5",
+        "symptom_6",
+        "symptom_7"
+      ],
+      "settings": {
+        "eyebrow": "Know the signs",
+        "heading": "Do these symptoms sound familiar?",
+        "text": "Tap the ones you have noticed. We’ll explain what each one means.",
+        "icon_style": "illustrated",
+        "tile_title": "Good to know",
+        "cta_text": "These signs often build up slowly, and some can have other causes. If any of them last more than two weeks or keep coming back, have your mouth checked.",
+        "cta_label": "",
+        "cta_link": "",
+        "count_text": "[n] of [total] selected.",
+        "msg_none": "Tap each symptom you have noticed in the last few months.",
+        "msg_one": "One sign on its own can be mild. The self-check will tell you more.",
+        "msg_few": "[n] signs together are worth checking. Take the self-check to see your likely stage.",
+        "msg_many": "[n] signs together can point to a later stage. Please take the self-check and talk to an expert soon.",
+        "many_from": 4,
+        "detail_button_label": "Check Your OSMF Stage",
+        "detail_button_link": "",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "check_invite": {
+      "type": "mt-check-invite",
+      "settings": {
+        "eyebrow": "MARCEL OSMF Self-Check",
+        "heading": "Understand your next step",
+        "text": "Answer a few short questions about your mouth opening and symptoms. Your result appears on screen straight away, with a suggested next step.",
+        "points": "Clear progress through each question, with Back and Next\nA summary of your answers on the result screen\nWhat your answers can indicate and the pathway that may be considered\nThe option to talk to a MARCEL OSMF Consultant or find a specialist",
+        "button_1_label": "Start the OSMF Self-Check",
+        "button_1_to": "test",
+        "button_1_link": "",
+        "button_2_label": "Talk to a MARCEL OSMF Consultant",
+        "button_2_to": "consult",
+        "button_2_link": "",
+        "note": "The self-check gives an initial indication only. It is not a diagnosis. A qualified healthcare professional must confirm the diagnosis and stage.",
+        "test_to": "test",
+        "test_link": "",
+        "preview_step": "Question 1 of 6",
+        "preview_topic": "Mouth opening",
+        "preview_question": "How wide can you open your mouth?",
+        "preview_options": "gt35 | 3 fingers | Opens comfortably\n26to35 | 2 fingers | Feels a little tight\n15to25 | 1 finger | Clearly restricted\nlt15 | Less than 1 finger | Very hard to open",
+        "preview_result": "Private and confidential",
+        "continue_label": "Continue",
+        "background": "tint",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "causes": {
+      "type": "mt-icon-cards",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "icon": "ban",
+            "title": "Areca nut / supari & chewing products",
+            "text": "Supari • Gutkha • Pan masala • Mawa",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "icon": "ban",
+            "title": "Tobacco products",
+            "text": "Khaini • Chewing tobacco • Tobacco with gutkha or pan masala • Bidi • Cigarettes",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "icon": "clock",
+            "title": "Frequent & long-term chewing",
+            "text": "The more often and longer you chew, the greater the risk.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "icon": "bowl",
+            "title": "Poor nutrition",
+            "text": "May make oral tissues more vulnerable.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "card_5": {
+          "type": "card",
+          "settings": {
+            "icon": "users",
+            "title": "Genetic susceptibility",
+            "text": "Some people may be more vulnerable.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "card_6": {
+          "type": "card",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Poor oral hygiene",
+            "text": "Can contribute to poor overall oral health.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4",
+        "card_5",
+        "card_6"
+      ],
+      "settings": {
+        "eyebrow": "What causes OSMF?",
+        "heading": "Know the habits and factors that can affect your mouth.",
+        "text": "OSMF is mainly linked to chewing areca nut (supari) and related products. Several other factors can also increase the risk or make the oral tissues more vulnerable.",
+        "center": false,
+        "columns": "3",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "inside": {
+      "type": "mt-stages",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Healthy mouth",
+            "text": "Normal and comfortable",
+            "color": "#0a8a96"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Repeated chewing",
+            "text": "Irritation from supari, gutkha or tobacco",
+            "color": "#a0952b"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Irritation starts",
+            "text": "The inner lining may become sensitive and burn",
+            "color": "#c4860b"
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "Fibrosis can develop",
+            "text": "Tissue can turn stiff and less elastic",
+            "color": "#d5602a"
+          }
+        },
+        "step_5": {
+          "type": "step",
+          "settings": {
+            "title": "Opening may reduce",
+            "text": "Eating and speaking can get harder",
+            "color": "#c23838"
+          }
+        },
+        "step_6": {
+          "type": "step",
+          "settings": {
+            "title": "With the right care",
+            "text": "Care may help manage symptoms and support function",
+            "color": "#2b9759"
+          }
+        },
+        "stage_1": {
+          "type": "stage",
+          "settings": {
+            "number": "1",
+            "name": "Stage 1",
+            "range": "Over 35 mm",
+            "color": "#2b9759",
+            "title": "Stage 1",
+            "text": "Mouth opening is still more than 35 mm, but symptoms such as burning or cheek tightness have started. This is a good time to act, with professional guidance.",
+            "notice": "Burning with spicy food\nTightness in the cheeks\nEating is usually still comfortable",
+            "helps": "Stop supari, gutkha and tobacco\nMARCEL OMR Therapy™ Foundation may be considered\nA professional assessment to confirm the stage",
+            "button_label": "Am I in this stage?",
+            "button_to": "test",
+            "button_link": "",
+            "link_label": "Explore Foundation",
+            "link_to": "foundation",
+            "link": ""
+          }
+        },
+        "stage_2": {
+          "type": "stage",
+          "settings": {
+            "number": "2",
+            "name": "Stage 2",
+            "range": "26–35 mm",
+            "color": "#c4860b",
+            "title": "Stage 2",
+            "text": "Mouth opening has started to reduce, to between 26 and 35 mm. Burning, cheek tightness and some difficulty chewing may be present.",
+            "notice": "Mouth opening has reduced\nBurning or cheek tightness\nDifficulty chewing may be present",
+            "helps": "Stop the habit\nFoundation may be considered, based on individual assessment\nGuidance from the In-house OSMF Consultant",
+            "button_label": "Am I in this stage?",
+            "button_to": "test",
+            "button_link": "",
+            "link_label": "Explore Foundation",
+            "link_to": "foundation",
+            "link": ""
+          }
+        },
+        "stage_3": {
+          "type": "stage",
+          "settings": {
+            "number": "3",
+            "name": "Stage 3",
+            "range": "15–25 mm",
+            "color": "#d5602a",
+            "title": "Stage 3",
+            "text": "Mouth opening and oral function are more restricted. Eating is commonly harder, and burning and cheek tightness are often present.",
+            "notice": "Greater restriction in mouth opening\nBurning and cheek tightness\nDifficulty chewing is common",
+            "helps": "A professional assessment first\nMARCEL OMR Therapy™ Advance may be considered with professional guidance\nPrescribed mouth and jaw exercises",
+            "button_label": "Am I in this stage?",
+            "button_to": "test",
+            "button_link": "",
+            "link_label": "Explore Advance",
+            "link_to": "advance",
+            "link": ""
+          }
+        },
+        "stage_4": {
+          "type": "stage",
+          "settings": {
+            "number": "4",
+            "name": "Stage 4",
+            "range": "Under 15 mm",
+            "color": "#c23838",
+            "title": "Stage 4",
+            "text": "Mouth opening is severely restricted, and tongue movement may also be affected. A doctor should examine you and guide your care.",
+            "notice": "Opening of less than 15 mm\nDifficulty chewing\nDifficulty moving the tongue may be present",
+            "helps": "Examination by an OSMF Specialist doctor\nAdvance may be considered with professional guidance\nMOFlex Device as an optional adjunct, when recommended",
+            "button_label": "Am I in this stage?",
+            "button_to": "test",
+            "button_link": "",
+            "link_label": "Explore Advance",
+            "link_to": "advance",
+            "link": ""
+          }
+        },
+        "stage_5": {
+          "type": "stage",
+          "settings": {
+            "number": "5",
+            "name": "Stage 5",
+            "range": "Under 5 mm",
+            "color": "#8e2424",
+            "title": "Stage 5: specialist care",
+            "text": "A very restricted opening with a chronic ulcer, or with carcinoma confirmed by a biopsy, needs prompt specialist medical evaluation. MARCEL OMR Therapy™ is not the primary care pathway here.",
+            "notice": "The mouth barely opens (less than 5 mm)\nA chronic ulcer in the mouth\nOr carcinoma confirmed by a biopsy",
+            "helps": "Prompt specialist medical evaluation\nDo not delay care\nBring any reports to your appointment",
+            "button_label": "Find an OSMF Specialist Doctor",
+            "button_to": "specialists",
+            "button_link": "",
+            "link_label": "Talk to a MARCEL OSMF Consultant",
+            "link_to": "consult",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5",
+        "step_6",
+        "stage_1",
+        "stage_2",
+        "stage_3",
+        "stage_4",
+        "stage_5"
+      ],
+      "settings": {
+        "anchor": "stages",
+        "eyebrow": "Know your stage",
+        "heading": "What’s happening inside your mouth?",
+        "text": "OSMF usually develops slowly, over months or years of chewing. Knowing your stage helps you take the right step at the right time.",
+        "heading_font": "serif",
+        "tabs_label": "OSMF stages",
+        "notice_label": "What you may notice",
+        "helps_label": "What helps",
+        "note": "Stage ranges follow the MARCEL OSMF Self-Check. Not everyone goes through every step, and the pace differs from person to person. Only a qualified healthcare professional can diagnose OSMF and confirm its stage.",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "holistic": {
+      "type": "mt-icon-cards",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "icon": "test",
+            "title": "Personalised OSMF Care Plan",
+            "text": "Care guidance based on your symptoms, mouth opening and OSMF stage.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "icon": "shield",
+            "title": "MARCEL OMR Therapy™",
+            "text": "A structured therapy approach designed to support the management of OSMF.",
+            "link_label": "Explore the therapy",
+            "link_to": "therapy",
+            "link": ""
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "icon": "s-open",
+            "title": "Mouth Opening Exercises",
+            "text": "Guided exercises to support mouth opening and oral function.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "icon": "bowl",
+            "title": "Personalised Diet Plan",
+            "text": "Practical dietary guidance to support your oral health and therapy journey.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "card_5": {
+          "type": "card",
+          "settings": {
+            "icon": "ruler",
+            "title": "Mouth Opening Device",
+            "text": "Optional adjunct device to support mouth opening as part of your therapy journey, when recommended.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "card_6": {
+          "type": "card",
+          "settings": {
+            "icon": "phone",
+            "title": "In-house OSMF Consultant",
+            "text": "Personalised guidance and follow-up from our trained MARCEL care team.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "card_7": {
+          "type": "card",
+          "settings": {
+            "icon": "doctor",
+            "title": "Personalised Care by Specialist Doctors",
+            "text": "Clinical assessment and personalised care from MARCEL OSMF Care Specialists.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4",
+        "card_5",
+        "card_6",
+        "card_7"
+      ],
+      "settings": {
+        "eyebrow": "Holistic OSMF care",
+        "heading": "OSMF care requires more than just products",
+        "text": "A structured approach that combines personalised care planning, MARCEL OMR Therapy™, exercises, nutrition and professional guidance for better oral health.",
+        "center": false,
+        "columns": "4",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "get_started": {
+      "type": "mt-steps",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "number": "",
+            "title": "Check your symptoms",
+            "text": "Take the MARCEL OSMF Self-Check to understand your symptoms, mouth opening and possible stage."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "number": "",
+            "title": "Understand your care path",
+            "text": "Understand the MARCEL care pathway that may be appropriate, based on your symptoms and mouth opening."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "number": "",
+            "title": "Start your 12-week journey",
+            "text": "Begin your MARCEL OMR Therapy™ journey with your structured care routine, daily oral care, exercises and progress tracking."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "number": "",
+            "title": "Talk to our In-house OSMF Consultant",
+            "text": "Get personalised guidance and support on starting and continuing your MARCEL journey."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
+      "settings": {
+        "layout": "row",
+        "eyebrow": "How to get started",
+        "heading": "Take the first step towards better oral health",
+        "text": "",
+        "link_label": "Explore MARCEL OMR Therapy™",
+        "link": "/pages/marcel-omr-therapy",
+        "button_label": "Check Your OSMF Stage",
+        "button_link": "",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "pathways": {
+      "type": "mt-pathways",
+      "blocks": {
+        "pathway_1": {
+          "type": "pathway",
+          "settings": {
+            "tone": "teal",
+            "stages": "Stage 1 – 2",
+            "title": "MARCEL OMR Therapy™ Foundation",
+            "subtitle": "For earlier-stage OSMF symptoms and functional restriction.",
+            "bands": "Stage 1 | More than 35 mm, with symptoms\nStage 2 | 26 – 35 mm",
+            "points": "Burning or cheek tightness\nDifficulty chewing may be present\nModerate restriction in mouth opening at Stage 2",
+            "summary": "May be considered based on individual assessment.",
+            "button_label": "Explore Foundation",
+            "link_to": "foundation",
+            "link": ""
+          }
+        },
+        "pathway_2": {
+          "type": "pathway",
+          "settings": {
+            "tone": "blue",
+            "stages": "Stage 3 – 4",
+            "title": "MARCEL OMR Therapy™ Advance",
+            "subtitle": "For greater restriction in mouth opening and oral function.",
+            "bands": "Stage 3 | 15 – 25 mm\nStage 4 | Less than 15 mm",
+            "points": "Greater restriction in mouth opening\nBurning and cheek tightness commonly present\nDifficulty chewing common\nDifficulty in tongue movement may be present",
+            "summary": "May be considered with professional guidance.",
+            "button_label": "Explore Advance",
+            "link_to": "advance",
+            "link": ""
+          }
+        },
+        "pathway_3": {
+          "type": "pathway",
+          "settings": {
+            "tone": "red",
+            "stages": "Stage 5",
+            "title": "Specialist evaluation required",
+            "subtitle": "Not the primary MARCEL pathway.",
+            "bands": "Stage 5 | Less than 5 mm + red-flag findings",
+            "points": "Very restricted opening\nChronic ulcer in the mouth\nOr histopathologically proven carcinoma",
+            "summary": "MARCEL OMR Therapy™ is not recommended as the primary care pathway. Prompt specialist medical evaluation and management is required.",
+            "button_label": "Find a Specialist Doctor",
+            "link_to": "specialists",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "pathway_1",
+        "pathway_2",
+        "pathway_3"
+      ],
+      "settings": {
+        "anchor": "",
+        "eyebrow": "Honest expectations",
+        "heading": "Which MARCEL OMR Therapy™ is appropriate for your stage?",
+        "text": "Your mouth opening and symptoms help indicate the stage of OSMF and the MARCEL OMR Therapy™ pathway that may be considered. A qualified healthcare professional must confirm the diagnosis and stage.",
+        "center": false,
+        "note": "MARCEL OMR Therapy™ is intended to support OSMF management in appropriate patients. This information is for education only. Please consult a MARCEL OSMF Care Specialist or a qualified healthcare professional for individual assessment and guidance.",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "progress": {
+      "type": "mt-journey",
+      "blocks": {
+        "phase_1": {
+          "type": "phase",
+          "settings": {
+            "when": "Start",
+            "icon": "ruler",
+            "tone": "",
+            "title": "Baseline",
+            "text": "",
+            "points": "Burning sensation\nTightness in cheeks\nDifficulty in eating\nDifficulty in speaking\nRestricted mouth opening",
+            "foot": "This becomes your personal starting point."
+          }
+        },
+        "phase_2": {
+          "type": "phase",
+          "settings": {
+            "when": "Week 3",
+            "icon": "chart",
+            "tone": "",
+            "title": "First progress review",
+            "text": "",
+            "points": "Burning sensation may reduce\nCheek tightness may be less\nEating may be easier\nSpeech may improve\nMouth opening may increase",
+            "foot": "Stay consistent with your daily care routine."
+          }
+        },
+        "phase_3": {
+          "type": "phase",
+          "settings": {
+            "when": "Week 6",
+            "icon": "chart",
+            "tone": "",
+            "title": "Progress check",
+            "text": "",
+            "points": "Burning may reduce further\nCheek tightness may ease\nEating may feel more comfortable\nSpeaking may be easier\nMouth opening may continue to change",
+            "foot": "Continue your daily care and review your progress."
+          }
+        },
+        "phase_4": {
+          "type": "phase",
+          "settings": {
+            "when": "Week 9",
+            "icon": "chart",
+            "tone": "",
+            "title": "Continue & reassess",
+            "text": "",
+            "points": "Review burning and cheek comfort\nReview eating and speaking\nReview mouth opening",
+            "foot": "Maintain your routine and stay in touch with your care team."
+          }
+        },
+        "phase_5": {
+          "type": "phase",
+          "settings": {
+            "when": "Week 12",
+            "icon": "target",
+            "tone": "",
+            "title": "Overall progress assessment",
+            "text": "",
+            "points": "Review comfort and daily function\nReview mouth opening against your baseline\nPlan your next steps",
+            "foot": "Plan your next steps with your care team."
+          }
+        }
+      },
+      "block_order": [
+        "phase_1",
+        "phase_2",
+        "phase_3",
+        "phase_4",
+        "phase_5"
+      ],
+      "disabled": true,
+      "settings": {
+        "anchor": "",
+        "eyebrow": "When can you expect to see progress?",
+        "heading": "A healthier, more comfortable mouth, step by step",
+        "text": "Every person’s progress is different. Regular assessment helps you understand your individual response throughout the 12-week MARCEL OMR Therapy™ journey.",
+        "center": false,
+        "layout": "cards",
+        "columns": 5,
+        "note": "<strong>Progress varies from person to person.</strong> MARCEL OMR Therapy™ does not promise a fixed timeline or outcome. Regular assessment by a MARCEL OSMF Care Specialist or qualified healthcare professional helps you understand your individual progress and adjust care as needed.",
+        "button_label": "Explore the 12-Week Care Journey",
+        "button_to": "journey",
+        "button_link": "",
+        "button2_label": "",
+        "button2_to": "consult",
+        "button2_link": "",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "progress_support": {
+      "type": "mt-icon-cards",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "icon": "chart",
+            "title": "3-Week Progress Tracker",
+            "text": "With every MARCEL pack. Track symptoms and mouth-opening progress.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "icon": "calendar",
+            "title": "Regular progress reviews",
+            "text": "Review your journey at Weeks 3, 6, 9 and 12.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "icon": "whatsapp",
+            "title": "Patient education",
+            "text": "Through our WhatsApp channel.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "icon": "phone",
+            "title": "Personalised guidance",
+            "text": "From our In-house OSMF Consultant.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ],
+      "settings": {
+        "eyebrow": "Track your progress. Stay supported.",
+        "heading": "Your MARCEL journey is more than a product",
+        "text": "Every MARCEL journey includes structured progress tracking and access to our In-house OSMF Consultant, to help you stay informed, consistent and supported throughout your 12-week journey.",
+        "center": false,
+        "columns": "4",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "products": {
+      "type": "mt-products",
+      "blocks": {
+        "product_1": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "title": "MARCEL Ora-Care™ Oral Spray",
+            "meta": "Metered oral spray · 50 mL",
+            "badge": "none",
+            "step": "1",
+            "role": "Foundation",
+            "color": "#168c83",
+            "benefits": "Part of Foundation MARCEL OMR Therapy™\nMay support the management of burning and tightness\nA measured amount with every spray",
+            "best": "Foundation pathway",
+            "art": "ora-care"
+          }
+        },
+        "product_2": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "title": "MARCEL Ora-Shield™ Oral Rinse",
+            "meta": "Therapeutic oral rinse · 10 mL",
+            "badge": "none",
+            "step": "1",
+            "role": "Advance",
+            "color": "#5a5cbe",
+            "benefits": "Part of ADVANCE MARCEL OMR Therapy™\nA concentrate, diluted before use\nUsed with professional guidance",
+            "best": "Advance pathway",
+            "art": "ora-shield"
+          }
+        },
+        "product_3": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "title": "MARCEL Smile™ Toothpaste",
+            "meta": "Toothpaste · 30 g and 100 g",
+            "badge": "none",
+            "step": "1",
+            "role": "Daily oral care",
+            "color": "#2265c4",
+            "benefits": "Premium herbal complex\nNo SLS, no parabens\nNo artificial sweeteners",
+            "best": "Everyday care",
+            "art": "smile"
+          }
+        },
+        "product_4": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "title": "MARCEL® MOFlex Device",
+            "meta": "Mouth-opening support device",
+            "badge": "none",
+            "step": "1",
+            "role": "Optional adjunct",
+            "color": "#077c87",
+            "benefits": "Supports guided mouth-opening exercises\nGentle. Gradual. Guided.\nUsed with professional guidance",
+            "best": "When recommended",
+            "art": "device"
+          }
+        }
+      },
+      "block_order": [
+        "product_1",
+        "product_2",
+        "product_3",
+        "product_4"
+      ],
+      "settings": {
+        "eyebrow": "Products",
+        "heading": "Products within MARCEL OMR Therapy™",
+        "text": "Each product has a defined role in the therapy. See what it is, how it is used and where it fits.",
+        "link_label": "Explore Our Products",
+        "link": "/collections/all",
+        "details_label": "View product details",
+        "add_label": "Add to cart",
+        "sold_out_label": "Sold out",
+        "image_fit": "cover",
+        "show_kit": false,
+        "kit_product": "",
+        "kit_eyebrow": "MARCEL OMR Therapy™",
+        "kit_heading": "Foundation and Advance kits",
+        "kit_text": "Each kit brings together the components of one pathway. A qualified healthcare professional should confirm which pathway is appropriate.",
+        "kit_add_label": "Add kit to cart",
+        "kit_view_label": "View kit",
+        "kit_link": "",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "consult": {
+      "type": "mt-consult",
+      "blocks": {
+        "route_1": {
+          "type": "route",
+          "settings": {
+            "icon": "phone",
+            "title": "Book video consultation",
+            "text": "An on-call consultation from home, about your concerns and next step",
+            "badge": "₹50 booking",
+            "link_to": "consult",
+            "link": ""
+          }
+        },
+        "route_2": {
+          "type": "route",
+          "settings": {
+            "icon": "whatsapp",
+            "title": "Connect with Marcel Team",
+            "text": "Chat now and share your questions privately",
+            "badge": "",
+            "link_to": "whatsapp",
+            "link": ""
+          }
+        },
+        "route_3": {
+          "type": "route",
+          "settings": {
+            "icon": "doctor",
+            "title": "Marcel OSMF Specialist doctor",
+            "text": "Get your mouth opening measured at one of 120+ clinics",
+            "badge": "",
+            "link_to": "specialists",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "route_1",
+        "route_2",
+        "route_3"
+      ],
+      "settings": {
+        "eyebrow": "Expert consultation",
+        "heading": "Talk to an OSMF expert.",
+        "text": "Ask about your symptoms, your care pathway or getting help to quit the habit. Choose the way that suits you.",
+        "heading_font": "serif",
+        "note": "The OSMF Consultant discusses your concerns and guides the next step. For an examination, diagnosis and stage, see an OSMF Specialist doctor.",
+        "show_card": true,
+        "card_icon": "phone",
+        "card_title": "Book a consultation",
+        "card_text": "In-house MARCEL OSMF Consultant · On call · ₹50 booking",
+        "card_to": "consult",
+        "card_link": "",
+        "slots": "10:00 AM – 10:15 AM, 11:00 AM – 11:15 AM, 03:00 PM – 03:15 PM",
+        "closed_days": "Sun",
+        "days_shown": 2,
+        "lead_minutes": 60,
+        "today_label": "Today",
+        "tomorrow_label": "Tomorrow",
+        "empty_text": "Choose a time on the booking page.",
+        "all_label": "See all times",
+        "background": "navy",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "evidence": {
+      "type": "mt-evidence",
+      "blocks": {
+        "meta_1": {
+          "type": "meta",
+          "settings": {
+            "label": "Study design",
+            "value": "Prospective, randomized, parallel-group, active-controlled, open-label clinical trial"
+          }
+        },
+        "meta_2": {
+          "type": "meta",
+          "settings": {
+            "label": "Ethics approval",
+            "value": "RAPMC/IEC/PROJECT/04/2026"
+          }
+        },
+        "meta_3": {
+          "type": "meta",
+          "settings": {
+            "label": "CTRI registration",
+            "value": "CTRI/2026/03/128345"
+          }
+        },
+        "stat_1_1": {
+          "type": "stat_1",
+          "settings": {
+            "value": "77.97%",
+            "label": "Burning sensation"
+          }
+        },
+        "stat_1_2": {
+          "type": "stat_1",
+          "settings": {
+            "value": "77.78%",
+            "label": "Taste alteration"
+          }
+        },
+        "stat_1_3": {
+          "type": "stat_1",
+          "settings": {
+            "value": "15.25%",
+            "label": "Salivation"
+          }
+        },
+        "stat_1_4": {
+          "type": "stat_1",
+          "settings": {
+            "value": "70.83%",
+            "label": "Intolerance to spicy food"
+          }
+        },
+        "stat_1_5": {
+          "type": "stat_1",
+          "settings": {
+            "value": "71.88%",
+            "label": "Pain in mouth"
+          }
+        },
+        "stat_2_1": {
+          "type": "stat_2",
+          "settings": {
+            "value": "66.07%",
+            "label": "Colour of oral mucosa"
+          }
+        },
+        "stat_2_2": {
+          "type": "stat_2",
+          "settings": {
+            "value": "47.37%",
+            "label": "Ulceration"
+          }
+        },
+        "stat_2_3": {
+          "type": "stat_2",
+          "settings": {
+            "value": "57.14%",
+            "label": "Consistency"
+          }
+        },
+        "stat_2_4": {
+          "type": "stat_2",
+          "settings": {
+            "value": "66.67%",
+            "label": "Fibrous bands"
+          }
+        }
+      },
+      "block_order": [
+        "meta_1",
+        "meta_2",
+        "meta_3",
+        "stat_1_1",
+        "stat_1_2",
+        "stat_1_3",
+        "stat_1_4",
+        "stat_1_5",
+        "stat_2_1",
+        "stat_2_2",
+        "stat_2_3",
+        "stat_2_4"
+      ],
+      "disabled": true,
+      "settings": {
+        "anchor": "",
+        "eyebrow": "Clinical research evidence",
+        "heading": "What the 2026 clinical study found",
+        "text": "A clinical study was conducted in 2026 to evaluate MARCEL OMR Therapy™ in people with OSMF.",
+        "hero_value": "14.86 mm",
+        "hero_extra": "(71.25%)",
+        "hero_label": "Average increase in mouth opening",
+        "hero_text": "Average change reported in the study group. Individual results vary.",
+        "group_1_title": "Reported relief in chief complaints",
+        "group_1_text": "Percentage of participants who reported relief",
+        "group_2_title": "Changes in clinical findings",
+        "group_2_text": "Percentage of participants with improvement",
+        "caveat": "The study had Institutional Ethics Committee approval and was registered with the Clinical Trials Registry of India (CTRI). Clinical findings must be interpreted in the context of the study design, methods, sample size, duration and limitations. Individual results vary and are not guaranteed.",
+        "button_label": "Explore clinical evidence",
+        "button_to": "evidence",
+        "button_link": "",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "reviews": {
+      "type": "mt-reviews",
+      "disabled": true,
+      "settings": {
+        "eyebrow": "Patient stories",
+        "heading": "Experiences shared by people on the MARCEL journey",
+        "text": "",
+        "note": "Shared with permission. Each person’s experience is their own; results vary and are not guaranteed.",
+        "link_label": "Read our reviews on Google",
+        "link": "",
+        "before_label": "Before",
+        "after_label": "After",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "videos": {
+      "type": "mt-videos",
+      "disabled": true,
+      "settings": {
+        "eyebrow": "Understand OSMF with experts",
+        "heading": "Short videos that answer common questions",
+        "text": "Doctors and the MARCEL team explain reduced mouth opening, the signs to watch for and how MARCEL OMR Therapy™ works.",
+        "shape": "landscape",
+        "columns": 3,
+        "play_label": "Play video",
+        "note": "Videos are for general education and do not replace a consultation.",
+        "button_label": "Talk to a MARCEL OSMF Consultant",
+        "button_to": "consult",
+        "button_link": "",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "answers": {
+      "type": "mt-icon-cards",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "icon": "ruler",
+            "title": "Understand the stages of OSMF",
+            "text": "How mouth opening and symptoms are used to describe Stage 1 to Stage 5. General information, not an assessment of your condition.",
+            "link_label": "Read about the stages",
+            "link_to": "custom",
+            "link": "/pages/understand-osmf#stages"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "icon": "shield",
+            "title": "How MARCEL OMR Therapy™ works",
+            "text": "The three pillars, the daily routine, mouth exercises and guided progress reviews.",
+            "link_label": "See how the therapy works",
+            "link_to": "therapy",
+            "link": ""
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "icon": "chart",
+            "title": "Can my mouth opening improve?",
+            "text": "Care may help manage symptoms and support mouth opening. How much changes differs from person to person, and a cure cannot be promised.",
+            "link_label": "What to expect over 12 weeks",
+            "link_to": "journey",
+            "link": ""
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "icon": "book",
+            "title": "Patient guide",
+            "text": "Practical reads, from checking your mouth opening at home to quitting gutkha and supari.",
+            "link_label": "Read the patient guide",
+            "link_to": "custom",
+            "link": "/blogs/patient-guide"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ],
+      "disabled": true,
+      "settings": {
+        "eyebrow": "Find answers",
+        "heading": "Questions people ask before they start",
+        "text": "",
+        "center": false,
+        "columns": "4",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "faq": {
+      "type": "mt-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "What are the early signs of OSMF?",
+            "answer": "<p>Burning while eating spicy food, tightness inside the cheeks and gradually reduced mouth opening can be signs of OSMF. If these symptoms persist or are getting worse, arrange a professional assessment.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "What is MARCEL OMR Therapy™?",
+            "answer": "<p>MARCEL OMR Therapy™ is a structured approach to oral mucosal care, designed around a planned care journey rather than using products at random. The appropriate care plan depends on the person’s needs and the approved instructions for each product.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "What is the difference between an OSMF Consultant and an OSMF Specialist doctor?",
+            "answer": "<p>An OSMF Consultant provides an in-house on-call consultation, allowing you to discuss your concerns and understand the next step remotely. An OSMF Specialist doctor provides an in-clinic, in-person consultation, where the doctor can examine your mouth, assess mouth opening and evaluate oral tissue changes directly.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3"
+      ],
+      "settings": {
+        "eyebrow": "Questions",
+        "heading": "What people ask us most",
+        "open_first": false,
+        "one_at_a_time": false,
+        "schema_markup": true,
+        "show_help": true,
+        "help_title": "Have questions?",
+        "help_text": "Our In-house OSMF Consultant can help with programme questions and your next step.",
+        "whatsapp_label": "WhatsApp the Patient HelpDesk",
+        "link_label": "See all FAQs",
+        "link": "/pages/faq",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "support": {
+      "type": "mt-support",
+      "blocks": {
+        "route_1": {
+          "type": "route",
+          "settings": {
+            "icon": "phone",
+            "eyebrow": "Option A",
+            "title": "MARCEL OSMF Consultant",
+            "subtitle": "In-house, on-call consultation",
+            "text": "Discuss your concerns remotely and understand the next step.",
+            "points": "Ask your questions\nGet guidance on your care path\nSupport through your journey",
+            "button_label": "Talk to a MARCEL OSMF Consultant",
+            "link_to": "consult",
+            "link": "",
+            "button2_label": "WhatsApp the Patient HelpDesk",
+            "link2_to": "whatsapp",
+            "link2": ""
+          }
+        },
+        "route_2": {
+          "type": "route",
+          "settings": {
+            "icon": "doctor",
+            "eyebrow": "Option B",
+            "title": "OSMF Specialist Doctors",
+            "subtitle": "In-clinic, in-person consultation",
+            "text": "A doctor can examine your mouth, assess mouth opening and evaluate oral tissue changes directly.",
+            "points": "Qualified clinical assessment\nEvaluation of symptoms and mouth opening\nProfessional guidance on diagnosis and management",
+            "button_label": "Find an OSMF Specialist Doctor",
+            "link_to": "specialists",
+            "link": "",
+            "button2_label": "",
+            "link2_to": "whatsapp",
+            "link2": ""
+          }
+        }
+      },
+      "block_order": [
+        "route_1",
+        "route_2"
+      ],
+      "settings": {
+        "anchor": "",
+        "eyebrow": "Have questions?",
+        "heading": "Our In-house OSMF Consultant is here to help.",
+        "text": "Get personalised guidance about your symptoms, MARCEL OMR Therapy™ journey and progress. For an examination, find an OSMF Specialist doctor.",
+        "center": false,
+        "note": "The MARCEL OSMF Consultant gives programme information and next-step guidance. Diagnosis, staging and treatment decisions are made by a qualified healthcare professional.",
+        "background": "navy",
+        "sheet": true,
+        "spacing": "normal"
+      }
+    },
+    "specialists": {
+      "type": "mt-clinic-finder",
+      "settings": {
+        "eyebrow": "Near you",
+        "heading": "Find an OSMF Specialist Doctor",
+        "text": "Search by city or PIN code for verified MARCEL OSMF Care Specialists who offer an in-clinic, in-person consultation.",
+        "link": "",
+        "param": "q",
+        "placeholder": "Enter your city or PIN code",
+        "button_label": "Find specialists",
+        "cities_label": "Popular:",
+        "cities": "Ahmedabad, Vadodara, Surat",
+        "background": "paper",
+        "sheet": true,
+        "spacing": "tight"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "stats",
+    "symptoms",
+    "check_invite",
+    "causes",
+    "inside",
+    "holistic",
+    "get_started",
+    "pathways",
+    "progress",
+    "progress_support",
+    "products",
+    "consult",
+    "evidence",
+    "reviews",
+    "videos",
+    "answers",
+    "faq",
+    "support",
+    "specialists"
+  ]
+}

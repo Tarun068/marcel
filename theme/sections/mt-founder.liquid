@@ -1,0 +1,751 @@
+{%- style -%}
+  .mt-founder { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: clamp(28px, 5vw, 80px); align-items: center; }
+  .mt-founder--reverse > .mt-founder-photo { order: 2; }
+  .mt-founder-photo { position: relative; aspect-ratio: 4 / 4.8; border-radius: var(--mt-r-xl); overflow: hidden; background: var(--mt-tint); }
+  .mt-founder-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .mt-founder-fallback { position: absolute; inset: 0; display: grid; place-items: center; color: var(--mt-on-dark); }
+  .mt-founder-fallback svg { width: 34%; height: auto; opacity: .9; }
+  .mt-founder-tag { position: absolute; left: 16px; bottom: 16px; right: 16px; display: grid; gap: 2px; width: fit-content; padding: 12px 16px; border-radius: 14px; background: var(--mt-paper); border: 1px solid var(--mt-line); }
+  .mt-founder-tag b { font-size: 15.5px; color: var(--mt-ink); line-height: 1.25; }
+  .mt-founder-tag small { font-size: 13px; color: var(--mt-ink-3); }
+  .mt-founder-copy { display: grid; gap: 20px; align-content: center; }
+  .mt-founder-quote { position: relative; font-size: clamp(22px, 16px + 1.2vw, 30px); font-weight: 700; line-height: 1.32; letter-spacing: -.015em; color: var(--mt-ink); }
+  .mt-founder-quote::before { content: "\201C"; display: block; height: 36px; font-size: 72px; line-height: .9; font-weight: 800; color: var(--mt-aqua); }
+  .mt-founder-rule { display: block; height: 1px; background: var(--mt-line); }
+  .mt .mt-founder-copy .mt-h3 { font-size: clamp(20px, 17px + .6vw, 25px); }
+  .mt .mt-founder-copy .mt-h2 { font-size: clamp(26px, 19px + 1.6vw, 38px); }
+  .mt-founder-copy > .mt-eyebrow + h2 { margin-top: -10px; }
+  .mt-founder-body > * + * { margin-top: 14px; }
+  .mt-founder-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 26px; }
+  .mt-founder-fact { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 2px 12px; align-items: start; }
+  .mt-founder-fact .mt-i { grid-row: span 2; width: 26px; height: 26px; color: var(--mt-teal); stroke-width: 1.7; }
+  .mt-founder-fact b { color: var(--mt-ink); font-size: 16px; line-height: 1.3; }
+  .mt-founder-fact span { font-size: 14.5px; line-height: 1.45; }
+  @media (max-width: 920px) {
+    .mt-founder { grid-template-columns: minmax(0, 1fr); }
+    .mt-founder--reverse > .mt-founder-photo { order: 0; }
+    .mt-founder-photo { max-width: 460px; aspect-ratio: 4 / 4; }
+    .mt-founder-photo--empty { aspect-ratio: auto; max-width: none; background: none; overflow: visible; }
+    .mt-founder-photo--empty .mt-founder-fallback { display: none; }
+    .mt-founder-photo--empty .mt-founder-tag { position: static; }
+    .mt-founder-photo--empty { order: 2; }
+  }
+  @media (max-width: 480px) {
+    .mt-founder-facts { grid-template-columns: minmax(0, 1fr); }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign link = section.settings.link | default: routes.root_url
+-%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-founder-sec' %}">
+  <div class="mt-wrap mt-founder{% if section.settings.quote_position == 'right' %} mt-founder--reverse{% endif %}">
+    <figure class="mt-founder-photo{% if section.settings.photo == blank %} mt-founder-photo--empty{% endif %}">
+      {%- if section.settings.photo != blank -%}
+        {{ section.settings.photo | image_url: width: 1000 | image_tag: loading: 'lazy', alt: section.settings.name, sizes: '(min-width: 990px) 40vw, 92vw', widths: '400, 600, 800, 1000' }}
+      {%- else -%}
+        <span class="mt-founder-fallback" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><use href="#mt-logo-mark"/></svg>
+        </span>
+      {%- endif -%}
+      {%- if section.settings.name != blank -%}
+        <figcaption class="mt-founder-tag">
+          <b>{{ section.settings.name | escape }}</b>
+          {%- if section.settings.role != blank -%}<small>{{ section.settings.role | escape }}</small>{%- endif -%}
+        </figcaption>
+      {%- endif -%}
+    </figure>
+
+    <div class="mt-founder-copy">
+      {%- if section.settings.quote_eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.quote_eyebrow | escape }}</span>{%- endif -%}
+      {%- if section.settings.quote != blank -%}
+        <blockquote class="mt-founder-quote">{{ section.settings.quote | escape }}</blockquote>
+      {%- endif -%}
+      <span class="mt-founder-rule" aria-hidden="true"></span>
+      {%- if section.settings.story_eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.story_eyebrow | escape }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="{% if section.settings.heading_size == 'large' %}mt-h2{% else %}mt-h3{% endif %}">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+      {%- if section.settings.body != blank -%}<div class="mt-rte mt-founder-body">{{ section.settings.body }}</div>{%- endif -%}
+      {%- if section.blocks.size > 0 -%}
+        <ul class="mt-founder-facts">
+          {%- for block in section.blocks -%}
+            <li class="mt-founder-fact" {{ block.shopify_attributes }}>
+              {%- render 'mt-icon', icon: block.settings.icon -%}
+              <b>{{ block.settings.title | escape }}</b>
+              {%- if block.settings.text != blank -%}<span>{{ block.settings.text | escape }}</span>{%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      {%- if section.settings.link_label != blank -%}
+        <p>
+          <a class="mt-link" href="{{ link }}">
+            {{- section.settings.link_label | escape -}}
+            {%- render 'mt-icon', icon: 'arrow-right' -%}
+          </a>
+        </p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel why us",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Quote"
+    },
+    {
+      "type": "select",
+      "id": "quote_position",
+      "label": "Photo position on desktop",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "quote_eyebrow",
+      "label": "Eyebrow",
+      "default": "Why Marcel"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "When I met patients who could not open their mouth to eat, speak or smile without pain, I knew we had to do more."
+    },
+    {
+      "type": "image_picker",
+      "id": "photo",
+      "label": "Photo",
+      "info": "A portrait of the founder. Without one, the Marcel mark is shown."
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Name",
+      "default": "Kandarp Bakshi"
+    },
+    {
+      "type": "text",
+      "id": "role",
+      "label": "Role",
+      "default": "Founder · 40+ years in oral health research"
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "story_eyebrow",
+      "label": "Story eyebrow",
+      "info": "Optional, shown above the heading."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "small"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Science you can trust. <em>Care you can feel.</em>"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "Marcel OMR Therapy is a structured, doctor-guided programme by JanSuta Pharmaceuticals, built on years of research into Oral Submucous Fibrosis."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "More text",
+      "info": "Optional paragraphs after the text."
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "Read our story"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "normal"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Fact (highlight)",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "arrow-right",
+              "label": "Arrow"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "video",
+              "label": "Video call"
+            },
+            {
+              "value": "whatsapp",
+              "label": "WhatsApp"
+            },
+            {
+              "value": "clinic",
+              "label": "Clinic"
+            },
+            {
+              "value": "doctor",
+              "label": "Doctor"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "flask",
+              "label": "Research flask"
+            },
+            {
+              "value": "patent",
+              "label": "Patent document"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "users",
+              "label": "People"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "india",
+              "label": "Globe"
+            },
+            {
+              "value": "pin",
+              "label": "Location pin"
+            },
+            {
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "value": "mail",
+              "label": "Email"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "truck",
+              "label": "Delivery"
+            },
+            {
+              "value": "box",
+              "label": "Package"
+            },
+            {
+              "value": "bag",
+              "label": "Shopping bag"
+            },
+            {
+              "value": "search",
+              "label": "Search"
+            },
+            {
+              "value": "info",
+              "label": "Info"
+            },
+            {
+              "value": "alert",
+              "label": "Alert"
+            },
+            {
+              "value": "refresh",
+              "label": "Refresh"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "target",
+              "label": "Target"
+            },
+            {
+              "value": "chart",
+              "label": "Chart"
+            },
+            {
+              "value": "home",
+              "label": "Home"
+            },
+            {
+              "value": "grid",
+              "label": "Grid"
+            },
+            {
+              "value": "test",
+              "label": "Self-check"
+            },
+            {
+              "value": "book",
+              "label": "Guide"
+            },
+            {
+              "value": "drop",
+              "label": "Drop"
+            },
+            {
+              "value": "sun",
+              "label": "Sun"
+            },
+            {
+              "value": "moon",
+              "label": "Moon"
+            },
+            {
+              "value": "bowl",
+              "label": "Food bowl"
+            },
+            {
+              "value": "ban",
+              "label": "Quit habit"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "s-open",
+              "label": "Symptom: mouth opening"
+            },
+            {
+              "value": "s-burn",
+              "label": "Symptom: burning"
+            },
+            {
+              "value": "s-tight",
+              "label": "Symptom: tightness"
+            },
+            {
+              "value": "s-ulcer",
+              "label": "Symptom: ulcers"
+            },
+            {
+              "value": "s-bands",
+              "label": "Symptom: white bands"
+            },
+            {
+              "value": "s-tongue",
+              "label": "Symptom: tongue"
+            },
+            {
+              "value": "s-pain",
+              "label": "Symptom: pain"
+            }
+          ],
+          "default": "patent"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Patent filed"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Innovating for better OSMF care"
+        }
+      ]
+    },
+    {
+      "type": "card",
+      "name": "Fact",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "arrow-right",
+              "label": "Arrow"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "video",
+              "label": "Video call"
+            },
+            {
+              "value": "whatsapp",
+              "label": "WhatsApp"
+            },
+            {
+              "value": "clinic",
+              "label": "Clinic"
+            },
+            {
+              "value": "doctor",
+              "label": "Doctor"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "flask",
+              "label": "Research flask"
+            },
+            {
+              "value": "patent",
+              "label": "Patent document"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "users",
+              "label": "People"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "india",
+              "label": "Globe"
+            },
+            {
+              "value": "pin",
+              "label": "Location pin"
+            },
+            {
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "value": "mail",
+              "label": "Email"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "truck",
+              "label": "Delivery"
+            },
+            {
+              "value": "box",
+              "label": "Package"
+            },
+            {
+              "value": "bag",
+              "label": "Shopping bag"
+            },
+            {
+              "value": "search",
+              "label": "Search"
+            },
+            {
+              "value": "info",
+              "label": "Info"
+            },
+            {
+              "value": "alert",
+              "label": "Alert"
+            },
+            {
+              "value": "refresh",
+              "label": "Refresh"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "target",
+              "label": "Target"
+            },
+            {
+              "value": "chart",
+              "label": "Chart"
+            },
+            {
+              "value": "home",
+              "label": "Home"
+            },
+            {
+              "value": "grid",
+              "label": "Grid"
+            },
+            {
+              "value": "test",
+              "label": "Self-check"
+            },
+            {
+              "value": "book",
+              "label": "Guide"
+            },
+            {
+              "value": "drop",
+              "label": "Drop"
+            },
+            {
+              "value": "sun",
+              "label": "Sun"
+            },
+            {
+              "value": "moon",
+              "label": "Moon"
+            },
+            {
+              "value": "bowl",
+              "label": "Food bowl"
+            },
+            {
+              "value": "ban",
+              "label": "Quit habit"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "s-open",
+              "label": "Symptom: mouth opening"
+            },
+            {
+              "value": "s-burn",
+              "label": "Symptom: burning"
+            },
+            {
+              "value": "s-tight",
+              "label": "Symptom: tightness"
+            },
+            {
+              "value": "s-ulcer",
+              "label": "Symptom: ulcers"
+            },
+            {
+              "value": "s-bands",
+              "label": "Symptom: white bands"
+            },
+            {
+              "value": "s-tongue",
+              "label": "Symptom: tongue"
+            },
+            {
+              "value": "s-pain",
+              "label": "Symptom: pain"
+            }
+          ],
+          "default": "flask"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Research led"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "8+ research papers and publications."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel why us",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "calendar",
+            "title": "26 years",
+            "text": "Of development, from clinical need to commercialisation."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "icon": "patent",
+            "title": "First patent granted",
+            "text": "In 2008, with an Indian patent application filed in 2025."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "icon": "flask",
+            "title": "Clinically evaluated",
+            "text": "Government Dental Colleges, Ahmedabad and Jamnagar (2008)."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "icon": "chart",
+            "title": "Ongoing research",
+            "text": "Investigations into antifibrotic mechanisms and human clinical development."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "icon": "india",
+            "title": "Made in India",
+            "text": "Developed with pride, for patients across India."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

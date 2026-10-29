@@ -1,0 +1,355 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "mt-page-hero",
+      "settings": {
+        "show_crumbs": true,
+        "home_label": "Home",
+        "button_1_to": "test",
+        "button_2_to": "consult",
+        "back_to": "therapy",
+        "background": "tint",
+        "sheet": false,
+        "spacing": "none",
+        "current_label": "Understand OSMF",
+        "eyebrow": "Understand OSMF",
+        "heading": "Understanding OSMF",
+        "text": "Oral Submucous Fibrosis (OSMF) can affect mouth opening, oral comfort and everyday activities such as eating. Understanding the condition, recognising its signs and seeking appropriate clinical guidance are important steps towards informed care.",
+        "button_1_label": "Check Your OSMF Stage",
+        "button_2_label": ""
+      }
+    },
+    "guide": {
+      "type": "mt-guide",
+      "settings": {
+        "show_toc": true,
+        "toc_title": "On this page",
+        "read_label": "[n] min read",
+        "no_articles": "Articles will appear here once they are published.",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      },
+      "blocks": {
+        "chapter_1": {
+          "type": "chapter",
+          "settings": {
+            "heading": "What is OSMF?",
+            "toc_label": "Understanding OSMF",
+            "anchor": "what-is-osmf"
+          }
+        },
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Oral Submucous Fibrosis (OSMF) is a long-term condition in which tissues inside the mouth can become stiff and less flexible. It may cause burning while eating spicy food and gradually limit how widely the mouth opens. Areca nut products such as supari, gutkha and paan masala are important risk factors.</p>"
+          }
+        },
+        "chapter_2": {
+          "type": "chapter",
+          "settings": {
+            "heading": "Signs & symptoms",
+            "toc_label": "Signs & symptoms",
+            "anchor": "signs"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Common signs include burning when eating spicy food, tightness inside the cheeks, reduced flexibility of the mouth tissues and difficulty opening the mouth fully. Pay attention to symptoms that persist, worsen or begin to affect eating or daily activities.</p>"
+          }
+        },
+        "checklist_1": {
+          "type": "checklist",
+          "settings": {
+            "items": "Burning while eating spicy food\nTightness inside the cheeks\nReduced flexibility of the mouth tissues\nDifficulty opening the mouth fully\nDifficulty chewing\nDifficulty moving the tongue",
+            "columns": "2"
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "text": "<h3>Why does my mouth burn when I eat spicy food?</h3><p>Burning can happen when the lining of the mouth is irritated or sensitive. It can have several causes, including OSMF, so burning alone does not confirm the condition. If it keeps returning or occurs with cheek tightness or reduced mouth opening, arrange an assessment.</p>"
+          }
+        },
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Check your symptoms with the MARCEL OSMF Self-Check",
+            "url": ""
+          }
+        },
+        "chapter_3": {
+          "type": "chapter",
+          "settings": {
+            "heading": "Risk factors",
+            "toc_label": "Risk factors",
+            "anchor": "risk-factors"
+          }
+        },
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "icon": "ban",
+            "title": "Areca nut / supari & chewing products",
+            "text": "Supari, gutkha, pan masala and mawa."
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "icon": "ban",
+            "title": "Tobacco products",
+            "text": "Khaini, chewing tobacco, tobacco with gutkha or pan masala, bidi and cigarettes."
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "icon": "clock",
+            "title": "Frequent & long-term chewing",
+            "text": "The more often and longer you chew, the greater the risk."
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "icon": "bowl",
+            "title": "Poor nutrition",
+            "text": "May make oral tissues more vulnerable."
+          }
+        },
+        "card_5": {
+          "type": "card",
+          "settings": {
+            "icon": "users",
+            "title": "Genetic susceptibility",
+            "text": "Some people may be more vulnerable."
+          }
+        },
+        "card_6": {
+          "type": "card",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Poor oral hygiene",
+            "text": "Can contribute to poor overall oral health."
+          }
+        },
+        "chapter_4": {
+          "type": "chapter",
+          "settings": {
+            "heading": "Mouth opening and stages",
+            "toc_label": "Stages",
+            "anchor": "stages"
+          }
+        },
+        "text_4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Mouth opening is the primary yardstick for the MARCEL OSMF Self-Check. It is measured between the edges of the upper and lower front teeth.</p>"
+          }
+        },
+        "table_1": {
+          "type": "table",
+          "settings": {
+            "head": "Stage | Mouth opening | MARCEL OMR Therapy™ pathway",
+            "rows": "Stage 1 #2B9759 | More than 35 mm, with symptoms | Foundation\nStage 2 #C4860B | 26 – 35 mm | Foundation\nStage 3 #D5602A | 15 – 25 mm | Advance\nStage 4 #C23838 | Less than 15 mm | Advance\nStage 5 #C23838 | Less than 5 mm + persistent ulcer or confirmed carcinoma | Immediate specialist consultation",
+            "bold_col": 2
+          }
+        },
+        "fine_1": {
+          "type": "fine",
+          "settings": {
+            "text": "Difficulty moving the tongue can indicate the next stage. Only a qualified healthcare professional can confirm the diagnosis and stage."
+          }
+        },
+        "chapter_5": {
+          "type": "chapter",
+          "settings": {
+            "heading": "Can OSMF turn into oral cancer?",
+            "toc_label": "Oral cancer risk",
+            "anchor": "cancer-risk"
+          }
+        },
+        "text_5": {
+          "type": "text",
+          "settings": {
+            "text": "<p>OSMF is recognised as an oral potentially malignant disorder, meaning it is associated with an increased risk of oral cancer. It does not mean that everyone with OSMF will develop cancer, but regular professional follow-up matters. A persistent ulcer, unexplained lump, bleeding or another unusual oral change should be assessed promptly.</p>"
+          }
+        },
+        "callout_1": {
+          "type": "callout",
+          "settings": {
+            "style": "alert",
+            "icon": "alert",
+            "text": "<p><strong>Seek prompt professional assessment</strong> for a persistent ulcer, unexplained lump, bleeding or another unusual oral change.</p>"
+          }
+        },
+        "chapter_6": {
+          "type": "chapter",
+          "settings": {
+            "heading": "Care options & specialist guidance",
+            "toc_label": "Care options",
+            "anchor": "care-options"
+          }
+        },
+        "text_6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Start with the MARCEL OSMF Self-Check for an initial indication, talk to a MARCEL OSMF Consultant about your next step, and see an OSMF Specialist doctor for an examination, diagnosis and stage.</p>"
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Find an OSMF Specialist Doctor",
+            "url": "/pages/find-osmf-specialist"
+          }
+        },
+        "chapter_7": {
+          "type": "chapter",
+          "settings": {
+            "heading": "Patient guide",
+            "toc_label": "Patient guide",
+            "anchor": "patient-guide"
+          }
+        },
+        "text_7": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Practical reads for every stage, from checking your mouth opening to quitting the habit.</p>"
+          }
+        },
+        "articles_1": {
+          "type": "articles",
+          "settings": {
+            "limit": 6,
+            "show_images": false
+          }
+        }
+      },
+      "block_order": [
+        "chapter_1",
+        "text_1",
+        "chapter_2",
+        "text_2",
+        "checklist_1",
+        "text_3",
+        "link_1",
+        "chapter_3",
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4",
+        "card_5",
+        "card_6",
+        "chapter_4",
+        "text_4",
+        "table_1",
+        "fine_1",
+        "chapter_5",
+        "text_5",
+        "callout_1",
+        "chapter_6",
+        "text_6",
+        "link_2",
+        "chapter_7",
+        "text_7",
+        "articles_1"
+      ]
+    },
+    "faq": {
+      "type": "mt-faq",
+      "settings": {
+        "eyebrow": "Questions",
+        "heading": "About OSMF",
+        "open_first": false,
+        "one_at_a_time": false,
+        "schema_markup": true,
+        "show_help": true,
+        "help_title": "Have questions?",
+        "help_text": "Our In-house OSMF Consultant can help with programme questions and your next step.",
+        "whatsapp_label": "WhatsApp the Patient HelpDesk",
+        "link_label": "See all FAQs",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal",
+        "link": "/pages/faq"
+      },
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "What is OSMF?",
+            "answer": "<p>Oral Submucous Fibrosis (OSMF) is a long-term condition in which tissues inside the mouth can become stiff and less flexible. It may cause burning while eating spicy food and gradually limit how widely the mouth opens. Areca nut products such as supari, gutkha and paan masala are important risk factors.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "What are the early signs of OSMF?",
+            "answer": "<p>Common signs include burning when eating spicy food, tightness inside the cheeks, reduced flexibility of the mouth tissues and difficulty opening the mouth fully. Pay attention to symptoms that persist, worsen or begin to affect eating or daily activities.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Why does my mouth burn when I eat spicy food?",
+            "answer": "<p>Burning can happen when the lining of the mouth is irritated or sensitive. It can have several causes, including OSMF, so burning alone does not confirm the condition. If it keeps returning or occurs with cheek tightness or reduced mouth opening, arrange an assessment.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Can OSMF turn into oral cancer?",
+            "answer": "<p>OSMF is recognised as an oral potentially malignant disorder, meaning it is associated with an increased risk of oral cancer. It does not mean that everyone with OSMF will develop cancer, but regular professional follow-up matters. A persistent ulcer, unexplained lump, bleeding or another unusual oral change should be assessed promptly.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Can I continue using gutkha, supari or paan masala while following the care plan?",
+            "answer": "<p>Stopping gutkha, supari, paan masala and other areca nut products is an important step in protecting your oral health. If quitting has been difficult, ask a healthcare professional for practical support rather than trying to manage it alone.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5"
+      ]
+    },
+    "cta": {
+      "type": "mt-cta-band",
+      "settings": {
+        "eyebrow": "Explore the therapy",
+        "heading": "Understand MARCEL OMR Therapy™",
+        "text": "A structured approach to oral mucosal care, with professional guidance and progress tracking.",
+        "button_1_label": "Explore MARCEL OMR Therapy™",
+        "button_1_to": "therapy",
+        "button_2_label": "Check Your OSMF Stage",
+        "button_2_to": "test",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "guide",
+    "faq",
+    "cta"
+  ]
+}

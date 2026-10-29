@@ -1,0 +1,1113 @@
+{{ 'mt-pages.css' | asset_url | stylesheet_tag }}
+{{ 'mt-product.css' | asset_url | stylesheet_tag }}
+{{ 'mt-faq.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'mt-faq.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'mt-product.js' | asset_url }}" defer="defer"></script>
+
+{%- capture handle_art -%}{% render 'mt-art-for', product: product %}{%- endcapture -%}
+{%- capture defaults -%}{% render 'mt-product-defaults', product: product %}{%- endcapture -%}
+{%- liquid
+  assign d = defaults | split: '|'
+  assign mf = product.metafields.marcel
+  assign role = mf.role.value | default: d[0]
+  assign color = mf.color.value | default: d[1] | default: '#077C87'
+  assign kit_items = mf.kit_items.value
+  assign is_kit = false
+  if kit_items.size > 0
+    assign is_kit = true
+  endif
+  assign variant = product.selected_or_first_available_variant
+  assign form_id = 'MtProductForm-' | append: section.id
+  assign shop_link = section.settings.shop_link | default: routes.all_products_collection_url
+  if is_kit
+    assign eyebrow = mf.role.value
+  elsif mf.role.value != blank
+    if mf.step.value != blank
+      assign eyebrow = 'Step ' | append: mf.step.value | append: ' · ' | append: mf.role.value
+    else
+      assign eyebrow = mf.role.value
+    endif
+  endif
+  if section.settings.headline != blank
+    assign eyebrow = section.settings.headline
+  endif
+  assign how_list = mf.how_to_use.value
+  if how_list.size == 0 and section.settings.how_lines != blank
+    assign how_list = section.settings.how_lines | newline_to_br | split: '<br />'
+  endif
+  assign has_how = false
+  if is_kit or how_list.size > 0
+    assign has_how = true
+  endif
+  assign price_text = variant.price | money_without_trailing_zeros
+  assign add_label = section.settings.add_label | replace: '[price]', price_text
+  assign pack_lines = section.settings.pack_notes | newline_to_br | split: '<br />'
+  assign has_ing = false
+  if is_kit or mf.ingredients.value.size > 0 or mf.free_from.value.size > 0
+    assign has_ing = true
+  endif
+-%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-pdp-sec' %}">
+  <div class="mt-wrap">
+    <nav class="mt-crumbs" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">{{ section.settings.home_label | escape }}</a>
+      {%- render 'mt-icon', icon: 'chevron-right' -%}
+      <a href="{{ shop_link }}">{{ section.settings.shop_label | escape }}</a>
+      {%- render 'mt-icon', icon: 'chevron-right' -%}
+      <span aria-current="page">{{ product.title | escape }}</span>
+    </nav>
+
+    <div class="mt-pdp" style="--pc: {{ color }};">
+      <mt-gallery class="mt-gallery">
+        <div class="mt-gmain">
+          {%- if role != blank -%}
+            <span class="mt-role{% unless is_kit or mf.step.value != blank %} mt-role--plain{% endunless %}">
+              {%- if is_kit -%}<i>{%- render 'mt-icon', icon: 'sparkle' -%}</i>{%- elsif mf.step.value != blank -%}<i>{{ mf.step.value | escape }}</i>{%- endif -%}
+              {{- role | escape -}}
+            </span>
+          {%- endif -%}
+          {%- for media in product.media -%}
+            <div class="mt-gslide{% if forloop.first %} is-on{% endif %}" data-slide="m{{ forloop.index0 }}" data-media-id="{{ media.id }}">
+              {%- assign media_alt = media.alt | default: product.title -%}
+              {%- render 'mt-pack-media', image: media.preview_image, alt: media_alt, sizes: '(min-width: 990px) 560px, 100vw', fit: section.settings.image_fit -%}
+            </div>
+          {%- else -%}
+            <div class="mt-gslide is-on" data-slide="m0">
+              {%- render 'mt-pack-media', art: handle_art, kit: kit_items, alt: product.title -%}
+            </div>
+          {%- endfor -%}
+
+          {%- if has_how -%}
+            <div class="mt-gslide mt-info-slide" data-slide="how">
+              {%- if is_kit -%}
+                <h3>{{ section.settings.routine_title | escape }}</h3>
+                <ol class="mt-info-steps">
+                  {%- for item in kit_items -%}
+                    <li style="--pc: {{ item.metafields.marcel.color.value | default: color }};">
+                      <span class="mt-num mt-num--sm">{{ forloop.index }}</span>
+                      <span><b>{{ item.title | escape }}</b>{% if item.metafields.marcel.how_short.value != blank %}<br><span class="mt-muted">{{ item.metafields.marcel.how_short.value | escape }}</span>{% endif %}</span>
+                    </li>
+                  {%- endfor -%}
+                </ol>
+              {%- else -%}
+                <h3>{{ section.settings.how_title | escape }}</h3>
+                <ol class="mt-info-steps">
+                  {%- for step in how_list -%}
+                    {%- assign step = step | strip -%}
+                    {%- if step != blank -%}<li><span class="mt-num mt-num--sm">{{ forloop.index }}</span><span>{{ step | escape }}</span></li>{%- endif -%}
+                  {%- endfor -%}
+                </ol>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          {%- if has_ing -%}
+            <div class="mt-gslide mt-info-slide" data-slide="ing">
+              {%- if is_kit -%}
+                <h3>{{ section.settings.kit_inside_title | escape }}</h3>
+                <ul class="mt-ing-list">
+                  {%- for item in kit_items -%}
+                    <li><span>{{ item.title | escape }}<small>{{ item.metafields.marcel.type_label.value | escape }}</small></span><span>{{ item.metafields.marcel.size.value | escape }}</span></li>
+                  {%- endfor -%}
+                </ul>
+              {%- elsif mf.ingredients.value.size > 0 -%}
+                <h3>{{ section.settings.ingredients_title | escape }}</h3>
+                <ul class="mt-ing-list">
+                  {%- for row in mf.ingredients.value -%}
+                    {%- assign parts = row | split: '|' -%}
+                    <li><span>{{ parts[0] | strip | escape }}{% if parts[1] != blank %}<small>{{ parts[1] | strip | escape }}</small>{% endif %}</span><span>{{ parts[2] | strip | escape }}</span></li>
+                  {%- endfor -%}
+                </ul>
+                {%- if mf.base_note.value != blank -%}<p class="mt-small mt-muted">{{ mf.base_note.value | escape }}</p>{%- endif -%}
+              {%- else -%}
+                <h3>{{ section.settings.free_title | escape }}</h3>
+                <ul class="mt-ing-list">
+                  {%- for row in mf.free_from.value -%}
+                    <li><span>{{ row | escape }}</span><span>{%- render 'mt-icon', icon: 'check' -%}</span></li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div class="mt-gthumbs" role="group" aria-label="{{ section.settings.gallery_label | escape }}">
+          {%- for media in product.media -%}
+            <button type="button" class="mt-gthumb" data-mt-slide="m{{ forloop.index0 }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="{{ media.alt | default: product.title | escape }}">
+              {%- render 'mt-pack-media', image: media.preview_image, alt: '', sizes: '120px', fit: section.settings.image_fit -%}
+            </button>
+          {%- else -%}
+            <button type="button" class="mt-gthumb" data-mt-slide="m0" aria-current="true" aria-label="{{ product.title | escape }}">
+              {%- render 'mt-pack-media', art: handle_art, kit: kit_items, alt: '' -%}
+            </button>
+          {%- endfor -%}
+          {%- if has_how -%}
+            <button type="button" class="mt-gthumb" data-mt-slide="how" aria-current="false">
+              <span class="mt-thumb-label">{%- render 'mt-icon', icon: 'clock' -%}{% if is_kit %}{{ section.settings.routine_thumb | escape }}{% else %}{{ section.settings.how_thumb | escape }}{% endif %}</span>
+            </button>
+          {%- endif -%}
+          {%- if has_ing -%}
+            <button type="button" class="mt-gthumb" data-mt-slide="ing" aria-current="false">
+              <span class="mt-thumb-label">{%- render 'mt-icon', icon: 'leaf' -%}{% if is_kit %}{{ section.settings.kit_thumb | escape }}{% else %}{{ section.settings.ingredients_thumb | escape }}{% endif %}</span>
+            </button>
+          {%- endif -%}
+        </div>
+      </mt-gallery>
+
+      <div class="mt-pdp-info">
+        <div class="mt-stack-sm">
+          {%- if eyebrow != blank -%}<span class="mt-eyebrow mt-pdp-eyebrow">{{ eyebrow | escape }}</span>{%- endif -%}
+          <h1 class="mt-pdp-title">{{ product.title | escape }}</h1>
+          {%- assign sub = section.settings.supporting | default: mf.tagline.value -%}
+          {%- if sub != blank -%}<p class="mt-pdp-sub">{{ sub | escape }}</p>{%- endif -%}
+        </div>
+        {%- if section.settings.intro != blank -%}<div class="mt-rte mt-pdp-intro">{{ section.settings.intro }}</div>{%- endif -%}
+        {%- if section.settings.details != blank -%}<p class="mt-pdp-details">{{ section.settings.details | escape }}</p>{%- endif -%}
+
+        {%- if mf.specs.value.size > 0 -%}
+          <div class="mt-spec-chips">
+            {%- for spec in mf.specs.value -%}<span class="mt-chip">{{ spec | escape }}</span>{%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if mf.benefits.value.size > 0 -%}
+          <ul class="mt-checks">
+            {%- for line in mf.benefits.value -%}<li>{%- render 'mt-icon', icon: 'check' -%}<span>{{ line | escape }}</span></li>{%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if is_kit -%}
+          <div class="mt-kit-includes">
+            <p class="mt-mini-h">{{ section.settings.kit_heading | escape }}</p>
+            {%- for item in kit_items -%}
+              <a href="{{ item.url }}">
+                <span class="mt-kit-thumb">{%- render 'mt-pack-media', image: item.featured_image, art: item.metafields.marcel.art.value, alt: '', sizes: '56px' -%}</span>
+                <span>
+                  <b>{{ item.title | escape }}</b>
+                  <small>{{ item.metafields.marcel.type_label.value | escape }}{% if item.metafields.marcel.size.value != blank %} · {{ item.metafields.marcel.size.value | escape }}{% endif %}</small>
+                </span>
+              </a>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        <div class="mt-buy-box">
+          <div class="mt-buy-top">
+            {%- render 'mt-price', product: product, variant: variant -%}
+            {%- if mf.best_for.value != blank -%}
+              <span class="mt-best">{%- render 'mt-icon', icon: 'target' -%}{{ section.settings.best_prefix | escape }} {{ mf.best_for.value | escape }}</span>
+            {%- endif -%}
+          </div>
+
+          {%- unless product.has_only_default_variant -%}
+            <mt-variant-select class="mt-field" data-form="{{ form_id }}" data-add-label="{{ section.settings.add_label | escape }}" data-sold-label="{{ section.settings.sold_out_label | escape }}"{% if settings.mt_hide_prices %} data-hide-price{% endif %}>
+              {%- if section.settings.variant_style == 'cards' -%}
+                <span class="mt-label">{{ section.settings.pack_label | default: product.options.first | escape }}</span>
+                <div class="mt-packs" role="radiogroup" aria-label="{{ section.settings.pack_label | default: product.options.first | escape }}">
+                  {%- for v in product.variants -%}
+                    {%- liquid
+                      assign note = ''
+                      for line in pack_lines
+                        assign parts = line | strip | split: '|'
+                        assign key = parts[0] | strip
+                        if key == v.title and parts[1] != blank
+                          assign note = parts[1] | strip
+                        endif
+                      endfor
+                    -%}
+                    <label class="mt-pack-opt">
+                      <input type="radio" name="MtPack-{{ section.id }}" value="{{ v.id }}"{% if v.id == variant.id %} checked{% endif %}{% unless v.available %} disabled{% endunless %}>
+                      <span>
+                        <b>{{ v.title | escape }}</b>
+                        {%- if note != blank -%}<small>{{ note | escape }}</small>{%- endif -%}
+                      </span>
+                      {%- unless settings.mt_hide_prices -%}<em>{{ v.price | money_without_trailing_zeros }}</em>{%- endunless -%}
+                    </label>
+                  {%- endfor -%}
+                </div>
+              {%- else -%}
+                <label for="MtVariant-{{ section.id }}">{{ product.options | join: ' / ' | escape }}</label>
+                <select class="mt-input" id="MtVariant-{{ section.id }}">
+                  {%- for v in product.variants -%}
+                    <option value="{{ v.id }}"{% if v.id == variant.id %} selected{% endif %}{% unless v.available %} data-sold-out{% endunless %}>
+                      {{- v.title | escape }}{% unless v.available %} · {{ section.settings.sold_out_label | escape }}{% endunless -%}
+                    </option>
+                  {%- endfor -%}
+                </select>
+              {%- endif -%}
+              <script type="application/json">
+                [{%- for v in product.variants -%}{ "id": {{ v.id }}, "available": {{ v.available | json }}, "price": {{ v.price | money | json }}, "short": {{ v.price | money_without_trailing_zeros | json }}, "compare": {% if v.compare_at_price > v.price %}{{ v.compare_at_price | money | json }}{% else %}null{% endif %}, "media": {{ v.featured_media.id | json }} }{% unless forloop.last %},{% endunless %}{%- endfor -%}]
+              </script>
+            </mt-variant-select>
+          {%- endunless -%}
+
+          {%- if settings.mt_hide_prices and settings.mt_whatsapp_number != blank -%}
+            {%- assign enquiry = settings.mt_enquire_message | default: 'Hi MARCEL team, I would like to know more about' | append: ' ' | append: product.title -%}
+            {%- capture wa -%}{% render 'mt-wa-url', message: enquiry %}{%- endcapture -%}
+            <a class="mt-btn mt-btn-wa mt-btn-block" href="{{ wa }}" target="_blank" rel="noopener">{%- render 'mt-icon', icon: 'whatsapp' -%}{{ settings.mt_enquire_label | default: 'Enquire on WhatsApp' | escape }}</a>
+          {%- else -%}
+          <product-form class="mt-product-form" data-section-id="{{ section.id }}">
+            {%- form 'product', product, id: form_id, class: 'mt-buy-form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+              <input type="hidden" name="id" value="{{ variant.id }}" disabled>
+              <div class="mt-buy-row">
+                <div class="mt-qty">
+                  <button type="button" data-mt-qty="-1" aria-label="{{ section.settings.minus_label | escape }}">{%- render 'mt-icon', icon: 'minus' -%}</button>
+                  <input type="number" name="quantity" value="1" min="1" max="10" inputmode="numeric" aria-label="{{ section.settings.qty_label | escape }}">
+                  <button type="button" data-mt-qty="1" aria-label="{{ section.settings.plus_label | escape }}">{%- render 'mt-icon', icon: 'plus' -%}</button>
+                </div>
+                <button
+                  type="submit"
+                  name="add"
+                  class="mt-btn mt-btn-primary"
+                  {% unless variant.available %}
+                    disabled
+                  {% endunless %}
+                >
+                  <span class="mt-btn-label">
+                    {%- render 'mt-icon', icon: 'bag' -%}
+                    {%- if variant.available -%}{{ add_label | escape }}{%- else -%}{{ section.settings.sold_out_label | escape }}{%- endif -%}
+                  </span>
+                  {%- render 'loading-spinner' -%}
+                </button>
+              </div>
+              <div class="product-form__error-message-wrapper mt-err" role="alert" hidden>
+                <span class="product-form__error-message"></span>
+              </div>
+              {%- if section.settings.show_buy_now -%}
+                <div class="mt-buy-now">{{ form | payment_button }}</div>
+              {%- endif -%}
+            {%- endform -%}
+          </product-form>
+          {%- endif -%}
+        </div>
+
+        {%- assign perks = section.blocks | where: 'type', 'perk' -%}
+        {%- if perks.size > 0 -%}
+          <ul class="mt-perks">
+            {%- for block in perks -%}
+              <li {{ block.shopify_attributes }}>{%- render 'mt-icon', icon: block.settings.icon -%}{{ block.settings.text | escape }}</li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if section.settings.cta_label != blank or section.settings.cta2_label != blank -%}
+          {%- capture cta_href -%}{% render 'mt-link-to', key: section.settings.cta_to, url: section.settings.cta_link %}{%- endcapture -%}
+          {%- capture cta2_href -%}{% render 'mt-link-to', key: section.settings.cta2_to, url: section.settings.cta2_link %}{%- endcapture -%}
+          <div class="mt-btn-row mt-pdp-ctas">
+            {%- if section.settings.cta_label != blank -%}<a class="mt-btn mt-btn-secondary" href="{{ cta_href }}">{{ section.settings.cta_label | escape }}</a>{%- endif -%}
+            {%- if section.settings.cta2_label != blank -%}<a class="mt-link" href="{{ cta2_href }}">{{ section.settings.cta2_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>{%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <mt-accordion class="mt-acc" data-single="false">
+          {%- liquid
+            assign acc_open = true
+            assign free_note = section.settings.free_note | escape
+          -%}
+          {%- if is_kit -%}
+            {%- capture acc_body -%}
+              <ul>
+                {%- for item in kit_items -%}
+                  <li>{{ item.title | escape }}{% if item.metafields.marcel.size.value != blank %}, {{ item.metafields.marcel.size.value | escape }}{% endif %}</li>
+                {%- endfor -%}
+              </ul>
+            {%- endcapture -%}
+            {%- render 'mt-acc-item', prefix: section.id, id: 'kit', title: section.settings.acc_kit, body: acc_body, open: acc_open -%}
+            {%- assign acc_open = false -%}
+            {%- if mf.how_to_use.value.size > 0 -%}
+              {%- capture acc_body -%}{%- for step in mf.how_to_use.value -%}<p>{{ step | escape }}</p>{%- endfor -%}{%- endcapture -%}
+              {%- render 'mt-acc-item', prefix: section.id, id: 'routine', title: section.settings.acc_routine, body: acc_body -%}
+            {%- endif -%}
+          {%- else -%}
+            {%- if how_list.size > 0 -%}
+              {%- capture acc_body -%}
+                <ul>{%- for step in how_list -%}{%- assign step = step | strip -%}{%- if step != blank -%}<li>{{ step | escape }}</li>{%- endif -%}{%- endfor -%}</ul>
+                {%- if section.settings.safety != blank -%}<p><strong>{{ section.settings.safety | escape }}</strong></p>{%- endif -%}
+              {%- endcapture -%}
+              {%- render 'mt-acc-item', prefix: section.id, id: 'how', title: section.settings.acc_how, body: acc_body, open: acc_open -%}
+              {%- assign acc_open = false -%}
+            {%- endif -%}
+            {%- if mf.ingredients.value.size > 0 -%}
+              {%- capture acc_body -%}
+                <table class="mt-ing-table"><tbody>
+                  {%- for row in mf.ingredients.value -%}
+                    {%- assign parts = row | split: '|' -%}
+                    <tr><td>{{ parts[0] | strip | escape }}{% if parts[1] != blank %}<small>{{ parts[1] | strip | escape }}</small>{% endif %}</td><td>{{ parts[2] | strip | escape }}</td></tr>
+                  {%- endfor -%}
+                </tbody></table>
+                {%- if mf.base_note.value != blank -%}<p class="mt-small mt-muted">{{ mf.base_note.value | escape }}</p>{%- endif -%}
+              {%- endcapture -%}
+              {%- render 'mt-acc-item', prefix: section.id, id: 'ing', title: section.settings.acc_ingredients, body: acc_body, open: acc_open -%}
+              {%- assign acc_open = false -%}
+            {%- elsif mf.free_from.value.size > 0 -%}
+              {%- capture acc_body -%}
+                <ul>{%- for row in mf.free_from.value -%}<li>{{ row | escape }}</li>{%- endfor -%}</ul>
+                {%- if free_note != blank -%}<p class="mt-small mt-muted">{{ free_note }}</p>{%- endif -%}
+              {%- endcapture -%}
+              {%- render 'mt-acc-item', prefix: section.id, id: 'ing', title: section.settings.acc_whats_in, body: acc_body, open: acc_open -%}
+              {%- assign acc_open = false -%}
+            {%- endif -%}
+            {%- if mf.caution.value != blank or mf.storage.value != blank -%}
+              {%- capture acc_body -%}
+                {%- if mf.caution.value != blank -%}<p>{{ mf.caution.value | escape | newline_to_br }}</p>{%- endif -%}
+                {%- if mf.storage.value != blank -%}<p>{{ mf.storage.value | escape | newline_to_br }}</p>{%- endif -%}
+              {%- endcapture -%}
+              {%- render 'mt-acc-item', prefix: section.id, id: 'care', title: section.settings.acc_caution, body: acc_body, open: acc_open -%}
+              {%- assign acc_open = false -%}
+            {%- endif -%}
+          {%- endif -%}
+
+          {%- if mf.stage_text.value != blank -%}
+            {%- capture acc_body -%}<p>{{ mf.stage_text.value | escape | newline_to_br }}</p>{%- endcapture -%}
+            {%- render 'mt-acc-item', prefix: section.id, id: 'stage', title: section.settings.acc_stage, body: acc_body, open: acc_open -%}
+            {%- assign acc_open = false -%}
+          {%- endif -%}
+
+          {%- if section.settings.show_description and product.description != blank -%}
+            {%- render 'mt-acc-item', prefix: section.id, id: 'about', title: section.settings.acc_about, body: product.description, open: acc_open -%}
+            {%- assign acc_open = false -%}
+          {%- endif -%}
+
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'accordion' -%}
+              {%- render 'mt-acc-item', prefix: section.id, id: block.id, title: block.settings.title, body: block.settings.text, attrs: block.shopify_attributes -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </mt-accordion>
+      </div>
+    </div>
+  </div>
+  <script type="application/ld+json">
+    {{ product | structured_data }}
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel product",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Pack details come from the product’s ‘marcel’ metafields: role, step, colour, tagline, specs, benefits, how to use, ingredients, caution, storage, stage text and kit items."
+    },
+    {
+      "type": "header",
+      "content": "Product copy"
+    },
+    {
+      "type": "paragraph",
+      "content": "Optional. Use these on a product template to show approved copy; empty fields fall back to the ‘marcel’ metafields."
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline (above the title)"
+    },
+    {
+      "type": "text",
+      "id": "supporting",
+      "label": "Supporting line (under the title)"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Introduction"
+    },
+    {
+      "type": "text",
+      "id": "details",
+      "label": "Pack details",
+      "info": "e.g. 50 mL · MRP inclusive of all taxes"
+    },
+    {
+      "type": "textarea",
+      "id": "how_lines",
+      "label": "How to use",
+      "info": "One step per line. Used when the product has no ‘how_to_use’ metafield."
+    },
+    {
+      "type": "text",
+      "id": "safety",
+      "label": "Safety note",
+      "info": "Shown under How to use."
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button",
+      "info": "e.g. Talk to a MARCEL OSMF Consultant"
+    },
+    {
+      "type": "select",
+      "id": "cta_to",
+      "label": "Button opens",
+      "options": [
+        {
+          "value": "custom",
+          "label": "Custom link below"
+        },
+        {
+          "value": "test",
+          "label": "MARCEL OSMF Self-Check"
+        },
+        {
+          "value": "therapy",
+          "label": "MARCEL OMR Therapy page"
+        },
+        {
+          "value": "foundation",
+          "label": "Foundation Kit page"
+        },
+        {
+          "value": "advance",
+          "label": "Advance Kit page"
+        },
+        {
+          "value": "journey",
+          "label": "12-Week Care Journey"
+        },
+        {
+          "value": "consult",
+          "label": "MARCEL OSMF Consultant booking"
+        },
+        {
+          "value": "specialists",
+          "label": "Find an OSMF Specialist"
+        },
+        {
+          "value": "help",
+          "label": "Get Help page"
+        },
+        {
+          "value": "evidence",
+          "label": "Clinical evidence page"
+        },
+        {
+          "value": "products",
+          "label": "All products"
+        },
+        {
+          "value": "whatsapp",
+          "label": "WhatsApp chat"
+        }
+      ],
+      "default": "consult"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button custom link"
+    },
+    {
+      "type": "text",
+      "id": "cta2_label",
+      "label": "Text link",
+      "info": "e.g. Explore Foundation MARCEL OMR Therapy™"
+    },
+    {
+      "type": "select",
+      "id": "cta2_to",
+      "label": "Text link opens",
+      "options": [
+        {
+          "value": "custom",
+          "label": "Custom link below"
+        },
+        {
+          "value": "test",
+          "label": "MARCEL OSMF Self-Check"
+        },
+        {
+          "value": "therapy",
+          "label": "MARCEL OMR Therapy page"
+        },
+        {
+          "value": "foundation",
+          "label": "Foundation Kit page"
+        },
+        {
+          "value": "advance",
+          "label": "Advance Kit page"
+        },
+        {
+          "value": "journey",
+          "label": "12-Week Care Journey"
+        },
+        {
+          "value": "consult",
+          "label": "MARCEL OSMF Consultant booking"
+        },
+        {
+          "value": "specialists",
+          "label": "Find an OSMF Specialist"
+        },
+        {
+          "value": "help",
+          "label": "Get Help page"
+        },
+        {
+          "value": "evidence",
+          "label": "Clinical evidence page"
+        },
+        {
+          "value": "products",
+          "label": "All products"
+        },
+        {
+          "value": "whatsapp",
+          "label": "WhatsApp chat"
+        }
+      ],
+      "default": "foundation"
+    },
+    {
+      "type": "url",
+      "id": "cta2_link",
+      "label": "Text link custom URL"
+    },
+    {
+      "type": "url",
+      "id": "shop_link",
+      "label": "Shop page",
+      "info": "Used in the breadcrumbs. Empty uses All products."
+    },
+    {
+      "type": "text",
+      "id": "home_label",
+      "label": "Breadcrumb: home",
+      "default": "Home"
+    },
+    {
+      "type": "text",
+      "id": "shop_label",
+      "label": "Breadcrumb: shop",
+      "default": "Products"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Fill the square"
+        },
+        {
+          "value": "contain",
+          "label": "Show the whole image"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "text",
+      "id": "gallery_label",
+      "label": "Gallery label (for screen readers)",
+      "default": "Product images and details"
+    },
+    {
+      "type": "header",
+      "content": "Gallery slides"
+    },
+    {
+      "type": "text",
+      "id": "how_title",
+      "label": "How to use title",
+      "default": "How to use"
+    },
+    {
+      "type": "text",
+      "id": "how_thumb",
+      "label": "How to use thumbnail",
+      "default": "How to use"
+    },
+    {
+      "type": "text",
+      "id": "routine_title",
+      "label": "Kit routine title",
+      "default": "Your routine"
+    },
+    {
+      "type": "text",
+      "id": "routine_thumb",
+      "label": "Kit routine thumbnail",
+      "default": "Routine"
+    },
+    {
+      "type": "text",
+      "id": "ingredients_title",
+      "label": "Ingredients title",
+      "default": "Key ingredients"
+    },
+    {
+      "type": "text",
+      "id": "ingredients_thumb",
+      "label": "Ingredients thumbnail",
+      "default": "Ingredients"
+    },
+    {
+      "type": "text",
+      "id": "free_title",
+      "label": "‘Made with care’ title",
+      "default": "Made with care"
+    },
+    {
+      "type": "text",
+      "id": "kit_inside_title",
+      "label": "Kit contents title",
+      "default": "What’s inside"
+    },
+    {
+      "type": "text",
+      "id": "kit_thumb",
+      "label": "Kit contents thumbnail",
+      "default": "In the kit"
+    },
+    {
+      "type": "header",
+      "content": "Buy box"
+    },
+    {
+      "type": "text",
+      "id": "kit_heading",
+      "label": "Kit list heading",
+      "default": "In this kit"
+    },
+    {
+      "type": "text",
+      "id": "best_prefix",
+      "label": "Best for prefix",
+      "default": "Best for"
+    },
+    {
+      "type": "text",
+      "id": "add_label",
+      "label": "Add to cart label",
+      "default": "Add to cart",
+      "info": "[price] is replaced by the price, e.g. Buy MARCEL Ora-Care™ – [price]."
+    },
+    {
+      "type": "text",
+      "id": "sold_out_label",
+      "label": "Sold out label",
+      "default": "Sold out"
+    },
+    {
+      "type": "select",
+      "id": "variant_style",
+      "label": "Pack sizes shown as",
+      "options": [
+        {
+          "value": "cards",
+          "label": "Cards"
+        },
+        {
+          "value": "dropdown",
+          "label": "Dropdown"
+        }
+      ],
+      "default": "cards"
+    },
+    {
+      "type": "text",
+      "id": "pack_label",
+      "label": "Pack size label",
+      "default": "Pack size"
+    },
+    {
+      "type": "textarea",
+      "id": "pack_notes",
+      "label": "Pack notes",
+      "info": "One per line: variant name | note, e.g. 30 g | Compact pack – handy for travel."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_buy_now",
+      "label": "Show Buy it now button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "qty_label",
+      "label": "Quantity label (for screen readers)",
+      "default": "Quantity"
+    },
+    {
+      "type": "text",
+      "id": "minus_label",
+      "label": "Decrease label (for screen readers)",
+      "default": "Decrease quantity"
+    },
+    {
+      "type": "text",
+      "id": "plus_label",
+      "label": "Increase label (for screen readers)",
+      "default": "Increase quantity"
+    },
+    {
+      "type": "header",
+      "content": "Details"
+    },
+    {
+      "type": "text",
+      "id": "acc_how",
+      "label": "How to use",
+      "default": "How to use"
+    },
+    {
+      "type": "text",
+      "id": "acc_kit",
+      "label": "Kit contents",
+      "default": "What’s in the kit"
+    },
+    {
+      "type": "text",
+      "id": "acc_routine",
+      "label": "Kit routine",
+      "info": "Uses the kit’s ‘How to use’ metafield.",
+      "default": "Your daily routine"
+    },
+    {
+      "type": "text",
+      "id": "acc_ingredients",
+      "label": "Ingredients",
+      "default": "Ingredients"
+    },
+    {
+      "type": "text",
+      "id": "acc_whats_in",
+      "label": "What’s in it",
+      "default": "What’s in it"
+    },
+    {
+      "type": "text",
+      "id": "free_note",
+      "label": "What’s in it note",
+      "default": "Full ingredient list as printed on the pack."
+    },
+    {
+      "type": "text",
+      "id": "acc_caution",
+      "label": "Caution and storage",
+      "default": "Caution and storage"
+    },
+    {
+      "type": "text",
+      "id": "acc_stage",
+      "label": "Which stage",
+      "default": "Which stage is it for?"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show the product description",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "acc_about",
+      "label": "Description title",
+      "default": "About this product"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "tight"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "perk",
+      "name": "Perk",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "arrow-right",
+              "label": "Arrow"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "video",
+              "label": "Video call"
+            },
+            {
+              "value": "whatsapp",
+              "label": "WhatsApp"
+            },
+            {
+              "value": "clinic",
+              "label": "Clinic"
+            },
+            {
+              "value": "doctor",
+              "label": "Doctor"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "flask",
+              "label": "Research flask"
+            },
+            {
+              "value": "patent",
+              "label": "Patent document"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "users",
+              "label": "People"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "india",
+              "label": "Globe"
+            },
+            {
+              "value": "pin",
+              "label": "Location pin"
+            },
+            {
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "value": "mail",
+              "label": "Email"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "truck",
+              "label": "Delivery"
+            },
+            {
+              "value": "box",
+              "label": "Package"
+            },
+            {
+              "value": "bag",
+              "label": "Shopping bag"
+            },
+            {
+              "value": "search",
+              "label": "Search"
+            },
+            {
+              "value": "info",
+              "label": "Info"
+            },
+            {
+              "value": "alert",
+              "label": "Alert"
+            },
+            {
+              "value": "refresh",
+              "label": "Refresh"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "target",
+              "label": "Target"
+            },
+            {
+              "value": "chart",
+              "label": "Chart"
+            },
+            {
+              "value": "home",
+              "label": "Home"
+            },
+            {
+              "value": "grid",
+              "label": "Grid"
+            },
+            {
+              "value": "test",
+              "label": "Self-check"
+            },
+            {
+              "value": "book",
+              "label": "Guide"
+            },
+            {
+              "value": "drop",
+              "label": "Drop"
+            },
+            {
+              "value": "sun",
+              "label": "Sun"
+            },
+            {
+              "value": "moon",
+              "label": "Moon"
+            },
+            {
+              "value": "bowl",
+              "label": "Food bowl"
+            },
+            {
+              "value": "ban",
+              "label": "Quit habit"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "s-open",
+              "label": "Symptom: mouth opening"
+            },
+            {
+              "value": "s-burn",
+              "label": "Symptom: burning"
+            },
+            {
+              "value": "s-tight",
+              "label": "Symptom: tightness"
+            },
+            {
+              "value": "s-ulcer",
+              "label": "Symptom: ulcers"
+            },
+            {
+              "value": "s-bands",
+              "label": "Symptom: white bands"
+            },
+            {
+              "value": "s-tongue",
+              "label": "Symptom: tongue"
+            },
+            {
+              "value": "s-pain",
+              "label": "Symptom: pain"
+            }
+          ],
+          "default": "box"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Discreet packaging"
+        }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "Extra detail",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Delivery and returns"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Ships across India in discreet packaging. Delivery times are shown at checkout.</p>"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

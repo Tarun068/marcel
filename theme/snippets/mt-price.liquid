@@ -1,0 +1,37 @@
+{%- comment -%}
+  Price block used on Marcel product cards and the product page.
+  Shows the "hidden price" text from Theme settings > Marcel products when prices are hidden or there is no product.
+
+  Accepts:
+  - product: {Object} product (optional)
+  - variant: {Object} variant to price (optional, defaults to the product price)
+  - class: {String} extra classes (optional)
+{%- endcomment -%}
+<span class="mt-price{% if class != blank %} {{ class }}{% endif %}" data-mt-price>
+  {%- if settings.mt_hide_prices or product == blank -%}
+    {%- if settings.mt_price_label != blank -%}<small>{{ settings.mt_price_label | escape }}</small>{%- endif -%}
+    <b>{{ settings.mt_price_hidden_text | default: 'Coming soon' | escape }}</b>
+  {%- else -%}
+    <b>
+      {%- if variant != blank -%}
+        {{- variant.price | money -}}
+      {%- elsif product.price_varies -%}
+        {%- assign from_price = product.price_min | money -%}
+        {{- 'products.product.price.from_price_html' | t: price: from_price -}}
+      {%- else -%}
+        {{- product.price | money -}}
+      {%- endif -%}
+    </b>
+    {%- liquid
+      assign compare = product.compare_at_price
+      assign price = product.price
+      if variant != blank
+        assign compare = variant.compare_at_price
+        assign price = variant.price
+      endif
+    -%}
+    {%- if compare > price -%}
+      <s>{{ compare | money }}</s>
+    {%- endif -%}
+  {%- endif -%}
+</span>

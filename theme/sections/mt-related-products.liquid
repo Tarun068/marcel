@@ -1,0 +1,204 @@
+{{ 'mt-products.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'mt-related.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign limit = section.settings.limit
+  assign picked = product.metafields.marcel.related.value
+  assign use_picked = false
+  if section.settings.source == 'metafield' and picked.size > 0
+    assign use_picked = true
+  endif
+  assign card_sizes = '(min-width: 1200px) 380px, (min-width: 961px) 31vw, (min-width: 761px) 46vw, 92vw'
+-%}
+
+<mt-related
+  class="mt-related"
+  {% unless use_picked %}
+    data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ limit }}&intent={{ section.settings.intent }}"
+  {% endunless %}
+>
+  {%- if use_picked or recommendations.products_count > 0 -%}
+    <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-products' %}">
+      <div class="mt-wrap">
+        {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading -%}
+        <div class="mt-pgrid mt-swipe">
+          {%- if use_picked -%}
+            {%- for item in picked limit: limit -%}
+              {%- render 'mt-product-card', product: item, section_id: section.id, add_label: section.settings.add_label,
+            details_label: section.settings.details_label, sold_out_label: section.settings.sold_out_label, image_fit: section.settings.image_fit, sizes: card_sizes -%}
+            {%- endfor -%}
+          {%- else -%}
+            {%- for item in recommendations.products -%}
+              {%- if item.tags contains 'mt-hidden' -%}{%- continue -%}{%- endif -%}
+              {%- render 'mt-product-card', product: item, section_id: section.id, add_label: section.settings.add_label,
+            details_label: section.settings.details_label, sold_out_label: section.settings.sold_out_label, image_fit: section.settings.image_fit, sizes: card_sizes -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+</mt-related>
+
+{% schema %}
+{
+  "name": "Marcel related products",
+  "settings": [
+    {
+      "type": "select",
+      "id": "source",
+      "label": "Products",
+      "options": [
+        {
+          "value": "metafield",
+          "label": "Picked in the product’s ‘related’ metafield"
+        },
+        {
+          "value": "recommendations",
+          "label": "Shopify recommendations"
+        }
+      ],
+      "default": "metafield",
+      "info": "When a product has nothing picked, Shopify recommendations are used."
+    },
+    {
+      "type": "select",
+      "id": "intent",
+      "label": "Recommendation type",
+      "options": [
+        {
+          "value": "related",
+          "label": "Related"
+        },
+        {
+          "value": "complementary",
+          "label": "Complementary (set in Search & Discovery)"
+        }
+      ],
+      "default": "related"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Number of products",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Works best together"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Complete your routine"
+    },
+    {
+      "type": "text",
+      "id": "details_label",
+      "label": "Product details link",
+      "info": "Leave empty to hide.",
+      "default": "View product details"
+    },
+    {
+      "type": "text",
+      "id": "add_label",
+      "label": "Add to cart label",
+      "default": "Add to cart"
+    },
+    {
+      "type": "text",
+      "id": "sold_out_label",
+      "label": "Sold out label",
+      "default": "Sold out"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Fill the square"
+        },
+        {
+          "value": "contain",
+          "label": "Show the whole image"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "mist"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "normal"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel related products"
+    }
+  ],
+  "enabled_on": {
+    "templates": [
+      "product"
+    ]
+  }
+}
+{% endschema %}

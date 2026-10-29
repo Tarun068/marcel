@@ -1,0 +1,263 @@
+{{ 'mt-faq.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mt-faq.js' | asset_url }}" defer="defer"></script>
+
+{%- capture wa_url -%}{% render 'mt-wa-url' %}{%- endcapture -%}
+{%- liquid
+  assign link = section.settings.link | default: routes.root_url
+-%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-faq' %}">
+  <div class="mt-wrap">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="mt-sec-head mt-faq-head">
+        {%- if section.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2 class="mt-h2">{{ section.settings.heading }}</h2>{%- endif -%}
+      </div>
+    {%- endif -%}
+    <div class="mt-faq-layout{% unless section.settings.show_help %} mt-faq-layout--solo{% endunless %}">
+    {%- if section.settings.show_help -%}
+    <div class="mt-faq-side">
+        <div class="mt-help-card">
+          {%- if section.settings.help_title != blank -%}<b>{{ section.settings.help_title | escape }}</b>{%- endif -%}
+          {%- if section.settings.help_text != blank -%}<p class="mt-small">{{ section.settings.help_text | escape }}</p>{%- endif -%}
+          {%- if section.settings.whatsapp_label != blank and settings.mt_whatsapp_number != blank -%}
+            <div class="mt-btn-row">
+              <a class="mt-btn mt-btn-wa mt-btn-sm" href="{{ wa_url }}" target="_blank" rel="noopener">
+                {%- render 'mt-icon', icon: 'whatsapp' -%}
+                {{- section.settings.whatsapp_label | escape -}}
+              </a>
+            </div>
+          {%- endif -%}
+          {%- if section.settings.link_label != blank -%}
+            <a class="mt-link" href="{{ link }}">
+              {{- section.settings.link_label | escape -}}
+              {%- render 'mt-icon', icon: 'arrow-right' -%}
+            </a>
+          {%- endif -%}
+        </div>
+    </div>
+    {%- endif -%}
+
+    <mt-accordion class="mt-acc" data-single="{{ section.settings.one_at_a_time }}">
+      {%- for block in section.blocks -%}
+        {%- assign open = false -%}
+        {%- if forloop.first and section.settings.open_first -%}{%- assign open = true -%}{%- endif -%}
+        {%- render 'mt-acc-item',
+          prefix: section.id,
+          id: block.id,
+          title: block.settings.question,
+          body: block.settings.answer,
+          open: open,
+          attrs: block.shopify_attributes
+        -%}
+      {%- endfor -%}
+    </mt-accordion>
+    </div>
+  </div>
+</section>
+
+{%- if section.settings.schema_markup and section.blocks.size > 0 -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- for block in section.blocks -%}
+          {
+            "@type": "Question",
+            "name": {{ block.settings.question | json }},
+            "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.answer | strip_html | json }} }
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Marcel FAQ",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 30,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Questions"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What people ask us most"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Open the first question",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "one_at_a_time",
+      "label": "Open one question at a time",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "schema_markup",
+      "label": "Add FAQ rich results for Google",
+      "info": "Use on one FAQ section per page.",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Help card"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_help",
+      "label": "Show help card",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "help_title",
+      "label": "Title",
+      "default": "Have questions?"
+    },
+    {
+      "type": "text",
+      "id": "help_text",
+      "label": "Text",
+      "default": "Our In-house OSMF Consultant can help with programme questions and your next step."
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_label",
+      "label": "WhatsApp button label",
+      "default": "WhatsApp the Patient HelpDesk"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "See all FAQs"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "normal"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What is OSMF?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Oral Submucous Fibrosis (OSMF) is a long-term condition in which the lining of the mouth becomes stiff and loses its stretch.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel FAQ",
+      "blocks": [
+        {
+          "type": "question",
+          "settings": {
+            "question": "What are the early signs of OSMF?",
+            "answer": "<p>Burning while eating spicy food, tightness inside the cheeks and gradually reduced mouth opening can be signs of OSMF. If these symptoms persist or are getting worse, arrange a professional assessment.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "What is MARCEL OMR Therapy™?",
+            "answer": "<p>MARCEL OMR Therapy™ is a structured approach to oral mucosal care, designed around a planned care journey rather than using products at random. The appropriate care plan depends on the person’s needs and the approved instructions for each product.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "What is the difference between an OSMF Consultant and an OSMF Specialist doctor?",
+            "answer": "<p>An OSMF Consultant offers an in-house on-call consultation to discuss your concerns and guide the next step. An OSMF Specialist doctor provides an in-clinic, in-person consultation and can examine your mouth and assess your condition directly.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

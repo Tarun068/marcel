@@ -1,0 +1,8 @@
+.mt-announce { background: var(--mt-navy); color: var(--mt-on-dark); font-size: 13.5px; font-weight: 700; }
+.mt-announce-row { display: flex; justify-content: center; align-items: center; gap: 8px 32px; min-height: 40px; flex-wrap: wrap; text-align: center; padding-block: 6px; }
+.mt-announce-item { display: inline-flex; gap: 8px; align-items: center; }
+a.mt-announce-item:hover { text-decoration: underline; text-underline-offset: 3px; }
+.mt-announce-item .mt-i { width: 16px; height: 16px; color: var(--mt-mint); }
+@media (max-width: 760px) {
+  .mt-announce .mt-hide-sm { display: none; }
+}

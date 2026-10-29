@@ -1,0 +1,383 @@
+{{ 'mt-header.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mt-header.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign logo = section.settings.logo | default: settings.logo
+  assign cta_link = section.settings.cta_link | default: settings.mt_link_test | default: routes.root_url
+  assign drawer_cta_link = section.settings.drawer_cta_link | default: settings.mt_link_help | default: routes.root_url
+  assign mobile_menu = section.settings.mobile_menu | default: section.settings.menu
+  assign logo_sizes = nil
+  if logo != blank
+    assign logo_w = section.settings.logo_height | times: logo.aspect_ratio | ceil
+    assign logo_sizes = logo_w | append: 'px'
+  endif
+-%}
+{%- capture wa_url -%}{% render 'mt-wa-url' %}{%- endcapture -%}
+
+<mt-header
+  class="mt mt-header-root"
+  style="--mt-logo-h: {{ section.settings.logo_height }}px; --mt-logo-h-mobile: {{ section.settings.logo_height_mobile }}px;"
+  data-empty-text="{{ section.settings.search_empty_text | escape }}"
+>
+  <header class="mt-header" data-mt-header>
+    <div class="mt-wrap mt-header-bar">
+      <a class="mt-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
+        {%- render 'mt-logo', image: logo, sizes: logo_sizes -%}
+      </a>
+
+      {%- if section.settings.menu.links.size > 0 -%}
+        <nav class="mt-nav" aria-label="Main">
+          {%- for link in section.settings.menu.links -%}
+            <a
+              href="{{ link.url }}"
+              {% if link.active or link.child_active %}
+                class="is-active"
+              {% endif %}
+              {% if link.current %}
+                aria-current="page"
+              {% endif %}
+            >
+              {{- link.title | escape -}}
+            </a>
+          {%- endfor -%}
+        </nav>
+      {%- endif -%}
+
+      <div class="mt-head-actions">
+        {%- if section.settings.show_whatsapp and settings.mt_whatsapp_number != blank -%}
+          <a class="mt-icon-btn mt-head-wa" href="{{ wa_url }}" target="_blank" rel="noopener" aria-label="{{ section.settings.whatsapp_label | escape }}">
+            {%- render 'mt-icon', icon: 'whatsapp' -%}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.show_search -%}
+          <button
+            type="button"
+            class="mt-icon-btn"
+            data-mt-open="search"
+            aria-label="Search"
+            aria-expanded="false"
+            aria-controls="MtSearch-{{ section.id }}"
+          >
+            {%- render 'mt-icon', icon: 'search' -%}
+          </button>
+        {%- endif -%}
+        <a href="{{ routes.cart_url }}" class="mt-icon-btn" data-mt-cart aria-label="Cart ({{ cart.item_count }})">
+          {%- render 'mt-icon', icon: 'bag' -%}
+          <span class="mt-count" data-mt-cart-count data-n="{{ cart.item_count }}" aria-hidden="true">
+            {{- cart.item_count -}}
+          </span>
+        </a>
+        {%- if section.settings.cta_label != blank -%}
+          <a class="mt-btn mt-btn-primary mt-btn-sm mt-head-cta" href="{{ cta_link }}">
+            {{- section.settings.cta_label | escape -}}
+          </a>
+        {%- endif -%}
+        <button
+          type="button"
+          class="mt-icon-btn mt-menu-btn"
+          data-mt-open="menu"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="MtMenu-{{ section.id }}"
+        >
+          {%- render 'mt-icon', icon: 'menu' -%}
+        </button>
+      </div>
+    </div>
+  </header>
+
+  {%- comment -%} Dawn's cart drawer re-renders this element; the visible count above is updated by mt-header.js. {%- endcomment -%}
+  <span id="cart-icon-bubble" hidden></span>
+
+  <div class="mt-backdrop" data-mt-close></div>
+
+  <aside class="mt-drawer" id="MtMenu-{{ section.id }}" data-mt-panel="menu" aria-label="Menu" inert>
+    <div class="mt-drawer-head">
+      <a class="mt-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
+        {%- render 'mt-logo', image: logo, sizes: logo_sizes -%}
+      </a>
+      <button type="button" class="mt-icon-btn" data-mt-close aria-label="Close menu">
+        {%- render 'mt-icon', icon: 'x' -%}
+      </button>
+    </div>
+    <div class="mt-drawer-body">
+      {%- if section.settings.drawer_cta_label != blank -%}
+        <a class="mt-btn mt-btn-primary mt-btn-block mt-drawer-cta" href="{{ drawer_cta_link }}">
+          {{- section.settings.drawer_cta_label | escape -}}
+          {%- render 'mt-icon', icon: 'arrow-right' -%}
+        </a>
+      {%- endif -%}
+
+      {%- if mobile_menu.links.size > 0 -%}
+        <nav class="mt-mnav-links" aria-label="Mobile">
+          {%- for link in mobile_menu.links -%}
+            <a
+              href="{{ link.url }}"
+              {% if link.active %}
+                class="is-active"
+              {% endif %}
+              {% if link.current %}
+                aria-current="page"
+              {% endif %}
+            >
+              {{- link.title | escape -}}
+              {%- render 'mt-icon', icon: 'chevron-right' -%}
+            </a>
+            {%- for child in link.links -%}
+              <a
+                href="{{ child.url }}"
+                class="mt-mnav-child{% if child.active %} is-active{% endif %}"
+                {% if child.current %}
+                  aria-current="page"
+                {% endif %}
+              >
+                {{- child.title | escape -}}
+                {%- render 'mt-icon', icon: 'chevron-right' -%}
+              </a>
+            {%- endfor -%}
+          {%- endfor -%}
+        </nav>
+      {%- endif -%}
+
+      {%- if section.settings.show_contact -%}
+        <div class="mt-mnav-contact">
+          {%- if settings.mt_whatsapp_number != blank and section.settings.whatsapp_label != blank -%}
+            <a href="{{ wa_url }}" target="_blank" rel="noopener">
+              {%- render 'mt-icon', icon: 'whatsapp' -%}
+              {{- section.settings.whatsapp_label | escape -}}
+            </a>
+          {%- endif -%}
+          {%- if settings.mt_phone != blank -%}
+            <a href="tel:{{ settings.mt_phone | remove: ' ' }}">
+              {%- render 'mt-icon', icon: 'phone' -%}
+              {{- settings.mt_phone | escape -}}
+            </a>
+          {%- endif -%}
+          {%- if settings.mt_email != blank -%}
+            <a href="mailto:{{ settings.mt_email }}">
+              {%- render 'mt-icon', icon: 'mail' -%}
+              {{- settings.mt_email | escape -}}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </aside>
+
+  {%- if section.settings.show_search -%}
+    <div
+      class="mt-search"
+      id="MtSearch-{{ section.id }}"
+      data-mt-panel="search"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Search"
+      inert
+    >
+      <div class="mt-wrap-narrow">
+        <form class="mt-search-row" action="{{ routes.search_url }}" method="get" role="search">
+          <label class="mt-search-box">
+            {%- render 'mt-icon', icon: 'search' -%}
+            <span class="visually-hidden">Search</span>
+            <input
+              type="search"
+              name="q"
+              placeholder="{{ section.settings.search_placeholder | escape }}"
+              autocomplete="off"
+              data-mt-search-input
+            >
+          </label>
+          <input type="hidden" name="options[prefix]" value="last">
+          <button type="button" class="mt-icon-btn" data-mt-close aria-label="Close search">
+            {%- render 'mt-icon', icon: 'x' -%}
+          </button>
+        </form>
+        <div class="mt-search-results" aria-live="polite">
+          <div data-mt-search-default>
+            {%- if section.settings.search_menu.links.size > 0 -%}
+              <p class="mt-mini-h mt-search-label">{{ section.settings.search_popular_heading | escape }}</p>
+              {%- for link in section.settings.search_menu.links -%}
+                {%- liquid
+                  case link.type
+                    when 'product_link'
+                      assign type_label = 'Product'
+                      assign row_icon = 'bag'
+                    when 'collection_link'
+                      assign type_label = 'Shop'
+                      assign row_icon = 'grid'
+                    when 'article_link', 'blog_link'
+                      assign type_label = 'Guide'
+                      assign row_icon = 'book'
+                    when 'page_link'
+                      assign type_label = 'Page'
+                      assign row_icon = 'book'
+                    else
+                      assign type_label = 'Link'
+                      assign row_icon = 'arrow-right'
+                  endcase
+                -%}
+                <a class="mt-sr-item" href="{{ link.url }}">
+                  <span class="mt-sr-ico">
+                    {%- if link.type == 'product_link' and link.object.featured_image -%}
+                      {{ link.object.featured_image | image_url: width: 96 | image_tag: loading: 'lazy', alt: '' }}
+                    {%- else -%}
+                      {%- render 'mt-icon', icon: row_icon -%}
+                    {%- endif -%}
+                  </span>
+                  <span>
+                    <b>{{ link.title | escape }}</b>
+                  </span>
+                  <span class="mt-sr-type">{{ type_label }}</span>
+                </a>
+              {%- endfor -%}
+            {%- endif -%}
+          </div>
+          <div data-mt-search-live hidden></div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+</mt-header>
+
+{% schema %}
+{
+  "name": "Marcel header",
+  "class": "mt-header-section",
+  "enabled_on": {
+    "groups": [
+      "header"
+    ]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image",
+      "info": "Leave empty to use the logo from Theme settings, or the Marcel mark with the logo text."
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo height on desktop",
+      "min": 28,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "logo_height_mobile",
+      "label": "Logo height on mobile",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Desktop menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Check Your OSMF Stage"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link",
+      "info": "Empty uses the self-check page from Theme settings."
+    },
+    {
+      "type": "header",
+      "content": "Search"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_whatsapp",
+      "label": "Show WhatsApp button",
+      "info": "Uses the number from Theme settings. Hidden on phones, where the mobile bar has WhatsApp.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show search",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search placeholder",
+      "default": "Search products, symptoms, guides"
+    },
+    {
+      "type": "text",
+      "id": "search_popular_heading",
+      "label": "Suggestions heading",
+      "default": "Popular"
+    },
+    {
+      "type": "link_list",
+      "id": "search_menu",
+      "label": "Suggestions menu",
+      "info": "Links shown before the customer starts typing."
+    },
+    {
+      "type": "text",
+      "id": "search_empty_text",
+      "label": "No results text",
+      "info": "[q] is replaced with the search words.",
+      "default": "No results for “[q]”. Try “burning”, “Ora-Care” or “specialist”."
+    },
+    {
+      "type": "header",
+      "content": "Mobile menu"
+    },
+    {
+      "type": "link_list",
+      "id": "mobile_menu",
+      "label": "Mobile menu",
+      "info": "Empty uses the desktop menu."
+    },
+    {
+      "type": "text",
+      "id": "drawer_cta_label",
+      "label": "Button label",
+      "default": "Get Help"
+    },
+    {
+      "type": "url",
+      "id": "drawer_cta_link",
+      "label": "Button link",
+      "info": "Empty uses the Get Help page from Theme settings."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_contact",
+      "label": "Show contact details",
+      "info": "WhatsApp, phone and email from Theme settings.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_label",
+      "label": "WhatsApp link label",
+      "default": "WhatsApp the Patient HelpDesk"
+    }
+  ]
+}
+{% endschema %}

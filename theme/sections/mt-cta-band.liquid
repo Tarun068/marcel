@@ -1,0 +1,171 @@
+{%- style -%}
+  .mt-cta-band { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 48px; align-items: end; padding: clamp(32px, 5vw, 64px); border-radius: var(--mt-r-xl); background: var(--mt-teal); color: rgba(255, 255, 255, .86); }
+  .mt-cta-copy { display: grid; gap: 14px; }
+  .mt-cta-band .mt-eyebrow { color: var(--mt-mint); }
+  .mt .mt-cta-band h2 { color: var(--mt-on-dark); max-width: 20ch; }
+  .mt-cta-band p { max-width: 54ch; font-size: 17.5px; }
+  .mt-cta-band .mt-btn-row { justify-content: flex-end; }
+  @media (max-width: 860px) {
+    .mt-cta-band { grid-template-columns: minmax(0, 1fr); align-items: start; }
+    .mt-cta-band .mt-btn-row { justify-content: flex-start; }
+  }
+  @media (max-width: 560px) {
+    .mt .mt-cta-band .mt-btn { width: 100%; }
+  }
+{%- endstyle -%}
+
+{%- capture btn1_link -%}{% render 'mt-link-to', key: section.settings.button_1_to, url: section.settings.button_1_link %}{%- endcapture -%}
+{%- capture btn2_link -%}{% render 'mt-link-to', key: section.settings.button_2_to, url: section.settings.button_2_link %}{%- endcapture -%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-cta' %}">
+  <div class="mt-wrap">
+    <div class="mt-cta-band mt-on-dark">
+      <div class="mt-cta-copy">
+        {%- if section.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2 class="mt-h2">{{ section.settings.heading }}</h2>{%- endif -%}
+        {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+      </div>
+      {%- if section.settings.button_1_label != blank or section.settings.button_2_label != blank -%}
+        <div class="mt-btn-row">
+          {%- if section.settings.button_1_label != blank -%}
+            <a class="mt-btn mt-btn-light" href="{{ btn1_link }}"{% if section.settings.button_1_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
+              {{- section.settings.button_1_label | escape -}}
+              {%- render 'mt-icon', icon: 'arrow-right' -%}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.button_2_label != blank -%}
+            <a class="mt-btn mt-btn-outline-light" href="{{ btn2_link }}"{% if section.settings.button_2_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>{{ section.settings.button_2_label | escape }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel call to action",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Need guidance?"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Not sure what to do next?"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "Explore MARCEL OMR Therapy™ or connect with our team to understand the next steps."
+    },
+    {
+      "type": "text",
+      "id": "button_1_label",
+      "label": "First button label",
+      "default": "Talk to a MARCEL OSMF Consultant"
+    },
+    {
+      "type": "select",
+      "id": "button_1_to",
+      "label": "Button 1 opens",
+      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "default": "consult"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Button 1 custom link"
+    },
+    {
+      "type": "text",
+      "id": "button_2_label",
+      "label": "Second button label",
+      "default": "Find an OSMF Specialist Doctor"
+    },
+    {
+      "type": "select",
+      "id": "button_2_to",
+      "label": "Button 2 opens",
+      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "default": "specialists"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Button 2 custom link"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "tight"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel call to action"
+    }
+  ]
+}
+{% endschema %}

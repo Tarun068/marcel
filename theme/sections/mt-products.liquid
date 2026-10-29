@@ -1,0 +1,445 @@
+{{ 'mt-products.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign link = section.settings.link | default: routes.all_products_collection_url
+  assign card_blocks = section.blocks | where: 'type', 'product'
+  assign kit = section.settings.kit_product
+  assign kit_link = section.settings.kit_link | default: kit.url | default: routes.all_products_collection_url
+  assign card_sizes = '(min-width: 1200px) 380px, (min-width: 961px) 31vw, (min-width: 761px) 46vw, 82vw'
+-%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-products' %}">
+  <div class="mt-wrap">
+    <div class="mt-sec-head-row">
+      {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
+      {%- if section.settings.link_label != blank -%}
+        <a class="mt-link" href="{{ link }}">
+          {{- section.settings.link_label | escape -}}
+          {%- render 'mt-icon', icon: 'arrow-right' -%}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if card_blocks.size > 0 -%}
+      <div class="mt-pgrid mt-swipe">
+        {%- for block in card_blocks -%}
+          {%- render 'mt-product-card',
+            product: block.settings.product,
+            block: block,
+            section_id: section.id,
+            add_label: section.settings.add_label,
+            details_label: section.settings.details_label,
+            sold_out_label: section.settings.sold_out_label,
+            image_fit: section.settings.image_fit,
+            sizes: card_sizes,
+            fallback_url: link
+          -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_kit -%}
+      <div class="mt-kit-banner mt-on-dark">
+        <div class="mt-kit-thumbs">
+          {%- if kit.featured_image != blank -%}
+            <span class="mt-pack mt-kit-photo">{{ kit.featured_image | image_url: width: 400 | image_tag: loading: 'lazy', alt: kit.title, sizes: '200px', widths: '200, 300, 400' }}</span>
+          {%- else -%}
+            {%- for block in card_blocks limit: 3 -%}
+              {%- assign thumb = block.settings.image | default: block.settings.product.featured_image -%}
+              {%- render 'mt-pack-media', image: thumb, art: block.settings.art, alt: '', sizes: '88px', fit: section.settings.image_fit -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+        <div class="mt-stack-sm">
+          {%- if section.settings.kit_eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.kit_eyebrow | escape }}</span>{%- endif -%}
+          <h3>{{ section.settings.kit_heading | default: kit.title | escape }}</h3>
+          {%- if section.settings.kit_text != blank -%}<p>{{ section.settings.kit_text | escape }}</p>{%- endif -%}
+        </div>
+        <div class="mt-btn-row">
+          {%- assign kit_form_id = 'MtProductForm-' | append: section.id | append: '-kit' -%}
+          {%- render 'mt-buy-button',
+            product: kit,
+            form_id: kit_form_id,
+            section_id: section.id,
+            label: section.settings.kit_add_label,
+            sold_out_label: section.settings.sold_out_label,
+            class: 'mt-btn mt-btn-light',
+            fallback_url: kit_link
+          -%}
+          {%- if section.settings.kit_view_label != blank -%}
+            <a class="mt-btn mt-btn-outline-light" href="{{ kit_link }}">{{ section.settings.kit_view_label | escape }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel products",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 9,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Products"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Products within MARCEL OMR Therapy™"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "Each product has a defined role in the therapy. See what it is, how it is used and where it fits."
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "Explore Our Products"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Cards"
+    },
+    {
+      "type": "text",
+      "id": "details_label",
+      "label": "Product details link",
+      "info": "Leave empty to hide.",
+      "default": "View product details"
+    },
+    {
+      "type": "text",
+      "id": "add_label",
+      "label": "Add to cart label",
+      "default": "Add to cart"
+    },
+    {
+      "type": "text",
+      "id": "sold_out_label",
+      "label": "Sold out label",
+      "default": "Sold out"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Fill the square"
+        },
+        {
+          "value": "contain",
+          "label": "Show the whole image"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "paragraph",
+      "content": "Prices can be hidden in Theme settings > Marcel products."
+    },
+    {
+      "type": "header",
+      "content": "Kit banner"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_kit",
+      "label": "Show kit banner",
+      "default": false
+    },
+    {
+      "type": "product",
+      "id": "kit_product",
+      "label": "Kit product",
+      "info": "Optional: a kit sold as one product."
+    },
+    {
+      "type": "text",
+      "id": "kit_eyebrow",
+      "label": "Eyebrow",
+      "default": "MARCEL OMR Therapy™"
+    },
+    {
+      "type": "text",
+      "id": "kit_heading",
+      "label": "Heading",
+      "info": "Empty uses the kit product title.",
+      "default": "Foundation and Advance kits"
+    },
+    {
+      "type": "textarea",
+      "id": "kit_text",
+      "label": "Text",
+      "default": "Each kit brings together the components of one pathway. A qualified healthcare professional should confirm which pathway is appropriate."
+    },
+    {
+      "type": "text",
+      "id": "kit_add_label",
+      "label": "Add to cart label",
+      "default": "Add kit to cart"
+    },
+    {
+      "type": "text",
+      "id": "kit_view_label",
+      "label": "View button label",
+      "default": "View kit"
+    },
+    {
+      "type": "url",
+      "id": "kit_link",
+      "label": "View button link",
+      "info": "Empty uses the kit product page."
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "mist"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "normal"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product card",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "info": "Empty uses the product title."
+        },
+        {
+          "type": "text",
+          "id": "meta",
+          "label": "Type and size",
+          "default": "Therapeutic oral spray · 50 ml"
+        },
+        {
+          "type": "header",
+          "content": "Badge"
+        },
+        {
+          "type": "select",
+          "id": "badge",
+          "label": "Badge style",
+          "options": [
+            {
+              "value": "step",
+              "label": "Step number"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle icon"
+            },
+            {
+              "value": "none",
+              "label": "Text only"
+            }
+          ],
+          "default": "step"
+        },
+        {
+          "type": "text",
+          "id": "step",
+          "label": "Step number",
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Badge text",
+          "default": "Foundation care"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Product colour",
+          "info": "Used for the badge and the check marks.",
+          "default": "#168C83"
+        },
+        {
+          "type": "header",
+          "content": "Details"
+        },
+        {
+          "type": "textarea",
+          "id": "benefits",
+          "label": "Benefits",
+          "info": "One per line.",
+          "default": "Helps manage burning sensation\nHelps manage oral tightness\nSupports oral comfort"
+        },
+        {
+          "type": "text",
+          "id": "best",
+          "label": "Best for",
+          "default": "Best for Stage 1 to 4"
+        },
+        {
+          "type": "header",
+          "content": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Empty uses the product image."
+        },
+        {
+          "type": "select",
+          "id": "art",
+          "label": "Illustration when there is no image",
+          "options": [
+            {
+              "value": "ora-care",
+              "label": "Ora-Care pack"
+            },
+            {
+              "value": "ora-shield",
+              "label": "Ora-Shield pack"
+            },
+            {
+              "value": "smile",
+              "label": "Smile pack"
+            },
+            {
+              "value": "device",
+              "label": "Device icon"
+            },
+            {
+              "value": "none",
+              "label": "Shopify placeholder"
+            }
+          ],
+          "default": "ora-care"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel products",
+      "blocks": [
+        {
+          "type": "product",
+          "settings": {
+            "title": "MARCEL Ora-Care™ Oral Spray",
+            "meta": "Therapeutic oral spray · 50 ml",
+            "badge": "step",
+            "step": "1",
+            "role": "Foundation care",
+            "color": "#168C83",
+            "benefits": "Helps manage burning sensation\nHelps manage oral tightness\nSupports oral comfort",
+            "best": "Best for Stage 1 to 4",
+            "art": "ora-care"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "MARCEL Ora-Shield™ Oral Rinse",
+            "meta": "Therapeutic oral rinse · 10 ml",
+            "badge": "step",
+            "step": "2",
+            "role": "Advanced care",
+            "color": "#5A5CBE",
+            "benefits": "Helps reduce oral discomfort\nSupports reduced oral tightness\nSupports better mouth opening",
+            "best": "Best for Stage 2 to 4",
+            "art": "ora-shield"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "MARCEL Smile™ Toothpaste",
+            "meta": "Therapeutic toothpaste · 30 g",
+            "badge": "step",
+            "step": "3",
+            "role": "Daily oral care",
+            "color": "#2265C4",
+            "benefits": "Supports oral mucosal health\nHealthy gums and strong enamel\nStrong teeth and fresh breath",
+            "best": "Best for everyone, every day",
+            "art": "smile"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

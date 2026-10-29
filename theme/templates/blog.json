@@ -1,0 +1,69 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "mt-page-hero",
+      "settings": {
+        "show_crumbs": true,
+        "home_label": "Home",
+        "button_1_to": "test",
+        "button_2_to": "consult",
+        "back_to": "therapy",
+        "background": "tint",
+        "sheet": false,
+        "spacing": "none",
+        "parent_label": "Understand OSMF",
+        "parent_link": "/pages/understand-osmf",
+        "current_label": "",
+        "eyebrow": "Patient guide",
+        "heading": "",
+        "text": "Practical reads for every stage, from checking your mouth opening to quitting the habit."
+      }
+    },
+    "main": {
+      "type": "mt-main-blog",
+      "settings": {
+        "per_page": 12,
+        "show_images": false,
+        "read_label": "[n] min read",
+        "show_tags": true,
+        "tags_label": "Filter articles",
+        "all_label": "All",
+        "empty_text": "No articles yet.",
+        "prev_label": "Previous",
+        "next_label": "Next",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      }
+    },
+    "cta": {
+      "type": "mt-cta-band",
+      "settings": {
+        "eyebrow": "Check your OSMF stage",
+        "heading": "Not sure where you stand?",
+        "text": "The MARCEL OSMF Self-Check gives an initial indication of your possible stage. It cannot diagnose OSMF.",
+        "button_1_label": "Check Your OSMF Stage",
+        "button_1_to": "test",
+        "button_2_label": "Talk to a MARCEL OSMF Consultant",
+        "button_2_to": "consult",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "main",
+    "cta"
+  ]
+}

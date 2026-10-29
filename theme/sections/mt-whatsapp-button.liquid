@@ -1,0 +1,83 @@
+{%- if section.settings.enable and settings.mt_whatsapp_number != blank -%}
+  {%- capture wa_url -%}{% render 'mt-wa-url', message: section.settings.message %}{%- endcapture -%}
+  <style>
+    .mt-fab-wa { position: fixed; right: 20px; bottom: 20px; z-index: 60; width: 58px; height: 58px; border-radius: 99px; background: var(--mt-wa); color: #FFFFFF; display: grid; place-items: center; box-shadow: 0 14px 30px -8px rgba(18, 140, 74, .55); text-decoration: none; transition: transform .2s; }
+    .mt-fab-wa:hover { transform: scale(1.06); }
+    .mt-fab-wa .mt-i { width: 30px; height: 30px; flex: none; }
+    .mt-fab-wa-text { display: none; }
+    @media (min-width: 761px) {
+      .mt-fab-wa--text { display: flex; gap: 10px; width: auto; padding: 0 22px 0 16px; font-weight: 800; font-size: 15px; white-space: nowrap; }
+      .mt-fab-wa--text .mt-i { width: 26px; height: 26px; }
+      .mt-fab-wa--text .mt-fab-wa-text { display: inline; }
+      .mt-fab-wa--text:hover { transform: translateY(-2px); }
+    }
+    @media (max-width: 760px) {
+      .mt-fab-wa { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+      .mt-fab-wa--hide-sm { display: none; }
+    }
+  </style>
+  <a
+    class="mt mt-fab-wa{% if section.settings.button_text != blank %} mt-fab-wa--text{% endif %}{% if section.settings.hide_mobile %} mt-fab-wa--hide-sm{% endif %}"
+    href="{{ wa_url }}"
+    target="_blank"
+    rel="noopener"
+    aria-label="{{ section.settings.label | escape }}"
+  >
+    {%- render 'mt-icon', icon: 'whatsapp' -%}
+    {%- if section.settings.button_text != blank -%}<span class="mt-fab-wa-text" aria-hidden="true">{{ section.settings.button_text | escape }}</span>{%- endif -%}
+  </a>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Marcel WhatsApp button",
+  "enabled_on": {
+    "groups": [
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Floating button in the bottom corner. The number is set in Theme settings > Marcel contact and links."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Show button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Prefilled message",
+      "info": "Empty uses the default message from Theme settings."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Text on desktop",
+      "info": "Shown next to the icon on larger screens. Empty shows the icon only.",
+      "default": "Need guidance?"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Accessible label",
+      "default": "WhatsApp the MARCEL Patient HelpDesk"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_mobile",
+      "label": "Hide on mobile",
+      "info": "Turn on when the Marcel mobile bar has a WhatsApp button.",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel WhatsApp button"
+    }
+  ]
+}
+{% endschema %}

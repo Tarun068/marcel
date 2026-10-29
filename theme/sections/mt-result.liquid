@@ -1,0 +1,822 @@
+{{ 'mt-pages.css' | asset_url | stylesheet_tag }}
+{{ 'mt-test.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'mt-result.js' | asset_url }}" defer="defer"></script>
+
+{%- capture wa_base -%}{% render 'mt-wa-url' %}{%- endcapture -%}
+{%- capture test_default -%}{% render 'mt-link-to', key: 'test' %}{%- endcapture -%}
+{%- capture specialists_link -%}{% render 'mt-link-to', key: 'specialists' %}{%- endcapture -%}
+{%- liquid
+  assign test_link = section.settings.test_link | default: test_default
+  assign meter_labels = section.settings.meter_labels | split: ','
+  assign outcomes = section.blocks | where: 'type', 'outcome'
+  assign tips = section.blocks | where: 'type', 'tip'
+  assign centers = '11.5,32.7,51.9,71.2,90.4' | split: ','
+-%}
+
+<mt-result
+  class="mt mt-result"
+  data-design="{{ request.design_mode }}"
+  data-wa="{{ settings.mt_whatsapp_number | remove: ' ' | remove: '+' }}"
+  data-wa-text="{{ section.settings.wa_message | escape }}"
+>
+  {%- comment -%} Shown when there is no saved result in this browser. {%- endcomment -%}
+  <section class="mt-section mt-bg-paper" data-mt-empty hidden>
+    <div class="mt-wrap-narrow">
+      <div class="mt-empty">
+        {%- render 'mt-icon', icon: 'test' -%}
+        <h1 class="mt-h2">{{ section.settings.empty_title | escape }}</h1>
+        <p class="mt-muted">{{ section.settings.empty_text | escape }}</p>
+        <a class="mt-btn mt-btn-primary" href="{{ test_link }}">{{ section.settings.empty_button | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>
+      </div>
+    </div>
+  </section>
+  <noscript>
+    <section class="mt-section"><div class="mt-wrap-narrow"><div class="mt-empty"><p>{{ section.settings.empty_text | escape }}</p></div></div></section>
+  </noscript>
+
+  {%- for block in outcomes -%}
+    {%- liquid
+      case block.settings.key
+        when 'stage1'
+          assign zone = 1
+        when 'stage2'
+          assign zone = 2
+        when 'stage3'
+          assign zone = 3
+        when 'stage4', 'investigate', 'stage5'
+          assign zone = 4
+        else
+          assign zone = 0
+      endcase
+      assign points = block.settings.box_points | newline_to_br | split: '<br />'
+      assign kit = block.settings.kit
+      assign kit_form = 'MtResultKit-' | append: block.id
+      assign pathway = block.settings.pathway
+    -%}
+    {%- capture pathway_link -%}{% if pathway != 'none' %}{% render 'mt-link-to', key: pathway %}{% endif %}{%- endcapture -%}
+    <div data-mt-outcome="{{ block.settings.key }}" style="--c: {{ block.settings.color }};" hidden {{ block.shopify_attributes }}>
+      <section class="mt-result-hero mt-bg-tint">
+        <div class="mt-wrap">
+          <nav class="mt-crumbs" aria-label="Breadcrumb">
+            <a href="{{ routes.root_url }}">{{ section.settings.home_label | escape }}</a>
+            {%- render 'mt-icon', icon: 'chevron-right' -%}
+            <a href="{{ test_link }}">{{ section.settings.test_label | escape }}</a>
+            {%- render 'mt-icon', icon: 'chevron-right' -%}
+            <span aria-current="page">{{ section.settings.current_label | escape }}</span>
+          </nav>
+          <div class="mt-result-grid">
+            <div class="mt-stack">
+              <span class="mt-eyebrow">{{ section.settings.eyebrow | escape }}</span>
+              <h1 class="mt-result-title">{{ block.settings.lead | escape }}<span>{{ block.settings.title | escape }}</span></h1>
+              <p class="mt-lead">{{ block.settings.text | escape }}</p>
+              {%- if block.settings.key == 'stage5' or block.settings.key == 'investigate' -%}
+                <div class="mt-callout mt-callout--alert">
+                  {%- render 'mt-icon', icon: 'alert' -%}<span>{{ block.settings.alert | escape }}</span>
+                </div>
+              {%- else -%}
+                <div class="mt-meter" aria-label="{{ section.settings.meter_label | escape }}">
+                  <div class="mt-meter-track">
+                    {%- for label in meter_labels -%}<i{% if forloop.index0 == zone %} class="is-on"{% endif %}></i>{%- endfor -%}
+                    <span class="mt-meter-pin" style="left: {{ centers[zone] }}%;"></span>
+                  </div>
+                  <div class="mt-meter-labels">
+                    {%- for label in meter_labels -%}<span{% if forloop.index0 == zone %} class="is-on"{% endif %}>{{ label | strip | escape }}</span>{%- endfor -%}
+                  </div>
+                </div>
+              {%- endif -%}
+              <p class="mt-severity" data-mt-severity-row hidden>
+                {%- render 'mt-icon', icon: 'chart' -%}
+                <span>{{ section.settings.severity_label | escape }} <b data-mt-severity></b></span>
+              </p>
+              <div>
+                <p class="mt-mini-h">{{ section.settings.chips_heading | escape }}</p>
+                <div class="mt-answer-chips" data-mt-chips></div>
+              </div>
+            </div>
+            <aside class="mt-gauge-card">
+              <p class="mt-mini-h">{{ section.settings.gauge_heading | escape }}</p>
+              {%- render 'mt-gauge', fingers: 3, color: block.settings.color, caption: section.settings.gauge_caption -%}
+              <div class="mt-gauge-row"><span>{{ section.settings.healthy_label | escape }}</span><b>{{ section.settings.healthy_value | escape }}</b></div>
+              <div class="mt-gauge-row"><span>{{ block.settings.range_label | escape }}</span><b>{{ block.settings.range | escape }}</b></div>
+              <a class="mt-link" href="{{ test_link }}" data-mt-retake>{%- render 'mt-icon', icon: 'refresh' -%}{{ section.settings.retake_label | escape }}</a>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-section mt-section--tight mt-bg-paper">
+        <div class="mt-wrap">
+          {%- render 'mt-sec-head', eyebrow: block.settings.plan_eyebrow, heading: block.settings.plan_title, text: block.settings.plan_intro -%}
+          <div class="mt-plan">
+            <div class="mt-plan-list">
+              {%- if block.settings.clinic_first -%}
+                <div class="mt-plan-item mt-plan-item--extra">
+                  <span class="mt-plan-ico">{%- render 'mt-icon', icon: 'doctor' -%}</span>
+                  <div><h3>{{ section.settings.clinic_title | escape }}</h3><p>{{ section.settings.clinic_text | escape }}</p></div>
+                </div>
+              {%- endif -%}
+              {%- for product in block.settings.plan_products -%}
+                {%- assign mf = product.metafields.marcel -%}
+                <div class="mt-plan-item" style="--pc: {{ mf.color.value | default: block.settings.color }};">
+                  <a class="mt-plan-media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+                    {%- render 'mt-pack-media', image: product.featured_image, art: mf.art.value, alt: product.title, sizes: '96px' -%}
+                  </a>
+                  <div>
+                    {%- if mf.role.value != blank -%}<p class="mt-mini-h">{{ mf.role.value | escape }}</p>{%- endif -%}
+                    <h3><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
+                    {%- if mf.why.value != blank -%}<p>{{ mf.why.value | escape }}</p>{%- endif -%}
+                    {%- if mf.how_short.value != blank -%}<span class="mt-plan-use">{%- render 'mt-icon', icon: 'clock' -%}{{ mf.how_short.value | escape }}</span>{%- endif -%}
+                  </div>
+                </div>
+              {%- else -%}
+                {%- if request.design_mode and pathway != 'none' -%}<p class="mt-placeholder">Choose the products for this pathway in the theme editor.</p>{%- endif -%}
+              {%- endfor -%}
+              {%- if block.settings.exercises -%}
+                <div class="mt-plan-item mt-plan-item--extra">
+                  <span class="mt-plan-ico">{%- render 'mt-icon', icon: 's-open' -%}</span>
+                  <div><h3>{{ section.settings.exercises_title | escape }}</h3><p>{{ section.settings.exercises_text | escape }}</p></div>
+                </div>
+              {%- endif -%}
+            </div>
+
+            <aside class="mt-plan-box mt-on-dark">
+              {%- if block.settings.box_eyebrow != blank -%}<span class="mt-eyebrow">{{ block.settings.box_eyebrow | escape }}</span>{%- endif -%}
+              <h3>{{ block.settings.box_title | default: kit.title | escape }}</h3>
+              {%- if block.settings.box_points != blank -%}
+                <ul>
+                  {%- for line in points -%}
+                    {%- assign line = line | strip -%}
+                    {%- if line != blank -%}<li>{%- render 'mt-icon', icon: 'check' -%}<span>{{ line | escape }}</span></li>{%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+              {%- if pathway != 'none' and block.settings.pathway_label != blank -%}
+                <a class="mt-btn mt-btn-light mt-btn-block" href="{{ pathway_link }}">{{ block.settings.pathway_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>
+              {%- endif -%}
+              {%- if kit != blank and block.settings.kit_label != blank -%}
+                {%- render 'mt-price', product: kit -%}
+                {%- render 'mt-buy-button', product: kit, form_id: kit_form, section_id: section.id, label: block.settings.kit_label, class: 'mt-btn mt-btn-outline-light mt-btn-block' -%}
+              {%- endif -%}
+              {%- if section.settings.assess_label != blank -%}
+                <a class="mt-btn mt-btn-outline-light mt-btn-block" href="{{ specialists_link }}">{%- render 'mt-icon', icon: 'doctor' -%}{{ section.settings.assess_label | escape }}</a>
+              {%- endif -%}
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-section mt-section--tight mt-bg-mist">
+        <div class="mt-wrap">
+          {%- liquid
+            case block.settings.next_action
+              when 'whatsapp'
+                assign next_icon = 'whatsapp'
+              when 'specialists'
+                assign next_icon = 'doctor'
+              when 'pathway'
+                assign next_icon = 'book'
+              else
+                assign next_icon = 'phone'
+            endcase
+          -%}
+          <div class="mt-next-card">
+            <span class="mt-next-ico">{%- render 'mt-icon', icon: next_icon -%}</span>
+            <div class="mt-stack-sm">
+              {%- if block.settings.next_tag != blank -%}<span class="mt-urg">{{ block.settings.next_tag | escape }}</span>{%- endif -%}
+              <h2 class="mt-h3">{{ block.settings.next_title | escape }}</h2>
+              <p>{{ block.settings.next_text | escape }}</p>
+            </div>
+            <div class="mt-btn-row">
+              {%- for n in (1..2) -%}
+                {%- liquid
+                  if n == 1
+                    assign action = block.settings.next_action
+                    assign label = block.settings.next_label
+                    assign cls = 'mt-btn mt-btn-primary'
+                  else
+                    assign action = block.settings.alt_action
+                    assign label = block.settings.alt_label
+                    assign cls = 'mt-btn mt-btn-secondary'
+                  endif
+                  if action == 'pathway'
+                    assign link_key = pathway
+                  else
+                    assign link_key = action
+                  endif
+                -%}
+                {%- if action != 'none' and label != blank -%}
+                  {%- if action == 'whatsapp' -%}
+                    <a class="{{ cls }}" href="{{ wa_base }}" target="_blank" rel="noopener" data-mt-wa>{%- render 'mt-icon', icon: 'whatsapp' -%}{{ label | escape }}</a>
+                  {%- else -%}
+                    {%- capture href -%}{% render 'mt-link-to', key: link_key %}{%- endcapture -%}
+                    <a class="{{ cls }}" href="{{ href }}">{{ label | escape }}</a>
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  {%- endfor -%}
+
+  <section class="mt-section mt-section--tight mt-bg-paper" data-mt-shared hidden>
+    <div class="mt-wrap mt-stack-lg">
+      {%- render 'mt-sec-head', eyebrow: section.settings.tips_eyebrow, heading: section.settings.tips_heading -%}
+      {%- if tips.size > 0 -%}
+        <div class="mt-cards" style="--mt-cols: {{ tips.size | at_most: 4 }};">
+          {%- for block in tips -%}
+            <div class="mt-mini-card" {{ block.shopify_attributes }}>
+              {%- render 'mt-icon', icon: block.settings.icon -%}
+              <b>{{ block.settings.title | escape }}</b>
+              <p>{{ block.settings.text | escape }}</p>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_report -%}
+        <div class="mt-report-row">
+          <div class="mt-stack-sm">
+            <b class="mt-report-title">{%- render 'mt-icon', icon: 'whatsapp' -%}{{ section.settings.report_title | escape }}</b>
+            <p class="mt-small">{{ section.settings.report_text | escape }}</p>
+          </div>
+          {%- form 'contact', id: 'MtResultReport', class: 'mt-report-form', data-mt-report: '', novalidate: 'novalidate' -%}
+            <input type="hidden" name="contact[source]" value="Self-check report">
+            <input type="hidden" name="contact[email]" value="{{ shop.email }}">
+            <input type="hidden" name="contact[result]" value="" data-mt-field="result">
+            <input type="hidden" name="contact[symptoms]" value="" data-mt-field="severity">
+            <input type="hidden" name="contact[answers]" value="" data-mt-field="answers">
+            <div class="mt-phone">
+              <span>+91</span>
+              <input class="mt-input" name="contact[phone]" inputmode="numeric" maxlength="10" placeholder="10-digit mobile" aria-label="{{ section.settings.report_phone_label | escape }}">
+            </div>
+            <button class="mt-btn mt-btn-primary" type="submit">{%- render 'mt-icon', icon: 'whatsapp' -%}{{ section.settings.report_button | escape }}</button>
+            <p class="mt-err" data-mt-error hidden>{{ section.settings.report_error | escape }}</p>
+            <p class="mt-report-done" data-mt-done hidden>{%- render 'mt-icon', icon: 'check' -%}{{ section.settings.report_done | escape }}</p>
+          {%- endform -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.warning != blank -%}
+        <div class="mt-callout mt-callout--warn">{%- render 'mt-icon', icon: 'alert' -%}<span>{{ section.settings.warning }}</span></div>
+      {%- endif -%}
+      {%- if section.settings.disclaimer != blank -%}
+        <div class="mt-callout mt-callout--muted">{%- render 'mt-icon', icon: 'info' -%}<span>{{ section.settings.disclaimer | escape }}</span></div>
+      {%- endif -%}
+    </div>
+  </section>
+</mt-result>
+
+{% schema %}
+{
+  "name": "Marcel self-check result",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 16,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Shows the result saved by the MARCEL OSMF Self-Check in this browser. Each Result block is one possible outcome. In the theme editor, select a Result block to preview it."
+    },
+    {
+      "type": "url",
+      "id": "test_link",
+      "label": "Self-check page",
+      "info": "Empty uses the self-check page from Theme settings."
+    },
+    {
+      "type": "header",
+      "content": "Top"
+    },
+    {
+      "type": "text",
+      "id": "home_label",
+      "label": "Breadcrumb: home",
+      "default": "Home"
+    },
+    {
+      "type": "text",
+      "id": "test_label",
+      "label": "Breadcrumb: self-check",
+      "default": "OSMF Self-Check"
+    },
+    {
+      "type": "text",
+      "id": "current_label",
+      "label": "Breadcrumb: this page",
+      "default": "Your result"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Your MARCEL OSMF Self-Check result"
+    },
+    {
+      "type": "text",
+      "id": "meter_label",
+      "label": "Scale label (for screen readers)",
+      "default": "Result scale"
+    },
+    {
+      "type": "text",
+      "id": "meter_labels",
+      "label": "Scale labels",
+      "info": "Five labels separated by commas.",
+      "default": "No signs yet, Stage 1, Stage 2, Stage 3, Stage 4"
+    },
+    {
+      "type": "text",
+      "id": "severity_label",
+      "label": "Symptom summary label",
+      "default": "Symptom summary:"
+    },
+    {
+      "type": "text",
+      "id": "chips_heading",
+      "label": "Answers heading",
+      "default": "What you told us"
+    },
+    {
+      "type": "text",
+      "id": "gauge_heading",
+      "label": "Gauge heading",
+      "default": "Your mouth opening"
+    },
+    {
+      "type": "text",
+      "id": "gauge_caption",
+      "label": "Gauge caption",
+      "default": "your answer"
+    },
+    {
+      "type": "text",
+      "id": "healthy_label",
+      "label": "Reference label",
+      "default": "No signs of OSMF"
+    },
+    {
+      "type": "text",
+      "id": "healthy_value",
+      "label": "Reference value",
+      "default": "More than 35 mm"
+    },
+    {
+      "type": "text",
+      "id": "retake_label",
+      "label": "Retake link",
+      "default": "Take the self-check again"
+    },
+    {
+      "type": "header",
+      "content": "Pathway"
+    },
+    {
+      "type": "text",
+      "id": "clinic_title",
+      "label": "Assessment-first title",
+      "default": "First: a professional assessment"
+    },
+    {
+      "type": "text",
+      "id": "clinic_text",
+      "label": "Assessment-first text",
+      "default": "A qualified OSMF Specialist doctor examines your mouth, assesses your mouth opening and confirms the diagnosis, stage and care pathway."
+    },
+    {
+      "type": "text",
+      "id": "exercises_title",
+      "label": "Exercises title",
+      "default": "Prescribed mouth and jaw exercises"
+    },
+    {
+      "type": "text",
+      "id": "exercises_text",
+      "label": "Exercises text",
+      "default": "Exercises may form part of your care routine when recommended by your healthcare professional. Do not force movements or continue through pain."
+    },
+    {
+      "type": "text",
+      "id": "assess_label",
+      "label": "Assessment button",
+      "default": "Get Professional Assessment"
+    },
+    {
+      "type": "text",
+      "id": "wa_message",
+      "label": "WhatsApp message",
+      "info": "[result] is replaced with the result title.",
+      "default": "Hi MARCEL team, I'd like to talk to a MARCEL OSMF Consultant. My self-check result: [result]."
+    },
+    {
+      "type": "header",
+      "content": "Habits and report"
+    },
+    {
+      "type": "text",
+      "id": "tips_eyebrow",
+      "label": "Tips eyebrow",
+      "default": "Important to know"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "tips_heading",
+      "label": "Tips heading",
+      "default": "Steps that protect your oral health"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_report",
+      "label": "Show ‘Get this report on WhatsApp’",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "report_title",
+      "label": "Report title",
+      "default": "Get this report on WhatsApp"
+    },
+    {
+      "type": "text",
+      "id": "report_text",
+      "label": "Report text",
+      "default": "Keep a copy of your result and get a follow-up from our In-house OSMF Consultant."
+    },
+    {
+      "type": "text",
+      "id": "report_phone_label",
+      "label": "Phone field label",
+      "default": "WhatsApp number"
+    },
+    {
+      "type": "text",
+      "id": "report_button",
+      "label": "Report button",
+      "default": "Send"
+    },
+    {
+      "type": "text",
+      "id": "report_error",
+      "label": "Report error",
+      "default": "Enter a 10-digit mobile number."
+    },
+    {
+      "type": "text",
+      "id": "report_done",
+      "label": "Report sent message",
+      "default": "Thanks. Our team will send your report on WhatsApp."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "warning",
+      "label": "Warning signs",
+      "default": "<b>Seek prompt professional assessment</b> if you notice a persistent ulcer, unexplained bleeding, a new lump or worsening symptoms."
+    },
+    {
+      "type": "textarea",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "default": "The MARCEL OSMF Self-Check is preliminary and cannot diagnose OSMF or confirm your stage. It is not a substitute for an examination or advice from a qualified healthcare professional, who must assess and confirm the diagnosis and stage."
+    },
+    {
+      "type": "header",
+      "content": "No result yet"
+    },
+    {
+      "type": "text",
+      "id": "empty_title",
+      "label": "Title",
+      "default": "No result yet"
+    },
+    {
+      "type": "text",
+      "id": "empty_text",
+      "label": "Text",
+      "default": "Take the MARCEL OSMF Self-Check to see an initial indication of your possible stage and the next step."
+    },
+    {
+      "type": "text",
+      "id": "empty_button",
+      "label": "Button",
+      "default": "Check Your OSMF Stage"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "outcome",
+      "name": "Result",
+      "settings": [
+        {
+          "type": "select",
+          "id": "key",
+          "label": "Result",
+          "options": [
+            {
+              "value": "healthy",
+              "label": "Healthy / no signs of OSMF yet"
+            },
+            {
+              "value": "stage1",
+              "label": "Stage 1"
+            },
+            {
+              "value": "stage2",
+              "label": "Stage 2"
+            },
+            {
+              "value": "stage3",
+              "label": "Stage 3"
+            },
+            {
+              "value": "stage4",
+              "label": "Stage 4"
+            },
+            {
+              "value": "investigate",
+              "label": "Under 5 mm, no red flags (investigation)"
+            },
+            {
+              "value": "stage5",
+              "label": "Stage 5"
+            }
+          ],
+          "default": "stage1"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Colour",
+          "default": "#2B9759"
+        },
+        {
+          "type": "text",
+          "id": "lead",
+          "label": "Title intro",
+          "default": "Your answers indicate"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Possible Stage 1 OSMF"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Your mouth opening is more than 35 mm and you reported symptoms that can be associated with OSMF."
+        },
+        {
+          "type": "textarea",
+          "id": "alert",
+          "label": "Alert (Stage 5 and investigation only)"
+        },
+        {
+          "type": "text",
+          "id": "range_label",
+          "label": "Range label",
+          "default": "Stage 1 band"
+        },
+        {
+          "type": "text",
+          "id": "range",
+          "label": "Range",
+          "default": "More than 35 mm"
+        },
+        {
+          "type": "header",
+          "content": "Pathway"
+        },
+        {
+          "type": "select",
+          "id": "pathway",
+          "label": "Pathway",
+          "options": [
+            {
+              "value": "none",
+              "label": "No MARCEL OMR Therapy™ pathway"
+            },
+            {
+              "value": "foundation",
+              "label": "Foundation"
+            },
+            {
+              "value": "advance",
+              "label": "Advance"
+            }
+          ],
+          "default": "foundation"
+        },
+        {
+          "type": "text",
+          "id": "plan_eyebrow",
+          "label": "Eyebrow",
+          "default": "Relevant pathway"
+        },
+        {
+          "type": "text",
+          "id": "plan_title",
+          "label": "Title",
+          "default": "MARCEL OMR Therapy™ Foundation"
+        },
+        {
+          "type": "textarea",
+          "id": "plan_intro",
+          "label": "Intro",
+          "default": "Foundation is associated with professionally assessed Stage 1–2 OSMF. A qualified healthcare professional should confirm the diagnosis, stage and care pathway."
+        },
+        {
+          "type": "product_list",
+          "id": "plan_products",
+          "label": "Pathway products",
+          "limit": 4
+        },
+        {
+          "type": "checkbox",
+          "id": "clinic_first",
+          "label": "Show ‘professional assessment first’",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "exercises",
+          "label": "Show prescribed exercises",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Pathway box"
+        },
+        {
+          "type": "text",
+          "id": "box_eyebrow",
+          "label": "Eyebrow",
+          "default": "What Foundation includes"
+        },
+        {
+          "type": "text",
+          "id": "box_title",
+          "label": "Title",
+          "info": "Empty uses the kit product title.",
+          "default": "MARCEL OMR Therapy™ Foundation"
+        },
+        {
+          "type": "textarea",
+          "id": "box_points",
+          "label": "Points",
+          "info": "One per line.",
+          "default": "MARCEL Ora-Care™ Oral Spray, 50 mL\nMARCEL Smile™ Toothpaste, 30 g\nPrescribed mouth/jaw exercises\nProfessional guidance and patient support"
+        },
+        {
+          "type": "text",
+          "id": "pathway_label",
+          "label": "Pathway button",
+          "default": "Explore MARCEL OMR Therapy™ Foundation"
+        },
+        {
+          "type": "product",
+          "id": "kit",
+          "label": "Kit product (optional)",
+          "info": "Shows a price and Add to cart when a kit is sold as one product."
+        },
+        {
+          "type": "text",
+          "id": "kit_label",
+          "label": "Add to cart label",
+          "default": "Add Foundation Kit to cart"
+        },
+        {
+          "type": "header",
+          "content": "Next step"
+        },
+        {
+          "type": "text",
+          "id": "next_tag",
+          "label": "Tag",
+          "default": "Recommended"
+        },
+        {
+          "type": "text",
+          "id": "next_title",
+          "label": "Title",
+          "default": "Confirm your stage with a professional"
+        },
+        {
+          "type": "textarea",
+          "id": "next_text",
+          "label": "Text",
+          "default": "A MARCEL OSMF Consultant can discuss your result and guide the next step. An OSMF Specialist doctor can examine you and confirm your stage."
+        },
+        {
+          "type": "select",
+          "id": "next_action",
+          "label": "Button opens",
+          "options": [
+            {
+              "value": "consult",
+              "label": "MARCEL OSMF Consultant booking"
+            },
+            {
+              "value": "specialists",
+              "label": "Find an OSMF Specialist"
+            },
+            {
+              "value": "pathway",
+              "label": "This result’s pathway page"
+            },
+            {
+              "value": "help",
+              "label": "Get Help page"
+            },
+            {
+              "value": "whatsapp",
+              "label": "WhatsApp chat"
+            }
+          ],
+          "default": "consult"
+        },
+        {
+          "type": "text",
+          "id": "next_label",
+          "label": "Button label",
+          "default": "Talk to a MARCEL OSMF Consultant"
+        },
+        {
+          "type": "select",
+          "id": "alt_action",
+          "label": "Second button opens",
+          "options": [
+            {
+              "value": "none",
+              "label": "No second button"
+            },
+            {
+              "value": "consult",
+              "label": "MARCEL OSMF Consultant booking"
+            },
+            {
+              "value": "specialists",
+              "label": "Find an OSMF Specialist"
+            },
+            {
+              "value": "pathway",
+              "label": "This result’s pathway page"
+            },
+            {
+              "value": "help",
+              "label": "Get Help page"
+            },
+            {
+              "value": "whatsapp",
+              "label": "WhatsApp chat"
+            }
+          ],
+          "default": "specialists"
+        },
+        {
+          "type": "text",
+          "id": "alt_label",
+          "label": "Second button label",
+          "default": "Find an OSMF Specialist Doctor"
+        }
+      ]
+    },
+    {
+      "type": "tip",
+      "name": "Tip",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [{"value":"none","label":"None"},{"value":"arrow-right","label":"Arrow"},{"value":"check","label":"Check"},{"value":"video","label":"Video call"},{"value":"whatsapp","label":"WhatsApp"},{"value":"clinic","label":"Clinic"},{"value":"doctor","label":"Doctor"},{"value":"calendar","label":"Calendar"},{"value":"clock","label":"Clock"},{"value":"shield","label":"Shield"},{"value":"flask","label":"Research flask"},{"value":"patent","label":"Patent document"},{"value":"leaf","label":"Leaf"},{"value":"users","label":"People"},{"value":"heart","label":"Heart"},{"value":"india","label":"Globe"},{"value":"pin","label":"Location pin"},{"value":"phone","label":"Phone"},{"value":"mail","label":"Email"},{"value":"lock","label":"Lock"},{"value":"truck","label":"Delivery"},{"value":"box","label":"Package"},{"value":"bag","label":"Shopping bag"},{"value":"search","label":"Search"},{"value":"info","label":"Info"},{"value":"alert","label":"Alert"},{"value":"refresh","label":"Refresh"},{"value":"sparkle","label":"Sparkle"},{"value":"star","label":"Star"},{"value":"target","label":"Target"},{"value":"chart","label":"Chart"},{"value":"home","label":"Home"},{"value":"grid","label":"Grid"},{"value":"test","label":"Self-check"},{"value":"book","label":"Guide"},{"value":"drop","label":"Drop"},{"value":"sun","label":"Sun"},{"value":"moon","label":"Moon"},{"value":"bowl","label":"Food bowl"},{"value":"ban","label":"Quit habit"},{"value":"ruler","label":"Ruler"},{"value":"s-open","label":"Symptom: mouth opening"},{"value":"s-burn","label":"Symptom: burning"},{"value":"s-tight","label":"Symptom: tightness"},{"value":"s-ulcer","label":"Symptom: ulcers"},{"value":"s-bands","label":"Symptom: white bands"},{"value":"s-tongue","label":"Symptom: tongue"},{"value":"s-pain","label":"Symptom: pain"}],
+          "default": "ban"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Stop areca nut products"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Stopping gutkha, supari, pan masala and other areca nut products is an important step in protecting your oral health."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel self-check result"
+    }
+  ]
+}
+{% endschema %}

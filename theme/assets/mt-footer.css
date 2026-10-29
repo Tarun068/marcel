@@ -1,0 +1,26 @@
+.mt-footer { position: relative; background: var(--mt-navy-3); color: rgba(255, 255, 255, .7); padding-block: clamp(56px, 7vw, 88px) 28px; font-size: 15px; border-radius: var(--mt-sheet-r) var(--mt-sheet-r) 0 0; }
+.mt-foot-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(var(--mt-foot-cols, 4), minmax(0, 1fr)); gap: 32px; }
+@media (max-width: 1000px) {
+  .mt-foot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mt-foot-brand { grid-column: 1 / -1; }
+}
+.mt-foot-brand { display: grid; gap: 18px; align-content: start; max-width: 380px; }
+.mt-foot-logo { display: flex; align-items: center; width: fit-content; }
+.mt-foot-logo .mt-logo-img { height: 48px; width: auto; }
+.mt-foot-contact { display: grid; gap: 10px; }
+.mt-foot-contact a { display: inline-flex; align-items: center; gap: 10px; color: var(--mt-on-dark); font-weight: 700; width: fit-content; }
+.mt-foot-contact a:hover { color: var(--mt-mint); }
+.mt-foot-contact .mt-i { width: 18px; height: 18px; color: var(--mt-mint); }
+.mt-foot-col { display: grid; gap: 11px; align-content: start; }
+.mt-foot-col b { color: var(--mt-on-dark); font-size: 13px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 4px; }
+.mt-foot-col a:hover { color: var(--mt-on-dark); text-decoration: underline; text-underline-offset: 3px; }
+.mt-disclaimer { margin-top: 28px; padding: 18px 20px; border-radius: var(--mt-r); background: rgba(255, 255, 255, .05); font-size: 13px; line-height: 1.6; color: rgba(255, 255, 255, .6); }
+.mt-disclaimer a { text-decoration: underline; }
+.mt-foot-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .12); font-size: 13.5px; color: rgba(255, 255, 255, .55); }
+.mt-pay-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.mt-pay-row span { padding: 5px 10px; border-radius: 99px; border: 1px solid rgba(255, 255, 255, .18); color: rgba(255, 255, 255, .8); font-weight: 700; font-size: 12px; letter-spacing: .04em; }
+
+.mt-ai-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 22px; font-size: 14px; font-weight: 700; color: rgba(255, 255, 255, .8); }
+.mt-ai-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.mt-ai-links a { padding: 6px 12px; border-radius: 99px; border: 1px solid rgba(255, 255, 255, .22); font-size: 13px; font-weight: 700; color: var(--mt-on-dark); }
+.mt-ai-links a:hover { border-color: var(--mt-mint); color: var(--mt-mint); }

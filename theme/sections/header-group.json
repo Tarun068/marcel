@@ -1,0 +1,58 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "announcement": {
+      "type": "mt-announcement",
+      "blocks": {
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "text": "Delivery across India",
+            "link": "",
+            "hide_mobile": true
+          }
+        }
+      },
+      "block_order": [
+        "item_3"
+      ],
+      "settings": {}
+    },
+    "header": {
+      "type": "mt-header",
+      "settings": {
+        "logo_height": 48,
+        "logo_height_mobile": 40,
+        "menu": "main-menu",
+        "cta_label": "Book a Consultation",
+        "cta_link": "",
+        "show_whatsapp": false,
+        "show_search": true,
+        "search_placeholder": "Search products, symptoms, guides",
+        "search_popular_heading": "Popular",
+        "search_menu": "",
+        "search_empty_text": "No results for “[q]”. Try “burning”, “Ora-Care” or “specialist”.",
+        "mobile_menu": "",
+        "drawer_cta_label": "Get Help",
+        "drawer_cta_link": "",
+        "show_contact": true,
+        "whatsapp_label": "WhatsApp the Patient HelpDesk"
+      }
+    }
+  },
+  "order": [
+    "announcement",
+    "header"
+  ]
+}

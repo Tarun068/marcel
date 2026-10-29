@@ -1,0 +1,611 @@
+{{ 'mt-symptoms.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mt-symptoms.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign cta_link = section.settings.cta_link | default: settings.mt_link_test | default: routes.root_url
+  assign detail_link = section.settings.detail_button_link | default: settings.mt_link_test | default: routes.root_url
+  assign first = section.blocks.first
+  assign total = section.blocks.size
+  assign count_text = section.settings.count_text | replace: '[n]', '0' | replace: '[total]', total
+  assign art = false
+  if section.settings.icon_style == 'illustrated'
+    assign art = true
+  endif
+  assign first_art = false
+  assign first_pre = first.settings.icon | slice: 0, 2
+  if art and first_pre == 's-'
+    assign first_art = true
+  endif
+-%}
+{%- if art -%}{% render 'mt-symptom-art' %}{%- endif -%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-symptoms' %}">
+  <div class="mt-wrap">
+    {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
+
+    {%- if total > 0 -%}
+      <mt-symptoms
+        class="mt-sym-layout"
+        data-count-text="{{ section.settings.count_text | escape }}"
+        data-msg-none="{{ section.settings.msg_none | escape }}"
+        data-msg-one="{{ section.settings.msg_one | escape }}"
+        data-msg-few="{{ section.settings.msg_few | escape }}"
+        data-msg-many="{{ section.settings.msg_many | escape }}"
+        data-many-from="{{ section.settings.many_from }}"
+      >
+        <div class="mt-sym-grid">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign pre = block.settings.icon | slice: 0, 2
+              assign use_art = false
+              if art and pre == 's-'
+                assign use_art = true
+              endif
+            -%}
+            <button
+              type="button"
+              class="mt-sym{% if forloop.first %} is-viewing{% endif %}"
+              aria-pressed="false"
+              data-icon="{{ block.settings.icon }}"
+              data-art="{{ use_art }}"
+              data-title="{{ block.settings.title | escape }}"
+              data-text="{{ block.settings.text | escape }}"
+              {{ block.shopify_attributes }}
+            >
+              {%- if block.settings.image != blank -%}
+                <span class="mt-sym-img">{{ block.settings.image | image_url: width: 480 | image_tag: loading: 'lazy', widths: '240, 360, 480', sizes: '(min-width: 921px) 200px, 45vw', alt: '' }}</span>
+              {%- elsif use_art -%}
+                <span class="mt-sym-art"><svg viewBox="0 0 80 80" aria-hidden="true" focusable="false"><use href="#mt-sx-{{ block.settings.icon }}"/></svg></span>
+              {%- else -%}
+                <span class="mt-sym-ico">{%- render 'mt-icon', icon: block.settings.icon -%}</span>
+              {%- endif -%}
+              <span class="mt-sym-txt">
+                <b>{{ block.settings.title | escape }}</b>
+                {%- if block.settings.short != blank -%}<small>{{ block.settings.short | escape }}</small>{%- endif -%}
+              </span>
+              <span class="mt-sym-tick">{%- render 'mt-icon', icon: 'check' -%}</span>
+            </button>
+          {%- endfor -%}
+          {%- if section.settings.tile_title != blank or section.settings.cta_text != blank or section.settings.cta_label != blank -%}
+            <div class="mt-sym-cta">
+              {%- if section.settings.tile_title != blank -%}
+                <b>{%- render 'mt-icon', icon: 'info' -%}{{ section.settings.tile_title | escape }}</b>
+              {%- endif -%}
+              {%- if section.settings.cta_text != blank -%}<span>{{ section.settings.cta_text | escape }}</span>{%- endif -%}
+              {%- if section.settings.cta_label != blank -%}
+                <a class="mt-link" href="{{ cta_link }}">
+                  {{- section.settings.cta_label | escape -}}
+                  {%- render 'mt-icon', icon: 'arrow-right' -%}
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+
+        <aside class="mt-sym-detail" aria-live="polite">
+          <span class="mt-sym-detail-ico{% if first_art %} is-art{% endif %}" data-mt-ico>
+            {%- if first_art -%}
+              <svg viewBox="0 0 80 80" aria-hidden="true" focusable="false"><use href="#mt-sx-{{ first.settings.icon }}"/></svg>
+            {%- else -%}
+              <svg class="mt-i" aria-hidden="true" focusable="false"><use href="#mt-i-{{ first.settings.icon }}"/></svg>
+            {%- endif -%}
+          </span>
+          <h3 data-mt-title>{{ first.settings.title | escape }}</h3>
+          <p data-mt-text>{{ first.settings.text | escape }}</p>
+          <div class="mt-sym-meter">
+            <div class="mt-sym-bars" style="--mt-cols: {{ total }};">
+              {%- for block in section.blocks -%}<i></i>{%- endfor -%}
+            </div>
+            <p>
+              <b data-mt-count>{{ count_text | escape }}</b>
+              <span data-mt-msg>{{ section.settings.msg_none | escape }}</span>
+            </p>
+          </div>
+          {%- if section.settings.detail_button_label != blank -%}
+            <div class="mt-btn-row">
+              <a class="mt-btn mt-btn-light" href="{{ detail_link }}">
+                {{- section.settings.detail_button_label | escape -}}
+                {%- render 'mt-icon', icon: 'arrow-right' -%}
+              </a>
+            </div>
+          {%- endif -%}
+        </aside>
+      </mt-symptoms>
+    {%- else -%}
+      <p class="mt-placeholder">Add "Symptom" blocks to build the grid.</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel symptoms",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Know the signs"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Do these symptoms sound familiar?"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "Tap the ones you have noticed. We’ll explain what each one means."
+    },
+    {
+      "type": "select",
+      "id": "icon_style",
+      "label": "Symptom icons",
+      "options": [
+        {
+          "value": "illustrated",
+          "label": "Illustrated, in colour"
+        },
+        {
+          "value": "line",
+          "label": "Line icons"
+        }
+      ],
+      "default": "illustrated"
+    },
+    {
+      "type": "header",
+      "content": "Last tile"
+    },
+    {
+      "type": "text",
+      "id": "tile_title",
+      "label": "Title",
+      "default": "Good to know"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_text",
+      "label": "Text",
+      "default": "These signs often build up slowly, and some can have other causes. If any of them last more than two weeks or keep coming back, have your mouth checked."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Link label",
+      "info": "Optional. The panel on the right already has a button."
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Link",
+      "info": "Empty uses the self-check page from Theme settings."
+    },
+    {
+      "type": "header",
+      "content": "Detail panel"
+    },
+    {
+      "type": "text",
+      "id": "count_text",
+      "label": "Counter",
+      "info": "[n] is the number selected, [total] the number of symptoms.",
+      "default": "[n] of [total] selected."
+    },
+    {
+      "type": "text",
+      "id": "msg_none",
+      "label": "Message when none selected",
+      "default": "Tap each symptom you have noticed in the last few months."
+    },
+    {
+      "type": "text",
+      "id": "msg_one",
+      "label": "Message for one",
+      "default": "One sign on its own can be mild. The self-check will tell you more."
+    },
+    {
+      "type": "text",
+      "id": "msg_few",
+      "label": "Message for a few",
+      "info": "[n] is the number selected.",
+      "default": "[n] signs together are worth checking. Take the self-check to see your likely stage."
+    },
+    {
+      "type": "text",
+      "id": "msg_many",
+      "label": "Message for many",
+      "info": "[n] is the number selected.",
+      "default": "[n] signs together can point to a later stage. Please take the self-check and talk to an expert soon."
+    },
+    {
+      "type": "range",
+      "id": "many_from",
+      "label": "Show the \"many\" message from",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "text",
+      "id": "detail_button_label",
+      "label": "Button label",
+      "default": "Check Your OSMF Stage"
+    },
+    {
+      "type": "url",
+      "id": "detail_button_link",
+      "label": "Button link",
+      "info": "Empty uses the self-check page from Theme settings."
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "normal"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "symptom",
+      "name": "Symptom",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "arrow-right",
+              "label": "Arrow"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "video",
+              "label": "Video call"
+            },
+            {
+              "value": "whatsapp",
+              "label": "WhatsApp"
+            },
+            {
+              "value": "clinic",
+              "label": "Clinic"
+            },
+            {
+              "value": "doctor",
+              "label": "Doctor"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "flask",
+              "label": "Research flask"
+            },
+            {
+              "value": "patent",
+              "label": "Patent document"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "users",
+              "label": "People"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "india",
+              "label": "Globe"
+            },
+            {
+              "value": "pin",
+              "label": "Location pin"
+            },
+            {
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "value": "mail",
+              "label": "Email"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "truck",
+              "label": "Delivery"
+            },
+            {
+              "value": "box",
+              "label": "Package"
+            },
+            {
+              "value": "bag",
+              "label": "Shopping bag"
+            },
+            {
+              "value": "search",
+              "label": "Search"
+            },
+            {
+              "value": "info",
+              "label": "Info"
+            },
+            {
+              "value": "alert",
+              "label": "Alert"
+            },
+            {
+              "value": "refresh",
+              "label": "Refresh"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "target",
+              "label": "Target"
+            },
+            {
+              "value": "chart",
+              "label": "Chart"
+            },
+            {
+              "value": "home",
+              "label": "Home"
+            },
+            {
+              "value": "grid",
+              "label": "Grid"
+            },
+            {
+              "value": "test",
+              "label": "Self-check"
+            },
+            {
+              "value": "book",
+              "label": "Guide"
+            },
+            {
+              "value": "drop",
+              "label": "Drop"
+            },
+            {
+              "value": "sun",
+              "label": "Sun"
+            },
+            {
+              "value": "moon",
+              "label": "Moon"
+            },
+            {
+              "value": "bowl",
+              "label": "Food bowl"
+            },
+            {
+              "value": "ban",
+              "label": "Quit habit"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "s-open",
+              "label": "Symptom: mouth opening"
+            },
+            {
+              "value": "s-burn",
+              "label": "Symptom: burning"
+            },
+            {
+              "value": "s-tight",
+              "label": "Symptom: tightness"
+            },
+            {
+              "value": "s-ulcer",
+              "label": "Symptom: ulcers"
+            },
+            {
+              "value": "s-bands",
+              "label": "Symptom: white bands"
+            },
+            {
+              "value": "s-tongue",
+              "label": "Symptom: tongue"
+            },
+            {
+              "value": "s-pain",
+              "label": "Symptom: pain"
+            }
+          ],
+          "default": "s-open"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Symptom",
+          "default": "Difficulty opening mouth"
+        },
+        {
+          "type": "text",
+          "id": "short",
+          "label": "Short line",
+          "info": "Shown under the title on the card.",
+          "default": "Your mouth no longer opens as wide as before."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Optional. Replaces the icon. Use the same style of photo or illustration on every card."
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "What it means",
+          "default": "Your jaw doesn’t open as wide as it used to, and even a two-finger gap starts to feel like a stretch. Mouth opening is the main measure used to describe the stage of OSMF."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel symptoms",
+      "blocks": [
+        {
+          "type": "symptom",
+          "settings": {
+            "icon": "s-open",
+            "title": "Difficulty opening mouth",
+            "short": "Your mouth no longer opens as wide as before.",
+            "text": "Your jaw doesn’t open as wide as it used to, and even a two-finger gap starts to feel like a stretch. Mouth opening is the main measure used to describe the stage of OSMF."
+          }
+        },
+        {
+          "type": "symptom",
+          "settings": {
+            "icon": "s-burn",
+            "title": "Burning while eating",
+            "short": "Spicy or sour food stings more than it used to.",
+            "text": "A sharp, burning feeling that flares up with spicy or sour food. If everyday meals have started to sting, the inside of your mouth needs a closer look."
+          }
+        },
+        {
+          "type": "symptom",
+          "settings": {
+            "icon": "s-tight",
+            "title": "Tightness inside mouth",
+            "short": "Cheeks or lips feel stiff and less flexible.",
+            "text": "A stiff, band-like tightness across the cheeks or inner lips, as if the tissue has less give. Doctors check for this tightening during an oral exam."
+          }
+        },
+        {
+          "type": "symptom",
+          "settings": {
+            "icon": "s-ulcer",
+            "title": "Ulcers",
+            "short": "Sores or raw patches that are slow to heal.",
+            "text": "Small sores or raw patches that last longer than a normal mouth ulcer. Any ulcer that doesn’t heal within two weeks should be checked by a doctor."
+          }
+        },
+        {
+          "type": "symptom",
+          "settings": {
+            "icon": "s-bands",
+            "title": "White bands",
+            "short": "Pale, firm streaks along the cheeks or gums.",
+            "text": "Pale, fibrous streaks or patches along the cheeks or gums. They can feel leathery to the touch and are a common sign of tissue changes."
+          }
+        },
+        {
+          "type": "symptom",
+          "settings": {
+            "icon": "s-tongue",
+            "title": "Reduced tongue movement",
+            "short": "Harder to stick out or move your tongue.",
+            "text": "Trouble sticking your tongue out fully or moving it from side to side. A tongue that feels tied down is worth mentioning to a doctor."
+          }
+        },
+        {
+          "type": "symptom",
+          "settings": {
+            "icon": "s-pain",
+            "title": "Pain while eating",
+            "short": "Chewing hurts, especially harder foods.",
+            "text": "Discomfort or pain while chewing, especially with harder or drier foods. If mealtimes have started to hurt, don’t ignore it."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

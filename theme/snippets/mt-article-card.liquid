@@ -1,0 +1,38 @@
+{%- comment -%}
+  Patient guide article card: image (or an icon), read time and title.
+  The icon comes from a tag like "icon:ruler"; without one it shows a book.
+
+  Accepts:
+  - article: {Object} article
+  - read_label: {String} read time label, [n] is the minutes, default '[n] min read'
+  - show_image: {Boolean} show the featured image when there is one
+  - sizes: {String} image sizes attribute
+
+  Usage:
+  {% render 'mt-article-card', article: article, read_label: section.settings.read_label, show_image: true %}
+{%- endcomment -%}
+{%- liquid
+  assign icon = 'book'
+  for tag in article.tags
+    assign t = tag | downcase
+    if t contains 'icon:'
+      assign icon = t | remove: 'icon:' | strip
+    endif
+  endfor
+  assign words = article.content | strip_html | split: ' ' | size
+  assign minutes = words | plus: 179 | divided_by: 180 | floor | at_least: 1
+  assign label = read_label | default: '[n] min read'
+  assign read = label | replace: '[n]', minutes
+  assign alt = article.image.alt | default: article.title
+-%}
+<a class="mt-art-card" href="{{ article.url }}">
+  <span class="mt-art-media">
+    {%- if show_image and article.image -%}
+      {{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: alt, sizes: sizes, widths: '320, 480, 640, 800' }}
+    {%- else -%}
+      {%- render 'mt-icon', icon: icon -%}
+    {%- endif -%}
+  </span>
+  <small>{{ read | escape }}</small>
+  <h3>{{ article.title | escape }}</h3>
+</a>

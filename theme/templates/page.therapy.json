@@ -1,0 +1,342 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "mt-page-hero",
+      "settings": {
+        "show_crumbs": true,
+        "home_label": "Home",
+        "button_1_to": "test",
+        "button_2_to": "custom",
+        "back_to": "therapy",
+        "background": "tint",
+        "sheet": false,
+        "spacing": "none",
+        "current_label": "MARCEL OMR Therapy™",
+        "eyebrow": "MARCEL OMR Therapy™",
+        "heading": "A structured approach to oral mucosal care",
+        "text": "MARCEL OMR Therapy™ provides a planned framework for OSMF care rather than relying on random or inconsistent product use. It brings together oral mucosal care, functional support and guided progress.",
+        "button_1_label": "Check Your OSMF Stage",
+        "button_2_label": "Explore MARCEL OMR Therapy™",
+        "button_2_link": "#overview"
+      }
+    },
+    "overview": {
+      "type": "mt-journey",
+      "settings": {
+        "eyebrow": "Therapy overview",
+        "heading": "The MARCEL 3-Pillar Approach",
+        "text": "Three connected pillars. One structured approach to OSMF care.",
+        "center": false,
+        "layout": "cards",
+        "columns": 3,
+        "note": "Individual response to care varies. MARCEL OMR Therapy™ is not a guarantee of cure or reversal of OSMF. Clinical assessment may be required depending on symptoms and disease stage.",
+        "button_label": "Explore the 12-Week Care Journey",
+        "button_to": "journey",
+        "button2_to": "consult",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal",
+        "anchor": "overview"
+      },
+      "blocks": {
+        "phase_1": {
+          "type": "phase",
+          "settings": {
+            "when": "01 — Oral mucosal care",
+            "icon": "shield",
+            "title": "Care for the mouth. Support comfort.",
+            "text": "A structured oral-care regimen designed to support oral mucosal health and help manage common OSMF-related discomfort such as burning, tightness and difficulty with eating."
+          }
+        },
+        "phase_2": {
+          "type": "phase",
+          "settings": {
+            "when": "02 — Functional support",
+            "icon": "s-open",
+            "title": "Support what matters in daily life.",
+            "text": "Mouth opening is an important functional measure in OSMF. The MARCEL approach incorporates regular mouth-opening exercises and, where appropriate, an optional mouth-opening device as an adjunct.",
+            "foot": "Focus: Mouth opening • Chewing • Oral function"
+          }
+        },
+        "phase_3": {
+          "type": "phase",
+          "settings": {
+            "when": "03 — Guided care & progress",
+            "icon": "chart",
+            "title": "Track. Review. Stay supported.",
+            "text": "Structured progress tracking, the 3-Week Progress Tracker, scheduled progress reviews and access to the In-house OSMF Consultant. Where clinical assessment is required, patients can be guided towards MARCEL OSMF Care Specialists.",
+            "foot": "Focus: Progress tracking • Guidance • Specialist care"
+          }
+        }
+      },
+      "block_order": [
+        "phase_1",
+        "phase_2",
+        "phase_3"
+      ]
+    },
+    "pathways": {
+      "type": "mt-pathways",
+      "settings": {
+        "eyebrow": "Choose your pathway",
+        "heading": "Foundation or Advance",
+        "text": "Each pathway is associated with a professionally assessed stage of OSMF. The self-check gives only an initial indication, and a qualified healthcare professional must confirm the diagnosis and stage.",
+        "center": false,
+        "note": "MARCEL OMR Therapy™ is intended to support OSMF management in appropriate patients. This information is for education only. Please consult a MARCEL OSMF Care Specialist or a qualified healthcare professional for individual assessment and guidance.",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal",
+        "anchor": "pathways"
+      },
+      "blocks": {
+        "pathway_1": {
+          "type": "pathway",
+          "settings": {
+            "tone": "teal",
+            "stages": "Stage 1 – 2",
+            "title": "MARCEL OMR Therapy™ Foundation",
+            "subtitle": "For earlier-stage OSMF symptoms and functional restriction.",
+            "bands": "Stage 1 | More than 35 mm, with symptoms\nStage 2 | 26 – 35 mm",
+            "points": "Burning or cheek tightness\nDifficulty chewing may be present\nModerate restriction in mouth opening at Stage 2",
+            "summary": "May be considered based on individual assessment.",
+            "button_label": "Explore Foundation",
+            "link_to": "foundation"
+          }
+        },
+        "pathway_2": {
+          "type": "pathway",
+          "settings": {
+            "tone": "blue",
+            "stages": "Stage 3 – 4",
+            "title": "MARCEL OMR Therapy™ Advance",
+            "subtitle": "For greater restriction in mouth opening and oral function.",
+            "bands": "Stage 3 | 15 – 25 mm\nStage 4 | Less than 15 mm",
+            "points": "Greater restriction in mouth opening\nBurning and cheek tightness commonly present\nDifficulty chewing common\nDifficulty in tongue movement may be present",
+            "summary": "May be considered with professional guidance.",
+            "button_label": "Explore Advance",
+            "link_to": "advance"
+          }
+        }
+      },
+      "block_order": [
+        "pathway_1",
+        "pathway_2"
+      ]
+    },
+    "journey": {
+      "type": "mt-journey",
+      "settings": {
+        "eyebrow": "The 12-Week Care Journey",
+        "heading": "Four phases to organise routine and follow-up",
+        "text": "The phases are a care-planning framework, not a promise of a specific result by a fixed date.",
+        "center": false,
+        "layout": "cards",
+        "columns": 4,
+        "note": "Individual experiences vary. This is not a clinical-trial timeline or a guarantee of tissue restoration or specific improvement.",
+        "button_label": "Explore the 12-Week Care Journey",
+        "button_to": "journey",
+        "button2_to": "consult",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      },
+      "blocks": {
+        "phase_1": {
+          "type": "phase",
+          "settings": {
+            "when": "Weeks 1–2",
+            "icon": "calendar",
+            "title": "Relief",
+            "text": "Establish the routine and focus on comfort."
+          }
+        },
+        "phase_2": {
+          "type": "phase",
+          "settings": {
+            "when": "Weeks 3–6",
+            "icon": "calendar",
+            "title": "Activation",
+            "text": "Build consistency and follow prescribed exercises."
+          }
+        },
+        "phase_3": {
+          "type": "phase",
+          "settings": {
+            "when": "Weeks 6–10",
+            "icon": "calendar",
+            "title": "Restoration",
+            "text": "Continue the routine and review comfort and function with professional guidance."
+          }
+        },
+        "phase_4": {
+          "type": "phase",
+          "settings": {
+            "when": "Weeks 11–12",
+            "icon": "calendar",
+            "title": "Reinforcement",
+            "text": "Reinforce daily habits and follow-up."
+          }
+        }
+      },
+      "block_order": [
+        "phase_1",
+        "phase_2",
+        "phase_3",
+        "phase_4"
+      ]
+    },
+    "support": {
+      "type": "mt-support",
+      "settings": {
+        "eyebrow": "Patient support",
+        "heading": "Two ways to get the right guidance",
+        "text": "Programme guidance and clinical assessment are different services. Choose the one that fits what you need now.",
+        "center": false,
+        "note": "The MARCEL OSMF Consultant gives programme information and next-step guidance. Diagnosis, staging and treatment decisions are made by a qualified healthcare professional.",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      },
+      "blocks": {
+        "route_1": {
+          "type": "route",
+          "settings": {
+            "icon": "phone",
+            "eyebrow": "Option A",
+            "title": "MARCEL OSMF Consultant",
+            "subtitle": "In-house, on-call consultation",
+            "text": "Discuss your concerns remotely and understand the next step.",
+            "button_label": "Talk to a MARCEL OSMF Consultant",
+            "link_to": "consult",
+            "link2_to": "whatsapp",
+            "points": "Programme information and next steps\nGuidance on the MARCEL OMR Therapy™ pathways\nHelp finding a professional assessment",
+            "button2_label": ""
+          }
+        },
+        "route_2": {
+          "type": "route",
+          "settings": {
+            "icon": "doctor",
+            "eyebrow": "Option B",
+            "title": "OSMF Specialist Doctors",
+            "subtitle": "In-clinic, in-person consultation",
+            "text": "A doctor can examine your mouth, assess mouth opening and evaluate oral tissue changes directly.",
+            "button_label": "Find an OSMF Specialist Doctor",
+            "link_to": "specialists",
+            "link2_to": "whatsapp",
+            "points": "Qualified clinical assessment\nEvaluation of symptoms and mouth opening\nProfessional guidance on diagnosis and management",
+            "button2_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "route_1",
+        "route_2"
+      ]
+    },
+    "faq": {
+      "type": "mt-faq",
+      "settings": {
+        "eyebrow": "Questions",
+        "heading": "About MARCEL OMR Therapy™",
+        "open_first": false,
+        "one_at_a_time": false,
+        "schema_markup": true,
+        "show_help": true,
+        "help_title": "Have questions?",
+        "help_text": "Our In-house OSMF Consultant can help with programme questions and your next step.",
+        "whatsapp_label": "WhatsApp the Patient HelpDesk",
+        "link_label": "See all FAQs",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal",
+        "link": "/pages/faq"
+      },
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "What is MARCEL OMR Therapy™?",
+            "answer": "<p>MARCEL OMR Therapy™ is a structured approach to oral mucosal care. It provides a planned framework for care rather than relying on random or inconsistent product use. The appropriate approach and products depend on the individual’s needs and the approved instructions for each product.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Can MARCEL OMR Therapy™ help improve mouth opening?",
+            "answer": "<p>Supporting oral comfort and function may be part of the care goal, but the amount of change in mouth opening varies from person to person. It depends on the degree of restriction, the individual’s condition and the care plan. A consultation with an OSMF Consultant can help establish a baseline and discuss realistic goals.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Will it completely cure OSMF or restore my mouth to how it was before?",
+            "answer": "<p>A complete cure or a return to exactly the same mouth opening cannot be promised. The focus is to assess the condition, address symptoms and work toward the best achievable function for the individual. A qualified OSMF Specialist doctor can explain the options after assessing the case.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Is MARCEL OMR Therapy™ only for early-stage OSMF?",
+            "answer": "<p>The care needed depends on the person’s symptoms, mouth opening and clinical findings, not simply on an assumed stage. People with more restricted mouth opening should be assessed to determine the appropriate plan and whether additional medical care is needed.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "How soon will I notice a result?",
+            "answer": "<p>There is no single timeline that applies to everyone. Burning, eating comfort and mouth opening are different outcomes and may change at different rates. Follow the recommended care plan and arrange a review if progress is not as expected.</p>"
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "Do I need to use every component of the recommended care plan?",
+            "answer": "<p>The components may serve different purposes, so do not assume that using one product alone will provide the same approach. Follow the care plan recommended for you and the approved instructions supplied with each product. If you are unsure what to use, ask the OSMF Consultant before changing the plan.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6"
+      ]
+    },
+    "cta": {
+      "type": "mt-cta-band",
+      "settings": {
+        "eyebrow": "Need guidance?",
+        "heading": "Not sure what to do next?",
+        "text": "Explore MARCEL OMR Therapy™ or connect with our team to understand the next steps.",
+        "button_1_label": "Talk to a MARCEL OSMF Consultant",
+        "button_1_to": "consult",
+        "button_2_label": "Find an OSMF Specialist Doctor",
+        "button_2_to": "specialists",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "overview",
+    "pathways",
+    "journey",
+    "support",
+    "faq",
+    "cta"
+  ]
+}

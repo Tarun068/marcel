@@ -1,0 +1,128 @@
+{%- comment -%}
+  Marcel product card. Details come from the product's "marcel" metafields; a section block can override them.
+
+  Accepts:
+  - product: {Object} product (optional on the home page, where block content can stand in)
+  - block: {Object} section block whose settings override the metafields (optional)
+  - section_id: {String} section id
+  - add_label: {String} add to cart label
+  - sold_out_label: {String} sold out label
+  - image_fit: {String} 'cover' | 'contain'
+  - sizes: {String} image sizes attribute
+  - fallback_url: {String} link when there is no product
+  - details_label: {String} label of the product-details link (optional)
+  - enquire_label: {String} WhatsApp enquiry label shown instead of Add to cart while prices are hidden (optional)
+
+  Metafields used (namespace marcel): type_label, size, role, step, color, benefits (list), best_for, art, kit_items (list of products).
+
+  Usage:
+  {% render 'mt-product-card', product: product, section_id: section.id %}
+{%- endcomment -%}
+{%- capture handle_art -%}{% render 'mt-art-for', product: product %}{%- endcapture -%}
+{%- capture defaults -%}{% render 'mt-product-defaults', product: product %}{%- endcapture -%}
+{%- liquid
+  assign d = defaults | split: '|'
+  assign mf = product.metafields.marcel
+  assign title = block.settings.title | default: product.title
+  assign meta = block.settings.meta
+  if meta == blank and mf.type_label.value != blank
+    assign meta = mf.type_label.value
+    if mf.size.value != blank
+      assign meta = meta | append: ' · ' | append: mf.size.value
+    endif
+  endif
+  if meta == blank
+    assign meta = d[2]
+  endif
+  assign role = block.settings.role | default: mf.role.value | default: d[0]
+  assign step = block.settings.step | default: mf.step.value
+  assign color = block.settings.color | default: mf.color.value | default: d[1] | default: '#077C87'
+  assign badge = block.settings.badge
+  if badge == blank
+    assign badge = 'step'
+    if mf.kit_items.value.size > 0
+      assign badge = 'sparkle'
+    endif
+  endif
+  assign best = block.settings.best
+  if best == blank and mf.best_for.value != blank
+    assign best = 'Best for ' | append: mf.best_for.value
+  endif
+  if best == blank
+    assign best = d[3]
+  endif
+  assign image = block.settings.image | default: product.featured_image
+  assign art = block.settings.art | default: handle_art | default: 'none'
+  assign url = product.url | default: fallback_url | default: routes.all_products_collection_url
+  assign add = add_label | default: 'Add to cart'
+  assign form_id = 'MtProductForm-' | append: section_id | append: '-' | append: product.id | append: block.id
+-%}
+<article class="mt-pcard" style="--pc: {{ color }};" {{ block.shopify_attributes }}>
+  <a class="mt-pmedia" href="{{ url }}" aria-label="{{ title | escape }}">
+    {%- if role != blank -%}
+      <span class="mt-role{% if badge == 'none' or badge == 'step' and step == blank %} mt-role--plain{% endif %}">
+        {%- unless badge == 'none' or badge == 'step' and step == blank -%}
+          <i>
+            {%- if badge == 'sparkle' -%}
+              {%- render 'mt-icon', icon: 'sparkle' -%}
+            {%- else -%}
+              {{- step | escape -}}
+            {%- endif -%}
+          </i>
+        {%- endunless -%}
+        {{- role | escape -}}
+      </span>
+    {%- endif -%}
+    {%- render 'mt-pack-media', image: image, art: art, kit: mf.kit_items.value, alt: title, sizes: sizes, fit: image_fit -%}
+  </a>
+  <div class="mt-pbody">
+    <h3><a href="{{ url }}">{{ title | escape }}</a></h3>
+    {%- if meta != blank -%}<p class="mt-pmeta">{{ meta | escape }}</p>{%- endif -%}
+    {%- if block.settings.benefits != blank -%}
+      {%- assign lines = block.settings.benefits | newline_to_br | split: '<br />' -%}
+      <ul class="mt-checks">
+        {%- for line in lines -%}
+          {%- assign line = line | strip -%}
+          {%- if line != blank -%}<li>{%- render 'mt-icon', icon: 'check' -%}<span>{{ line | escape }}</span></li>{%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- elsif mf.benefits.value.size > 0 -%}
+      <ul class="mt-checks">
+        {%- for line in mf.benefits.value limit: 3 -%}
+          <li>{%- render 'mt-icon', icon: 'check' -%}<span>{{ line | escape }}</span></li>
+        {%- endfor -%}
+      </ul>
+    {%- elsif d[4] != blank -%}
+      {%- assign lines = d[4] | split: ';' -%}
+      <ul class="mt-checks">
+        {%- for line in lines -%}
+          <li>{%- render 'mt-icon', icon: 'check' -%}<span>{{ line | escape }}</span></li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+    {%- if best != blank -%}
+      <p class="mt-best">{%- render 'mt-icon', icon: 'target' -%}{{ best | escape }}</p>
+    {%- endif -%}
+    {%- if details_label != blank -%}
+      <a class="mt-link mt-pdetails" href="{{ url }}">{{ details_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>
+    {%- endif -%}
+    <div class="mt-pfoot">
+      {%- render 'mt-price', product: product -%}
+      {%- if settings.mt_hide_prices and settings.mt_whatsapp_number != blank -%}
+        {%- assign enquiry = settings.mt_enquire_message | default: 'Hi MARCEL team, I would like to know more about' | append: ' ' | append: title -%}
+        {%- capture wa -%}{% render 'mt-wa-url', message: enquiry %}{%- endcapture -%}
+        <a class="mt-btn mt-btn-wa mt-btn-sm" href="{{ wa }}" target="_blank" rel="noopener">{%- render 'mt-icon', icon: 'whatsapp' -%}{{ enquire_label | default: settings.mt_enquire_label | default: 'Enquire' | escape }}</a>
+      {%- else -%}
+      {%- render 'mt-buy-button',
+        product: product,
+        form_id: form_id,
+        section_id: section_id,
+        label: add,
+        sold_out_label: sold_out_label,
+        class: 'mt-btn mt-btn-primary mt-btn-sm',
+        fallback_url: url
+      -%}
+      {%- endif -%}
+    </div>
+  </div>
+</article>

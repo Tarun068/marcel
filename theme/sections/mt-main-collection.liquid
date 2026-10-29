@@ -1,0 +1,315 @@
+{{ 'mt-pages.css' | asset_url | stylesheet_tag }}
+{{ 'mt-products.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'mt-filter.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign test_link = section.settings.promo_link | default: settings.mt_link_test | default: routes.root_url
+  assign label_lines = section.settings.type_labels | newline_to_br | split: '<br />'
+  assign card_sizes = '(min-width: 1200px) 380px, (min-width: 961px) 31vw, (min-width: 761px) 46vw, 92vw'
+  assign hidden_count = 0
+  for p in collection.products
+    if p.tags contains 'mt-hidden'
+      assign hidden_count = hidden_count | plus: 1
+    endif
+  endfor
+  assign shown_count = collection.products_count | minus: hidden_count
+-%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-collection' %}">
+  <div class="mt-wrap">
+    {%- paginate collection.products by section.settings.per_page -%}
+      <mt-filter data-count-one="{{ section.settings.count_one | escape }}" data-count-many="{{ section.settings.count_many | escape }}">
+        <div class="mt-toolbar">
+          {%- if section.settings.show_filters and collection.all_types.size > 1 -%}
+            <div class="mt-chips" role="group" aria-label="{{ section.settings.filter_label | escape }}">
+              <button type="button" class="mt-fchip" data-mt-filter="all" aria-pressed="true">{{ section.settings.all_label | escape }}</button>
+              {%- for type in collection.all_types -%}
+                {%- liquid
+                  assign label = type
+                  for line in label_lines
+                    assign parts = line | strip | split: '|'
+                    assign key = parts[0] | strip | downcase
+                    assign t = type | downcase
+                    if key == t and parts[1] != blank
+                      assign label = parts[1] | strip
+                    endif
+                  endfor
+                -%}
+                <button type="button" class="mt-fchip" data-mt-filter="{{ type | handleize }}" aria-pressed="false">{{ label | escape }}</button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+          <span class="mt-count-text" data-mt-count>
+            {%- if shown_count == 1 -%}
+              {{- section.settings.count_one | replace: '[n]', shown_count -}}
+            {%- else -%}
+              {{- section.settings.count_many | replace: '[n]', shown_count -}}
+            {%- endif -%}
+          </span>
+        </div>
+
+        <div class="mt-pgrid">
+          {%- for product in collection.products -%}
+            {%- if product.tags contains 'mt-hidden' -%}{%- continue -%}{%- endif -%}
+            <div class="mt-filter-item" data-type="{{ product.type | handleize }}">
+              {%- render 'mt-product-card',
+                product: product,
+                section_id: section.id,
+                add_label: section.settings.add_label,
+                details_label: section.settings.details_label,
+                sold_out_label: section.settings.sold_out_label,
+                image_fit: section.settings.image_fit,
+                sizes: card_sizes
+              -%}
+            </div>
+          {%- else -%}
+            <p class="mt-placeholder">{{ section.settings.empty_text | escape }}</p>
+          {%- endfor -%}
+          {%- if section.settings.show_promo -%}
+            <div class="mt-promo-card mt-on-dark" data-mt-promo>
+              <div class="mt-stack-sm">
+                {%- if section.settings.promo_eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.promo_eyebrow | escape }}</span>{%- endif -%}
+                <h3>{{ section.settings.promo_heading | escape }}</h3>
+                {%- if section.settings.promo_text != blank -%}<p>{{ section.settings.promo_text | escape }}</p>{%- endif -%}
+              </div>
+              <a class="mt-btn mt-btn-light" href="{{ test_link }}">
+                {{- section.settings.promo_label | escape -}}
+                {%- render 'mt-icon', icon: 'arrow-right' -%}
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+      </mt-filter>
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="mt-pagination" aria-label="Pagination">
+          {%- if paginate.previous -%}
+            <a class="mt-btn mt-btn-secondary mt-btn-sm" href="{{ paginate.previous.url }}">{%- render 'mt-icon', icon: 'arrow-left' -%}{{ section.settings.prev_label | escape }}</a>
+          {%- endif -%}
+          <span class="mt-count-text">{{ paginate.current_page }} / {{ paginate.pages }}</span>
+          {%- if paginate.next -%}
+            <a class="mt-btn mt-btn-secondary mt-btn-sm" href="{{ paginate.next.url }}">{{ section.settings.next_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>
+          {%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel product grid",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "range",
+      "id": "per_page",
+      "label": "Products per page",
+      "min": 6,
+      "max": 48,
+      "step": 3,
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Filters"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_filters",
+      "label": "Show product type filters",
+      "info": "Built from each product’s Product type, for example Kit, Oral spray, Oral rinse, Toothpaste.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "filter_label",
+      "label": "Filters label (for screen readers)",
+      "default": "Filter products"
+    },
+    {
+      "type": "text",
+      "id": "all_label",
+      "label": "All label",
+      "default": "All"
+    },
+    {
+      "type": "textarea",
+      "id": "type_labels",
+      "label": "Filter names",
+      "info": "Optional. One per line: product type | label, for example Kit | Kits.",
+      "default": "Device | Devices"
+    },
+    {
+      "type": "text",
+      "id": "count_one",
+      "label": "Count, one product",
+      "default": "[n] product"
+    },
+    {
+      "type": "text",
+      "id": "count_many",
+      "label": "Count, several products",
+      "default": "[n] products"
+    },
+    {
+      "type": "header",
+      "content": "Cards"
+    },
+    {
+      "type": "text",
+      "id": "details_label",
+      "label": "Product details link",
+      "info": "Leave empty to hide.",
+      "default": "View product details"
+    },
+    {
+      "type": "text",
+      "id": "add_label",
+      "label": "Add to cart label",
+      "default": "Add to cart"
+    },
+    {
+      "type": "text",
+      "id": "sold_out_label",
+      "label": "Sold out label",
+      "default": "Sold out"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Fill the square"
+        },
+        {
+          "value": "contain",
+          "label": "Show the whole image"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "text",
+      "id": "empty_text",
+      "label": "Empty collection text",
+      "default": "No products here yet."
+    },
+    {
+      "type": "text",
+      "id": "prev_label",
+      "label": "Previous page label",
+      "default": "Previous"
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "Next page label",
+      "default": "Next"
+    },
+    {
+      "type": "header",
+      "content": "Self-check card"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_promo",
+      "label": "Show self-check card after the products",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "promo_eyebrow",
+      "label": "Eyebrow",
+      "default": "Not sure where to start?"
+    },
+    {
+      "type": "text",
+      "id": "promo_heading",
+      "label": "Heading",
+      "default": "Check your OSMF stage"
+    },
+    {
+      "type": "textarea",
+      "id": "promo_text",
+      "label": "Text",
+      "default": "Answer a few simple questions about your mouth opening and symptoms. The self-check gives an initial indication and cannot diagnose OSMF."
+    },
+    {
+      "type": "text",
+      "id": "promo_label",
+      "label": "Button label",
+      "default": "Check Your OSMF Stage"
+    },
+    {
+      "type": "url",
+      "id": "promo_link",
+      "label": "Button link",
+      "info": "Empty uses the self-check page from Theme settings."
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "tight"
+    }
+  ]
+}
+{% endschema %}

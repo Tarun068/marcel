@@ -1,0 +1,230 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "mt-page-hero",
+      "settings": {
+        "show_crumbs": true,
+        "home_label": "Home",
+        "button_1_to": "test",
+        "button_2_to": "consult",
+        "back_to": "therapy",
+        "background": "tint",
+        "sheet": false,
+        "spacing": "none",
+        "current_label": "FAQs",
+        "heading": "Frequently asked questions",
+        "text": "Answers about OSMF, MARCEL OMR Therapy™, consultations and products.",
+        "note": "This website provides general information and is not a substitute for an examination or advice from a qualified healthcare professional. Please seek prompt professional assessment for persistent or worsening symptoms or any unusual oral change."
+      }
+    },
+    "faq": {
+      "type": "mt-faq-page",
+      "settings": {
+        "show_filters": true,
+        "filter_label": "Filter questions",
+        "all_label": "All",
+        "open_first": true,
+        "one_at_a_time": false,
+        "schema_markup": true,
+        "show_help": true,
+        "help_title": "Can’t find your answer?",
+        "help_text": "Our In-house OSMF Consultant can help with programme questions and your next step.",
+        "whatsapp_label": "WhatsApp the Patient HelpDesk",
+        "link_label": "Talk to a MARCEL OSMF Consultant",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight",
+        "link": ""
+      },
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "title": "Understanding OSMF"
+          }
+        },
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "What is OSMF?",
+            "answer": "<p>Oral Submucous Fibrosis (OSMF) is a long-term condition in which tissues inside the mouth can become stiff and less flexible. It may cause burning while eating spicy food and gradually limit how widely the mouth opens. Areca nut products such as supari, gutkha and paan masala are important risk factors.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "What are the early signs of OSMF?",
+            "answer": "<p>Common signs include burning when eating spicy food, tightness inside the cheeks, reduced flexibility of the mouth tissues and difficulty opening the mouth fully. Pay attention to symptoms that persist, worsen or begin to affect eating or daily activities.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Why does my mouth burn when I eat spicy food?",
+            "answer": "<p>Burning can happen when the lining of the mouth is irritated or sensitive. It can have several causes, including OSMF, so burning alone does not confirm the condition. If it keeps returning or occurs with cheek tightness or reduced mouth opening, arrange an assessment.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Can OSMF turn into oral cancer?",
+            "answer": "<p>OSMF is recognised as an oral potentially malignant disorder, meaning it is associated with an increased risk of oral cancer. It does not mean that everyone with OSMF will develop cancer, but regular professional follow-up matters. A persistent ulcer, unexplained lump, bleeding or another unusual oral change should be assessed promptly.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Can I continue using gutkha, supari or paan masala while following the care plan?",
+            "answer": "<p>Stopping gutkha, supari, paan masala and other areca nut products is an important step in protecting your oral health. If quitting has been difficult, ask a healthcare professional for practical support rather than trying to manage it alone.</p>"
+          }
+        },
+        "category_2": {
+          "type": "category",
+          "settings": {
+            "title": "MARCEL OMR Therapy™"
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "What is MARCEL OMR Therapy™?",
+            "answer": "<p>MARCEL OMR Therapy™ is a structured approach to oral mucosal care. It provides a planned framework for care rather than relying on random or inconsistent product use. The appropriate approach and products depend on the individual’s needs and the approved instructions for each product.</p>"
+          }
+        },
+        "question_7": {
+          "type": "question",
+          "settings": {
+            "question": "Can MARCEL OMR Therapy™ help improve mouth opening?",
+            "answer": "<p>Supporting oral comfort and function may be part of the care goal, but the amount of change in mouth opening varies from person to person. It depends on the degree of restriction, the individual’s condition and the care plan. A consultation with an OSMF Consultant can help establish a baseline and discuss realistic goals.</p>"
+          }
+        },
+        "question_8": {
+          "type": "question",
+          "settings": {
+            "question": "Will it completely cure OSMF or restore my mouth to how it was before?",
+            "answer": "<p>A complete cure or a return to exactly the same mouth opening cannot be promised. The focus is to assess the condition, address symptoms and work toward the best achievable function for the individual. A qualified OSMF Specialist doctor can explain the options after assessing the case.</p>"
+          }
+        },
+        "question_9": {
+          "type": "question",
+          "settings": {
+            "question": "Is MARCEL OMR Therapy™ only for early-stage OSMF?",
+            "answer": "<p>The care needed depends on the person’s symptoms, mouth opening and clinical findings, not simply on an assumed stage. People with more restricted mouth opening should be assessed to determine the appropriate plan and whether additional medical care is needed.</p>"
+          }
+        },
+        "question_10": {
+          "type": "question",
+          "settings": {
+            "question": "How soon will I notice a result?",
+            "answer": "<p>There is no single timeline that applies to everyone. Burning, eating comfort and mouth opening are different outcomes and may change at different rates. Follow the recommended care plan and arrange a review if progress is not as expected.</p>"
+          }
+        },
+        "category_3": {
+          "type": "category",
+          "settings": {
+            "title": "Consultation"
+          }
+        },
+        "question_11": {
+          "type": "question",
+          "settings": {
+            "question": "What is the difference between an OSMF Consultant and an OSMF Specialist doctor?",
+            "answer": "<p>An OSMF Consultant provides an in-house on-call consultation, allowing you to discuss your concerns and understand the next step remotely. An OSMF Specialist doctor provides an in-clinic, in-person consultation, where the doctor can examine your mouth, assess mouth opening and evaluate oral tissue changes directly.</p>"
+          }
+        },
+        "question_12": {
+          "type": "question",
+          "settings": {
+            "question": "Which consultation should I choose?",
+            "answer": "<p>If you want to discuss your symptoms and understand how to proceed, start with the OSMF Consultant on-call service. If you need a direct examination, have significant difficulty opening your mouth, or notice a persistent ulcer, unexplained lump, bleeding or another concerning change, arrange an in-clinic consultation with an OSMF Specialist doctor.</p>"
+          }
+        },
+        "question_13": {
+          "type": "question",
+          "settings": {
+            "question": "Can I follow care from home if I cannot visit a clinic?",
+            "answer": "<p>An on-call consultation can help you discuss your symptoms and understand the next step without travelling first. If an examination is needed, the consultant can advise you to visit an OSMF Specialist doctor in person.</p>"
+          }
+        },
+        "question_14": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use MARCEL OMR Therapy™ while receiving treatment from another doctor?",
+            "answer": "<p>Tell the OSMF Consultant or your treating doctor about the medicines, procedures and oral products you are currently using. Do not stop or change prescribed treatment on your own. They can help you decide whether the approaches can be used together and whether an in-person assessment is needed.</p>"
+          }
+        },
+        "question_15": {
+          "type": "question",
+          "settings": {
+            "question": "Do I need surgery if my mouth opening is very limited?",
+            "answer": "<p>Not everyone with OSMF needs surgery. The decision depends on the degree of restriction and the clinical findings. An OSMF Specialist doctor can examine you and discuss appropriate options, including whether non-surgical care, a procedure or a combination should be considered.</p>"
+          }
+        },
+        "category_4": {
+          "type": "category",
+          "settings": {
+            "title": "Products & how to use"
+          }
+        },
+        "question_16": {
+          "type": "question",
+          "settings": {
+            "question": "Do I need to use every component of the recommended care plan?",
+            "answer": "<p>The components may serve different purposes, so do not assume that using one product alone will provide the same approach. Follow the care plan recommended for you and the approved instructions supplied with each product. If you are unsure what to use, ask the OSMF Consultant before changing the plan.</p>"
+          }
+        },
+        "question_17": {
+          "type": "question",
+          "settings": {
+            "question": "What should I do if I experience strong burning, swelling or sores after using a product?",
+            "answer": "<p>If you experience a strong or worsening reaction, stop using the product until you have received medical advice and contact the OSMF Consultant. Seek urgent care for difficulty breathing, marked swelling or another severe reaction. Keep the product pack available so the clinician can review what you used.</p>"
+          }
+        },
+        "question_18": {
+          "type": "question",
+          "settings": {
+            "question": "What should I do if my symptoms are not improving?",
+            "answer": "<p>Do not increase the amount or frequency of a product on your own. Note changes in burning, eating comfort and mouth opening, then contact the OSMF Consultant for a review. If symptoms worsen or you notice an ulcer, lump, bleeding or another unusual change, arrange an in-person assessment promptly.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "category_2",
+        "question_6",
+        "question_7",
+        "question_8",
+        "question_9",
+        "question_10",
+        "category_3",
+        "question_11",
+        "question_12",
+        "question_13",
+        "question_14",
+        "question_15",
+        "category_4",
+        "question_16",
+        "question_17",
+        "question_18"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "faq"
+  ]
+}

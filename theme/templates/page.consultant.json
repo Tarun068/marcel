@@ -1,0 +1,156 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "mt-page-hero",
+      "settings": {
+        "show_crumbs": true,
+        "home_label": "Home",
+        "button_1_to": "test",
+        "button_2_to": "consult",
+        "back_to": "therapy",
+        "background": "tint",
+        "sheet": false,
+        "spacing": "none",
+        "parent_label": "Get Help",
+        "parent_link": "/pages/get-help",
+        "current_label": "OSMF Consultant",
+        "eyebrow": "In-house OSMF consultation",
+        "heading": "Book your OSMF consultation",
+        "text": "Share your details, choose an available consultation slot and pay the booking fee. The fee is adjusted against an eligible MARCEL product purchase, subject to the published terms."
+      }
+    },
+    "booking": {
+      "type": "mt-booking",
+      "settings": {
+        "fee_fallback": "₹50",
+        "source_label": "OSMF Consultant booking request",
+        "details_heading": "Your details",
+        "details_text": "Please complete the required fields so our in-house consultation team can contact you.",
+        "name_label": "Full name",
+        "age_label": "Age",
+        "phone_label": "Phone number",
+        "phone_placeholder": "10-digit mobile",
+        "email_label": "Email ID",
+        "address_label": "Address",
+        "optional_label": "(optional)",
+        "required_mark": "*",
+        "slot_heading": "Select your consultation slot",
+        "slot_text": "Choose a preferred date and time. Final availability will be confirmed by MARCEL.",
+        "slot_groups": "Morning | 10:00 AM – 10:15 AM, 10:15 AM – 10:30 AM, 10:30 AM – 10:45 AM, 10:45 AM – 11:00 AM, 11:00 AM – 11:15 AM, 11:15 AM – 11:30 AM, 11:30 AM – 11:45 AM, 11:45 AM – 12:00 PM\nAfternoon | 03:00 PM – 03:15 PM, 03:15 PM – 03:30 PM, 03:30 PM – 03:45 PM, 03:45 PM – 04:00 PM, 04:00 PM – 04:15 PM, 04:15 PM – 04:30 PM, 04:30 PM – 04:45 PM, 04:45 PM – 05:00 PM",
+        "closed_days": "Sun",
+        "days_count": 7,
+        "lead_minutes": 60,
+        "days_label": "Choose a day",
+        "today_label": "Today",
+        "tomorrow_label": "Tomorrow",
+        "closed_label": "Closed",
+        "unavailable_label": "not available",
+        "fee_title": "Consultation booking fee",
+        "fee_text": "Adjusted against an eligible MARCEL product purchase*",
+        "consent_text": "I understand that a [fee] consultation fee is payable to reserve the slot and will be adjusted against an eligible MARCEL product purchase under the published terms. I agree that MARCEL may use my submitted details to manage this consultation request.",
+        "pay_label": "Continue to [fee] payment",
+        "request_label": "Send booking request",
+        "terms_note": "*Eligible products, the adjustment period and how to redeem it are set out in our consultation terms.",
+        "err_name": "Enter your full name.",
+        "err_age": "Enter your age.",
+        "err_phone": "Enter a 10-digit mobile number.",
+        "err_email": "Enter a valid email address, or leave it blank.",
+        "err_address": "Enter your address.",
+        "err_slot": "Choose a date and time slot.",
+        "err_consent": "Please accept the booking terms to continue.",
+        "err_send": "We couldn’t continue to payment. Please try again, or message us on WhatsApp.",
+        "prop_name": "Patient name",
+        "prop_age": "Age",
+        "prop_phone": "Phone",
+        "prop_email": "Email",
+        "prop_address": "Address",
+        "prop_date": "Consultation date",
+        "prop_slot": "Time slot",
+        "prop_id": "Booking reference",
+        "prop_result": "Self-check result",
+        "stage_titles": "healthy | No signs of OSMF yet | #0A8A96\nstage1 | Possible Stage 1 | #2B9759\nstage2 | Possible Stage 2 | #C4860B\nstage3 | Possible Stage 3 | #D5602A\nstage4 | Possible Stage 4 | #C23838\ninvestigate | Under 5 mm, investigation advised | #C23838\nstage5 | Possible Stage 5 | #C23838",
+        "summary_title": "Your consultation",
+        "sum_type": "Consultation",
+        "type_value": "In-house MARCEL OSMF Consultant, on call",
+        "sum_when": "When",
+        "sum_result": "Self-check result",
+        "sum_fee": "Booking fee",
+        "not_chosen": "Not chosen yet",
+        "not_taken": "Not taken yet",
+        "take_now": "Check your OSMF stage",
+        "role_note": "The OSMF Consultant discusses your concerns and guides the next step. For an examination, diagnosis or treatment, please see an OSMF Specialist doctor.",
+        "help_text": "Need help? WhatsApp [phone]",
+        "done_eyebrow": "Request received",
+        "done_heading": "Thank you",
+        "booking_id_label": "Booking reference",
+        "next_label": "What happens next",
+        "done_next": "Our in-house consultation team will contact you to confirm the slot and the booking fee.\nKeep your self-check result handy for the call.\nFor an examination, the consultant may advise you to see an OSMF Specialist doctor in person.",
+        "new_label": "Make another booking",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      }
+    },
+    "faq": {
+      "type": "mt-faq",
+      "settings": {
+        "eyebrow": "Before you book",
+        "heading": "Which consultation is right for you?",
+        "open_first": false,
+        "one_at_a_time": false,
+        "schema_markup": true,
+        "show_help": false,
+        "help_title": "Have questions?",
+        "help_text": "Our In-house OSMF Consultant can help with programme questions and your next step.",
+        "whatsapp_label": "WhatsApp the Patient HelpDesk",
+        "link_label": "",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal",
+        "link": "/pages/faq"
+      },
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Which consultation should I choose?",
+            "answer": "<p>If you want to discuss your symptoms and understand how to proceed, start with the OSMF Consultant on-call service. If you need a direct examination, have significant difficulty opening your mouth, or notice a persistent ulcer, unexplained lump, bleeding or another concerning change, arrange an in-clinic consultation with an OSMF Specialist doctor.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Can I follow care from home if I cannot visit a clinic?",
+            "answer": "<p>An on-call consultation can help you discuss your symptoms and understand the next step without travelling first. If an examination is needed, the consultant can advise you to visit an OSMF Specialist doctor in person.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use MARCEL OMR Therapy™ while receiving treatment from another doctor?",
+            "answer": "<p>Tell the OSMF Consultant or your treating doctor about the medicines, procedures and oral products you are currently using. Do not stop or change prescribed treatment on your own. They can help you decide whether the approaches can be used together and whether an in-person assessment is needed.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "booking",
+    "faq"
+  ]
+}

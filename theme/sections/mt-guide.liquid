@@ -1,0 +1,862 @@
+{{ 'mt-pages.css' | asset_url | stylesheet_tag }}
+{{ 'mt-article.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign chapters = section.blocks | where: 'type', 'chapter'
+-%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-guide' %}">
+  <div class="mt-wrap{% if section.settings.show_toc and chapters.size > 1 %} mt-guide-layout{% endif %}">
+    {%- if section.settings.show_toc and chapters.size > 1 -%}
+      <nav class="mt-toc" aria-label="{{ section.settings.toc_title | escape }}">
+        <b>{{ section.settings.toc_title | escape }}</b>
+        {%- for block in chapters -%}
+          {%- assign anchor = block.settings.anchor | default: block.id | handleize -%}
+          <a href="#{{ anchor }}">{{ block.settings.toc_label | default: block.settings.heading | escape }}</a>
+        {%- endfor -%}
+      </nav>
+    {%- endif -%}
+
+    <div class="mt-prose">
+      {%- liquid
+        assign body = ''
+        assign cards = ''
+        assign attrs = ''
+        assign head = ''
+        assign started = false
+      -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type != 'card' and cards != blank -%}
+          {%- capture body -%}{{ body }}<div class="mt-cards mt-cards--fill">{{ cards }}</div>{%- endcapture -%}
+          {%- assign cards = '' -%}
+        {%- endif -%}
+
+        {%- if block.type == 'chapter' -%}
+          {%- if started -%}
+            <section class="mt-prose-sec" {{ attrs }}>{{ head }}{{ body }}</section>
+          {%- endif -%}
+          {%- liquid
+            assign anchor = block.settings.anchor | default: block.id | handleize
+            assign attrs = 'id="' | append: anchor | append: '" ' | append: block.shopify_attributes
+            assign head = ''
+            if block.settings.heading != blank
+              assign head = '<h2>' | append: block.settings.heading | append: '</h2>'
+            endif
+            assign body = ''
+            assign started = true
+          -%}
+        {%- else -%}
+          {%- assign started = true -%}
+          {%- capture item -%}
+            {%- case block.type -%}
+              {%- when 'text' -%}
+                <div class="mt-rte mt-prose-text" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+    
+              {%- when 'callout' -%}
+                <div class="mt-callout{% if block.settings.style != 'info' %} mt-callout--{{ block.settings.style }}{% endif %}" {{ block.shopify_attributes }}>
+                  {%- render 'mt-icon', icon: block.settings.icon -%}
+                  <div class="mt-rte">{{ block.settings.text }}</div>
+                </div>
+    
+              {%- when 'card' -%}
+                <div class="mt-mini-card" {{ block.shopify_attributes }}>
+                  {%- render 'mt-icon', icon: block.settings.icon -%}
+                  <b>{{ block.settings.title | escape }}</b>
+                  {%- if block.settings.text != blank -%}<p>{{ block.settings.text | escape }}</p>{%- endif -%}
+                </div>
+    
+              {%- when 'checklist' -%}
+                {%- assign lines = block.settings.items | newline_to_br | split: '<br />' -%}
+                <ul class="mt-checks{% if block.settings.columns == '2' %} mt-two-col{% endif %}" {{ block.shopify_attributes }}>
+                  {%- for line in lines -%}
+                    {%- assign item = line | strip -%}
+                    {%- if item != blank -%}<li>{%- render 'mt-icon', icon: 'check' -%}<span>{{ item | escape }}</span></li>{%- endif -%}
+                  {%- endfor -%}
+                </ul>
+    
+              {%- when 'table' -%}
+                {%- liquid
+                  assign heads = block.settings.head | split: '|'
+                  assign rows = block.settings.rows | newline_to_br | split: '<br />'
+                -%}
+                <div class="mt-table-wrap" {{ block.shopify_attributes }}>
+                  <table class="mt-table">
+                    <thead>
+                      <tr>{%- for h in heads -%}<th scope="col">{{ h | strip | escape }}</th>{%- endfor -%}</tr>
+                    </thead>
+                    <tbody>
+                      {%- for row in rows -%}
+                        {%- assign cells = row | strip | split: '|' -%}
+                        {%- if cells.size > 0 -%}
+                          <tr>
+                            {%- for cell in cells -%}
+                              {%- assign value = cell | strip -%}
+                              {%- if forloop.first and value contains '#' -%}
+                                {%- assign parts = value | split: '#' -%}
+                                <td><span class="mt-stage-chip" style="--c: #{{ parts[1] | strip }};"><i></i>{{ parts[0] | strip | escape }}</span></td>
+                              {%- elsif forloop.index == block.settings.bold_col -%}
+                                <td class="mt-mmv">{{ value | escape }}</td>
+                              {%- else -%}
+                                <td>{{ value | escape }}</td>
+                              {%- endif -%}
+                            {%- endfor -%}
+                          </tr>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </tbody>
+                  </table>
+                </div>
+    
+              {%- when 'link' -%}
+                {%- if block.settings.label != blank -%}
+                  <a class="mt-link" href="{{ block.settings.url | default: settings.mt_link_test | default: routes.root_url }}" {{ block.shopify_attributes }}>
+                    {{- block.settings.label | escape -}}
+                    {%- render 'mt-icon', icon: 'arrow-right' -%}
+                  </a>
+                {%- endif -%}
+    
+              {%- when 'fine' -%}
+                <p class="mt-fine" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</p>
+    
+              {%- when 'articles' -%}
+                {%- assign guide = block.settings.blog | default: blogs['patient-guide'] | default: blogs.news -%}
+                <div class="mt-art-grid" {{ block.shopify_attributes }}>
+                  {%- for article in guide.articles limit: block.settings.limit -%}
+                    {%- render 'mt-article-card', article: article, read_label: section.settings.read_label, show_image: block.settings.show_images, sizes: '(min-width: 990px) 300px, (min-width: 600px) 45vw, 92vw' -%}
+                  {%- else -%}
+                    <p class="mt-placeholder">{{ section.settings.no_articles | escape }}</p>
+                  {%- endfor -%}
+                </div>
+            {%- endcase -%}
+          {%- endcapture -%}
+          {%- if block.type == 'card' -%}
+            {%- capture cards -%}{{ cards }}{{ item }}{%- endcapture -%}
+          {%- else -%}
+            {%- capture body -%}{{ body }}{{ item }}{%- endcapture -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if cards != blank -%}
+        {%- capture body -%}{{ body }}<div class="mt-cards mt-cards--fill">{{ cards }}</div>{%- endcapture -%}
+      {%- endif -%}
+      {%- if started -%}
+        <section class="mt-prose-sec" {{ attrs }}>{{ head }}{{ body }}</section>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel guide",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_toc",
+      "label": "Show ‘On this page’ menu",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "toc_title",
+      "label": "Menu title",
+      "default": "On this page"
+    },
+    {
+      "type": "text",
+      "id": "read_label",
+      "label": "Read time label",
+      "info": "[n] is the minutes.",
+      "default": "[n] min read"
+    },
+    {
+      "type": "text",
+      "id": "no_articles",
+      "label": "No articles text",
+      "default": "Articles will appear here once they are published."
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "tight"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "chapter",
+      "name": "Chapter",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Starts a new part of the guide. The blocks after it belong to this chapter."
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "What is OSMF?"
+        },
+        {
+          "type": "text",
+          "id": "toc_label",
+          "label": "Menu label",
+          "info": "Empty uses the heading."
+        },
+        {
+          "type": "text",
+          "id": "anchor",
+          "label": "Link name",
+          "info": "Used in links like /pages/osmf#what-is-osmf. Empty creates one."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Oral Submucous Fibrosis (OSMF) is a long-term condition that makes the lining inside the mouth stiff.</p>"
+        }
+      ]
+    },
+    {
+      "type": "callout",
+      "name": "Callout",
+      "settings": [
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "options": [
+            {
+              "value": "info",
+              "label": "Information"
+            },
+            {
+              "value": "alert",
+              "label": "Warning (red)"
+            },
+            {
+              "value": "warn",
+              "label": "Caution (amber)"
+            },
+            {
+              "value": "muted",
+              "label": "Quiet"
+            }
+          ],
+          "default": "info"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "arrow-right",
+              "label": "Arrow"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "video",
+              "label": "Video call"
+            },
+            {
+              "value": "whatsapp",
+              "label": "WhatsApp"
+            },
+            {
+              "value": "clinic",
+              "label": "Clinic"
+            },
+            {
+              "value": "doctor",
+              "label": "Doctor"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "flask",
+              "label": "Research flask"
+            },
+            {
+              "value": "patent",
+              "label": "Patent document"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "users",
+              "label": "People"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "india",
+              "label": "Globe"
+            },
+            {
+              "value": "pin",
+              "label": "Location pin"
+            },
+            {
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "value": "mail",
+              "label": "Email"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "truck",
+              "label": "Delivery"
+            },
+            {
+              "value": "box",
+              "label": "Package"
+            },
+            {
+              "value": "bag",
+              "label": "Shopping bag"
+            },
+            {
+              "value": "search",
+              "label": "Search"
+            },
+            {
+              "value": "info",
+              "label": "Info"
+            },
+            {
+              "value": "alert",
+              "label": "Alert"
+            },
+            {
+              "value": "refresh",
+              "label": "Refresh"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "target",
+              "label": "Target"
+            },
+            {
+              "value": "chart",
+              "label": "Chart"
+            },
+            {
+              "value": "home",
+              "label": "Home"
+            },
+            {
+              "value": "grid",
+              "label": "Grid"
+            },
+            {
+              "value": "test",
+              "label": "Self-check"
+            },
+            {
+              "value": "book",
+              "label": "Guide"
+            },
+            {
+              "value": "drop",
+              "label": "Drop"
+            },
+            {
+              "value": "sun",
+              "label": "Sun"
+            },
+            {
+              "value": "moon",
+              "label": "Moon"
+            },
+            {
+              "value": "bowl",
+              "label": "Food bowl"
+            },
+            {
+              "value": "ban",
+              "label": "Quit habit"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "s-open",
+              "label": "Symptom: mouth opening"
+            },
+            {
+              "value": "s-burn",
+              "label": "Symptom: burning"
+            },
+            {
+              "value": "s-tight",
+              "label": "Symptom: tightness"
+            },
+            {
+              "value": "s-ulcer",
+              "label": "Symptom: ulcers"
+            },
+            {
+              "value": "s-bands",
+              "label": "Symptom: white bands"
+            },
+            {
+              "value": "s-tongue",
+              "label": "Symptom: tongue"
+            },
+            {
+              "value": "s-pain",
+              "label": "Symptom: pain"
+            }
+          ],
+          "default": "info"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>It is most common in people who chew gutkha, pan masala, khaini, tobacco or other areca nut (supari) products.</p>"
+        }
+      ]
+    },
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Cards next to each other are shown as a grid."
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "arrow-right",
+              "label": "Arrow"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "video",
+              "label": "Video call"
+            },
+            {
+              "value": "whatsapp",
+              "label": "WhatsApp"
+            },
+            {
+              "value": "clinic",
+              "label": "Clinic"
+            },
+            {
+              "value": "doctor",
+              "label": "Doctor"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "flask",
+              "label": "Research flask"
+            },
+            {
+              "value": "patent",
+              "label": "Patent document"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "users",
+              "label": "People"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "india",
+              "label": "Globe"
+            },
+            {
+              "value": "pin",
+              "label": "Location pin"
+            },
+            {
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "value": "mail",
+              "label": "Email"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "truck",
+              "label": "Delivery"
+            },
+            {
+              "value": "box",
+              "label": "Package"
+            },
+            {
+              "value": "bag",
+              "label": "Shopping bag"
+            },
+            {
+              "value": "search",
+              "label": "Search"
+            },
+            {
+              "value": "info",
+              "label": "Info"
+            },
+            {
+              "value": "alert",
+              "label": "Alert"
+            },
+            {
+              "value": "refresh",
+              "label": "Refresh"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "target",
+              "label": "Target"
+            },
+            {
+              "value": "chart",
+              "label": "Chart"
+            },
+            {
+              "value": "home",
+              "label": "Home"
+            },
+            {
+              "value": "grid",
+              "label": "Grid"
+            },
+            {
+              "value": "test",
+              "label": "Self-check"
+            },
+            {
+              "value": "book",
+              "label": "Guide"
+            },
+            {
+              "value": "drop",
+              "label": "Drop"
+            },
+            {
+              "value": "sun",
+              "label": "Sun"
+            },
+            {
+              "value": "moon",
+              "label": "Moon"
+            },
+            {
+              "value": "bowl",
+              "label": "Food bowl"
+            },
+            {
+              "value": "ban",
+              "label": "Quit habit"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "s-open",
+              "label": "Symptom: mouth opening"
+            },
+            {
+              "value": "s-burn",
+              "label": "Symptom: burning"
+            },
+            {
+              "value": "s-tight",
+              "label": "Symptom: tightness"
+            },
+            {
+              "value": "s-ulcer",
+              "label": "Symptom: ulcers"
+            },
+            {
+              "value": "s-bands",
+              "label": "Symptom: white bands"
+            },
+            {
+              "value": "s-tongue",
+              "label": "Symptom: tongue"
+            },
+            {
+              "value": "s-pain",
+              "label": "Symptom: pain"
+            }
+          ],
+          "default": "ban"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Areca nut products"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Gutkha, pan masala, supari and khaini are the leading cause."
+        }
+      ]
+    },
+    {
+      "type": "checklist",
+      "name": "Checklist",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "items",
+          "label": "Items",
+          "info": "One per line.",
+          "default": "Stiffness inside the mouth\nReduced mouth opening\nBurning, especially with spicy food"
+        },
+        {
+          "type": "select",
+          "id": "columns",
+          "label": "Columns",
+          "options": [
+            {
+              "value": "1",
+              "label": "One"
+            },
+            {
+              "value": "2",
+              "label": "Two"
+            }
+          ],
+          "default": "2"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "name": "Table",
+      "settings": [
+        {
+          "type": "text",
+          "id": "head",
+          "label": "Column names",
+          "info": "Separate with |",
+          "default": "Stage | Mouth opening (approx.) | Finger test | What you may notice"
+        },
+        {
+          "type": "textarea",
+          "id": "rows",
+          "label": "Rows",
+          "info": "One row per line, cells separated by |. Add a colour to the first cell to show it as a stage tag, for example Stage 1 · Early #2B9759.",
+          "default": "Stage 1 · Early #2B9759 | 35 mm or more | About 3 fingers | Occasional burning with spicy food, mild tightness inside the cheeks, eating is still normal\nStage 2 · Moderate #C4860B | 25–35 mm | About 2 fingers | Mouth opening has reduced, burning sensation, difficulty with spicy food\nStage 3 · Advanced #D5602A | 15–25 mm | About 1 finger | Marked tightness, stiff cheeks, difficulty eating\nStage 4 · Severe #C23838 | under 15 mm | Less than 1 finger | Severely restricted opening, hard to keep the mouth clean, pain while eating"
+        },
+        {
+          "type": "range",
+          "id": "bold_col",
+          "label": "Bold column",
+          "min": 0,
+          "max": 6,
+          "step": 1,
+          "default": 2,
+          "info": "0 for none."
+        }
+      ]
+    },
+    {
+      "type": "link",
+      "name": "Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Check your symptoms with the MARCEL OSMF Self-Check"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link",
+          "info": "Empty uses the self-check page."
+        }
+      ]
+    },
+    {
+      "type": "fine",
+      "name": "Small print",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Ranges are approximate. Only a doctor can confirm your stage."
+        }
+      ]
+    },
+    {
+      "type": "articles",
+      "name": "Articles",
+      "settings": [
+        {
+          "type": "blog",
+          "id": "blog",
+          "label": "Blog",
+          "info": "Empty uses the blog with the handle patient-guide."
+        },
+        {
+          "type": "range",
+          "id": "limit",
+          "label": "Number of articles",
+          "min": 3,
+          "max": 12,
+          "step": 1,
+          "default": 6
+        },
+        {
+          "type": "checkbox",
+          "id": "show_images",
+          "label": "Show article images",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel guide"
+    }
+  ]
+}
+{% endschema %}

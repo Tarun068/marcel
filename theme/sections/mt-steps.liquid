@@ -1,0 +1,249 @@
+{%- style -%}
+  .mt-steps { position: relative; display: grid; grid-template-columns: repeat(var(--mt-cols, 4), minmax(0, 1fr)); gap: 28px; counter-reset: mt-step; }
+  .mt-steps::before { content: ""; position: absolute; top: 20px; left: 20px; right: calc(100% / var(--mt-cols, 4) - 20px); height: 2px; background: var(--mt-line-2); }
+  .mt-step { position: relative; display: grid; gap: 10px; align-content: start; }
+  .mt-step .mt-num { position: relative; margin-bottom: 8px; box-shadow: 0 0 0 6px var(--mt-section-bg, var(--mt-paper)); }
+  .mt .mt-step h3 { font-size: 19px; line-height: 1.25; letter-spacing: -.01em; }
+  .mt-step p { font-size: 15px; line-height: 1.55; }
+  @media (max-width: 900px) {
+    .mt-steps { grid-template-columns: minmax(0, 1fr); gap: 0; max-width: 560px; }
+    .mt-steps::before { display: none; }
+    .mt-step:not(:last-child)::after { content: ""; position: absolute; left: 19px; top: 46px; bottom: 6px; width: 2px; background: var(--mt-line-2); }
+    .mt-step { grid-template-columns: 40px minmax(0, 1fr); column-gap: 18px; row-gap: 4px; padding-bottom: 26px; }
+    .mt-step .mt-num { grid-row: span 2; margin-bottom: 0; }
+    .mt .mt-step h3 { margin-top: 8px; }
+  }
+  .mt-steps.mt-steps--journey { grid-template-columns: minmax(0, 1fr); gap: 0; max-width: 760px; }
+  .mt-steps--journey::before { display: none; }
+  .mt-steps--journey .mt-step { grid-template-columns: 48px minmax(0, 1fr); column-gap: 20px; row-gap: 6px; padding-bottom: 30px; }
+  .mt-steps--journey .mt-step:not(:last-child)::after { content: ""; position: absolute; left: 23px; top: 56px; bottom: 6px; width: 2px; background: var(--mt-line-2); }
+  .mt-steps--journey .mt-num { grid-row: span 2; width: 48px; height: 48px; margin-bottom: 0; font-size: 18px; }
+  .mt .mt-steps--journey .mt-step h3 { margin-top: 10px; font-size: 21px; }
+  .mt-steps--journey .mt-step p { max-width: 60ch; font-size: 16px; }
+  .mt-steps-sec .mt-steps + .mt-btn-row { margin-top: 12px; }
+{%- endstyle -%}
+
+{%- liquid
+  assign link = section.settings.link | default: routes.root_url
+-%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-steps-sec' %}">
+  <div class="mt-wrap">
+    <div class="mt-sec-head-row">
+      {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
+      {%- if section.settings.link_label != blank -%}
+        <a class="mt-link" href="{{ link }}">
+          {{- section.settings.link_label | escape -}}
+          {%- render 'mt-icon', icon: 'arrow-right' -%}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <ol class="mt-steps{% if section.settings.layout == 'journey' %} mt-steps--journey{% endif %}" style="--mt-cols: {{ section.blocks.size | at_most: 4 }};">
+        {%- for block in section.blocks -%}
+          <li class="mt-step" {{ block.shopify_attributes }}>
+            <span class="mt-num">{{ block.settings.number | default: forloop.index | escape }}</span>
+            <h3>{{ block.settings.title | escape }}</h3>
+            {%- if block.settings.text != blank -%}<p>{{ block.settings.text | escape }}</p>{%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ol>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <div class="mt-btn-row">
+        <a class="mt-btn mt-btn-primary" href="{{ section.settings.button_link | default: settings.mt_link_test | default: routes.root_url }}">
+          {{- section.settings.button_label | escape -}}
+          {%- render 'mt-icon', icon: 'arrow-right' -%}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel how it works",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "row",
+          "label": "Steps in a row"
+        },
+        {
+          "value": "journey",
+          "label": "Vertical journey"
+        }
+      ],
+      "default": "row"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "How to get started"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Take the first step towards better oral health"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "Explore MARCEL OMR Therapy™"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "info": "Optional button below the steps."
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "info": "Empty uses the self-check page."
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "mist"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "normal"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "info": "Empty numbers the steps automatically."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Take the self-check"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Take the MARCEL OSMF Self-Check to understand your symptoms, mouth opening and possible stage."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel how it works",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Check your symptoms",
+            "text": "Take the MARCEL OSMF Self-Check to understand your symptoms, mouth opening and possible stage."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Understand your care path",
+            "text": "Understand the MARCEL care pathway that may be appropriate, based on your symptoms and mouth opening."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Start your 12-week journey",
+            "text": "Begin your MARCEL OMR Therapy™ journey with your structured care routine, daily oral care, exercises and progress tracking."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Talk to our In-house OSMF Consultant",
+            "text": "Get personalised guidance and support on starting and continuing your MARCEL journey."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

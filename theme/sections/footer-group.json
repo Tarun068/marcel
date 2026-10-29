@@ -1,0 +1,138 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "mt-footer",
+      "blocks": {
+        "menu_1": {
+          "type": "menu",
+          "settings": {
+            "heading": "Products",
+            "menu": "footer-shop"
+          }
+        },
+        "menu_2": {
+          "type": "menu",
+          "settings": {
+            "heading": "Get help",
+            "menu": "footer-help"
+          }
+        },
+        "menu_3": {
+          "type": "menu",
+          "settings": {
+            "heading": "Learn",
+            "menu": "footer-learn"
+          }
+        },
+        "policies_1": {
+          "type": "policies",
+          "settings": {
+            "heading": "Policies",
+            "menu": ""
+          }
+        }
+      },
+      "block_order": [
+        "menu_1",
+        "menu_2",
+        "menu_3",
+        "policies_1"
+      ],
+      "settings": {
+        "description": "A structured approach to oral mucosal care for people living with Oral Submucous Fibrosis (OSMF).",
+        "show_contact": true,
+        "whatsapp_label": "WhatsApp the Patient HelpDesk",
+        "disclaimer": "",
+        "ai_heading": "",
+        "ai_prompt": "",
+        "ai_tools": "",
+        "copyright": "© [year] MARCEL OMR Therapy™ by JanSuta Pharmaceuticals. MARCEL® is a registered trademark of JanSuta Pharmaceuticals.",
+        "payment_labels": "UPI, Cards, Net banking, Cash on delivery"
+      }
+    },
+    "mobile_bar": {
+      "type": "mt-mobile-bar",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "icon": "home",
+            "label": "Home",
+            "link": "/",
+            "style": "default"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "icon": "bag",
+            "label": "Products",
+            "link": "/collections/all",
+            "style": "default"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "icon": "test",
+            "label": "Self-Check",
+            "link": "/pages/osmf-self-check",
+            "style": "featured"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "icon": "phone",
+            "label": "Get Help",
+            "link": "/pages/get-help",
+            "style": "default"
+          }
+        },
+        "item_5": {
+          "type": "item",
+          "settings": {
+            "icon": "whatsapp",
+            "label": "WhatsApp",
+            "link": "",
+            "style": "whatsapp"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5"
+      ],
+      "settings": {}
+    },
+    "whatsapp": {
+      "type": "mt-whatsapp-button",
+      "settings": {
+        "enable": true,
+        "message": "",
+        "button_text": "Need guidance?",
+        "label": "WhatsApp the MARCEL Patient HelpDesk",
+        "hide_mobile": true
+      }
+    }
+  },
+  "order": [
+    "footer",
+    "mobile_bar",
+    "whatsapp"
+  ]
+}

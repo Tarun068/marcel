@@ -1,0 +1,118 @@
+{%- style -%}
+  .mt-stats-wrap { position: relative; z-index: 2; }
+  .mt-stats-wrap--overlap .mt-stats { margin-top: -58px; }
+  .mt-stats-wrap--spaced { padding-block: clamp(32px, 4vw, 56px); }
+  .mt-stats { display: grid; grid-template-columns: repeat(var(--mt-cols, 4), minmax(0, 1fr)); border-radius: var(--mt-r-lg); background: var(--mt-paper); border: 1px solid var(--mt-line); box-shadow: 0 2px 0 var(--mt-line); }
+  .mt-stat { display: grid; gap: 4px; align-content: start; padding: 24px clamp(16px, 2.4vw, 30px); border-left: 1px solid var(--mt-line); }
+  .mt-stat:first-child { border-left: 0; }
+  .mt .mt-stat b { font-size: clamp(28px, 22px + 1.2vw, 40px); font-weight: 800; line-height: 1; letter-spacing: -.03em; color: var(--mt-ink); font-variant-numeric: tabular-nums; }
+  .mt-stat b i { font-style: normal; color: var(--mt-teal); }
+  .mt-stat span { font-size: 14.5px; font-weight: 600; line-height: 1.35; color: var(--mt-ink-3); }
+  @media (max-width: 760px) {
+    .mt-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .mt-stat:nth-child(odd) { border-left: 0; }
+    .mt-stat:nth-child(n + 3) { border-top: 1px solid var(--mt-line); }
+    .mt-stat { padding: 18px 16px; }
+  }
+{%- endstyle -%}
+
+{%- if section.blocks.size > 0 -%}
+  <div class="mt mt-stats-wrap{% if section.settings.overlap %} mt-stats-wrap--overlap{% else %} mt-stats-wrap--spaced{% endif %}">
+    <div class="mt-wrap">
+      <div class="mt-stats" style="--mt-cols: {{ section.blocks.size | at_most: 4 }};">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign value = block.settings.value | escape
+            assign last = value | slice: -1
+          -%}
+          <div class="mt-stat" {{ block.shopify_attributes }}>
+            {%- if last == '+' -%}
+              <b>{{ value | remove_last: '+' }}<i>+</i></b>
+            {%- else -%}
+              <b>{{ value }}</b>
+            {%- endif -%}
+            <span>{{ block.settings.label | escape }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Marcel stats",
+  "class": "mt-stats-section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "overlap",
+      "label": "Overlap the section above",
+      "info": "Pulls the strip up over the bottom of the hero, as in the design.",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Number",
+          "default": "26"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Years of development"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel stats",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "value": "26",
+            "label": "Years of development, 2000–2026"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "2008",
+            "label": "First patent granted"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "2026",
+            "label": "CTRI-registered clinical study"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "30",
+            "label": "Trademark applications filed"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

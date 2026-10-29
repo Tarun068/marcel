@@ -1,0 +1,31 @@
+{%- comment -%}
+  Marcel logo: the uploaded image, or the hexagon mark with the brand words from Theme settings > Marcel brand.
+
+  Accepts:
+  - image: {Object} image to show (optional)
+  - light: {Boolean} use the white mark for dark backgrounds
+  - tagline: {Boolean} show the tagline line under the words
+  - sizes: {String} sizes attribute for the image (optional)
+
+  Usage:
+  {% render 'mt-logo', image: section.settings.logo, tagline: true %}
+{%- endcomment -%}
+{%- if image != blank -%}
+  {{
+    image
+    | image_url: width: 600
+    | image_tag: class: 'mt-logo-img', alt: shop.name, loading: 'eager', widths: '160, 240, 320, 480, 600', sizes: sizes
+  }}
+{%- else -%}
+  <span class="mt-logo-fb{% if light %} mt-logo-fb--light{% endif %}">
+    <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#mt-logo-mark{% if light %}-light{% endif %}"/></svg>
+    <span class="mt-logo-words">
+      <b>
+        {{- settings.mt_brand_name | escape -}}
+        {%- if settings.mt_brand_symbol != blank -%}<sup>{{ settings.mt_brand_symbol | escape }}</sup>{%- endif -%}
+      </b>
+      {%- if settings.mt_brand_line != blank -%}<span>{{ settings.mt_brand_line | escape }}</span>{%- endif -%}
+      {%- if tagline and settings.mt_brand_tagline != blank -%}<small>{{ settings.mt_brand_tagline | escape }}</small>{%- endif -%}
+    </span>
+  </span>
+{%- endif -%}

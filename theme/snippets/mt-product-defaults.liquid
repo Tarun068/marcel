@@ -1,0 +1,23 @@
+{%- comment -%}
+  Outputs fallback card details for the four MARCEL products, matched on the handle, as
+  "role|color|meta|best|benefit;benefit;benefit". Used only where the product's "marcel" metafields are empty,
+  so products imported from setup/products.csv look right before any metafields are filled in.
+
+  Accepts:
+  - product: {Object} product
+
+  Usage:
+  {%- capture defaults -%}{% render 'mt-product-defaults', product: product %}{%- endcapture -%}
+{%- endcomment -%}
+{%- liquid
+  assign h = product.handle | downcase
+  if h contains 'shield'
+    echo 'Advance|#5A5CBE|Therapeutic oral rinse · 10 mL|Advance pathway|Part of ADVANCE MARCEL OMR Therapy™;A concentrate, diluted before use;Used with professional guidance'
+  elsif h contains 'ora-care' or h contains 'oracare'
+    echo 'Foundation|#168C83|Metered oral spray · 50 mL|Foundation pathway|Part of Foundation MARCEL OMR Therapy™;May support the management of burning and tightness;A measured amount with every spray'
+  elsif h contains 'smile'
+    echo 'Daily oral care|#2265C4|Toothpaste · 30 g and 100 g|Everyday care|Premium herbal complex;No SLS, no parabens;No artificial sweeteners'
+  elsif h contains 'mo-device' or h contains 'moflex'
+    echo 'Optional adjunct|#077C87|Mouth-opening support device|When recommended|Supports guided mouth-opening exercises;Gentle. Gradual. Guided.;Used with professional guidance'
+  endif
+-%}

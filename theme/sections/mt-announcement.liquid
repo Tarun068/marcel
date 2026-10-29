@@ -1,0 +1,294 @@
+{{ 'mt-announcement.css' | asset_url | stylesheet_tag }}
+
+{%- if section.blocks.size > 0 -%}
+  <div class="mt mt-announce" {{ section.shopify_attributes }}>
+    <div class="mt-wrap mt-announce-row">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign tag = 'span'
+          if block.settings.link != blank
+            assign tag = 'a'
+          endif
+        -%}
+        <{{ tag }}
+          class="mt-announce-item{% if block.settings.hide_mobile %} mt-hide-sm{% endif %}"
+          {% if block.settings.link != blank %}
+            href="{{ block.settings.link }}"
+          {% endif %}
+          {{ block.shopify_attributes }}
+        >
+          {%- render 'mt-icon', icon: block.settings.icon -%}
+          {{- block.settings.text | escape -}}
+        </{{ tag }}>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Marcel announcement",
+  "class": "mt-announce-section",
+  "enabled_on": {
+    "groups": [
+      "header"
+    ]
+  },
+  "max_blocks": 5,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "arrow-right",
+              "label": "Arrow"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "video",
+              "label": "Video call"
+            },
+            {
+              "value": "whatsapp",
+              "label": "WhatsApp"
+            },
+            {
+              "value": "clinic",
+              "label": "Clinic"
+            },
+            {
+              "value": "doctor",
+              "label": "Doctor"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "flask",
+              "label": "Research flask"
+            },
+            {
+              "value": "patent",
+              "label": "Patent document"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "users",
+              "label": "People"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "india",
+              "label": "Globe"
+            },
+            {
+              "value": "pin",
+              "label": "Location pin"
+            },
+            {
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "value": "mail",
+              "label": "Email"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "truck",
+              "label": "Delivery"
+            },
+            {
+              "value": "box",
+              "label": "Package"
+            },
+            {
+              "value": "bag",
+              "label": "Shopping bag"
+            },
+            {
+              "value": "search",
+              "label": "Search"
+            },
+            {
+              "value": "info",
+              "label": "Info"
+            },
+            {
+              "value": "alert",
+              "label": "Alert"
+            },
+            {
+              "value": "refresh",
+              "label": "Refresh"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "target",
+              "label": "Target"
+            },
+            {
+              "value": "chart",
+              "label": "Chart"
+            },
+            {
+              "value": "home",
+              "label": "Home"
+            },
+            {
+              "value": "grid",
+              "label": "Grid"
+            },
+            {
+              "value": "test",
+              "label": "Self-check"
+            },
+            {
+              "value": "book",
+              "label": "Guide"
+            },
+            {
+              "value": "drop",
+              "label": "Drop"
+            },
+            {
+              "value": "sun",
+              "label": "Sun"
+            },
+            {
+              "value": "moon",
+              "label": "Moon"
+            },
+            {
+              "value": "bowl",
+              "label": "Food bowl"
+            },
+            {
+              "value": "ban",
+              "label": "Quit habit"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "s-open",
+              "label": "Symptom: mouth opening"
+            },
+            {
+              "value": "s-burn",
+              "label": "Symptom: burning"
+            },
+            {
+              "value": "s-tight",
+              "label": "Symptom: tightness"
+            },
+            {
+              "value": "s-ulcer",
+              "label": "Symptom: ulcers"
+            },
+            {
+              "value": "s-bands",
+              "label": "Symptom: white bands"
+            },
+            {
+              "value": "s-tongue",
+              "label": "Symptom: tongue"
+            },
+            {
+              "value": "s-pain",
+              "label": "Symptom: pain"
+            }
+          ],
+          "default": "flask"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Supported by clinical evaluation and ongoing research"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_mobile",
+          "label": "Hide on mobile",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel announcement",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "icon": "video",
+            "text": "Doctor consultation for every Marcel patient"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "box",
+            "text": "Discreet packaging",
+            "hide_mobile": true
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "text": "Delivery across India",
+            "hide_mobile": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

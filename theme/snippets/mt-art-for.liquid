@@ -1,0 +1,24 @@
+{%- comment -%}
+  Outputs the pack illustration name for a product: its 'marcel.art' metafield, else a match on the handle
+  (ora-care, ora-shield, smile; device shows an icon). Lets new products show the drawn pack until real photos are added.
+
+  Accepts:
+  - product: {Object} product
+
+  Usage:
+  {%- capture art -%}{% render 'mt-art-for', product: product %}{%- endcapture -%}
+{%- endcomment -%}
+{%- liquid
+  assign h = product.handle | downcase
+  if product.metafields.marcel.art.value != blank
+    echo product.metafields.marcel.art.value
+  elsif h contains 'shield'
+    echo 'ora-shield'
+  elsif h contains 'ora-care' or h contains 'oracare'
+    echo 'ora-care'
+  elsif h contains 'smile'
+    echo 'smile'
+  elsif h contains 'mo-device' or h contains 'moflex'
+    echo 'device'
+  endif
+-%}

@@ -1,0 +1,239 @@
+{{ 'mt-pages.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  .mt-enquiry-grid { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+  @media (max-width: 900px) {
+    .mt-enquiry-grid { grid-template-columns: minmax(0, 1fr); }
+  }
+  .mt-enquiry-side { display: grid; gap: 18px; }
+  .mt-enquiry-side .mt-sec-head { margin-bottom: 0; }
+  .mt-contact-list { display: grid; gap: 10px; }
+  .mt-contact-list a { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: var(--mt-r); background: var(--mt-paper); border: 1px solid var(--mt-line); font-weight: 700; color: var(--mt-ink); }
+  .mt-bg-paper .mt-contact-list a { background: var(--mt-mist); border-color: transparent; }
+  .mt-contact-list a:hover { border-color: var(--mt-teal); }
+  .mt-contact-list .mt-i { width: 20px; height: 20px; color: var(--mt-teal); flex: none; }
+  .mt-contact-list small { display: block; font-weight: 500; font-size: 13.5px; color: var(--mt-ink-3); }
+  .mt-enquiry-card { display: grid; gap: 18px; padding: clamp(20px, 3.5vw, 32px); border-radius: var(--mt-r-xl); background: var(--mt-paper); border: 1px solid var(--mt-line); }
+  .mt-enquiry-card .mt-btn { justify-self: start; }
+  .mt-form-ok { display: flex; gap: 10px; align-items: center; padding: 14px 16px; border-radius: var(--mt-r); background: #E3F6EA; color: var(--mt-wa-ink); font-weight: 700; }
+{%- endstyle -%}
+
+{%- liquid
+  assign s = section.settings
+  assign types = s.types | newline_to_br | split: '<br />'
+  assign wa_digits = settings.mt_whatsapp_number | remove: ' ' | remove: '+'
+  assign form_id = 'MtEnquiry-' | append: section.id
+-%}
+{%- capture wa_url -%}{% render 'mt-wa-url' %}{%- endcapture -%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-enquiry' %}"{% if s.anchor != blank %} id="{{ s.anchor | handleize }}"{% endif %}>
+  <div class="mt-wrap mt-enquiry-grid">
+    <div class="mt-enquiry-side">
+      {%- render 'mt-sec-head', eyebrow: s.eyebrow, heading: s.heading, text: s.text -%}
+      <div class="mt-contact-list">
+        {%- if s.show_whatsapp and wa_digits != blank -%}
+          <a href="{{ wa_url }}" target="_blank" rel="noopener">{%- render 'mt-icon', icon: 'whatsapp' -%}<span>{{ s.whatsapp_label | escape }}<small>{{ s.whatsapp_note | escape }}</small></span></a>
+        {%- endif -%}
+        {%- if settings.mt_phone != blank -%}
+          <a href="tel:{{ settings.mt_phone | remove: ' ' }}">{%- render 'mt-icon', icon: 'phone' -%}<span>{{ settings.mt_phone | escape }}<small>{{ s.phone_note | escape }}</small></span></a>
+        {%- endif -%}
+        {%- if settings.mt_email != blank -%}
+          <a href="mailto:{{ settings.mt_email }}">{%- render 'mt-icon', icon: 'mail' -%}<span>{{ settings.mt_email | escape }}<small>{{ s.email_note | escape }}</small></span></a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="mt-enquiry-card">
+      {%- form 'contact', id: form_id, class: 'mt-form-grid', novalidate: 'novalidate' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="mt-form-ok" role="status">{%- render 'mt-icon', icon: 'check' -%}{{ s.success_text | escape }}</p>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <p class="mt-err" role="alert">{{ form.errors | default_errors }}</p>
+        {%- endif -%}
+        <h2 class="mt-h3">{{ s.form_heading | escape }}</h2>
+        <div class="mt-field">
+          <label for="{{ form_id }}-type">{{ s.type_label | escape }}</label>
+          <select class="mt-input" id="{{ form_id }}-type" name="contact[enquiry_type]">
+            {%- for t in types -%}
+              {%- assign t = t | strip -%}
+              {%- if t != blank -%}<option value="{{ t | escape }}">{{ t | escape }}</option>{%- endif -%}
+            {%- endfor -%}
+          </select>
+        </div>
+        <div class="mt-form-grid mt-form-grid--2">
+          <div class="mt-field">
+            <label for="{{ form_id }}-name">{{ s.name_label | escape }}</label>
+            <input class="mt-input" id="{{ form_id }}-name" name="contact[name]" autocomplete="name" required>
+          </div>
+          <div class="mt-field">
+            <label for="{{ form_id }}-phone">{{ s.phone_label | escape }}</label>
+            <input class="mt-input" id="{{ form_id }}-phone" name="contact[phone]" type="tel" autocomplete="tel" required>
+          </div>
+          <div class="mt-field">
+            <label for="{{ form_id }}-email">{{ s.email_label | escape }}</label>
+            <input class="mt-input" id="{{ form_id }}-email" name="contact[email]" type="email" autocomplete="email" required>
+          </div>
+          <div class="mt-field">
+            <label for="{{ form_id }}-city">{{ s.city_label | escape }}</label>
+            <input class="mt-input" id="{{ form_id }}-city" name="contact[city]" autocomplete="address-level2">
+          </div>
+        </div>
+        <div class="mt-field">
+          <label for="{{ form_id }}-body">{{ s.message_label | escape }}</label>
+          <textarea class="mt-input" id="{{ form_id }}-body" name="contact[body]"></textarea>
+        </div>
+        <button type="submit" class="mt-btn mt-btn-primary">{{ s.submit_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</button>
+        {%- if s.fine != blank -%}<p class="mt-fine">{{ s.fine | escape }}</p>{%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel enquiry form",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Link name",
+      "info": "Optional, for links like #enquiry.",
+      "default": "enquiry"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Contact MARCEL"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Send us an enquiry"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "Choose the type of enquiry so it reaches the right team."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_whatsapp",
+      "label": "Show WhatsApp",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_label",
+      "label": "WhatsApp label",
+      "default": "WhatsApp the Patient HelpDesk"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_note",
+      "label": "WhatsApp note",
+      "default": "For questions about the programme and your next step"
+    },
+    {
+      "type": "text",
+      "id": "phone_note",
+      "label": "Phone note",
+      "default": "Call the MARCEL team"
+    },
+    {
+      "type": "text",
+      "id": "email_note",
+      "label": "Email note",
+      "default": "For professional, business and research enquiries"
+    },
+    {
+      "type": "header",
+      "content": "Form"
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "Form heading",
+      "default": "Your enquiry"
+    },
+    {
+      "type": "text",
+      "id": "type_label",
+      "label": "Type label",
+      "default": "Enquiry type"
+    },
+    {
+      "type": "textarea",
+      "id": "types",
+      "label": "Enquiry types",
+      "info": "One per line. The choice is included in the email you receive.",
+      "default": "Patient HelpDesk\nSpecialist / clinic enquiry\nProfessional enquiry\nBusiness enquiry\nResearch / collaboration enquiry"
+    },
+    {
+      "type": "text",
+      "id": "name_label",
+      "label": "Name label",
+      "default": "Full name"
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "Phone label",
+      "default": "Phone number"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email label",
+      "default": "Email ID"
+    },
+    {
+      "type": "text",
+      "id": "city_label",
+      "label": "City label",
+      "default": "City"
+    },
+    {
+      "type": "text",
+      "id": "message_label",
+      "label": "Message label",
+      "default": "Your message"
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Submit button",
+      "default": "Send enquiry"
+    },
+    {
+      "type": "text",
+      "id": "success_text",
+      "label": "Sent message",
+      "default": "Thank you. Your enquiry has reached the MARCEL team."
+    },
+    {
+      "type": "text",
+      "id": "fine",
+      "label": "Small print",
+      "default": "Please do not send personal medical records through this form. For an examination, see an OSMF Specialist doctor."
+    },
+    {"type":"header","content":"Section style"},
+    {"type":"select","id":"background","label":"Background","options":[{"value":"paper","label":"White"},{"value":"mist","label":"Light"},{"value":"tint","label":"Tinted"},{"value":"navy","label":"Navy"}],"default":"mist"},
+    {"type":"checkbox","id":"sheet","label":"Rounded top edge","info":"Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.","default":false},
+    {"type":"select","id":"spacing","label":"Spacing","options":[{"value":"normal","label":"Normal"},{"value":"tight","label":"Compact"},{"value":"none","label":"None"}],"default":"normal"}
+  ],
+  "presets": [
+    {
+      "name": "Marcel enquiry form"
+    }
+  ]
+}
+{% endschema %}

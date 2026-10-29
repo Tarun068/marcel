@@ -1,0 +1,268 @@
+{%- style -%}
+  .mt-invite { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+  @media (max-width: 900px) {
+    .mt-invite { grid-template-columns: minmax(0, 1fr); }
+  }
+  .mt-invite-copy { display: grid; gap: 20px; }
+  .mt-invite-copy .mt-sec-head { margin-bottom: 0; }
+  .mt-invite-copy .mt-checks li { font-size: 16px; color: var(--mt-ink); }
+  .mt-invite-preview { display: grid; gap: 14px; padding: clamp(20px, 3vw, 30px); border-radius: var(--mt-r-xl); background: var(--mt-paper); box-shadow: 0 24px 50px -28px rgba(13, 38, 59, .35), inset 0 0 0 1px var(--mt-line); }
+  .mt-bg-paper .mt-invite-preview { background: var(--mt-mist); box-shadow: none; }
+  .mt-invite-step { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--mt-teal); }
+  .mt-invite-step span:last-child { color: var(--mt-ink-3); letter-spacing: 0; text-transform: none; font-weight: 600; }
+  .mt-invite-bar { height: 6px; border-radius: 6px; background: var(--mt-line); overflow: hidden; }
+  .mt-invite-bar i { display: block; width: var(--mt-progress, 16%); height: 100%; border-radius: 6px; background: var(--mt-teal); }
+  .mt .mt-invite-preview h3 { font-size: clamp(20px, 17px + .6vw, 24px); line-height: 1.2; letter-spacing: -.015em; }
+  .mt-invite-opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .mt .mt-invite-opts .mt-opt { min-height: 74px; padding: 14px 16px; }
+  .mt-invite-opts .mt-opt b { font-size: 17px; }
+  .mt-invite-opts .mt-opt small { font-size: 14px; }
+  /* Answers are real radio buttons; the label carries the look of the self-check options. */
+  .mt .mt-invite-opts .mt-opt { position: relative; cursor: pointer; }
+  .mt-invite-opts input { position: absolute; opacity: 0; pointer-events: none; }
+  .mt .mt-invite-opts .mt-opt:has(input:checked) { background: var(--mt-tint); box-shadow: inset 0 0 0 2px var(--mt-teal); }
+  .mt-invite-opts .mt-opt:has(input:checked) .mt-opt-radio { background: var(--mt-teal); box-shadow: none; }
+  .mt-invite-opts .mt-opt:has(input:checked) .mt-opt-radio .mt-i { opacity: 1; }
+  .mt-invite-opts .mt-opt:has(input:focus-visible) { outline: 2px solid var(--mt-teal); outline-offset: 2px; }
+  .mt-invite-foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding-top: 14px; border-top: 1px dashed var(--mt-line-2); }
+  .mt-invite-foot p { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--mt-ink-3); }
+  .mt-invite-foot p .mt-i { width: 17px; height: 17px; color: var(--mt-teal); flex: none; }
+  .mt .mt-invite-foot .mt-btn { min-height: 48px; padding-inline: 22px; }
+  /* Until an answer is chosen the button looks inactive; choosing one wakes it up. */
+  .mt .mt-invite-preview:not(:has(input:checked)) .mt-invite-foot .mt-btn { opacity: .45; box-shadow: none; }
+  @media (max-width: 480px) {
+    .mt-invite-opts { gap: 8px; }
+    .mt .mt-invite-opts .mt-opt { gap: 10px; padding: 12px 10px; }
+    .mt-invite-opts .mt-opt b { font-size: 15.5px; }
+    .mt-invite-opts .mt-opt small { font-size: 13px; }
+    .mt-invite-foot { flex-direction: column; align-items: stretch; }
+    .mt .mt-invite-foot .mt-btn { width: 100%; }
+  }
+{%- endstyle -%}
+
+{%- capture btn1_link -%}{% render 'mt-link-to', key: section.settings.button_1_to, url: section.settings.button_1_link %}{%- endcapture -%}
+{%- capture btn2_link -%}{% render 'mt-link-to', key: section.settings.button_2_to, url: section.settings.button_2_link %}{%- endcapture -%}
+{%- capture test_url -%}{% render 'mt-link-to', key: section.settings.test_to, url: section.settings.test_link %}{%- endcapture -%}
+{%- liquid
+  assign points = section.settings.points | newline_to_br | split: '<br />'
+  assign options = section.settings.preview_options | newline_to_br | split: '<br />'
+-%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-check-invite' %}">
+  <div class="mt-wrap">
+    <div class="mt-invite">
+      <div class="mt-invite-copy">
+        {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
+        {%- if section.settings.points != blank -%}
+          <ul class="mt-checks">
+            {%- for line in points -%}
+              {%- assign item = line | strip -%}
+              {%- if item != blank -%}<li>{%- render 'mt-icon', icon: 'check' -%}<span>{{ item | escape }}</span></li>{%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+        {%- if section.settings.button_1_label != blank or section.settings.button_2_label != blank -%}
+          <div class="mt-btn-row">
+            {%- if section.settings.button_1_label != blank -%}
+              <a class="mt-btn mt-btn-primary" href="{{ btn1_link }}"{% if section.settings.button_1_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
+                {{- section.settings.button_1_label | escape -}}
+                {%- render 'mt-icon', icon: 'arrow-right' -%}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.button_2_label != blank -%}
+              <a class="mt-btn mt-btn-secondary" href="{{ btn2_link }}"{% if section.settings.button_2_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>{{ section.settings.button_2_label | escape }}</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+        {%- if section.settings.note != blank -%}<p class="mt-fine">{{ section.settings.note }}</p>{%- endif -%}
+      </div>
+
+      {%- if section.settings.preview_question != blank -%}
+        {%- comment -%} A plain GET form, so the chosen answer reaches the self-check as ?opening=… even without JavaScript. {%- endcomment -%}
+        <form action="{{ test_url | strip }}" method="get">
+          <div class="mt-invite-preview">
+            <div class="mt-invite-step">
+              <span>{{ section.settings.preview_step | escape }}</span>
+              <span>{{ section.settings.preview_topic | escape }}</span>
+            </div>
+            <div class="mt-invite-bar"><i></i></div>
+            <h3 id="MtInviteQ-{{ section.id }}">{{ section.settings.preview_question | escape }}</h3>
+            <div class="mt-invite-opts" role="radiogroup" aria-labelledby="MtInviteQ-{{ section.id }}">
+              {%- for line in options -%}
+                {%- assign parts = line | split: '|' -%}
+                {%- assign value = parts[0] | strip -%}
+                {%- assign label = parts[1] | strip -%}
+                {%- if value != blank and label != blank -%}
+                  <label class="mt-opt">
+                    <input type="radio" name="opening" value="{{ value | escape }}" required>
+                    <span class="mt-opt-radio">{%- render 'mt-icon', icon: 'check' -%}</span>
+                    <span>
+                      <b>{{ label | escape }}</b>
+                      {%- if parts[2] != blank -%}<small>{{ parts[2] | strip | escape }}</small>{%- endif -%}
+                    </span>
+                  </label>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+            <div class="mt-invite-foot">
+              {%- if section.settings.preview_result != blank -%}
+                <p>{%- render 'mt-icon', icon: 'lock' -%}{{ section.settings.preview_result | escape }}</p>
+              {%- endif -%}
+              <button type="submit" class="mt-btn mt-btn-primary">
+                {{- section.settings.continue_label | escape -}}
+                {%- render 'mt-icon', icon: 'arrow-right' -%}
+              </button>
+            </div>
+          </div>
+        </form>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel self-check invite",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "MARCEL OSMF Self-Check"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Understand your next step"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "Answer a few short questions about your mouth opening and symptoms. Your result appears on screen straight away, with a suggested next step."
+    },
+    {
+      "type": "textarea",
+      "id": "points",
+      "label": "What visitors get",
+      "info": "One point per line.",
+      "default": "Clear progress through each question, with Back and Next\nA summary of your answers on the result screen\nWhat your answers can indicate and the pathway that may be considered\nThe option to talk to a MARCEL OSMF Consultant or find a specialist"
+    },
+    {
+      "type": "text",
+      "id": "button_1_label",
+      "label": "Button 1 label",
+      "default": "Start the OSMF Self-Check"
+    },
+    {
+      "type": "select",
+      "id": "button_1_to",
+      "label": "Button 1 opens",
+      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "default": "test"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Button 1 custom link"
+    },
+    {
+      "type": "text",
+      "id": "button_2_label",
+      "label": "Button 2 label",
+      "default": "Talk to a MARCEL OSMF Consultant"
+    },
+    {
+      "type": "select",
+      "id": "button_2_to",
+      "label": "Button 2 opens",
+      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "default": "consult"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Button 2 custom link"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "note",
+      "label": "Note",
+      "default": "The self-check gives an initial indication only. It is not a diagnosis. A qualified healthcare professional must confirm the diagnosis and stage."
+    },
+    {
+      "type": "header",
+      "content": "First question"
+    },
+    {
+      "type": "paragraph",
+      "content": "Visitors choose an answer and press the button. The self-check then opens at question 2 with that answer already chosen. Empty question hides the card."
+    },
+    {
+      "type": "select",
+      "id": "test_to",
+      "label": "Self-check page",
+      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "default": "test"
+    },
+    {
+      "type": "url",
+      "id": "test_link",
+      "label": "Self-check custom link"
+    },
+    {
+      "type": "text",
+      "id": "preview_step",
+      "label": "Step label",
+      "default": "Question 1 of 6"
+    },
+    {
+      "type": "text",
+      "id": "preview_topic",
+      "label": "Topic",
+      "default": "Mouth opening"
+    },
+    {
+      "type": "text",
+      "id": "preview_question",
+      "label": "Question",
+      "default": "How wide can you open your mouth?"
+    },
+    {
+      "type": "textarea",
+      "id": "preview_options",
+      "label": "Answers",
+      "info": "One per line: value | answer | hint. Values must match the self-check: gt35, 26to35, 15to25, lt15, lt5.",
+      "default": "gt35 | 3 fingers | Opens comfortably\n26to35 | 2 fingers | Feels a little tight\n15to25 | 1 finger | Clearly restricted\nlt15 | Less than 1 finger | Very hard to open"
+    },
+    {
+      "type": "text",
+      "id": "preview_result",
+      "label": "Footer note",
+      "default": "Private and confidential"
+    },
+    {
+      "type": "text",
+      "id": "continue_label",
+      "label": "Button label",
+      "default": "Continue"
+    },
+    {"type":"header","content":"Section style"},
+    {"type":"select","id":"background","label":"Background","options":[{"value":"paper","label":"White"},{"value":"mist","label":"Light"},{"value":"tint","label":"Tinted"},{"value":"navy","label":"Navy"}],"default":"tint"},
+    {"type":"checkbox","id":"sheet","label":"Rounded top edge","info":"Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.","default":false},
+    {"type":"select","id":"spacing","label":"Spacing","options":[{"value":"normal","label":"Normal"},{"value":"tight","label":"Compact"},{"value":"none","label":"None"}],"default":"normal"}
+  ],
+  "presets": [
+    {
+      "name": "Marcel self-check invite"
+    }
+  ]
+}
+{% endschema %}
