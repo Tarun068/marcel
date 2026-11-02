@@ -1652,6 +1652,27 @@
         "label": "Use the Marcel font on Dawn pages too",
         "info": "Marcel sections always use Figtree. Turn this on to also use it on Dawn pages such as product, cart and search.",
         "default": true
+      },
+      {
+        "type": "select",
+        "id": "mt_type_style",
+        "label": "Heading and button style",
+        "options": [
+          {
+            "value": "inner",
+            "label": "Serif on inner pages"
+          },
+          {
+            "value": "all",
+            "label": "Serif on every page"
+          },
+          {
+            "value": "sans",
+            "label": "Sans-serif everywhere"
+          }
+        ],
+        "default": "inner",
+        "info": "Serif headings (Fraunces) and sentence-case buttons, as in the approved mockup. With \"Serif on inner pages\", the home page keeps its own section settings. The header and footer are not affected."
       }
     ]
   },

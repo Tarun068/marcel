@@ -66,6 +66,8 @@
 .mt-bg-tint { background: var(--mt-tint); --mt-section-bg: var(--mt-tint); }
 .mt-bg-navy { background: var(--mt-navy); --mt-section-bg: var(--mt-navy); color: var(--mt-navy-ink); }
 .mt-bg-navy :is(h1, h2, h3, h4) { color: var(--mt-on-dark); }
+/* Soft tint that fades to white, as in the mockup's page heroes. */
+.mt-bg-fade { background: linear-gradient(180deg, var(--mt-tint), var(--mt-paper)); --mt-section-bg: var(--mt-paper); }
 /* Optional rounded top edge that overlaps the section above. */
 .mt-sheet { position: relative; border-radius: var(--mt-sheet-r) var(--mt-sheet-r) 0 0; margin-top: calc(-1 * var(--mt-sheet-r)); }
 .mt-stack { display: grid; gap: 16px; align-content: start; min-width: 0; }
@@ -261,6 +263,25 @@
 
 /* ---------- Placeholder (theme editor) ---------- */
 .mt-placeholder { display: grid; place-items: center; padding: 24px; border-radius: var(--mt-r-lg); background: var(--mt-mist); color: var(--mt-ink-3); font-size: 14px; text-align: center; }
+
+/* ---------- Mockup type style ----------
+   body.mt-type-serif (snippets/mt-body-class, Theme settings > Marcel brand > Heading and button style):
+   serif headings with teal italic emphasis and sentence-case buttons, in the page content only.
+   :where() keeps the base specificity, so section rules that resize a heading still apply. */
+:where(.mt-type-serif #MainContent) .mt :is(.mt-display, .mt-h1, .mt-h2, .mt-test-title, .mt-result-title, .mt-pdp-title, .mt-book-h, .mt-prose-sec h2, .mt-article-body h2, .mt-phero-stat b) { font-family: var(--mt-serif); font-weight: 600; letter-spacing: -.018em; font-optical-sizing: auto; }
+:where(.mt-type-serif #MainContent) .mt .mt-h1 { font-size: clamp(34px, 22px + 2.6vw, 54px); line-height: 1.06; }
+:where(.mt-type-serif #MainContent) .mt .mt-h2 { font-size: clamp(29px, 21px + 2vw, 45px); line-height: 1.1; }
+:where(.mt-type-serif #MainContent) .mt :is(.mt-display, .mt-h1, .mt-h2, .mt-test-title, .mt-result-title, .mt-pdp-title) :is(em, i) { font-style: italic; font-weight: 500; color: var(--mt-teal); }
+:where(.mt-type-serif #MainContent) .mt-bg-navy :is(.mt-display, .mt-h1, .mt-h2) :is(em, i) { color: var(--mt-mint); }
+.mt-type-serif #MainContent .mt .mt-phero-stat b { font-weight: 600; }
+:where(.mt-type-serif #MainContent) .mt .mt-founder-quote { font-family: var(--mt-serif); font-weight: 500; letter-spacing: -.01em; }
+:where(.mt-type-serif #MainContent) .mt .mt-btn { font-size: 16px; font-weight: 700; letter-spacing: 0; text-transform: none; padding-inline: 24px; }
+:where(.mt-type-serif #MainContent) .mt .mt-btn-sm { font-size: 14.5px; padding-inline: 18px; }
+.mt-type-serif #MainContent .mt .mt-buy-now .shopify-payment-button__button--unbranded { font-size: 16px; font-weight: 700; letter-spacing: 0; text-transform: none; }
+@media (max-width: 480px) {
+  :where(.mt-type-serif #MainContent) .mt .mt-btn { font-size: 15.5px; padding-inline: 20px; }
+  :where(.mt-type-serif #MainContent) .mt .mt-btn-sm { font-size: 14px; padding-inline: 16px; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .mt *, .mt *::before, .mt *::after { animation: none !important; transition: none !important; }

@@ -20,6 +20,15 @@
     font-display: swap;
     src: url('{{ 'mt-figtree.woff2' | asset_url }}') format('woff2');
   }
+  /* ™ and ® from Figtree inside serif headings: Fraunces draws them almost full size. */
+  @font-face {
+    font-family: 'MT Marks';
+    font-style: normal;
+    font-weight: 300 900;
+    font-display: swap;
+    src: url('{{ 'mt-figtree.woff2' | asset_url }}') format('woff2');
+    unicode-range: U+2122, U+00AE;
+  }
   @font-face {
     font-family: 'Fraunces';
     font-style: normal;
@@ -78,7 +87,7 @@
     --mt-tooth-gap: #E3EAEE;
 
     --mt-font: 'Figtree', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-    --mt-serif: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+    --mt-serif: 'MT Marks', 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
     --mt-wrap: {{ settings.mt_page_width | default: 1200 }}px;
     --mt-header-h: 72px;
 

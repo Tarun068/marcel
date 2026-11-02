@@ -17,7 +17,7 @@
         "button_1_to": "custom",
         "button_2_to": "evidence",
         "back_to": "therapy",
-        "background": "tint",
+        "background": "fade",
         "sheet": false,
         "spacing": "none",
         "current_label": "For healthcare professionals",

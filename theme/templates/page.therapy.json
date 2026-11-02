@@ -17,7 +17,7 @@
         "button_1_to": "test",
         "button_2_to": "custom",
         "back_to": "therapy",
-        "background": "tint",
+        "background": "fade",
         "sheet": false,
         "spacing": "none",
         "current_label": "MARCEL OMR Therapy™",

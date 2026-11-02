@@ -1,0 +1,15 @@
+{%- comment -%}
+  Extra <body> classes for the Marcel look (Theme settings > Marcel brand > Heading and button style).
+  mt-type-serif: serif headings and sentence-case buttons in the page content (see mt-base.css).
+{%- endcomment -%}
+{%- liquid
+  assign type_style = settings.mt_type_style | default: 'inner'
+  case type_style
+    when 'all'
+      echo ' mt-type-serif'
+    when 'inner'
+      unless template.name == 'index'
+        echo ' mt-type-serif'
+      endunless
+  endcase
+-%}

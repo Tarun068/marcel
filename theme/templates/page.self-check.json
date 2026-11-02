@@ -67,9 +67,9 @@
           "settings": {
             "qid": "opening",
             "short": "Mouth opening",
-            "question": "How wide can you open your mouth?",
-            "options": "gt35 | More than 35 mm | About 3 fingers or more | Over 35 mm\n26to35 | 26 to 35 mm | About 2 fingers | 26–35 mm\n15to25 | 15 to 25 mm | About 1 finger | 15–25 mm\nlt15 | Less than 15 mm | Less than 1 finger | Under 15 mm\nlt5 | Less than 5 mm | The mouth barely opens | Under 5 mm",
-            "help": "Measure between the edges of your upper and lower front teeth, or count how many fingers fit when stacked one above the other. Don’t force it."
+            "question": "How many fingers fit vertically in your mouth?",
+            "options": "gt35 | 3 fingers | Opens comfortably · more than 35 mm | 3 fingers (over 35 mm)\n26to35 | 2 fingers | Feels a little tight · 26–35 mm | 2 fingers (26–35 mm)\n15to25 | 1 finger | Clearly restricted · 15–25 mm | 1 finger (15–25 mm)\nlt15 | Less than 1 finger | Very hard to open · under 15 mm | Less than 1 finger (under 15 mm)\nlt5 | Barely opens | Hardly any opening · under 5 mm | Barely opens (under 5 mm)",
+            "help": "Stack your fingers one above the other between your upper and lower front teeth. Don’t force it. If you measured with a ruler, use the millimetre range under each answer."
           }
         },
         "question_2": {
