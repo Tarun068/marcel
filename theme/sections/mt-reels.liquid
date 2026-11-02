@@ -1,0 +1,405 @@
+{%- liquid
+  assign shown = 0
+  for block in section.blocks
+    if block.settings.video != blank or block.settings.video_url != blank
+      assign shown = shown | plus: 1
+    elsif section.settings.show_placeholders
+      if block.settings.cover != blank or block.settings.art != 'none'
+        assign shown = shown | plus: 1
+      endif
+    endif
+  endfor
+-%}
+
+{%- if shown > 0 or request.design_mode -%}
+  {{ 'mt-reels.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'mt-reels.js' | asset_url }}" defer="defer"></script>
+  {%- capture btn_link -%}{% render 'mt-link-to', key: section.settings.button_to, url: section.settings.button_link %}{%- endcapture -%}
+
+  <section
+    class="{% render 'mt-section-class', s: section.settings, extra: 'mt-reels-sec' %}"
+    style="--per-d: {{ section.settings.per_desktop }}; --per-m: {{ section.settings.per_mobile }};"
+  >
+    <mt-reels class="mt-wrap mt-reels" data-preview="{{ section.settings.preview }}">
+      <div class="mt-sec-head-row">
+        {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
+        <div class="mt-reels-nav" hidden>
+          <button type="button" class="mt-reels-arrow" data-dir="-1" aria-label="{{ section.settings.prev_label | escape }}">
+            {%- render 'mt-icon', icon: 'arrow-left' -%}
+          </button>
+          <button type="button" class="mt-reels-arrow" data-dir="1" aria-label="{{ section.settings.next_label | escape }}">
+            {%- render 'mt-icon', icon: 'arrow-right' -%}
+          </button>
+        </div>
+      </div>
+
+      {%- if shown == 0 -%}
+        <p class="mt-placeholder">Add Reel blocks with a video uploaded to Shopify, or a YouTube or Vimeo link. This section stays hidden on the live store until then.</p>
+      {%- else -%}
+        <ul class="mt-reels-track" role="list">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign b = block.settings
+              assign v = b.video
+              assign u = b.video_url
+              assign kind = 'none'
+              if v != blank
+                assign kind = 'hosted'
+              elsif u != blank
+                assign kind = u.type
+              endif
+              assign show = true
+              if kind == 'none'
+                assign show = false
+                if section.settings.show_placeholders
+                  if b.cover != blank or b.art != 'none'
+                    assign show = true
+                  endif
+                endif
+              endif
+            -%}
+            {%- if show -%}
+              <li class="mt-reel" {{ block.shopify_attributes }}>
+                <button
+                  type="button"
+                  class="mt-reel-card"
+                  aria-haspopup="dialog"
+                  aria-label="{{ section.settings.play_label | escape }}: {{ b.title | escape }}"
+                >
+                  <span class="mt-reel-media">
+                    {%- if b.cover != blank -%}
+                      {{- b.cover | image_url: width: 720 | image_tag: loading: 'lazy', widths: '360, 480, 720', sizes: '(min-width: 990px) 380px, (min-width: 750px) 30vw, 46vw', alt: '' -}}
+                    {%- elsif kind == 'hosted' and v.preview_image != blank -%}
+                      {{- v.preview_image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '360, 480, 720', sizes: '(min-width: 990px) 380px, (min-width: 750px) 30vw, 46vw', alt: '' -}}
+                    {%- elsif kind == 'youtube' -%}
+                      {% # theme-check-disable-next-line RemoteAsset %}
+                      <img src="https://i.ytimg.com/vi/{{ u.id | escape }}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+                    {%- elsif b.art != 'none' -%}
+                      <img
+                        src="{{ 'mt-reel-' | append: b.art | append: '-480.webp' | asset_url }}"
+                        srcset="{{ 'mt-reel-' | append: b.art | append: '-480.webp' | asset_url }} 480w, {{ 'mt-reel-' | append: b.art | append: '.webp' | asset_url }} 720w"
+                        sizes="(min-width: 990px) 380px, (min-width: 750px) 30vw, 46vw"
+                        width="720"
+                        height="1280"
+                        alt=""
+                        loading="lazy"
+                      >
+                    {%- endif -%}
+                    {%- if kind == 'hosted' and section.settings.preview != 'off' -%}
+                      {%- liquid
+                        assign mp4s = v.sources | where: 'mime_type', 'video/mp4' | sort: 'height'
+                        assign pv = mp4s.first
+                        for s in mp4s
+                          if s.height >= 480
+                            assign pv = s
+                            break
+                          endif
+                        endfor
+                      -%}
+                      {%- if pv != blank -%}
+                        <video class="mt-reel-preview" muted playsinline loop preload="none" data-src="{{ pv.url }}" aria-hidden="true" tabindex="-1"></video>
+                      {%- endif -%}
+                    {%- endif -%}
+                  </span>
+                  <span class="mt-reel-play" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" focusable="false"><path d="M7 4.5v15l12-7.5z"/></svg>
+                  </span>
+                  {%- if b.duration != blank -%}<span class="mt-reel-dur">{{ b.duration | escape }}</span>{%- endif -%}
+                  {%- if b.title != blank or b.subtitle != blank -%}
+                    <span class="mt-reel-cap">
+                      {%- if b.title != blank -%}<b>{{ b.title | escape }}</b>{%- endif -%}
+                      {%- if b.subtitle != blank -%}<small>{{ b.subtitle | escape }}</small>{%- endif -%}
+                    </span>
+                  {%- endif -%}
+                </button>
+                <template class="mt-reel-src" data-kind="{{ kind }}"{% if kind == 'youtube' or kind == 'vimeo' %} data-id="{{ u.id | escape }}"{% endif %} data-title="{{ b.title | escape }}" data-sub="{{ b.subtitle | escape }}">
+                  {%- if kind == 'hosted' -%}
+                    {{ v | video_tag: controls: true, playsinline: true, preload: 'metadata' }}
+                  {%- endif -%}
+                </template>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+        <div class="mt-reels-dots"></div>
+      {%- endif -%}
+
+      {%- if section.settings.note != blank or section.settings.button_label != blank -%}
+        <div class="mt-reels-foot">
+          {%- if section.settings.button_label != blank -%}
+            <a class="mt-btn mt-btn-secondary" href="{{ btn_link }}"{% if section.settings.button_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
+              {{- section.settings.button_label | escape -}}
+              {%- render 'mt-icon', icon: 'arrow-right' -%}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.note != blank -%}<p class="mt-fine">{{ section.settings.note }}</p>{%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <dialog class="mt mt-reel-modal" aria-label="{{ section.settings.dialog_label | escape }}">
+        <div class="mt-reel-box">
+          <div class="mt-reel-stage"></div>
+          <p class="mt-reel-soon" hidden>{{ section.settings.soon_text | escape }}</p>
+          <div class="mt-reel-mcap"><b></b><small></small></div>
+          <button type="button" class="mt-reel-step" data-dir="-1" aria-label="{{ section.settings.prev_label | escape }}">
+            {%- render 'mt-icon', icon: 'arrow-left' -%}
+          </button>
+          <button type="button" class="mt-reel-step" data-dir="1" aria-label="{{ section.settings.next_label | escape }}">
+            {%- render 'mt-icon', icon: 'arrow-right' -%}
+          </button>
+          <button type="button" class="mt-reel-close" aria-label="{{ section.settings.close_label | escape }}">
+            {%- render 'mt-icon', icon: 'x' -%}
+          </button>
+        </div>
+      </dialog>
+    </mt-reels>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Marcel video reels",
+  "class": "mt-reels-section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Vertical (9:16) videos in a sliding row. Visitors tap a reel to watch it full screen with sound. Upload videos in Shopify (Content > Files) or link YouTube or Vimeo. Only describe an expert as recommending MARCEL with their permission."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Watch and learn"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Short videos that answer common questions"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "range",
+      "id": "per_desktop",
+      "label": "Reels in view on desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "per_mobile",
+      "label": "Reels in view on phones",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "preview",
+      "label": "Silent preview",
+      "info": "For videos uploaded to Shopify. The preview plays without sound.",
+      "options": [
+        {
+          "value": "hover",
+          "label": "Play when the pointer is over a reel"
+        },
+        {
+          "value": "view",
+          "label": "Play while the reel is on screen"
+        },
+        {
+          "value": "off",
+          "label": "Off"
+        }
+      ],
+      "default": "hover"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_placeholders",
+      "label": "Show reels that have no video yet",
+      "info": "They show their cover and a coming-soon note. Turn off before launch if some videos are still missing.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "soon_text",
+      "label": "Coming-soon note",
+      "default": "This video is coming soon."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Talk to a MARCEL OSMF Consultant"
+    },
+    {
+      "type": "select",
+      "id": "button_to",
+      "label": "Button opens",
+      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "default": "consult"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button custom link"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "note",
+      "label": "Note",
+      "default": "Videos are for general education and do not replace a consultation."
+    },
+    {
+      "type": "header",
+      "content": "Screen reader labels"
+    },
+    {
+      "type": "text",
+      "id": "play_label",
+      "label": "Play",
+      "default": "Play video"
+    },
+    {
+      "type": "text",
+      "id": "dialog_label",
+      "label": "Video window",
+      "default": "Video"
+    },
+    {
+      "type": "text",
+      "id": "close_label",
+      "label": "Close",
+      "default": "Close video"
+    },
+    {
+      "type": "text",
+      "id": "prev_label",
+      "label": "Previous",
+      "default": "Previous video"
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "Next",
+      "default": "Next video"
+    },
+    {"type":"header","content":"Section style"},
+    {"type":"select","id":"background","label":"Background","options":[{"value":"paper","label":"White"},{"value":"mist","label":"Light"},{"value":"tint","label":"Tinted"},{"value":"navy","label":"Navy"}],"default":"paper"},
+    {"type":"checkbox","id":"sheet","label":"Rounded top edge","info":"Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.","default":false},
+    {"type":"select","id":"spacing","label":"Spacing","options":[{"value":"normal","label":"Normal"},{"value":"tight","label":"Compact"},{"value":"none","label":"None"}],"default":"normal"}
+  ],
+  "blocks": [
+    {
+      "type": "reel",
+      "name": "Reel",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video uploaded to Shopify",
+          "info": "Vertical 9:16, ideally under a minute."
+        },
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "label": "Or a YouTube or Vimeo link",
+          "accept": [
+            "youtube",
+            "vimeo"
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "cover",
+          "label": "Cover image",
+          "info": "Optional. 1080 × 1920 px. Uploaded videos use their own first frame."
+        },
+        {
+          "type": "select",
+          "id": "art",
+          "label": "Built-in placeholder cover",
+          "info": "Used until a video or cover image is added.",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "1",
+              "label": "Consultant"
+            },
+            {
+              "value": "2",
+              "label": "Finger test"
+            },
+            {
+              "value": "3",
+              "label": "Habits: supari and tobacco"
+            },
+            {
+              "value": "4",
+              "label": "Therapy kits"
+            },
+            {
+              "value": "5",
+              "label": "Self-check on a phone"
+            },
+            {
+              "value": "6",
+              "label": "Specialist finder"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "What is OSMF? The signs to watch for"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "info": "For example the speaker's name and role, as they approved it."
+        },
+        {
+          "type": "text",
+          "id": "duration",
+          "label": "Length",
+          "info": "For example: 0:45"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel video reels",
+      "blocks": [
+        {"type": "reel", "settings": {"art": "1", "title": "What is OSMF? The signs to watch for", "subtitle": "MARCEL OSMF Consultant"}},
+        {"type": "reel", "settings": {"art": "2", "title": "The finger test for mouth opening", "subtitle": "How to check it at home"}},
+        {"type": "reel", "settings": {"art": "3", "title": "Supari, gutkha and other habits behind OSMF", "subtitle": "Know the risk factors"}},
+        {"type": "reel", "settings": {"art": "4", "title": "How MARCEL OMR Therapy™ works", "subtitle": "Foundation and Advance kits"}},
+        {"type": "reel", "settings": {"art": "5", "title": "Taking the MARCEL OSMF Self-Check", "subtitle": "Six questions and a next step"}},
+        {"type": "reel", "settings": {"art": "6", "title": "When to see an OSMF Specialist", "subtitle": "Signs that need a doctor"}}
+      ]
+    }
+  ]
+}
+{% endschema %}

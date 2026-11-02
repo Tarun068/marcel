@@ -22,13 +22,13 @@
         {%- render 'mt-icon', icon: 'chevron-right' -%}
         <a href="{{ blog.url }}" aria-current="page">{{ blog.title | escape }}</a>
       </nav>
-      <span class="mt-eyebrow">{{ blog.title | escape }} · {{ read | escape }}</span>
+      <span class="mt-eyebrow">{{ blog.title | escape }}, {{ read | escape }}</span>
       <h1 class="mt-h1">{{ article.title | escape }}</h1>
       {%- if lead != blank -%}<p class="mt-lead">{{ lead | escape }}</p>{%- endif -%}
       {%- if s.show_meta -%}
         <p class="mt-fine mt-article-meta">
           {{- article.published_at | time_tag: format: 'date' -}}
-          {%- if s.show_author and article.author != blank %} · {{ article.author | escape }}{% endif -%}
+          {%- if s.show_author and article.author != blank %}, by {{ article.author | escape }}{% endif -%}
         </p>
       {%- endif -%}
     </div>

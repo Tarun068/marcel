@@ -29,7 +29,7 @@
         "kit_thumb": "In the kit",
         "kit_heading": "In this kit",
         "best_prefix": "Best for",
-        "add_label": "Buy MARCEL® MOFlex – [price]",
+        "add_label": "Buy MARCEL® MOFlex for [price]",
         "sold_out_label": "Sold out",
         "variant_style": "cards",
         "pack_label": "Pack size",
@@ -51,7 +51,7 @@
         "sheet": false,
         "spacing": "tight",
         "headline": "Mouth-opening support device",
-        "supporting": "Gentle. Gradual. Guided.",
+        "supporting": "Gentle and gradual, never forced.",
         "intro": "<h3>Support your mouth-opening exercises with guided movement</h3><p>MARCEL® MOFlex Device is a mouth-opening support tool designed to support guided, gradual mouth-opening exercises as part of a structured rehabilitation routine for selected individuals experiencing restricted mouth opening.</p><p>It is an optional support tool, not a standalone solution, and should be used according to appropriate professional guidance.</p>",
         "details": "MRP per piece, inclusive of all taxes",
         "how_lines": "",
@@ -370,10 +370,28 @@
       "block_order": [
         "fine_1"
       ]
+    },
+    "use": {
+      "type": "mt-media-text",
+      "settings": {
+        "media_side": "left",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal",
+        "art": "device",
+        "eyebrow": "How it is used",
+        "heading": "Support for your <em>exercise routine</em>",
+        "text": "<p>The MARCEL® MOFlex Device is an optional aid for guided mouth-opening exercises. Use it only in the way your healthcare professional shows you, and never force your mouth open.</p>",
+        "button_1_label": "Find an OSMF Specialist",
+        "button_1_to": "specialists",
+        "button_2_label": "Talk to a Consultant",
+        "button_2_to": "consult"
+      }
     }
   },
   "order": [
     "main",
+    "use",
     "details",
     "support",
     "disclaimer"

@@ -74,11 +74,26 @@
                   | image_tag: loading: 'lazy', alt: alt, widths: '400, 600, 800, 1100', sizes: '(min-width: 861px) 40vw, 92vw'
                 }}
               {%- else -%}
-                <span class="mt-smedia-ph">
-                  <span class="mt-hex mt-hex--lg">{{ block.settings.number | escape }}</span>
-                  {%- if block.settings.range != blank -%}<b>{{ block.settings.range | escape }}</b>{%- endif -%}
-                  {%- if request.design_mode -%}<small>Add a stage image in the theme editor.</small>{%- endif -%}
-                </span>
+                {%- liquid
+                  assign n = block.settings.number | strip
+                  assign builtin = false
+                  if section.settings.stage_photos
+                    case n
+                      when '1', '2', '3', '4', '5'
+                        assign builtin = true
+                    endcase
+                  endif
+                -%}
+                {%- if builtin -%}
+                  <img src="{{ 'mt-stage-' | append: n | append: '.webp' | asset_url }}" alt="Mouth opening: {{ block.settings.range | escape }}" width="720" height="540" loading="lazy">
+                  {%- if block.settings.range != blank -%}<span class="mt-smedia-tag">{{ block.settings.range | escape }}</span>{%- endif -%}
+                {%- else -%}
+                  <span class="mt-smedia-ph">
+                    <span class="mt-hex mt-hex--lg">{{ block.settings.number | escape }}</span>
+                    {%- if block.settings.range != blank -%}<b>{{ block.settings.range | escape }}</b>{%- endif -%}
+                    {%- if request.design_mode -%}<small>Add a stage image in the theme editor.</small>{%- endif -%}
+                  </span>
+                {%- endif -%}
               {%- endif -%}
             </div>
             <div class="mt-sinfo">
@@ -210,6 +225,13 @@
       "id": "note",
       "label": "Note",
       "default": "Stage ranges follow the MARCEL OSMF Self-Check. Only a qualified healthcare professional can diagnose OSMF and confirm its stage."
+    },
+    {
+      "type": "checkbox",
+      "id": "stage_photos",
+      "label": "Show built-in stage photos",
+      "info": "Placeholder photos for stages 1 to 5, used until a stage image is chosen. The stage's range shows on the photo.",
+      "default": true
     },
     {"type":"header","content":"Section style"},
     {"type":"select","id":"background","label":"Background","options":[{"value":"paper","label":"White"},{"value":"mist","label":"Light"},{"value":"tint","label":"Tinted"},{"value":"navy","label":"Navy"}],"default":"paper"},

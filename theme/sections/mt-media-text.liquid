@@ -1,0 +1,188 @@
+{{ 'mt-pages.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign art = section.settings.art | default: 'none'
+  assign points = section.settings.points | newline_to_br | split: '<br />'
+  assign has_media = false
+  if section.settings.image != blank
+    assign has_media = true
+  elsif art != 'none'
+    assign has_media = true
+  endif
+-%}
+{%- capture btn1_link -%}{% render 'mt-link-to', key: section.settings.button_1_to, url: section.settings.button_1_link %}{%- endcapture -%}
+{%- capture btn2_link -%}{% render 'mt-link-to', key: section.settings.button_2_to, url: section.settings.button_2_link %}{%- endcapture -%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-mtext' %}">
+  <div class="mt-wrap">
+    <div class="mt-mtext-grid{% if section.settings.media_side == 'left' %} mt-mtext-grid--flip{% endif %}">
+      <div class="mt-mtext-copy">
+        {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading -%}
+        {%- if section.settings.text != blank -%}<div class="mt-rte">{{ section.settings.text }}</div>{%- endif -%}
+        {%- if section.settings.points != blank -%}
+          <ul class="mt-checks">
+            {%- for line in points -%}
+              {%- assign item = line | strip -%}
+              {%- if item != blank -%}<li>{%- render 'mt-icon', icon: 'check' -%}<span>{{ item | escape }}</span></li>{%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+        {%- if section.settings.button_1_label != blank or section.settings.button_2_label != blank -%}
+          <div class="mt-btn-row">
+            {%- if section.settings.button_1_label != blank -%}
+              <a class="mt-btn mt-btn-primary" href="{{ btn1_link }}"{% if section.settings.button_1_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
+                {{- section.settings.button_1_label | escape -}}
+                {%- render 'mt-icon', icon: 'arrow-right' -%}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.button_2_label != blank -%}
+              <a class="mt-btn mt-btn-secondary" href="{{ btn2_link }}"{% if section.settings.button_2_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>{{ section.settings.button_2_label | escape }}</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+        {%- if section.settings.note != blank -%}<p class="mt-fine">{{ section.settings.note }}</p>{%- endif -%}
+      </div>
+
+      {%- if has_media -%}
+        <div class="mt-mtext-media{% if section.settings.image == blank %} mt-mtext-media--art{% endif %}">
+          {%- if section.settings.image != blank -%}
+            {{
+              section.settings.image
+              | image_url: width: 1200
+              | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 540px, 92vw', widths: '400, 600, 800, 1200', alt: section.settings.image.alt
+            }}
+          {%- else -%}
+            <img
+              src="{{ 'mt-art-' | append: art | append: '-560.webp' | asset_url }}"
+              srcset="{{ 'mt-art-' | append: art | append: '-560.webp' | asset_url }} 560w, {{ 'mt-art-' | append: art | append: '.webp' | asset_url }} 1120w"
+              sizes="(min-width: 990px) 540px, 92vw"
+              width="1120"
+              height="920"
+              alt=""
+              loading="lazy"
+            >
+          {%- endif -%}
+        </div>
+      {%- elsif request.design_mode -%}
+        <p class="mt-placeholder">Choose a photo or a built-in picture for this section.</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel image with text",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photo",
+      "info": "5:4 works best, at least 1200 px wide."
+    },
+    {
+      "type": "select",
+      "id": "art",
+      "label": "Built-in placeholder picture",
+      "info": "Used until a photo is chosen.",
+      "options": [{"value":"none","label":"None"},{"value":"therapy","label":"Therapy products"},{"value":"foundation","label":"Foundation kit"},{"value":"advance","label":"Advance kit and MO Device"},{"value":"journey","label":"Progress tracker on a phone"},{"value":"osmf","label":"Measuring mouth opening"},{"value":"evidence","label":"Research"},{"value":"faq","label":"OSMF Consultant"},{"value":"shop","label":"Products and delivery"},{"value":"about","label":"Ora-Shield pack"},{"value":"device","label":"MO Device and exercise"}],
+      "default": "none"
+    },
+    {
+      "type": "select",
+      "id": "media_side",
+      "label": "Picture position on desktop",
+      "options": [
+        {
+          "value": "right",
+          "label": "Right"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Foundation routine"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Italic words get the teal marker.",
+      "default": "Part of the <em>Foundation kit</em>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Explain where this product fits and who decides whether it suits the visitor.</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "points",
+      "label": "Checklist",
+      "info": "Optional. One point per line."
+    },
+    {
+      "type": "text",
+      "id": "button_1_label",
+      "label": "Button 1"
+    },
+    {
+      "type": "select",
+      "id": "button_1_to",
+      "label": "Button 1 opens",
+      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "default": "therapy"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Button 1 custom link"
+    },
+    {
+      "type": "text",
+      "id": "button_2_label",
+      "label": "Button 2"
+    },
+    {
+      "type": "select",
+      "id": "button_2_to",
+      "label": "Button 2 opens",
+      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "default": "consult"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Button 2 custom link"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "note",
+      "label": "Small print"
+    },
+    {"type":"header","content":"Section style"},
+    {"type":"select","id":"background","label":"Background","options":[{"value":"paper","label":"White"},{"value":"mist","label":"Light"},{"value":"tint","label":"Tinted"},{"value":"navy","label":"Navy"}],"default":"paper"},
+    {"type":"checkbox","id":"sheet","label":"Rounded top edge","info":"Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.","default":false},
+    {"type":"select","id":"spacing","label":"Spacing","options":[{"value":"normal","label":"Normal"},{"value":"tight","label":"Compact"},{"value":"none","label":"None"}],"default":"normal"}
+  ],
+  "presets": [
+    {
+      "name": "Marcel image with text"
+    }
+  ]
+}
+{% endschema %}

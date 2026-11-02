@@ -25,7 +25,8 @@
         "heading": "Understanding OSMF",
         "text": "Oral Submucous Fibrosis (OSMF) can affect mouth opening, oral comfort and everyday activities such as eating. Understanding the condition, recognising its signs and seeking appropriate clinical guidance are important steps towards informed care.",
         "button_1_label": "Check Your OSMF Stage",
-        "button_2_label": ""
+        "button_2_label": "",
+        "art": "osmf"
       }
     },
     "guide": {
@@ -162,7 +163,7 @@
           "type": "table",
           "settings": {
             "head": "Stage | Mouth opening | MARCEL OMR Therapy™ pathway",
-            "rows": "Stage 1 #2B9759 | More than 35 mm, with symptoms | Foundation\nStage 2 #C4860B | 26 – 35 mm | Foundation\nStage 3 #D5602A | 15 – 25 mm | Advance\nStage 4 #C23838 | Less than 15 mm | Advance\nStage 5 #C23838 | Less than 5 mm + persistent ulcer or confirmed carcinoma | Immediate specialist consultation",
+            "rows": "Stage 1 #2B9759 | More than 35 mm, with symptoms | Foundation\nStage 2 #C4860B | 26 to 35 mm | Foundation\nStage 3 #D5602A | 15 to 25 mm | Advance\nStage 4 #C23838 | Less than 15 mm | Advance\nStage 5 #C23838 | Less than 5 mm with a persistent ulcer or confirmed carcinoma | Immediate specialist consultation",
             "bold_col": 2
           }
         },

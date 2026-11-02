@@ -1,15 +1,17 @@
 {%- style -%}
-  .mt-cta-band { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 48px; align-items: end; padding: clamp(32px, 5vw, 64px); border-radius: var(--mt-r-xl); background: var(--mt-teal); color: rgba(255, 255, 255, .86); }
-  .mt-cta-copy { display: grid; gap: 14px; }
+  /* One left-aligned column (eyebrow, heading, text, then the buttons), so long button labels never squeeze the
+     text; a soft honeycomb fills the right-hand side. */
+  .mt-cta-band { position: relative; isolation: isolate; overflow: hidden; display: grid; gap: 26px; justify-items: start; padding: clamp(28px, 5vw, 64px); border-radius: var(--mt-r-xl); background: radial-gradient(60% 130% at 100% 0%, rgba(var(--mt-mint-rgb), .26), rgba(var(--mt-mint-rgb), 0) 62%), var(--mt-teal); color: rgba(255, 255, 255, .86); }
+  .mt-cta-band::before { content: ""; position: absolute; inset: 0; z-index: -1; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cpath d='M26 0L52 15V45L26 60L0 45V15ZM26 60V90' fill='none' stroke='%23FFFFFF' stroke-opacity='.16' stroke-width='1'/%3E%3C/svg%3E"); background-size: 52px 90px; -webkit-mask-image: radial-gradient(50% 95% at 96% 50%, #000 0%, transparent 72%); mask-image: radial-gradient(50% 95% at 96% 50%, #000 0%, transparent 72%); pointer-events: none; }
+  .mt-cta-copy { display: grid; gap: 14px; max-width: 640px; }
   .mt-cta-band .mt-eyebrow { color: var(--mt-mint); }
-  .mt .mt-cta-band h2 { color: var(--mt-on-dark); max-width: 20ch; }
-  .mt-cta-band p { max-width: 54ch; font-size: 17.5px; }
-  .mt-cta-band .mt-btn-row { justify-content: flex-end; }
-  @media (max-width: 860px) {
-    .mt-cta-band { grid-template-columns: minmax(0, 1fr); align-items: start; }
-    .mt-cta-band .mt-btn-row { justify-content: flex-start; }
-  }
+  .mt .mt-cta-band h2 { color: var(--mt-on-dark); max-width: 22ch; }
+  .mt-cta-band p { max-width: 56ch; font-size: 17.5px; }
+  .mt-cta-band .mt-btn-row { justify-content: flex-start; }
   @media (max-width: 560px) {
+    .mt-cta-band { gap: 22px; }
+    .mt-cta-band::before { -webkit-mask-image: radial-gradient(70% 45% at 100% 0%, #000 0%, transparent 72%); mask-image: radial-gradient(70% 45% at 100% 0%, #000 0%, transparent 72%); }
+    .mt-cta-band .mt-btn-row { width: 100%; }
     .mt .mt-cta-band .mt-btn { width: 100%; }
   }
 {%- endstyle -%}

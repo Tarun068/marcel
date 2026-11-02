@@ -1,0 +1,105 @@
+/* Marcel video reels (sections/mt-reels.liquid): a snap-scrolling row of 9:16 cards and a full-screen player. */
+mt-reels { display: block; }
+.mt-reels { --gap: 20px; --per: var(--per-d, 3); }
+.mt-reels-nav { display: flex; gap: 10px; }
+.mt .mt-reels-arrow { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 99px; background: var(--mt-paper); color: var(--mt-ink); box-shadow: inset 0 0 0 1.5px var(--mt-line-2); transition: background .2s, color .2s, box-shadow .2s, opacity .2s; }
+.mt-reels-arrow .mt-i { width: 20px; height: 20px; stroke-width: 2.2; }
+.mt .mt-reels-arrow:disabled { opacity: .35; cursor: default; }
+@media (hover: hover) {
+  .mt .mt-reels-arrow:not(:disabled):hover { background: var(--mt-ink); color: var(--mt-on-dark); box-shadow: none; }
+}
+.mt-bg-navy .mt-reels-arrow { background: transparent; color: var(--mt-on-dark); box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .4); }
+
+.mt-reels-track { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - (var(--per) - 1) * var(--gap)) / var(--per)); gap: var(--gap); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; margin: -10px; padding: 10px; scroll-padding-inline: 10px; }
+.mt-reels-track::-webkit-scrollbar { display: none; }
+.mt-reel { min-width: 0; scroll-snap-align: start; }
+
+.mt .mt-reel-card { position: relative; display: block; width: 100%; aspect-ratio: 9 / 16; overflow: hidden; isolation: isolate; border-radius: 22px; background: var(--mt-navy); color: var(--mt-on-dark); text-align: left; box-shadow: 0 22px 44px -28px rgba(12, 42, 61, .55); transition: transform .45s cubic-bezier(.2, .7, .2, 1), box-shadow .45s; }
+.mt-reel-media, .mt-reel-media :is(img, video) { position: absolute; inset: 0; width: 100%; height: 100%; }
+.mt-reel-media :is(img, video) { object-fit: cover; transition: transform .8s cubic-bezier(.2, .7, .2, 1), opacity .4s; }
+.mt-reel-preview { opacity: 0; }
+.mt-reel-card.is-previewing .mt-reel-preview { opacity: 1; }
+.mt-reel-card::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(6, 18, 28, 0) 46%, rgba(6, 18, 28, .55) 72%, rgba(6, 18, 28, .86) 100%); pointer-events: none; }
+
+.mt-reel-play { position: absolute; left: 50%; top: 46%; z-index: 2; display: grid; place-items: center; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 99px; background: rgba(255, 255, 255, .2); box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .6); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: transform .35s cubic-bezier(.2, .7, .2, 1), background .3s, opacity .3s; }
+.mt-reel-play svg { width: 22px; height: 22px; margin-left: 3px; fill: currentColor; }
+/* A soft ring that keeps pulsing out of the play button, so the cards read as videos. */
+.mt-reel-play::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; box-shadow: 0 0 0 0 rgba(255, 255, 255, .5); animation: mt-reel-pulse 2.6s cubic-bezier(.2, .7, .3, 1) infinite; }
+.mt-reel:nth-child(3n + 2) .mt-reel-play::before { animation-delay: .8s; }
+.mt-reel:nth-child(3n) .mt-reel-play::before { animation-delay: 1.6s; }
+@keyframes mt-reel-pulse { 70%, 100% { box-shadow: 0 0 0 18px rgba(255, 255, 255, 0); } }
+.mt-reel-card.is-previewing .mt-reel-play { opacity: 0; }
+
+.mt-reel-dur { position: absolute; top: 12px; right: 12px; z-index: 2; padding: 4px 10px; border-radius: 99px; background: rgba(6, 18, 28, .58); font-size: 12px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.mt-reel-cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; display: grid; gap: 5px; padding: 18px 18px 20px; }
+.mt-reel-cap b { font-size: 18px; font-weight: 800; line-height: 1.25; letter-spacing: -.01em; text-wrap: balance; }
+.mt-reel-cap small { font-size: 13.5px; font-weight: 600; line-height: 1.35; color: rgba(255, 255, 255, .78); }
+
+@media (hover: hover) {
+  .mt .mt-reel-card:hover { transform: translateY(-6px); box-shadow: 0 34px 60px -30px rgba(12, 42, 61, .6); }
+  .mt-reel-card:hover .mt-reel-media img { transform: scale(1.05); }
+  .mt-reel-card:hover .mt-reel-play { transform: scale(1.1); background: var(--mt-teal); box-shadow: none; }
+}
+.mt .mt-reel-card:focus-visible { outline: 3px solid var(--mt-aqua); outline-offset: 3px; }
+
+.mt-reels-dots { display: flex; justify-content: center; gap: 6px; margin-top: 22px; }
+.mt .mt-reels-dot { width: 8px; height: 8px; border-radius: 99px; background: var(--mt-line-2); transition: width .35s cubic-bezier(.3, .8, .3, 1), background .3s; }
+.mt .mt-reels-dot[aria-current="true"] { width: 28px; background: var(--mt-teal); }
+.mt-bg-navy .mt-reels-dot { background: rgba(255, 255, 255, .3); }
+.mt-bg-navy .mt-reels-dot[aria-current="true"] { background: var(--mt-mint); }
+
+.mt-reels-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin-top: 26px; }
+.mt-reels-foot .mt-fine { flex: 1 1 260px; }
+
+/* ---------- Player ---------- */
+html:has(.mt-reel-modal[open]) { overflow: hidden; }
+.mt-reel-modal { width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; padding: 0; border: 0; background: transparent; color: var(--mt-on-dark); overflow: hidden; }
+.mt-reel-modal::backdrop { background: rgba(5, 15, 24, .86); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.mt-reel-modal[open] { display: grid; place-items: center; animation: mt-reel-in .35s cubic-bezier(.2, .7, .2, 1); }
+@keyframes mt-reel-in { from { opacity: 0; transform: scale(.96); } }
+.mt-reel-box { position: relative; display: grid; gap: 14px; justify-items: center; width: min(92vw, calc(min(84vh, 820px) * 9 / 16)); }
+.mt-reel-stage { position: relative; width: 100%; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 20px; background: #000; box-shadow: 0 40px 90px -30px rgba(0, 0, 0, .7); }
+.mt-reel-stage :is(video, iframe, img) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: contain; background: #000; }
+.mt-reel-stage img { object-fit: cover; }
+.mt-reel-soon { position: absolute; left: 50%; top: 42%; z-index: 2; transform: translateX(-50%); padding: 10px 18px; border-radius: 99px; background: rgba(6, 18, 28, .78); font-size: 15px; font-weight: 700; white-space: nowrap; }
+.mt-reel-mcap { display: grid; gap: 3px; width: 100%; text-align: center; }
+.mt-reel-mcap b { font-size: 17px; font-weight: 800; line-height: 1.3; color: var(--mt-on-dark); }
+.mt-reel-mcap small { font-size: 13.5px; color: rgba(255, 255, 255, .72); }
+.mt .mt-reel-close, .mt .mt-reel-step { position: absolute; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 99px; background: rgba(255, 255, 255, .14); color: var(--mt-on-dark); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25); transition: background .2s, color .2s; }
+.mt-reel-close .mt-i, .mt-reel-step .mt-i { width: 22px; height: 22px; stroke-width: 2.2; }
+.mt .mt-reel-close { top: -6px; right: -64px; }
+.mt .mt-reel-step { top: calc(50% - 40px); }
+.mt-reel-step[data-dir="-1"] { left: -76px; }
+.mt-reel-step[data-dir="1"] { right: -76px; }
+@media (hover: hover) {
+  .mt .mt-reel-close:hover, .mt .mt-reel-step:hover { background: var(--mt-on-dark); color: var(--mt-ink); }
+}
+
+@media (max-width: 989px) {
+  .mt-reels { --gap: 14px; }
+  .mt .mt-reel-card { border-radius: 18px; }
+  .mt-reel-cap { padding: 14px 14px 16px; }
+  .mt-reel-cap b { font-size: 16px; }
+}
+@media (max-width: 749px) {
+  .mt-reels { --gap: 12px; --per: var(--per-m, 2); }
+  .mt-reels-nav { display: none; }
+  .mt .mt-reel-card { border-radius: 16px; }
+  .mt-reel-play { width: 48px; height: 48px; margin: -24px 0 0 -24px; }
+  .mt-reel-play svg { width: 18px; height: 18px; }
+  .mt-reel-dur { top: 8px; right: 8px; padding: 3px 8px; font-size: 11px; }
+  .mt-reel-cap { gap: 3px; padding: 10px 11px 12px; }
+  .mt-reel-cap b { font-size: 14px; line-height: 1.22; }
+  .mt-reel-cap small { font-size: 11.5px; }
+  .mt-reels-dots { margin-top: 16px; }
+  .mt-reels-foot { margin-top: 20px; }
+  .mt-reels-foot .mt-btn { width: 100%; }
+  /* Phone player: the video fills the screen width; the controls sit on top of it. */
+  .mt-reel-box { width: min(100vw, calc(100vh * 9 / 16)); gap: 10px; }
+  .mt-reel-stage { border-radius: 0; }
+  .mt .mt-reel-close { top: 12px; right: 12px; z-index: 3; background: rgba(6, 18, 28, .55); }
+  .mt .mt-reel-step { z-index: 3; width: 44px; height: 44px; background: rgba(6, 18, 28, .55); }
+  .mt-reel-step[data-dir="-1"] { left: 12px; }
+  .mt-reel-step[data-dir="1"] { right: 12px; }
+  .mt-reel-mcap { padding-inline: 16px; }
+}

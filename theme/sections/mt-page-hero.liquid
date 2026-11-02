@@ -5,6 +5,13 @@
   assign current = section.settings.current_label | default: fallback_title
   assign stats = section.blocks | where: 'type', 'stat'
   assign searches = section.blocks | where: 'type', 'search'
+  assign art = section.settings.art | default: 'none'
+  assign has_media = false
+  if section.settings.image != blank
+    assign has_media = true
+  elsif art != 'none'
+    assign has_media = true
+  endif
   assign hero_text = section.settings.text
   if hero_text == blank and collection.description != blank
     assign hero_text = collection.description | strip_html | truncatewords: 40
@@ -15,8 +22,8 @@
 {%- capture back_link -%}{% render 'mt-link-to', key: section.settings.back_to, url: section.settings.back_link %}{%- endcapture -%}
 
 <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-phero' %}">
-  <div class="mt-wrap{% if stats.size > 0 %} mt-phero-grid{% endif %}">
-    <div>
+  <div class="mt-wrap{% if has_media %} mt-phero-grid mt-phero--media{% elsif stats.size > 0 %} mt-phero-grid{% endif %}">
+    <div class="mt-phero-copy">
       {%- if section.settings.show_crumbs -%}
         <nav class="mt-crumbs" aria-label="Breadcrumb">
           <a href="{{ routes.root_url }}">{{ section.settings.home_label | escape }}</a>
@@ -57,8 +64,45 @@
           <button class="mt-btn mt-btn-primary" type="submit">{{ block.settings.button_label | escape }}</button>
         </form>
       {%- endfor -%}
+      {%- if has_media and stats.size > 0 -%}
+        {%- comment -%} With a photo on the right, the stats sit under the text. {%- endcomment -%}
+        <div class="mt-phero-stats mt-phero-stats--row">
+          {%- for block in stats -%}
+            <div class="mt-phero-stat" {{ block.shopify_attributes }}>
+              <b>
+                {%- if block.settings.value != blank -%}
+                  {{- block.settings.value | escape -}}
+                {%- else -%}
+                  {%- render 'mt-icon', icon: block.settings.icon -%}
+                {%- endif -%}
+              </b>
+              <span>{{ block.settings.label | escape }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
     </div>
-    {%- if stats.size > 0 -%}
+    {%- if has_media -%}
+      <div class="mt-phero-media{% if section.settings.image == blank %} mt-phero-media--art{% endif %}">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1200
+            | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 990px) 520px, 92vw', widths: '400, 600, 800, 1200', alt: section.settings.image.alt
+          }}
+        {%- else -%}
+          <img
+            src="{{ 'mt-art-' | append: art | append: '-560.webp' | asset_url }}"
+            srcset="{{ 'mt-art-' | append: art | append: '-560.webp' | asset_url }} 560w, {{ 'mt-art-' | append: art | append: '.webp' | asset_url }} 1120w"
+            sizes="(min-width: 990px) 520px, 92vw"
+            width="1120"
+            height="920"
+            alt=""
+            fetchpriority="high"
+          >
+        {%- endif -%}
+      </div>
+    {%- elsif stats.size > 0 -%}
       <div class="mt-phero-stats">
         {%- for block in stats -%}
           <div class="mt-phero-stat" {{ block.shopify_attributes }}>
@@ -194,6 +238,24 @@
       "type": "url",
       "id": "back_link",
       "label": "Back link custom URL"
+    },
+    {
+      "type": "header",
+      "content": "Picture"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photo",
+      "info": "Shown on the right. 1200 × 1000 px works best."
+    },
+    {
+      "type": "select",
+      "id": "art",
+      "label": "Built-in placeholder picture",
+      "info": "Used until a photo is chosen.",
+      "options": [{"value":"none","label":"None"},{"value":"therapy","label":"Therapy products"},{"value":"foundation","label":"Foundation kit"},{"value":"advance","label":"Advance kit and MO Device"},{"value":"journey","label":"Progress tracker on a phone"},{"value":"osmf","label":"Measuring mouth opening"},{"value":"evidence","label":"Research"},{"value":"faq","label":"OSMF Consultant"},{"value":"shop","label":"Products and delivery"},{"value":"about","label":"Ora-Shield pack"},{"value":"device","label":"MO Device and exercise"}],
+      "default": "none"
     },
     {
       "type": "header",

@@ -59,7 +59,9 @@
         "analysing_text": "Matching your mouth opening and symptoms to the self-check stages",
         "background": "mist",
         "sheet": false,
-        "spacing": "tight"
+        "spacing": "tight",
+        "opening_media": "photo",
+        "photo_note": "Example photo. Your own opening may look different."
       },
       "blocks": {
         "question_1": {
@@ -68,7 +70,7 @@
             "qid": "opening",
             "short": "Mouth opening",
             "question": "How many fingers fit vertically in your mouth?",
-            "options": "gt35 | 3 fingers | Opens comfortably · more than 35 mm | 3 fingers (over 35 mm)\n26to35 | 2 fingers | Feels a little tight · 26–35 mm | 2 fingers (26–35 mm)\n15to25 | 1 finger | Clearly restricted · 15–25 mm | 1 finger (15–25 mm)\nlt15 | Less than 1 finger | Very hard to open · under 15 mm | Less than 1 finger (under 15 mm)\nlt5 | Barely opens | Hardly any opening · under 5 mm | Barely opens (under 5 mm)",
+            "options": "gt35 | 3 fingers | Opens comfortably, more than 35 mm | 3 fingers (over 35 mm)\n26to35 | 2 fingers | Feels a little tight, 26 to 35 mm | 2 fingers (26 to 35 mm)\n15to25 | 1 finger | Clearly restricted, 15 to 25 mm | 1 finger (15 to 25 mm)\nlt15 | Less than 1 finger | Very hard to open, under 15 mm | Less than 1 finger (under 15 mm)\nlt5 | Barely opens | Hardly any opening, under 5 mm | Barely opens (under 5 mm)",
             "help": "Stack your fingers one above the other between your upper and lower front teeth. Don’t force it. If you measured with a ruler, use the millimetre range under each answer."
           }
         },

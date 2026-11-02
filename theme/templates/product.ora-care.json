@@ -29,7 +29,7 @@
         "kit_thumb": "In the kit",
         "kit_heading": "In this kit",
         "best_prefix": "Best for",
-        "add_label": "Buy MARCEL Ora-Care™ – [price]",
+        "add_label": "Buy MARCEL Ora-Care™ for [price]",
         "sold_out_label": "Sold out",
         "variant_style": "cards",
         "pack_label": "Pack size",
@@ -53,8 +53,8 @@
         "headline": "Foundational oral support",
         "supporting": "A core component of Foundation MARCEL OMR Therapy™",
         "intro": "<p>MARCEL Ora-Care™ is a metered oral spray that gives a measured amount with every spray. It is the foundational format in Foundation MARCEL OMR Therapy™ and is meant to be part of your regular oral-care routine, with guidance from a qualified healthcare professional.</p>",
-        "details": "50 mL · MRP inclusive of all taxes",
-        "how_lines": "Spray 6–7 puffs evenly throughout the mouth.\nUse twice daily, or as directed by your physician or MARCEL OSMF Consultant.\nAfter each spray, do the prescribed mouth and jaw exercises.",
+        "details": "50 mL. MRP includes all taxes.",
+        "how_lines": "Spray 6 to 7 puffs evenly throughout the mouth.\nUse twice daily, or as directed by your physician or MARCEL OSMF Consultant.\nAfter each spray, do the prescribed mouth and jaw exercises.",
         "safety": "Safety: Keep out of reach of children. Avoid contact with the eyes.",
         "cta_label": "Talk to a MARCEL OSMF Consultant",
         "cta2_label": "Explore Foundation MARCEL OMR Therapy™"
@@ -183,10 +183,28 @@
       "block_order": [
         "link_1"
       ]
+    },
+    "fit": {
+      "type": "mt-media-text",
+      "settings": {
+        "media_side": "right",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal",
+        "art": "foundation",
+        "eyebrow": "Foundation routine",
+        "heading": "Used as part of the <em>Foundation kit</em>",
+        "text": "<p>MARCEL Ora-Care™ Oral Spray sits alongside MARCEL Smile™ Toothpaste and the mouth and jaw exercises your healthcare professional prescribes. Whether the Foundation pathway suits you should be decided after a professional assessment.</p>",
+        "button_1_label": "See the Foundation Kit",
+        "button_1_to": "foundation",
+        "button_2_label": "Talk to a Consultant",
+        "button_2_to": "consult"
+      }
     }
   },
   "order": [
     "main",
+    "fit",
     "related",
     "links"
   ]

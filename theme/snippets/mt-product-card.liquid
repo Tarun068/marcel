@@ -28,7 +28,7 @@
   if meta == blank and mf.type_label.value != blank
     assign meta = mf.type_label.value
     if mf.size.value != blank
-      assign meta = meta | append: ' · ' | append: mf.size.value
+      assign meta = meta | append: ', ' | append: mf.size.value
     endif
   endif
   if meta == blank

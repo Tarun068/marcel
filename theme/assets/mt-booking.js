@@ -138,7 +138,7 @@ if (!customElements.get('mt-booking')) {
         const d = this.days()[this.state.day];
         if (!d) return this.state.slot;
         const name = d.i === 0 ? this.t.today : d.i === 1 ? this.t.tomorrow : d.dow;
-        return `${name}, ${d.num} ${d.mon} · ${this.state.slot}`;
+        return `${name}, ${d.num} ${d.mon}, ${this.state.slot}`;
       }
 
       render() {

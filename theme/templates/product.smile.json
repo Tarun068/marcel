@@ -29,7 +29,7 @@
         "kit_thumb": "In the kit",
         "kit_heading": "In this kit",
         "best_prefix": "Best for",
-        "add_label": "Buy MARCEL Smile™ – [price]",
+        "add_label": "Buy MARCEL Smile™ for [price]",
         "sold_out_label": "Sold out",
         "variant_style": "cards",
         "pack_label": "Pack size",
@@ -56,7 +56,7 @@
         "details": "MRP inclusive of all taxes",
         "how_lines": "Take a pea-sized amount.\nBrush thoroughly for at least two minutes, preferably twice daily, or as directed by a qualified professional.\nSpit out and rinse your mouth with water.",
         "safety": "",
-        "pack_notes": "30 g | Compact pack – handy for travel\n100 g | Larger pack – best value for home",
+        "pack_notes": "30 g | Compact pack, handy for travel\n100 g | Larger pack, better value for home use",
         "cta_label": "",
         "cta2_label": ""
       },
@@ -112,7 +112,7 @@
         "text_1": {
           "type": "text",
           "settings": {
-            "text": "<p>Teeth matter. Healthy gums matter. Enamel matters. Fresh breath matters. And the soft tissues lining the inside of your mouth matter, too.</p><p>MARCEL Smile™ brings these tissues into your daily oral care, so your routine looks after more than just teeth and gums.</p>"
+            "text": "<p>Most toothpastes focus on teeth, gums and fresh breath. The soft tissue that lines the inside of your mouth matters too.</p><p>MARCEL Smile™ brings that lining into your daily brushing, so your routine covers the whole mouth.</p>"
           }
         }
       },

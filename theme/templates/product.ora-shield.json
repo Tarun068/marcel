@@ -29,7 +29,7 @@
         "kit_thumb": "In the kit",
         "kit_heading": "In this kit",
         "best_prefix": "Best for",
-        "add_label": "Buy MARCEL Ora-Shield™ – [price]",
+        "add_label": "Buy MARCEL Ora-Shield™ for [price]",
         "sold_out_label": "Sold out",
         "variant_style": "cards",
         "pack_label": "Pack size",
@@ -53,8 +53,8 @@
         "headline": "Support for advanced OSMF care",
         "supporting": "A core component of ADVANCE MARCEL OMR Therapy™",
         "intro": "<p>MARCEL Ora-Shield™ is a therapeutic oral rinse used as part of a care plan for Oral Submucous Fibrosis (OSMF). It is part of ADVANCE MARCEL OMR Therapy™ for Stage 3 and Stage 4 OSMF, along with guidance from a healthcare professional and a care routine suited to you.</p>",
-        "details": "10 mL · MRP inclusive of all taxes",
-        "how_lines": "MARCEL Ora-Shield™ is a concentrate. Dilute it before use.\nAdd 5–10 drops to about 160 mL of lukewarm water.\nGargle or rinse for 20–30 seconds, then spit out.\nUse twice daily, or as advised by your physician or MARCEL OSMF Consultant.\nAfter each rinse, do the prescribed mouth and jaw exercises.",
+        "details": "10 mL. MRP includes all taxes.",
+        "how_lines": "MARCEL Ora-Shield™ is a concentrate. Dilute it before use.\nAdd 5 to 10 drops to about 160 mL of lukewarm water.\nGargle or rinse for 20 to 30 seconds, then spit out.\nUse twice daily, or as advised by your physician or MARCEL OSMF Consultant.\nAfter each rinse, do the prescribed mouth and jaw exercises.",
         "safety": "Do not swallow.",
         "cta_label": "Talk to a MARCEL OSMF Consultant",
         "cta2_label": "Explore ADVANCE MARCEL OMR Therapy™"
@@ -175,10 +175,28 @@
       "block_order": [
         "link_1"
       ]
+    },
+    "fit": {
+      "type": "mt-media-text",
+      "settings": {
+        "media_side": "right",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal",
+        "art": "advance",
+        "eyebrow": "Advance routine",
+        "heading": "Used as part of the <em>Advance kit</em>",
+        "text": "<p>MARCEL Ora-Shield™ Oral Rinse is used with MARCEL Smile™ Toothpaste, prescribed mouth and jaw exercises and, when advised, the MARCEL® MO Device. A qualified healthcare professional should confirm that the Advance pathway is right for you.</p>",
+        "button_1_label": "See the Advance Kit",
+        "button_1_to": "advance",
+        "button_2_label": "Talk to a Consultant",
+        "button_2_to": "consult"
+      }
     }
   },
   "order": [
     "main",
+    "fit",
     "related",
     "links"
   ]

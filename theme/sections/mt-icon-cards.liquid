@@ -6,8 +6,29 @@
     {%- if section.blocks.size > 0 -%}
       <div class="mt-cards" style="--mt-cols: {{ section.settings.columns }};">
         {%- for block in section.blocks -%}
-          <div class="mt-mini-card" {{ block.shopify_attributes }}>
-            {%- render 'mt-icon', icon: block.settings.icon -%}
+          {%- liquid
+            assign media = section.settings.media | default: 'icon'
+            assign has_photo = false
+            if media != 'icon'
+              if block.settings.image != blank or block.settings.art != 'none'
+                assign has_photo = true
+              endif
+            endif
+          -%}
+          <div class="mt-mini-card{% if media != 'icon' %} mt-mini-card--{{ media }}{% endif %}" {{ block.shopify_attributes }}>
+            {%- if has_photo -%}
+              <span class="mt-card-photo">
+                {%- if block.settings.image != blank -%}
+                  {{- block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '240, 360, 600, 900', sizes: '(min-width: 990px) 320px, (min-width: 750px) 45vw, 92vw', alt: block.settings.image.alt -}}
+                {%- else -%}
+                  <img src="{{ 'mt-card-' | append: block.settings.art | append: '.webp' | asset_url }}" alt="" width="360" height="360" loading="lazy">
+                {%- endif -%}
+              </span>
+            {%- elsif media != 'icon' and block.settings.icon != 'none' -%}
+              <span class="mt-card-photo mt-card-photo--icon">{%- render 'mt-icon', icon: block.settings.icon -%}</span>
+            {%- else -%}
+              {%- render 'mt-icon', icon: block.settings.icon -%}
+            {%- endif -%}
             <h3>{{ block.settings.title | escape }}</h3>
             {%- if block.settings.text != blank -%}<p>{{ block.settings.text | escape }}</p>{%- endif -%}
             {%- if block.settings.link_label != blank -%}
@@ -80,6 +101,27 @@
       "default": "3"
     },
     {
+      "type": "select",
+      "id": "media",
+      "label": "Card picture",
+      "options": [
+        {
+          "value": "icon",
+          "label": "Icon"
+        },
+        {
+          "value": "photo",
+          "label": "Small photo"
+        },
+        {
+          "value": "cover",
+          "label": "Large photo on top"
+        }
+      ],
+      "default": "icon",
+      "info": "Photos come from each card's Photo setting. Cards without one show their icon in the same tile."
+    },
+    {
       "type": "header",
       "content": "Section style"
     },
@@ -146,6 +188,33 @@
           "label": "Icon",
           "options": [{"value":"none","label":"None"},{"value":"arrow-right","label":"Arrow"},{"value":"check","label":"Check"},{"value":"video","label":"Video call"},{"value":"whatsapp","label":"WhatsApp"},{"value":"clinic","label":"Clinic"},{"value":"doctor","label":"Doctor"},{"value":"calendar","label":"Calendar"},{"value":"clock","label":"Clock"},{"value":"shield","label":"Shield"},{"value":"flask","label":"Research flask"},{"value":"patent","label":"Patent document"},{"value":"leaf","label":"Leaf"},{"value":"users","label":"People"},{"value":"heart","label":"Heart"},{"value":"india","label":"Globe"},{"value":"pin","label":"Location pin"},{"value":"phone","label":"Phone"},{"value":"mail","label":"Email"},{"value":"lock","label":"Lock"},{"value":"truck","label":"Delivery"},{"value":"box","label":"Package"},{"value":"bag","label":"Shopping bag"},{"value":"search","label":"Search"},{"value":"info","label":"Info"},{"value":"alert","label":"Alert"},{"value":"refresh","label":"Refresh"},{"value":"sparkle","label":"Sparkle"},{"value":"star","label":"Star"},{"value":"target","label":"Target"},{"value":"chart","label":"Chart"},{"value":"home","label":"Home"},{"value":"grid","label":"Grid"},{"value":"test","label":"Self-check"},{"value":"book","label":"Guide"},{"value":"drop","label":"Drop"},{"value":"sun","label":"Sun"},{"value":"moon","label":"Moon"},{"value":"bowl","label":"Food bowl"},{"value":"ban","label":"Quit habit"},{"value":"ruler","label":"Ruler"},{"value":"s-open","label":"Symptom: mouth opening"},{"value":"s-burn","label":"Symptom: burning"},{"value":"s-tight","label":"Symptom: tightness"},{"value":"s-ulcer","label":"Symptom: ulcers"},{"value":"s-bands","label":"Symptom: white bands"},{"value":"s-tongue","label":"Symptom: tongue"},{"value":"s-pain","label":"Symptom: pain"}],
           "default": "shield"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo",
+          "info": "Shown when Card picture is set to a photo. Square works best for small photos, 16:10 for large."
+        },
+        {
+          "type": "select",
+          "id": "art",
+          "label": "Built-in placeholder photo",
+          "info": "Used until a photo is chosen.",
+          "options": [
+            {"value": "none", "label": "None"},
+            {"value": "careplan", "label": "Care plan"},
+            {"value": "therapy", "label": "MARCEL products"},
+            {"value": "exercise", "label": "Mouth-opening exercise"},
+            {"value": "diet", "label": "Diet plate"},
+            {"value": "device", "label": "Mouth-opening device"},
+            {"value": "consultant", "label": "OSMF Consultant"},
+            {"value": "doctor", "label": "Specialist doctor"},
+            {"value": "areca", "label": "Areca nut and supari"},
+            {"value": "tobacco", "label": "Tobacco"},
+            {"value": "nutrition", "label": "Nutrition"},
+            {"value": "tracker", "label": "Progress tracker"}
+          ],
+          "default": "none"
         },
         {
           "type": "text",

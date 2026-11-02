@@ -23,7 +23,8 @@
         "current_label": "About",
         "eyebrow": "About MARCEL",
         "heading": "A journey towards better oral function",
-        "text": "MARCEL OMR Therapy™ has evolved through years of development, clinical assessment and continued work focused on Oral Submucous Fibrosis (OSMF). JanSuta Pharmaceuticals is the organisation behind the platform."
+        "text": "MARCEL OMR Therapy™ has evolved through years of development, clinical assessment and continued work focused on Oral Submucous Fibrosis (OSMF). JanSuta Pharmaceuticals is the organisation behind the platform.",
+        "art": "about"
       },
       "blocks": {
         "stat_1": {
@@ -31,7 +32,7 @@
           "settings": {
             "value": "26",
             "icon": "patent",
-            "label": "Years of development, 2000–2026"
+            "label": "Years of development, 2000 to 2026"
           }
         },
         "stat_2": {
@@ -106,28 +107,34 @@
         "phase_1": {
           "type": "phase",
           "settings": {
-            "when": "2000–2008",
+            "when": "2000 to 2008",
             "icon": "flask",
             "title": "Foundation & early development",
-            "text": "Understanding the clinical problem, developing the therapeutic concept, screening candidate ingredients and progressing towards lead formulation development. First patent granted in 2008."
+            "text": "Understanding the clinical problem, developing the therapeutic concept, screening candidate ingredients and progressing towards lead formulation development. First patent granted in 2008.",
+            "status": "done",
+            "art": "era-lab"
           }
         },
         "phase_2": {
           "type": "phase",
           "settings": {
-            "when": "2012–2022",
+            "when": "2012 to 2022",
             "icon": "chart",
             "title": "Product development & market learning",
-            "text": "Technical development and standardisation, alpha and beta product testing, product maturation, scale-up and market learning."
+            "text": "Technical development and standardisation, alpha and beta product testing, product maturation, scale-up and market learning.",
+            "status": "done",
+            "art": "pillar-care"
           }
         },
         "phase_3": {
           "type": "phase",
           "settings": {
-            "when": "2025–2026",
+            "when": "2025 to 2026",
             "icon": "test",
             "title": "Evidence generation, regulatory & scale-up",
-            "text": "Clinical evidence generation, regulatory dossier and licensing activities, GMP manufacturing and scale-up, quality-related activities and continued intellectual-property development."
+            "text": "Clinical evidence generation, regulatory dossier and licensing activities, GMP manufacturing and scale-up, quality-related activities and continued intellectual-property development.",
+            "status": "now",
+            "art": "era-study"
           }
         },
         "phase_4": {
@@ -136,7 +143,9 @@
             "when": "2026",
             "icon": "india",
             "title": "Commercialisation",
-            "text": "Market introduction, distribution expansion, healthcare professional engagement, patient access and awareness."
+            "text": "Market introduction, distribution expansion, healthcare professional engagement, patient access and awareness.",
+            "status": "now",
+            "art": "era-launch"
           }
         },
         "phase_5": {
@@ -145,7 +154,9 @@
             "when": "Beyond 2026",
             "icon": "target",
             "title": "Continuous development",
-            "text": "Further evidence generation, ongoing research, real-world clinical experience and exploration of future applications, subject to appropriate evaluation."
+            "text": "Further evidence generation, ongoing research, real-world clinical experience and exploration of future applications, subject to appropriate evaluation.",
+            "status": "next",
+            "art": "none"
           }
         }
       },
@@ -161,7 +172,7 @@
       "type": "mt-journey",
       "settings": {
         "eyebrow": "The MARCEL 3-Pillar Approach",
-        "heading": "Three connected pillars. One structured approach to OSMF care.",
+        "heading": "Three connected pillars that work together in OSMF care.",
         "text": "MARCEL OMR Therapy™ brings together oral mucosal care, functional support and guided progress.",
         "center": false,
         "layout": "cards",
@@ -178,30 +189,33 @@
         "phase_1": {
           "type": "phase",
           "settings": {
-            "when": "01 — Oral mucosal care",
+            "when": "Pillar 1: Oral mucosal care",
             "icon": "shield",
-            "title": "Care for the mouth. Support comfort.",
-            "text": "A structured oral-care regimen designed to support oral mucosal health and help manage common OSMF-related discomfort such as burning, tightness and difficulty with eating."
+            "title": "Care for the mouth and support comfort",
+            "text": "A structured oral-care regimen designed to support oral mucosal health and help manage common OSMF-related discomfort such as burning, tightness and difficulty with eating.",
+            "art": "pillar-care"
           }
         },
         "phase_2": {
           "type": "phase",
           "settings": {
-            "when": "02 — Functional support",
+            "when": "Pillar 2: Functional support",
             "icon": "s-open",
-            "title": "Support what matters in daily life.",
+            "title": "Support what matters in daily life",
             "text": "Regular mouth-opening exercises and, where appropriate, an optional mouth-opening device as an adjunct.",
-            "foot": "Focus: Mouth opening • Chewing • Oral function"
+            "foot": "Focus: mouth opening, chewing and oral function",
+            "art": "pillar-function"
           }
         },
         "phase_3": {
           "type": "phase",
           "settings": {
-            "when": "03 — Guided care & progress",
+            "when": "Pillar 3: Guided care and progress",
             "icon": "chart",
-            "title": "Track. Review. Stay supported.",
+            "title": "Track your progress with support",
             "text": "Progress tracking, the 3-Week Progress Tracker, scheduled reviews and the In-house OSMF Consultant, with guidance towards MARCEL OSMF Care Specialists where clinical assessment is required.",
-            "foot": "Focus: Progress tracking • Guidance • Specialist care"
+            "foot": "Focus: progress tracking, guidance and specialist care",
+            "art": "pillar-progress"
           }
         }
       },
@@ -311,7 +325,7 @@
     "cta": {
       "type": "mt-cta-band",
       "settings": {
-        "eyebrow": "Care • Function • Guidance",
+        "eyebrow": "Care, function and guidance",
         "heading": "The journey continues",
         "text": "Our aim is to make the OSMF care journey more understandable, measurable and supportive, while recognising the importance of professional assessment and continued scientific evaluation.",
         "button_1_label": "Explore Clinical Evidence",

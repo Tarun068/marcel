@@ -23,13 +23,14 @@
         "parent_label": "MARCEL OMR Therapy™",
         "parent_link": "/pages/marcel-omr-therapy",
         "current_label": "Foundation Kit",
-        "eyebrow": "MARCEL OMR Therapy™ Foundation Kit · Stage 1 & Stage 2 OSMF",
+        "eyebrow": "MARCEL OMR Therapy™ Foundation Kit for Stage 1 or 2 OSMF",
         "heading": "Build a Strong Foundation for OSMF Care",
         "text": "MARCEL OMR Therapy™ Foundation Kit is intended for individuals assessed by a qualified healthcare professional as having Stage 1 or Stage 2 Oral Submucous Fibrosis (OSMF). The routine includes MARCEL Ora-Care™ Oral Spray, MARCEL Smile™ Toothpaste, prescribed mouth/jaw exercises when advised, and professional guidance as appropriate.",
         "button_1_label": "Talk to a MARCEL OSMF Consultant",
         "button_2_label": "Check Your OSMF Stage",
         "note": "If you have not been assessed, the MARCEL OSMF SELF CHECK™ can provide an initial indication of your possible stage. It cannot diagnose OSMF or confirm your stage.",
-        "back_label": "Back to MARCEL OMR Therapy™ Overview"
+        "back_label": "Back to MARCEL OMR Therapy™ Overview",
+        "art": "foundation"
       }
     },
     "components": {
@@ -171,7 +172,7 @@
         "phase_1": {
           "type": "phase",
           "settings": {
-            "when": "Weeks 1–2",
+            "when": "Weeks 1 and 2",
             "icon": "calendar",
             "title": "Relief",
             "text": "Establish the routine and focus on comfort."
@@ -180,7 +181,7 @@
         "phase_2": {
           "type": "phase",
           "settings": {
-            "when": "Weeks 3–6",
+            "when": "Weeks 3 to 6",
             "icon": "calendar",
             "title": "Activation",
             "text": "Build consistency and follow prescribed exercises."
@@ -189,7 +190,7 @@
         "phase_3": {
           "type": "phase",
           "settings": {
-            "when": "Weeks 6–10",
+            "when": "Weeks 6 to 10",
             "icon": "calendar",
             "title": "Restoration",
             "text": "Continue the routine and review comfort and function with professional guidance."
@@ -198,7 +199,7 @@
         "phase_4": {
           "type": "phase",
           "settings": {
-            "when": "Weeks 11–12",
+            "when": "Weeks 11 and 12",
             "icon": "calendar",
             "title": "Reinforcement",
             "text": "Reinforce daily habits and follow-up."

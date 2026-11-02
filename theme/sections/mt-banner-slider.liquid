@@ -1,0 +1,746 @@
+{{ 'mt-banner.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mt-banner.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign slides = section.blocks | where: 'type', 'slide'
+  assign trust_blocks = section.blocks | where: 'type', 'trust'
+
+  # Banner shape comes from the first banner: its pictures, or the built-in art (2240 x 1040 and 1080 x 1440).
+  assign first = slides.first
+  assign ratio_d = 2.1538
+  assign ratio_m = 0.75
+  if first.settings.image != blank
+    assign ratio_d = first.settings.image.aspect_ratio
+    if first.settings.style == 'image'
+      assign ratio_m = first.settings.image.aspect_ratio
+    endif
+  endif
+  if first.settings.mobile_image != blank
+    assign ratio_m = first.settings.mobile_image.aspect_ratio
+  endif
+
+  # "Follow the picture shape" still needs a length for CSS min(); this one never binds.
+  assign max_h = '99999px'
+  if section.settings.max_height != 'image'
+    assign max_h = section.settings.max_height | append: 'px'
+  endif
+
+  assign heading_tag = 'h2'
+  if section.settings.first_h1
+    assign heading_tag = 'h1'
+  endif
+
+  # Page width: the banner sits in the page container, like every other section. Full: edge to edge.
+  assign boxed = true
+  assign sizes_d = '(min-width: 1200px) 1120px, 94vw'
+  assign sizes_m = 'calc(100vw - 32px)'
+  if section.settings.width == 'full'
+    assign boxed = false
+    assign sizes_d = '100vw'
+    assign sizes_m = '100vw'
+  endif
+-%}
+
+<section
+  class="mt mt-bs{% if boxed %} mt-bs--boxed{% endif %}{% if section.settings.heading_font == 'serif' %} mt-bs--serif{% endif %}"
+  style="--bs-ratio-d: {{ ratio_d }}; --bs-ratio-m: {{ ratio_m }}; --bs-max: {{ max_h }}; --bs-interval: {{ section.settings.interval }}s;"
+>
+  {%- if slides.size > 0 -%}
+    {%- if section.settings.first_h1 and first.settings.style == 'image' and section.settings.seo_heading != blank -%}
+      <h1 class="visually-hidden">{{ section.settings.seo_heading | escape }}</h1>
+    {%- endif -%}
+    <div class="mt-bs-wrap{% if boxed %} mt-wrap{% endif %}">
+    <mt-banner-slider
+      class="mt-bs-stage"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="{{ section.settings.label | escape }}"
+      data-autoplay="{{ section.settings.autoplay }}"
+      {% if slides.size > 1 %}data-multi{% endif %}
+    >
+      {%- for block in slides -%}
+        {%- liquid
+          assign b = block.settings
+          assign img = b.image
+          assign mob = b.mobile_image
+          assign art = b.art
+          if img != blank
+            assign art = 'none'
+          endif
+          assign alt = b.alt | default: img.alt | escape
+          if b.style == 'text'
+            assign alt = ''
+          endif
+          assign loading = 'lazy'
+          assign priority = 'auto'
+          if forloop.first
+            assign loading = 'eager'
+            assign priority = 'high'
+          endif
+          assign tag = 'h2'
+          if forloop.first
+            assign tag = heading_tag
+          endif
+        -%}
+        {%- capture link -%}{% render 'mt-link-to', key: b.link_to, url: b.link %}{%- endcapture -%}
+        {%- capture btn1_link -%}{% render 'mt-link-to', key: b.button_1_to, url: b.button_1_link %}{%- endcapture -%}
+        {%- capture btn2_link -%}{% render 'mt-link-to', key: b.button_2_to, url: b.button_2_link %}{%- endcapture -%}
+        <div
+          class="mt-bs-slide mt-bs-slide--{{ b.style }} mt-bs-tone-{{ b.text_color }} mt-bs-align-{{ b.align }}{% if art != 'none' %} mt-bs-slide--art{% endif %}{% if forloop.first %} is-active{% endif %}"
+          role="group"
+          aria-roledescription="slide"
+          aria-label="{{ forloop.index }} / {{ slides.size }}"
+          data-tone="{{ b.text_color }}"
+          {% unless forloop.first %}aria-hidden="true" inert{% endunless %}
+          style="--bs-scrim: {{ b.scrim | divided_by: 100.0 }};"
+          {{ block.shopify_attributes }}
+        >
+          <picture class="mt-bs-media">
+            {%- if mob != blank -%}
+              <source
+                media="(max-width: 749px)"
+                srcset="{{ mob | image_url: width: 750 }} 750w, {{ mob | image_url: width: 1100 }} 1100w, {{ mob | image_url: width: 1500 }} 1500w"
+                sizes="{{ sizes_m }}"
+                width="{{ mob.width }}"
+                height="{{ mob.height }}"
+              >
+            {%- elsif art != 'none' -%}
+              <source
+                media="(max-width: 749px)"
+                srcset="{{ 'mt-banner-' | append: art | append: '-m-720.webp' | asset_url }} 720w, {{ 'mt-banner-' | append: art | append: '-m.webp' | asset_url }} 1080w"
+                sizes="{{ sizes_m }}"
+                width="1080"
+                height="1440"
+              >
+            {%- endif -%}
+            {%- if img != blank -%}
+              {{
+                img
+                | image_url: width: 2880
+                | image_tag:
+                  class: 'mt-bs-img',
+                  alt: alt,
+                  loading: loading,
+                  fetchpriority: priority,
+                  sizes: sizes_d,
+                  widths: '750, 1100, 1500, 1920, 2240, 2880'
+              }}
+            {%- elsif art != 'none' -%}
+              <img
+                class="mt-bs-img"
+                src="{{ 'mt-banner-' | append: art | append: '-d-1120.webp' | asset_url }}"
+                srcset="{{ 'mt-banner-' | append: art | append: '-d-1120.webp' | asset_url }} 1120w, {{ 'mt-banner-' | append: art | append: '-d.webp' | asset_url }} 2240w"
+                sizes="{{ sizes_d }}"
+                width="2240"
+                height="1040"
+                alt="{{ alt }}"
+                loading="{{ loading }}"
+                fetchpriority="{{ priority }}"
+              >
+            {%- else -%}
+              <span class="mt-bs-ph">
+                {%- if request.design_mode -%}Add a desktop and a mobile picture to this banner.{%- endif -%}
+              </span>
+            {%- endif -%}
+          </picture>
+
+          {%- if b.style == 'image' -%}
+            {%- if b.link_to != 'custom' or b.link != blank -%}
+              <a class="mt-bs-link" href="{{ link }}"{% if b.link_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %} aria-label="{{ b.alt | default: img.alt | default: 'Open banner' | escape }}"></a>
+            {%- endif -%}
+          {%- else -%}
+            <div class="mt-wrap mt-bs-content">
+              <div class="mt-bs-copy">
+                {%- if b.eyebrow != blank -%}
+                  <span class="mt-bs-pill">
+                    {%- if b.eyebrow_icon != 'none' -%}<span class="mt-bs-pill-dot">{%- render 'mt-icon', icon: b.eyebrow_icon -%}</span>{%- endif -%}
+                    {{- b.eyebrow | escape -}}
+                  </span>
+                {%- endif -%}
+                {%- if b.heading != blank -%}
+                  <{{ tag }} class="mt-bs-h">{{ b.heading }}</{{ tag }}>
+                {%- endif -%}
+                {%- if b.text != blank -%}
+                  <p class="mt-bs-text{% unless b.show_text_mobile %} mt-bs-text--desk{% endunless %}">{{ b.text }}</p>
+                {%- endif -%}
+                {%- if b.button_1_label != blank or b.button_2_label != blank -%}
+                  <div class="mt-bs-btns">
+                    {%- if b.button_1_label != blank -%}
+                      <a class="mt-btn mt-btn-primary" href="{{ btn1_link }}"{% if b.button_1_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
+                        {{- b.button_1_label | escape -}}
+                        {%- render 'mt-icon', icon: 'arrow-right' -%}
+                      </a>
+                    {%- endif -%}
+                    {%- if b.button_2_label != blank -%}
+                      <a class="mt-btn mt-btn-secondary mt-bs-btn2" href="{{ btn2_link }}"{% if b.button_2_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
+                        {%- if b.button_2_to == 'whatsapp' -%}{%- render 'mt-icon', icon: 'whatsapp' -%}{%- endif -%}
+                        {{- b.button_2_label | escape -}}
+                      </a>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+
+      {%- if slides.size > 1 -%}
+        <div class="mt-bs-controls">
+          {%- if section.settings.show_arrows -%}
+            <button type="button" class="mt-bs-arrow" data-dir="-1" aria-label="{{ section.settings.prev_label | escape }}">
+              {%- render 'mt-icon', icon: 'arrow-left' -%}
+            </button>
+          {%- endif -%}
+          <div class="mt-bs-dots">
+            {%- for block in slides -%}
+              <button
+                type="button"
+                class="mt-bs-dot"
+                aria-label="{{ section.settings.dot_label | escape }} {{ forloop.index }}"
+                {% if forloop.first %}aria-current="true"{% endif %}
+              >
+                <i></i>
+              </button>
+            {%- endfor -%}
+          </div>
+          {%- if section.settings.show_arrows -%}
+            <button type="button" class="mt-bs-arrow" data-dir="1" aria-label="{{ section.settings.next_label | escape }}">
+              {%- render 'mt-icon', icon: 'arrow-right' -%}
+            </button>
+          {%- endif -%}
+          {%- if section.settings.autoplay -%}
+            <button type="button" class="mt-bs-pause" aria-label="{{ section.settings.pause_label | escape }}" data-label-play="{{ section.settings.play_label | escape }}" data-label-pause="{{ section.settings.pause_label | escape }}">
+              <svg class="mt-i mt-bs-i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6v12M15 6v12"/></svg>
+              <svg class="mt-i mt-bs-i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+            </button>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </mt-banner-slider>
+    </div>
+  {%- elsif request.design_mode -%}
+    <div class="mt-wrap"><p class="mt-placeholder">Add Banner blocks to show the banner slider.</p></div>
+  {%- endif -%}
+
+  {%- if trust_blocks.size > 0 -%}
+    {%- capture trust_items -%}
+      {%- for block in trust_blocks -%}
+        <li {{ block.shopify_attributes }}>
+          {%- render 'mt-icon', icon: block.settings.icon -%}
+          <span>{{ block.settings.text | escape }}</span>
+        </li>
+      {%- endfor -%}
+    {%- endcapture -%}
+    <div class="mt-bs-trust mt-bg-{{ section.settings.trust_background }}">
+      <div class="mt-bs-trust-in{% if boxed %} mt-wrap{% endif %}">
+        <div class="mt-bs-trust-clip">
+          <div class="mt-bs-trust-track">
+            <ul class="mt-bs-trust-row">{{ trust_items }}</ul>
+            <ul class="mt-bs-trust-row mt-bs-trust-row--clone" aria-hidden="true">{{ trust_items }}</ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Marcel banner slider",
+  "class": "mt-bs-section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Two or three rotating banners at the top of the page. A banner can carry its own heading and buttons, or be a finished picture with the text already in it. Desktop pictures work best at 2240 × 1040 px and mobile pictures at 1080 × 1440 px."
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Banner width",
+      "options": [
+        {
+          "value": "page",
+          "label": "Page width, rounded corners"
+        },
+        {
+          "value": "full",
+          "label": "Full screen width"
+        }
+      ],
+      "default": "page"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Change banners automatically",
+      "info": "Pauses while a visitor points at or uses the banner, and for visitors who reduce motion.",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "interval",
+      "label": "Seconds per banner",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "unit": "s",
+      "default": 6
+    },
+    {
+      "type": "select",
+      "id": "max_height",
+      "label": "Height on large screens",
+      "options": [
+        {
+          "value": "image",
+          "label": "Follow the picture shape"
+        },
+        {
+          "value": "640",
+          "label": "Up to 640 px"
+        },
+        {
+          "value": "720",
+          "label": "Up to 720 px"
+        },
+        {
+          "value": "820",
+          "label": "Up to 820 px"
+        }
+      ],
+      "default": "720",
+      "info": "For the full screen width. Use \"Follow the picture shape\" for pictures with text in them, so nothing is cut off."
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading font",
+      "options": [
+        {
+          "value": "serif",
+          "label": "Serif, like the mockup"
+        },
+        {
+          "value": "sans",
+          "label": "Same as the rest of the site"
+        }
+      ],
+      "default": "serif"
+    },
+    {
+      "type": "checkbox",
+      "id": "first_h1",
+      "label": "Use the first banner's heading as the page title",
+      "info": "Keep this on when the banner slider is the first section of the home page.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "seo_heading",
+      "label": "Page title for search engines",
+      "info": "Read by search engines and screen readers when the first banner is a picture with the text in it.",
+      "default": "MARCEL OMR Therapy™: structured oral mucosal care for OSMF"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show arrows",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Trust strip"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add Trust item blocks to show a strip under the banners. It scrolls gently on phones."
+    },
+    {
+      "type": "select",
+      "id": "trust_background",
+      "label": "Strip background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "header",
+      "content": "Screen reader labels"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Banner area",
+      "default": "Featured"
+    },
+    {
+      "type": "text",
+      "id": "prev_label",
+      "label": "Previous button",
+      "default": "Previous banner"
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "Next button",
+      "default": "Next banner"
+    },
+    {
+      "type": "text",
+      "id": "dot_label",
+      "label": "Dot buttons",
+      "default": "Show banner"
+    },
+    {
+      "type": "text",
+      "id": "pause_label",
+      "label": "Pause button",
+      "default": "Pause banners"
+    },
+    {
+      "type": "text",
+      "id": "play_label",
+      "label": "Play button",
+      "default": "Play banners"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Banner",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Banner type",
+          "options": [
+            {
+              "value": "text",
+              "label": "Picture with text and buttons on it"
+            },
+            {
+              "value": "image",
+              "label": "Finished picture (text is in the picture)"
+            }
+          ],
+          "default": "text"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Desktop picture",
+          "info": "2240 × 1040 px. For banners with text on them, keep the left half calm."
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile picture",
+          "info": "1080 × 1440 px. For banners with text on them, keep the top half calm."
+        },
+        {
+          "type": "select",
+          "id": "art",
+          "label": "Built-in placeholder art",
+          "info": "Shown until a desktop picture is chosen.",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "1",
+              "label": "Therapy: research and the three pillars"
+            },
+            {
+              "value": "2",
+              "label": "Self-check: phone"
+            },
+            {
+              "value": "3",
+              "label": "Consultant: call booking"
+            },
+            {
+              "value": "4",
+              "label": "Care journey: progress check-in"
+            },
+            {
+              "value": "5",
+              "label": "Specialist finder: map"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Picture description",
+          "info": "For finished pictures: describe the text in the picture, for screen readers."
+        },
+        {
+          "type": "select",
+          "id": "link_to",
+          "label": "Finished picture opens",
+          "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+          "default": "test"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Finished picture custom link"
+        },
+        {
+          "type": "header",
+          "content": "Text on the banner"
+        },
+        {
+          "type": "select",
+          "id": "eyebrow_icon",
+          "label": "Eyebrow icon",
+          "options": [{"value":"none","label":"None"},{"value":"arrow-right","label":"Arrow"},{"value":"check","label":"Check"},{"value":"video","label":"Video call"},{"value":"whatsapp","label":"WhatsApp"},{"value":"clinic","label":"Clinic"},{"value":"doctor","label":"Doctor"},{"value":"calendar","label":"Calendar"},{"value":"clock","label":"Clock"},{"value":"shield","label":"Shield"},{"value":"flask","label":"Research flask"},{"value":"patent","label":"Patent document"},{"value":"leaf","label":"Leaf"},{"value":"users","label":"People"},{"value":"heart","label":"Heart"},{"value":"india","label":"Globe"},{"value":"pin","label":"Location pin"},{"value":"phone","label":"Phone"},{"value":"mail","label":"Email"},{"value":"lock","label":"Lock"},{"value":"truck","label":"Delivery"},{"value":"box","label":"Package"},{"value":"bag","label":"Shopping bag"},{"value":"search","label":"Search"},{"value":"info","label":"Info"},{"value":"alert","label":"Alert"},{"value":"refresh","label":"Refresh"},{"value":"sparkle","label":"Sparkle"},{"value":"star","label":"Star"},{"value":"target","label":"Target"},{"value":"chart","label":"Chart"},{"value":"home","label":"Home"},{"value":"grid","label":"Grid"},{"value":"test","label":"Self-check"},{"value":"book","label":"Guide"},{"value":"drop","label":"Drop"},{"value":"sun","label":"Sun"},{"value":"moon","label":"Moon"},{"value":"bowl","label":"Food bowl"},{"value":"ban","label":"Quit habit"},{"value":"ruler","label":"Ruler"},{"value":"s-open","label":"Symptom: mouth opening"},{"value":"s-burn","label":"Symptom: burning"},{"value":"s-tight","label":"Symptom: tightness"},{"value":"s-ulcer","label":"Symptom: ulcers"},{"value":"s-bands","label":"Symptom: white bands"},{"value":"s-tongue","label":"Symptom: tongue"},{"value":"s-pain","label":"Symptom: pain"}],
+          "default": "shield"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "Care beyond teeth, gums & enamel"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "info": "Italic words show in teal.",
+          "default": "A structured approach to <em>oral mucosal care</em>"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_text_mobile",
+          "label": "Show the text on phones",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "button_1_label",
+          "label": "Button 1",
+          "default": "Check Your OSMF Stage"
+        },
+        {
+          "type": "select",
+          "id": "button_1_to",
+          "label": "Button 1 opens",
+          "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+          "default": "test"
+        },
+        {
+          "type": "url",
+          "id": "button_1_link",
+          "label": "Button 1 custom link"
+        },
+        {
+          "type": "text",
+          "id": "button_2_label",
+          "label": "Button 2"
+        },
+        {
+          "type": "select",
+          "id": "button_2_to",
+          "label": "Button 2 opens",
+          "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+          "default": "therapy"
+        },
+        {
+          "type": "url",
+          "id": "button_2_link",
+          "label": "Button 2 custom link"
+        },
+        {
+          "type": "select",
+          "id": "align",
+          "label": "Text position on desktop",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Centre"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "select",
+          "id": "text_color",
+          "label": "Text colour",
+          "options": [
+            {
+              "value": "dark",
+              "label": "Dark, for light pictures"
+            },
+            {
+              "value": "light",
+              "label": "White, for dark pictures"
+            }
+          ],
+          "default": "dark"
+        },
+        {
+          "type": "range",
+          "id": "scrim",
+          "label": "Shade behind the text",
+          "info": "Raise it if the text is hard to read on your picture.",
+          "min": 0,
+          "max": 80,
+          "step": 10,
+          "unit": "%",
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "trust",
+      "name": "Trust item",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [{"value":"none","label":"None"},{"value":"arrow-right","label":"Arrow"},{"value":"check","label":"Check"},{"value":"video","label":"Video call"},{"value":"whatsapp","label":"WhatsApp"},{"value":"clinic","label":"Clinic"},{"value":"doctor","label":"Doctor"},{"value":"calendar","label":"Calendar"},{"value":"clock","label":"Clock"},{"value":"shield","label":"Shield"},{"value":"flask","label":"Research flask"},{"value":"patent","label":"Patent document"},{"value":"leaf","label":"Leaf"},{"value":"users","label":"People"},{"value":"heart","label":"Heart"},{"value":"india","label":"Globe"},{"value":"pin","label":"Location pin"},{"value":"phone","label":"Phone"},{"value":"mail","label":"Email"},{"value":"lock","label":"Lock"},{"value":"truck","label":"Delivery"},{"value":"box","label":"Package"},{"value":"bag","label":"Shopping bag"},{"value":"search","label":"Search"},{"value":"info","label":"Info"},{"value":"alert","label":"Alert"},{"value":"refresh","label":"Refresh"},{"value":"sparkle","label":"Sparkle"},{"value":"star","label":"Star"},{"value":"target","label":"Target"},{"value":"chart","label":"Chart"},{"value":"home","label":"Home"},{"value":"grid","label":"Grid"},{"value":"test","label":"Self-check"},{"value":"book","label":"Guide"},{"value":"drop","label":"Drop"},{"value":"sun","label":"Sun"},{"value":"moon","label":"Moon"},{"value":"bowl","label":"Food bowl"},{"value":"ban","label":"Quit habit"},{"value":"ruler","label":"Ruler"},{"value":"s-open","label":"Symptom: mouth opening"},{"value":"s-burn","label":"Symptom: burning"},{"value":"s-tight","label":"Symptom: tightness"},{"value":"s-ulcer","label":"Symptom: ulcers"},{"value":"s-bands","label":"Symptom: white bands"},{"value":"s-tongue","label":"Symptom: tongue"},{"value":"s-pain","label":"Symptom: pain"}],
+          "default": "flask"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Clinically evaluated"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel banner slider",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "art": "1",
+            "button_2_label": "Explore MARCEL OMR Therapy™"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "art": "2",
+            "eyebrow_icon": "test",
+            "eyebrow": "MARCEL OSMF Self-Check",
+            "heading": "Not sure what your symptoms mean? <em>Check your OSMF stage.</em>",
+            "button_1_label": "Start the Self-Check",
+            "button_2_label": "Talk to a Consultant",
+            "button_2_to": "consult"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "art": "3",
+            "eyebrow_icon": "phone",
+            "eyebrow": "In-house MARCEL OSMF Consultant",
+            "heading": "Have questions? <em>Talk to our OSMF Consultant.</em>",
+            "button_1_label": "Book a Consultation",
+            "button_1_to": "consult",
+            "button_2_label": "WhatsApp us",
+            "button_2_to": "whatsapp"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "art": "4",
+            "eyebrow_icon": "calendar",
+            "eyebrow": "12-Week Care Journey",
+            "heading": "Care that keeps going <em>after you start</em>",
+            "button_1_label": "See the 12-Week Journey",
+            "button_1_to": "journey",
+            "button_2_label": "Talk to a Consultant",
+            "button_2_to": "consult"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "art": "5",
+            "eyebrow_icon": "doctor",
+            "eyebrow": "OSMF Specialist Doctors",
+            "heading": "Need a check-up? <em>Find a specialist near you.</em>",
+            "button_1_label": "Find a Specialist",
+            "button_1_to": "specialists",
+            "button_2_label": "Check Your OSMF Stage",
+            "button_2_to": "test"
+          }
+        },
+        {
+          "type": "trust",
+          "settings": {
+            "icon": "flask",
+            "text": "Clinically evaluated"
+          }
+        },
+        {
+          "type": "trust",
+          "settings": {
+            "icon": "test",
+            "text": "CTRI-registered clinical study"
+          }
+        },
+        {
+          "type": "trust",
+          "settings": {
+            "icon": "calendar",
+            "text": "26-year development journey"
+          }
+        },
+        {
+          "type": "trust",
+          "settings": {
+            "icon": "patent",
+            "text": "Patent application filed"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

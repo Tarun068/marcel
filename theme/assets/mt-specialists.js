@@ -200,7 +200,7 @@ if (!customElements.get('mt-specialists')) {
           avatar.textContent = initials(p.name);
         }
         const head = el('div');
-        head.append(el('h3', '', p.name), el('p', 'mt-clinic-where', [p.qualification, this.t.role].filter(Boolean).join(' · ')));
+        head.append(el('h3', '', p.name), el('p', 'mt-clinic-where', [p.qualification, this.t.role].filter(Boolean).join(', ')));
         top.append(avatar, head);
 
         const meta = el('div', 'mt-clinic-meta');
@@ -211,7 +211,7 @@ if (!customElements.get('mt-specialists')) {
           meta.append(span);
         };
         line('clinic', p.clinic);
-        line('pin', [p.address, p.area, p.city, p.state].filter(Boolean).join(', ') + (p.pin ? ` — ${p.pin}` : ''));
+        line('pin', [p.address, p.area, p.city, p.state].filter(Boolean).join(', ') + (p.pin ? ` ${p.pin}` : ''));
         line('clock', p.hours);
         line('phone', p.phone);
         if (p.registration) line('patent', `${this.t.reg} ${p.registration}`);

@@ -14,6 +14,11 @@
   .mt .mt-phase h3 { font-size: 21px; line-height: 1.2; letter-spacing: -.015em; }
   .mt-phase p { font-size: 15px; line-height: 1.55; }
   .mt-phase .mt-checks li { font-size: 14.5px; }
+  /* Optional photo on top of a card (card layout only). */
+  .mt-phase-photo { display: block; overflow: hidden; margin: -22px -22px 6px; aspect-ratio: 16 / 10; background: var(--mt-tint); }
+  .mt-phase-photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
+  .mt-phase:hover .mt-phase-photo img { transform: scale(1.05); }
+  .mt-phase--photo { overflow: hidden; }
   .mt-phase-foot { margin-top: 4px; padding-top: 12px; border-top: 1px solid var(--mt-line); font-size: 14.5px; font-weight: 700; color: var(--mt-ink); }
 
   /* Timeline layout: a vertical list with a line, used for the development journey. */
@@ -67,10 +72,94 @@
 <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-journey' %}"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handleize }}"{% endif %}>
   <div class="mt-wrap">
     {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text, center: section.settings.center -%}
+    {%- if section.settings.layout == 'timeline' -%}
+      {%- comment -%}
+        Journey timeline: milestones alternate either side of a line that fills as the visitor scrolls
+        (one column with the line on the left on phones). assets/mt-timeline.js lights up the milestone being read.
+      {%- endcomment -%}
+      {{ 'mt-timeline.css' | asset_url | stylesheet_tag }}
+      <script src="{{ 'mt-timeline.js' | asset_url }}" defer="defer"></script>
+      <mt-timeline class="mt-tl">
+        <span class="mt-tl-spine" aria-hidden="true"><span class="mt-tl-fill"></span></span>
+        <ol class="mt-tl-list">
+          {%- for block in phases -%}
+            {%- liquid
+              assign points = block.settings.points | newline_to_br | split: '<br />'
+              assign photo_art = block.settings.art | default: 'none'
+              assign status = block.settings.status | default: 'none'
+              assign side = 'left'
+              assign odd = forloop.index | modulo: 2
+              if odd == 0
+                assign side = 'right'
+              endif
+              case status
+                when 'done'
+                  assign status_label = section.settings.status_done
+                when 'now'
+                  assign status_label = section.settings.status_now
+                when 'next'
+                  assign status_label = section.settings.status_next
+                else
+                  assign status_label = ''
+              endcase
+            -%}
+            <li class="mt-tl-item mt-tl-item--{{ side }} mt-tl-item--{{ status }}"{% if block.settings.tone != blank %} style="--tone: {{ block.settings.tone }};"{% endif %} {{ block.shopify_attributes }}>
+              <div class="mt-tl-date{% if block.settings.when.size > 14 %} mt-tl-date--long{% endif %}">
+                <span class="mt-tl-year">{{ block.settings.when | escape }}</span>
+              </div>
+              <span class="mt-tl-node" aria-hidden="true">{%- render 'mt-icon', icon: block.settings.icon -%}</span>
+              <article class="mt-tl-card">
+                {%- if block.settings.image != blank or photo_art != 'none' -%}
+                  <span class="mt-tl-photo">
+                    {%- if block.settings.image != blank -%}
+                      {{- block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '400, 600, 900', sizes: '(min-width: 990px) 460px, 92vw', alt: block.settings.image.alt -}}
+                    {%- else -%}
+                      <img src="{{ 'mt-' | append: photo_art | append: '.webp' | asset_url }}" alt="" width="800" height="500" loading="lazy">
+                    {%- endif -%}
+                  </span>
+                {%- endif -%}
+                <div class="mt-tl-body">
+                  {%- if status_label != blank -%}<span class="mt-tl-status">{{ status_label | escape }}</span>{%- endif -%}
+                  {%- if block.settings.title != blank -%}<h3>{{ block.settings.title | escape }}</h3>{%- endif -%}
+                  {%- if block.settings.text != blank -%}<p>{{ block.settings.text | escape }}</p>{%- endif -%}
+                  {%- if block.settings.points != blank -%}
+                    <ul class="mt-checks">
+                      {%- for line in points -%}
+                        {%- assign item = line | strip -%}
+                        {%- if item != blank -%}<li>{%- render 'mt-icon', icon: 'check' -%}<span>{{ item | escape }}</span></li>{%- endif -%}
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                  {%- if block.settings.foot != blank -%}<p class="mt-phase-foot">{{ block.settings.foot | escape }}</p>{%- endif -%}
+                </div>
+              </article>
+            </li>
+          {%- endfor -%}
+        </ol>
+      </mt-timeline>
+    {%- else -%}
     <ol class="mt-phases{% if section.settings.layout != 'cards' %} mt-phases--{{ section.settings.layout }}{% endif %}" style="--mt-cols: {{ phases.size | at_most: section.settings.columns }};">
       {%- for block in phases -%}
         {%- assign points = block.settings.points | newline_to_br | split: '<br />' -%}
-        <li class="mt-phase"{% if block.settings.tone != blank %} style="--tone: {{ block.settings.tone }};"{% endif %} {{ block.shopify_attributes }}>
+        {%- liquid
+          assign photo_art = block.settings.art | default: 'none'
+          assign has_photo = false
+          if section.settings.layout == 'cards'
+            if block.settings.image != blank or photo_art != 'none'
+              assign has_photo = true
+            endif
+          endif
+        -%}
+        <li class="mt-phase{% if has_photo %} mt-phase--photo{% endif %}"{% if block.settings.tone != blank %} style="--tone: {{ block.settings.tone }};"{% endif %} {{ block.shopify_attributes }}>
+          {%- if has_photo -%}
+            <span class="mt-phase-photo">
+              {%- if block.settings.image != blank -%}
+                {{- block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 600, 800', sizes: '(min-width: 990px) 380px, 92vw', alt: block.settings.image.alt -}}
+              {%- else -%}
+                <img src="{{ 'mt-' | append: photo_art | append: '.webp' | asset_url }}" alt="" width="800" height="500" loading="lazy">
+              {%- endif -%}
+            </span>
+          {%- endif -%}
           {%- if section.settings.layout == 'flow' -%}
             <span class="mt-phase-ico">{%- render 'mt-icon', icon: block.settings.icon -%}</span>
             {%- if block.settings.when != blank -%}<span class="mt-phase-when">{{ block.settings.when | escape }}</span>{%- endif -%}
@@ -91,6 +180,7 @@
         </li>
       {%- endfor -%}
     </ol>
+    {%- endif -%}
     {%- if section.settings.note != blank or section.settings.button_label != blank -%}
       <div class="mt-journey-foot{% if section.settings.center %} mt-journey-foot--center{% endif %}">
         {%- if section.settings.note != blank -%}
@@ -218,6 +308,28 @@
       "id": "button2_link",
       "label": "Second button custom link"
     },
+    {
+      "type": "header",
+      "content": "Timeline status labels"
+    },
+    {
+      "type": "text",
+      "id": "status_done",
+      "label": "Completed",
+      "default": "Completed"
+    },
+    {
+      "type": "text",
+      "id": "status_now",
+      "label": "In progress",
+      "default": "In progress"
+    },
+    {
+      "type": "text",
+      "id": "status_next",
+      "label": "Coming next",
+      "default": "Coming next"
+    },
     {"type":"header","content":"Section style"},
     {"type":"select","id":"background","label":"Background","options":[{"value":"paper","label":"White"},{"value":"mist","label":"Light"},{"value":"tint","label":"Tinted"},{"value":"navy","label":"Navy"}],"default":"paper"},
     {"type":"checkbox","id":"sheet","label":"Rounded top edge","info":"Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.","default":false},
@@ -232,7 +344,7 @@
           "type": "text",
           "id": "when",
           "label": "When",
-          "default": "Weeks 1–2"
+          "default": "Weeks 1 and 2"
         },
         {
           "type": "select",
@@ -246,6 +358,32 @@
           "id": "tone",
           "label": "Colour",
           "info": "Optional."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo",
+          "info": "Card and timeline layouts. Shown at the top of the card, 16:10."
+        },
+        {
+          "type": "select",
+          "id": "art",
+          "label": "Built-in placeholder photo",
+          "options": [{"value":"none","label":"None"},{"value":"pillar-care","label":"Therapy products"},{"value":"pillar-function","label":"Mouth-opening exercise"},{"value":"pillar-progress","label":"Progress tracker"},{"value":"era-lab","label":"Research"},{"value":"era-study","label":"Clinical study"},{"value":"era-launch","label":"Kits and Ora-Shield pack"}],
+          "default": "none"
+        },
+        {
+          "type": "select",
+          "id": "status",
+          "label": "Timeline status",
+          "info": "Timeline layout only.",
+          "options": [
+            {"value": "none", "label": "None"},
+            {"value": "done", "label": "Completed"},
+            {"value": "now", "label": "In progress"},
+            {"value": "next", "label": "Coming next"}
+          ],
+          "default": "none"
         },
         {
           "type": "text",
@@ -280,7 +418,7 @@
         {
           "type": "phase",
           "settings": {
-            "when": "Weeks 1–2",
+            "when": "Weeks 1 and 2",
             "title": "Relief",
             "text": "Establish the routine and focus on comfort."
           }
@@ -288,7 +426,7 @@
         {
           "type": "phase",
           "settings": {
-            "when": "Weeks 3–6",
+            "when": "Weeks 3 to 6",
             "title": "Activation",
             "text": "Build consistency and follow prescribed exercises."
           }
@@ -296,7 +434,7 @@
         {
           "type": "phase",
           "settings": {
-            "when": "Weeks 6–10",
+            "when": "Weeks 6 to 10",
             "title": "Restoration",
             "text": "Continue the routine and review comfort and function with professional guidance."
           }
@@ -304,7 +442,7 @@
         {
           "type": "phase",
           "settings": {
-            "when": "Weeks 11–12",
+            "when": "Weeks 11 and 12",
             "title": "Reinforcement",
             "text": "Reinforce daily habits and follow-up."
           }

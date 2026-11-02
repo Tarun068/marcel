@@ -44,9 +44,15 @@ if (!customElements.get('mt-self-test')) {
           const opt = e.target.closest('.mt-opt');
           if (opt) this.choose(opt);
         });
+        // Pointing at a mouth-opening answer previews its picture; leaving the answers shows the chosen one again.
         this.box.addEventListener('pointerover', (e) => {
           const opt = e.target.closest('.mt-opt[data-q="opening"]');
-          if (opt && window.MarcelTheme) window.MarcelTheme.setGauge(this.box.querySelector('[data-mt-gauge]'), FINGERS[opt.dataset.v]);
+          if (opt) this.showOpening(opt.dataset.v);
+        });
+        this.box.addEventListener('pointerout', (e) => {
+          const from = e.target.closest('.mt-opt[data-q="opening"]');
+          const to = e.relatedTarget && e.relatedTarget.closest ? e.relatedTarget.closest('.mt-opt[data-q="opening"]') : null;
+          if (from && !to && !this.locked) this.showOpening(this.answers.opening);
         });
         if (this.form) {
           this.form.addEventListener('submit', (e) => {
@@ -105,14 +111,29 @@ if (!customElements.get('mt-self-test')) {
 
         if (q.id === 'opening') {
           this.box.innerHTML = `${head}<div class="mt-finger-layout"><div data-mt-gauge-slot></div><div class="mt-test-opts">${opts}</div></div>`;
-          const tpl = this.querySelector('[data-mt-gauge-template]');
+          const tpl = this.querySelector('[data-mt-photo-template]') || this.querySelector('[data-mt-gauge-template]');
           if (tpl) {
             this.box.querySelector('[data-mt-gauge-slot]').appendChild(tpl.content.cloneNode(true));
-            if (window.MarcelTheme) window.MarcelTheme.setGauge(this.box.querySelector('[data-mt-gauge]'), sel === undefined ? 3 : FINGERS[sel]);
+            this.showOpening(sel);
           }
         } else {
           this.box.innerHTML = `${head}<div class="mt-test-opts${q.options.length === 4 ? ' mt-test-opts--2' : ''}">${opts}</div>`;
         }
+      }
+
+      /* First question: show the photo for an answer (photo mode) or set the finger gauge. No answer yet: the widest opening. */
+      showOpening(value) {
+        const photos = this.box.querySelector('[data-mt-photos]');
+        if (!photos) {
+          if (window.MarcelTheme) window.MarcelTheme.setGauge(this.box.querySelector('[data-mt-gauge]'), value === undefined ? 3 : FINGERS[value]);
+          return;
+        }
+        const v = value === undefined ? 'gt35' : value;
+        photos.querySelectorAll('.mt-open-photo').forEach((img) => img.classList.toggle('is-on', img.dataset.v === v));
+        const q = this.questions.find((x) => x.id === 'opening');
+        const o = q && q.options.find((x) => x.v === v);
+        const badge = photos.querySelector('[data-mt-photo-badge]');
+        if (badge) badge.textContent = o ? o.s || o.l : '';
       }
 
       choose(opt) {
@@ -125,7 +146,7 @@ if (!customElements.get('mt-self-test')) {
           delete this.answers.carcinoma;
         }
         this.box.querySelectorAll('.mt-opt').forEach((o) => o.setAttribute('aria-pressed', o === opt));
-        if (id === 'opening' && window.MarcelTheme) window.MarcelTheme.setGauge(this.box.querySelector('[data-mt-gauge]'), FINGERS[value]);
+        if (id === 'opening') this.showOpening(value);
         this.locked = true;
         setTimeout(() => {
           this.locked = false;

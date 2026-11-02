@@ -18,7 +18,8 @@
   .mt-path-band span { font-size: 14px; font-weight: 700; color: var(--tone); font-variant-numeric: tabular-nums; }
   .mt-path .mt-checks .mt-i { color: var(--tone); }
   .mt-path-media { position: relative; overflow: hidden; border-radius: var(--mt-r); background: var(--mt-pack-bg); aspect-ratio: 16 / 9; }
-  .mt-path-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+  .mt-path-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: transform .7s cubic-bezier(.2, .7, .2, 1); }
+  .mt-path:hover .mt-path-media img { transform: scale(1.05); }
   .mt-path-foot { margin-top: auto; display: grid; gap: 12px; }
   .mt-path-foot p { font-size: 15px; font-weight: 600; color: var(--mt-ink); }
   .mt .mt-path-foot .mt-btn { width: 100%; }
@@ -58,6 +59,10 @@
             {%- if block.settings.image != blank -%}
               <div class="mt-path-media">
                 {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 560px, 92vw', widths: '300, 450, 600, 900' }}
+              </div>
+            {%- elsif block.settings.art != blank and block.settings.art != 'none' -%}
+              <div class="mt-path-media">
+                <img src="{{ 'mt-kit-' | append: block.settings.art | append: '.webp' | asset_url }}" alt="" width="670" height="356" loading="lazy">
               </div>
             {%- endif -%}
             {%- if block.settings.points != blank -%}
@@ -165,7 +170,7 @@
           "type": "text",
           "id": "stages",
           "label": "Stages",
-          "default": "Stage 1 – 2"
+          "default": "Stages 1 and 2"
         },
         {
           "type": "text",
@@ -184,13 +189,25 @@
           "id": "bands",
           "label": "Mouth-opening bands",
           "info": "One per line: stage | band.",
-          "default": "Stage 1 | More than 35 mm, with symptoms\nStage 2 | 26 – 35 mm"
+          "default": "Stage 1 | More than 35 mm, with symptoms\nStage 2 | 26 to 35 mm"
         },
         {
           "type": "image_picker",
           "id": "image",
           "label": "Image",
           "info": "Optional, for example the kit pack."
+        },
+        {
+          "type": "select",
+          "id": "art",
+          "label": "Built-in placeholder kit picture",
+          "info": "Used until an image is chosen.",
+          "options": [
+            {"value": "none", "label": "None"},
+            {"value": "foundation", "label": "Foundation kit"},
+            {"value": "advance", "label": "Advance kit"}
+          ],
+          "default": "none"
         },
         {
           "type": "textarea",
@@ -240,10 +257,10 @@
           "type": "pathway",
           "settings": {
             "tone": "blue",
-            "stages": "Stage 3 – 4",
+            "stages": "Stages 3 and 4",
             "title": "MARCEL OMR Therapy™ Advance",
             "subtitle": "For greater restriction in mouth opening and oral function.",
-            "bands": "Stage 3 | 15 – 25 mm\nStage 4 | Less than 15 mm",
+            "bands": "Stage 3 | 15 to 25 mm\nStage 4 | Less than 15 mm",
             "points": "Greater restriction in mouth opening\nDifficulty chewing common\nDifficulty in tongue movement may be present",
             "summary": "May be considered with professional guidance.",
             "button_label": "Explore MARCEL OMR Therapy™ Advance",

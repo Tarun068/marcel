@@ -23,7 +23,8 @@
         "current_label": "Clinical evidence",
         "eyebrow": "Clinical evidence & research",
         "heading": "Development guided by evaluation and continued learning",
-        "text": "Clinical assessment and scientific investigation form important parts of the MARCEL development journey. Where research is ongoing, it is described as ongoing research."
+        "text": "Clinical assessment and scientific investigation form important parts of the MARCEL development journey. Where research is ongoing, it is described as ongoing research.",
+        "art": "evidence"
       }
     },
     "study": {
@@ -206,7 +207,7 @@
       "settings": {
         "eyebrow": "Ongoing research",
         "heading": "MARCEL OSMF Fibrosis Reversal Research Programme",
-        "text": "Ongoing investigations and evidence generation. Status: ongoing — final reports and integrated conclusions are pending.",
+        "text": "Investigations and evidence generation are still under way. Final reports and integrated conclusions are pending.",
         "center": false,
         "layout": "cards",
         "columns": 3,
@@ -324,7 +325,7 @@
         "phase_3": {
           "type": "phase",
           "settings": {
-            "when": "2025–2026",
+            "when": "2025 to 2026",
             "icon": "book",
             "title": "Regulatory dossier & licensing",
             "text": "Compilation of applicable quality, scientific, manufacturing and regulatory documentation and pursuit of the applicable licensing pathway."
@@ -333,7 +334,7 @@
         "phase_4": {
           "type": "phase",
           "settings": {
-            "when": "2025–2026",
+            "when": "2025 to 2026",
             "icon": "box",
             "title": "GMP manufacturing, scale-up & process validation",
             "text": ""
@@ -345,7 +346,7 @@
             "when": "2026",
             "icon": "shield",
             "title": "Quality, GMP & regulatory compliance certifications",
-            "text": "ISO 9001:2015 · ISO 14001:2015 · ISO 22000:2018 · GMP · FDA regulatory compliance."
+            "text": "ISO 9001:2015, ISO 14001:2015 and ISO 22000:2018, along with GMP and FDA regulatory compliance."
           }
         },
         "phase_6": {
@@ -380,7 +381,7 @@
     "cta": {
       "type": "mt-cta-band",
       "settings": {
-        "eyebrow": "Measure. Document. Analyse. Improve.",
+        "eyebrow": "How we keep learning",
         "heading": "Questions about the evidence?",
         "text": "Healthcare professionals can contact the MARCEL team for research and clinical information.",
         "button_1_label": "Professional enquiry",

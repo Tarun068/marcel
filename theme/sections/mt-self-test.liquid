@@ -52,6 +52,27 @@
       <template data-mt-gauge-template>
         {%- render 'mt-gauge', fingers: 3, caption: section.settings.gauge_caption -%}
       </template>
+      {%- if section.settings.opening_media == 'photo' -%}
+        {%- comment -%} One photo per mouth-opening answer; built-in example photos until the merchant picks their own. {%- endcomment -%}
+        <template data-mt-photo-template>
+          <figure class="mt-open-media" data-mt-photos aria-hidden="true">
+            <span class="mt-open-frame">
+              {%- assign values = 'gt35,26to35,15to25,lt15,lt5' | split: ',' -%}
+              {%- for v in values -%}
+                {%- assign key = 'photo_' | append: v -%}
+                {%- assign img = section.settings[key] -%}
+                {%- if img != blank -%}
+                  <img class="mt-open-photo" data-v="{{ v }}" src="{{ img | image_url: width: 900 }}" srcset="{{ img | image_url: width: 450 }} 450w, {{ img | image_url: width: 700 }} 700w, {{ img | image_url: width: 900 }} 900w" sizes="(min-width: 760px) 440px, 92vw" width="{{ img.width }}" height="{{ img.height }}" alt="">
+                {%- else -%}
+                  <img class="mt-open-photo" data-v="{{ v }}" src="{{ 'mt-stage-' | append: forloop.index | append: '.webp' | asset_url }}" width="720" height="540" alt="">
+                {%- endif -%}
+              {%- endfor -%}
+              <span class="mt-open-badge" data-mt-photo-badge></span>
+            </span>
+            {%- if section.settings.photo_note != blank -%}<figcaption class="mt-open-note">{{ section.settings.photo_note | escape }}</figcaption>{%- endif -%}
+          </figure>
+        </template>
+      {%- endif -%}
 
       <div class="mt-test-top">
         <button type="button" class="mt-icon-btn mt-test-back" data-mt-back aria-label="{{ section.settings.back_label | escape }}">
@@ -168,9 +189,58 @@
       "default": "[n]/[total]"
     },
     {
+      "type": "select",
+      "id": "opening_media",
+      "label": "First question picture",
+      "options": [
+        {
+          "value": "photo",
+          "label": "Photos, one per answer"
+        },
+        {
+          "value": "gauge",
+          "label": "Finger illustration"
+        }
+      ],
+      "default": "photo",
+      "info": "The picture changes as the visitor points at or picks an answer."
+    },
+    {
+      "type": "image_picker",
+      "id": "photo_gt35",
+      "label": "Photo: 3 fingers (over 35 mm)"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo_26to35",
+      "label": "Photo: 2 fingers (26 to 35 mm)"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo_15to25",
+      "label": "Photo: 1 finger (15 to 25 mm)"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo_lt15",
+      "label": "Photo: less than 1 finger (under 15 mm)"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo_lt5",
+      "label": "Photo: barely opens (under 5 mm)",
+      "info": "4:3 photos work best. Until a photo is chosen, a built-in example photo is used."
+    },
+    {
+      "type": "text",
+      "id": "photo_note",
+      "label": "Note under the photo",
+      "default": "Example photo. Your own opening may look different."
+    },
+    {
       "type": "text",
       "id": "gauge_caption",
-      "label": "Gauge caption",
+      "label": "Finger illustration caption",
       "default": "your opening"
     },
     {
@@ -480,7 +550,7 @@
             "short": "Mouth opening",
             "question": "How many fingers fit vertically in your mouth?",
             "help": "Stack your fingers one above the other between your upper and lower front teeth. Don’t force it. If you measured with a ruler, use the millimetre range under each answer.",
-            "options": "gt35 | 3 fingers | Opens comfortably · more than 35 mm | 3 fingers (over 35 mm)\n26to35 | 2 fingers | Feels a little tight · 26–35 mm | 2 fingers (26–35 mm)\n15to25 | 1 finger | Clearly restricted · 15–25 mm | 1 finger (15–25 mm)\nlt15 | Less than 1 finger | Very hard to open · under 15 mm | Less than 1 finger (under 15 mm)\nlt5 | Barely opens | Hardly any opening · under 5 mm | Barely opens (under 5 mm)"
+            "options": "gt35 | 3 fingers | Opens comfortably, more than 35 mm | 3 fingers (over 35 mm)\n26to35 | 2 fingers | Feels a little tight, 26 to 35 mm | 2 fingers (26 to 35 mm)\n15to25 | 1 finger | Clearly restricted, 15 to 25 mm | 1 finger (15 to 25 mm)\nlt15 | Less than 1 finger | Very hard to open, under 15 mm | Less than 1 finger (under 15 mm)\nlt5 | Barely opens | Hardly any opening, under 5 mm | Barely opens (under 5 mm)"
           }
         },
         {

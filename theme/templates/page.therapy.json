@@ -26,7 +26,8 @@
         "text": "MARCEL OMR Therapy™ provides a planned framework for OSMF care rather than relying on random or inconsistent product use. It brings together oral mucosal care, functional support and guided progress.",
         "button_1_label": "Check Your OSMF Stage",
         "button_2_label": "Explore MARCEL OMR Therapy™",
-        "button_2_link": "#overview"
+        "button_2_link": "#overview",
+        "art": "therapy"
       }
     },
     "overview": {
@@ -34,7 +35,7 @@
       "settings": {
         "eyebrow": "Therapy overview",
         "heading": "The MARCEL 3-Pillar Approach",
-        "text": "Three connected pillars. One structured approach to OSMF care.",
+        "text": "Three connected pillars that work together in OSMF care.",
         "center": false,
         "layout": "cards",
         "columns": 3,
@@ -51,30 +52,33 @@
         "phase_1": {
           "type": "phase",
           "settings": {
-            "when": "01 — Oral mucosal care",
+            "when": "Pillar 1: Oral mucosal care",
             "icon": "shield",
-            "title": "Care for the mouth. Support comfort.",
-            "text": "A structured oral-care regimen designed to support oral mucosal health and help manage common OSMF-related discomfort such as burning, tightness and difficulty with eating."
+            "title": "Care for the mouth and support comfort",
+            "text": "A structured oral-care regimen designed to support oral mucosal health and help manage common OSMF-related discomfort such as burning, tightness and difficulty with eating.",
+            "art": "pillar-care"
           }
         },
         "phase_2": {
           "type": "phase",
           "settings": {
-            "when": "02 — Functional support",
+            "when": "Pillar 2: Functional support",
             "icon": "s-open",
-            "title": "Support what matters in daily life.",
+            "title": "Support what matters in daily life",
             "text": "Mouth opening is an important functional measure in OSMF. The MARCEL approach incorporates regular mouth-opening exercises and, where appropriate, an optional mouth-opening device as an adjunct.",
-            "foot": "Focus: Mouth opening • Chewing • Oral function"
+            "foot": "Focus: mouth opening, chewing and oral function",
+            "art": "pillar-function"
           }
         },
         "phase_3": {
           "type": "phase",
           "settings": {
-            "when": "03 — Guided care & progress",
+            "when": "Pillar 3: Guided care and progress",
             "icon": "chart",
-            "title": "Track. Review. Stay supported.",
+            "title": "Track your progress with support",
             "text": "Structured progress tracking, the 3-Week Progress Tracker, scheduled progress reviews and access to the In-house OSMF Consultant. Where clinical assessment is required, patients can be guided towards MARCEL OSMF Care Specialists.",
-            "foot": "Focus: Progress tracking • Guidance • Specialist care"
+            "foot": "Focus: progress tracking, guidance and specialist care",
+            "art": "pillar-progress"
           }
         }
       },
@@ -102,28 +106,30 @@
           "type": "pathway",
           "settings": {
             "tone": "teal",
-            "stages": "Stage 1 – 2",
+            "stages": "Stages 1 and 2",
             "title": "MARCEL OMR Therapy™ Foundation",
             "subtitle": "For earlier-stage OSMF symptoms and functional restriction.",
-            "bands": "Stage 1 | More than 35 mm, with symptoms\nStage 2 | 26 – 35 mm",
+            "bands": "Stage 1 | More than 35 mm, with symptoms\nStage 2 | 26 to 35 mm",
             "points": "Burning or cheek tightness\nDifficulty chewing may be present\nModerate restriction in mouth opening at Stage 2",
             "summary": "May be considered based on individual assessment.",
             "button_label": "Explore Foundation",
-            "link_to": "foundation"
+            "link_to": "foundation",
+            "art": "foundation"
           }
         },
         "pathway_2": {
           "type": "pathway",
           "settings": {
             "tone": "blue",
-            "stages": "Stage 3 – 4",
+            "stages": "Stages 3 and 4",
             "title": "MARCEL OMR Therapy™ Advance",
             "subtitle": "For greater restriction in mouth opening and oral function.",
-            "bands": "Stage 3 | 15 – 25 mm\nStage 4 | Less than 15 mm",
+            "bands": "Stage 3 | 15 to 25 mm\nStage 4 | Less than 15 mm",
             "points": "Greater restriction in mouth opening\nBurning and cheek tightness commonly present\nDifficulty chewing common\nDifficulty in tongue movement may be present",
             "summary": "May be considered with professional guidance.",
             "button_label": "Explore Advance",
-            "link_to": "advance"
+            "link_to": "advance",
+            "art": "advance"
           }
         }
       },
@@ -153,7 +159,7 @@
         "phase_1": {
           "type": "phase",
           "settings": {
-            "when": "Weeks 1–2",
+            "when": "Weeks 1 and 2",
             "icon": "calendar",
             "title": "Relief",
             "text": "Establish the routine and focus on comfort."
@@ -162,7 +168,7 @@
         "phase_2": {
           "type": "phase",
           "settings": {
-            "when": "Weeks 3–6",
+            "when": "Weeks 3 to 6",
             "icon": "calendar",
             "title": "Activation",
             "text": "Build consistency and follow prescribed exercises."
@@ -171,7 +177,7 @@
         "phase_3": {
           "type": "phase",
           "settings": {
-            "when": "Weeks 6–10",
+            "when": "Weeks 6 to 10",
             "icon": "calendar",
             "title": "Restoration",
             "text": "Continue the routine and review comfort and function with professional guidance."
@@ -180,7 +186,7 @@
         "phase_4": {
           "type": "phase",
           "settings": {
-            "when": "Weeks 11–12",
+            "when": "Weeks 11 and 12",
             "icon": "calendar",
             "title": "Reinforcement",
             "text": "Reinforce daily habits and follow-up."

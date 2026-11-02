@@ -1630,7 +1630,7 @@
         "type": "text",
         "id": "mt_brand_tagline",
         "label": "Tagline",
-        "default": "RESTORE · RECOVER · RENEW"
+        "default": "RESTORE, RECOVER, RENEW"
       },
       {
         "type": "header",

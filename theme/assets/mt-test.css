@@ -16,6 +16,22 @@ mt-self-test { display: block; }
 .mt-test-opts .mt-opt b { font-size: 16.5px; }
 .mt-finger-layout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
 .mt-finger-layout .mt-gauge { height: 100%; }
+/* Mouth-opening photos (Self-Check > First question picture: Photos). They crossfade as answers are pointed at or picked. */
+.mt-open-media { display: grid; align-content: center; gap: 12px; height: 100%; padding: 16px; border-radius: var(--mt-r-lg); background: var(--mt-tint); }
+.mt-open-frame { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 16px; background: var(--mt-mist); box-shadow: 0 18px 36px -24px rgba(12, 42, 61, .5); }
+.mt-open-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.05); transition: opacity .45s ease, transform .8s cubic-bezier(.2, .7, .2, 1); }
+.mt-open-photo.is-on { opacity: 1; transform: none; }
+.mt-open-badge { position: absolute; left: 12px; bottom: 12px; z-index: 1; padding: 7px 13px; border-radius: 12px; background: rgba(255, 255, 255, .95); box-shadow: 0 10px 24px -12px rgba(12, 42, 61, .45); font-size: 15px; font-weight: 800; line-height: 1.25; color: var(--mt-teal); }
+.mt-open-badge:empty { display: none; }
+.mt-open-note { font-size: 13px; line-height: 1.45; text-align: center; color: var(--mt-ink-3); }
+@media (max-width: 560px) {
+  /* Phones: a shorter crop keeps the answers close to the top of the screen. */
+  .mt-open-media { gap: 8px; padding: 12px; }
+  .mt-open-frame { aspect-ratio: 16 / 9; border-radius: 14px; }
+  .mt-open-photo { object-position: 50% 70%; }
+  .mt-open-badge { left: 10px; bottom: 10px; padding: 6px 11px; font-size: 13.5px; }
+  .mt-open-note { font-size: 12px; }
+}
 @media (max-width: 560px) {
   .mt-test-opts--2, .mt-finger-layout { grid-template-columns: minmax(0, 1fr); }
 }

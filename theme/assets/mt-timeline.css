@@ -1,0 +1,82 @@
+/* Marcel journey timeline (sections/mt-journey.liquid, layout "Timeline").
+   Desktop: milestones alternate either side of a centre line, with the date set large opposite each card.
+   Phones: one column with the line on the left. assets/mt-timeline.js fills the line as the visitor scrolls
+   (--tl-progress) and marks milestones is-past / is-active / is-in. */
+mt-timeline { display: block; }
+.mt-tl { --tl-node: 54px; --tl-progress: 0; position: relative; margin-top: 8px; }
+.mt-tl-list { position: relative; display: grid; gap: clamp(26px, 4vw, 52px); }
+
+/* The line, and its teal fill. */
+.mt-tl-spine { position: absolute; left: 50%; top: 27px; bottom: 27px; width: 4px; margin-left: -2px; overflow: hidden; border-radius: 4px; background: var(--mt-line); }
+.mt-tl-fill { position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(180deg, var(--mt-aqua), var(--mt-teal)); transform: scaleY(var(--tl-progress)); transform-origin: top; }
+
+/* A milestone row: card, node, date (mirrored on every other row). */
+.mt-tl-item { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) var(--tl-node) minmax(0, 1fr); column-gap: clamp(20px, 3.2vw, 48px); align-items: center; }
+.mt-tl-item--left .mt-tl-card { grid-column: 1; grid-row: 1; }
+.mt-tl-item--left .mt-tl-date { grid-column: 3; grid-row: 1; text-align: left; }
+.mt-tl-item--right .mt-tl-date { grid-column: 1; grid-row: 1; text-align: right; }
+.mt-tl-item--right .mt-tl-card { grid-column: 3; grid-row: 1; }
+
+.mt-tl-node { position: relative; z-index: 1; grid-column: 2; grid-row: 1; display: grid; place-items: center; width: var(--tl-node); height: var(--tl-node); border-radius: 50%; background: var(--mt-paper); color: var(--mt-ink-3); box-shadow: 0 0 0 2px var(--mt-line-2), 0 10px 22px -12px rgba(12, 42, 61, .4); transition: background .45s, color .45s, box-shadow .45s, transform .55s cubic-bezier(.3, 1.5, .5, 1), opacity .5s; }
+.mt-tl-node .mt-i { width: 23px; height: 23px; stroke-width: 1.9; }
+.mt-tl-item.is-past .mt-tl-node { background: var(--mt-paper); color: var(--tone, var(--mt-teal)); box-shadow: 0 0 0 2.5px var(--tone, var(--mt-teal)), 0 10px 22px -12px rgba(12, 42, 61, .4); }
+.mt-tl-item.is-active .mt-tl-node { background: var(--tone, var(--mt-teal)); color: var(--mt-on-dark); box-shadow: 0 0 0 7px rgba(var(--mt-teal-rgb), .15), 0 14px 28px -10px rgba(var(--mt-teal-rgb), .75); transform: scale(1.12); }
+.mt-tl-item.is-active .mt-tl-node::after { content: ""; position: absolute; inset: -7px; border-radius: inherit; animation: mt-tl-pulse 2.4s cubic-bezier(.2, .7, .3, 1) infinite; }
+@keyframes mt-tl-pulse { 0% { box-shadow: 0 0 0 0 rgba(var(--mt-aqua-rgb), .45); } 70%, 100% { box-shadow: 0 0 0 18px rgba(var(--mt-aqua-rgb), 0); } }
+
+/* Big serif dates: faint ahead, full colour once reached. */
+.mt-tl-date { min-width: 0; transition: opacity .8s ease .12s; }
+.mt-tl-year { display: inline-block; font-family: var(--mt-serif); font-optical-sizing: auto; font-size: clamp(30px, 12px + 2.5vw, 56px); font-weight: 600; line-height: 1.04; letter-spacing: -.022em; color: var(--tone, var(--mt-teal)); opacity: .3; transform: translateY(6px); transition: opacity .55s, transform .7s cubic-bezier(.2, .7, .2, 1); }
+.mt-tl-date--long .mt-tl-year { max-width: 18ch; font-size: clamp(20px, 14px + .9vw, 28px); line-height: 1.2; letter-spacing: -.01em; }
+.mt-tl-item.is-past .mt-tl-year { opacity: .72; transform: none; }
+.mt-tl-item.is-active .mt-tl-year { opacity: 1; transform: none; }
+
+/* Cards */
+.mt-tl-card { position: relative; min-width: 0; overflow: hidden; border-radius: var(--mt-r-xl); background: var(--mt-paper); border: 1px solid var(--mt-line); box-shadow: 0 1px 2px rgba(12, 42, 61, .04), 0 18px 36px -28px rgba(12, 42, 61, .38); transition: transform .65s cubic-bezier(.2, .7, .2, 1), box-shadow .5s, border-color .5s, opacity .8s; }
+.mt-bg-paper .mt-tl-card { background: var(--mt-mist); }
+.mt-tl-photo { display: block; aspect-ratio: 2 / 1; overflow: hidden; background: var(--mt-tint); }
+.mt-tl-photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 1.1s cubic-bezier(.2, .7, .2, 1); }
+.mt-tl-body { display: grid; gap: 10px; align-content: start; padding: clamp(18px, 2.2vw, 28px); }
+.mt .mt-tl-body h3 { font-size: 21px; line-height: 1.25; letter-spacing: -.012em; }
+.mt-tl-body p { font-size: 15.5px; line-height: 1.6; }
+.mt-tl-body .mt-phase-foot { margin-top: 4px; padding-top: 12px; border-top: 1px solid var(--mt-line); font-size: 14.5px; font-weight: 700; color: var(--mt-ink); }
+.mt-tl-item.is-active .mt-tl-card { border-color: rgba(var(--mt-teal-rgb), .35); box-shadow: 0 1px 2px rgba(12, 42, 61, .05), 0 32px 56px -30px rgba(12, 42, 61, .5); transform: translateY(-4px); }
+.mt-tl-item.is-active .mt-tl-photo img { transform: scale(1.04); }
+@media (hover: hover) {
+  .mt-tl-card:hover { transform: translateY(-4px); }
+  .mt-tl-card:hover .mt-tl-photo img { transform: scale(1.06); }
+}
+
+/* Status: completed, in progress (a live dot) and coming next (a lighter, dashed milestone). */
+.mt-tl-status { display: inline-flex; align-items: center; gap: 7px; width: fit-content; padding: 4px 11px 4px 9px; border-radius: 99px; font-size: 11.5px; font-weight: 800; line-height: 1.4; letter-spacing: .07em; text-transform: uppercase; }
+.mt-tl-status::before { content: ""; width: 7px; height: 7px; flex: none; border-radius: 50%; background: currentColor; }
+.mt-tl-item--done .mt-tl-status { background: #E6F4EC; color: #1E7A49; }
+.mt-tl-item--now .mt-tl-status { background: var(--mt-aqua-soft); color: var(--mt-teal-2); }
+.mt-tl-item--now .mt-tl-status::before { animation: mt-tl-blink 1.6s ease-in-out infinite; }
+@keyframes mt-tl-blink { 50% { opacity: .2; } }
+.mt-tl-item--next .mt-tl-status { background: transparent; color: var(--mt-ink-3); box-shadow: inset 0 0 0 1.5px var(--mt-line-2); }
+.mt-tl-item--next .mt-tl-card { background: transparent; border-style: dashed; border-color: var(--mt-line-2); box-shadow: none; }
+.mt-tl-item--next:not(.is-active) .mt-tl-node { outline: 2px dashed var(--mt-line-2); outline-offset: 4px; }
+
+/* Entrance, only once the script runs: cards glide in from their own side, nodes pop, dates fade up. */
+.mt-tl.is-ready .mt-tl-item:not(.is-in) .mt-tl-card { opacity: 0; transform: translateX(-56px); }
+.mt-tl.is-ready .mt-tl-item--right:not(.is-in) .mt-tl-card { transform: translateX(56px); }
+.mt-tl.is-ready .mt-tl-item:not(.is-in) .mt-tl-node { opacity: 0; transform: scale(.4); }
+.mt-tl.is-ready .mt-tl-item:not(.is-in) .mt-tl-date { opacity: 0; }
+
+@media (max-width: 899px) {
+  .mt-tl { --tl-node: 44px; }
+  .mt-tl-spine { left: calc(var(--tl-node) / 2); }
+  .mt-tl-list { gap: 30px; }
+  .mt-tl-item { grid-template-columns: var(--tl-node) minmax(0, 1fr); column-gap: 16px; row-gap: 10px; align-items: start; }
+  .mt-tl-item .mt-tl-node { grid-column: 1; grid-row: 1; }
+  .mt-tl-item .mt-tl-date { grid-column: 2; grid-row: 1; align-self: center; text-align: left; }
+  .mt-tl-item .mt-tl-card { grid-column: 2; grid-row: 2; }
+  .mt-tl-node .mt-i { width: 20px; height: 20px; }
+  .mt-tl-year { font-size: 27px; }
+  .mt-tl-date--long .mt-tl-year { font-size: 18px; }
+  .mt .mt-tl-body h3 { font-size: 19px; }
+  .mt-tl-body p { font-size: 15px; }
+  .mt-tl.is-ready .mt-tl-item:not(.is-in) .mt-tl-card,
+  .mt-tl.is-ready .mt-tl-item--right:not(.is-in) .mt-tl-card { transform: translateY(26px); }
+}

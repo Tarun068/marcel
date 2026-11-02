@@ -24,7 +24,7 @@
     assign eyebrow = mf.role.value
   elsif mf.role.value != blank
     if mf.step.value != blank
-      assign eyebrow = 'Step ' | append: mf.step.value | append: ' · ' | append: mf.role.value
+      assign eyebrow = 'Step ' | append: mf.step.value | append: ': ' | append: mf.role.value
     else
       assign eyebrow = mf.role.value
     endif
@@ -186,7 +186,7 @@
                 <span class="mt-kit-thumb">{%- render 'mt-pack-media', image: item.featured_image, art: item.metafields.marcel.art.value, alt: '', sizes: '56px' -%}</span>
                 <span>
                   <b>{{ item.title | escape }}</b>
-                  <small>{{ item.metafields.marcel.type_label.value | escape }}{% if item.metafields.marcel.size.value != blank %} · {{ item.metafields.marcel.size.value | escape }}{% endif %}</small>
+                  <small>{{ item.metafields.marcel.type_label.value | escape }}{% if item.metafields.marcel.size.value != blank %}, {{ item.metafields.marcel.size.value | escape }}{% endif %}</small>
                 </span>
               </a>
             {%- endfor -%}
@@ -232,7 +232,7 @@
                 <select class="mt-input" id="MtVariant-{{ section.id }}">
                   {%- for v in product.variants -%}
                     <option value="{{ v.id }}"{% if v.id == variant.id %} selected{% endif %}{% unless v.available %} data-sold-out{% endunless %}>
-                      {{- v.title | escape }}{% unless v.available %} · {{ section.settings.sold_out_label | escape }}{% endunless -%}
+                      {{- v.title | escape }}{% unless v.available %} ({{ section.settings.sold_out_label | escape }}){% endunless -%}
                     </option>
                   {%- endfor -%}
                 </select>
@@ -425,7 +425,7 @@
       "type": "text",
       "id": "details",
       "label": "Pack details",
-      "info": "e.g. 50 mL · MRP inclusive of all taxes"
+      "info": "e.g. 50 mL. MRP includes all taxes."
     },
     {
       "type": "textarea",
@@ -696,7 +696,7 @@
       "id": "add_label",
       "label": "Add to cart label",
       "default": "Add to cart",
-      "info": "[price] is replaced by the price, e.g. Buy MARCEL Ora-Care™ – [price]."
+      "info": "[price] is replaced by the price, e.g. Buy MARCEL Ora-Care™ for [price]."
     },
     {
       "type": "text",
@@ -730,7 +730,7 @@
       "type": "textarea",
       "id": "pack_notes",
       "label": "Pack notes",
-      "info": "One per line: variant name | note, e.g. 30 g | Compact pack – handy for travel."
+      "info": "One per line: variant name | note, e.g. 30 g | Compact pack, handy for travel."
     },
     {
       "type": "checkbox",

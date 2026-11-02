@@ -1,0 +1,174 @@
+/* Marcel banner slider (sections/mt-banner-slider.liquid).
+   Banners crossfade in one grid cell. The cell is as tall as the first banner's picture shape (capped on
+   large screens) and grows if a banner's text needs more room. By default the banner is a rounded box in the
+   page container (.mt-bs--boxed); .mt-bs-wrap is the size container, so 100cqw is the banner's own width. */
+.mt-bs { position: relative; background: var(--mt-mist); }
+.mt-bs-wrap { container-type: inline-size; }
+.mt-bs-stage { --bs-pad: 0px; }
+.mt-bs-stage { position: relative; display: grid; touch-action: pan-y; }
+.mt-bs-stage::before { content: ""; grid-area: 1 / 1; height: min(100vw / var(--bs-ratio-d), var(--bs-max)); height: min(100cqw / var(--bs-ratio-d), var(--bs-max)); }
+
+.mt-bs-slide { grid-area: 1 / 1; position: relative; display: grid; overflow: hidden; opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility 0s linear .8s; }
+.mt-bs-slide.is-active { z-index: 1; opacity: 1; visibility: visible; transition: opacity .8s ease; }
+.mt-bs-media { position: absolute; inset: 0; display: block; }
+.mt-bs-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.mt-bs-slide--art .mt-bs-img { object-position: right center; }
+.mt-bs--boxed { padding-top: clamp(10px, 1.6vw, 22px); background: var(--mt-paper); }
+.mt-bs--boxed .mt-bs-stage { --bs-pad: clamp(22px, 5cqw, 60px); --bs-r: clamp(18px, 2.4cqw, 30px); }
+.mt-bs--boxed .mt-bs-slide { border-radius: var(--bs-r); box-shadow: 0 24px 50px -38px rgba(12, 42, 61, .55); }
+.mt-bs--boxed .mt-bs-slide::before { content: ""; position: absolute; inset: 0; z-index: 2; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(12, 42, 61, .06); pointer-events: none; }
+.mt-bs--boxed .mt-bs-content { max-width: none; padding-inline: var(--bs-pad); }
+.mt-bs--boxed .mt-bs-copy { max-width: min(560px, 54%); }
+.mt.mt-bs--boxed .mt-bs-h { font-size: clamp(30px, 4.4cqw, 50px); }
+.mt.mt-bs--boxed .mt-bs-btns .mt-btn { min-height: 54px; padding-inline: 20px; font-size: 15.5px; }
+.mt-bs--boxed .mt-bs-btns { gap: 10px; }
+.mt-bs-ph { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; background: linear-gradient(120deg, var(--mt-mist), var(--mt-tint)); font-size: 14px; color: var(--mt-ink-3); text-align: center; }
+
+/* Optional shade behind the text, from the text side. */
+.mt-bs-slide::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: var(--bs-scrim, 0); background: linear-gradient(90deg, rgba(255, 255, 255, .95) 0%, rgba(255, 255, 255, .7) 38%, rgba(255, 255, 255, 0) 70%); }
+.mt-bs-tone-light::after { background: linear-gradient(90deg, rgba(var(--mt-navy-rgb), .92) 0%, rgba(var(--mt-navy-rgb), .65) 40%, rgba(var(--mt-navy-rgb), 0) 72%); }
+.mt-bs-align-center::after { background: radial-gradient(60% 80% at 50% 50%, rgba(255, 255, 255, .9), rgba(255, 255, 255, 0)); }
+.mt-bs-align-right::after { transform: scaleX(-1); }
+
+/* Finished pictures: the whole banner is the link. */
+.mt-bs-link { position: absolute; inset: 0; z-index: 2; }
+.mt-bs-link:focus-visible { outline: 3px solid var(--mt-aqua); outline-offset: -6px; }
+
+/* ---------- Text on the banner ---------- */
+.mt-bs-content { position: relative; z-index: 2; display: flex; align-items: center; width: 100%; padding-block: clamp(30px, 3.6vw, 52px) clamp(74px, 6.2vw, 86px); }
+.mt-bs-copy { display: grid; gap: 18px; align-content: start; max-width: min(590px, 52%); min-width: 0; }
+.mt-bs-align-center .mt-bs-content { justify-content: center; text-align: center; }
+.mt-bs-align-center .mt-bs-copy { justify-items: center; max-width: 720px; }
+.mt-bs-align-center ~ .mt-bs-controls, .mt-bs-stage:has(.mt-bs-align-center.is-active) .mt-bs-controls { left: 50%; transform: translateX(-50%); }
+.mt-bs-align-right .mt-bs-content { justify-content: flex-end; }
+
+.mt-bs-pill { display: inline-flex; align-items: center; gap: 9px; width: fit-content; padding: 6px 16px 6px 6px; border-radius: 99px; background: rgba(255, 255, 255, .9); box-shadow: inset 0 0 0 1px var(--mt-line); font-size: 14.5px; font-weight: 600; line-height: 1.3; color: var(--mt-ink); }
+.mt-bs-pill-dot { display: grid; place-items: center; width: 26px; height: 26px; flex: none; border-radius: 99px; background: var(--mt-aqua-soft); color: var(--mt-teal); }
+.mt-bs-pill-dot .mt-i { width: 15px; height: 15px; }
+
+.mt .mt-bs-h { font-weight: 800; font-size: clamp(32px, 15px + 2.6vw, 54px); line-height: 1.05; letter-spacing: -.03em; color: var(--mt-ink); }
+.mt .mt-bs-h :is(em, i) { font-style: normal; color: var(--mt-teal); }
+.mt.mt-bs--serif .mt-bs-h { font-family: var(--mt-serif); font-weight: 600; letter-spacing: -.022em; font-optical-sizing: auto; }
+.mt.mt-bs--serif .mt-bs-h :is(em, i) { font-style: italic; font-weight: 500; }
+.mt-bs-text { max-width: 50ch; font-size: clamp(16.5px, 15px + .35vw, 19px); line-height: 1.6; color: var(--mt-ink-2); }
+
+.mt-bs-btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
+.mt .mt-bs-btns .mt-btn { min-height: 56px; padding-inline: 22px; font-size: 16px; font-weight: 700; letter-spacing: 0; text-transform: none; }
+.mt .mt-bs-btns .mt-btn-primary { box-shadow: 0 12px 24px -10px rgba(var(--mt-teal-rgb), .7); }
+.mt .mt-bs-btns .mt-btn .mt-i { width: 19px; height: 19px; transition: transform .2s; }
+.mt .mt-bs-btns .mt-btn-primary:hover .mt-i { transform: translateX(3px); }
+
+.mt-bs-tone-light .mt-bs-pill { background: rgba(255, 255, 255, .14); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .28); color: var(--mt-on-dark); }
+.mt-bs-tone-light .mt-bs-pill-dot { background: rgba(255, 255, 255, .18); color: var(--mt-mint); }
+.mt .mt-bs-tone-light .mt-bs-h { color: var(--mt-on-dark); }
+.mt .mt-bs-tone-light .mt-bs-h :is(em, i) { color: var(--mt-mint); }
+.mt-bs-tone-light .mt-bs-text { color: var(--mt-navy-ink); }
+.mt .mt-bs-tone-light .mt-bs-btn2 { background: transparent; color: var(--mt-on-dark); box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .5); }
+
+/* Entrance: once the slider has moved, the text of each new banner rises in line by line. The first banner's text
+   is never hidden, so it paints straight away. Pictures simply crossfade. */
+.mt-bs-copy > * { --i: 0; }
+.mt-bs-copy > :nth-child(2) { --i: 1; }
+.mt-bs-copy > :nth-child(3) { --i: 2; }
+.mt-bs-copy > :nth-child(4) { --i: 3; }
+.mt-bs-stage.is-moved .mt-bs-slide.is-active .mt-bs-copy > * { animation: mt-bs-rise .9s cubic-bezier(.2, .75, .2, 1) both; animation-delay: calc(140ms + var(--i) * 95ms); }
+@keyframes mt-bs-rise { from { opacity: 0; transform: translateY(26px); } }
+
+/* ---------- Controls ---------- */
+/* Desktop: under the text column. Phones: centred. */
+.mt-bs-controls { position: absolute; left: max(var(--mt-gutter), (100% - var(--mt-wrap)) / 2 + var(--mt-gutter)); bottom: clamp(14px, 2vw, 22px); z-index: 3; display: flex; align-items: center; gap: 6px; padding: 5px; border-radius: 99px; background: rgba(255, 255, 255, .78); box-shadow: 0 10px 30px -14px rgba(12, 42, 61, .45), inset 0 0 0 1px rgba(12, 42, 61, .06); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.mt-bs--boxed .mt-bs-controls { left: var(--bs-pad); }
+.mt .mt-bs-arrow, .mt .mt-bs-pause { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 99px; color: var(--mt-ink); transition: background .2s, color .2s; }
+.mt-bs-arrow .mt-i, .mt-bs-pause .mt-i { width: 18px; height: 18px; stroke-width: 2.2; }
+.mt-bs-pause .mt-i { stroke-width: 2.6; }
+.mt-bs-i-play { fill: currentColor; stroke-width: 0; }
+.mt-bs-pause .mt-bs-i-play, .mt-bs-stage.is-user-paused .mt-bs-i-pause { display: none; }
+.mt-bs-stage.is-user-paused .mt-bs-i-play { display: block; }
+.mt-bs-dots { display: flex; align-items: center; gap: 2px; padding-inline: 4px; }
+.mt .mt-bs-dot { display: grid; place-items: center; height: 38px; padding: 0 5px; }
+.mt-bs-dot i { position: relative; display: block; width: 8px; height: 8px; border-radius: 99px; background: rgba(12, 42, 61, .28); overflow: hidden; transition: width .45s cubic-bezier(.3, .8, .3, 1), background .3s; }
+.mt-bs-dot i::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--mt-teal); transform: scaleX(0); transform-origin: left; }
+.mt-bs-dot[aria-current="true"] i { width: 36px; background: rgba(12, 42, 61, .16); }
+.mt-bs-dot[aria-current="true"] i::after { transform: none; }
+/* With autoplay, the active dot fills over the banner's time; the slider moves on when it is full. */
+.mt-bs-stage[data-autoplay="true"]:not(.is-static) .mt-bs-dot[aria-current="true"] i::after { animation: mt-bs-progress var(--bs-interval, 6s) linear both; }
+.mt-bs-stage.is-paused .mt-bs-dot[aria-current="true"] i::after { animation-play-state: paused; }
+@keyframes mt-bs-progress { from { transform: scaleX(0); } to { transform: none; } }
+.mt-bs-stage[data-tone="light"] .mt-bs-controls { background: rgba(8, 26, 42, .48); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14); }
+.mt-bs-stage[data-tone="light"] :is(.mt-bs-arrow, .mt-bs-pause) { color: var(--mt-on-dark); }
+.mt-bs-stage[data-tone="light"] .mt-bs-dot i { background: rgba(255, 255, 255, .4); }
+.mt-bs-stage[data-tone="light"] .mt-bs-dot i::after { background: var(--mt-mint); }
+@media (hover: hover) {
+  .mt .mt-bs-arrow:hover, .mt .mt-bs-pause:hover { background: var(--mt-ink); color: var(--mt-on-dark); }
+  .mt-bs-stage[data-tone="light"] :is(.mt-bs-arrow, .mt-bs-pause):hover { background: var(--mt-on-dark); color: var(--mt-ink); }
+}
+
+/* ---------- Trust strip ---------- */
+.mt-bs-trust { position: relative; border-bottom: 1px solid var(--mt-line); }
+.mt-bs--boxed .mt-bs-trust { border-bottom: 0; }
+.mt-bs-trust-clip { overflow: hidden; }
+.mt-bs-trust-track { display: flex; justify-content: center; }
+.mt-bs-trust-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 44px; max-width: var(--mt-wrap); padding: 17px var(--mt-gutter); }
+.mt-bs-trust-row li { display: inline-flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 700; line-height: 1.3; color: var(--mt-ink); white-space: nowrap; }
+.mt-bs-trust-row .mt-i { width: 20px; height: 20px; color: var(--mt-teal); }
+.mt-bs-trust.mt-bg-navy { border-bottom: 0; }
+.mt-bs-trust.mt-bg-navy li { color: var(--mt-on-dark); }
+.mt-bs-trust.mt-bg-navy .mt-i { color: var(--mt-mint); }
+.mt-bs-trust-row--clone { display: none; }
+
+/* Between phone and wide desktop the text can run over the built-in art: shade it. */
+@media (min-width: 750px) and (max-width: 1199px) {
+  .mt-bs-slide--art::after { opacity: max(var(--bs-scrim, 0), .92); }
+}
+@media (max-width: 989px) {
+  .mt-bs-copy { max-width: min(520px, 54%); gap: 16px; }
+  .mt .mt-bs-btns .mt-btn { min-height: 52px; padding-inline: 20px; font-size: 15.5px; }
+  /* The trust strip becomes a slow marquee: two copies of the list slide left by one copy's width. */
+  .mt-bs-trust-track { justify-content: flex-start; width: max-content; animation: mt-bs-marquee 28s linear infinite; }
+  .mt-bs-trust-row { flex-wrap: nowrap; justify-content: flex-start; max-width: none; gap: 34px; padding: 15px 34px 15px 0; }
+  /* Soft edges where the strip enters and leaves the container. */
+  .mt-bs-trust-clip { -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+  .mt-bs-trust-row--clone { display: flex; }
+  .mt-bs-trust:hover .mt-bs-trust-track { animation-play-state: paused; }
+  .mt-bs-trust-row li { font-size: 14px; }
+}
+@keyframes mt-bs-marquee { to { transform: translateX(-50%); } }
+
+@media (max-width: 749px) {
+  .mt-bs-stage::before { height: calc(100vw / var(--bs-ratio-m)); height: calc(100cqw / var(--bs-ratio-m)); }
+  .mt-bs-slide--art .mt-bs-img { object-position: center bottom; }
+  .mt-bs-slide::after { background: linear-gradient(180deg, rgba(255, 255, 255, .95) 0%, rgba(255, 255, 255, .75) 40%, rgba(255, 255, 255, 0) 68%); }
+  .mt-bs-tone-light::after { background: linear-gradient(180deg, rgba(var(--mt-navy-rgb), .9) 0%, rgba(var(--mt-navy-rgb), .6) 42%, rgba(var(--mt-navy-rgb), 0) 70%); }
+  .mt-bs-align-right::after { transform: none; }
+  .mt-bs-content { align-items: flex-start; padding-block: 22px 28px; }
+  .mt-bs--boxed .mt-bs-stage { --bs-pad: 18px; --bs-r: 20px; }
+  .mt-bs--boxed .mt-bs-copy { max-width: 100%; }
+  .mt.mt-bs--boxed .mt-bs-h { font-size: clamp(27px, 7.6cqw, 36px); }
+  .mt-bs-align-center .mt-bs-content, .mt-bs-align-right .mt-bs-content { justify-content: flex-start; text-align: left; }
+  .mt-bs-copy, .mt-bs-align-center .mt-bs-copy { max-width: 100%; gap: 14px; justify-items: start; }
+  .mt-bs-pill { font-size: 13px; padding-right: 13px; }
+  .mt-bs-pill-dot { width: 24px; height: 24px; }
+  .mt .mt-bs-h { font-size: clamp(28px, 7.4vw, 38px); line-height: 1.08; }
+  .mt-bs-text { font-size: 15.5px; }
+  .mt-bs-text--desk { display: none; }
+  .mt-bs-btns { display: grid; gap: 8px; width: 100%; margin-top: 2px; }
+  .mt .mt-bs-btns .mt-btn-primary, .mt.mt-bs--boxed .mt-bs-btns .mt-btn-primary { width: 100%; min-height: 50px; font-size: 16px; }
+  /* The second button reads as a link on phones, to keep the picture in view. */
+  .mt .mt-bs-btns .mt-bs-btn2, .mt.mt-bs--boxed .mt-bs-btns .mt-bs-btn2 { justify-self: start; min-height: 0; padding: 6px 2px; background: none; box-shadow: none; font-size: 15px; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+  .mt .mt-bs-tone-light .mt-bs-btns .mt-bs-btn2 { box-shadow: none; }
+  .mt-bs-btn2 .mt-i { width: 17px; height: 17px; }
+  .mt-bs-arrow { display: none !important; }
+  /* Phones: the controls sit in their own row under the picture, so they never cover the art. */
+  .mt-bs-controls, .mt-bs--boxed .mt-bs-controls { position: relative; left: auto; bottom: auto; grid-area: 2 / 1; justify-self: center; margin: 4px 0 2px; padding: 0; background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .mt-bs-stage[data-tone="light"] .mt-bs-controls { background: none; box-shadow: none; }
+  .mt-bs-stage[data-tone="light"] .mt-bs-pause { color: var(--mt-ink); }
+  .mt-bs-stage[data-tone="light"] .mt-bs-dot i { background: rgba(12, 42, 61, .28); }
+  .mt-bs-stage[data-tone="light"] .mt-bs-dot i::after { background: var(--mt-teal); }
+  .mt .mt-bs-pause { width: 34px; height: 34px; }
+  .mt .mt-bs-dot { height: 34px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mt-bs-trust-clip { overflow-x: auto; }
+  .mt-bs-trust-row--clone { display: none !important; }
+}

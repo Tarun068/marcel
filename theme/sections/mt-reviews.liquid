@@ -71,7 +71,7 @@
                   </span>
                   <span>
                     <b>{{ block.settings.name | escape }}</b>
-                    {%- capture meta -%}{{ block.settings.place | escape }}{% if block.settings.place != blank and block.settings.context != blank %} · {% endif %}{{ block.settings.context | escape }}{%- endcapture -%}
+                    {%- capture meta -%}{{ block.settings.place | escape }}{% if block.settings.place != blank and block.settings.context != blank %}, {% endif %}{{ block.settings.context | escape }}{%- endcapture -%}
                     {%- if meta != blank -%}<small>{{ meta }}</small>{%- endif -%}
                     {%- if block.settings.source != blank -%}<small>{{ block.settings.source | escape }}</small>{%- endif -%}
                   </span>
