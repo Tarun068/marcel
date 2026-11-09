@@ -17,7 +17,7 @@
 .mt-role i { width: 24px; height: 24px; border-radius: 99px; background: var(--pc); color: var(--mt-on-dark); display: grid; place-items: center; font-style: normal; font-size: 12px; letter-spacing: 0; }
 .mt-role .mt-i { width: 13px; height: 13px; stroke-width: 2.4; }
 .mt-pbody { display: flex; flex-direction: column; gap: 12px; flex: 1; padding: 20px 22px 22px; }
-.mt .mt-pbody h3 { font-size: 21px; line-height: 1.2; letter-spacing: -.015em; }
+.mt .mt-pbody h3 { font-size: var(--mt-fs-sub); line-height: 1.2; letter-spacing: -.015em; }
 .mt-pbody h3 a:hover { color: var(--mt-teal); }
 .mt-pmeta { margin-top: -6px; font-size: 14px; font-weight: 600; color: var(--mt-ink-3); }
 .mt-best { display: inline-flex; align-items: center; gap: 7px; width: fit-content; padding: 5px 11px; border-radius: 99px; background: var(--mt-mist); font-size: 13px; font-weight: 700; color: var(--mt-ink); }
@@ -31,7 +31,7 @@
 .mt-product-form { display: block; }
 
 .mt-kit-banner { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: clamp(18px, 3vw, 36px); align-items: center; margin-top: 18px; padding: clamp(20px, 3vw, 30px); border-radius: var(--mt-r-xl); background: var(--mt-navy); color: var(--mt-navy-ink); }
-.mt .mt-kit-banner h3 { color: var(--mt-on-dark); font-size: clamp(22px, 19px + .8vw, 30px); line-height: 1.1; letter-spacing: -.02em; }
+.mt .mt-kit-banner h3 { color: var(--mt-on-dark); font-size: var(--mt-fs-sub); line-height: 1.1; letter-spacing: -.02em; }
 .mt-kit-thumbs { display: flex; }
 .mt-kit-thumbs .mt-pack { position: relative; inset: auto; width: 88px; height: 88px; border-radius: 16px; overflow: hidden; box-shadow: 0 0 0 3px var(--mt-navy); }
 .mt-kit-thumbs .mt-pack + .mt-pack { margin-left: -16px; }
@@ -48,7 +48,7 @@
 mt-filter { display: block; }
 .mt-filter-item { display: grid; }
 .mt-promo-card { display: flex; flex-direction: column; justify-content: space-between; gap: 20px; min-height: 100%; padding: 26px; border-radius: var(--mt-r-lg); background: var(--mt-navy); color: var(--mt-navy-ink); }
-.mt .mt-promo-card h3 { color: var(--mt-on-dark); font-size: 26px; line-height: 1.15; letter-spacing: -.02em; }
+.mt .mt-promo-card h3 { color: var(--mt-on-dark); font-size: var(--mt-fs-sub); line-height: 1.15; letter-spacing: -.02em; }
 .mt-promo-card .mt-btn { align-self: flex-start; }
 .mt-pagination { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 32px; }
 @media (max-width: 620px) {

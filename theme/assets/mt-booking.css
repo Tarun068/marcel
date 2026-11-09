@@ -10,7 +10,7 @@ mt-booking { display: grid; }
 }
 .mt-book-main { display: grid; gap: 24px; min-width: 0; padding: clamp(20px, 3.5vw, 34px); border-radius: var(--mt-r-xl); background: var(--mt-paper); border: 1px solid var(--mt-line); }
 .mt-book-step { display: grid; gap: 22px; min-width: 0; }
-.mt .mt-book-h { font-size: clamp(21px, 18px + .6vw, 25px); line-height: 1.2; letter-spacing: -.015em; }
+.mt .mt-book-h { font-size: var(--mt-fs-sub); line-height: 1.2; letter-spacing: -.015em; }
 
 /* Day and slot */
 .mt-book-when { display: grid; gap: 18px; }
@@ -64,7 +64,7 @@ mt-booking { display: grid; }
 
 /* Done */
 .mt-done-box { display: grid; gap: 18px; justify-items: start; }
-.mt-done-box .mt-h2 { font-size: clamp(28px, 22px + 1.5vw, 38px); }
+.mt-done-box .mt-h2 { font-size: var(--mt-fs-h); }
 .mt-done-check { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 99px; background: #2B9759; color: var(--mt-on-dark); }
 .mt-done-check .mt-i { width: 30px; height: 30px; stroke-width: 2.6; }
 .mt-booking-id { font-weight: 800; letter-spacing: .04em; color: var(--mt-ink); font-variant-numeric: tabular-nums; }
@@ -84,9 +84,9 @@ mt-clinics { display: block; }
 .mt-clinic { display: grid; gap: 14px; align-content: start; padding: 20px; border-radius: var(--mt-r-lg); background: var(--mt-paper); border: 1px solid var(--mt-line); }
 .mt-clinic-top { display: flex; gap: 14px; align-items: flex-start; }
 .mt-clinic-top .mt-wico { width: 48px; height: 48px; }
-.mt .mt-clinic h3 { font-size: 18px; line-height: 1.3; }
-.mt-clinic-where { font-size: 15px; font-weight: 600; color: var(--mt-ink-3); }
-.mt-clinic-meta { display: grid; gap: 6px; font-size: 15px; }
+.mt .mt-clinic h3 { font-size: var(--mt-fs-sub); line-height: 1.3; }
+.mt-clinic-where { font-size: var(--mt-fs-body); font-weight: 600; color: var(--mt-ink-3); }
+.mt-clinic-meta { display: grid; gap: 6px; font-size: var(--mt-fs-body); }
 .mt-clinic-meta span { display: flex; gap: 9px; align-items: center; }
 .mt-clinic-meta .mt-i { width: 16px; height: 16px; flex: none; color: var(--mt-ink-3); }
 .mt-clinic-tags { display: flex; flex-wrap: wrap; gap: 6px; }

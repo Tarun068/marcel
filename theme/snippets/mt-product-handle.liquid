@@ -1,0 +1,28 @@
+{%- comment -%}
+  Outputs the handle of the store product a card stands for when no product is picked in the theme editor:
+  the handle in a /products/ link, else the MARCEL product drawn by the pack illustration.
+  Cards then show that product's photos, price and link without choosing the product block by block.
+
+  Accepts:
+  - art: {String} pack illustration: 'ora-care' | 'ora-shield' | 'smile' | 'device' (optional)
+  - url: {String} the card's link (optional)
+
+  Usage:
+  {%- capture handle -%}{% render 'mt-product-handle', art: block.settings.art, url: block.settings.link %}{%- endcapture -%}
+{%- endcomment -%}
+{%- liquid
+  if url contains '/products/'
+    echo url | split: '/products/' | last | split: '?' | first | split: '#' | first | split: '/' | first
+  else
+    case art
+      when 'ora-care'
+        echo 'marcel-ora-care'
+      when 'ora-shield'
+        echo 'marcel-ora-shield'
+      when 'smile'
+        echo 'marcel-smile'
+      when 'device'
+        echo 'marcel-mo-device'
+    endcase
+  endif
+-%}

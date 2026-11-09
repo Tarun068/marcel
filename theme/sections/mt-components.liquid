@@ -15,9 +15,9 @@
   .mt-comp-ico .mt-i { width: 56px; height: 56px; stroke-width: 1.3; }
   .mt-comp-badge { position: absolute; top: 14px; left: 14px; z-index: 2; padding: 5px 11px; border-radius: 99px; background: var(--mt-paper); font-size: 11.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--mt-ink); }
   .mt-comp-body { display: flex; flex-direction: column; gap: 10px; flex: 1; padding: 20px 22px 22px; }
-  .mt .mt-comp h3 { font-size: 20px; line-height: 1.25; letter-spacing: -.01em; }
+  .mt .mt-comp h3 { font-size: var(--mt-fs-sub); line-height: 1.25; letter-spacing: -.01em; }
   .mt-comp-size { font-size: 14px; font-weight: 700; color: var(--mt-ink-3); }
-  .mt-comp p { font-size: 15px; line-height: 1.55; }
+  .mt-comp p { font-size: var(--mt-fs-body); line-height: 1.55; }
   .mt-comp-foot { margin-top: auto; padding-top: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
 {%- endstyle -%}
 
@@ -30,14 +30,22 @@
       {%- for block in items -%}
         {%- liquid
           assign p = block.settings.product
+          if p == blank
+            capture p_handle
+              render 'mt-product-handle', art: block.settings.art, url: block.settings.link
+            endcapture
+            if p_handle != blank
+              assign p = all_products[p_handle]
+            endif
+          endif
           assign title = block.settings.title | default: p.title
+          assign img = block.settings.image | default: p.featured_image
         -%}
         {%- capture href -%}{% if block.settings.link_to == 'product' and p != blank %}{{ p.url }}{% else %}{% render 'mt-link-to', key: block.settings.link_to, url: block.settings.link %}{% endif %}{%- endcapture -%}
         <article class="mt-comp" {{ block.shopify_attributes }}>
-          {%- if p != blank or block.settings.art != 'none' or block.settings.image != blank -%}
+          {%- if img != blank or block.settings.art != 'none' -%}
             <a class="mt-comp-media" href="{{ href }}" tabindex="-1" aria-hidden="true">
               {%- if block.settings.badge != blank -%}<span class="mt-comp-badge">{{ block.settings.badge | escape }}</span>{%- endif -%}
-              {%- assign img = block.settings.image | default: p.featured_image -%}
               {%- render 'mt-pack-media', image: img, art: block.settings.art, alt: '', sizes: '(min-width: 990px) 380px, 92vw', fit: 'contain' -%}
             </a>
           {%- else -%}
@@ -131,7 +139,7 @@
           "type": "product",
           "id": "product",
           "label": "Product",
-          "info": "Optional. Gives the image and the link."
+          "info": "Optional. Gives the image and the link. Empty uses the product in the custom link, or the one the pack illustration shows."
         },
         {
           "type": "image_picker",

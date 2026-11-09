@@ -5,9 +5,9 @@
   assign slides = section.blocks | where: 'type', 'slide'
   assign trust_blocks = section.blocks | where: 'type', 'trust'
 
-  # Banner shape comes from the first banner: its pictures, or the built-in art (2240 x 1040 and 1080 x 1440).
+  # Banner shape comes from the first banner: its pictures, or the built-in art (2880 x 1080 and 1080 x 1440).
   assign first = slides.first
-  assign ratio_d = 2.1538
+  assign ratio_d = 2.6667
   assign ratio_m = 0.75
   if first.settings.image != blank
     assign ratio_d = first.settings.image.aspect_ratio
@@ -30,14 +30,14 @@
     assign heading_tag = 'h1'
   endif
 
-  # Page width: the banner sits in the page container, like every other section. Full: edge to edge.
-  assign boxed = true
-  assign sizes_d = '(min-width: 1200px) 1120px, 94vw'
-  assign sizes_m = 'calc(100vw - 32px)'
-  if section.settings.width == 'full'
-    assign boxed = false
-    assign sizes_d = '100vw'
-    assign sizes_m = '100vw'
+  # Full: edge to edge (the default). Page width: a rounded box in the page container.
+  assign boxed = false
+  assign sizes_d = '100vw'
+  assign sizes_m = '100vw'
+  if section.settings.width == 'page'
+    assign boxed = true
+    assign sizes_d = '(min-width: 1200px) 1120px, 94vw'
+    assign sizes_m = 'calc(100vw - 32px)'
   endif
 -%}
 
@@ -128,11 +128,11 @@
             {%- elsif art != 'none' -%}
               <img
                 class="mt-bs-img"
-                src="{{ 'mt-banner-' | append: art | append: '-d-1120.webp' | asset_url }}"
-                srcset="{{ 'mt-banner-' | append: art | append: '-d-1120.webp' | asset_url }} 1120w, {{ 'mt-banner-' | append: art | append: '-d.webp' | asset_url }} 2240w"
+                src="{{ 'mt-banner-' | append: art | append: '-d-1440.webp' | asset_url }}"
+                srcset="{{ 'mt-banner-' | append: art | append: '-d-1440.webp' | asset_url }} 1440w, {{ 'mt-banner-' | append: art | append: '-d.webp' | asset_url }} 2880w"
                 sizes="{{ sizes_d }}"
-                width="2240"
-                height="1040"
+                width="2880"
+                height="1080"
                 alt="{{ alt }}"
                 loading="{{ loading }}"
                 fetchpriority="{{ priority }}"
@@ -209,12 +209,6 @@
               {%- render 'mt-icon', icon: 'arrow-right' -%}
             </button>
           {%- endif -%}
-          {%- if section.settings.autoplay -%}
-            <button type="button" class="mt-bs-pause" aria-label="{{ section.settings.pause_label | escape }}" data-label-play="{{ section.settings.play_label | escape }}" data-label-pause="{{ section.settings.pause_label | escape }}">
-              <svg class="mt-i mt-bs-i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6v12M15 6v12"/></svg>
-              <svg class="mt-i mt-bs-i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10.5-6.5z"/></svg>
-            </button>
-          {%- endif -%}
         </div>
       {%- endif -%}
     </mt-banner-slider>
@@ -233,7 +227,7 @@
       {%- endfor -%}
     {%- endcapture -%}
     <div class="mt-bs-trust mt-bg-{{ section.settings.trust_background }}">
-      <div class="mt-bs-trust-in{% if boxed %} mt-wrap{% endif %}">
+      <div class="mt-bs-trust-in mt-wrap">
         <div class="mt-bs-trust-clip">
           <div class="mt-bs-trust-track">
             <ul class="mt-bs-trust-row">{{ trust_items }}</ul>
@@ -259,7 +253,7 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "Two or three rotating banners at the top of the page. A banner can carry its own heading and buttons, or be a finished picture with the text already in it. Desktop pictures work best at 2240 × 1040 px and mobile pictures at 1080 × 1440 px."
+      "content": "Two or three rotating banners at the top of the page. A banner can carry its own heading and buttons, or be a finished picture with the text already in it. Desktop pictures work best at 2880 × 1080 px and mobile pictures at 1080 × 1440 px."
     },
     {
       "type": "select",
@@ -275,7 +269,7 @@
           "label": "Full screen width"
         }
       ],
-      "default": "page"
+      "default": "full"
     },
     {
       "type": "checkbox",
@@ -410,18 +404,6 @@
       "id": "dot_label",
       "label": "Dot buttons",
       "default": "Show banner"
-    },
-    {
-      "type": "text",
-      "id": "pause_label",
-      "label": "Pause button",
-      "default": "Pause banners"
-    },
-    {
-      "type": "text",
-      "id": "play_label",
-      "label": "Play button",
-      "default": "Play banners"
     }
   ],
   "blocks": [
@@ -450,7 +432,7 @@
           "type": "image_picker",
           "id": "image",
           "label": "Desktop picture",
-          "info": "2240 × 1040 px. For banners with text on them, keep the left half calm."
+          "info": "2880 × 1080 px. For banners with text on them, keep the left half calm."
         },
         {
           "type": "image_picker",

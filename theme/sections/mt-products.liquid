@@ -24,8 +24,19 @@
     {%- if card_blocks.size > 0 -%}
       <div class="mt-pgrid mt-swipe">
         {%- for block in card_blocks -%}
+          {%- liquid
+            assign card_product = block.settings.product
+            if card_product == blank
+              capture card_handle
+                render 'mt-product-handle', art: block.settings.art
+              endcapture
+              if card_handle != blank
+                assign card_product = all_products[card_handle]
+              endif
+            endif
+          -%}
           {%- render 'mt-product-card',
-            product: block.settings.product,
+            product: card_product,
             block: block,
             section_id: section.id,
             add_label: section.settings.add_label,
@@ -46,7 +57,18 @@
             <span class="mt-pack mt-kit-photo">{{ kit.featured_image | image_url: width: 400 | image_tag: loading: 'lazy', alt: kit.title, sizes: '200px', widths: '200, 300, 400' }}</span>
           {%- else -%}
             {%- for block in card_blocks limit: 3 -%}
-              {%- assign thumb = block.settings.image | default: block.settings.product.featured_image -%}
+              {%- liquid
+                assign thumb_product = block.settings.product
+                if thumb_product == blank
+                  capture thumb_handle
+                    render 'mt-product-handle', art: block.settings.art
+                  endcapture
+                  if thumb_handle != blank
+                    assign thumb_product = all_products[thumb_handle]
+                  endif
+                endif
+                assign thumb = block.settings.image | default: thumb_product.featured_image
+              -%}
               {%- render 'mt-pack-media', image: thumb, art: block.settings.art, alt: '', sizes: '88px', fit: section.settings.image_fit -%}
             {%- endfor -%}
           {%- endif -%}
@@ -277,7 +299,8 @@
         {
           "type": "product",
           "id": "product",
-          "label": "Product"
+          "label": "Product",
+          "info": "Empty uses the MARCEL product that matches the illustration chosen below."
         },
         {
           "type": "text",

@@ -103,8 +103,8 @@
 .mt-mini-card { display: grid; gap: 8px; align-content: start; padding: 20px; border-radius: var(--mt-r); background: var(--mt-paper); border: 1px solid var(--mt-line); }
 .mt-bg-paper .mt-mini-card { background: var(--mt-mist); border-color: transparent; }
 .mt-mini-card > .mt-i { width: 30px; height: 30px; margin-bottom: 4px; color: var(--mt-teal); stroke-width: 1.6; }
-.mt .mt-mini-card h3, .mt-mini-card b { font-size: 16.5px; font-weight: 800; line-height: 1.3; color: var(--mt-ink); }
-.mt-mini-card p { font-size: 14.5px; line-height: 1.5; }
+.mt .mt-mini-card h3, .mt-mini-card b { font-size: var(--mt-fs-sub); font-weight: 800; line-height: 1.3; color: var(--mt-ink); }
+.mt-mini-card p { font-size: var(--mt-fs-body); line-height: 1.5; }
 .mt-mini-card .mt-card-link { margin-top: auto; padding-top: 6px; width: fit-content; font-size: 14.5px; }
 /* Card pictures (Marcel icon cards > Card picture). */
 .mt-card-photo { position: relative; display: grid; place-items: center; width: 88px; height: 88px; margin-bottom: 8px; overflow: hidden; border-radius: 22px; background: var(--mt-tint); color: var(--mt-teal); box-shadow: 0 12px 24px -16px rgba(12, 42, 61, .45); }
@@ -142,7 +142,7 @@
 .mt-art-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .mt-art-media .mt-i { width: 44px; height: 44px; stroke-width: 1.4; }
 .mt-art-card small { padding-inline: 6px; font-size: 13px; font-weight: 700; color: var(--mt-ink-3); }
-.mt .mt-art-card h3 { padding-inline: 6px; font-size: 17.5px; line-height: 1.3; letter-spacing: -.01em; }
+.mt .mt-art-card h3 { padding-inline: 6px; font-size: var(--mt-fs-sub); line-height: 1.3; letter-spacing: -.01em; }
 .mt-art-card:hover h3 { color: var(--mt-teal); }
 
 /* ---------- Small helpers ---------- */
@@ -160,7 +160,7 @@
 .mt-mtext-grid--flip .mt-mtext-media { order: -1; }
 .mt-mtext-copy { display: grid; gap: 18px; align-content: start; min-width: 0; }
 .mt-mtext-copy .mt-sec-head { margin-bottom: 0; }
-.mt-mtext-copy .mt-rte { font-size: 17px; line-height: 1.65; }
+.mt-mtext-copy .mt-rte { font-size: var(--mt-fs-body); line-height: 1.65; }
 .mt-mtext-copy .mt-btn-row { margin-top: 6px; }
 .mt-mtext-media { position: relative; min-width: 0; }
 .mt-mtext-media img { display: block; width: 100%; height: auto; }

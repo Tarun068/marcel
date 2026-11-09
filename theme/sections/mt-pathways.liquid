@@ -9,8 +9,8 @@
   .mt-path--red { --tone: #C23838; }
   .mt-path-head { display: grid; gap: 4px; padding: 20px 24px; background: var(--tone); color: rgba(255, 255, 255, .86); }
   .mt-path-head small { font-size: 12.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: rgba(255, 255, 255, .8); }
-  .mt .mt-path-head h3 { color: var(--mt-on-dark); font-size: clamp(21px, 18px + .7vw, 26px); line-height: 1.15; letter-spacing: -.015em; }
-  .mt-path-head p { font-size: 15px; }
+  .mt .mt-path-head h3 { color: var(--mt-on-dark); font-size: var(--mt-fs-sub); line-height: 1.15; letter-spacing: -.015em; }
+  .mt-path-head p { font-size: var(--mt-fs-body); }
   .mt-path-body { display: flex; flex-direction: column; gap: 16px; flex: 1; padding: 22px 24px 24px; }
   .mt-path-bands { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
   .mt-path-band { display: grid; gap: 2px; padding: 12px 14px; border-radius: var(--mt-r); background: var(--mt-mist); }
@@ -21,7 +21,7 @@
   .mt-path-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: transform .7s cubic-bezier(.2, .7, .2, 1); }
   .mt-path:hover .mt-path-media img { transform: scale(1.05); }
   .mt-path-foot { margin-top: auto; display: grid; gap: 12px; }
-  .mt-path-foot p { font-size: 15px; font-weight: 600; color: var(--mt-ink); }
+  .mt-path-foot p { font-size: var(--mt-fs-body); font-weight: 600; color: var(--mt-ink); }
   .mt .mt-path-foot .mt-btn { width: 100%; }
   .mt .mt-path--red .mt-path-foot .mt-btn-primary { background: #C23838; }
   .mt-paths-note { margin-top: 18px; }
@@ -62,7 +62,7 @@
               </div>
             {%- elsif block.settings.art != blank and block.settings.art != 'none' -%}
               <div class="mt-path-media">
-                <img src="{{ 'mt-kit-' | append: block.settings.art | append: '.webp' | asset_url }}" alt="" width="670" height="356" loading="lazy">
+                <img src="{{ 'mt-kit-' | append: block.settings.art | append: '.webp' | asset_url }}" alt="" width="1120" height="630" loading="lazy">
               </div>
             {%- endif -%}
             {%- if block.settings.points != blank -%}

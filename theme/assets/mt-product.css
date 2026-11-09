@@ -18,9 +18,9 @@ mt-gallery { display: block; }
 .mt-gslide.is-on { opacity: 1; visibility: visible; transition: opacity .3s; }
 .mt-gmain .mt-role { z-index: 3; }
 .mt-info-slide { display: grid; align-content: center; gap: 16px; padding: clamp(24px, 7%, 52px); background: var(--mt-tint); overflow-y: auto; }
-.mt .mt-info-slide h3 { font-size: clamp(22px, 17px + 1.2vw, 32px); line-height: 1.1; letter-spacing: -.02em; }
+.mt .mt-info-slide h3 { font-size: var(--mt-fs-sub); line-height: 1.1; letter-spacing: -.02em; }
 .mt-info-steps { display: grid; gap: 12px; }
-.mt-info-steps li { display: flex; gap: 14px; align-items: flex-start; font-size: clamp(15px, 13.5px + .3vw, 17px); line-height: 1.45; color: var(--mt-ink); }
+.mt-info-steps li { display: flex; gap: 14px; align-items: flex-start; font-size: var(--mt-fs-body); line-height: 1.45; color: var(--mt-ink); }
 .mt-info-steps .mt-num { background: var(--pc); }
 .mt-ing-list { display: grid; gap: 10px; }
 .mt-ing-list li { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 10px; border-bottom: 1px dashed var(--mt-line-2); font-weight: 600; color: var(--mt-ink); }
@@ -38,20 +38,20 @@ mt-gallery { display: block; }
 /* ---------- Info column ---------- */
 .mt-pdp-info { display: grid; gap: 20px; min-width: 0; }
 .mt .mt-pdp-eyebrow { color: var(--pc); }
-.mt .mt-pdp-title { font-size: clamp(32px, 22px + 2.4vw, 48px); line-height: 1.04; letter-spacing: -.03em; }
-.mt-pdp-sub { font-size: 17px; line-height: 1.5; color: var(--mt-ink-2); }
-.mt-pdp-intro { font-size: 16.5px; line-height: 1.65; }
+.mt .mt-pdp-title { font-size: var(--mt-fs-h); line-height: 1.04; letter-spacing: -.03em; }
+.mt-pdp-sub { font-size: var(--mt-fs-body); line-height: 1.5; color: var(--mt-ink-2); }
+.mt-pdp-intro { font-size: var(--mt-fs-body); line-height: 1.65; }
 .mt-pdp-details { font-size: 15px; font-weight: 700; color: var(--mt-ink); }
 .mt-pdp-ctas { gap: 12px 20px; }
 .mt-spec-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.mt-pdp-info .mt-checks li { font-size: 15.5px; color: var(--mt-ink); }
+.mt-pdp-info .mt-checks li { font-size: var(--mt-fs-body); color: var(--mt-ink); }
 
 .mt-kit-includes { display: grid; gap: 8px; }
 .mt-kit-includes .mt-mini-h { margin: 0; }
 .mt-kit-includes a { display: flex; align-items: center; gap: 12px; padding: 8px; border-radius: var(--mt-r); background: var(--mt-paper); border: 1px solid var(--mt-line); transition: border-color .15s; }
 .mt-kit-includes a:hover { border-color: var(--mt-teal); }
 .mt-kit-thumb { position: relative; width: 56px; aspect-ratio: 1 / 1; border-radius: 10px; overflow: hidden; flex: none; }
-.mt-kit-includes b { display: block; font-size: 15px; color: var(--mt-ink); }
+.mt-kit-includes b { display: block; font-size: var(--mt-fs-body); color: var(--mt-ink); }
 .mt-kit-includes small { font-size: 13px; color: var(--mt-ink-3); }
 
 /* ---------- Buy box ---------- */
@@ -91,7 +91,7 @@ mt-variant-select { display: grid; }
 
 /* ---------- Perks + details ---------- */
 .mt-perks { display: grid; gap: 10px; }
-.mt-perks li { display: flex; gap: 12px; align-items: center; font-size: 15px; font-weight: 600; color: var(--mt-ink); }
+.mt-perks li { display: flex; gap: 12px; align-items: center; font-size: var(--mt-fs-body); font-weight: 600; color: var(--mt-ink); }
 .mt-perks .mt-i { width: 20px; height: 20px; flex: none; color: var(--mt-teal); }
 .mt-pdp-info .mt-acc-in { padding-right: 22px; }
 .mt-ing-table { width: 100%; font-size: 15px; border-collapse: collapse; }

@@ -11,15 +11,15 @@
   .mt-bg-paper .mt-phase { background: var(--mt-mist); border-color: transparent; border-top-color: var(--tone, var(--mt-teal)); }
   .mt-phase-when { display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--tone, var(--mt-teal)); }
   .mt-phase-when .mt-i { width: 18px; height: 18px; }
-  .mt .mt-phase h3 { font-size: 21px; line-height: 1.2; letter-spacing: -.015em; }
-  .mt-phase p { font-size: 15px; line-height: 1.55; }
-  .mt-phase .mt-checks li { font-size: 14.5px; }
+  .mt .mt-phase h3 { font-size: var(--mt-fs-sub); line-height: 1.2; letter-spacing: -.015em; }
+  .mt-phase p { font-size: var(--mt-fs-body); line-height: 1.55; }
+  .mt-phase .mt-checks li { font-size: var(--mt-fs-body); }
   /* Optional photo on top of a card (card layout only). */
   .mt-phase-photo { display: block; overflow: hidden; margin: -22px -22px 6px; aspect-ratio: 16 / 10; background: var(--mt-tint); }
   .mt-phase-photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
   .mt-phase:hover .mt-phase-photo img { transform: scale(1.05); }
   .mt-phase--photo { overflow: hidden; }
-  .mt-phase-foot { margin-top: 4px; padding-top: 12px; border-top: 1px solid var(--mt-line); font-size: 14.5px; font-weight: 700; color: var(--mt-ink); }
+  .mt-phase-foot { margin-top: 4px; padding-top: 12px; border-top: 1px solid var(--mt-line); font-size: var(--mt-fs-body); font-weight: 700; color: var(--mt-ink); }
 
   /* Timeline layout: a vertical list with a line, used for the development journey. */
   .mt-phases--timeline { grid-template-columns: minmax(0, 1fr); gap: 0; max-width: 860px; }
@@ -49,8 +49,8 @@
   .mt-bg-paper .mt-phase-ico { background: var(--mt-mist); }
   .mt-phase-ico .mt-i { width: 36px; height: 36px; stroke-width: 1.5; }
   .mt-phases--flow .mt-phase-when { justify-content: center; }
-  .mt .mt-phases--flow .mt-phase h3 { font-size: 18px; }
-  .mt-phases--flow .mt-phase p { font-size: 14.5px; }
+  .mt .mt-phases--flow .mt-phase h3 { font-size: var(--mt-fs-sub); }
+  .mt-phases--flow .mt-phase p { font-size: var(--mt-fs-body); }
   @media (min-width: 1001px) {
     .mt-phases--flow .mt-phase:not(:last-child)::after { content: ""; position: absolute; top: 37px; left: calc(50% + 46px); width: calc(100% + 18px - 92px); border-top: 2px dashed var(--mt-line-2); }
     .mt-phases--flow .mt-phase:not(:last-child)::before { content: ""; position: absolute; top: 33px; left: calc(150% + 18px - 54px); width: 8px; height: 8px; border-top: 2px solid var(--mt-line-2); border-right: 2px solid var(--mt-line-2); transform: rotate(45deg); }

@@ -1,7 +1,7 @@
 /* Marcel banner slider: crossfading banners with autoplay, arrows, dots, swipe and arrow keys.
    Autoplay is driven by the active dot's CSS fill animation: when it ends, the next banner shows.
-   Anything that should stop the clock (pointer over, focus inside, off screen, tab hidden, the pause
-   button, the theme editor) is a "hold"; the clock runs only while there are none. */
+   Anything that should stop the clock (pointer over, focus inside, off screen, tab hidden, the theme
+   editor) is a "hold"; the clock runs only while there are none. */
 if (!customElements.get('mt-banner-slider')) {
   customElements.define(
     'mt-banner-slider',
@@ -24,11 +24,6 @@ if (!customElements.get('mt-banner-slider')) {
           btn.addEventListener('click', () => this.go(this.index + Number(btn.dataset.dir)))
         );
         this.dots.forEach((dot, i) => dot.addEventListener('click', () => this.go(i)));
-        this.pauseBtn = this.querySelector('.mt-bs-pause');
-        if (this.pauseBtn) {
-          if (this.dataset.autoplay !== 'true') this.pauseBtn.hidden = true;
-          this.pauseBtn.addEventListener('click', () => this.setUserPause(!this.holds.has('user')));
-        }
 
         this.addEventListener('animationend', (e) => {
           if (e.animationName === 'mt-bs-progress' && this.dots[this.index]?.contains(e.target)) this.go(this.index + 1);
@@ -110,14 +105,6 @@ if (!customElements.get('mt-banner-slider')) {
         if (on) this.holds.add(reason);
         else this.holds.delete(reason);
         this.classList.toggle('is-paused', this.holds.size > 0);
-      }
-
-      setUserPause(paused) {
-        this.hold('user', paused);
-        this.classList.toggle('is-user-paused', paused);
-        if (this.pauseBtn) {
-          this.pauseBtn.setAttribute('aria-label', paused ? this.pauseBtn.dataset.labelPlay : this.pauseBtn.dataset.labelPause);
-        }
       }
     }
   );

@@ -10,11 +10,11 @@
   .mt-ev-meta div { display: grid; gap: 2px; padding: 14px 18px; border-top: 1px solid var(--mt-line); }
   .mt-ev-meta div:first-child { border-top: 0; }
   .mt-ev-meta small { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--mt-ink-3); }
-  .mt-ev-meta b { font-size: 15px; color: var(--mt-ink); }
+  .mt-ev-meta b { font-size: var(--mt-fs-body); color: var(--mt-ink); }
   .mt-ev-hero { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 28px; align-items: center; padding: clamp(22px, 3.5vw, 34px); border-radius: var(--mt-r-xl); background: var(--mt-navy); color: var(--mt-navy-ink); }
   .mt-ev-hero b { font-size: clamp(44px, 30px + 3vw, 72px); font-weight: 800; line-height: 1; letter-spacing: -.035em; color: var(--mt-on-dark); font-variant-numeric: tabular-nums; }
   .mt-ev-hero b small { font-size: .42em; letter-spacing: -.01em; color: var(--mt-mint); }
-  .mt .mt-ev-hero h3 { color: var(--mt-on-dark); font-size: clamp(20px, 17px + .7vw, 26px); line-height: 1.2; }
+  .mt .mt-ev-hero h3 { color: var(--mt-on-dark); font-size: var(--mt-fs-sub); line-height: 1.2; }
   @media (max-width: 620px) {
     .mt-ev-hero { grid-template-columns: minmax(0, 1fr); }
   }
@@ -24,8 +24,8 @@
   }
   .mt-ev-group { display: grid; gap: 14px; align-content: start; padding: 22px; border-radius: var(--mt-r-xl); background: var(--mt-paper); border: 1px solid var(--mt-line); }
   .mt-bg-paper .mt-ev-group { background: var(--mt-mist); border-color: transparent; }
-  .mt .mt-ev-group h3 { font-size: 19px; line-height: 1.25; }
-  .mt-ev-group > p { margin-top: -8px; font-size: 14.5px; color: var(--mt-ink-3); }
+  .mt .mt-ev-group h3 { font-size: var(--mt-fs-sub); line-height: 1.25; }
+  .mt-ev-group > p { margin-top: -8px; font-size: var(--mt-fs-body); color: var(--mt-ink-3); }
   .mt-ev-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
   .mt-ev-stat { display: grid; gap: 4px; padding: 14px; border-radius: var(--mt-r); background: var(--mt-mist); }
   .mt-bg-paper .mt-ev-stat { background: var(--mt-paper); }

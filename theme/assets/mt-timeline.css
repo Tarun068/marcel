@@ -26,8 +26,8 @@ mt-timeline { display: block; }
 
 /* Big serif dates: faint ahead, full colour once reached. */
 .mt-tl-date { min-width: 0; transition: opacity .8s ease .12s; }
-.mt-tl-year { display: inline-block; font-family: var(--mt-serif); font-optical-sizing: auto; font-size: clamp(30px, 12px + 2.5vw, 56px); font-weight: 600; line-height: 1.04; letter-spacing: -.022em; color: var(--tone, var(--mt-teal)); opacity: .3; transform: translateY(6px); transition: opacity .55s, transform .7s cubic-bezier(.2, .7, .2, 1); }
-.mt-tl-date--long .mt-tl-year { max-width: 18ch; font-size: clamp(20px, 14px + .9vw, 28px); line-height: 1.2; letter-spacing: -.01em; }
+.mt-tl-year { display: inline-block; font-family: var(--mt-serif); font-optical-sizing: auto; font-size: var(--mt-fs-h); font-weight: 600; line-height: 1.04; letter-spacing: -.022em; color: var(--tone, var(--mt-teal)); opacity: .3; transform: translateY(6px); transition: opacity .55s, transform .7s cubic-bezier(.2, .7, .2, 1); }
+.mt-tl-date--long .mt-tl-year { max-width: 18ch; font-size: var(--mt-fs-sub); line-height: 1.2; letter-spacing: -.01em; }
 .mt-tl-item.is-past .mt-tl-year { opacity: .72; transform: none; }
 .mt-tl-item.is-active .mt-tl-year { opacity: 1; transform: none; }
 
@@ -37,9 +37,9 @@ mt-timeline { display: block; }
 .mt-tl-photo { display: block; aspect-ratio: 2 / 1; overflow: hidden; background: var(--mt-tint); }
 .mt-tl-photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 1.1s cubic-bezier(.2, .7, .2, 1); }
 .mt-tl-body { display: grid; gap: 10px; align-content: start; padding: clamp(18px, 2.2vw, 28px); }
-.mt .mt-tl-body h3 { font-size: 21px; line-height: 1.25; letter-spacing: -.012em; }
-.mt-tl-body p { font-size: 15.5px; line-height: 1.6; }
-.mt-tl-body .mt-phase-foot { margin-top: 4px; padding-top: 12px; border-top: 1px solid var(--mt-line); font-size: 14.5px; font-weight: 700; color: var(--mt-ink); }
+.mt .mt-tl-body h3 { font-size: var(--mt-fs-sub); line-height: 1.25; letter-spacing: -.012em; }
+.mt-tl-body p { font-size: var(--mt-fs-body); line-height: 1.6; }
+.mt-tl-body .mt-phase-foot { margin-top: 4px; padding-top: 12px; border-top: 1px solid var(--mt-line); font-size: var(--mt-fs-body); font-weight: 700; color: var(--mt-ink); }
 .mt-tl-item.is-active .mt-tl-card { border-color: rgba(var(--mt-teal-rgb), .35); box-shadow: 0 1px 2px rgba(12, 42, 61, .05), 0 32px 56px -30px rgba(12, 42, 61, .5); transform: translateY(-4px); }
 .mt-tl-item.is-active .mt-tl-photo img { transform: scale(1.04); }
 @media (hover: hover) {
@@ -73,10 +73,10 @@ mt-timeline { display: block; }
   .mt-tl-item .mt-tl-date { grid-column: 2; grid-row: 1; align-self: center; text-align: left; }
   .mt-tl-item .mt-tl-card { grid-column: 2; grid-row: 2; }
   .mt-tl-node .mt-i { width: 20px; height: 20px; }
-  .mt-tl-year { font-size: 27px; }
-  .mt-tl-date--long .mt-tl-year { font-size: 18px; }
-  .mt .mt-tl-body h3 { font-size: 19px; }
-  .mt-tl-body p { font-size: 15px; }
+  .mt-tl-year { font-size: var(--mt-fs-h); }
+  .mt-tl-date--long .mt-tl-year { font-size: var(--mt-fs-sub); }
+  .mt .mt-tl-body h3 { font-size: var(--mt-fs-sub); }
+  .mt-tl-body p { font-size: var(--mt-fs-body); }
   .mt-tl.is-ready .mt-tl-item:not(.is-in) .mt-tl-card,
   .mt-tl.is-ready .mt-tl-item--right:not(.is-in) .mt-tl-card { transform: translateY(26px); }
 }

@@ -3,8 +3,8 @@
   .mt-steps::before { content: ""; position: absolute; top: 20px; left: 20px; right: calc(100% / var(--mt-cols, 4) - 20px); height: 2px; background: var(--mt-line-2); }
   .mt-step { position: relative; display: grid; gap: 10px; align-content: start; }
   .mt-step .mt-num { position: relative; margin-bottom: 8px; box-shadow: 0 0 0 6px var(--mt-section-bg, var(--mt-paper)); }
-  .mt .mt-step h3 { font-size: 19px; line-height: 1.25; letter-spacing: -.01em; }
-  .mt-step p { font-size: 15px; line-height: 1.55; }
+  .mt .mt-step h3 { font-size: var(--mt-fs-sub); line-height: 1.25; letter-spacing: -.01em; }
+  .mt-step p { font-size: var(--mt-fs-body); line-height: 1.55; }
   @media (max-width: 900px) {
     .mt-steps { grid-template-columns: minmax(0, 1fr); gap: 0; max-width: 560px; }
     .mt-steps::before { display: none; }
@@ -18,8 +18,8 @@
   .mt-steps--journey .mt-step { grid-template-columns: 48px minmax(0, 1fr); column-gap: 20px; row-gap: 6px; padding-bottom: 30px; }
   .mt-steps--journey .mt-step:not(:last-child)::after { content: ""; position: absolute; left: 23px; top: 56px; bottom: 6px; width: 2px; background: var(--mt-line-2); }
   .mt-steps--journey .mt-num { grid-row: span 2; width: 48px; height: 48px; margin-bottom: 0; font-size: 18px; }
-  .mt .mt-steps--journey .mt-step h3 { margin-top: 10px; font-size: 21px; }
-  .mt-steps--journey .mt-step p { max-width: 60ch; font-size: 16px; }
+  .mt .mt-steps--journey .mt-step h3 { margin-top: 10px; font-size: var(--mt-fs-sub); }
+  .mt-steps--journey .mt-step p { max-width: 60ch; font-size: var(--mt-fs-body); }
   .mt-steps-sec .mt-steps + .mt-btn-row { margin-top: 12px; }
 {%- endstyle -%}
 

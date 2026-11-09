@@ -5,7 +5,7 @@
   }
   .mt-consult-copy { display: grid; gap: 22px; min-width: 0; }
   .mt-consult-copy .mt-sec-head { margin-bottom: 0; }
-  .mt.mt-consult--serif .mt-sec-head .mt-h2 { font-family: var(--mt-serif); font-weight: 600; font-size: clamp(32px, 22px + 2.4vw, 54px); line-height: 1.08; letter-spacing: -.02em; }
+  .mt.mt-consult--serif .mt-sec-head .mt-h2 { font-family: var(--mt-serif); font-weight: 600; font-size: var(--mt-fs-h); line-height: 1.08; letter-spacing: -.02em; }
 
   .mt-routes { display: grid; gap: 12px; }
   .mt .mt-route-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: 16px; padding: 18px 20px; border-radius: 22px; background: rgba(255, 255, 255, .05); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); color: var(--mt-navy-ink); text-decoration: none; transition: background .15s, box-shadow .15s; }
@@ -13,8 +13,8 @@
   .mt .mt-route-row:focus-visible { outline: 2px solid var(--mt-mint); outline-offset: 2px; }
   .mt-route-ico { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 16px; background: rgba(14, 140, 150, .28); color: var(--mt-mint); }
   .mt-route-ico .mt-i { width: 24px; height: 24px; }
-  .mt-route-row b { display: block; font-size: 18px; font-weight: 800; line-height: 1.3; color: var(--mt-on-dark); }
-  .mt-route-row small { display: block; margin-top: 2px; font-size: 15px; line-height: 1.4; color: var(--mt-navy-ink); }
+  .mt-route-row b { display: block; font-size: var(--mt-fs-sub); font-weight: 800; line-height: 1.3; color: var(--mt-on-dark); }
+  .mt-route-row small { display: block; margin-top: 2px; font-size: var(--mt-fs-body); line-height: 1.4; color: var(--mt-navy-ink); }
   .mt-route-badge { padding: 5px 12px; border-radius: 99px; background: #E3F6EA; color: var(--mt-wa-ink); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
   .mt-route-row > .mt-i { width: 20px; height: 20px; color: var(--mt-mint); transition: transform .15s; }
   .mt-route-row:hover > .mt-i { transform: translateX(3px); }
@@ -22,8 +22,8 @@
   @media (max-width: 560px) {
     .mt .mt-route-row { grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; padding: 14px; }
     .mt-route-ico { width: 46px; height: 46px; border-radius: 14px; }
-    .mt-route-row b { font-size: 16px; }
-    .mt-route-row small { font-size: 14px; }
+    .mt-route-row b { font-size: var(--mt-fs-sub); }
+    .mt-route-row small { font-size: var(--mt-fs-body); }
     .mt-route-badge { grid-column: 2; grid-row: 2; justify-self: start; }
     .mt-route-row > .mt-i { grid-column: 3; grid-row: 1 / span 2; }
   }
@@ -33,8 +33,8 @@
   .mt-slot-head { display: flex; align-items: center; gap: 14px; }
   .mt-slot-hex { display: grid; place-items: center; width: 56px; height: 64px; flex: none; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); background: linear-gradient(160deg, var(--mt-teal), #1C5C86); color: #FFFFFF; }
   .mt-slot-hex .mt-i { width: 24px; height: 24px; }
-  .mt-slot-head b { display: block; font-size: 18px; font-weight: 800; color: var(--mt-ink); }
-  .mt-slot-head small { display: block; margin-top: 2px; font-size: 15px; color: var(--mt-ink-3); }
+  .mt-slot-head b { display: block; font-size: var(--mt-fs-sub); font-weight: 800; color: var(--mt-ink); }
+  .mt-slot-head small { display: block; margin-top: 2px; font-size: var(--mt-fs-body); color: var(--mt-ink-3); }
   .mt-slot-days { display: grid; gap: 16px; }
   .mt-slot-day p { margin-bottom: 10px; font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--mt-ink-3); }
   .mt-slot-times { display: flex; flex-wrap: wrap; gap: 10px; }
