@@ -3,6 +3,7 @@
 
   Accepts:
   - product: {Object} product (optional on the home page, where block content can stand in)
+  - variant: {Object} one size or variant of the product: its picture, price, link and Add to cart (optional)
   - block: {Object} section block whose settings override the metafields (optional)
   - section_id: {String} section id
   - add_label: {String} add to cart label
@@ -51,15 +52,18 @@
   if best == blank
     assign best = d[3]
   endif
-  assign image = block.settings.image | default: product.featured_image
+  assign image = block.settings.image | default: variant.featured_image | default: product.featured_image
   assign art = block.settings.art | default: handle_art | default: 'none'
   assign url = product.url | default: fallback_url | default: routes.all_products_collection_url
+  if variant != blank
+    assign url = variant.url
+  endif
   assign add = add_label | default: 'Add to cart'
   assign form_id = 'MtProductForm-' | append: section_id | append: '-' | append: product.id | append: block.id
 -%}
 <article class="mt-pcard" style="--pc: {{ color }};" {{ block.shopify_attributes }}>
   <a class="mt-pmedia" href="{{ url }}" aria-label="{{ title | escape }}">
-    {%- if role != blank -%}
+    {%- if role != blank and badge != 'hide' -%}
       <span class="mt-role{% if badge == 'none' or badge == 'step' and step == blank %} mt-role--plain{% endif %}">
         {%- unless badge == 'none' or badge == 'step' and step == blank -%}
           <i>
@@ -107,7 +111,7 @@
       <a class="mt-link mt-pdetails" href="{{ url }}">{{ details_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>
     {%- endif -%}
     <div class="mt-pfoot">
-      {%- render 'mt-price', product: product -%}
+      {%- render 'mt-price', product: product, variant: variant -%}
       {%- if settings.mt_hide_prices and settings.mt_whatsapp_number != blank -%}
         {%- assign enquiry = settings.mt_enquire_message | default: 'Hi MARCEL team, I would like to know more about' | append: ' ' | append: title -%}
         {%- capture wa -%}{% render 'mt-wa-url', message: enquiry %}{%- endcapture -%}
@@ -115,6 +119,7 @@
       {%- else -%}
       {%- render 'mt-buy-button',
         product: product,
+        variant: variant,
         form_id: form_id,
         section_id: section_id,
         label: add,

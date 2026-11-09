@@ -4,6 +4,7 @@
 
   Accepts:
   - product: {Object} product to add (optional)
+  - variant: {Object} variant to add (optional, defaults to the selected or first available one)
   - form_id: {String} unique form id
   - section_id: {String} section id
   - label: {String} button label
@@ -15,7 +16,7 @@
   {% render 'mt-buy-button', product: product, form_id: 'MtForm-1', section_id: section.id, label: 'Add to cart', class: 'mt-btn mt-btn-primary mt-btn-sm' %}
 {%- endcomment -%}
 {%- if product != blank -%}
-  {%- assign variant = product.selected_or_first_available_variant -%}
+  {%- assign variant = variant | default: product.selected_or_first_available_variant -%}
   <product-form class="mt-product-form" data-section-id="{{ section_id }}" data-hide-errors="true">
     {%- form 'product', product, id: form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
       <input type="hidden" name="id" value="{{ variant.id }}" disabled>

@@ -320,6 +320,20 @@
         "overlap": true
       }
     },
+    "symptom_banner": {
+      "type": "mt-picture-banner",
+      "settings": {
+        "art": "symptoms-hi",
+        "alt": "MARCEL OMR Therapy. क्या मुँह खोलने में परेशानी हो रही है? मुँह में जलन, गालों में खिंचाव, मुँह में जकड़न। ये OSMF के लक्षण हो सकते हैं। OSMF की अवस्था के अनुसार देखभाल। अपने लक्षण पहचानें। सही जाँच कराएं।",
+        "lang": "hi",
+        "link_to": "test",
+        "link": "",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight",
+        "join_next": true
+      }
+    },
     "symptoms": {
       "type": "mt-symptoms",
       "blocks": {
@@ -1178,13 +1192,49 @@
     "products": {
       "type": "mt-products",
       "blocks": {
+        "kit_foundation": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "title": "MARCEL OMR Therapy™ Foundation Kit",
+            "meta": "Oral spray and toothpaste kit",
+            "badge": "none",
+            "step": "1",
+            "role": "Stage 1 or 2",
+            "color": "#168c83",
+            "benefits": "MARCEL Ora-Care™ Oral Spray\nMARCEL Smile™ Toothpaste\nUse as advised by a healthcare professional",
+            "best": "Foundation pathway",
+            "art": "kit-foundation",
+            "link_to": "foundation",
+            "link": "",
+            "link_label": "View kit"
+          }
+        },
+        "kit_advance": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "title": "MARCEL OMR Therapy™ Advance Kit",
+            "meta": "Oral rinse and toothpaste kit",
+            "badge": "none",
+            "step": "1",
+            "role": "Stage 3 or 4",
+            "color": "#5a5cbe",
+            "benefits": "MARCEL Ora-Shield™ Oral Rinse\nMARCEL Smile™ Toothpaste\nUse as advised by a healthcare professional",
+            "best": "Advance pathway",
+            "art": "kit-advance",
+            "link_to": "advance",
+            "link": "",
+            "link_label": "View kit"
+          }
+        },
         "product_1": {
           "type": "product",
           "settings": {
             "product": "",
             "title": "MARCEL Ora-Care™ Oral Spray",
             "meta": "Metered oral spray, 50 mL",
-            "badge": "none",
+            "badge": "hide",
             "step": "1",
             "role": "Foundation",
             "color": "#168c83",
@@ -1199,7 +1249,7 @@
             "product": "",
             "title": "MARCEL Ora-Shield™ Oral Rinse",
             "meta": "Therapeutic oral rinse, 10 mL",
-            "badge": "none",
+            "badge": "hide",
             "step": "1",
             "role": "Advance",
             "color": "#5a5cbe",
@@ -1212,8 +1262,25 @@
           "type": "product",
           "settings": {
             "product": "",
-            "title": "MARCEL Smile™ Toothpaste",
-            "meta": "Toothpaste in 30 g and 100 g packs",
+            "variant": "30g",
+            "title": "MARCEL Smile™ Toothpaste 30 g",
+            "meta": "Toothpaste, 30 g pack",
+            "badge": "none",
+            "step": "1",
+            "role": "Daily oral care",
+            "color": "#2265c4",
+            "benefits": "Premium herbal complex\nNo SLS, no parabens\nNo artificial sweeteners",
+            "best": "Everyday care",
+            "art": "smile"
+          }
+        },
+        "product_5": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "variant": "100g",
+            "title": "MARCEL Smile™ Toothpaste 100 g",
+            "meta": "Toothpaste, 100 g pack",
             "badge": "none",
             "step": "1",
             "role": "Daily oral care",
@@ -1240,9 +1307,12 @@
         }
       },
       "block_order": [
+        "kit_foundation",
+        "kit_advance",
         "product_1",
         "product_2",
         "product_3",
+        "product_5",
         "product_4"
       ],
       "settings": {
@@ -1690,6 +1760,7 @@
     "banner",
     "hero",
     "stats",
+    "symptom_banner",
     "symptoms",
     "causes",
     "inside",

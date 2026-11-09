@@ -1,0 +1,289 @@
+{%- comment -%}
+  Marcel picture banner: a finished picture (its text is in the picture) shown whole, at its own shape,
+  inside the page container. The picture can link anywhere, including #specialist-search on the same page.
+{%- endcomment -%}
+{%- style -%}
+  .mt-pbanner--join { padding-bottom: 0; }
+  .mt-pbanner-pic { display: block; overflow: hidden; border-radius: var(--mt-r-xl); background: var(--mt-mist); box-shadow: 0 26px 52px -36px rgba(12, 42, 61, .5); }
+  .mt-pbanner-pic img { display: block; width: 100%; height: auto; }
+  a.mt-pbanner-pic { transition: transform .25s ease, box-shadow .25s ease; }
+  a.mt-pbanner-pic:hover { transform: translateY(-3px); box-shadow: 0 32px 60px -34px rgba(12, 42, 61, .55); }
+  a.mt-pbanner-pic:focus-visible { outline: 3px solid var(--mt-teal); outline-offset: 4px; }
+  @media (max-width: 749px) {
+    .mt-pbanner-pic { border-radius: var(--mt-r); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    a.mt-pbanner-pic, a.mt-pbanner-pic:hover { transition: none; transform: none; }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign img = section.settings.image
+  assign mob = section.settings.mobile_image
+  assign art = section.settings.art | default: 'none'
+  if img != blank
+    assign art = 'none'
+  endif
+  assign art_w = 1600
+  assign art_h = 900
+  if art == 'symptoms-hi'
+    assign art_h = 902
+  endif
+  assign alt = section.settings.alt | default: img.alt
+  assign loading = 'lazy'
+  if section.index and section.index <= 2
+    assign loading = 'eager'
+  endif
+  assign sizes = '(min-width: 1200px) 1120px, calc(100vw - 32px)'
+  assign link_to = section.settings.link_to | default: 'none'
+-%}
+{%- capture link -%}{% render 'mt-link-to', key: link_to, url: section.settings.link %}{%- endcapture -%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-pbanner' %}{% if section.settings.join_next %} mt-pbanner--join{% endif %}">
+  <div class="mt-wrap">
+    {%- if img != blank or art != 'none' -%}
+      {%- if link_to != 'none' -%}
+        <a class="mt-pbanner-pic" href="{{ link | strip }}"{% if link_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}{% if section.settings.lang == 'hi' %} lang="hi"{% endif %}>
+      {%- else -%}
+        <div class="mt-pbanner-pic"{% if section.settings.lang == 'hi' %} lang="hi"{% endif %}>
+      {%- endif -%}
+      <picture>
+        {%- if mob != blank -%}
+          <source
+            media="(max-width: 749px)"
+            srcset="{{ mob | image_url: width: 750 }} 750w, {{ mob | image_url: width: 1100 }} 1100w"
+            sizes="calc(100vw - 32px)"
+            width="{{ mob.width }}"
+            height="{{ mob.height }}"
+          >
+        {%- endif -%}
+        {%- if img != blank -%}
+          {{ img | image_url: width: 2240 | image_tag: loading: loading, sizes: sizes, widths: '800, 1100, 1600, 2240', alt: alt }}
+        {%- else -%}
+          <img
+            src="{{ 'mt-pic-' | append: art | append: '-800.webp' | asset_url }}"
+            srcset="{{ 'mt-pic-' | append: art | append: '-800.webp' | asset_url }} 800w, {{ 'mt-pic-' | append: art | append: '.webp' | asset_url }} {{ art_w }}w"
+            sizes="{{ sizes }}"
+            width="{{ art_w }}"
+            height="{{ art_h }}"
+            alt="{{ alt | escape }}"
+            loading="{{ loading }}"
+          >
+        {%- endif -%}
+      </picture>
+      {%- if link_to != 'none' -%}</a>{%- else -%}</div>{%- endif -%}
+    {%- elsif request.design_mode -%}
+      <p class="mt-placeholder">Choose a picture for this banner.</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel picture banner",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Picture"
+    },
+    {
+      "type": "select",
+      "id": "art",
+      "label": "Built-in picture",
+      "info": "Used until a desktop picture is chosen.",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "symptoms-hi",
+          "label": "OSMF symptoms banner in Hindi"
+        },
+        {
+          "value": "specialist",
+          "label": "Consult an OSMF specialist"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop picture",
+      "info": "Shown whole, at its own shape. Finished pictures with their text on them work well."
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile picture",
+      "info": "Optional. A taller version with bigger text reads better on phones, for example 1080 × 1350 px."
+    },
+    {
+      "type": "text",
+      "id": "alt",
+      "label": "Picture description",
+      "info": "Write out the text that is in the picture, for screen readers and search engines."
+    },
+    {
+      "type": "select",
+      "id": "lang",
+      "label": "Language of the picture text",
+      "options": [
+        {
+          "value": "page",
+          "label": "Same as the page"
+        },
+        {
+          "value": "hi",
+          "label": "Hindi"
+        }
+      ],
+      "default": "page"
+    },
+    {
+      "type": "header",
+      "content": "Link"
+    },
+    {
+      "type": "select",
+      "id": "link_to",
+      "label": "Picture opens",
+      "options": [
+        {
+          "value": "none",
+          "label": "Nothing, no link"
+        },
+        {
+          "value": "custom",
+          "label": "Custom link below"
+        },
+        {
+          "value": "test",
+          "label": "MARCEL OSMF Self-Check"
+        },
+        {
+          "value": "therapy",
+          "label": "MARCEL OMR Therapy page"
+        },
+        {
+          "value": "foundation",
+          "label": "Foundation Kit page"
+        },
+        {
+          "value": "advance",
+          "label": "Advance Kit page"
+        },
+        {
+          "value": "journey",
+          "label": "12-Week Care Journey"
+        },
+        {
+          "value": "consult",
+          "label": "MARCEL OSMF Consultant booking"
+        },
+        {
+          "value": "specialists",
+          "label": "Find an OSMF Specialist"
+        },
+        {
+          "value": "help",
+          "label": "Get Help page"
+        },
+        {
+          "value": "evidence",
+          "label": "Clinical evidence page"
+        },
+        {
+          "value": "products",
+          "label": "All products"
+        },
+        {
+          "value": "whatsapp",
+          "label": "WhatsApp chat"
+        }
+      ],
+      "default": "test"
+    },
+    {
+      "type": "text",
+      "id": "link",
+      "label": "Custom link",
+      "info": "A page address, or #specialist-search to jump to the specialist search on the same page."
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "tight"
+    },
+    {
+      "type": "checkbox",
+      "id": "join_next",
+      "label": "No space below the picture",
+      "info": "Lets the picture sit close to the next section.",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel picture banner"
+    }
+  ]
+}
+{% endschema %}

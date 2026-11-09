@@ -11,10 +11,11 @@
 {%- endcomment -%}
 {%- liquid
   assign h = product.handle | downcase
+  # Ora-Care and Ora-Shield carry no badge: Foundation and Advance are the kits, sold as their own products.
   if h contains 'shield'
-    echo 'Advance|#5A5CBE|Therapeutic oral rinse, 10 mL|Advance pathway|Part of ADVANCE MARCEL OMR Therapy™;A concentrate, diluted before use;Used with professional guidance'
+    echo '|#5A5CBE|Therapeutic oral rinse, 10 mL|Advance pathway|Part of ADVANCE MARCEL OMR Therapy™;A concentrate, diluted before use;Used with professional guidance'
   elsif h contains 'ora-care' or h contains 'oracare'
-    echo 'Foundation|#168C83|Metered oral spray, 50 mL|Foundation pathway|Part of Foundation MARCEL OMR Therapy™;May support the management of burning and tightness;A measured amount with every spray'
+    echo '|#168C83|Metered oral spray, 50 mL|Foundation pathway|Part of Foundation MARCEL OMR Therapy™;May support the management of burning and tightness;A measured amount with every spray'
   elsif h contains 'smile'
     echo 'Daily oral care|#2265C4|Toothpaste in 30 g and 100 g packs|Everyday care|Premium herbal complex;No SLS, no parabens;No artificial sweeteners'
   elsif h contains 'mo-device' or h contains 'moflex'

@@ -16,6 +16,19 @@
   if art and first_pre == 's-'
     assign first_art = true
   endif
+
+  # The panel opens on the first symptom: its own photo, else the built-in photo for its icon.
+  assign first_photo = ''
+  if first.settings.image != blank
+    assign first_photo = first.settings.image | image_url: width: 720
+  elsif section.settings.photos
+    capture first_key
+      render 'mt-symptom-photo', icon: first.settings.icon
+    endcapture
+    if first_key != blank
+      assign first_photo = 'mt-symptom-' | append: first_key | append: '-720.webp' | asset_url
+    endif
+  endif
 -%}
 {%- if art -%}{% render 'mt-symptom-art' %}{%- endif -%}
 
@@ -41,19 +54,35 @@
               if art and pre == 's-'
                 assign use_art = true
               endif
+              assign photo_key = ''
+              assign photo = ''
+              if block.settings.image != blank
+                assign photo = block.settings.image | image_url: width: 720
+              elsif section.settings.photos
+                capture photo_key
+                  render 'mt-symptom-photo', icon: block.settings.icon
+                endcapture
+                if photo_key != blank
+                  assign photo = 'mt-symptom-' | append: photo_key | append: '-720.webp' | asset_url
+                endif
+              endif
             -%}
             <button
               type="button"
-              class="mt-sym{% if forloop.first %} is-viewing{% endif %}"
+              class="mt-sym{% if photo != blank %} mt-sym--photo{% endif %}{% if forloop.first %} is-viewing{% endif %}"
               aria-pressed="false"
               data-icon="{{ block.settings.icon }}"
               data-art="{{ use_art }}"
+              data-photo="{{ photo }}"
               data-title="{{ block.settings.title | escape }}"
               data-text="{{ block.settings.text | escape }}"
               {{ block.shopify_attributes }}
             >
               {%- if block.settings.image != blank -%}
                 <span class="mt-sym-img">{{ block.settings.image | image_url: width: 480 | image_tag: loading: 'lazy', widths: '240, 360, 480', sizes: '(min-width: 921px) 200px, 45vw', alt: '' }}</span>
+              {%- elsif photo_key != blank -%}
+                {%- assign photo_small = 'mt-symptom-' | append: photo_key | append: '-480.webp' | asset_url -%}
+                <span class="mt-sym-img"><img src="{{ photo_small }}" srcset="{{ photo_small }} 480w, {{ photo }} 720w" sizes="(min-width: 921px) 200px, 45vw" width="720" height="540" alt="" loading="lazy"></span>
               {%- elsif use_art -%}
                 <span class="mt-sym-art"><svg viewBox="0 0 80 80" aria-hidden="true" focusable="false"><use href="#mt-sx-{{ block.settings.icon }}"/></svg></span>
               {%- else -%}
@@ -83,7 +112,14 @@
         </div>
 
         <aside class="mt-sym-detail" aria-live="polite">
-          <span class="mt-sym-detail-ico{% if first_art %} is-art{% endif %}" data-mt-ico>
+          <span class="mt-sym-detail-photo" data-mt-photo{% if first_photo == blank %} hidden{% endif %}>
+            {%- if first_photo != blank -%}
+              <img src="{{ first_photo }}" width="720" height="540" alt="" loading="lazy">
+            {%- else -%}
+              <img width="720" height="540" alt="" loading="lazy">
+            {%- endif -%}
+          </span>
+          <span class="mt-sym-detail-ico{% if first_art %} is-art{% endif %}" data-mt-ico{% if first_photo != blank %} hidden{% endif %}>
             {%- if first_art -%}
               <svg viewBox="0 0 80 80" aria-hidden="true" focusable="false"><use href="#mt-sx-{{ first.settings.icon }}"/></svg>
             {%- else -%}
@@ -161,6 +197,13 @@
         }
       ],
       "default": "illustrated"
+    },
+    {
+      "type": "checkbox",
+      "id": "photos",
+      "label": "Show the built-in symptom photos",
+      "info": "Photos for mouth opening, burning, tightness, pain, ulcers, white bands and tongue. A photo chosen on a symptom replaces its built-in one.",
+      "default": true
     },
     {
       "type": "header",

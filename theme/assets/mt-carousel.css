@@ -1,0 +1,53 @@
+/* Marcel carousel (assets/mt-carousel.js): a snap-scrolling row of cards with arrows and dots.
+   Used by the product cards on the home page. Arrows and dots match the video reels. */
+mt-carousel { display: block; }
+.mt-car { --gap: 16px; --per: var(--per-d, 4); }
+
+/* Head row: the "explore" link and the arrows sit together on the right. */
+.mt-car-side { display: flex; align-items: center; gap: 14px 22px; flex-wrap: wrap; }
+.mt-car-nav { display: flex; gap: 10px; }
+.mt .mt-car-arrow { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 99px; background: var(--mt-paper); color: var(--mt-ink); box-shadow: inset 0 0 0 1.5px var(--mt-line-2); transition: background .2s, color .2s, box-shadow .2s, opacity .2s; }
+.mt-car-arrow .mt-i { width: 20px; height: 20px; stroke-width: 2.2; }
+.mt .mt-car-arrow:disabled { opacity: .35; cursor: default; }
+@media (hover: hover) {
+  .mt .mt-car-arrow:not(:disabled):hover { background: var(--mt-ink); color: var(--mt-on-dark); box-shadow: none; }
+}
+.mt .mt-car-arrow:focus-visible { outline: 3px solid var(--mt-aqua); outline-offset: 3px; }
+.mt-bg-navy .mt-car-arrow { background: transparent; color: var(--mt-on-dark); box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .4); }
+
+/* The row: room above and below for the card hover lift and shadow. */
+.mt-car-track { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - (var(--per) - 1) * var(--gap)) / var(--per)); gap: var(--gap); margin: -14px -12px -18px; padding: 14px 12px 18px; list-style: none; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: 12px; scrollbar-width: none; }
+.mt-car-track::-webkit-scrollbar { display: none; }
+.mt-car-item { display: flex; min-width: 0; scroll-snap-align: start; }
+.mt-car-item > * { width: 100%; }
+
+.mt-car-dots { display: flex; justify-content: center; gap: 6px; margin-top: 22px; }
+.mt .mt-car-dot { width: 8px; height: 8px; border-radius: 99px; background: var(--mt-line-2); transition: width .35s cubic-bezier(.3, .8, .3, 1), background .3s; }
+.mt .mt-car-dot[aria-current="true"] { width: 28px; background: var(--mt-teal); }
+.mt-bg-navy .mt-car-dot { background: rgba(255, 255, 255, .3); }
+.mt-bg-navy .mt-car-dot[aria-current="true"] { background: var(--mt-mint); }
+
+/* Product cards four to a view are narrow: tighter padding, price above a full-width button. */
+@media (min-width: 1100px) {
+  .mt-car--4 .mt-pbody { padding: 18px; }
+  .mt-car--4 .mt-pfoot { display: grid; gap: 10px; }
+  .mt .mt-car--4 .mt-pfoot .mt-btn { width: 100%; }
+}
+@media (max-width: 1099px) {
+  .mt-car { --per: 3; }
+  .mt-car .mt-pfoot { display: grid; gap: 10px; }
+  .mt .mt-car .mt-pfoot .mt-btn { width: 100%; }
+}
+@media (max-width: 899px) {
+  .mt-car { --per: 2; }
+}
+/* Phones: one card and a peek of the next, edge to edge; swipe or use the dots. */
+@media (max-width: 749px) {
+  .mt-car { --gap: 12px; --per: 1.22; }
+  .mt-car-nav { display: none; }
+  .mt-car-track { margin-inline: calc(-1 * var(--mt-gutter)); padding-inline: var(--mt-gutter); scroll-padding-inline: var(--mt-gutter); }
+  .mt-car-dots { margin-top: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mt .mt-car-dot { transition: none; }
+}

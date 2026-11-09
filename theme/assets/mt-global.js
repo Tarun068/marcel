@@ -39,7 +39,7 @@
   const GROUPS = [
     '.mt-cards', '.mt-steps', '.mt-paths', '.mt-sym-grid', '.mt-prog', '.mt-pgrid', '.mt-phases', '.mt-routes',
     '.mt-reviews-row', '.mt-ev-stats', '.mt-ev-groups', '.mt-support-grid', '.mt-acc', '.mt-reels-track', '.mt-stats',
-    '.mt-videos-row', '.mt-stabs', '.mt-invite-opts',
+    '.mt-videos-row', '.mt-stabs', '.mt-invite-opts', '.mt-car-track',
   ].join(',');
   // Two-column layouts whose columns reveal one after the other.
   const SPLITS = ['.mt-sym-layout', '.mt-faq-layout', '.mt-consult', '.mt-invite', '.mt-clinic-band', '.mt-sec-head-row', '.mt-mtext-grid'].join(',');

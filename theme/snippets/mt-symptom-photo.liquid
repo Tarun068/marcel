@@ -1,0 +1,18 @@
+{%- comment -%}
+  Outputs the built-in photo name for a symptom icon (assets mt-symptom-[name]-480.webp and -720.webp),
+  or nothing when there is no photo for that icon. "Pain while eating" shares the hand-on-cheek photo.
+
+  Accepts:
+  - icon: {String} symptom icon, for example 's-open'
+
+  Usage:
+  {%- capture photo -%}{% render 'mt-symptom-photo', icon: block.settings.icon %}{%- endcapture -%}
+{%- endcomment -%}
+{%- case icon -%}
+  {%- when 's-open' -%}open
+  {%- when 's-burn' -%}burn
+  {%- when 's-tight', 's-pain' -%}tight
+  {%- when 's-ulcer' -%}ulcer
+  {%- when 's-bands' -%}bands
+  {%- when 's-tongue' -%}tongue
+{%- endcase -%}

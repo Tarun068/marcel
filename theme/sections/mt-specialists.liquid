@@ -5,7 +5,7 @@
 {%- capture consult_link -%}{% render 'mt-link-to', key: 'consult' %}{%- endcapture -%}
 {%- assign s = section.settings -%}
 
-<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-clinics-page' %}">
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-clinics-page' %}"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handleize }}"{% endif %}>
   <div class="mt-wrap">
     <mt-specialists>
       {%- render 'mt-specialist-data' -%}
@@ -78,6 +78,13 @@
     {
       "type": "paragraph",
       "content": "Specialists come from metaobject entries of type ‘osmf_specialist’. Add a Marcel page header with a Search box block above this section. The finder reads ?q= (city or PIN code), ?city= and ?state= from links. Sample profiles show in the theme editor only."
+    },
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Link name",
+      "info": "Buttons and pictures can jump here with #specialist-search.",
+      "default": "specialist-search"
     },
     {
       "type": "text",

@@ -3,7 +3,7 @@
 
   Accepts:
   - image: {Object} image (optional)
-  - art: {String} 'ora-care' | 'ora-shield' | 'smile' | 'none'
+  - art: {String} 'ora-care' | 'ora-shield' | 'smile' | 'device' | 'kit-foundation' | 'kit-advance' | 'none'
   - alt: {String} alt text
   - sizes: {String} sizes attribute
   - fit: {String} 'cover' | 'contain'
@@ -16,6 +16,18 @@
       | image_url: width: 900
       | image_tag: loading: 'lazy', alt: alt, sizes: sizes, widths: '180, 300, 450, 600, 900'
     }}
+  {%- elsif art == 'kit-foundation' or art == 'kit-advance' -%}
+    {%- assign kit_photo = art | remove_first: 'kit-' -%}
+    {%- assign kit_small = 'mt-kitcard-' | append: kit_photo | append: '-450.webp' | asset_url -%}
+    <img
+      src="{{ kit_small }}"
+      srcset="{{ kit_small }} 450w, {{ 'mt-kitcard-' | append: kit_photo | append: '-900.webp' | asset_url }} 900w"
+      sizes="{{ sizes | default: '(min-width: 990px) 300px, 80vw' }}"
+      width="900"
+      height="900"
+      alt="{{ alt | escape }}"
+      loading="lazy"
+    >
   {%- elsif art == 'device' -%}
     <span class="mt-packfb mt-pack-icon" role="img" aria-label="{{ alt | escape }}">{%- render 'mt-icon', icon: 's-open' -%}</span>
   {%- elsif art != blank and art != 'none' -%}

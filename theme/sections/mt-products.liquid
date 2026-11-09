@@ -6,23 +6,66 @@
   assign card_blocks = section.blocks | where: 'type', 'product'
   assign kit = section.settings.kit_product
   assign kit_link = section.settings.kit_link | default: kit.url | default: routes.all_products_collection_url
+  assign carousel = false
+  if section.settings.layout == 'carousel' and card_blocks.size > 1
+    assign carousel = true
+  endif
+  assign per = section.settings.per_desktop | default: '4'
   assign card_sizes = '(min-width: 1200px) 380px, (min-width: 961px) 31vw, (min-width: 761px) 46vw, 82vw'
+  if carousel
+    assign card_sizes = '(min-width: 1200px) 280px, (min-width: 750px) 36vw, 82vw'
+    if per == '3'
+      assign card_sizes = '(min-width: 1200px) 370px, (min-width: 750px) 36vw, 82vw'
+    endif
+  endif
 -%}
+{%- if carousel -%}
+  {{ 'mt-carousel.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'mt-carousel.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 
 <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-products' %}">
-  <div class="mt-wrap">
+  {%- if carousel -%}
+    <mt-carousel
+      class="mt-wrap mt-car mt-car--{{ per }}"
+      style="--per-d: {{ per }};"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="{{ section.settings.heading | strip_html | escape }}"
+    >
+  {%- else -%}
+    <div class="mt-wrap">
+  {%- endif -%}
     <div class="mt-sec-head-row">
       {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
-      {%- if section.settings.link_label != blank -%}
-        <a class="mt-link" href="{{ link }}">
-          {{- section.settings.link_label | escape -}}
-          {%- render 'mt-icon', icon: 'arrow-right' -%}
-        </a>
+      {%- if section.settings.link_label != blank or carousel -%}
+        <div class="mt-car-side">
+          {%- if section.settings.link_label != blank -%}
+            <a class="mt-link" href="{{ link }}">
+              {{- section.settings.link_label | escape -}}
+              {%- render 'mt-icon', icon: 'arrow-right' -%}
+            </a>
+          {%- endif -%}
+          {%- if carousel -%}
+            <div class="mt-car-nav" hidden>
+              <button type="button" class="mt-car-arrow" data-dir="-1" aria-label="{{ section.settings.prev_label | escape }}">
+                {%- render 'mt-icon', icon: 'arrow-left' -%}
+              </button>
+              <button type="button" class="mt-car-arrow" data-dir="1" aria-label="{{ section.settings.next_label | escape }}">
+                {%- render 'mt-icon', icon: 'arrow-right' -%}
+              </button>
+            </div>
+          {%- endif -%}
+        </div>
       {%- endif -%}
     </div>
 
     {%- if card_blocks.size > 0 -%}
-      <div class="mt-pgrid mt-swipe">
+      {%- if carousel -%}
+        <ul class="mt-car-track" role="list">
+      {%- else -%}
+        <div class="mt-pgrid mt-swipe">
+      {%- endif -%}
         {%- for block in card_blocks -%}
           {%- liquid
             assign card_product = block.settings.product
@@ -34,20 +77,52 @@
                 assign card_product = all_products[card_handle]
               endif
             endif
+
+            # One size of a product, for example Smile 30 g and Smile 100 g as two cards.
+            assign card_variant = ''
+            if card_product != blank and block.settings.variant != blank
+              assign want = block.settings.variant | downcase | remove: ' '
+              for v in card_product.variants
+                assign v_title = v.title | downcase | remove: ' '
+                if v_title == want
+                  assign card_variant = v
+                  break
+                endif
+              endfor
+            endif
+
+            # Cards without a product (for example a kit not yet sold online) link to a page instead.
+            assign card_link = link
+            assign card_add = section.settings.add_label
+            if card_product == blank and block.settings.link_to != blank and block.settings.link_to != 'none'
+              capture card_link
+                render 'mt-link-to', key: block.settings.link_to, url: block.settings.link
+              endcapture
+              assign card_link = card_link | strip
+              assign card_add = block.settings.link_label | default: section.settings.add_label
+            endif
           -%}
+          {%- if carousel -%}<li class="mt-car-item">{%- endif -%}
           {%- render 'mt-product-card',
             product: card_product,
+            variant: card_variant,
             block: block,
             section_id: section.id,
-            add_label: section.settings.add_label,
+            add_label: card_add,
             details_label: section.settings.details_label,
             sold_out_label: section.settings.sold_out_label,
             image_fit: section.settings.image_fit,
             sizes: card_sizes,
-            fallback_url: link
+            fallback_url: card_link
           -%}
+          {%- if carousel -%}</li>{%- endif -%}
         {%- endfor -%}
-      </div>
+      {%- if carousel -%}
+        </ul>
+        <div class="mt-car-dots"></div>
+      {%- else -%}
+        </div>
+      {%- endif -%}
     {%- endif -%}
 
     {%- if section.settings.show_kit -%}
@@ -95,7 +170,11 @@
         </div>
       </div>
     {%- endif -%}
-  </div>
+  {%- if carousel -%}
+    </mt-carousel>
+  {%- else -%}
+    </div>
+  {%- endif -%}
 </section>
 
 {% schema %}
@@ -181,6 +260,56 @@
     {
       "type": "paragraph",
       "content": "Prices can be hidden in Theme settings > Marcel products."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Cards shown as",
+      "options": [
+        {
+          "value": "carousel",
+          "label": "Carousel with arrows"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
+      ],
+      "default": "carousel"
+    },
+    {
+      "type": "select",
+      "id": "per_desktop",
+      "label": "Cards in view on large screens",
+      "options": [
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "text",
+      "id": "prev_label",
+      "label": "Previous button label",
+      "info": "Read out by screen readers.",
+      "default": "Previous products"
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "Next button label",
+      "info": "Read out by screen readers.",
+      "default": "Next products"
     },
     {
       "type": "header",
@@ -304,6 +433,12 @@
         },
         {
           "type": "text",
+          "id": "variant",
+          "label": "Size",
+          "info": "Shows one size of the product, with its own picture, price and Add to cart, for example 100g. Empty uses the first size in stock."
+        },
+        {
+          "type": "text",
           "id": "title",
           "label": "Title",
           "info": "Empty uses the product title."
@@ -334,6 +469,10 @@
             {
               "value": "none",
               "label": "Text only"
+            },
+            {
+              "value": "hide",
+              "label": "No badge"
             }
           ],
           "default": "step"
@@ -408,9 +547,65 @@
             {
               "value": "none",
               "label": "Shopify placeholder"
+            },
+            {
+              "value": "kit-foundation",
+              "label": "Foundation Kit photo"
+            },
+            {
+              "value": "kit-advance",
+              "label": "Advance Kit photo"
             }
           ],
           "default": "ora-care"
+        },
+        {
+          "type": "header",
+          "content": "When no product is chosen"
+        },
+        {
+          "type": "select",
+          "id": "link_to",
+          "label": "Card opens",
+          "info": "For example a kit page until the kit is sold as a product.",
+          "options": [
+            {
+              "value": "none",
+              "label": "All products"
+            },
+            {
+              "value": "foundation",
+              "label": "Foundation Kit page"
+            },
+            {
+              "value": "advance",
+              "label": "Advance Kit page"
+            },
+            {
+              "value": "therapy",
+              "label": "MARCEL OMR Therapy page"
+            },
+            {
+              "value": "consult",
+              "label": "MARCEL OSMF Consultant booking"
+            },
+            {
+              "value": "custom",
+              "label": "Custom link below"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Custom link"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Button label",
+          "info": "Replaces Add to cart, for example View kit."
         }
       ]
     }

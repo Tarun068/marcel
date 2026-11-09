@@ -42,6 +42,20 @@
         "search_1"
       ]
     },
+    "specialist_banner": {
+      "type": "mt-picture-banner",
+      "settings": {
+        "art": "specialist",
+        "alt": "An OSMF specialist examines a patient's mouth. Consult an OSMF specialist for detailed evaluation.",
+        "lang": "page",
+        "link_to": "custom",
+        "link": "#specialist-search",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight",
+        "join_next": true
+      }
+    },
     "finder": {
       "type": "mt-specialists",
       "settings": {
@@ -151,6 +165,7 @@
   },
   "order": [
     "hero",
+    "specialist_banner",
     "finder",
     "how",
     "support"

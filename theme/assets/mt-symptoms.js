@@ -30,10 +30,25 @@ if (!customElements.get('mt-symptoms')) {
         if (window.MarcelTheme) window.MarcelTheme.storage('mt-symptoms', selected);
       }
 
-      // Swaps the panel icon; illustrated icons and line icons use different sprites and sizes.
+      // Shows the symptom's photo in the panel when it has one; otherwise swaps the icon.
+      // Illustrated icons and line icons use different sprites and sizes.
       setIcon(item) {
+        const frame = this.querySelector('[data-mt-photo]');
         const box = this.querySelector('[data-mt-ico]');
+        const photo = frame ? item.dataset.photo || '' : '';
+        if (frame) {
+          frame.hidden = !photo;
+          const img = frame.querySelector('img');
+          if (photo && img && img.getAttribute('src') !== photo) {
+            img.src = photo;
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && img.animate) {
+              img.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 220, easing: 'ease-out' });
+            }
+          }
+        }
         if (!box) return;
+        box.hidden = Boolean(photo);
+        if (photo) return;
         const art = item.dataset.art === 'true';
         box.classList.toggle('is-art', art);
         box.innerHTML = art
