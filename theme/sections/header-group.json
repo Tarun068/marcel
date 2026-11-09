@@ -32,8 +32,9 @@
     "header": {
       "type": "mt-header",
       "settings": {
-        "logo_height": 48,
-        "logo_height_mobile": 40,
+        "logo": "shopify://shop_images/OMR_Logo_Color.png",
+        "logo_height": 72,
+        "logo_height_mobile": 52,
         "menu": "main-menu",
         "cta_label": "Book a Consultation",
         "cta_link": "",
