@@ -6,11 +6,40 @@
   - light: {Boolean} use the white mark for dark backgrounds
   - tagline: {Boolean} show the tagline line under the words
   - sizes: {String} sizes attribute for the image (optional)
+  - crop_left, crop_top, crop_width, crop_height: {Number} region of the image to show, in image pixels, to trim
+    white space built into the logo file (optional; Shopify crops the image on the CDN)
 
   Usage:
   {% render 'mt-logo', image: section.settings.logo, tagline: true %}
 {%- endcomment -%}
-{%- if image != blank -%}
+{%- if image != blank and crop_width > 0 and crop_height > 0 -%}
+  {%- liquid
+    assign logo_widths = '160,240,320,480,600' | split: ','
+    assign logo_h = 600 | times: crop_height | divided_by: crop_width
+    capture logo_srcset
+      for w in logo_widths
+        assign wn = w | plus: 0
+        echo image | image_url: width: wn, crop: 'region', crop_left: crop_left, crop_top: crop_top, crop_width: crop_width, crop_height: crop_height
+        echo ' ' | append: w | append: 'w'
+        unless forloop.last
+          echo ', '
+        endunless
+      endfor
+    endcapture
+  -%}
+  <img
+    class="mt-logo-img"
+    src="{{ image | image_url: width: 600, crop: 'region', crop_left: crop_left, crop_top: crop_top, crop_width: crop_width, crop_height: crop_height }}"
+    srcset="{{ logo_srcset }}"
+    {% if sizes != blank %}
+      sizes="{{ sizes }}"
+    {% endif %}
+    width="600"
+    height="{{ logo_h }}"
+    alt="{{ shop.name | escape }}"
+    loading="eager"
+  >
+{%- elsif image != blank -%}
   {{
     image
     | image_url: width: 600

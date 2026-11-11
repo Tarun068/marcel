@@ -25,17 +25,21 @@
         type="submit"
         name="add"
         class="{{ class }}"
+        data-add-label="{{ label | escape }}"
+        data-sold-label="{{ sold_out_label | default: 'Sold out' | escape }}"
         {% unless variant.available %}
           disabled
         {% endunless %}
       >
         <span class="mt-btn-label">
           {%- render 'mt-icon', icon: 'bag' -%}
-          {%- if variant.available -%}
-            {{- label | escape -}}
-          {%- else -%}
-            {{- sold_out_label | default: 'Sold out' | escape -}}
-          {%- endif -%}
+          <span class="mt-btn-text">
+            {%- if variant.available -%}
+              {{- label | escape -}}
+            {%- else -%}
+              {{- sold_out_label | default: 'Sold out' | escape -}}
+            {%- endif -%}
+          </span>
         </span>
         {%- render 'loading-spinner' -%}
       </button>

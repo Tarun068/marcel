@@ -7,8 +7,28 @@
   assign drawer_cta_link = section.settings.drawer_cta_link | default: settings.mt_link_help | default: routes.root_url
   assign mobile_menu = section.settings.mobile_menu | default: section.settings.menu
   assign logo_sizes = nil
+  assign crop_left = 0
+  assign crop_top = 0
+  assign crop_width = 0
+  assign crop_height = 0
   if logo != blank
-    assign logo_w = section.settings.logo_height | times: logo.aspect_ratio | ceil
+    assign logo_ratio = logo.aspect_ratio
+    # Trim the white space built into the logo file, so the logo itself fills the logo height.
+    assign t_top = section.settings.logo_trim_top | default: 0
+    assign t_right = section.settings.logo_trim_right | default: 0
+    assign t_bottom = section.settings.logo_trim_bottom | default: 0
+    assign t_left = section.settings.logo_trim_left | default: 0
+    assign keep_w = 100 | minus: t_left | minus: t_right
+    assign keep_h = 100 | minus: t_top | minus: t_bottom
+    assign trim_total = t_top | plus: t_right | plus: t_bottom | plus: t_left
+    if trim_total > 0 and keep_w > 0 and keep_h > 0
+      assign crop_left = logo.width | times: t_left | divided_by: 100
+      assign crop_top = logo.height | times: t_top | divided_by: 100
+      assign crop_width = logo.width | times: keep_w | divided_by: 100
+      assign crop_height = logo.height | times: keep_h | divided_by: 100
+      assign logo_ratio = crop_width | times: 1.0 | divided_by: crop_height
+    endif
+    assign logo_w = section.settings.logo_height | times: logo_ratio | ceil
     assign logo_sizes = logo_w | append: 'px'
   endif
 -%}
@@ -22,7 +42,7 @@
   <header class="mt-header" data-mt-header>
     <div class="mt-wrap mt-header-bar">
       <a class="mt-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
-        {%- render 'mt-logo', image: logo, sizes: logo_sizes -%}
+        {%- render 'mt-logo', image: logo, sizes: logo_sizes, crop_left: crop_left, crop_top: crop_top, crop_width: crop_width, crop_height: crop_height -%}
       </a>
 
       {%- if section.settings.menu.links.size > 0 -%}
@@ -94,7 +114,7 @@
   <aside class="mt-drawer" id="MtMenu-{{ section.id }}" data-mt-panel="menu" aria-label="Menu" inert>
     <div class="mt-drawer-head">
       <a class="mt-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
-        {%- render 'mt-logo', image: logo, sizes: logo_sizes -%}
+        {%- render 'mt-logo', image: logo, sizes: logo_sizes, crop_left: crop_left, crop_top: crop_top, crop_width: crop_width, crop_height: crop_height -%}
       </a>
       <button type="button" class="mt-icon-btn" data-mt-close aria-label="Close menu">
         {%- render 'mt-icon', icon: 'x' -%}
@@ -280,6 +300,50 @@
       "default": 40
     },
     {
+      "type": "paragraph",
+      "content": "Trim the white space built into the logo file, so the logo itself fills the height above. The image is cropped by Shopify; the file is not changed."
+    },
+    {
+      "type": "range",
+      "id": "logo_trim_top",
+      "label": "Trim top",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "logo_trim_bottom",
+      "label": "Trim bottom",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "logo_trim_left",
+      "label": "Trim left",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "logo_trim_right",
+      "label": "Trim right",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "%",
+      "default": 0
+    },
+    {
       "type": "header",
       "content": "Navigation"
     },
@@ -376,7 +440,7 @@
       "type": "text",
       "id": "whatsapp_label",
       "label": "WhatsApp link label",
-      "default": "WhatsApp the Patient HelpDesk"
+      "default": "WhatsApp the MARCEL Team"
     }
   ]
 }

@@ -6,7 +6,7 @@
 {%- liquid
   assign test_link = section.settings.promo_link | default: settings.mt_link_test | default: routes.root_url
   assign label_lines = section.settings.type_labels | newline_to_br | split: '<br />'
-  assign card_sizes = '(min-width: 1200px) 380px, (min-width: 961px) 31vw, (min-width: 761px) 46vw, 92vw'
+  assign card_sizes = '(min-width: 1440px) 450px, (min-width: 961px) 31vw, (min-width: 761px) 46vw, 92vw'
   assign hidden_count = 0
   for p in collection.products
     if p.tags contains 'mt-hidden'

@@ -11,29 +11,99 @@
   "sections": {
     "main": {
       "type": "mt-main-product",
+      "blocks": {
+        "feature_1": {
+          "type": "perk",
+          "settings": {
+            "icon": "target",
+            "text": "Foundation for Stage 1 or 2, Advance for Stage 3 or 4"
+          }
+        },
+        "feature_2": {
+          "type": "perk",
+          "settings": {
+            "icon": "check",
+            "text": "Includes MARCEL Smile™ Toothpaste"
+          }
+        },
+        "feature_3": {
+          "type": "perk",
+          "settings": {
+            "icon": "clock",
+            "text": "A structured daily routine"
+          }
+        },
+        "feature_4": {
+          "type": "perk",
+          "settings": {
+            "icon": "calendar",
+            "text": "Organised around a 12-week care journey"
+          }
+        },
+        "feature_5": {
+          "type": "perk",
+          "settings": {
+            "icon": "doctor",
+            "text": "Use as advised by a healthcare professional"
+          }
+        },
+        "accordion_1": {
+          "type": "accordion",
+          "settings": {
+            "title": "Delivery and returns",
+            "text": "<p>Ships across India in discreet packaging. Delivery times are shown at checkout.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4",
+        "feature_5",
+        "accordion_1"
+      ],
       "settings": {
+        "headline": "",
+        "supporting": "",
+        "intro": "",
+        "details": "",
+        "how_lines": "",
+        "safety": "",
+        "cta_label": "",
         "cta_to": "consult",
+        "cta_link": "",
+        "cta2_label": "",
         "cta2_to": "therapy",
+        "cta2_link": "",
+        "shop_link": "",
         "home_label": "Home",
         "shop_label": "Products",
         "image_fit": "cover",
         "gallery_label": "Product images and details",
-        "how_title": "How to use",
+        "thumbs_label": "Choose a picture",
+        "prev_label": "Previous picture",
+        "next_label": "Next picture",
+        "thumbs_prev_label": "Earlier pictures",
+        "thumbs_next_label": "More pictures",
+        "how_title": "How to Use",
         "how_thumb": "How to use",
-        "routine_title": "Your routine",
+        "routine_title": "Your Routine",
         "routine_thumb": "Routine",
-        "ingredients_title": "Key ingredients",
+        "ingredients_title": "Key Ingredients",
         "ingredients_thumb": "Ingredients",
-        "free_title": "Made with care",
-        "kit_inside_title": "What’s inside",
+        "free_title": "Made with Care",
+        "kit_inside_title": "What’s Inside",
         "kit_thumb": "In the kit",
-        "kit_heading": "In this kit",
+        "kit_heading": "In This Kit",
         "best_prefix": "Best for",
         "add_label": "Add to cart",
         "sold_out_label": "Sold out",
         "variant_style": "cards",
         "pack_label": "Pack size",
+        "pack_notes": "",
         "show_buy_now": true,
+        "features_heading": "Key Features",
         "qty_label": "Quantity",
         "minus_label": "Decrease quantity",
         "plus_label": "Increase quantity",
@@ -49,51 +119,26 @@
         "acc_about": "About this product",
         "background": "paper",
         "sheet": false,
-        "spacing": "tight",
-        "cta_label": "Talk to a MARCEL OSMF Consultant",
-        "cta2_label": "Explore MARCEL OMR Therapy™"
-      },
-      "blocks": {
-        "perk_1": {
-          "type": "perk",
-          "settings": {
-            "icon": "box",
-            "text": "Discreet packaging"
-          }
-        },
-        "perk_2": {
-          "type": "perk",
-          "settings": {
-            "icon": "truck",
-            "text": "Delivery across India"
-          }
-        },
-        "accordion_1": {
-          "type": "accordion",
-          "settings": {
-            "title": "Delivery and returns",
-            "text": "<p>Ships across India in discreet packaging. Delivery times are shown at checkout.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "perk_1",
-        "perk_2",
-        "accordion_1"
-      ]
+        "spacing": "tight"
+      }
     },
     "related": {
       "type": "mt-related-products",
       "settings": {
         "source": "metafield",
         "intent": "related",
-        "limit": 3,
-        "eyebrow": "Also in MARCEL OMR Therapy™",
-        "heading": "Related products",
+        "limit": 6,
+        "eyebrow": "More from MARCEL",
+        "heading": "You May Also Like",
         "details_label": "View product details",
         "add_label": "Add to cart",
         "sold_out_label": "Sold out",
+        "card_style": "compact",
         "image_fit": "cover",
+        "layout": "carousel",
+        "per_desktop": "4",
+        "prev_label": "Previous products",
+        "next_label": "Next products",
         "background": "mist",
         "sheet": false,
         "spacing": "normal"
@@ -103,21 +148,108 @@
       "type": "mt-cta-band",
       "settings": {
         "eyebrow": "Need guidance?",
-        "heading": "Not sure what to do next?",
+        "heading": "Not Sure What to Do Next?",
         "text": "Explore MARCEL OMR Therapy™ or connect with our team to understand the next steps.",
         "button_1_label": "Talk to a MARCEL OSMF Consultant",
         "button_1_to": "consult",
+        "button_1_link": "",
         "button_2_label": "Find an OSMF Specialist Doctor",
         "button_2_to": "specialists",
+        "button_2_link": "",
         "background": "paper",
         "sheet": false,
         "spacing": "tight"
+      }
+    },
+    "faq": {
+      "type": "mt-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Do I need to use every component of the recommended care plan?",
+            "answer": "<p>The components may serve different purposes, so do not assume that using one product alone will provide the same approach. Follow the care plan recommended for you and the approved instructions supplied with each product. If you are unsure what to use, ask a MARCEL OSMF Consultant before changing the plan.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "How soon will I notice a result?",
+            "answer": "<p>There is no single timeline that applies to everyone. Burning, eating comfort and mouth opening are different outcomes and may change at different rates. Follow the recommended care plan and arrange a review if progress is not as expected.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "What should I do if my symptoms are not improving?",
+            "answer": "<p>Do not increase the amount or frequency of a product on your own. Note changes in burning, eating comfort and mouth opening, then contact a MARCEL OSMF Consultant for a review. If symptoms worsen or you notice an ulcer, lump, bleeding or another unusual change, arrange an in-person assessment promptly.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "What should I do if I experience strong burning, swelling or sores after using a product?",
+            "answer": "<p>If you experience a strong or worsening reaction, stop using the product until you have received medical advice and contact a MARCEL OSMF Consultant. Seek urgent care for difficulty breathing, marked swelling or another severe reaction. Keep the product pack available so the clinician can review what you used.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use MARCEL OMR Therapy™ while receiving treatment from another doctor?",
+            "answer": "<p>Tell a MARCEL OSMF Consultant or your treating doctor about the medicines, procedures and oral products you are currently using. Do not stop or change prescribed treatment on your own. They can help you decide whether the approaches can be used together and whether an in-person assessment is needed.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5"
+      ],
+      "settings": {
+        "eyebrow": "MARCEL OMR Therapy™",
+        "heading": "Frequently Asked Questions",
+        "open_first": false,
+        "one_at_a_time": false,
+        "schema_markup": true,
+        "show_help": true,
+        "help_title": "Have Questions?",
+        "help_text": "Our In-house OSMF Consultant can help with programme questions and your next step.",
+        "whatsapp_label": "WhatsApp the MARCEL Team",
+        "link_label": "See all FAQs",
+        "link": "/pages/faq",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "179437565770c9ea1b": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_BmeE7x": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_BmeE7x"
+      ],
+      "settings": {
+        "include_margins": true
       }
     }
   },
   "order": [
     "main",
+    "179437565770c9ea1b",
     "related",
-    "cta"
+    "cta",
+    "faq"
   ]
 }

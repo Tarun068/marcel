@@ -22,7 +22,7 @@
         "spacing": "none",
         "current_label": "Clinical evidence",
         "eyebrow": "Clinical evidence & research",
-        "heading": "Development guided by evaluation and continued learning",
+        "heading": "Development Guided by Evaluation and Continued Learning",
         "text": "Clinical assessment and scientific investigation form important parts of the MARCEL development journey. Where research is ongoing, it is described as ongoing research.",
         "art": "evidence"
       }
@@ -31,15 +31,15 @@
       "type": "mt-evidence",
       "settings": {
         "eyebrow": "Clinical research evidence",
-        "heading": "What the 2026 clinical study found",
+        "heading": "What the 2026 Clinical Study Found",
         "text": "A clinical study was conducted in 2026 to evaluate MARCEL OMR Therapy™ in people with OSMF.",
         "hero_value": "14.86 mm",
         "hero_extra": "(71.25%)",
         "hero_label": "Average increase in mouth opening",
         "hero_text": "Average change reported in the study group. Individual results vary.",
-        "group_1_title": "Reported relief in chief complaints",
+        "group_1_title": "Reported Relief in Chief Complaints",
         "group_1_text": "Percentage of participants who reported relief",
-        "group_2_title": "Changes in clinical findings",
+        "group_2_title": "Changes in Clinical Findings",
         "group_2_text": "Percentage of participants with improvement",
         "caveat": "The study had Institutional Ethics Committee approval and was registered with the Clinical Trials Registry of India (CTRI). Clinical findings must be interpreted in the context of the study design, methods, sample size, duration and limitations. Individual results vary and are not guaranteed.",
         "button_to": "evidence",
@@ -153,7 +153,7 @@
       "type": "mt-journey",
       "settings": {
         "eyebrow": "Clinical evidence",
-        "heading": "Clinical studies in academic institutions",
+        "heading": "Clinical Studies in Academic Institutions",
         "text": "",
         "center": false,
         "layout": "timeline",
@@ -173,7 +173,7 @@
           "settings": {
             "when": "November 2008",
             "icon": "clinic",
-            "title": "Clinical evaluation at Government Dental Colleges",
+            "title": "Clinical Evaluation at Government Dental Colleges",
             "text": "Early clinical evaluation of the developing formulation at Government Dental College, Ahmedabad and Government Dental College, Jamnagar."
           }
         },
@@ -182,7 +182,7 @@
           "settings": {
             "when": "R.A. Podar Ayurvedic Medical College, Mumbai",
             "icon": "test",
-            "title": "Clinical study",
+            "title": "Clinical Study",
             "text": "Final report pending."
           }
         },
@@ -226,7 +226,7 @@
           "settings": {
             "when": "Investigation 1",
             "icon": "flask",
-            "title": "In-vitro anti-fibrotic mechanism",
+            "title": "In-Vitro Anti-Fibrotic Mechanism",
             "text": "Investigate relevant cellular biological activity and generate preliminary anti-fibrotic evidence."
           }
         },
@@ -235,7 +235,7 @@
           "settings": {
             "when": "Investigation 2",
             "icon": "flask",
-            "title": "Molecular mechanism & biomarkers",
+            "title": "Molecular Mechanism & Biomarkers",
             "text": "Investigate relevant molecular pathways and fibrosis-associated biomarkers."
           }
         },
@@ -244,7 +244,7 @@
           "settings": {
             "when": "Investigation 3",
             "icon": "flask",
-            "title": "Histopathology & tissue remodelling",
+            "title": "Histopathology & Tissue Remodelling",
             "text": "Investigate whether biological activity corresponds to measurable structural and tissue-level changes."
           }
         },
@@ -253,7 +253,7 @@
           "settings": {
             "when": "Planning",
             "icon": "test",
-            "title": "Human clinical development planning",
+            "title": "Human Clinical Development Planning",
             "text": "Protocol, population, endpoints, comparator, sample size, ethics, registration and study procedures for human fibrosis-remodelling research."
           }
         },
@@ -262,7 +262,7 @@
           "settings": {
             "when": "Investigation 4",
             "icon": "users",
-            "title": "Human OSMF fibrosis-remodelling / reversal study",
+            "title": "Human OSMF Fibrosis-Remodelling / Reversal Study",
             "text": "A separate investigation designed to evaluate clinical, biological and tissue-level outcomes in patients with established OSMF."
           }
         },
@@ -271,7 +271,7 @@
           "settings": {
             "when": "Integration",
             "icon": "chart",
-            "title": "Integrated scientific evidence assessment",
+            "title": "Integrated Scientific Evidence Assessment",
             "text": "Cellular → Molecular → Tissue → Human clinical."
           }
         }
@@ -289,7 +289,7 @@
       "type": "mt-journey",
       "settings": {
         "eyebrow": "IP, regulatory, quality & manufacturing",
-        "heading": "Building a strong IP, regulatory and manufacturing foundation",
+        "heading": "Building a Strong IP, Regulatory and Manufacturing Foundation",
         "text": "",
         "center": false,
         "layout": "timeline",
@@ -309,7 +309,7 @@
           "settings": {
             "when": "2008",
             "icon": "patent",
-            "title": "First patent granted",
+            "title": "First Patent Granted",
             "text": ""
           }
         },
@@ -318,7 +318,7 @@
           "settings": {
             "when": "8 May 2025",
             "icon": "patent",
-            "title": "Indian patent application filed",
+            "title": "Indian Patent Application Filed",
             "text": "Application No. 202521044814."
           }
         },
@@ -327,7 +327,7 @@
           "settings": {
             "when": "2025 to 2026",
             "icon": "book",
-            "title": "Regulatory dossier & licensing",
+            "title": "Regulatory Dossier & Licensing",
             "text": "Compilation of applicable quality, scientific, manufacturing and regulatory documentation and pursuit of the applicable licensing pathway."
           }
         },
@@ -336,7 +336,7 @@
           "settings": {
             "when": "2025 to 2026",
             "icon": "box",
-            "title": "GMP manufacturing, scale-up & process validation",
+            "title": "GMP Manufacturing, Scale-Up & Process Validation",
             "text": ""
           }
         },
@@ -345,7 +345,7 @@
           "settings": {
             "when": "2026",
             "icon": "shield",
-            "title": "Quality, GMP & regulatory compliance certifications",
+            "title": "Quality, GMP & Regulatory Compliance Certifications",
             "text": "ISO 9001:2015, ISO 14001:2015 and ISO 22000:2018, along with GMP and FDA regulatory compliance."
           }
         },
@@ -354,7 +354,7 @@
           "settings": {
             "when": "2026",
             "icon": "patent",
-            "title": "30 trademark applications filed",
+            "title": "30 Trademark Applications Filed",
             "text": ""
           }
         },
@@ -363,7 +363,7 @@
           "settings": {
             "when": "2026",
             "icon": "india",
-            "title": "PCT international patent filing",
+            "title": "PCT International Patent Filing",
             "text": "International patent protection pathway initiated through PCT filing."
           }
         }
@@ -382,8 +382,8 @@
       "type": "mt-cta-band",
       "settings": {
         "eyebrow": "How we keep learning",
-        "heading": "Questions about the evidence?",
-        "text": "Healthcare professionals can contact the MARCEL team for research and clinical information.",
+        "heading": "Questions About the Evidence?",
+        "text": "Healthcare professionals can contact the MARCEL Team for research and clinical information.",
         "button_1_label": "Professional enquiry",
         "button_1_to": "custom",
         "button_2_label": "Explore MARCEL OMR Therapy™",

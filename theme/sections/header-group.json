@@ -20,7 +20,7 @@
             "icon": "truck",
             "text": "Delivery across India",
             "link": "",
-            "hide_mobile": true
+            "hide_mobile": false
           }
         }
       },
@@ -48,7 +48,11 @@
         "drawer_cta_label": "Get Help",
         "drawer_cta_link": "",
         "show_contact": true,
-        "whatsapp_label": "WhatsApp the Patient HelpDesk"
+        "whatsapp_label": "WhatsApp the MARCEL Team",
+        "logo_trim_top": 9,
+        "logo_trim_bottom": 15,
+        "logo_trim_left": 10,
+        "logo_trim_right": 5
       }
     }
   },

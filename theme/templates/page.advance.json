@@ -37,7 +37,7 @@
       "type": "mt-components",
       "settings": {
         "eyebrow": "What Advance care includes",
-        "heading": "The components of the Advance routine",
+        "heading": "The Components of the Advance Routine",
         "columns": "4",
         "background": "paper",
         "sheet": false,
@@ -114,7 +114,7 @@
       "settings": {
         "layout": "journey",
         "eyebrow": "Follow your recommended routine",
-        "heading": "Your Advance routine",
+        "heading": "Your Advance Routine",
         "link_label": "",
         "background": "mist",
         "sheet": false,
@@ -171,7 +171,7 @@
       "type": "mt-journey",
       "settings": {
         "eyebrow": "Your care journey",
-        "heading": "Four phases to organise routine and follow-up",
+        "heading": "Four Phases to Organise Routine and Follow-Up",
         "text": "The phases are a care-planning framework, not a promise of a specific result by a fixed date.",
         "center": false,
         "layout": "cards",
@@ -233,7 +233,7 @@
       "type": "mt-guide",
       "settings": {
         "show_toc": false,
-        "toc_title": "On this page",
+        "toc_title": "On This Page",
         "read_label": "[n] min read",
         "no_articles": "Articles will appear here once they are published.",
         "background": "paper",
@@ -244,8 +244,8 @@
         "chapter_1": {
           "type": "chapter",
           "settings": {
-            "heading": "Important to know",
-            "toc_label": "Important to know",
+            "heading": "Important to Know",
+            "toc_label": "Important to Know",
             "anchor": "important"
           }
         },
@@ -275,7 +275,7 @@
       "type": "mt-support",
       "settings": {
         "eyebrow": "Need guidance?",
-        "heading": "Not sure whether Advance is appropriate for you?",
+        "heading": "Not Sure Whether Advance Is Appropriate for You?",
         "text": "A MARCEL OSMF Consultant can help you understand the next steps and guide you towards suitable professional assessment.",
         "center": false,
         "note": "The MARCEL OSMF Consultant gives programme information and next-step guidance. Diagnosis, staging and treatment decisions are made by a qualified healthcare professional.",
@@ -324,7 +324,7 @@
       "type": "mt-cta-band",
       "settings": {
         "eyebrow": "Advance pathway",
-        "heading": "Take the next step with structured care",
+        "heading": "Take the Next Step with Structured Care",
         "text": "If the Advance Kit has been recommended for you, explore its components and follow your personalised care advice.",
         "button_1_label": "Talk to a MARCEL OSMF Consultant",
         "button_1_to": "consult",
@@ -373,7 +373,7 @@
       "type": "mt-guide",
       "settings": {
         "show_toc": false,
-        "toc_title": "On this page",
+        "toc_title": "On This Page",
         "read_label": "[n] min read",
         "no_articles": "Articles will appear here once they are published.",
         "background": "paper",

@@ -3,6 +3,27 @@
 .mt-announce-item { display: inline-flex; gap: 8px; align-items: center; }
 a.mt-announce-item:hover { text-decoration: underline; text-underline-offset: 3px; }
 .mt-announce-item .mt-i { width: 16px; height: 16px; color: var(--mt-mint); }
+
+/* Moving messages (sections/mt-announcement.liquid): two identical runs side by side; moving the track by half
+   its width brings the second run exactly where the first began, so the loop is seamless. */
+.mt-announce--scroll { overflow: hidden; }
+.mt-announce-track { display: flex; width: max-content; animation: mt-announce-move var(--mt-announce-time, 50s) linear infinite; }
+.mt-announce-run, .mt-announce-run .mt-announce-copy { display: flex; flex: none; align-items: center; gap: 56px; }
+.mt-announce-run { min-height: 40px; padding: 6px 56px 6px 0; }
+.mt-announce--scroll .mt-announce-item { white-space: nowrap; }
+.mt-announce--scroll:hover .mt-announce-track,
+.mt-announce--scroll:focus-within .mt-announce-track { animation-play-state: paused; }
+@keyframes mt-announce-move {
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Reduced motion: no movement, just the messages once, centred. */
+@media (prefers-reduced-motion: reduce) {
+  .mt-announce-track { width: auto; justify-content: center; animation: none; }
+  .mt-announce-run { padding-right: 0; }
+  .mt-announce .mt-announce-copy { display: none; }
+}
+
 @media (max-width: 760px) {
-  .mt-announce .mt-hide-sm { display: none; }
+  .mt-announce .mt-hide-sm, .mt-announce--hide-sm { display: none; }
 }

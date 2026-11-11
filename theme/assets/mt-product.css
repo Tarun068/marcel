@@ -7,16 +7,36 @@
   .mt-pdp { grid-template-columns: minmax(0, 1fr); }
 }
 
-/* ---------- Gallery ---------- */
+/* ---------- Gallery (assets/mt-product.js) ----------
+   The main picture is a row of slides that swipes and snaps; arrows and the counter sit on top.
+   Thumbnails run in one row underneath and scroll sideways, keeping the current one in view. */
 mt-gallery { display: block; }
-.mt-gallery { position: sticky; top: calc(var(--mt-header-h) + 20px); display: grid; gap: 12px; }
+.mt-gallery { position: sticky; top: calc(var(--mt-header-h) + 20px); display: grid; gap: 12px; min-width: 0; }
 @media (max-width: 900px) {
   .mt-gallery { position: relative; top: auto; }
 }
-.mt-gmain { position: relative; aspect-ratio: 1 / 1; border-radius: var(--mt-r-xl); background: var(--mt-pack-bg); overflow: hidden; }
-.mt-gslide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .3s, visibility 0s .3s; }
-.mt-gslide.is-on { opacity: 1; visibility: visible; transition: opacity .3s; }
+/* Square, but never taller than the screen leaves room for, so the thumbnails show on a laptop without
+   scrolling (330px covers the header, breadcrumbs and the thumbnail row). Pictures are contained, never cropped. */
+.mt-gmain { position: relative; justify-self: stretch; width: 100%; aspect-ratio: 1 / 1; max-height: max(320px, calc(100vh - 330px)); max-height: max(320px, calc(100svh - 330px)); border-radius: var(--mt-r-xl); background: var(--mt-pack-bg); overflow: hidden; }
+.mt-gslide .mt-pack:has(> img) { background: #fff; }
+.mt-gslide .mt-pack img { object-fit: contain; }
+.mt-gtrack { position: absolute; inset: 0; display: flex; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.mt-gtrack::-webkit-scrollbar { display: none; }
+.mt-gtrack:focus-visible { outline: 3px solid var(--mt-aqua); outline-offset: -3px; border-radius: inherit; }
+.mt-gslide { position: relative; flex: 0 0 100%; height: 100%; scroll-snap-align: start; scroll-snap-stop: always; }
 .mt-gmain .mt-role { z-index: 3; }
+
+.mt .mt-garrow { position: absolute; top: 50%; z-index: 3; display: grid; place-items: center; width: 44px; height: 44px; margin-top: -22px; border-radius: 99px; background: rgba(255, 255, 255, .94); color: var(--mt-ink); box-shadow: 0 6px 18px -8px rgba(12, 42, 61, .38), inset 0 0 0 1px var(--mt-line); transition: background .2s, color .2s, opacity .2s, box-shadow .2s; }
+.mt-garrow--prev { left: 14px; }
+.mt-garrow--next { right: 14px; }
+.mt-garrow .mt-i { width: 20px; height: 20px; stroke-width: 2.4; }
+.mt .mt-garrow:disabled { opacity: 0; pointer-events: none; }
+@media (hover: hover) {
+  .mt .mt-garrow:not(:disabled):hover { background: var(--mt-ink); color: var(--mt-on-dark); box-shadow: 0 6px 18px -8px rgba(12, 42, 61, .5); }
+}
+.mt .mt-garrow:focus-visible { outline: 3px solid var(--mt-aqua); outline-offset: 2px; }
+.mt-gcount { position: absolute; right: 14px; bottom: 14px; z-index: 3; padding: 4px 11px; border-radius: 99px; background: rgba(255, 255, 255, .94); box-shadow: inset 0 0 0 1px var(--mt-line); font-size: 13px; font-weight: 700; line-height: 1.5; color: var(--mt-ink-3); font-variant-numeric: tabular-nums; pointer-events: none; }
+.mt-gcount b { color: var(--mt-ink); }
 .mt-info-slide { display: grid; align-content: center; gap: 16px; padding: clamp(24px, 7%, 52px); background: var(--mt-tint); overflow-y: auto; }
 .mt .mt-info-slide h3 { font-size: var(--mt-fs-sub); line-height: 1.1; letter-spacing: -.02em; }
 .mt-info-steps { display: grid; gap: 12px; }
@@ -28,10 +48,28 @@ mt-gallery { display: block; }
 .mt-ing-list li > span:last-child { flex: none; font-weight: 800; color: var(--pc); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .mt-ing-list li > span:last-child .mt-i { width: 18px; height: 18px; stroke-width: 2.4; }
 
-.mt-gthumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 110px)); gap: 12px; }
-.mt .mt-gthumb { position: relative; aspect-ratio: 1 / 1; border-radius: var(--mt-r); background: var(--mt-pack-bg); overflow: hidden; box-shadow: inset 0 0 0 1px var(--mt-line); transition: box-shadow .15s; }
-.mt .mt-gthumb:hover { box-shadow: inset 0 0 0 1.5px var(--mt-line-2); }
-.mt .mt-gthumb[aria-current="true"] { box-shadow: 0 0 0 2px var(--mt-teal); }
+/* About five and a half thumbnails in view, so the cut-off one shows the row scrolls; arrows either side
+   page through them when there are more. The ring is drawn by ::after above the picture, so the picture
+   never covers it. */
+.mt-gthumbs-row { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.mt .mt-gthumbs-arrow { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 99px; background: var(--mt-paper); color: var(--mt-ink); box-shadow: inset 0 0 0 1.5px var(--mt-line-2); transition: background .2s, color .2s, box-shadow .2s, opacity .2s; }
+.mt .mt-gthumbs-arrow[hidden] { display: none; }
+.mt-gthumbs-arrow .mt-i { width: 18px; height: 18px; stroke-width: 2.4; }
+.mt .mt-gthumbs-arrow:disabled { opacity: .35; cursor: default; }
+@media (hover: hover) {
+  .mt .mt-gthumbs-arrow:not(:disabled):hover { background: var(--mt-ink); color: var(--mt-on-dark); box-shadow: none; }
+}
+.mt .mt-gthumbs-arrow:focus-visible { outline: 3px solid var(--mt-aqua); outline-offset: 2px; }
+.mt-gthumbs { --tg: 10px; position: relative; flex: 1 1 auto; min-width: 0; display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 5 * var(--tg)) / 5.5); gap: var(--tg); overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; }
+.mt-gthumbs::-webkit-scrollbar { display: none; }
+.mt .mt-gthumb { position: relative; aspect-ratio: 1 / 1; border-radius: var(--mt-r); background: var(--mt-pack-bg); overflow: hidden; }
+.mt-gthumb::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; box-shadow: inset 0 0 0 1px var(--mt-line); pointer-events: none; transition: box-shadow .15s; }
+@media (hover: hover) {
+  .mt .mt-gthumb:hover::after { box-shadow: inset 0 0 0 1.5px var(--mt-line-2); }
+}
+.mt .mt-gthumb[aria-current="true"]::after { box-shadow: inset 0 0 0 2px var(--mt-teal); }
+.mt .mt-gthumb:focus-visible { outline: none; }
+.mt .mt-gthumb:focus-visible::after { box-shadow: inset 0 0 0 3px var(--mt-aqua); }
 .mt-thumb-label { position: absolute; inset: 0; display: grid; place-items: center; align-content: center; gap: 6px; padding: 8px; background: var(--mt-tint); font-size: 13px; font-weight: 800; line-height: 1.2; color: var(--mt-ink); text-align: center; }
 .mt-thumb-label .mt-i { width: 24px; height: 24px; color: var(--mt-teal); stroke-width: 1.8; }
 
@@ -70,39 +108,84 @@ mt-variant-select { display: grid; }
 .mt-pack-opt:has(input:checked) { box-shadow: inset 0 0 0 2px var(--mt-teal); background: var(--mt-tint); }
 .mt-pack-opt:has(input:focus-visible) { outline: 2px solid var(--mt-teal); outline-offset: 2px; }
 .mt-pack-opt:has(input:disabled) { opacity: .5; cursor: not-allowed; }
-.mt-buy-form { display: grid; gap: 10px; }
-.mt-buy-row { display: flex; flex-wrap: wrap; gap: 10px; }
-.mt-buy-row .mt-btn { flex: 1 1 180px; }
-.mt-qty { display: inline-flex; align-items: center; height: 52px; border-radius: 99px; background: var(--mt-paper); box-shadow: inset 0 0 0 1.5px var(--mt-line-2); }
-.mt .mt-qty button { width: 44px; height: 100%; display: grid; place-items: center; border-radius: 99px; color: var(--mt-ink); }
-.mt .mt-qty button:hover { background: var(--mt-mist); }
+/* Quantity, Add to cart and Buy it now in one row; the two buttons share the space equally.
+   The form is a size container, so the row follows the buy box width rather than the screen. */
+.mt-buy-form { display: grid; gap: 10px; container: mt-buy / inline-size; }
+.mt-buy-row { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: stretch; gap: 10px; }
+.mt-buy-row--now { grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr); }
+.mt-buy-row > .mt-btn, .mt-buy-row > .mt-buy-now { min-width: 0; }
+.mt-qty-wrap { display: flex; align-items: center; gap: 14px; }
+.mt-qty-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* The stepper keeps a real border; the round buttons sit inside it, so their hover never covers the edge. */
+.mt-qty { display: inline-flex; align-items: center; gap: 2px; height: 52px; padding: 0 5px; border: 1.5px solid var(--mt-line-2); border-radius: 99px; background: var(--mt-paper); transition: border-color .15s; }
+.mt .mt-qty button { width: 38px; height: 38px; flex: none; display: grid; place-items: center; border-radius: 99px; color: var(--mt-ink); transition: background .15s, color .15s; }
+@media (hover: hover) {
+  .mt .mt-qty button:hover { background: var(--mt-tint); color: var(--mt-teal); }
+}
+.mt .mt-qty button:focus-visible { outline: 2px solid var(--mt-teal); outline-offset: 1px; }
 .mt-qty button .mt-i { width: 16px; height: 16px; stroke-width: 2.4; }
 .mt .mt-qty input { width: 34px; padding: 0; border: 0; background: none; text-align: center; font: inherit; font-weight: 800; color: var(--mt-ink); font-variant-numeric: tabular-nums; -moz-appearance: textfield; appearance: textfield; }
 .mt .mt-qty input:focus { outline: none; }
 .mt-qty input::-webkit-outer-spin-button, .mt-qty input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-.mt-qty:focus-within { box-shadow: inset 0 0 0 1.5px var(--mt-ink); }
+.mt-qty:has(input:focus) { border-color: var(--mt-ink); }
 
-/* Shopify's dynamic checkout button, restyled as a secondary pill. */
-.mt-buy-now .shopify-payment-button__button { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 52px; border-radius: 999px; overflow: hidden; }
-.mt .mt-buy-now .shopify-payment-button__button--unbranded { background: var(--mt-paper); color: var(--mt-ink); box-shadow: inset 0 0 0 1.5px var(--mt-line-2); font-family: inherit; font-weight: 800; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; }
+/* Shopify's Buy it now button, restyled as a secondary pill the same size as Add to cart. Dawn draws button
+   borders with square ::before and ::after layers, which the pill clipped into a broken outline: removed. */
+.mt-buy-now, .mt-buy-now .shopify-payment-button, .mt-buy-now shopify-accelerated-checkout, .mt-buy-now shopify-buy-it-now-button { display: block; width: 100%; height: 100%; }
+.mt-buy-now .shopify-payment-button__button { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; min-height: 52px; margin: 0; padding: 0 20px; border-radius: 999px; overflow: hidden; }
+.mt .mt-buy-now .shopify-payment-button__button--unbranded { background: var(--mt-paper); color: var(--mt-ink); box-shadow: inset 0 0 0 1.5px var(--mt-line-2); font-family: inherit; font-weight: 800; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; transition: box-shadow .2s, background .2s; }
+.mt .mt-buy-now .shopify-payment-button__button--unbranded::before, .mt .mt-buy-now .shopify-payment-button__button--unbranded::after { content: none; display: none; }
 .mt .mt-buy-now .shopify-payment-button__button--unbranded:hover:not([disabled]) { background: var(--mt-paper); box-shadow: inset 0 0 0 1.5px var(--mt-ink); text-decoration: none; }
+.mt .mt-buy-now .shopify-payment-button__button--unbranded:focus-visible { outline: 3px solid var(--mt-aqua); outline-offset: 2px; }
 .mt-buy-now .shopify-payment-button__more-options { margin-top: 8px; font-size: 13px; color: var(--mt-ink-3); }
 .mt-buy-form .mt-err:not([hidden]) { display: block; }
 
+/* Narrow buy box: quantity and its label on their own row, then Add to cart and Buy it now side by side. */
+@container mt-buy (max-width: 489px) {
+  .mt-buy-row--now { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .mt-buy-row--now .mt-qty-wrap { grid-column: 1 / -1; }
+  .mt-buy-row--now .mt-qty-label { position: static; width: auto; height: auto; overflow: visible; clip: auto; font-size: 14.5px; font-weight: 700; color: var(--mt-ink); }
+}
+@container mt-buy (max-width: 339px) {
+  .mt .mt-buy-row--now .mt-btn { padding-inline: 12px; }
+  .mt-buy-now .shopify-payment-button__button { padding-inline: 12px; }
+}
+@container mt-buy (max-width: 299px) {
+  .mt-buy-row--now .mt-add-btn .mt-i { display: none; }
+}
+
 /* ---------- Perks + details ---------- */
-.mt-perks { display: grid; gap: 10px; }
-.mt-perks li { display: flex; gap: 12px; align-items: center; font-size: var(--mt-fs-body); font-weight: 600; color: var(--mt-ink); }
-.mt-perks .mt-i { width: 20px; height: 20px; flex: none; color: var(--mt-teal); }
+/* Key features under the buy box: two columns of icon and text, one column in a narrow info column.
+   Icons take the product colour (--pc) on a light tint of it. */
+.mt-features { display: grid; gap: 12px; container: mt-feat / inline-size; }
+.mt-features .mt-mini-h { margin: 0; }
+.mt-perks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 22px; }
+.mt-perks li { display: flex; gap: 12px; align-items: center; font-size: 15px; font-weight: 600; line-height: 1.35; color: var(--mt-ink); }
+.mt-perk-i { flex: none; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 99px; background: var(--mt-tint); background: color-mix(in srgb, var(--pc, var(--mt-teal)) 12%, #fff); color: var(--pc, var(--mt-teal)); }
+.mt-perks .mt-i { width: 19px; height: 19px; stroke-width: 2; }
+@container mt-feat (max-width: 459px) {
+  .mt-perks { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+}
 .mt-pdp-info .mt-acc-in { padding-right: 22px; }
 .mt-ing-table { width: 100%; font-size: 15px; border-collapse: collapse; }
 .mt-ing-table td { padding: 9px 0; border-bottom: 1px solid var(--mt-line); vertical-align: top; }
 .mt-ing-table td:last-child { padding-left: 12px; text-align: right; font-weight: 700; color: var(--mt-ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .mt-ing-table small { display: block; color: var(--mt-ink-3); }
 
+@media (max-width: 749px) {
+  .mt .mt-gthumbs-arrow { display: none; }
+  .mt .mt-garrow { width: 38px; height: 38px; margin-top: -19px; }
+  .mt-garrow--prev { left: 10px; }
+  .mt-garrow--next { right: 10px; }
+  .mt-garrow .mt-i { width: 18px; height: 18px; }
+  .mt-gcount { right: 10px; bottom: 10px; font-size: 12.5px; }
+}
 @media (max-width: 480px) {
   .mt-buy-box { padding: 16px; }
-  .mt-gthumbs { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
-  .mt-thumb-label { font-size: 12px; padding: 6px; }
+  .mt-gthumbs { --tg: 8px; grid-auto-columns: calc((100% - 4 * var(--tg)) / 4.4); }
+  .mt-thumb-label { font-size: 11.5px; padding: 5px; gap: 4px; }
+  .mt-thumb-label .mt-i { width: 20px; height: 20px; }
 }
 
 .mt-gmain .mt-role--plain { padding-left: 13px; }

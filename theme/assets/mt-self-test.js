@@ -1,4 +1,4 @@
-/* MARCEL OSMF Self-Check: one question at a time, optional lead step, then the result page.
+/* MARCEL OSMF Self-Check: one question at a time, a details step (name and WhatsApp number), then the result page.
    Scoring follows the Self-Check Master Matrix v1.0:
    - mouth opening sets the base stage,
    - difficulty moving the tongue (Yes / Often) raises it by one, up to Stage 4,
@@ -60,15 +60,12 @@ if (!customElements.get('mt-self-test')) {
             this.submitLead();
           });
           const phone = this.form.querySelector('[name="contact[phone]"]');
-          if (phone) {
-            phone.addEventListener('input', () => {
-              phone.value = phone.value.replace(/\D/g, '');
-              phone.classList.remove('is-invalid');
-            });
-          }
+          if (phone) phone.addEventListener('input', () => (phone.value = phone.value.replace(/\D/g, '')));
+          // A field's message clears as soon as the visitor edits it.
+          this.form.querySelectorAll('.mt-input').forEach((input) =>
+            input.addEventListener('input', () => this.fieldError(input, false))
+          );
         }
-        const skip = this.querySelector('[data-mt-skip]');
-        if (skip) skip.addEventListener('click', () => this.finish());
         this.render();
       }
 
@@ -205,19 +202,37 @@ if (!customElements.get('mt-self-test')) {
           });
       }
 
+      // Shows or clears the message under one field of the details form.
+      fieldError(input, on) {
+        if (!input) return;
+        input.classList.toggle('is-invalid', on);
+        input.setAttribute('aria-invalid', on ? 'true' : 'false');
+        const id = input.getAttribute('aria-describedby');
+        const msg = id ? this.form.querySelector(`#${id}`) : null;
+        if (msg) msg.hidden = !on;
+      }
+
+      // Name and WhatsApp number are required; email is optional but must look right when given.
       async submitLead() {
-        const name = (this.form.querySelector('[name="contact[name]"]') || {}).value || '';
+        const nameInput = this.form.querySelector('[name="contact[name]"]');
         const phoneInput = this.form.querySelector('[name="contact[phone]"]');
+        const emailInput = this.form.querySelector('#MtLeadEmail');
+        const name = nameInput ? nameInput.value.trim() : '';
         const phone = phoneInput ? phoneInput.value.replace(/\D/g, '') : '';
-        const error = this.form.querySelector('[data-mt-error]');
-        if (phone && !/^[6-9]\d{9}$/.test(phone)) {
-          if (error) error.hidden = false;
-          if (phoneInput) phoneInput.classList.add('is-invalid');
+        const email = emailInput ? emailInput.value.trim() : '';
+        const bad = [];
+        if (!name) bad.push(nameInput);
+        if (!/^[6-9]\d{9}$/.test(phone)) bad.push(phoneInput);
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) bad.push(emailInput);
+        [nameInput, phoneInput, emailInput].forEach((input) => this.fieldError(input, bad.includes(input)));
+        if (bad.length) {
+          if (bad[0]) bad[0].focus();
           return;
         }
-        if (error) error.hidden = true;
-        this.lead = { name: name.trim(), phone };
-        if (this.dataset.send === 'true' && (this.lead.name || phone)) {
+        this.lead = { name, phone, email };
+        const replyTo = this.form.querySelector('[name="contact[email]"]');
+        if (replyTo) replyTo.value = email || replyTo.dataset.mtFallback || replyTo.value;
+        if (this.dataset.send === 'true') {
           const result = this.compute();
           this.form.querySelector('[data-mt-field="result"]').value = result.key;
           this.form.querySelector('[data-mt-field="severity"]').value = result.severity;

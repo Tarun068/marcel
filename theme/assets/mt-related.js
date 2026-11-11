@@ -1,4 +1,6 @@
-/* Marcel related products: loads Shopify's product recommendations when the row comes into view. */
+/* Marcel related products: loads Shopify's product recommendations when the row comes near the screen.
+   It starts well ahead (1200px), because the product FAQ sits below this row and should not jump down
+   when the cards arrive. */
 if (!customElements.get('mt-related')) {
   customElements.define(
     'mt-related',
@@ -11,7 +13,7 @@ if (!customElements.get('mt-related')) {
             obs.unobserve(this);
             this.load();
           },
-          { rootMargin: '0px 0px 400px 0px' }
+          { rootMargin: '0px 0px 1200px 0px' }
         );
         observer.observe(this);
       }

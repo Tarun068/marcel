@@ -121,3 +121,7 @@ mt-result { display: block; }
 .mt-report-form .mt-phone { flex: 1 1 220px; }
 .mt-report-form .mt-err, .mt-report-done { flex-basis: 100%; }
 .mt-report-done { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--mt-wa-ink); }
+
+/* Details step: the optional email field takes the full row under name and number. */
+.mt-test-card .mt-form-grid--2 > .mt-field:nth-child(3) { grid-column: 1 / -1; }
+.mt-test-card .mt-field .mt-err { margin-top: 6px; }

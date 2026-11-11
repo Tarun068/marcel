@@ -1,27 +1,98 @@
 {{ 'mt-announcement.css' | asset_url | stylesheet_tag }}
 
+{%- comment -%}
+  Messages either stay still or move across the bar in a loop. When moving, the messages repeat so one run is
+  wider than any screen, and a second, hidden copy of the run follows it, so the loop has no gap. Screen readers
+  hear each message once; motion stops on hover and for visitors who ask for reduced motion.
+{%- endcomment -%}
 {%- if section.blocks.size > 0 -%}
-  <div class="mt mt-announce" {{ section.shopify_attributes }}>
-    <div class="mt-wrap mt-announce-row">
-      {%- for block in section.blocks -%}
-        {%- liquid
-          assign tag = 'span'
-          if block.settings.link != blank
-            assign tag = 'a'
-          endif
-        -%}
-        <{{ tag }}
-          class="mt-announce-item{% if block.settings.hide_mobile %} mt-hide-sm{% endif %}"
-          {% if block.settings.link != blank %}
-            href="{{ block.settings.link }}"
-          {% endif %}
-          {{ block.shopify_attributes }}
-        >
-          {%- render 'mt-icon', icon: block.settings.icon -%}
-          {{- block.settings.text | escape -}}
-        </{{ tag }}>
-      {%- endfor -%}
-    </div>
+  {%- liquid
+    assign scroll = false
+    if section.settings.motion != 'static'
+      assign scroll = true
+    endif
+
+    # Hide the whole bar on phones when every message is hidden there, instead of leaving an empty strip.
+    assign all_hidden_sm = true
+    for block in section.blocks
+      unless block.settings.hide_mobile
+        assign all_hidden_sm = false
+      endunless
+    endfor
+
+    assign reps = 16 | divided_by: section.blocks.size | at_least: 2
+    assign per_item = 3.3
+    if section.settings.speed == 'slow'
+      assign per_item = 4.4
+    elsif section.settings.speed == 'fast'
+      assign per_item = 2.4
+    endif
+    assign duration = reps | times: section.blocks.size | times: per_item
+  -%}
+
+  {%- capture items -%}
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign tag = 'span'
+        if block.settings.link != blank
+          assign tag = 'a'
+        endif
+      -%}
+      <{{ tag }}
+        class="mt-announce-item{% if block.settings.hide_mobile %} mt-hide-sm{% endif %}"
+        {% if block.settings.link != blank %}
+          href="{{ block.settings.link }}"
+        {% endif %}
+        {{ block.shopify_attributes }}
+      >
+        {%- render 'mt-icon', icon: block.settings.icon -%}
+        {{- block.settings.text | escape -}}
+      </{{ tag }}>
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- capture copies -%}
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign tag = 'span'
+        if block.settings.link != blank
+          assign tag = 'a'
+        endif
+      -%}
+      <{{ tag }}
+        class="mt-announce-item{% if block.settings.hide_mobile %} mt-hide-sm{% endif %}"
+        {% if block.settings.link != blank %}
+          href="{{ block.settings.link }}" tabindex="-1"
+        {% endif %}
+      >
+        {%- render 'mt-icon', icon: block.settings.icon -%}
+        {{- block.settings.text | escape -}}
+      </{{ tag }}>
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  <div
+    class="mt mt-announce{% if scroll %} mt-announce--scroll{% endif %}{% if all_hidden_sm %} mt-announce--hide-sm{% endif %}"
+    {% if scroll %}
+      style="--mt-announce-time: {{ duration }}s;"
+    {% endif %}
+    {{ section.shopify_attributes }}
+  >
+    {%- if scroll -%}
+      <div class="mt-announce-track">
+        <div class="mt-announce-run">
+          {{ items }}
+          <span class="mt-announce-copy" aria-hidden="true">
+            {%- for i in (2..reps) -%}{{ copies }}{%- endfor -%}
+          </span>
+        </div>
+        <div class="mt-announce-run mt-announce-copy" aria-hidden="true">
+          {%- for i in (1..reps) -%}{{ copies }}{%- endfor -%}
+        </div>
+      </div>
+    {%- else -%}
+      <div class="mt-wrap mt-announce-row">{{ items }}</div>
+    {%- endif -%}
   </div>
 {%- endif -%}
 
@@ -35,6 +106,44 @@
     ]
   },
   "max_blocks": 5,
+  "settings": [
+    {
+      "type": "select",
+      "id": "motion",
+      "label": "Messages",
+      "options": [
+        {
+          "value": "scroll",
+          "label": "Move across the bar"
+        },
+        {
+          "value": "static",
+          "label": "Stay still"
+        }
+      ],
+      "default": "scroll"
+    },
+    {
+      "type": "select",
+      "id": "speed",
+      "label": "Speed",
+      "options": [
+        {
+          "value": "slow",
+          "label": "Slow"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "fast",
+          "label": "Fast"
+        }
+      ],
+      "default": "normal"
+    }
+  ],
   "blocks": [
     {
       "type": "item",

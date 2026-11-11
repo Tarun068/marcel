@@ -18,7 +18,7 @@
 
       <div class="mt-art-grid">
         {%- for article in blog.articles -%}
-          {%- render 'mt-article-card', article: article, read_label: section.settings.read_label, show_image: section.settings.show_images, sizes: '(min-width: 1200px) 380px, (min-width: 600px) 45vw, 92vw' -%}
+          {%- render 'mt-article-card', article: article, read_label: section.settings.read_label, show_image: section.settings.show_images, sizes: '(min-width: 1440px) 450px, (min-width: 600px) 45vw, 92vw' -%}
         {%- else -%}
           <p class="mt-placeholder">{{ section.settings.empty_text | escape }}</p>
         {%- endfor -%}

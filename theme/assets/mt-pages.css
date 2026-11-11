@@ -5,7 +5,8 @@
    ========================================================================== */
 
 /* ---------- Page header ---------- */
-.mt-phero { padding-block: clamp(28px, 5vw, 64px) clamp(28px, 4vw, 48px); }
+/* The space under the hero is the site's section gap; the section after it starts without extra space. */
+.mt-phero { padding-block: clamp(28px, 5vw, 64px) var(--mt-space); }
 .mt-phero .mt-h1 { max-width: 22ch; }
 .mt-phero .mt-lead { margin-top: 14px; }
 .mt-phero .mt-eyebrow { display: block; margin-bottom: 12px; }
@@ -127,6 +128,18 @@
 .mt-table th { padding: 14px 18px; background: var(--mt-mist); text-align: left; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--mt-ink-3); }
 .mt-table td { padding: 15px 18px; border-top: 1px solid var(--mt-line); vertical-align: top; }
 .mt-table td b, .mt-table .mt-mmv { font-weight: 800; color: var(--mt-ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+/* Phones: each row becomes a small card (first cell on top, then "Column: value" lines) instead of a table that scrolls sideways. */
+@media (max-width: 640px) {
+  .mt-table, .mt-table tbody, .mt-table td { display: block; }
+  .mt-table { min-width: 0; }
+  .mt-table thead { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .mt-table tr { display: grid; gap: 6px; padding: 14px 16px; }
+  .mt-table tr + tr { border-top: 1px solid var(--mt-line); }
+  .mt-table td { padding: 0; border-top: 0; }
+  .mt-table td:first-child { margin-bottom: 2px; }
+  .mt-table td:not(:first-child)::before { content: attr(data-label) ": "; font-weight: 600; color: var(--mt-ink-3); }
+  .mt-table td b, .mt-table .mt-mmv { white-space: normal; }
+}
 
 /* ---------- Article cards ---------- */
 .mt-art-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
@@ -173,3 +186,23 @@
   .mt-mtext-grid { grid-template-columns: minmax(0, 1fr); }
   .mt-mtext-grid .mt-mtext-media { order: -1; width: min(100%, 520px); margin-inline: auto; }
 }
+
+/* ---------- Guide with a video beside the text ---------- */
+.mt-guide-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .92fr); gap: clamp(28px, 4vw, 64px); align-items: center; }
+.mt-guide-split .mt-prose { max-width: none; }
+.mt-guide-video mt-video { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--mt-r-xl); background: var(--mt-navy); box-shadow: 0 26px 52px -36px rgba(12, 42, 61, .5); }
+.mt-guide-video--portrait { justify-self: center; width: min(100%, 360px); }
+.mt-guide-video--portrait mt-video { aspect-ratio: 9 / 16; }
+.mt-guide-video mt-video :is(img, iframe, video) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
+.mt .mt-guide-video .mt-video-play { position: absolute; inset: 0; display: grid; place-items: center; width: 100%; background: linear-gradient(180deg, rgba(13, 38, 59, 0) 50%, rgba(13, 38, 59, .45)); }
+.mt-guide-video .mt-video-play span { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 99px; background: rgba(255, 255, 255, .94); color: var(--mt-navy); box-shadow: 0 10px 30px -10px rgba(0, 0, 0, .5); transition: transform .2s; }
+.mt-guide-video .mt-video-play:hover span { transform: scale(1.06); }
+.mt-guide-video .mt-video-play svg { width: 26px; height: 26px; margin-left: 4px; fill: currentColor; }
+@media (max-width: 900px) {
+  .mt-guide-split { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Page hero with centred text (self-check) */
+.mt-phero--center .mt-phero-copy { max-width: 780px; margin-inline: auto; text-align: center; }
+.mt-phero--center .mt-crumbs, .mt-phero--center .mt-phero-btns { justify-content: center; }
+.mt-phero--center .mt-h1, .mt-phero--center .mt-lead, .mt-phero--center .mt-find-form { margin-inline: auto; }

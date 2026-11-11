@@ -33,9 +33,10 @@
       "type": "mt-guide",
       "settings": {
         "show_toc": true,
-        "toc_title": "On this page",
+        "toc_title": "On This Page",
         "read_label": "[n] min read",
         "no_articles": "Articles will appear here once they are published.",
+        "card_media": "photo",
         "background": "paper",
         "sheet": false,
         "spacing": "tight"
@@ -44,7 +45,7 @@
         "chapter_1": {
           "type": "chapter",
           "settings": {
-            "heading": "What is OSMF?",
+            "heading": "What Is OSMF?",
             "toc_label": "Understanding OSMF",
             "anchor": "what-is-osmf"
           }
@@ -58,8 +59,8 @@
         "chapter_2": {
           "type": "chapter",
           "settings": {
-            "heading": "Signs & symptoms",
-            "toc_label": "Signs & symptoms",
+            "heading": "Signs & Symptoms",
+            "toc_label": "Signs & Symptoms",
             "anchor": "signs"
           }
         },
@@ -79,7 +80,7 @@
         "text_3": {
           "type": "text",
           "settings": {
-            "text": "<h3>Why does my mouth burn when I eat spicy food?</h3><p>Burning can happen when the lining of the mouth is irritated or sensitive. It can have several causes, including OSMF, so burning alone does not confirm the condition. If it keeps returning or occurs with cheek tightness or reduced mouth opening, arrange an assessment.</p>"
+            "text": "<h3>Why Does My Mouth Burn When I Eat Spicy Food?</h3><p>Burning can happen when the lining of the mouth is irritated or sensitive. It can have several causes, including OSMF, so burning alone does not confirm the condition. If it keeps returning or occurs with cheek tightness or reduced mouth opening, arrange an assessment.</p>"
           }
         },
         "link_1": {
@@ -92,8 +93,8 @@
         "chapter_3": {
           "type": "chapter",
           "settings": {
-            "heading": "Risk factors",
-            "toc_label": "Risk factors",
+            "heading": "Risk Factors",
+            "toc_label": "Risk Factors",
             "anchor": "risk-factors"
           }
         },
@@ -101,23 +102,25 @@
           "type": "card",
           "settings": {
             "icon": "ban",
-            "title": "Areca nut / supari & chewing products",
-            "text": "Supari, gutkha, pan masala and mawa."
+            "title": "Areca Nut / Supari & Chewing Products",
+            "text": "Supari, gutkha, pan masala and mawa.",
+            "art": "areca"
           }
         },
         "card_2": {
           "type": "card",
           "settings": {
             "icon": "ban",
-            "title": "Tobacco products",
-            "text": "Khaini, chewing tobacco, tobacco with gutkha or pan masala, bidi and cigarettes."
+            "title": "Tobacco Products",
+            "text": "Khaini, chewing tobacco, tobacco with gutkha or pan masala, bidi and cigarettes.",
+            "art": "tobacco"
           }
         },
         "card_3": {
           "type": "card",
           "settings": {
             "icon": "clock",
-            "title": "Frequent & long-term chewing",
+            "title": "Frequent & Long-Term Chewing",
             "text": "The more often and longer you chew, the greater the risk."
           }
         },
@@ -125,15 +128,16 @@
           "type": "card",
           "settings": {
             "icon": "bowl",
-            "title": "Poor nutrition",
-            "text": "May make oral tissues more vulnerable."
+            "title": "Poor Nutrition",
+            "text": "May make oral tissues more vulnerable.",
+            "art": "nutrition"
           }
         },
         "card_5": {
           "type": "card",
           "settings": {
             "icon": "users",
-            "title": "Genetic susceptibility",
+            "title": "Genetic Susceptibility",
             "text": "Some people may be more vulnerable."
           }
         },
@@ -141,14 +145,14 @@
           "type": "card",
           "settings": {
             "icon": "sparkle",
-            "title": "Poor oral hygiene",
+            "title": "Poor Oral Hygiene",
             "text": "Can contribute to poor overall oral health."
           }
         },
         "chapter_4": {
           "type": "chapter",
           "settings": {
-            "heading": "Mouth opening and stages",
+            "heading": "Mouth Opening and Stages",
             "toc_label": "Stages",
             "anchor": "stages"
           }
@@ -176,8 +180,8 @@
         "chapter_5": {
           "type": "chapter",
           "settings": {
-            "heading": "Can OSMF turn into oral cancer?",
-            "toc_label": "Oral cancer risk",
+            "heading": "Can OSMF Turn into Oral Cancer?",
+            "toc_label": "Oral Cancer Risk",
             "anchor": "cancer-risk"
           }
         },
@@ -198,8 +202,8 @@
         "chapter_6": {
           "type": "chapter",
           "settings": {
-            "heading": "Care options & specialist guidance",
-            "toc_label": "Care options",
+            "heading": "Care Options & Specialist Guidance",
+            "toc_label": "Care Options",
             "anchor": "care-options"
           }
         },
@@ -214,27 +218,6 @@
           "settings": {
             "label": "Find an OSMF Specialist Doctor",
             "url": "/pages/find-osmf-specialist"
-          }
-        },
-        "chapter_7": {
-          "type": "chapter",
-          "settings": {
-            "heading": "Patient guide",
-            "toc_label": "Patient guide",
-            "anchor": "patient-guide"
-          }
-        },
-        "text_7": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Practical reads for every stage, from checking your mouth opening to quitting the habit.</p>"
-          }
-        },
-        "articles_1": {
-          "type": "articles",
-          "settings": {
-            "limit": 6,
-            "show_images": false
           }
         }
       },
@@ -256,16 +239,13 @@
         "chapter_4",
         "text_4",
         "table_1",
+        "callout_1",
         "fine_1",
         "chapter_5",
         "text_5",
-        "callout_1",
         "chapter_6",
         "text_6",
-        "link_2",
-        "chapter_7",
-        "text_7",
-        "articles_1"
+        "link_2"
       ]
     },
     "faq": {
@@ -277,9 +257,9 @@
         "one_at_a_time": false,
         "schema_markup": true,
         "show_help": true,
-        "help_title": "Have questions?",
+        "help_title": "Have Questions?",
         "help_text": "Our In-house OSMF Consultant can help with programme questions and your next step.",
-        "whatsapp_label": "WhatsApp the Patient HelpDesk",
+        "whatsapp_label": "WhatsApp the MARCEL Team",
         "link_label": "See all FAQs",
         "background": "mist",
         "sheet": false,

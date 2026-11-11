@@ -75,12 +75,12 @@ if (!customElements.get('mt-result')) {
           chips.parentElement.hidden = !html;
         }
 
-        // Gauge: the visitor's mouth-opening band, or the band that matches the result in the theme editor.
-        const FINGERS = { gt35: 3, '26to35': 2, '15to25': 1, lt15: 0, lt5: 0 };
-        const byKey = { healthy: 3, stage1: 3, stage2: 2, stage3: 1, stage4: 0, investigate: 0, stage5: 0 };
+        // Mouth-opening photo: the visitor's own answer band, or the band that matches the result in the theme editor.
+        const BANDS = ['gt35', '26to35', '15to25', 'lt15', 'lt5'];
+        const byKey = { healthy: 'gt35', stage1: 'gt35', stage2: '26to35', stage3: '15to25', stage4: 'lt15', investigate: 'lt5', stage5: 'lt5' };
         const opening = r.answers && r.answers.opening;
-        const fingers = FINGERS[opening] !== undefined ? FINGERS[opening] : byKey[key] !== undefined ? byKey[key] : 3;
-        if (window.MarcelTheme) window.MarcelTheme.setGauge(target.querySelector('[data-mt-gauge]'), fingers);
+        const band = BANDS.includes(opening) ? opening : byKey[key] || 'gt35';
+        target.querySelectorAll('[data-mt-open-photos] .mt-open-photo').forEach((img) => img.classList.toggle('is-on', img.dataset.v === band));
 
         const severity = target.querySelector('[data-mt-severity]');
         if (severity) {

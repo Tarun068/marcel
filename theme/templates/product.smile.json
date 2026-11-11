@@ -11,29 +11,99 @@
   "sections": {
     "main": {
       "type": "mt-main-product",
+      "blocks": {
+        "feature_1": {
+          "type": "perk",
+          "settings": {
+            "icon": "leaf",
+            "text": "Premium Herbal Complex"
+          }
+        },
+        "feature_2": {
+          "type": "perk",
+          "settings": {
+            "icon": "sparkle",
+            "text": "Natural flavors"
+          }
+        },
+        "feature_3": {
+          "type": "perk",
+          "settings": {
+            "icon": "drop",
+            "text": "No artificial sweeteners"
+          }
+        },
+        "feature_4": {
+          "type": "perk",
+          "settings": {
+            "icon": "shield",
+            "text": "No parabens"
+          }
+        },
+        "feature_5": {
+          "type": "perk",
+          "settings": {
+            "icon": "check",
+            "text": "No SLS"
+          }
+        },
+        "accordion_1": {
+          "type": "accordion",
+          "settings": {
+            "title": "Delivery and returns",
+            "text": "<p>Ships across India in discreet packaging. Delivery times are shown at checkout.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4",
+        "feature_5",
+        "accordion_1"
+      ],
       "settings": {
+        "headline": "Oral care beyond teeth & gums™",
+        "supporting": "The Real Total Oral Care",
+        "intro": "<p>You already look after your teeth and gums. MARCEL Smile™ invites you to care for the soft tissues inside your mouth too, as part of a more complete daily routine.</p>",
+        "details": "MRP inclusive of all taxes",
+        "how_lines": "Take a pea-sized amount.\nBrush thoroughly for at least two minutes, preferably twice daily, or as directed by a qualified professional.\nSpit out and rinse your mouth with water.",
+        "safety": "",
+        "cta_label": "",
         "cta_to": "consult",
+        "cta_link": "",
+        "cta2_label": "",
         "cta2_to": "foundation",
+        "cta2_link": "",
+        "shop_link": "",
         "home_label": "Home",
         "shop_label": "Products",
         "image_fit": "cover",
         "gallery_label": "Product images and details",
-        "how_title": "How to use",
+        "thumbs_label": "Choose a picture",
+        "prev_label": "Previous picture",
+        "next_label": "Next picture",
+        "thumbs_prev_label": "Earlier pictures",
+        "thumbs_next_label": "More pictures",
+        "how_title": "How to Use",
         "how_thumb": "How to use",
-        "routine_title": "Your routine",
+        "routine_title": "Your Routine",
         "routine_thumb": "Routine",
-        "ingredients_title": "Key ingredients",
+        "ingredients_title": "Key Ingredients",
         "ingredients_thumb": "Ingredients",
-        "free_title": "Made with care",
-        "kit_inside_title": "What’s inside",
+        "free_title": "Made with Care",
+        "kit_inside_title": "What’s Inside",
         "kit_thumb": "In the kit",
-        "kit_heading": "In this kit",
+        "kit_heading": "In This Kit",
         "best_prefix": "Best for",
-        "add_label": "Buy MARCEL Smile™ for [price]",
+        "add_label": "Add to cart",
         "sold_out_label": "Sold out",
         "variant_style": "cards",
         "pack_label": "Pack size",
+        "pack_notes": "30 g | Compact pack, handy for travel\n100 g | Larger pack, better value for home use",
         "show_buy_now": true,
+        "features_heading": "Key Features",
         "qty_label": "Quantity",
         "minus_label": "Decrease quantity",
         "plus_label": "Increase quantity",
@@ -49,63 +119,17 @@
         "acc_about": "About this product",
         "background": "paper",
         "sheet": false,
-        "spacing": "tight",
-        "headline": "Oral care beyond teeth & gums™",
-        "supporting": "The Real Total Oral Care",
-        "intro": "<p>You already look after your teeth and gums. MARCEL Smile™ invites you to care for the soft tissues inside your mouth too, as part of a more complete daily routine.</p>",
-        "details": "MRP inclusive of all taxes",
-        "how_lines": "Take a pea-sized amount.\nBrush thoroughly for at least two minutes, preferably twice daily, or as directed by a qualified professional.\nSpit out and rinse your mouth with water.",
-        "safety": "",
-        "pack_notes": "30 g | Compact pack, handy for travel\n100 g | Larger pack, better value for home use",
-        "cta_label": "",
-        "cta2_label": ""
-      },
-      "blocks": {
-        "perk_1": {
-          "type": "perk",
-          "settings": {
-            "icon": "box",
-            "text": "Discreet packaging"
-          }
-        },
-        "perk_2": {
-          "type": "perk",
-          "settings": {
-            "icon": "truck",
-            "text": "Delivery across India"
-          }
-        },
-        "accordion_1": {
-          "type": "accordion",
-          "settings": {
-            "title": "Delivery and returns",
-            "text": "<p>Ships across India in discreet packaging. Delivery times are shown at checkout.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "perk_1",
-        "perk_2",
-        "accordion_1"
-      ]
+        "spacing": "tight"
+      }
     },
     "matters": {
       "type": "mt-guide",
-      "settings": {
-        "show_toc": false,
-        "toc_title": "On this page",
-        "read_label": "[n] min read",
-        "no_articles": "Articles will appear here once they are published.",
-        "background": "mist",
-        "sheet": false,
-        "spacing": "normal"
-      },
       "blocks": {
         "chapter_1": {
           "type": "chapter",
           "settings": {
-            "heading": "Your whole mouth matters.",
-            "toc_label": "Your whole mouth matters",
+            "heading": "Your Whole Mouth Matters.",
+            "toc_label": "Your Whole Mouth Matters",
             "anchor": "whole-mouth"
           }
         },
@@ -119,63 +143,82 @@
       "block_order": [
         "chapter_1",
         "text_1"
-      ]
+      ],
+      "settings": {
+        "show_toc": false,
+        "toc_title": "On This Page",
+        "read_label": "[n] min read",
+        "no_articles": "Articles will appear here once they are published.",
+        "card_media": "icon",
+        "video_url": "",
+        "video_title": "",
+        "video_shape": "landscape",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
     },
     "inside": {
       "type": "mt-icon-cards",
-      "settings": {
-        "eyebrow": "What’s inside",
-        "heading": "Five things that make MARCEL Smile™ different",
-        "center": false,
-        "columns": "5",
-        "background": "paper",
-        "sheet": false,
-        "spacing": "normal"
-      },
       "blocks": {
         "card_1": {
           "type": "card",
           "settings": {
             "icon": "leaf",
+            "art": "none",
             "title": "Premium Herbal Complex",
             "text": "A blend of plant extracts.",
-            "link_to": "custom"
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
           }
         },
         "card_2": {
           "type": "card",
           "settings": {
             "icon": "sparkle",
-            "title": "Natural flavors",
+            "art": "none",
+            "title": "Natural Flavors",
             "text": "",
-            "link_to": "custom"
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
           }
         },
         "card_3": {
           "type": "card",
           "settings": {
             "icon": "drop",
-            "title": "No artificial sweeteners",
+            "art": "none",
+            "title": "No Artificial Sweeteners",
             "text": "Naturally pleasant taste.",
-            "link_to": "custom"
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
           }
         },
         "card_4": {
           "type": "card",
           "settings": {
             "icon": "shield",
-            "title": "No parabens",
+            "art": "none",
+            "title": "No Parabens",
             "text": "No synthetic preservatives.",
-            "link_to": "custom"
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
           }
         },
         "card_5": {
           "type": "card",
           "settings": {
             "icon": "check",
+            "art": "none",
             "title": "No SLS",
             "text": "No harsh foaming agent.",
-            "link_to": "custom"
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
           }
         }
       },
@@ -185,12 +228,124 @@
         "card_3",
         "card_4",
         "card_5"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "What’s inside",
+        "heading": "Five Things That Make MARCEL Smile™ Different",
+        "text": "",
+        "center": false,
+        "columns": "5",
+        "media": "icon",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "related": {
+      "type": "mt-related-products",
+      "disabled": true,
+      "settings": {
+        "source": "metafield",
+        "intent": "related",
+        "limit": 6,
+        "eyebrow": "More from MARCEL",
+        "heading": "You May Also Like",
+        "details_label": "View product details",
+        "add_label": "Add to cart",
+        "sold_out_label": "Sold out",
+        "card_style": "compact",
+        "image_fit": "cover",
+        "layout": "carousel",
+        "per_desktop": "4",
+        "prev_label": "Previous products",
+        "next_label": "Next products",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "faq": {
+      "type": "mt-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "How do I use MARCEL Smile™?",
+            "answer": "<p>Take a pea-sized amount. Brush thoroughly for at least two minutes, preferably twice daily, or as directed by a qualified professional. Spit out and rinse your mouth with water.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "What is inside MARCEL Smile™?",
+            "answer": "<ul><li>Premium Herbal Complex, a blend of plant extracts</li><li>Natural flavors</li><li>No artificial sweeteners, for a naturally pleasant taste</li><li>No parabens, so no synthetic preservatives</li><li>No SLS, a harsh foaming agent</li></ul>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Which pack size should I choose?",
+            "answer": "<p>The 30 g pack is compact and handy for travel. The 100 g pack is the larger pack and the best value for home.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Why care for the soft tissues in my mouth?",
+            "answer": "<p>Teeth, gums, enamel and fresh breath all matter, and so do the soft tissues lining the inside of your mouth. MARCEL Smile™ brings these tissues into your daily oral care, so your routine looks after more than just teeth and gums.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4"
+      ],
+      "settings": {
+        "eyebrow": "MARCEL Smile™",
+        "heading": "Frequently Asked Questions",
+        "open_first": false,
+        "one_at_a_time": false,
+        "schema_markup": true,
+        "show_help": true,
+        "help_title": "Have Questions?",
+        "help_text": "The MARCEL Team can help with any question about MARCEL Smile™.",
+        "whatsapp_label": "WhatsApp the MARCEL Team",
+        "link_label": "",
+        "link": "/pages/faq",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "1794375560ff80f120": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_H4Y9nw": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_H4Y9nw"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
     "main",
     "matters",
-    "inside"
+    "inside",
+    "1794375560ff80f120",
+    "related",
+    "faq"
   ]
 }

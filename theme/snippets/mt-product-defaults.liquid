@@ -1,5 +1,5 @@
 {%- comment -%}
-  Outputs fallback card details for the four MARCEL products, matched on the handle, as
+  Outputs fallback card details for the MARCEL products and kits, matched on the handle, as
   "role|color|meta|best|benefit;benefit;benefit". Used only where the product's "marcel" metafields are empty,
   so products imported from setup/products.csv look right before any metafields are filled in.
 
@@ -19,6 +19,10 @@
   elsif h contains 'smile'
     echo 'Daily oral care|#2265C4|Toothpaste in 30 g and 100 g packs|Everyday care|Premium herbal complex;No SLS, no parabens;No artificial sweeteners'
   elsif h contains 'mo-device' or h contains 'moflex'
-    echo 'Optional adjunct|#077C87|Mouth-opening support device|When recommended|Supports guided mouth-opening exercises;Gentle. Gradual. Guided.;Used with professional guidance'
+    echo 'Optional adjunct|#077C87|Mouth-opening support device|When recommended|Supports guided mouth-opening exercises;Gentle and gradual, never forced.;Used with professional guidance'
+  elsif h contains 'foundation'
+    echo 'Stage 1 or 2|#168C83|Oral spray and toothpaste kit|Foundation pathway|MARCEL Ora-Care™ Oral Spray;MARCEL Smile™ Toothpaste;Use as advised by a healthcare professional'
+  elsif h contains 'advance'
+    echo 'Stage 3 or 4|#5A5CBE|Oral rinse and toothpaste kit|Advance pathway|MARCEL Ora-Shield™ Oral Rinse;MARCEL Smile™ Toothpaste;Use as advised by a healthcare professional'
   endif
 -%}

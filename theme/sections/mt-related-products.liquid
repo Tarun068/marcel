@@ -1,3 +1,8 @@
+{%- comment -%}
+  "You May Also Like" on product pages: the products picked in the product's marcel.related metafield, else
+  Shopify's recommendations (fetched by assets/mt-related.js when the row comes into view). Products tagged
+  mt-hidden, such as the consultation booking, are left out.
+{%- endcomment -%}
 {{ 'mt-products.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'mt-related.js' | asset_url }}" defer="defer"></script>
@@ -9,8 +14,34 @@
   if section.settings.source == 'metafield' and picked.size > 0
     assign use_picked = true
   endif
-  assign card_sizes = '(min-width: 1200px) 380px, (min-width: 961px) 31vw, (min-width: 761px) 46vw, 92vw'
+  assign items = recommendations.products
+  if use_picked
+    assign items = picked
+  endif
+
+  assign carousel = false
+  if section.settings.layout == 'carousel'
+    assign carousel = true
+  endif
+  assign per = section.settings.per_desktop | default: '4'
+  assign compact_cards = true
+  if section.settings.card_style == 'detailed'
+    assign compact_cards = false
+  endif
+  assign card_sizes = '(min-width: 1440px) 450px, (min-width: 961px) 31vw, (min-width: 761px) 46vw, 92vw'
+  if carousel
+    assign card_sizes = '(min-width: 1440px) 340px, (min-width: 750px) 36vw, 82vw'
+    if per == '3'
+      assign card_sizes = '(min-width: 1440px) 450px, (min-width: 750px) 36vw, 82vw'
+    endif
+  endif
 -%}
+{%- comment -%} Loaded here, outside mt-related, because scripts inside the fetched cards would not run. {%- endcomment -%}
+{%- if carousel -%}
+  {{ 'mt-carousel.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'mt-carousel.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+<script src="{{ 'mt-card-sizes.js' | asset_url }}" defer="defer"></script>
 
 <mt-related
   class="mt-related"
@@ -20,23 +51,64 @@
 >
   {%- if use_picked or recommendations.products_count > 0 -%}
     <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-products' %}">
-      <div class="mt-wrap">
-        {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading -%}
-        <div class="mt-pgrid mt-swipe">
-          {%- if use_picked -%}
-            {%- for item in picked limit: limit -%}
-              {%- render 'mt-product-card', product: item, section_id: section.id, add_label: section.settings.add_label,
-            details_label: section.settings.details_label, sold_out_label: section.settings.sold_out_label, image_fit: section.settings.image_fit, sizes: card_sizes -%}
-            {%- endfor -%}
-          {%- else -%}
-            {%- for item in recommendations.products -%}
-              {%- if item.tags contains 'mt-hidden' -%}{%- continue -%}{%- endif -%}
-              {%- render 'mt-product-card', product: item, section_id: section.id, add_label: section.settings.add_label,
-            details_label: section.settings.details_label, sold_out_label: section.settings.sold_out_label, image_fit: section.settings.image_fit, sizes: card_sizes -%}
-            {%- endfor -%}
+      {%- if carousel -%}
+        <mt-carousel
+          class="mt-wrap mt-car mt-car--{{ per }}"
+          style="--per-d: {{ per }};"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="{{ section.settings.heading | strip_html | escape }}"
+        >
+      {%- else -%}
+        <div class="mt-wrap">
+      {%- endif -%}
+        <div class="mt-sec-head-row">
+          {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading -%}
+          {%- if carousel -%}
+            <div class="mt-car-side">
+              <div class="mt-car-nav" hidden>
+                <button type="button" class="mt-car-arrow" data-dir="-1" aria-label="{{ section.settings.prev_label | escape }}">
+                  {%- render 'mt-icon', icon: 'arrow-left' -%}
+                </button>
+                <button type="button" class="mt-car-arrow" data-dir="1" aria-label="{{ section.settings.next_label | escape }}">
+                  {%- render 'mt-icon', icon: 'arrow-right' -%}
+                </button>
+              </div>
+            </div>
           {%- endif -%}
         </div>
-      </div>
+
+        {%- if carousel -%}
+          <ul class="mt-car-track" role="list">
+        {%- else -%}
+          <div class="mt-pgrid mt-swipe">
+        {%- endif -%}
+          {%- for item in items limit: limit -%}
+            {%- if item.tags contains 'mt-hidden' -%}{%- continue -%}{%- endif -%}
+            {%- if carousel -%}<li class="mt-car-item">{%- endif -%}
+            {%- render 'mt-product-card',
+              product: item,
+              compact: compact_cards,
+              section_id: section.id,
+              add_label: section.settings.add_label,
+              details_label: section.settings.details_label,
+              sold_out_label: section.settings.sold_out_label,
+              image_fit: section.settings.image_fit,
+              sizes: card_sizes
+            -%}
+            {%- if carousel -%}</li>{%- endif -%}
+          {%- endfor -%}
+        {%- if carousel -%}
+          </ul>
+          <div class="mt-car-dots"></div>
+        {%- else -%}
+          </div>
+        {%- endif -%}
+      {%- if carousel -%}
+        </mt-carousel>
+      {%- else -%}
+        </div>
+      {%- endif -%}
     </section>
   {%- endif -%}
 </mt-related>
@@ -83,21 +155,21 @@
       "id": "limit",
       "label": "Number of products",
       "min": 2,
-      "max": 6,
+      "max": 10,
       "step": 1,
-      "default": 3
+      "default": 6
     },
     {
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow",
-      "default": "Works best together"
+      "default": "More from MARCEL"
     },
     {
       "type": "inline_richtext",
       "id": "heading",
       "label": "Heading",
-      "default": "Complete your routine"
+      "default": "You May Also Like"
     },
     {
       "type": "text",
@@ -120,6 +192,23 @@
     },
     {
       "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "info": "Compact cards show the title, size choice, key points, price and Add to cart, and always show the whole picture.",
+      "options": [
+        {
+          "value": "compact",
+          "label": "Compact"
+        },
+        {
+          "value": "detailed",
+          "label": "Detailed, with best-for tag and details link"
+        }
+      ],
+      "default": "compact"
+    },
+    {
+      "type": "select",
       "id": "image_fit",
       "label": "Image fit",
       "options": [
@@ -133,6 +222,56 @@
         }
       ],
       "default": "cover"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Cards shown as",
+      "options": [
+        {
+          "value": "carousel",
+          "label": "Carousel with arrows"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
+      ],
+      "default": "carousel"
+    },
+    {
+      "type": "select",
+      "id": "per_desktop",
+      "label": "Cards in view on large screens",
+      "options": [
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "text",
+      "id": "prev_label",
+      "label": "Previous button label",
+      "info": "Read out by screen readers.",
+      "default": "Previous products"
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "Next button label",
+      "info": "Read out by screen readers.",
+      "default": "Next products"
     },
     {
       "type": "header",

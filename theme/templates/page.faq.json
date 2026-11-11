@@ -21,7 +21,7 @@
         "sheet": false,
         "spacing": "none",
         "current_label": "FAQs",
-        "heading": "Frequently asked questions",
+        "heading": "Frequently Asked Questions",
         "text": "Answers about OSMF, MARCEL OMR Therapy™, consultations and products.",
         "note": "This website provides general information and is not a substitute for an examination or advice from a qualified healthcare professional. Please seek prompt professional assessment for persistent or worsening symptoms or any unusual oral change.",
         "art": "faq"
@@ -37,9 +37,9 @@
         "one_at_a_time": false,
         "schema_markup": true,
         "show_help": true,
-        "help_title": "Can’t find your answer?",
+        "help_title": "Can’t Find Your Answer?",
         "help_text": "Our In-house OSMF Consultant can help with programme questions and your next step.",
-        "whatsapp_label": "WhatsApp the Patient HelpDesk",
+        "whatsapp_label": "WhatsApp the MARCEL Team",
         "link_label": "Talk to a MARCEL OSMF Consultant",
         "background": "paper",
         "sheet": false,
@@ -173,7 +173,7 @@
         "category_4": {
           "type": "category",
           "settings": {
-            "title": "Products & how to use"
+            "title": "Products & How to Use"
           }
         },
         "question_16": {

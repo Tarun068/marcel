@@ -49,6 +49,19 @@
         else
           assign zone = 0
       endcase
+      # Mouth-opening photo shown before mt-result.js picks the one for the visitor's own answer.
+      case block.settings.key
+        when 'stage2'
+          assign open_default = '26to35'
+        when 'stage3'
+          assign open_default = '15to25'
+        when 'stage4'
+          assign open_default = 'lt15'
+        when 'stage5', 'investigate'
+          assign open_default = 'lt5'
+        else
+          assign open_default = 'gt35'
+      endcase
       assign points = block.settings.box_points | newline_to_br | split: '<br />'
       assign kit = block.settings.kit
       assign kit_form = 'MtResultKit-' | append: block.id
@@ -96,7 +109,13 @@
             </div>
             <aside class="mt-gauge-card">
               <p class="mt-mini-h">{{ section.settings.gauge_heading | escape }}</p>
-              {%- render 'mt-gauge', fingers: 3, color: block.settings.color, caption: section.settings.gauge_caption -%}
+              {%- comment -%} The same mouth-opening photos as the self-check, one per answer band. {%- endcomment -%}
+              <span class="mt-open-frame" data-mt-open-photos>
+                {%- assign open_values = 'gt35,26to35,15to25,lt15,lt5' | split: ',' -%}
+                {%- for v in open_values -%}
+                  <img class="mt-open-photo{% if v == open_default %} is-on{% endif %}" data-v="{{ v }}" src="{{ 'mt-stage-' | append: forloop.index | append: '.webp' | asset_url }}" width="720" height="540" alt="" loading="lazy">
+                {%- endfor -%}
+              </span>
               <div class="mt-gauge-row"><span>{{ section.settings.healthy_label | escape }}</span><b>{{ section.settings.healthy_value | escape }}</b></div>
               <div class="mt-gauge-row"><span>{{ block.settings.range_label | escape }}</span><b>{{ block.settings.range | escape }}</b></div>
               <a class="mt-link" href="{{ test_link }}" data-mt-retake>{%- render 'mt-icon', icon: 'refresh' -%}{{ section.settings.retake_label | escape }}</a>
@@ -412,7 +431,7 @@
       "id": "wa_message",
       "label": "WhatsApp message",
       "info": "[result] is replaced with the result title.",
-      "default": "Hi MARCEL team, I'd like to talk to a MARCEL OSMF Consultant. My self-check result: [result]."
+      "default": "Hi MARCEL Team, I'd like to talk to a MARCEL OSMF Consultant. My self-check result: [result]."
     },
     {
       "type": "header",

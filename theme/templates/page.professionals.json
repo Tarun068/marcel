@@ -22,7 +22,7 @@
         "spacing": "none",
         "current_label": "For healthcare professionals",
         "eyebrow": "For dentists and healthcare professionals",
-        "heading": "MARCEL OMR Therapy™ for healthcare professionals",
+        "heading": "MARCEL OMR Therapy™ for Healthcare Professionals",
         "text": "Information about the therapy, OSMF, clinical evidence, research and the MARCEL OSMF Care Specialist network.",
         "button_1_label": "Professional enquiry",
         "button_1_link": "#enquiry",
@@ -33,7 +33,7 @@
       "type": "mt-icon-cards",
       "settings": {
         "eyebrow": "Professional pathway",
-        "heading": "Everything in one place",
+        "heading": "Everything in One Place",
         "center": false,
         "columns": "3",
         "background": "paper",
@@ -45,8 +45,8 @@
           "type": "card",
           "settings": {
             "icon": "shield",
-            "title": "MARCEL OMR Therapy™ overview",
-            "text": "The 3-pillar approach, the Foundation and Advance pathways and the 12-week care journey.",
+            "title": "MARCEL OMR Therapy™ Overview",
+            "text": "The 4-pillar approach, the Foundation and Advance pathways and the 12-week care journey.",
             "link_to": "therapy",
             "link_label": "Read the overview"
           }
@@ -55,7 +55,7 @@
           "type": "card",
           "settings": {
             "icon": "book",
-            "title": "OSMF information",
+            "title": "OSMF Information",
             "text": "Causes, risk factors, symptoms, mouth opening and stages.",
             "link_to": "custom",
             "link_label": "Understand OSMF",
@@ -66,7 +66,7 @@
           "type": "card",
           "settings": {
             "icon": "test",
-            "title": "Clinical evidence",
+            "title": "Clinical Evidence",
             "text": "The 2026 CTRI-registered study and earlier clinical evaluations.",
             "link_to": "evidence",
             "link_label": "See the evidence"
@@ -87,7 +87,7 @@
           "type": "card",
           "settings": {
             "icon": "box",
-            "title": "Product information",
+            "title": "Product Information",
             "text": "MARCEL Ora-Care™, Ora-Shield™, Smile™ and the MO Device.",
             "link_to": "products",
             "link_label": "View products"
@@ -97,7 +97,7 @@
           "type": "card",
           "settings": {
             "icon": "doctor",
-            "title": "OSMF Care Specialist pathway",
+            "title": "OSMF Care Specialist Pathway",
             "text": "Join the MARCEL OSMF Care Specialist network and appear in the specialist finder.",
             "link_to": "custom",
             "link_label": "Send an enquiry",
@@ -123,7 +123,7 @@
         "name": "Dr. Niyati Thakker, BDS",
         "role": "MARCEL OSMF Clinical Consultant",
         "heading_size": "large",
-        "heading": "A designated clinical contact for participating doctors",
+        "heading": "A Designated Clinical Contact for Participating Doctors",
         "text": "Dr. Niyati Thakker supports doctors in the MARCEL OSMF Care Specialist network.",
         "link_label": "",
         "background": "mist",
@@ -138,14 +138,14 @@
       "settings": {
         "anchor": "enquiry",
         "eyebrow": "Professional enquiry",
-        "heading": "Contact the MARCEL professional team",
+        "heading": "Contact the MARCEL Professional Team",
         "text": "For clinical information, research collaboration or joining the OSMF Care Specialist network.",
         "show_whatsapp": false,
-        "whatsapp_label": "WhatsApp the Patient HelpDesk",
+        "whatsapp_label": "WhatsApp the MARCEL Team",
         "whatsapp_note": "For questions about the programme and your next step",
-        "phone_note": "Call the MARCEL team",
+        "phone_note": "Call the MARCEL Team",
         "email_note": "For professional, business and research enquiries",
-        "form_heading": "Your enquiry",
+        "form_heading": "Your Enquiry",
         "type_label": "Enquiry type",
         "types": "Professional enquiry\nBecome a MARCEL OSMF Care Specialist\nResearch / collaboration enquiry\nBusiness enquiry",
         "name_label": "Full name",
@@ -154,7 +154,7 @@
         "city_label": "City",
         "message_label": "Your message",
         "submit_label": "Send enquiry",
-        "success_text": "Thank you. Your enquiry has reached the MARCEL team.",
+        "success_text": "Thank you. Your enquiry has reached the MARCEL Team.",
         "fine": "Please do not send personal medical records through this form. For an examination, see an OSMF Specialist doctor.",
         "background": "paper",
         "sheet": false,

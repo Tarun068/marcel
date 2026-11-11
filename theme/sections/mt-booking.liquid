@@ -203,7 +203,7 @@
               <a class="mt-small mt-sum-link" href="{{ test_link }}" data-mt-sum-test>{{ s.take_now | escape }}</a>
             </span>
           </div>
-          <div class="mt-sum-row">
+          <div class="mt-sum-row mt-sum-row--fee">
             {%- render 'mt-icon', icon: 'shield' -%}
             <span><small>{{ s.sum_fee | escape }}</small><b>{{ fee }}</b>{% if s.fee_text != blank %}<span class="mt-fine">{{ s.fee_text | escape }}</span>{% endif %}</span>
           </div>

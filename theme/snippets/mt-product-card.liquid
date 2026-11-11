@@ -13,6 +13,9 @@
   - fallback_url: {String} link when there is no product
   - details_label: {String} label of the product-details link (optional)
   - enquire_label: {String} WhatsApp enquiry label shown instead of Add to cart while prices are hidden (optional)
+  - compact: {Boolean} shorter card: no "best for" tag or details link, price and button on one line (optional)
+
+  Products with more than one size show a size choice; the chosen size sets the price, picture, link and Add to cart.
 
   Metafields used (namespace marcel): type_label, size, role, step, color, benefits (list), best_for, art, kit_items (list of products).
 
@@ -52,16 +55,29 @@
   if best == blank
     assign best = d[3]
   endif
-  assign image = block.settings.image | default: variant.featured_image | default: product.featured_image
+  # A product with sizes starts on the block's size, else the first size in stock.
+  assign current = variant
+  assign has_sizes = false
+  if product != blank and product.has_only_default_variant == false and product.variants.size > 1
+    assign has_sizes = true
+    if current == blank
+      assign current = product.selected_or_first_available_variant
+    endif
+  endif
+  assign image = block.settings.image | default: current.featured_image | default: product.featured_image
   assign art = block.settings.art | default: handle_art | default: 'none'
   assign url = product.url | default: fallback_url | default: routes.all_products_collection_url
-  if variant != blank
-    assign url = variant.url
+  if current != blank
+    assign url = current.url
+  endif
+  assign fit = image_fit
+  if compact
+    assign fit = 'contain'
   endif
   assign add = add_label | default: 'Add to cart'
   assign form_id = 'MtProductForm-' | append: section_id | append: '-' | append: product.id | append: block.id
 -%}
-<article class="mt-pcard" style="--pc: {{ color }};" {{ block.shopify_attributes }}>
+<article class="mt-pcard{% if compact %} mt-pcard--compact{% endif %}" style="--pc: {{ color }};" {{ block.shopify_attributes }}>
   <a class="mt-pmedia" href="{{ url }}" aria-label="{{ title | escape }}">
     {%- if role != blank and badge != 'hide' -%}
       <span class="mt-role{% if badge == 'none' or badge == 'step' and step == blank %} mt-role--plain{% endif %}">
@@ -77,7 +93,7 @@
         {{- role | escape -}}
       </span>
     {%- endif -%}
-    {%- render 'mt-pack-media', image: image, art: art, kit: mf.kit_items.value, alt: title, sizes: sizes, fit: image_fit -%}
+    {%- render 'mt-pack-media', image: image, art: art, kit: mf.kit_items.value, alt: title, sizes: sizes, fit: fit -%}
   </a>
   <div class="mt-pbody">
     <h3><a href="{{ url }}">{{ title | escape }}</a></h3>
@@ -104,22 +120,46 @@
         {%- endfor -%}
       </ul>
     {%- endif -%}
-    {%- if best != blank -%}
-      <p class="mt-best">{%- render 'mt-icon', icon: 'target' -%}{{ best | escape }}</p>
-    {%- endif -%}
-    {%- if details_label != blank -%}
-      <a class="mt-link mt-pdetails" href="{{ url }}">{{ details_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>
+    {%- unless compact -%}
+      {%- if best != blank -%}
+        <p class="mt-best">{%- render 'mt-icon', icon: 'target' -%}{{ best | escape }}</p>
+      {%- endif -%}
+      {%- if details_label != blank -%}
+        <a class="mt-link mt-pdetails" href="{{ url }}">{{ details_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>
+      {%- endif -%}
+    {%- endunless -%}
+    {%- if has_sizes -%}
+      <fieldset class="mt-psizes">
+        <legend class="visually-hidden">{{ product.options.first | escape }}</legend>
+        {%- for v in product.variants -%}
+          <label class="mt-psize">
+            <input
+              type="radio"
+              name="{{ form_id }}-size"
+              value="{{ v.id }}"
+              data-url="{{ v.url }}"
+              data-available="{{ v.available }}"
+              {% unless settings.mt_hide_prices %}data-price="{{ v.price | money | escape }}"{% endunless %}
+              {% if v.compare_at_price > v.price %}data-compare="{{ v.compare_at_price | money | escape }}"{% endif %}
+              {% if v.featured_image != blank %}data-image="{{ v.featured_image | image_url: width: 900 }}"{% endif %}
+              {% if v.id == current.id %}checked{% endif %}
+            >
+            <span{% unless v.available %} class="is-soldout"{% endunless %}>{{ v.title | escape }}</span>
+          </label>
+        {%- endfor -%}
+      </fieldset>
+      <script src="{{ 'mt-card-sizes.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
     <div class="mt-pfoot">
-      {%- render 'mt-price', product: product, variant: variant -%}
+      {%- render 'mt-price', product: product, variant: current -%}
       {%- if settings.mt_hide_prices and settings.mt_whatsapp_number != blank -%}
-        {%- assign enquiry = settings.mt_enquire_message | default: 'Hi MARCEL team, I would like to know more about' | append: ' ' | append: title -%}
+        {%- assign enquiry = settings.mt_enquire_message | default: 'Hi MARCEL Team, I would like to know more about' | append: ' ' | append: title -%}
         {%- capture wa -%}{% render 'mt-wa-url', message: enquiry %}{%- endcapture -%}
         <a class="mt-btn mt-btn-wa mt-btn-sm" href="{{ wa }}" target="_blank" rel="noopener">{%- render 'mt-icon', icon: 'whatsapp' -%}{{ enquire_label | default: settings.mt_enquire_label | default: 'Enquire' | escape }}</a>
       {%- else -%}
       {%- render 'mt-buy-button',
         product: product,
-        variant: variant,
+        variant: current,
         form_id: form_id,
         section_id: section_id,
         label: add,

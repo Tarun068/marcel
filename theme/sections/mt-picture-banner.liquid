@@ -3,7 +3,7 @@
   inside the page container. The picture can link anywhere, including #specialist-search on the same page.
 {%- endcomment -%}
 {%- style -%}
-  .mt-pbanner--join { padding-bottom: 0; }
+  .mt-pbanner--join { padding-bottom: clamp(24px, 3vw, 40px); }
   .mt-pbanner-pic { display: block; overflow: hidden; border-radius: var(--mt-r-xl); background: var(--mt-mist); box-shadow: 0 26px 52px -36px rgba(12, 42, 61, .5); }
   .mt-pbanner-pic img { display: block; width: 100%; height: auto; }
   a.mt-pbanner-pic { transition: transform .25s ease, box-shadow .25s ease; }
@@ -34,7 +34,7 @@
   if section.index and section.index <= 2
     assign loading = 'eager'
   endif
-  assign sizes = '(min-width: 1200px) 1120px, calc(100vw - 32px)'
+  assign sizes = '(min-width: 1440px) 1360px, calc(100vw - 32px)'
   assign link_to = section.settings.link_to | default: 'none'
 -%}
 {%- capture link -%}{% render 'mt-link-to', key: link_to, url: section.settings.link %}{%- endcapture -%}
@@ -275,8 +275,8 @@
     {
       "type": "checkbox",
       "id": "join_next",
-      "label": "No space below the picture",
-      "info": "Lets the picture sit close to the next section.",
+      "label": "Less space below the picture",
+      "info": "Lets the picture sit closer to the next section.",
       "default": false
     }
   ],

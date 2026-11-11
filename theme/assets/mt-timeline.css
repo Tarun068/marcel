@@ -40,6 +40,16 @@ mt-timeline { display: block; }
 .mt .mt-tl-body h3 { font-size: var(--mt-fs-sub); line-height: 1.25; letter-spacing: -.012em; }
 .mt-tl-body p { font-size: var(--mt-fs-body); line-height: 1.6; }
 .mt-tl-body .mt-phase-foot { margin-top: 4px; padding-top: 12px; border-top: 1px solid var(--mt-line); font-size: var(--mt-fs-body); font-weight: 700; color: var(--mt-ink); }
+
+/* Dated steps inside a milestone ("date | title | text" points): a small line of dots down the card. */
+.mt-tl-steps { display: grid; gap: 14px; margin: 4px 0 0; padding: 0; list-style: none; }
+.mt-tl-steps li { position: relative; display: grid; gap: 3px; padding-left: 24px; }
+.mt-tl-steps li::before { content: ""; position: absolute; left: 0; top: 5px; width: 10px; height: 10px; border-radius: 50%; background: var(--mt-paper); box-shadow: inset 0 0 0 2.5px var(--tone, var(--mt-teal)); }
+.mt-tl-steps li:not(:last-child)::after { content: ""; position: absolute; left: 4px; top: 19px; bottom: -13px; width: 2px; border-radius: 2px; background: var(--mt-line); }
+.mt-bg-paper .mt-tl-steps li::before { background: var(--mt-mist); }
+.mt-tl-step-when { font-size: 12px; font-weight: 800; line-height: 1.4; letter-spacing: .08em; text-transform: uppercase; color: var(--tone, var(--mt-teal)); }
+.mt-tl-steps b { font-size: var(--mt-fs-body); font-weight: 700; line-height: 1.35; color: var(--mt-ink); }
+.mt-tl-step-text { font-size: 15px; line-height: 1.55; color: var(--mt-ink-2); }
 .mt-tl-item.is-active .mt-tl-card { border-color: rgba(var(--mt-teal-rgb), .35); box-shadow: 0 1px 2px rgba(12, 42, 61, .05), 0 32px 56px -30px rgba(12, 42, 61, .5); transform: translateY(-4px); }
 .mt-tl-item.is-active .mt-tl-photo img { transform: scale(1.04); }
 @media (hover: hover) {

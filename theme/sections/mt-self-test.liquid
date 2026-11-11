@@ -49,11 +49,10 @@
         }
       </script>
 
-      <template data-mt-gauge-template>
-        {%- render 'mt-gauge', fingers: 3, caption: section.settings.gauge_caption -%}
-      </template>
-      {%- if section.settings.opening_media == 'photo' -%}
-        {%- comment -%} One photo per mouth-opening answer; built-in example photos until the merchant picks their own. {%- endcomment -%}
+      {%- comment -%}
+        One photo per mouth-opening answer; built-in example photos until the merchant picks their own.
+        (The drawn finger illustration was retired on 2026-11-11 at the client's request.)
+      {%- endcomment -%}
         <template data-mt-photo-template>
           <figure class="mt-open-media" data-mt-photos aria-hidden="true">
             <span class="mt-open-frame">
@@ -72,7 +71,6 @@
             {%- if section.settings.photo_note != blank -%}<figcaption class="mt-open-note">{{ section.settings.photo_note | escape }}</figcaption>{%- endif -%}
           </figure>
         </template>
-      {%- endif -%}
 
       <div class="mt-test-top">
         <button type="button" class="mt-icon-btn mt-test-back" data-mt-back aria-label="{{ section.settings.back_label | escape }}">
@@ -97,28 +95,36 @@
           <input type="hidden" name="contact[result]" value="" data-mt-field="result">
           <input type="hidden" name="contact[symptoms]" value="" data-mt-field="severity">
           <input type="hidden" name="contact[answers]" value="" data-mt-field="answers">
-          {%- comment -%} Shopify's contact form needs an email; the store's own address is used so the lead reaches the team. {%- endcomment -%}
-          <input type="hidden" name="contact[email]" value="{{ shop.email }}">
+          {%- comment -%}
+            Shopify's contact form needs an email. The visitor's email is used when they give one, so the team can reply;
+            otherwise the store's own address is used so the lead still reaches the team.
+          {%- endcomment -%}
+          <input type="hidden" name="contact[email]" value="{{ shop.email }}" data-mt-fallback="{{ shop.email }}">
           <div class="mt-form-grid mt-form-grid--2">
             <div class="mt-field">
-              <label for="MtLeadName">{{ section.settings.name_label | escape }} <span class="mt-opt-label">{{ section.settings.optional_label | escape }}</span></label>
-              <input class="mt-input" id="MtLeadName" name="contact[name]" autocomplete="name">
+              <label for="MtLeadName">{{ section.settings.name_label | escape }}</label>
+              <input class="mt-input" id="MtLeadName" name="contact[name]" autocomplete="name" required aria-describedby="MtLeadNameErr">
+              <p class="mt-err" id="MtLeadNameErr" data-mt-error="name" hidden>{{ section.settings.name_error | escape }}</p>
             </div>
             <div class="mt-field">
-              <label for="MtLeadPhone">{{ section.settings.phone_label | escape }} <span class="mt-opt-label">{{ section.settings.optional_label | escape }}</span></label>
+              <label for="MtLeadPhone">{{ section.settings.phone_label | escape }}</label>
               <div class="mt-phone">
                 <span>+91</span>
-                <input class="mt-input" id="MtLeadPhone" name="contact[phone]" inputmode="numeric" autocomplete="tel-national" maxlength="10" placeholder="{{ section.settings.phone_placeholder | escape }}">
+                <input class="mt-input" id="MtLeadPhone" name="contact[phone]" inputmode="numeric" autocomplete="tel-national" maxlength="10" placeholder="{{ section.settings.phone_placeholder | escape }}" required aria-describedby="MtLeadPhoneErr">
               </div>
+              <p class="mt-err" id="MtLeadPhoneErr" data-mt-error="phone" hidden>{{ section.settings.phone_error | escape }}</p>
+            </div>
+            <div class="mt-field">
+              <label for="MtLeadEmail">{{ section.settings.email_label | escape }} <span class="mt-opt-label">{{ section.settings.optional_label | escape }}</span></label>
+              <input class="mt-input" id="MtLeadEmail" type="email" name="contact[customer_email]" autocomplete="email" inputmode="email" placeholder="{{ section.settings.email_placeholder | escape }}" aria-describedby="MtLeadEmailErr">
+              <p class="mt-err" id="MtLeadEmailErr" data-mt-error="email" hidden>{{ section.settings.email_error | escape }}</p>
             </div>
           </div>
-          <p class="mt-err" data-mt-error hidden>{{ section.settings.phone_error | escape }}</p>
           <div class="mt-btn-row">
             <button class="mt-btn mt-btn-primary" type="submit">
               {{- section.settings.submit_label | escape -}}
               {%- render 'mt-icon', icon: 'arrow-right' -%}
             </button>
-            <button class="mt-btn mt-btn-secondary" type="button" data-mt-skip>{{ section.settings.skip_label | escape }}</button>
           </div>
           {%- if section.settings.lead_fine != blank -%}<p class="mt-fine">{{ section.settings.lead_fine | escape }}</p>{%- endif -%}
         {%- endform -%}
@@ -196,14 +202,10 @@
         {
           "value": "photo",
           "label": "Photos, one per answer"
-        },
-        {
-          "value": "gauge",
-          "label": "Finger illustration"
         }
       ],
       "default": "photo",
-      "info": "The picture changes as the visitor points at or picks an answer."
+      "info": "The photo changes as the visitor points at or picks an answer."
     },
     {
       "type": "image_picker",
@@ -321,7 +323,7 @@
     {
       "type": "checkbox",
       "id": "send_leads",
-      "label": "Send name and number to the store email",
+      "label": "Send the details to the store email",
       "info": "Uses Shopify’s contact form, so the team gets an email with the answers and the result.",
       "default": true
     },
@@ -347,7 +349,7 @@
       "type": "textarea",
       "id": "lead_text",
       "label": "Text",
-      "default": "Want a copy on WhatsApp and a follow-up from our In-house OSMF Consultant? Add your number. This step is optional."
+      "default": "Add your name and WhatsApp number to see your result. We'll send you a copy, and our In-house OSMF Consultant can follow up with you."
     },
     {
       "type": "text",
@@ -377,7 +379,31 @@
       "type": "text",
       "id": "phone_error",
       "label": "Phone error",
-      "default": "Enter a 10-digit mobile number, or leave it blank."
+      "default": "Enter your 10-digit mobile number."
+    },
+    {
+      "type": "text",
+      "id": "name_error",
+      "label": "Name error",
+      "default": "Enter your name."
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email label",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "name@example.com"
+    },
+    {
+      "type": "text",
+      "id": "email_error",
+      "label": "Email error",
+      "default": "Enter a valid email address, or leave it blank."
     },
     {
       "type": "text",
@@ -387,15 +413,8 @@
     },
     {
       "type": "text",
-      "id": "skip_label",
-      "label": "Skip label",
-      "default": "Skip and show result"
-    },
-    {
-      "type": "text",
       "id": "lead_fine",
-      "label": "Small print",
-      "default": "We use your number only to send your report and follow up about your care. We never share your details."
+      "label": "Small print"
     },
     {
       "type": "text",

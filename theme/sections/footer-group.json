@@ -24,7 +24,7 @@
         "menu_2": {
           "type": "menu",
           "settings": {
-            "heading": "Get help",
+            "heading": "Get Help",
             "menu": "footer-help"
           }
         },
@@ -52,7 +52,7 @@
       "settings": {
         "description": "A structured approach to oral mucosal care for people living with Oral Submucous Fibrosis (OSMF).",
         "show_contact": true,
-        "whatsapp_label": "WhatsApp the Patient HelpDesk",
+        "whatsapp_label": "WhatsApp the MARCEL Team",
         "disclaimer": "",
         "ai_heading": "",
         "ai_prompt": "",
@@ -124,8 +124,8 @@
       "settings": {
         "enable": true,
         "message": "",
-        "button_text": "Need guidance?",
-        "label": "WhatsApp the MARCEL Patient HelpDesk",
+        "button_text": "",
+        "label": "WhatsApp the MARCEL Team",
         "hide_mobile": true
       }
     }

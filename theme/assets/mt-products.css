@@ -57,3 +57,38 @@ mt-filter { display: block; }
 
 /* ---------- Related products (product page) ---------- */
 mt-related { display: block; }
+
+/* ---------- Compact product cards (home carousel) ---------- */
+/* Every card lines up: a two-line title area, a one-line type, then key points;
+   the size choice and the price with Add to cart sit together at the bottom. */
+.mt-pcard--compact { container-type: inline-size; }
+.mt-pcard--compact .mt-pmedia { aspect-ratio: 4 / 3; }
+.mt-pcard--compact .mt-pack { background: var(--mt-paper); }
+.mt-pcard--compact .mt-pack img { padding: 5% 6% 1%; }
+.mt-pcard--compact .mt-pbody { gap: 10px; padding: 18px; }
+.mt .mt-pcard--compact .mt-pbody h3 { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; min-height: 2.4em; }
+.mt-pcard--compact .mt-pmeta { margin-top: -4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mt-pcard--compact .mt-checks { gap: 6px; }
+.mt-pcard--compact .mt-checks li { line-height: 1.4; }
+.mt-pcard--compact .mt-pfoot { display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 10px; padding-top: 14px; }
+.mt .mt-pcard--compact .mt-pfoot .mt-product-form, .mt .mt-pcard--compact .mt-pfoot .mt-btn { width: auto; }
+.mt-pcard--compact .mt-price { min-width: 0; }
+@container (max-width: 300px) {
+  .mt .mt-pcard--compact .mt-pfoot .mt-btn { padding-inline: 14px; }
+  .mt-pcard--compact .mt-pfoot .mt-btn .mt-i { display: none; }
+}
+
+/* Size choice on a product card. position: relative keeps the hidden legend inside the card; without it the
+   legend was placed against the page and, in a sideways row of cards, widened phone pages to about 945 px. */
+.mt-psizes { position: relative; display: flex; flex-wrap: wrap; gap: 8px; min-inline-size: 0; margin: auto 0 0; padding: 0; border: 0; }
+.mt-psizes ~ .mt-pfoot { margin-top: 0; }
+.mt-psize { position: relative; display: inline-flex; }
+.mt-psize input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.mt-psize span { display: inline-flex; align-items: center; min-height: 34px; padding: 0 14px; border-radius: 99px; background: var(--mt-paper); box-shadow: inset 0 0 0 1.5px var(--mt-line-2); font-size: 13.5px; font-weight: 700; color: var(--mt-ink); transition: background .2s, color .2s, box-shadow .2s; }
+.mt-psize input:hover + span { box-shadow: inset 0 0 0 1.5px var(--mt-ink); }
+.mt-psize input:checked + span { background: var(--mt-ink); color: var(--mt-on-dark); box-shadow: none; }
+.mt-psize input:focus-visible + span { outline: 3px solid var(--mt-aqua); outline-offset: 2px; }
+.mt-psize .is-soldout { color: var(--mt-ink-3); text-decoration: line-through; }
+
+/* Product cards stay in line on hover: a shadow, no lift. */
+.mt.mt-section .mt-pcard:hover { transform: none; }

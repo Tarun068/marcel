@@ -30,13 +30,13 @@ mt-carousel { display: block; }
 /* Product cards four to a view are narrow: tighter padding, price above a full-width button. */
 @media (min-width: 1100px) {
   .mt-car--4 .mt-pbody { padding: 18px; }
-  .mt-car--4 .mt-pfoot { display: grid; gap: 10px; }
-  .mt .mt-car--4 .mt-pfoot .mt-btn { width: 100%; }
+  .mt-car--4 .mt-pcard:not(.mt-pcard--compact) .mt-pfoot { display: grid; gap: 10px; }
+  .mt .mt-car--4 .mt-pcard:not(.mt-pcard--compact) .mt-pfoot .mt-btn { width: 100%; }
 }
 @media (max-width: 1099px) {
   .mt-car { --per: 3; }
-  .mt-car .mt-pfoot { display: grid; gap: 10px; }
-  .mt .mt-car .mt-pfoot .mt-btn { width: 100%; }
+  .mt-car .mt-pcard:not(.mt-pcard--compact) .mt-pfoot { display: grid; gap: 10px; }
+  .mt .mt-car .mt-pcard:not(.mt-pcard--compact) .mt-pfoot .mt-btn { width: 100%; }
 }
 @media (max-width: 899px) {
   .mt-car { --per: 2; }

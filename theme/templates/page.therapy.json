@@ -22,8 +22,8 @@
         "spacing": "none",
         "current_label": "MARCEL OMR Therapy™",
         "eyebrow": "MARCEL OMR Therapy™",
-        "heading": "A structured approach to oral mucosal care",
-        "text": "MARCEL OMR Therapy™ provides a planned framework for OSMF care rather than relying on random or inconsistent product use. It brings together oral mucosal care, functional support and guided progress.",
+        "heading": "A Structured Approach to Oral Mucosal Care",
+        "text": "MARCEL OMR Therapy™ provides a planned framework for OSMF care rather than relying on random or inconsistent product use. It brings together oral mucosal care, functional support, guided progress and dietary guidance.",
         "button_1_label": "Check Your OSMF Stage",
         "button_2_label": "Explore MARCEL OMR Therapy™",
         "button_2_link": "#overview",
@@ -34,11 +34,11 @@
       "type": "mt-journey",
       "settings": {
         "eyebrow": "Therapy overview",
-        "heading": "The MARCEL 3-Pillar Approach",
-        "text": "Three connected pillars that work together in OSMF care.",
+        "heading": "The MARCEL 4-⁠Pillar Approach",
+        "text": "Four connected pillars that work together in OSMF care.",
         "center": false,
         "layout": "cards",
-        "columns": 3,
+        "columns": 4,
         "note": "Individual response to care varies. MARCEL OMR Therapy™ is not a guarantee of cure or reversal of OSMF. Clinical assessment may be required depending on symptoms and disease stage.",
         "button_label": "Explore the 12-Week Care Journey",
         "button_to": "journey",
@@ -54,7 +54,7 @@
           "settings": {
             "when": "Pillar 1: Oral mucosal care",
             "icon": "shield",
-            "title": "Care for the mouth and support comfort",
+            "title": "Care for the Mouth and Support Comfort",
             "text": "A structured oral-care regimen designed to support oral mucosal health and help manage common OSMF-related discomfort such as burning, tightness and difficulty with eating.",
             "art": "pillar-care"
           }
@@ -64,7 +64,7 @@
           "settings": {
             "when": "Pillar 2: Functional support",
             "icon": "s-open",
-            "title": "Support what matters in daily life",
+            "title": "Support What Matters in Daily Life",
             "text": "Mouth opening is an important functional measure in OSMF. The MARCEL approach incorporates regular mouth-opening exercises and, where appropriate, an optional mouth-opening device as an adjunct.",
             "foot": "Focus: mouth opening, chewing and oral function",
             "art": "pillar-function"
@@ -75,17 +75,29 @@
           "settings": {
             "when": "Pillar 3: Guided care and progress",
             "icon": "chart",
-            "title": "Track your progress with support",
+            "title": "Track Your Progress with Support",
             "text": "Structured progress tracking, the 3-Week Progress Tracker, scheduled progress reviews and access to the In-house OSMF Consultant. Where clinical assessment is required, patients can be guided towards MARCEL OSMF Care Specialists.",
             "foot": "Focus: progress tracking, guidance and specialist care",
             "art": "pillar-progress"
+          }
+        },
+        "phase_4": {
+          "type": "phase",
+          "settings": {
+            "when": "Pillar 4: Dietary guidance & nutrition",
+            "icon": "bowl",
+            "title": "Eat Well. Nourish Better.",
+            "text": "Practical dietary guidance to help individuals make informed food choices, manage food-related discomfort and maintain nutritional well-being throughout their OSMF care journey.",
+            "foot": "Focus: balanced diet, suitable food choices and healthy eating habits.",
+            "art": "pillar-nutrition"
           }
         }
       },
       "block_order": [
         "phase_1",
         "phase_2",
-        "phase_3"
+        "phase_3",
+        "phase_4"
       ]
     },
     "pathways": {
@@ -142,7 +154,7 @@
       "type": "mt-journey",
       "settings": {
         "eyebrow": "The 12-Week Care Journey",
-        "heading": "Four phases to organise routine and follow-up",
+        "heading": "Four Phases to Organise Routine and Follow-Up",
         "text": "The phases are a care-planning framework, not a promise of a specific result by a fixed date.",
         "center": false,
         "layout": "cards",
@@ -204,7 +216,7 @@
       "type": "mt-support",
       "settings": {
         "eyebrow": "Patient support",
-        "heading": "Two ways to get the right guidance",
+        "heading": "Two Ways to Get the Right Guidance",
         "text": "Programme guidance and clinical assessment are different services. Choose the one that fits what you need now.",
         "center": false,
         "note": "The MARCEL OSMF Consultant gives programme information and next-step guidance. Diagnosis, staging and treatment decisions are made by a qualified healthcare professional.",
@@ -258,9 +270,9 @@
         "one_at_a_time": false,
         "schema_markup": true,
         "show_help": true,
-        "help_title": "Have questions?",
+        "help_title": "Have Questions?",
         "help_text": "Our In-house OSMF Consultant can help with programme questions and your next step.",
-        "whatsapp_label": "WhatsApp the Patient HelpDesk",
+        "whatsapp_label": "WhatsApp the MARCEL Team",
         "link_label": "See all FAQs",
         "background": "paper",
         "sheet": false,
@@ -324,7 +336,7 @@
       "type": "mt-cta-band",
       "settings": {
         "eyebrow": "Need guidance?",
-        "heading": "Not sure what to do next?",
+        "heading": "Not Sure What to Do Next?",
         "text": "Explore MARCEL OMR Therapy™ or connect with our team to understand the next steps.",
         "button_1_label": "Talk to a MARCEL OSMF Consultant",
         "button_1_to": "consult",

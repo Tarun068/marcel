@@ -24,7 +24,7 @@
         "parent_link": "/pages/get-help",
         "current_label": "Find an OSMF Specialist",
         "eyebrow": "MARCEL OSMF Care Specialist directory",
-        "heading": "Find an OSMF Care Specialist near you",
+        "heading": "Find an OSMF Care Specialist Near You",
         "text": "Enter your city or PIN code to find verified OSMF Care Specialists in the same city, prioritising clinics in your PIN-code area and nearby localities."
       },
       "blocks": {
@@ -77,7 +77,7 @@
         "registration_label": "Reg. no.",
         "call_label": "Call clinic",
         "directions_label": "Get directions",
-        "empty_title": "No OSMF Care Specialist listed for [where] yet",
+        "empty_title": "No OSMF Care Specialist Listed for [where] Yet",
         "empty_text": "We are adding verified specialists. Meanwhile, a MARCEL OSMF Consultant can discuss your concerns and guide your next step.",
         "empty_consult_label": "Talk to a MARCEL OSMF Consultant",
         "empty_all_label": "Show all specialists",
@@ -92,7 +92,7 @@
       "settings": {
         "layout": "row",
         "eyebrow": "How it works",
-        "heading": "How patients can find care",
+        "heading": "How Patients Can Find Care",
         "link_label": "",
         "background": "mist",
         "sheet": false,
@@ -104,21 +104,21 @@
         "step_1": {
           "type": "step",
           "settings": {
-            "title": "Enter your city and PIN code",
+            "title": "Enter Your City and PIN Code",
             "text": "Results stay within your city and show the same and neighbouring PIN-code areas first."
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
-            "title": "Review specialist details",
+            "title": "Review Specialist Details",
             "text": "Compare verified clinic locations and contact information."
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
-            "title": "Contact or navigate",
+            "title": "Contact or Navigate",
             "text": "Call the clinic or open turn-by-turn directions in Maps."
           }
         }
@@ -133,7 +133,7 @@
       "type": "mt-support",
       "settings": {
         "eyebrow": "Not ready for a clinic visit?",
-        "heading": "Talk to a MARCEL OSMF Consultant first",
+        "heading": "Talk to a MARCEL OSMF Consultant First",
         "text": "Discuss your concerns by phone and understand whether an in-person examination is needed.",
         "center": false,
         "note": "",

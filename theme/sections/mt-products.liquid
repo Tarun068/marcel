@@ -11,11 +11,15 @@
     assign carousel = true
   endif
   assign per = section.settings.per_desktop | default: '4'
-  assign card_sizes = '(min-width: 1200px) 380px, (min-width: 961px) 31vw, (min-width: 761px) 46vw, 82vw'
+  assign compact_cards = true
+  if section.settings.card_style == 'detailed'
+    assign compact_cards = false
+  endif
+  assign card_sizes = '(min-width: 1440px) 450px, (min-width: 961px) 31vw, (min-width: 761px) 46vw, 82vw'
   if carousel
-    assign card_sizes = '(min-width: 1200px) 280px, (min-width: 750px) 36vw, 82vw'
+    assign card_sizes = '(min-width: 1440px) 340px, (min-width: 750px) 36vw, 82vw'
     if per == '3'
-      assign card_sizes = '(min-width: 1200px) 370px, (min-width: 750px) 36vw, 82vw'
+      assign card_sizes = '(min-width: 1440px) 450px, (min-width: 750px) 36vw, 82vw'
     endif
   endif
 -%}
@@ -107,6 +111,7 @@
             product: card_product,
             variant: card_variant,
             block: block,
+            compact: compact_cards,
             section_id: section.id,
             add_label: card_add,
             details_label: section.settings.details_label,
@@ -240,6 +245,23 @@
       "id": "sold_out_label",
       "label": "Sold out label",
       "default": "Sold out"
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "info": "Compact cards show the title, size choice, key points, price and Add to cart, and always show the whole picture.",
+      "options": [
+        {
+          "value": "compact",
+          "label": "Compact"
+        },
+        {
+          "value": "detailed",
+          "label": "Detailed, with best-for tag and details link"
+        }
+      ],
+      "default": "compact"
     },
     {
       "type": "select",
@@ -435,7 +457,7 @@
           "type": "text",
           "id": "variant",
           "label": "Size",
-          "info": "Shows one size of the product, with its own picture, price and Add to cart, for example 100g. Empty uses the first size in stock."
+          "info": "The size chosen first on the card, for example 100g. Empty uses the first size in stock. Shoppers can switch sizes on the card."
         },
         {
           "type": "text",

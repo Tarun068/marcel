@@ -21,7 +21,7 @@
         "sheet": false,
         "spacing": "none",
         "current_label": "",
-        "heading": "Products within MARCEL OMR Therapy™",
+        "heading": "Products Within MARCEL OMR Therapy™",
         "text": "Each product has a defined role in the therapy. Explore what it is, how it is used and where it fits.",
         "art": "shop"
       }
@@ -45,7 +45,7 @@
         "next_label": "Next",
         "show_promo": true,
         "promo_eyebrow": "Not sure where to start?",
-        "promo_heading": "Check your OSMF stage",
+        "promo_heading": "Check Your OSMF Stage",
         "promo_text": "Answer a few simple questions about your mouth opening and symptoms. The self-check gives an initial indication and cannot diagnose OSMF.",
         "promo_label": "Check Your OSMF Stage",
         "background": "paper",
@@ -57,7 +57,7 @@
       "type": "mt-cta-band",
       "settings": {
         "eyebrow": "Not sure which pathway applies?",
-        "heading": "Check your OSMF stage",
+        "heading": "Check Your OSMF Stage",
         "text": "The self-check gives an initial indication of your possible stage. A qualified healthcare professional must confirm the diagnosis and stage.",
         "button_1_label": "Check Your OSMF Stage",
         "button_1_to": "test",

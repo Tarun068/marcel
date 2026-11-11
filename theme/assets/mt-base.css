@@ -71,9 +71,19 @@ body { font-size: var(--mt-fs-body); }
 /* ---------- Layout ---------- */
 .mt-wrap { max-width: var(--mt-wrap); margin-inline: auto; padding-inline: var(--mt-gutter); }
 .mt-wrap-narrow { max-width: 820px; margin-inline: auto; padding-inline: var(--mt-gutter); }
-.mt-section { padding-block: clamp(56px, 7vw, 100px); }
-.mt-section--tight { padding-block: clamp(40px, 5vw, 68px); }
+/* Section spacing: one scale for the whole site. */
+:root { --mt-space: clamp(48px, 6vw, 80px); --mt-space-tight: clamp(36px, 4.4vw, 64px); }
+.mt-section { padding-block: var(--mt-space); }
+.mt-section--tight { padding-block: var(--mt-space-tight); }
 .mt-section--none { padding-block: 0; }
+/* Two sections in a row on the same background get one gap between them, not two:
+   the second one drops its top padding. Page heroes fade to white, so they pair with white sections. */
+.shopify-section:has(> .mt-bg-paper:not(.mt-section--none)) + .shopify-section > .mt-bg-paper:not(.mt-sheet),
+.shopify-section:has(> .mt-phero.mt-bg-fade) + .shopify-section > .mt-bg-paper:not(.mt-sheet),
+.shopify-section:has(> .mt-bg-mist:not(.mt-section--none)) + .shopify-section > .mt-bg-mist:not(.mt-sheet),
+.shopify-section:has(> .mt-phero.mt-bg-mist) + .shopify-section > .mt-bg-mist:not(.mt-sheet),
+.shopify-section:has(> .mt-bg-tint:not(.mt-section--none)) + .shopify-section > .mt-bg-tint:not(.mt-sheet),
+.shopify-section:has(> .mt-bg-navy:not(.mt-section--none)) + .shopify-section > .mt-bg-navy:not(.mt-sheet) { padding-top: 0; }
 .mt-bg-paper { background: var(--mt-paper); --mt-section-bg: var(--mt-paper); }
 .mt-bg-mist { background: var(--mt-mist); --mt-section-bg: var(--mt-mist); }
 .mt-bg-tint { background: var(--mt-tint); --mt-section-bg: var(--mt-tint); }
@@ -336,3 +346,17 @@ body { font-size: var(--mt-fs-body); }
 @media (prefers-reduced-motion: reduce) {
   .mt *, .mt *::before, .mt *::after { animation: none !important; transition: none !important; }
 }
+
+/* ---------- Judge.me reviews (app blocks in the Apps section) ----------
+   Match the Marcel look: the same contained width and section spacing, the serif section heading and pill
+   buttons in brand teal. Judge.me's own settings still control the layout inside the widget. */
+.shopify-section > .page-width:has(> .shopify-app-block .jdgm-widget) { max-width: var(--mt-wrap); padding-inline: var(--mt-gutter); }
+/* The widget sets max-width: 1200px inline; full container width lines its heading up with the other sections. */
+#MainContent .shopify-app-block > .jdgm-review-widget { max-width: none !important; }
+#MainContent .jm-review-widget-minimal-header__title,
+#MainContent .jdgm-cards-carousel .jdgm-title { font-size: var(--mt-fs-h); font-weight: 800; line-height: 1.08; letter-spacing: -.026em; color: var(--mt-ink); }
+.mt-type-serif #MainContent .jm-review-widget-minimal-header__title,
+.mt-type-serif #MainContent .jdgm-cards-carousel .jdgm-title { font-family: var(--mt-serif); font-weight: 600; letter-spacing: -.018em; }
+#MainContent .jdgm-widget .jm-button { border-radius: 999px; font-weight: 700; }
+#MainContent .jdgm-widget .jm-button--primary { background: var(--mt-teal); border-color: var(--mt-teal); color: #fff; }
+#MainContent .jdgm-widget .jm-button--primary:hover { background: var(--mt-teal-2); border-color: var(--mt-teal-2); }

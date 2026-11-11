@@ -3,10 +3,30 @@
 
 {%- liquid
   assign chapters = section.blocks | where: 'type', 'chapter'
+  assign has_toc = false
+  if section.settings.show_toc and chapters.size > 1
+    assign has_toc = true
+  endif
+  # A video beside the text (not with the page contents list).
+  assign video = section.settings.video
+  assign video_url = section.settings.video_url
+  assign has_video = false
+  if has_toc == false
+    if video != blank or video_url != blank
+      assign has_video = true
+    endif
+  endif
+  assign video_kind = 'hosted'
+  if video == blank
+    assign video_kind = video_url.type
+  endif
 -%}
+{%- if has_video -%}
+  <script src="{{ 'mt-videos.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 
 <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-guide' %}">
-  <div class="mt-wrap{% if section.settings.show_toc and chapters.size > 1 %} mt-guide-layout{% endif %}">
+  <div class="mt-wrap{% if has_toc %} mt-guide-layout{% elsif has_video %} mt-guide-split{% endif %}">
     {%- if section.settings.show_toc and chapters.size > 1 -%}
       <nav class="mt-toc" aria-label="{{ section.settings.toc_title | escape }}">
         <b>{{ section.settings.toc_title | escape }}</b>
@@ -60,7 +80,17 @@
     
               {%- when 'card' -%}
                 <div class="mt-mini-card" {{ block.shopify_attributes }}>
-                  {%- render 'mt-icon', icon: block.settings.icon -%}
+                  {%- if section.settings.card_media == 'photo' -%}
+                    {%- if block.settings.image != blank -%}
+                      <span class="mt-card-photo">{{ block.settings.image | image_url: width: 360 | image_tag: loading: 'lazy', widths: '180, 360', sizes: '88px', alt: '' }}</span>
+                    {%- elsif block.settings.art != blank and block.settings.art != 'none' -%}
+                      <span class="mt-card-photo"><img src="{{ 'mt-card-' | append: block.settings.art | append: '.webp' | asset_url }}" alt="" width="360" height="360" loading="lazy"></span>
+                    {%- else -%}
+                      <span class="mt-card-photo mt-card-photo--icon">{%- render 'mt-icon', icon: block.settings.icon -%}</span>
+                    {%- endif -%}
+                  {%- else -%}
+                    {%- render 'mt-icon', icon: block.settings.icon -%}
+                  {%- endif -%}
                   <b>{{ block.settings.title | escape }}</b>
                   {%- if block.settings.text != blank -%}<p>{{ block.settings.text | escape }}</p>{%- endif -%}
                 </div>
@@ -91,13 +121,15 @@
                           <tr>
                             {%- for cell in cells -%}
                               {%- assign value = cell | strip -%}
+                              {%- comment -%} data-label: the column name, shown before the value when phones stack each row {%- endcomment -%}
+                              {%- assign label = heads[forloop.index0] | strip | escape -%}
                               {%- if forloop.first and value contains '#' -%}
                                 {%- assign parts = value | split: '#' -%}
-                                <td><span class="mt-stage-chip" style="--c: #{{ parts[1] | strip }};"><i></i>{{ parts[0] | strip | escape }}</span></td>
+                                <td data-label="{{ label }}"><span class="mt-stage-chip" style="--c: #{{ parts[1] | strip }};"><i></i>{{ parts[0] | strip | escape }}</span></td>
                               {%- elsif forloop.index == block.settings.bold_col -%}
-                                <td class="mt-mmv">{{ value | escape }}</td>
+                                <td class="mt-mmv" data-label="{{ label }}">{{ value | escape }}</td>
                               {%- else -%}
-                                <td>{{ value | escape }}</td>
+                                <td data-label="{{ label }}">{{ value | escape }}</td>
                               {%- endif -%}
                             {%- endfor -%}
                           </tr>
@@ -143,6 +175,26 @@
         <section class="mt-prose-sec" {{ attrs }}>{{ head }}{{ body }}</section>
       {%- endif -%}
     </div>
+    {%- if has_video -%}
+      <div class="mt-guide-video{% if section.settings.video_shape == 'portrait' %} mt-guide-video--portrait{% endif %}">
+        <mt-video data-kind="{{ video_kind }}"{% if video_kind != 'hosted' %} data-id="{{ video_url.id | escape }}"{% endif %} data-title="{{ section.settings.video_title | escape }}">
+          {%- if section.settings.video_cover != blank -%}
+            {{- section.settings.video_cover | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '480, 720, 1100', sizes: '(min-width: 990px) 45vw, 92vw', alt: '' -}}
+          {%- elsif video_kind == 'hosted' and video.preview_image != blank -%}
+            {{- video.preview_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '480, 720, 1100', sizes: '(min-width: 990px) 45vw, 92vw', alt: '' -}}
+          {%- elsif video_kind == 'youtube' -%}
+            {% # theme-check-disable-next-line RemoteAsset %}
+            <img src="https://i.ytimg.com/vi/{{ video_url.id | escape }}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+          {%- endif -%}
+          {%- if video_kind == 'hosted' -%}
+            <template>{{ video | video_tag: controls: true, autoplay: true, playsinline: true, preload: 'none' }}</template>
+          {%- endif -%}
+          <button type="button" class="mt-video-play" aria-label="{{ section.settings.video_title | default: 'Play video' | escape }}">
+            <span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12-7.5z"/></svg></span>
+          </button>
+        </mt-video>
+      </div>
+    {%- endif -%}
   </div>
 </section>
 
@@ -180,6 +232,69 @@
       "id": "no_articles",
       "label": "No articles text",
       "default": "Articles will appear here once they are published."
+    },
+    {
+      "type": "select",
+      "id": "card_media",
+      "label": "Card pictures",
+      "info": "Photos uses each card's photo or built-in picture; cards without one show their icon in a matching tile.",
+      "options": [
+        {
+          "value": "icon",
+          "label": "Icons"
+        },
+        {
+          "value": "photo",
+          "label": "Photos"
+        }
+      ],
+      "default": "icon"
+    },
+    {
+      "type": "header",
+      "content": "Video next to the text"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video uploaded to Shopify"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Or a YouTube or Vimeo link",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "video_cover",
+      "label": "Cover picture",
+      "info": "Shown until the video is played. YouTube videos use their own cover when this is empty."
+    },
+    {
+      "type": "text",
+      "id": "video_title",
+      "label": "Video title",
+      "info": "Read out by screen readers, for example Mouth opening exercises."
+    },
+    {
+      "type": "select",
+      "id": "video_shape",
+      "label": "Video shape",
+      "options": [
+        {
+          "value": "landscape",
+          "label": "Landscape, 16:9"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait, 9:16"
+        }
+      ],
+      "default": "landscape"
     },
     {
       "type": "header",
@@ -733,6 +848,69 @@
           "id": "text",
           "label": "Text",
           "default": "Gutkha, pan masala, supari and khaini are the leading cause."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo",
+          "info": "Shown when the section's Card pictures is set to Photos."
+        },
+        {
+          "type": "select",
+          "id": "art",
+          "label": "Built-in picture",
+          "info": "Used until a photo is chosen.",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "areca",
+              "label": "Areca nut and supari"
+            },
+            {
+              "value": "tobacco",
+              "label": "Tobacco products"
+            },
+            {
+              "value": "nutrition",
+              "label": "Healthy food"
+            },
+            {
+              "value": "diet",
+              "label": "Soft diet"
+            },
+            {
+              "value": "exercise",
+              "label": "Mouth exercises"
+            },
+            {
+              "value": "careplan",
+              "label": "Care plan"
+            },
+            {
+              "value": "consultant",
+              "label": "OSMF Consultant"
+            },
+            {
+              "value": "doctor",
+              "label": "Specialist doctor"
+            },
+            {
+              "value": "device",
+              "label": "MO Device"
+            },
+            {
+              "value": "therapy",
+              "label": "Therapy products"
+            },
+            {
+              "value": "tracker",
+              "label": "Progress tracker"
+            }
+          ],
+          "default": "none"
         }
       ]
     },

@@ -21,7 +21,7 @@
 {%- capture btn2_link -%}{% render 'mt-link-to', key: section.settings.button_2_to, url: section.settings.button_2_link %}{%- endcapture -%}
 {%- capture back_link -%}{% render 'mt-link-to', key: section.settings.back_to, url: section.settings.back_link %}{%- endcapture -%}
 
-<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-phero' %}">
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-phero' %}{% if section.settings.align == 'center' and has_media == false %} mt-phero--center{% endif %}">
   <div class="mt-wrap{% if has_media %} mt-phero-grid mt-phero--media{% elsif stats.size > 0 %} mt-phero-grid{% endif %}">
     <div class="mt-phero-copy">
       {%- if section.settings.show_crumbs -%}
@@ -137,6 +137,23 @@
       "id": "show_crumbs",
       "label": "Show breadcrumbs",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Text position",
+      "info": "Centred suits pages whose main content sits in the middle, like the self-check. Not used when the hero has a photo.",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Centred"
+        }
+      ],
+      "default": "left"
     },
     {
       "type": "text",

@@ -8,13 +8,15 @@
   - sizes: {String} sizes attribute
   - fit: {String} 'cover' | 'contain'
   - kit: {Array} kit item products, drawn together when there is no image or art (optional)
+  - loading: {String} 'lazy' (default) | 'eager' for a picture that shows straight away (optional)
 {%- endcomment -%}
+{%- assign img_loading = loading | default: 'lazy' -%}
 <span class="mt-pack{% if fit == 'contain' %} mt-pack--contain{% endif %}">
   {%- if image != blank -%}
     {{
       image
       | image_url: width: 900
-      | image_tag: loading: 'lazy', alt: alt, sizes: sizes, widths: '180, 300, 450, 600, 900'
+      | image_tag: loading: img_loading, alt: alt, sizes: sizes, widths: '180, 300, 450, 600, 900'
     }}
   {%- elsif art == 'kit-foundation' or art == 'kit-advance' -%}
     {%- assign kit_photo = art | remove_first: 'kit-' -%}

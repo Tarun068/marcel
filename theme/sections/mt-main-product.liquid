@@ -60,7 +60,29 @@
     </nav>
 
     <div class="mt-pdp" style="--pc: {{ color }};">
-      <mt-gallery class="mt-gallery">
+      {%- liquid
+        # Slides: every product picture (or the pack art), then the How to use and Ingredients slides.
+        assign slide_total = product.media.size | at_least: 1
+        if has_how
+          assign slide_total = slide_total | plus: 1
+        endif
+        if has_ing
+          assign slide_total = slide_total | plus: 1
+        endif
+        assign slide_n = product.media.size | at_least: 1
+
+        # Open on the chosen size's picture, e.g. when the link names a variant.
+        assign start_slide = ''
+        if variant.featured_media
+          for media in product.media
+            if media.id == variant.featured_media.id
+              assign start_slide = 'm' | append: forloop.index0
+              break
+            endif
+          endfor
+        endif
+      -%}
+      <mt-gallery class="mt-gallery"{% if start_slide != blank and start_slide != 'm0' %} data-start="{{ start_slide }}"{% endif %}>
         <div class="mt-gmain">
           {%- if role != blank -%}
             <span class="mt-role{% unless is_kit or mf.step.value != blank %} mt-role--plain{% endunless %}">
@@ -68,19 +90,27 @@
               {{- role | escape -}}
             </span>
           {%- endif -%}
+          <div class="mt-gtrack" tabindex="0" role="region" aria-roledescription="carousel" aria-label="{{ section.settings.gallery_label | escape }}">
           {%- for media in product.media -%}
-            <div class="mt-gslide{% if forloop.first %} is-on{% endif %}" data-slide="m{{ forloop.index0 }}" data-media-id="{{ media.id }}">
-              {%- assign media_alt = media.alt | default: product.title -%}
-              {%- render 'mt-pack-media', image: media.preview_image, alt: media_alt, sizes: '(min-width: 990px) 560px, 100vw', fit: section.settings.image_fit -%}
+            {%- liquid
+              assign media_alt = media.alt | default: product.title
+              assign media_loading = 'lazy'
+              if forloop.first
+                assign media_loading = 'eager'
+              endif
+            -%}
+            <div class="mt-gslide" data-slide="m{{ forloop.index0 }}" data-media-id="{{ media.id }}" role="group" aria-roledescription="slide" aria-label="{{ forloop.index }} / {{ slide_total }}">
+              {%- render 'mt-pack-media', image: media.preview_image, alt: media_alt, sizes: '(min-width: 1440px) 690px, (min-width: 901px) 48vw, 100vw', fit: section.settings.image_fit, loading: media_loading -%}
             </div>
           {%- else -%}
-            <div class="mt-gslide is-on" data-slide="m0">
+            <div class="mt-gslide" data-slide="m0" role="group" aria-roledescription="slide" aria-label="1 / {{ slide_total }}">
               {%- render 'mt-pack-media', art: handle_art, kit: kit_items, alt: product.title -%}
             </div>
           {%- endfor -%}
 
           {%- if has_how -%}
-            <div class="mt-gslide mt-info-slide" data-slide="how">
+            {%- assign slide_n = slide_n | plus: 1 -%}
+            <div class="mt-gslide mt-info-slide" data-slide="how" role="group" aria-roledescription="slide" aria-label="{{ slide_n }} / {{ slide_total }}">
               {%- if is_kit -%}
                 <h3>{{ section.settings.routine_title | escape }}</h3>
                 <ol class="mt-info-steps">
@@ -104,7 +134,8 @@
           {%- endif -%}
 
           {%- if has_ing -%}
-            <div class="mt-gslide mt-info-slide" data-slide="ing">
+            {%- assign slide_n = slide_n | plus: 1 -%}
+            <div class="mt-gslide mt-info-slide" data-slide="ing" role="group" aria-roledescription="slide" aria-label="{{ slide_n }} / {{ slide_total }}">
               {%- if is_kit -%}
                 <h3>{{ section.settings.kit_inside_title | escape }}</h3>
                 <ul class="mt-ing-list">
@@ -131,9 +162,26 @@
               {%- endif -%}
             </div>
           {%- endif -%}
+          </div>
+
+          {%- if slide_total > 1 -%}
+            <button type="button" class="mt-garrow mt-garrow--prev" data-dir="-1" aria-label="{{ section.settings.prev_label | escape }}" disabled>
+              {%- render 'mt-icon', icon: 'chevron-left' -%}
+            </button>
+            <button type="button" class="mt-garrow mt-garrow--next" data-dir="1" aria-label="{{ section.settings.next_label | escape }}">
+              {%- render 'mt-icon', icon: 'chevron-right' -%}
+            </button>
+            <span class="mt-gcount" aria-hidden="true"><b>1</b> / {{ slide_total }}</span>
+          {%- endif -%}
         </div>
 
-        <div class="mt-gthumbs" role="group" aria-label="{{ section.settings.gallery_label | escape }}">
+        {%- if slide_total > 1 -%}
+        <div class="mt-gthumbs-row">
+        {%- comment -%} Arrows page through the thumbnails; mt-product.js shows them only when the row overflows. {%- endcomment -%}
+        <button type="button" class="mt-gthumbs-arrow" data-thumbs-dir="-1" aria-label="{{ section.settings.thumbs_prev_label | escape }}" hidden>
+          {%- render 'mt-icon', icon: 'chevron-left' -%}
+        </button>
+        <div class="mt-gthumbs" role="group" aria-label="{{ section.settings.thumbs_label | escape }}">
           {%- for media in product.media -%}
             <button type="button" class="mt-gthumb" data-mt-slide="m{{ forloop.index0 }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="{{ media.alt | default: product.title | escape }}">
               {%- render 'mt-pack-media', image: media.preview_image, alt: '', sizes: '120px', fit: section.settings.image_fit -%}
@@ -154,6 +202,11 @@
             </button>
           {%- endif -%}
         </div>
+        <button type="button" class="mt-gthumbs-arrow" data-thumbs-dir="1" aria-label="{{ section.settings.thumbs_next_label | escape }}" hidden>
+          {%- render 'mt-icon', icon: 'chevron-right' -%}
+        </button>
+        </div>
+        {%- endif -%}
       </mt-gallery>
 
       <div class="mt-pdp-info">
@@ -244,23 +297,30 @@
           {%- endunless -%}
 
           {%- if settings.mt_hide_prices and settings.mt_whatsapp_number != blank -%}
-            {%- assign enquiry = settings.mt_enquire_message | default: 'Hi MARCEL team, I would like to know more about' | append: ' ' | append: product.title -%}
+            {%- assign enquiry = settings.mt_enquire_message | default: 'Hi MARCEL Team, I would like to know more about' | append: ' ' | append: product.title -%}
             {%- capture wa -%}{% render 'mt-wa-url', message: enquiry %}{%- endcapture -%}
             <a class="mt-btn mt-btn-wa mt-btn-block" href="{{ wa }}" target="_blank" rel="noopener">{%- render 'mt-icon', icon: 'whatsapp' -%}{{ settings.mt_enquire_label | default: 'Enquire on WhatsApp' | escape }}</a>
           {%- else -%}
           <product-form class="mt-product-form" data-section-id="{{ section.id }}">
             {%- form 'product', product, id: form_id, class: 'mt-buy-form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
               <input type="hidden" name="id" value="{{ variant.id }}" disabled>
-              <div class="mt-buy-row">
-                <div class="mt-qty">
-                  <button type="button" data-mt-qty="-1" aria-label="{{ section.settings.minus_label | escape }}">{%- render 'mt-icon', icon: 'minus' -%}</button>
-                  <input type="number" name="quantity" value="1" min="1" max="10" inputmode="numeric" aria-label="{{ section.settings.qty_label | escape }}">
-                  <button type="button" data-mt-qty="1" aria-label="{{ section.settings.plus_label | escape }}">{%- render 'mt-icon', icon: 'plus' -%}</button>
+              {%- comment -%}
+                Quantity, Add to cart and Buy it now share one row; in a narrow buy box the quantity moves to its own row
+                (with its label showing) and the two buttons stay side by side.
+              {%- endcomment -%}
+              <div class="mt-buy-row{% if section.settings.show_buy_now %} mt-buy-row--now{% endif %}">
+                <div class="mt-qty-wrap">
+                  <label class="mt-qty-label" for="MtQty-{{ section.id }}">{{ section.settings.qty_label | escape }}</label>
+                  <div class="mt-qty">
+                    <button type="button" data-mt-qty="-1" aria-label="{{ section.settings.minus_label | escape }}">{%- render 'mt-icon', icon: 'minus' -%}</button>
+                    <input type="number" id="MtQty-{{ section.id }}" name="quantity" value="1" min="1" max="10" inputmode="numeric">
+                    <button type="button" data-mt-qty="1" aria-label="{{ section.settings.plus_label | escape }}">{%- render 'mt-icon', icon: 'plus' -%}</button>
+                  </div>
                 </div>
                 <button
                   type="submit"
                   name="add"
-                  class="mt-btn mt-btn-primary"
+                  class="mt-btn mt-btn-primary mt-add-btn"
                   {% unless variant.available %}
                     disabled
                   {% endunless %}
@@ -271,25 +331,34 @@
                   </span>
                   {%- render 'loading-spinner' -%}
                 </button>
+                {%- if section.settings.show_buy_now -%}
+                  <div class="mt-buy-now">{{ form | payment_button }}</div>
+                {%- endif -%}
               </div>
               <div class="product-form__error-message-wrapper mt-err" role="alert" hidden>
                 <span class="product-form__error-message"></span>
               </div>
-              {%- if section.settings.show_buy_now -%}
-                <div class="mt-buy-now">{{ form | payment_button }}</div>
-              {%- endif -%}
             {%- endform -%}
           </product-form>
           {%- endif -%}
         </div>
 
+        {%- comment -%} Key features: the "Feature" blocks (block type perk), shown under the buy box. {%- endcomment -%}
         {%- assign perks = section.blocks | where: 'type', 'perk' -%}
         {%- if perks.size > 0 -%}
-          <ul class="mt-perks">
-            {%- for block in perks -%}
-              <li {{ block.shopify_attributes }}>{%- render 'mt-icon', icon: block.settings.icon -%}{{ block.settings.text | escape }}</li>
-            {%- endfor -%}
-          </ul>
+          <div class="mt-features">
+            {%- if section.settings.features_heading != blank -%}
+              <p class="mt-mini-h">{{ section.settings.features_heading | escape }}</p>
+            {%- endif -%}
+            <ul class="mt-perks">
+              {%- for block in perks -%}
+                <li {{ block.shopify_attributes }}>
+                  <span class="mt-perk-i">{%- render 'mt-icon', icon: block.settings.icon -%}</span>
+                  <span>{{ block.settings.text | escape }}</span>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
         {%- endif -%}
 
         {%- if section.settings.cta_label != blank or section.settings.cta2_label != blank -%}
@@ -599,6 +668,7 @@
       "type": "select",
       "id": "image_fit",
       "label": "Image fit",
+      "info": "Used for the thumbnails. The main picture always shows the whole image.",
       "options": [
         {
           "value": "cover",
@@ -616,6 +686,36 @@
       "id": "gallery_label",
       "label": "Gallery label (for screen readers)",
       "default": "Product images and details"
+    },
+    {
+      "type": "text",
+      "id": "thumbs_label",
+      "label": "Thumbnails label (for screen readers)",
+      "default": "Choose a picture"
+    },
+    {
+      "type": "text",
+      "id": "prev_label",
+      "label": "Previous picture button (for screen readers)",
+      "default": "Previous picture"
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "Next picture button (for screen readers)",
+      "default": "Next picture"
+    },
+    {
+      "type": "text",
+      "id": "thumbs_prev_label",
+      "label": "Thumbnails back button (for screen readers)",
+      "default": "Earlier pictures"
+    },
+    {
+      "type": "text",
+      "id": "thumbs_next_label",
+      "label": "Thumbnails forward button (for screen readers)",
+      "default": "More pictures"
     },
     {
       "type": "header",
@@ -740,8 +840,16 @@
     },
     {
       "type": "text",
+      "id": "features_heading",
+      "label": "Key features heading",
+      "info": "Shown above the Feature blocks, under the buy box.",
+      "default": "Key Features"
+    },
+    {
+      "type": "text",
       "id": "qty_label",
-      "label": "Quantity label (for screen readers)",
+      "label": "Quantity label",
+      "info": "Shows next to the quantity on narrow screens.",
       "default": "Quantity"
     },
     {
@@ -880,7 +988,7 @@
   "blocks": [
     {
       "type": "perk",
-      "name": "Perk",
+      "name": "Feature",
       "settings": [
         {
           "type": "select",
@@ -1080,13 +1188,13 @@
               "label": "Symptom: pain"
             }
           ],
-          "default": "box"
+          "default": "check"
         },
         {
           "type": "text",
           "id": "text",
           "label": "Text",
-          "default": "Discreet packaging"
+          "default": "Key product feature"
         }
       ]
     },

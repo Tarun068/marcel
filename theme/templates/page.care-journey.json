@@ -33,7 +33,7 @@
       "type": "mt-journey",
       "settings": {
         "eyebrow": "The 12-Week Care Journey",
-        "heading": "Four phases to organise routine and follow-up",
+        "heading": "Four Phases to Organise Routine and Follow-Up",
         "text": "The phases are a care-planning framework, not a promise of a specific result by a fixed date.",
         "center": false,
         "layout": "cards",
@@ -95,7 +95,7 @@
       "type": "mt-journey",
       "settings": {
         "eyebrow": "Progress reviews",
-        "heading": "When can you expect to see progress?",
+        "heading": "When Can You Expect to See Progress?",
         "text": "Every person’s progress is different. Regular assessment helps you understand your individual response.",
         "center": false,
         "layout": "cards",
@@ -114,6 +114,7 @@
           "settings": {
             "when": "Start",
             "icon": "ruler",
+            "tone": "#C9453A",
             "title": "Baseline",
             "text": "",
             "points": "Burning sensation\nTightness in cheeks\nDifficulty in eating\nDifficulty in speaking\nRestricted mouth opening",
@@ -125,7 +126,8 @@
           "settings": {
             "when": "Week 3",
             "icon": "chart",
-            "title": "First progress review",
+            "tone": "#C2551F",
+            "title": "First Progress Review",
             "text": "",
             "points": "Burning sensation may reduce\nCheek tightness may be less\nEating may be easier\nSpeech may improve\nMouth opening may increase",
             "foot": "Stay consistent with your daily care routine."
@@ -136,7 +138,8 @@
           "settings": {
             "when": "Week 6",
             "icon": "chart",
-            "title": "Progress check",
+            "tone": "#9C6604",
+            "title": "Progress Check",
             "text": "",
             "points": "Burning may reduce further\nCheek tightness may ease\nEating may feel more comfortable\nSpeaking may be easier\nMouth opening may continue to change",
             "foot": "Continue your daily care and review your progress."
@@ -147,7 +150,8 @@
           "settings": {
             "when": "Week 9",
             "icon": "chart",
-            "title": "Continue & reassess",
+            "tone": "#4E7F1A",
+            "title": "Continue & Reassess",
             "text": "",
             "points": "Review burning and cheek comfort\nReview eating and speaking\nReview mouth opening",
             "foot": "Maintain your routine and stay in touch with your care team."
@@ -158,7 +162,8 @@
           "settings": {
             "when": "Week 12",
             "icon": "target",
-            "title": "Overall progress assessment",
+            "tone": "#23804A",
+            "title": "Overall Progress Assessment",
             "text": "",
             "points": "Review comfort and daily function\nReview mouth opening against your baseline\nPlan your next steps",
             "foot": "Plan your next steps with your care team."
@@ -177,7 +182,7 @@
       "type": "mt-icon-cards",
       "settings": {
         "eyebrow": "12-week progress support",
-        "heading": "Track your progress, with support along the way",
+        "heading": "Track Your Progress, with Support Along the Way",
         "center": false,
         "columns": "4",
         "background": "paper",
@@ -200,7 +205,7 @@
           "type": "card",
           "settings": {
             "icon": "calendar",
-            "title": "Regular progress reviews",
+            "title": "Regular Progress Reviews",
             "text": "Review your journey at Weeks 3, 6, 9 and 12.",
             "link_to": "custom",
             "art": "none"
@@ -210,7 +215,7 @@
           "type": "card",
           "settings": {
             "icon": "whatsapp",
-            "title": "Patient education",
+            "title": "Patient Education",
             "text": "Through our WhatsApp channel.",
             "link_to": "custom",
             "art": "none"
@@ -220,7 +225,7 @@
           "type": "card",
           "settings": {
             "icon": "phone",
-            "title": "Personalised guidance",
+            "title": "Personalised Guidance",
             "text": "From our In-house OSMF Consultant.",
             "link_to": "custom",
             "art": "consultant"
@@ -238,7 +243,7 @@
       "type": "mt-guide",
       "settings": {
         "show_toc": false,
-        "toc_title": "On this page",
+        "toc_title": "On This Page",
         "read_label": "[n] min read",
         "no_articles": "Articles will appear here once they are published.",
         "background": "mist",
@@ -249,7 +254,7 @@
         "chapter_1": {
           "type": "chapter",
           "settings": {
-            "heading": "Prescribed mouth and jaw exercises",
+            "heading": "Prescribed Mouth and Jaw Exercises",
             "toc_label": "Exercises",
             "anchor": "exercises"
           }
@@ -336,7 +341,7 @@
       "type": "mt-cta-band",
       "settings": {
         "eyebrow": "Need guidance?",
-        "heading": "Not sure what to do next?",
+        "heading": "Not Sure What to Do Next?",
         "text": "Explore MARCEL OMR Therapy™ or connect with our team to understand the next steps.",
         "button_1_label": "Talk to a MARCEL OSMF Consultant",
         "button_1_to": "consult",

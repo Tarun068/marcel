@@ -89,10 +89,11 @@
                 <span class="mt-sym-ico">{%- render 'mt-icon', icon: block.settings.icon -%}</span>
               {%- endif -%}
               <span class="mt-sym-txt">
+                {%- comment -%} The tick sits beside the title on photo tiles, so it never covers the photo. {%- endcomment -%}
+                <span class="mt-sym-tick">{%- render 'mt-icon', icon: 'check' -%}</span>
                 <b>{{ block.settings.title | escape }}</b>
                 {%- if block.settings.short != blank -%}<small>{{ block.settings.short | escape }}</small>{%- endif -%}
               </span>
-              <span class="mt-sym-tick">{%- render 'mt-icon', icon: 'check' -%}</span>
             </button>
           {%- endfor -%}
           {%- if section.settings.tile_title != blank or section.settings.cta_text != blank or section.settings.cta_label != blank -%}

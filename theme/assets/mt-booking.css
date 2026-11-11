@@ -37,11 +37,12 @@ mt-booking { display: grid; }
 .mt .mt-input--short { min-height: 84px; }
 .mt-book-gap { margin-top: 8px; padding-top: 22px; border-top: 1px solid var(--mt-line); }
 .mt-slots--range { grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); }
-.mt-fee-box { display: flex; align-items: center; gap: 16px; padding: 16px 18px; border-radius: var(--mt-r-lg); background: var(--mt-tint); }
-.mt-fee-box > b { font-size: 30px; font-weight: 800; line-height: 1; letter-spacing: -.02em; color: var(--mt-ink); }
+/* The booking fee is highlighted in red, here and in the summary, so the charge is clear before booking. */
+.mt-fee-box { --fee: #D32F2F; display: flex; align-items: center; gap: 16px; padding: 16px 18px; border-radius: var(--mt-r-lg); background: #FDEDED; box-shadow: inset 0 0 0 1.5px #F4C0BD; }
+.mt-fee-box > b { font-size: 30px; font-weight: 800; line-height: 1; letter-spacing: -.02em; color: var(--fee); }
 .mt-fee-box span { display: grid; gap: 2px; }
-.mt-fee-box strong { color: var(--mt-ink); }
-.mt-fee-box small { font-size: 14px; color: var(--mt-ink-3); }
+.mt-fee-box strong { color: var(--fee); }
+.mt-fee-box small { font-size: 14px; color: var(--mt-ink-2); }
 .mt-book-nav .mt-fine { flex: 1 1 260px; max-width: 46ch; margin: 0; }
 
 .mt-book-nav { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-top: 20px; border-top: 1px solid var(--mt-line); }
@@ -60,6 +61,9 @@ mt-booking { display: grid; }
 .mt-sum-row small { display: block; font-size: 11.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--mt-ink-3); }
 .mt-sum-row b { color: var(--mt-ink); }
 .mt-sum-row .mt-fine { display: block; margin-top: 2px; }
+.mt-sum-row--fee { margin-inline: -12px; padding: 10px 12px; border-radius: var(--mt-r); background: #FDEDED; box-shadow: inset 0 0 0 1.5px #F4C0BD; }
+.mt-sum-row--fee .mt-i, .mt-sum-row--fee small, .mt-sum-row--fee b { color: #D32F2F; }
+.mt-sum-row--fee b { font-size: 18px; }
 .mt .mt-sum-link { margin-left: 6px; font-weight: 700; color: var(--mt-teal); text-decoration: underline; text-underline-offset: 3px; }
 
 /* Done */
