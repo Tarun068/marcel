@@ -32,6 +32,16 @@ if (!customElements.get('mt-self-test')) {
         this.answers = {};
         this.step = 0;
 
+        // After the details are sent, Shopify opens the result page (the form's return_to). If it comes back
+        // here instead, with ?contact_posted=true, go on to the result that was saved before sending.
+        if (new URLSearchParams(window.location.search).get('contact_posted') === 'true') {
+          const saved = window.MarcelTheme && window.MarcelTheme.storage('mt-result');
+          if (saved && saved.key && Date.now() - (saved.at || 0) < 30 * 60 * 1000) {
+            window.location.replace(this.dataset.resultUrl || '/');
+            return;
+          }
+        }
+
         // A link such as ?opening=26to35 (from a home-page shortcut) answers the first question.
         const param = new URLSearchParams(window.location.search).get('opening');
         if (param && BASE[param] !== undefined) {
@@ -55,8 +65,13 @@ if (!customElements.get('mt-self-test')) {
           if (from && !to && !this.locked) this.showOpening(this.answers.opening);
         });
         if (this.form) {
+          // Shopify's spam check adds its own submit handler once the visitor types in the form. That handler
+          // would send the form straight away, even with empty fields, and Shopify would reload this page, so
+          // the test started again. This handler runs first and stops the event; submitLead() sends the form
+          // after its checks.
           this.form.addEventListener('submit', (e) => {
             e.preventDefault();
+            e.stopImmediatePropagation();
             this.submitLead();
           });
           const phone = this.form.querySelector('[name="contact[phone]"]');
@@ -213,7 +228,8 @@ if (!customElements.get('mt-self-test')) {
       }
 
       // Name and WhatsApp number are required; email is optional but must look right when given.
-      async submitLead() {
+      submitLead() {
+        if (this.sending) return;
         const nameInput = this.form.querySelector('[name="contact[name]"]');
         const phoneInput = this.form.querySelector('[name="contact[phone]"]');
         const emailInput = this.form.querySelector('#MtLeadEmail');
@@ -232,36 +248,43 @@ if (!customElements.get('mt-self-test')) {
         this.lead = { name, phone, email };
         const replyTo = this.form.querySelector('[name="contact[email]"]');
         if (replyTo) replyTo.value = email || replyTo.dataset.mtFallback || replyTo.value;
-        if (this.dataset.send === 'true') {
-          const result = this.compute();
-          this.form.querySelector('[data-mt-field="result"]').value = result.key;
-          this.form.querySelector('[data-mt-field="severity"]').value = result.severity;
-          this.form.querySelector('[data-mt-field="answers"]').value = this.summary().map((x) => `${x.short}: ${x.answer}`).join('; ');
-          const send = fetch(this.form.action, { method: 'POST', body: new FormData(this.form), headers: { Accept: 'text/html' } }).catch(() => {});
-          await Promise.race([send, new Promise((r) => setTimeout(r, 2500))]);
-        }
-        this.finish();
-      }
-
-      finish() {
-        const result = this.compute();
-        if (window.MarcelTheme) {
-          window.MarcelTheme.storage('mt-result', {
-            key: result.key,
-            severity: result.severity,
-            answers: this.answers,
-            summary: this.summary(),
-            lead: this.lead || {},
-            at: Date.now(),
-          });
-        }
+        this.sending = true;
+        this.save();
         this.leadCard.hidden = true;
         this.box.hidden = true;
         this.loading.hidden = false;
         this.bar.style.width = '100%';
-        setTimeout(() => {
-          window.location.href = this.dataset.resultUrl || '/';
-        }, 1100);
+
+        const post = window.MarcelTheme && window.MarcelTheme.postForm;
+        if (this.dataset.send === 'true' && post) {
+          const result = this.compute();
+          this.form.querySelector('[data-mt-field="result"]').value = result.key;
+          this.form.querySelector('[data-mt-field="severity"]').value = result.severity;
+          this.form.querySelector('[data-mt-field="answers"]').value = this.summary().map((x) => `${x.short}: ${x.answer}`).join('; ');
+          // Shopify emails the details to the store and then opens the result page. If the form can't be sent
+          // (the spam check is blocked), the visitor still gets their result.
+          post(this.form, () => this.openResult());
+        } else {
+          setTimeout(() => this.openResult(), 1100);
+        }
+      }
+
+      /* Keeps the outcome and answers for the result page, before the page leaves. */
+      save() {
+        const result = this.compute();
+        if (!window.MarcelTheme) return;
+        window.MarcelTheme.storage('mt-result', {
+          key: result.key,
+          severity: result.severity,
+          answers: this.answers,
+          summary: this.summary(),
+          lead: this.lead || {},
+          at: Date.now(),
+        });
+      }
+
+      openResult() {
+        window.location.href = this.dataset.resultUrl || '/';
       }
     }
   );

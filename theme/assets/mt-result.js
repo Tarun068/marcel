@@ -44,10 +44,16 @@ if (!customElements.get('mt-result')) {
             phone.value = phone.value.replace(/\D/g, '');
             phone.classList.remove('is-invalid');
           });
+          // Shopify's spam check adds its own submit handler once the visitor types in the form, and it would
+          // send the form at once, even with a wrong number. This handler runs first and stops the event;
+          // sendReport() sends the form after its check.
           this.report.addEventListener('submit', (e) => {
             e.preventDefault();
+            e.stopImmediatePropagation();
             this.sendReport();
           });
+          // Shopify reopens this page with ?report=sent once the request has gone to the store email.
+          if (new URLSearchParams(window.location.search).get('report') === 'sent') this.reportSent();
         }
       }
 
@@ -95,10 +101,10 @@ if (!customElements.get('mt-result')) {
         });
       }
 
-      async sendReport() {
+      sendReport() {
+        if (this.sending) return;
         const phone = this.report.querySelector('[name="contact[phone]"]');
         const error = this.report.querySelector('[data-mt-error]');
-        const done = this.report.querySelector('[data-mt-done]');
         const value = phone.value.replace(/\D/g, '');
         if (!/^[6-9]\d{9}$/.test(value)) {
           error.hidden = false;
@@ -113,8 +119,15 @@ if (!customElements.get('mt-result')) {
         this.report.querySelector('[data-mt-field="answers"]').value = ((this.result && this.result.summary) || []).map((x) => `${x.short}: ${x.answer}`).join('; ');
         const button = this.report.querySelector('button[type="submit"]');
         if (button) button.disabled = true;
-        await fetch(this.report.action, { method: 'POST', body: new FormData(this.report), headers: { Accept: 'text/html' } }).catch(() => {});
-        done.hidden = false;
+        this.sending = true;
+        if (window.MarcelTheme && window.MarcelTheme.postForm) window.MarcelTheme.postForm(this.report);
+        else HTMLFormElement.prototype.submit.call(this.report);
+      }
+
+      reportSent() {
+        const done = this.report.querySelector('[data-mt-done]');
+        const button = this.report.querySelector('button[type="submit"]');
+        if (done) done.hidden = false;
         if (button) button.hidden = true;
       }
     }

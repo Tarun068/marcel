@@ -26,7 +26,42 @@
     }
   }
 
-  window.MarcelTheme = { MM, setGauge, storage };
+  /* Sends a Shopify contact form as a normal form post.
+     Shopify's spam check (hCaptcha) only accepts contact forms that carry its token, and it adds the token only
+     to a real form post, so these forms can't be sent with fetch. When the spam check is on, the form goes
+     through it; otherwise the browser sends it straight away. Shopify then opens the form's return_to page,
+     or the same page with ?contact_posted=true.
+     The spam check also adds its own submit handler once the visitor types in a form, and that handler sends
+     the form at once. Components therefore stop their submit event (preventDefault + stopImmediatePropagation)
+     and call this after their own checks pass.
+     onStuck runs if the page is still here after 15 seconds and no spam-check puzzle is open, for example when
+     an ad blocker stops the spam check. By default the form is then posted without the token, and Shopify
+     shows its own challenge page if it needs one. */
+  function postForm(form, onStuck) {
+    if (!form) return;
+    let leaving = false;
+    window.addEventListener('beforeunload', () => (leaving = true), { once: true });
+    const send = () => form.submit();
+    const captcha = window.Shopify && window.Shopify.captcha;
+    if (!form.hasAttribute('data-hcaptcha-bound') && captcha && typeof captcha.protect === 'function') captcha.protect(form, send);
+    else send();
+    const puzzleOpen = () =>
+      Array.from(document.querySelectorAll('iframe[src*="hcaptcha"]')).some(
+        (f) => /frame=challenge/.test(f.src) && f.offsetHeight > 0 && getComputedStyle(f).visibility !== 'hidden'
+      );
+    const check = () => {
+      if (leaving) return;
+      if (puzzleOpen()) {
+        setTimeout(check, 5000);
+        return;
+      }
+      if (onStuck) onStuck();
+      else HTMLFormElement.prototype.submit.call(form);
+    };
+    setTimeout(check, 15000);
+  }
+
+  window.MarcelTheme = { MM, setGauge, storage, postForm };
 })();
 
 /* Scroll reveal for Marcel sections: blocks below the fold ease up as they come into view, and the items of a

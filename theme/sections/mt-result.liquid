@@ -261,7 +261,12 @@
             <b class="mt-report-title">{%- render 'mt-icon', icon: 'whatsapp' -%}{{ section.settings.report_title | escape }}</b>
             <p class="mt-small">{{ section.settings.report_text | escape }}</p>
           </div>
-          {%- form 'contact', id: 'MtResultReport', class: 'mt-report-form', data-mt-report: '', novalidate: 'novalidate' -%}
+          {%- comment -%}
+            Sent as a normal post so Shopify's spam check can add its token; Shopify then reopens this page with
+            ?report=sent and the thank-you line shows (mt-result.js).
+          {%- endcomment -%}
+          {%- assign report_return = request.path | append: '?report=sent' -%}
+          {%- form 'contact', id: 'MtResultReport', class: 'mt-report-form', data-mt-report: '', novalidate: 'novalidate', return_to: report_return -%}
             <input type="hidden" name="contact[source]" value="Self-check report">
             <input type="hidden" name="contact[email]" value="{{ shop.email }}">
             <input type="hidden" name="contact[result]" value="" data-mt-field="result">

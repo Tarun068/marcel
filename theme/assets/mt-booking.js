@@ -240,7 +240,10 @@ if (!customElements.get('mt-booking')) {
       }
 
       async submit(e) {
+        // Shopify's spam check adds its own submit handler once the visitor types in the form, and it would send
+        // the form at once and reload this page, cutting off the checkout. This handler runs first and stops it.
         e.preventDefault();
+        e.stopImmediatePropagation();
         const error = this.querySelector('[data-mt-error]');
         const { errs, firstBad } = this.validate();
         if (errs.length) {
@@ -299,7 +302,9 @@ if (!customElements.get('mt-booking')) {
         window.location.href = '/checkout';
       }
 
-      /* No fee product yet: send the request through the Shopify contact form. */
+      /* No fee product yet: send the request through the Shopify contact form, as a normal form post so Shopify's
+         spam check can add its token. Shopify reloads this page with ?contact_posted=true and the saved booking
+         shows as done (see connectedCallback). */
       async request(b) {
         const f = this.form;
         const field = (key, value) => {
@@ -310,13 +315,8 @@ if (!customElements.get('mt-booking')) {
         field('when', b.when);
         field('result', b.result);
         store(PENDING, b);
-        const response = await fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'text/html' } });
-        if (response.url.includes('/challenge')) {
-          HTMLFormElement.prototype.submit.call(f);
-          return;
-        }
-        if (!response.ok || !response.url.includes('contact_posted=true')) throw new Error('not sent');
-        this.done(b);
+        if (window.MarcelTheme && window.MarcelTheme.postForm) window.MarcelTheme.postForm(f);
+        else HTMLFormElement.prototype.submit.call(f);
       }
 
       done(b) {

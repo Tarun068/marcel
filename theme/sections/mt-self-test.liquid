@@ -90,7 +90,11 @@
           <h1 class="mt-test-title">{{ section.settings.lead_heading | escape }}</h1>
           <p class="mt-test-help">{{ section.settings.lead_text | escape }}</p>
         </div>
-        {%- form 'contact', id: 'MtSelfTestLead', class: 'mt-form-grid', data-mt-lead-form: '', novalidate: 'novalidate' -%}
+        {%- comment -%}
+          The form is sent as a normal post so Shopify's spam check can add its token (mt-global.js postForm).
+          Shopify then opens the result page.
+        {%- endcomment -%}
+        {%- form 'contact', id: 'MtSelfTestLead', class: 'mt-form-grid', data-mt-lead-form: '', novalidate: 'novalidate', return_to: result_link -%}
           <input type="hidden" name="contact[source]" value="{{ section.settings.source_label | escape }}">
           <input type="hidden" name="contact[result]" value="" data-mt-field="result">
           <input type="hidden" name="contact[symptoms]" value="" data-mt-field="severity">

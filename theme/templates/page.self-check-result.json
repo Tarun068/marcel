@@ -33,7 +33,7 @@
         "wa_message": "Hi MARCEL Team, I'd like to talk to a MARCEL OSMF Consultant. My self-check result: [result].",
         "tips_eyebrow": "Important to know",
         "tips_heading": "Steps That Protect Your Oral Health",
-        "show_report": true,
+        "show_report": false,
         "report_title": "Get This Report on WhatsApp",
         "report_text": "Keep a copy of your result and get a follow-up from our In-house OSMF Consultant.",
         "report_phone_label": "WhatsApp number",
