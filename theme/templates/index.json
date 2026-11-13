@@ -22,7 +22,7 @@
             "link": "",
             "eyebrow_icon": "shield",
             "eyebrow": "Care beyond teeth, gums & enamel",
-            "heading": "A Structured Approach to <em>Oral Mucosal Care</em>",
+            "heading": "A Structured Approach to <em>Oral Sub Mucous Fibrosis (OSMF)</em>",
             "text": "MARCEL OMR Therapy™ brings together oral mucosal care, functional support, guided progress and dietary guidance for people living with OSMF.",
             "show_text_mobile": false,
             "button_1_label": "Check Your OSMF Stage",
@@ -388,6 +388,7 @@
             "icon": "s-bands",
             "title": "White Bands",
             "short": "Pale, firm streaks along the cheeks or gums.",
+            "image": "shopify://shop_images/whiteband.jpg",
             "text": "Pale, fibrous streaks or patches along the cheeks or gums. They can feel leathery to the touch and are a common sign of tissue changes."
           }
         },
@@ -408,6 +409,16 @@
             "short": "Chewing hurts, especially harder foods.",
             "text": "Discomfort or pain while chewing, especially with harder or drier foods. If mealtimes have started to hurt, don’t ignore it."
           }
+        },
+        "symptom_kbd3nN": {
+          "type": "symptom",
+          "settings": {
+            "icon": "none",
+            "title": "Dryness Of Mouth",
+            "short": "",
+            "image": "shopify://shop_images/drynessofmouth.jpg",
+            "text": ""
+          }
         }
       },
       "block_order": [
@@ -417,7 +428,8 @@
         "symptom_4",
         "symptom_5",
         "symptom_6",
-        "symptom_7"
+        "symptom_7",
+        "symptom_kbd3nN"
       ],
       "settings": {
         "eyebrow": "Know the signs",
@@ -449,6 +461,7 @@
           "type": "card",
           "settings": {
             "icon": "ban",
+            "image": "shopify://shop_images/01_Gutkha_Packet.png",
             "art": "areca",
             "title": "Areca Nut / Supari & Chewing Products",
             "text": "Supari, gutkha, pan masala and mawa",
@@ -461,6 +474,7 @@
           "type": "card",
           "settings": {
             "icon": "ban",
+            "image": "shopify://shop_images/02_Tobacco_Products.png",
             "art": "tobacco",
             "title": "Tobacco Products",
             "text": "Khaini, chewing tobacco, tobacco mixed with gutkha or pan masala, bidi and cigarettes",
@@ -473,6 +487,7 @@
           "type": "card",
           "settings": {
             "icon": "clock",
+            "image": "shopify://shop_images/03_Frequent_Long_Term_Chewing.png",
             "art": "none",
             "title": "Frequent & Long-Term Chewing",
             "text": "The more often and longer you chew, the greater the risk.",
@@ -485,6 +500,7 @@
           "type": "card",
           "settings": {
             "icon": "bowl",
+            "image": "shopify://shop_images/04_Poor_Nutrition.png",
             "art": "nutrition",
             "title": "Poor Nutrition",
             "text": "May make oral tissues more vulnerable.",
@@ -497,6 +513,7 @@
           "type": "card",
           "settings": {
             "icon": "users",
+            "image": "shopify://shop_images/05_Genetic_Susceptibility.png",
             "art": "none",
             "title": "Genetic Susceptibility",
             "text": "Some people may be more vulnerable.",
@@ -509,6 +526,7 @@
           "type": "card",
           "settings": {
             "icon": "sparkle",
+            "image": "shopify://shop_images/06_Poor_Oral_Hygiene.png",
             "art": "none",
             "title": "Poor Oral Hygiene",
             "text": "Can contribute to poor overall oral health.",
@@ -1681,7 +1699,7 @@
             "corner_styling": "soft",
             "header_text_color": "#000000",
             "text_color": "#000000",
-            "card_color": "#F9F9F9",
+            "card_color": "#f9f9f9",
             "stars_color": "",
             "arrows_color": "#000000",
             "transition_speed": 5,

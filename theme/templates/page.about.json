@@ -11,21 +11,6 @@
   "sections": {
     "hero": {
       "type": "mt-page-hero",
-      "settings": {
-        "show_crumbs": true,
-        "home_label": "Home",
-        "button_1_to": "test",
-        "button_2_to": "consult",
-        "back_to": "therapy",
-        "background": "fade",
-        "sheet": false,
-        "spacing": "none",
-        "current_label": "About",
-        "eyebrow": "About MARCEL",
-        "heading": "A Journey Towards Better Oral Function",
-        "text": "MARCEL OMR Therapy™ has evolved through years of development, clinical assessment and continued work focused on Oral Submucous Fibrosis (OSMF). JanSuta Pharmaceuticals is the organisation behind the platform.",
-        "art": "about"
-      },
       "blocks": {
         "stat_1": {
           "type": "stat",
@@ -65,7 +50,32 @@
         "stat_2",
         "stat_3",
         "stat_4"
-      ]
+      ],
+      "settings": {
+        "show_crumbs": true,
+        "align": "left",
+        "home_label": "Home",
+        "parent_label": "",
+        "parent_link": "",
+        "current_label": "About",
+        "eyebrow": "About MARCEL",
+        "heading": "A Journey Towards Better Oral Function",
+        "text": "MARCEL OMR Therapy™ has evolved through years of development, clinical assessment and continued work focused on Oral Submucous Fibrosis (OSMF). JanSuta Pharmaceuticals is the organisation behind the platform.",
+        "button_1_label": "",
+        "button_1_to": "test",
+        "button_1_link": "",
+        "button_2_label": "",
+        "button_2_to": "consult",
+        "button_2_link": "",
+        "note": "",
+        "back_label": "",
+        "back_to": "therapy",
+        "back_link": "",
+        "art": "about",
+        "background": "fade",
+        "sheet": false,
+        "spacing": "none"
+      }
     },
     "quest": {
       "type": "mt-founder",
@@ -73,47 +83,36 @@
         "quote_position": "left",
         "quote_eyebrow": "",
         "quote": "",
+        "photo": "shopify://shop_images/marcel.jpg",
         "name": "Kandarp Bakshi",
         "role": "Founder, JanSuta Pharmaceuticals",
+        "story_eyebrow": "Our quest",
         "heading_size": "large",
         "heading": "From an Idea to a Continuing Journey in OSMF Care",
         "text": "The MARCEL journey began around 2000 with the recognition of a clinical need and the development of a therapeutic concept focused on Oral Submucous Fibrosis.",
+        "body": "<p>What followed was a journey spanning formulation development, product testing, clinical assessments, scientific investigations, intellectual-property development and commercialisation. The first patent was granted in 2008.</p><p>Today, MARCEL OMR Therapy™ continues to evolve through clinical evaluation, research initiatives and patient-support activities.</p>",
         "link_label": "",
+        "link": "",
         "background": "paper",
         "sheet": false,
-        "spacing": "normal",
-        "story_eyebrow": "Our quest",
-        "body": "<p>What followed was a journey spanning formulation development, product testing, clinical assessments, scientific investigations, intellectual-property development and commercialisation. The first patent was granted in 2008.</p><p>Today, MARCEL OMR Therapy™ continues to evolve through clinical evaluation, research initiatives and patient-support activities.</p>"
+        "spacing": "normal"
       }
     },
     "timeline": {
       "type": "mt-journey",
-      "settings": {
-        "eyebrow": "MARCEL OraShield™",
-        "heading": "Development, Evidence & Commercialisation Journey",
-        "text": "26 years of continuous evolution, from understanding a clinical need to building a scientifically guided, evidence-driven oral care solution for OSMF management. The timeline distinguishes completed milestones from ongoing activities and future opportunities.",
-        "center": false,
-        "layout": "timeline",
-        "columns": 4,
-        "note": "<b>The core journey in one line:</b> Clinical Need → Therapeutic Concept → Formulation Development → Clinical Evaluation → Product Maturation → Market Learning → Scientific Research → Clinical Evidence → IP & Regulatory Development → Manufacturing Scale-Up → Commercialisation → Continuous Evidence Generation",
-        "button_label": "Explore clinical evidence",
-        "button_to": "evidence",
-        "button2_to": "consult",
-        "background": "mist",
-        "sheet": false,
-        "spacing": "normal"
-      },
       "blocks": {
         "phase_1": {
           "type": "phase",
           "settings": {
             "when": "2000 to 2012",
             "icon": "flask",
+            "tone": "",
+            "art": "era-lab",
+            "status": "done",
             "title": "From Clinical Need to Lead Formulation",
             "text": "",
-            "status": "done",
-            "art": "era-lab",
-            "points": "2000 | Clinical Problem & Unmet Need Identified | Define the OSMF problem, patient need and treatment gap.\n2000 to 2001 | Therapeutic Concept Defined | Establish the intended therapeutic objective, biological rationale and target population.\n2001 to 2004 | Candidate Ingredients Identified & Screened | Literature, traditional knowledge, pharmacological rationale and preliminary screening of candidate ingredients.\n2004 to 2012 | Lead Formulation Development | Develop, compare and progressively optimise formulation prototypes.\n2008 | First Patent Granted | First patent protection established for the developing technology/formulation.\nNovember 2008 | Clinical Evaluation at Government Dental Colleges | Early clinical evaluation of the developing formulation at Government Dental College, Ahmedabad and Government Dental College, Jamnagar."
+            "points": "2000 | Clinical Problem & Unmet Need Identified | Define the OSMF problem, patient need and treatment gap.\n2000 to 2001 | Therapeutic Concept Defined | Establish the intended therapeutic objective, biological rationale and target population.\n2001 to 2004 | Candidate Ingredients Identified & Screened | Literature, traditional knowledge, pharmacological rationale and preliminary screening of candidate ingredients.\n2004 to 2012 | Lead Formulation Development | Develop, compare and progressively optimise formulation prototypes.\n2008 | First Patent Granted | First patent protection established for the developing technology/formulation.\nNovember 2008 | Clinical Evaluation at Government Dental Colleges | Early clinical evaluation of the developing formulation at Government Dental College, Ahmedabad and Government Dental College, Jamnagar.",
+            "foot": ""
           }
         },
         "phase_2": {
@@ -121,11 +120,13 @@
           "settings": {
             "when": "2012 to 2015",
             "icon": "ruler",
+            "tone": "",
+            "art": "none",
+            "status": "done",
             "title": "Technical Development & Product Testing",
             "text": "",
-            "status": "done",
-            "art": "none",
-            "points": "2012 | Raw-Material Standardisation | Establish consistent raw-material specifications and quality requirements.\n2012 to 2014 | Dose, Route & Administration Optimisation | Progressively optimise dosage, route and administration parameters.\n2012 to 2014 | Finished-Product Quality & Analytical Development | Develop finished-product quality parameters and analytical controls.\n2012 to 2014 | Stability, Packaging Compatibility & Shelf-Life Development | Evaluate product stability, packaging compatibility and shelf-life requirements.\n2015 | Alpha & Beta Product Testing | Product testing and refinement through successive development stages."
+            "points": "2012 | Raw-Material Standardisation | Establish consistent raw-material specifications and quality requirements.\n2012 to 2014 | Dose, Route & Administration Optimisation | Progressively optimise dosage, route and administration parameters.\n2012 to 2014 | Finished-Product Quality & Analytical Development | Develop finished-product quality parameters and analytical controls.\n2012 to 2014 | Stability, Packaging Compatibility & Shelf-Life Development | Evaluate product stability, packaging compatibility and shelf-life requirements.\n2015 | Alpha & Beta Product Testing | Product testing and refinement through successive development stages.",
+            "foot": ""
           }
         },
         "phase_3": {
@@ -133,11 +134,13 @@
           "settings": {
             "when": "2016 to 2022",
             "icon": "chart",
+            "tone": "",
+            "art": "none",
+            "status": "done",
             "title": "Product Maturation & Market Learning",
             "text": "",
-            "status": "done",
-            "art": "none",
-            "points": "2016 to 2018 | Product Maturation, Scale-Up & Commercial Feasibility | Progress from development-stage formulation toward a scalable and commercially feasible product.\n2019 | Seed Marketing / Market Proof of Concept | Initial market introduction and learning from early commercial experience.\n2019 to 2021 | Professional Adoption & Commercial Process Development | Develop professional engagement and a repeatable commercial process.\n2022 | Test Marketing / Regional Pilot Launch | Pilot market introduction and evaluation of regional commercial response."
+            "points": "2016 to 2018 | Product Maturation, Scale-Up & Commercial Feasibility | Progress from development-stage formulation toward a scalable and commercially feasible product.\n2019 | Seed Marketing / Market Proof of Concept | Initial market introduction and learning from early commercial experience.\n2019 to 2021 | Professional Adoption & Commercial Process Development | Develop professional engagement and a repeatable commercial process.\n2022 | Test Marketing / Regional Pilot Launch | Pilot market introduction and evaluation of regional commercial response.",
+            "foot": ""
           }
         },
         "phase_4": {
@@ -145,11 +148,13 @@
           "settings": {
             "when": "2023 onward",
             "icon": "search",
+            "tone": "",
+            "art": "none",
+            "status": "now",
             "title": "Ongoing Investigations & Evidence Generation",
             "text": "MARCEL OSMF Fibrosis Reversal Research Programme.",
-            "status": "now",
-            "art": "none",
-            "points": "Investigation 1 | In-Vitro Anti-Fibrotic Mechanism | Investigate relevant cellular biological activity and generate preliminary anti-fibrotic evidence.\nInvestigation 2 | Molecular Mechanism & Biomarkers | Investigate relevant molecular pathways and fibrosis-associated biomarkers.\nInvestigation 3 | Histopathology & Tissue Remodelling | Investigate whether biological activity corresponds to measurable structural and tissue-level changes.\nPlanning | Human Clinical Development Planning | Develop the protocol, population, endpoints, comparator, sample size, ethics, registration and study procedures for human fibrosis-remodelling research.\nInvestigation 4 | Human OSMF Fibrosis-Remodelling / Reversal Study | A separate investigation designed to evaluate clinical, biological and tissue-level outcomes in patients with established OSMF.\nAssessment | Integrated Scientific Evidence Assessment | Integrate the intended evidence chain: Cellular → Molecular → Tissue → Human Clinical."
+            "points": "Investigation 1 | In-Vitro Anti-Fibrotic Mechanism | Investigate relevant cellular biological activity and generate preliminary anti-fibrotic evidence.\nInvestigation 2 | Molecular Mechanism & Biomarkers | Investigate relevant molecular pathways and fibrosis-associated biomarkers.\nInvestigation 3 | Histopathology & Tissue Remodelling | Investigate whether biological activity corresponds to measurable structural and tissue-level changes.\nPlanning | Human Clinical Development Planning | Develop the protocol, population, endpoints, comparator, sample size, ethics, registration and study procedures for human fibrosis-remodelling research.\nInvestigation 4 | Human OSMF Fibrosis-Remodelling / Reversal Study | A separate investigation designed to evaluate clinical, biological and tissue-level outcomes in patients with established OSMF.\nAssessment | Integrated Scientific Evidence Assessment | Integrate the intended evidence chain: Cellular → Molecular → Tissue → Human Clinical.",
+            "foot": ""
           }
         },
         "phase_5": {
@@ -157,11 +162,13 @@
           "settings": {
             "when": "2008 to 2026",
             "icon": "doctor",
+            "tone": "",
+            "art": "era-study",
+            "status": "none",
             "title": "Clinical Evidence",
             "text": "",
-            "status": "none",
-            "art": "era-study",
-            "points": "November 2008 | Government Dental College Clinical Evaluation | Early clinical evaluation at Government Dental College, Ahmedabad and Government Dental College, Jamnagar.\nClinical study | R.A. Podar Ayurvedic Medical College, Mumbai | Final report pending.\nSeptember 2026 | Nanded Randomized Controlled Clinical Study | Randomized Controlled Clinical Study (RCT). The Nanded RCT is a separate clinical study from Investigation 4, the Human OSMF Fibrosis-Remodelling / Reversal Study."
+            "points": "November 2008 | Government Dental College Clinical Evaluation | Early clinical evaluation at Government Dental College, Ahmedabad and Government Dental College, Jamnagar.\nClinical study | R.A. Podar Ayurvedic Medical College, Mumbai | Final report pending.\nSeptember 2026 | Nanded Randomized Controlled Clinical Study | Randomized Controlled Clinical Study (RCT). The Nanded RCT is a separate clinical study from Investigation 4, the Human OSMF Fibrosis-Remodelling / Reversal Study.",
+            "foot": ""
           }
         },
         "phase_6": {
@@ -169,11 +176,13 @@
           "settings": {
             "when": "2025 to 2026",
             "icon": "patent",
+            "tone": "",
+            "art": "none",
+            "status": "now",
             "title": "IP, Regulatory, Quality & Manufacturing",
             "text": "",
-            "status": "now",
-            "art": "none",
-            "points": "8 May 2025 | Indian Patent Application Filed | Application No. 202521044814.\n2025 to 2026 | Regulatory Dossier & Licensing | Compilation of applicable quality, scientific, manufacturing and regulatory documentation and pursuit of the applicable licensing pathway.\n2025 to 2026 | GMP Manufacturing, Scale-Up & Process Validation | Manufacturing development, scale-up and process validation.\n2026 | Quality, GMP & Regulatory Compliance Certifications | ISO 9001:2015, ISO 14001:2015, ISO 22000:2018, GMP and FDA Regulatory Compliance.\n2026 | 30 Trademark Applications Filed\n2026 | PCT International Patent Filing | International patent protection pathway initiated through PCT filing."
+            "points": "8 May 2025 | Indian Patent Application Filed | Application No. 202521044814.\n2025 to 2026 | Regulatory Dossier & Licensing | Compilation of applicable quality, scientific, manufacturing and regulatory documentation and pursuit of the applicable licensing pathway.\n2025 to 2026 | GMP Manufacturing, Scale-Up & Process Validation | Manufacturing development, scale-up and process validation.\n2026 | Quality, GMP & Regulatory Compliance Certifications | ISO 9001:2015, ISO 14001:2015, ISO 22000:2018, GMP and FDA Regulatory Compliance.\n2026 | 30 Trademark Applications Filed\n2026 | PCT International Patent Filing | International patent protection pathway initiated through PCT filing.",
+            "foot": ""
           }
         },
         "phase_7": {
@@ -181,10 +190,13 @@
           "settings": {
             "when": "2026",
             "icon": "india",
+            "tone": "",
+            "art": "era-launch",
+            "status": "now",
             "title": "Commercialisation & National Rollout",
             "text": "Transition toward commercial availability, distribution expansion, healthcare professional engagement and broader patient access.",
-            "status": "now",
-            "art": "era-launch"
+            "points": "",
+            "foot": ""
           }
         },
         "phase_8": {
@@ -192,11 +204,13 @@
           "settings": {
             "when": "Beyond 2026",
             "icon": "target",
+            "tone": "",
+            "art": "none",
+            "status": "next",
             "title": "Post-Commercialisation Evidence & Continuous Development",
             "text": "",
-            "status": "next",
-            "art": "none",
-            "points": "Real-world clinical experience\nSafety monitoring\nExpanded clinical evidence\nOngoing research programme\nFurther indications and applications\nContinuing scientific, clinical, IP and regulatory development"
+            "points": "Real-world clinical experience\nSafety monitoring\nExpanded clinical evidence\nOngoing research programme\nFurther indications and applications\nContinuing scientific, clinical, IP and regulatory development",
+            "foot": ""
           }
         }
       },
@@ -209,11 +223,98 @@
         "phase_6",
         "phase_7",
         "phase_8"
-      ]
+      ],
+      "settings": {
+        "anchor": "",
+        "eyebrow": "MARCEL OraShield™",
+        "heading": "Development, Evidence & Commercialisation Journey",
+        "text": "26 years of continuous evolution, from understanding a clinical need to building a scientifically guided, evidence-driven oral care solution for OSMF management. The timeline distinguishes completed milestones from ongoing activities and future opportunities.",
+        "center": false,
+        "layout": "timeline",
+        "columns": 4,
+        "note": "<b>The core journey in one line:</b> Clinical Need → Therapeutic Concept → Formulation Development → Clinical Evaluation → Product Maturation → Market Learning → Scientific Research → Clinical Evidence → IP & Regulatory Development → Manufacturing Scale-Up → Commercialisation → Continuous Evidence Generation",
+        "button_label": "Explore clinical evidence",
+        "button_to": "evidence",
+        "button_link": "",
+        "button2_label": "",
+        "button2_to": "consult",
+        "button2_link": "",
+        "status_done": "Completed",
+        "status_now": "In progress",
+        "status_next": "Coming next",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
     },
     "pillars": {
       "type": "mt-journey",
+      "blocks": {
+        "phase_1": {
+          "type": "phase",
+          "settings": {
+            "when": "Pillar 1: Oral mucosal care",
+            "icon": "shield",
+            "tone": "",
+            "art": "pillar-care",
+            "status": "none",
+            "title": "Care for the Mouth and Support Comfort",
+            "text": "A structured oral-care regimen designed to support oral mucosal health and help manage common OSMF-related discomfort such as burning, tightness and difficulty with eating.",
+            "points": "",
+            "foot": ""
+          }
+        },
+        "phase_2": {
+          "type": "phase",
+          "settings": {
+            "when": "Pillar 2: Functional support",
+            "icon": "s-open",
+            "tone": "",
+            "art": "pillar-function",
+            "status": "none",
+            "title": "Support What Matters in Daily Life",
+            "text": "Regular mouth-opening exercises and, where appropriate, an optional mouth-opening device as an adjunct.",
+            "points": "",
+            "foot": "Focus: mouth opening, chewing and oral function"
+          }
+        },
+        "phase_3": {
+          "type": "phase",
+          "settings": {
+            "when": "Pillar 3: Guided care and progress",
+            "icon": "chart",
+            "tone": "",
+            "art": "pillar-progress",
+            "status": "none",
+            "title": "Track Your Progress with Support",
+            "text": "Progress tracking, the 3-Week Progress Tracker, scheduled reviews and the In-house OSMF Consultant, with guidance towards MARCEL OSMF Care Specialists where clinical assessment is required.",
+            "points": "",
+            "foot": "Focus: progress tracking, guidance and specialist care"
+          }
+        },
+        "phase_4": {
+          "type": "phase",
+          "settings": {
+            "when": "Pillar 4: Dietary guidance & nutrition",
+            "icon": "bowl",
+            "tone": "",
+            "art": "pillar-nutrition",
+            "status": "none",
+            "title": "Eat Well. Nourish Better.",
+            "text": "Practical dietary guidance to help individuals make informed food choices, manage food-related discomfort and maintain nutritional well-being throughout their OSMF care journey.",
+            "points": "",
+            "foot": "Focus: balanced diet, suitable food choices and healthy eating habits."
+          }
+        }
+      },
+      "block_order": [
+        "phase_1",
+        "phase_2",
+        "phase_3",
+        "phase_4"
+      ],
       "settings": {
+        "anchor": "",
         "eyebrow": "The MARCEL 4-Pillar Approach",
         "heading": "Four Connected Pillars That Work Together in OSMF Care.",
         "text": "MARCEL OMR Therapy™ brings together oral mucosal care, functional support, guided progress and dietary guidance.",
@@ -223,100 +324,55 @@
         "note": "",
         "button_label": "Explore MARCEL OMR Therapy™",
         "button_to": "therapy",
+        "button_link": "",
+        "button2_label": "",
         "button2_to": "consult",
+        "button2_link": "",
+        "status_done": "Completed",
+        "status_now": "In progress",
+        "status_next": "Coming next",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"
-      },
-      "blocks": {
-        "phase_1": {
-          "type": "phase",
-          "settings": {
-            "when": "Pillar 1: Oral mucosal care",
-            "icon": "shield",
-            "title": "Care for the Mouth and Support Comfort",
-            "text": "A structured oral-care regimen designed to support oral mucosal health and help manage common OSMF-related discomfort such as burning, tightness and difficulty with eating.",
-            "art": "pillar-care"
-          }
-        },
-        "phase_2": {
-          "type": "phase",
-          "settings": {
-            "when": "Pillar 2: Functional support",
-            "icon": "s-open",
-            "title": "Support What Matters in Daily Life",
-            "text": "Regular mouth-opening exercises and, where appropriate, an optional mouth-opening device as an adjunct.",
-            "foot": "Focus: mouth opening, chewing and oral function",
-            "art": "pillar-function"
-          }
-        },
-        "phase_3": {
-          "type": "phase",
-          "settings": {
-            "when": "Pillar 3: Guided care and progress",
-            "icon": "chart",
-            "title": "Track Your Progress with Support",
-            "text": "Progress tracking, the 3-Week Progress Tracker, scheduled reviews and the In-house OSMF Consultant, with guidance towards MARCEL OSMF Care Specialists where clinical assessment is required.",
-            "foot": "Focus: progress tracking, guidance and specialist care",
-            "art": "pillar-progress"
-          }
-        },
-        "phase_4": {
-          "type": "phase",
-          "settings": {
-            "when": "Pillar 4: Dietary guidance & nutrition",
-            "icon": "bowl",
-            "title": "Eat Well. Nourish Better.",
-            "text": "Practical dietary guidance to help individuals make informed food choices, manage food-related discomfort and maintain nutritional well-being throughout their OSMF care journey.",
-            "foot": "Focus: balanced diet, suitable food choices and healthy eating habits.",
-            "art": "pillar-nutrition"
-          }
-        }
-      },
-      "block_order": [
-        "phase_1",
-        "phase_2",
-        "phase_3",
-        "phase_4"
-      ]
+      }
     },
     "values": {
       "type": "mt-icon-cards",
-      "settings": {
-        "eyebrow": "What guides us",
-        "heading": "Care Built Around Responsibility, Transparency and Progress",
-        "center": false,
-        "columns": "3",
-        "background": "mist",
-        "sheet": false,
-        "spacing": "normal"
-      },
       "blocks": {
         "card_1": {
           "type": "card",
           "settings": {
             "icon": "shield",
+            "art": "none",
             "title": "Clinical Responsibility",
             "text": "OSMF is a complex condition requiring appropriate assessment, and individual responses to care can vary.",
-            "link_to": "custom"
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
           }
         },
         "card_2": {
           "type": "card",
           "settings": {
             "icon": "flask",
+            "art": "none",
             "title": "Evidence & Continued Research",
             "text": "We value documented clinical observations, structured evaluation and continued research to better understand outcomes.",
-            "link_to": "custom"
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
           }
         },
         "card_3": {
           "type": "card",
           "settings": {
             "icon": "heart",
+            "art": "none",
             "title": "Patient-Centred Support",
             "text": "We aim to help patients understand their symptoms, follow their care routine and track their progress with appropriate guidance.",
-            "link_to": "custom"
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
           }
         }
       },
@@ -324,7 +380,18 @@
         "card_1",
         "card_2",
         "card_3"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "What guides us",
+        "heading": "Care Built Around Responsibility, Transparency and Progress",
+        "text": "",
+        "center": false,
+        "columns": "3",
+        "media": "icon",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
     },
     "team": {
       "type": "mt-founder",
@@ -332,30 +399,23 @@
         "quote_position": "right",
         "quote_eyebrow": "",
         "quote": "",
-        "name": "Dr. Niyati Thakker, BDS",
+        "photo": "shopify://shop_images/df562fd0-b9e9-450b-a93a-23a73f0874f7.png",
+        "name": "",
         "role": "MARCEL OSMF Clinical Consultant",
+        "story_eyebrow": "Our team",
         "heading_size": "large",
         "heading": "A Clinical Point of Contact for Our Specialist Network",
-        "text": "Dr. Niyati Thakker, BDS, has joined JanSuta Pharmaceuticals as MARCEL OSMF Clinical Consultant.",
+        "text": "",
+        "body": "<p>As the MARCEL® OSMF Care Specialist network grows, she serves as a key clinical point of contact for participating doctors: helping them understand MARCEL OMR Therapy™, supporting clinical orientation and facilitating coordination with the JanSuta team.</p>",
         "link_label": "",
+        "link": "",
         "background": "paper",
         "sheet": false,
-        "spacing": "normal",
-        "story_eyebrow": "Our team",
-        "body": "<p>As the MARCEL® OSMF Care Specialist network grows, she serves as a key clinical point of contact for participating doctors: helping them understand MARCEL OMR Therapy™, supporting clinical orientation and facilitating coordination with the JanSuta team.</p>"
+        "spacing": "normal"
       }
     },
     "history": {
       "type": "mt-guide",
-      "settings": {
-        "show_toc": false,
-        "toc_title": "On This Page",
-        "read_label": "[n] min read",
-        "no_articles": "Articles will appear here once they are published.",
-        "background": "paper",
-        "sheet": false,
-        "spacing": "tight"
-      },
       "blocks": {
         "chapter_1": {
           "type": "chapter",
@@ -375,7 +435,20 @@
       "block_order": [
         "chapter_1",
         "text_1"
-      ]
+      ],
+      "settings": {
+        "show_toc": false,
+        "toc_title": "On This Page",
+        "read_label": "[n] min read",
+        "no_articles": "Articles will appear here once they are published.",
+        "card_media": "icon",
+        "video_url": "",
+        "video_title": "",
+        "video_shape": "landscape",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      }
     },
     "cta": {
       "type": "mt-cta-band",
@@ -385,8 +458,10 @@
         "text": "Our aim is to make the OSMF care journey more understandable, measurable and supportive, while recognising the importance of professional assessment and continued scientific evaluation.",
         "button_1_label": "Explore Clinical Evidence",
         "button_1_to": "evidence",
+        "button_1_link": "",
         "button_2_label": "Take the MARCEL OSMF Self-Check",
         "button_2_to": "test",
+        "button_2_link": "",
         "background": "paper",
         "sheet": false,
         "spacing": "tight"
@@ -394,15 +469,6 @@
     },
     "disclaimer": {
       "type": "mt-guide",
-      "settings": {
-        "show_toc": false,
-        "toc_title": "On This Page",
-        "read_label": "[n] min read",
-        "no_articles": "Articles will appear here once they are published.",
-        "background": "paper",
-        "sheet": false,
-        "spacing": "tight"
-      },
       "blocks": {
         "fine_1": {
           "type": "fine",
@@ -413,7 +479,20 @@
       },
       "block_order": [
         "fine_1"
-      ]
+      ],
+      "settings": {
+        "show_toc": false,
+        "toc_title": "On This Page",
+        "read_label": "[n] min read",
+        "no_articles": "Articles will appear here once they are published.",
+        "card_media": "icon",
+        "video_url": "",
+        "video_title": "",
+        "video_shape": "landscape",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      }
     }
   },
   "order": [
