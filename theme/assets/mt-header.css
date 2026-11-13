@@ -22,6 +22,19 @@ mt-header { display: block; }
 .mt-count.is-bump { animation: mt-bump .4s; }
 @keyframes mt-bump { 40% { transform: scale(1.35); } }
 .mt .mt-head-cta { margin-left: 4px; padding-inline: 16px; white-space: nowrap; }
+
+/* Language switch (snippet mt-lang-switch): shows once a second language is published. */
+.mt-lang { display: flex; margin: 0; }
+.mt .mt-lang-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 0 13px; border-radius: 99px; background: var(--mt-paper); box-shadow: inset 0 0 0 1.5px var(--mt-line-2); color: var(--mt-ink); font-size: 14px; font-weight: 700; line-height: 1; white-space: nowrap; transition: box-shadow .15s, color .15s; }
+.mt .mt-lang-btn:hover { box-shadow: inset 0 0 0 1.5px var(--mt-teal); color: var(--mt-teal); }
+.mt .mt-lang-btn:focus-visible { outline: 3px solid var(--mt-aqua); outline-offset: 2px; }
+.mt-lang--head { margin-right: 6px; }
+.mt-lang--drawer { margin-top: 18px; }
+.mt .mt-lang--drawer .mt-lang-btn { width: 100%; height: 48px; font-size: 16px; }
+.mt-lang--drawer .mt-i { width: 18px; height: 18px; }
+@media (max-width: 599px) {
+  .mt-lang--head { display: none; }
+}
 .mt .mt-menu-btn { display: none; }
 
 @media (max-width: 1320px) {

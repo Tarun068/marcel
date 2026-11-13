@@ -299,7 +299,7 @@
           {%- if settings.mt_hide_prices and settings.mt_whatsapp_number != blank -%}
             {%- assign enquiry = settings.mt_enquire_message | default: 'Hi MARCEL Team, I would like to know more about' | append: ' ' | append: product.title -%}
             {%- capture wa -%}{% render 'mt-wa-url', message: enquiry %}{%- endcapture -%}
-            <a class="mt-btn mt-btn-wa mt-btn-block" href="{{ wa }}" target="_blank" rel="noopener">{%- render 'mt-icon', icon: 'whatsapp' -%}{{ settings.mt_enquire_label | default: 'Enquire on WhatsApp' | escape }}</a>
+            <a class="mt-btn mt-btn-wa mt-btn-block" href="{{ wa }}" target="_blank" rel="noopener">{%- render 'mt-icon', icon: 'whatsapp' -%}{{ settings.mt_enquire_label | default: 'WhatsApp MARCEL Team' | escape }}</a>
           {%- else -%}
           <product-form class="mt-product-form" data-section-id="{{ section.id }}">
             {%- form 'product', product, id: form_id, class: 'mt-buy-form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
@@ -583,7 +583,7 @@
       "type": "text",
       "id": "cta2_label",
       "label": "Text link",
-      "info": "e.g. Explore Foundation MARCEL OMR Therapy™"
+      "info": "e.g. Explore the MARCEL OMR Therapy™ Foundation Kit"
     },
     {
       "type": "select",

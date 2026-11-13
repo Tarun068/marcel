@@ -26,7 +26,7 @@
         "eyebrow": "MARCEL OMR Therapy™ Foundation Kit for Stage 1 or 2 OSMF",
         "heading": "Build a Strong Foundation for OSMF Care",
         "text": "MARCEL OMR Therapy™ Foundation Kit is intended for individuals assessed by a qualified healthcare professional as having Stage 1 or Stage 2 Oral Submucous Fibrosis (OSMF). The routine includes MARCEL Ora-Care™ Oral Spray, MARCEL Smile™ Toothpaste, prescribed mouth/jaw exercises when advised, and professional guidance as appropriate.",
-        "button_1_label": "Talk to a MARCEL OSMF Consultant",
+        "button_1_label": "Book a Consultation",
         "button_2_label": "Check Your OSMF Stage",
         "note": "If you have not been assessed, the MARCEL OSMF SELF CHECK™ can provide an initial indication of your possible stage. It cannot diagnose OSMF or confirm your stage.",
         "back_label": "Back to MARCEL OMR Therapy™ Overview",
@@ -36,8 +36,8 @@
     "components": {
       "type": "mt-components",
       "settings": {
-        "eyebrow": "What Foundation care includes",
-        "heading": "The Components of the Foundation Routine",
+        "eyebrow": "What the Foundation Kit includes",
+        "heading": "The Components of the Foundation Kit Routine",
         "columns": "3",
         "background": "paper",
         "sheet": false,
@@ -51,7 +51,7 @@
             "icon": "s-open",
             "title": "MARCEL Ora-Care™ Oral Spray",
             "size": "50 mL",
-            "text": "The core therapy component of Foundation, used as part of a structured daily routine. Use it according to the approved product label or the directions of your physician or MARCEL OSMF Consultant. Follow prescribed mouth/jaw exercises after each application only as instructed.",
+            "text": "The core therapy component of the Foundation Kit, used as part of a structured daily routine. Use it according to the approved product label or the directions of your physician or MARCEL OSMF Consultant. Follow prescribed mouth/jaw exercises after each application only as instructed.",
             "button_label": "Explore MARCEL Ora-Care™",
             "link_to": "product",
             "show_price": false,
@@ -65,7 +65,7 @@
             "icon": "s-open",
             "title": "MARCEL Smile™ Toothpaste",
             "size": "30 g",
-            "text": "Supports everyday oral hygiene as part of the Foundation routine. Use according to the product label and maintain regular brushing habits.",
+            "text": "Supports everyday oral hygiene as part of the Foundation Kit routine. Use according to the product label and maintain regular brushing habits.",
             "button_label": "Explore MARCEL Smile™",
             "link_to": "product",
             "show_price": false,
@@ -98,7 +98,7 @@
       "settings": {
         "layout": "journey",
         "eyebrow": "Follow your recommended routine",
-        "heading": "Your Foundation Routine",
+        "heading": "Your Foundation Kit Routine",
         "link_label": "",
         "background": "mist",
         "sheet": false,
@@ -259,7 +259,7 @@
       "type": "mt-support",
       "settings": {
         "eyebrow": "Need guidance?",
-        "heading": "Not Sure Whether Foundation Is Appropriate for You?",
+        "heading": "Not Sure Whether the Foundation Kit Is Appropriate for You?",
         "text": "A MARCEL OSMF Consultant can help you understand the next steps and guide you towards suitable professional assessment.",
         "center": false,
         "note": "The MARCEL OSMF Consultant gives programme information and next-step guidance. Diagnosis, staging and treatment decisions are made by a qualified healthcare professional.",
@@ -274,9 +274,9 @@
             "icon": "phone",
             "eyebrow": "Option A",
             "title": "MARCEL OSMF Consultant",
-            "subtitle": "In-house, on-call consultation",
+            "subtitle": "On-call, remote consultation",
             "text": "Discuss your concerns remotely and understand the next step.",
-            "button_label": "Talk to a MARCEL OSMF Consultant",
+            "button_label": "Book a Consultation",
             "link_to": "consult",
             "link2_to": "test",
             "points": "Programme information and next steps\nGuidance on the MARCEL OMR Therapy™ pathways\nHelp finding a professional assessment",
@@ -291,7 +291,7 @@
             "title": "OSMF Specialist Doctors",
             "subtitle": "In-clinic, in-person consultation",
             "text": "A doctor can examine your mouth, assess mouth opening and evaluate oral tissue changes directly.",
-            "button_label": "Find an OSMF Specialist Doctor",
+            "button_label": "",
             "link_to": "specialists",
             "link2_to": "whatsapp",
             "points": "Qualified clinical assessment\nEvaluation of symptoms and mouth opening\nProfessional guidance on diagnosis and management",
@@ -307,10 +307,10 @@
     "cta": {
       "type": "mt-cta-band",
       "settings": {
-        "eyebrow": "Foundation pathway",
+        "eyebrow": "Foundation Kit pathway",
         "heading": "Start with a Structured Routine",
         "text": "If the Foundation Kit has been recommended for you, explore its components and follow your personalised care advice.",
-        "button_1_label": "Talk to a MARCEL OSMF Consultant",
+        "button_1_label": "Book a Consultation",
         "button_1_to": "consult",
         "button_2_label": "Explore MARCEL Ora-Care™",
         "button_2_to": "custom",
@@ -333,7 +333,7 @@
           "type": "link",
           "settings": {
             "lead": "Looking for the other pathway?",
-            "label": "Explore MARCEL OMR Therapy™ Advance",
+            "label": "Explore MARCEL OMR Therapy™ Advance Kit",
             "link_to": "advance",
             "back": false
           }

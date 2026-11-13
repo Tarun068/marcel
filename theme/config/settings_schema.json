@@ -1694,7 +1694,7 @@
         "type": "text",
         "id": "mt_whatsapp_message",
         "label": "Default WhatsApp message",
-        "default": "Hi Marcel team, I'd like to talk to an OSMF expert."
+        "default": "Hi MARCEL Team, I'd like to talk to a MARCEL OSMF Consultant."
       },
       {
         "type": "header",
@@ -1798,7 +1798,7 @@
         "type": "text",
         "id": "mt_enquire_label",
         "label": "Enquiry button (while prices are hidden)",
-        "default": "Enquire on WhatsApp"
+        "default": "WhatsApp MARCEL Team"
       },
       {
         "type": "text",

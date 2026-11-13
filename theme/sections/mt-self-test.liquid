@@ -5,6 +5,8 @@
 {%- liquid
   assign result_link = section.settings.result_link | default: settings.mt_link_result | default: '/pages/self-check-result'
 -%}
+{%- comment -%} A link setting passed straight to the form tag prints as "UrlDrop"; the form needs the plain address. {%- endcomment -%}
+{%- capture result_return -%}{{ result_link }}{%- endcapture -%}
 
 <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-test-sec' %}">
   <div class="mt-wrap">
@@ -94,7 +96,7 @@
           The form is sent as a normal post so Shopify's spam check can add its token (mt-global.js postForm).
           Shopify then opens the result page.
         {%- endcomment -%}
-        {%- form 'contact', id: 'MtSelfTestLead', class: 'mt-form-grid', data-mt-lead-form: '', novalidate: 'novalidate', return_to: result_link -%}
+        {%- form 'contact', id: 'MtSelfTestLead', class: 'mt-form-grid', data-mt-lead-form: '', novalidate: 'novalidate', return_to: result_return -%}
           <input type="hidden" name="contact[source]" value="{{ section.settings.source_label | escape }}">
           <input type="hidden" name="contact[result]" value="" data-mt-field="result">
           <input type="hidden" name="contact[symptoms]" value="" data-mt-field="severity">
@@ -353,7 +355,7 @@
       "type": "textarea",
       "id": "lead_text",
       "label": "Text",
-      "default": "Add your name and WhatsApp number to see your result. We'll send you a copy, and our In-house OSMF Consultant can follow up with you."
+      "default": "Add your name and WhatsApp number to see your result. We'll send you a copy, and a MARCEL OSMF Consultant can follow up with you."
     },
     {
       "type": "text",

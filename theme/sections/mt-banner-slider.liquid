@@ -86,7 +86,7 @@
         {%- capture btn1_link -%}{% render 'mt-link-to', key: b.button_1_to, url: b.button_1_link %}{%- endcapture -%}
         {%- capture btn2_link -%}{% render 'mt-link-to', key: b.button_2_to, url: b.button_2_link %}{%- endcapture -%}
         <div
-          class="mt-bs-slide mt-bs-slide--{{ b.style }} mt-bs-tone-{{ b.text_color }} mt-bs-align-{{ b.align }}{% if art != 'none' %} mt-bs-slide--art{% endif %}{% if forloop.first %} is-active{% endif %}"
+          class="mt-bs-slide mt-bs-slide--{{ b.style }} mt-bs-tone-{{ b.text_color }} mt-bs-align-{{ b.align }}{% if art != 'none' %} mt-bs-slide--art mt-bs-art-{{ art }}{% endif %}{% if forloop.first %} is-active{% endif %}"
           role="group"
           aria-roledescription="slide"
           aria-label="{{ forloop.index }} / {{ slides.size }}"
@@ -146,7 +146,7 @@
 
           {%- if b.style == 'image' -%}
             {%- if b.link_to != 'custom' or b.link != blank -%}
-              <a class="mt-bs-link" href="{{ link }}"{% if b.link_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %} aria-label="{{ b.alt | default: img.alt | default: 'Open banner' | escape }}"></a>
+              <a class="mt-bs-link" href="{{ link }}"{% if b.link_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}{% if art == 'hi' %} lang="hi"{% endif %} aria-label="{{ b.alt | default: img.alt | default: 'Open banner' | escape }}"></a>
             {%- endif -%}
           {%- else -%}
             <div class="mt-wrap mt-bs-content">
@@ -469,6 +469,10 @@
             {
               "value": "5",
               "label": "Specialist finder: map"
+            },
+            {
+              "value": "hi",
+              "label": "OSMF symptoms banner in Hindi"
             }
           ],
           "default": "none"
@@ -650,7 +654,7 @@
             "eyebrow": "MARCEL OSMF Self-Check",
             "heading": "Not sure what your symptoms mean? <em>Check your OSMF stage.</em>",
             "button_1_label": "Start the Self-Check",
-            "button_2_label": "Talk to a Consultant",
+            "button_2_label": "Book a Consultation",
             "button_2_to": "consult"
           }
         },
@@ -659,11 +663,11 @@
           "settings": {
             "art": "3",
             "eyebrow_icon": "phone",
-            "eyebrow": "In-house MARCEL OSMF Consultant",
-            "heading": "Have questions? <em>Talk to our OSMF Consultant.</em>",
+            "eyebrow": "MARCEL OSMF Consultants",
+            "heading": "Have questions? <em>Talk to our MARCEL OSMF Consultant.</em>",
             "button_1_label": "Book a Consultation",
             "button_1_to": "consult",
-            "button_2_label": "WhatsApp us",
+            "button_2_label": "WhatsApp MARCEL Team",
             "button_2_to": "whatsapp"
           }
         },
@@ -676,7 +680,7 @@
             "heading": "Care that keeps going <em>after you start</em>",
             "button_1_label": "See the 12-Week Journey",
             "button_1_to": "journey",
-            "button_2_label": "Talk to a Consultant",
+            "button_2_label": "Book a Consultation",
             "button_2_to": "consult"
           }
         },
@@ -687,7 +691,7 @@
             "eyebrow_icon": "doctor",
             "eyebrow": "OSMF Specialist Doctors",
             "heading": "Need a check-up? <em>Find a specialist near you.</em>",
-            "button_1_label": "Find a Specialist",
+            "button_1_label": "Find an OSMF Specialist Doctor",
             "button_1_to": "specialists",
             "button_2_label": "Check Your OSMF Stage",
             "button_2_to": "test"

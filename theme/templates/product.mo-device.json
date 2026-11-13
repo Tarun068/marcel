@@ -131,11 +131,11 @@
         "heading": "Support for Your <em>Exercise Routine</em>",
         "text": "<p>The MARCEL® MOFlex Device is an optional aid for guided mouth-opening exercises. Use it only in the way your healthcare professional shows you, and never force your mouth open.</p>",
         "points": "",
-        "button_1_label": "Find an OSMF Specialist",
-        "button_1_to": "specialists",
+        "button_1_label": "Book a Consultation",
+        "button_1_to": "consult",
         "button_1_link": "",
-        "button_2_label": "Talk to a Consultant",
-        "button_2_to": "consult",
+        "button_2_label": "WhatsApp MARCEL Team",
+        "button_2_to": "whatsapp",
         "button_2_link": "",
         "note": "",
         "background": "mist",
@@ -176,8 +176,8 @@
         "link_1": {
           "type": "link",
           "settings": {
-            "label": "Find an OSMF Specialist Doctor",
-            "url": "/pages/find-osmf-specialist"
+            "label": "Book a Consultation",
+            "url": "/pages/osmf-consultant"
           }
         },
         "chapter_2": {
@@ -212,13 +212,13 @@
         "text_4": {
           "type": "text",
           "settings": {
-            "text": "<p>The MARCEL® MOFlex Device may be considered as an optional adjunct for selected individuals who need additional support with mouth-opening exercises. It is intended to support functional rehabilitation as part of a broader care plan. It does not replace:</p><ul><li>Professional assessment or personalised clinical advice</li><li>The broader care plan recommended for you</li><li>Mouth-opening exercises and follow-up guidance</li></ul><p>It is associated with the functional-rehabilitation component of the MARCEL OMR Therapy™ Advance programme, where appropriate. It is not required by every patient.</p>"
+            "text": "<p>The MARCEL® MOFlex Device may be considered as an optional adjunct for selected individuals who need additional support with mouth-opening exercises. It is intended to support functional rehabilitation as part of a broader care plan. It does not replace:</p><ul><li>Professional assessment or personalised clinical advice</li><li>The broader care plan recommended for you</li><li>Mouth-opening exercises and follow-up guidance</li></ul><p>It is associated with the functional-rehabilitation component of the MARCEL OMR Therapy™ Advance Kit programme, where appropriate. It is not required by every patient.</p>"
           }
         },
         "link_2": {
           "type": "link",
           "settings": {
-            "label": "Explore MARCEL OMR Therapy™ Advance",
+            "label": "Explore MARCEL OMR Therapy™ Advance Kit",
             "url": "/pages/advance-kit"
           }
         },
@@ -340,10 +340,10 @@
             "icon": "phone",
             "eyebrow": "Option A",
             "title": "MARCEL OSMF Consultant",
-            "subtitle": "In-house, on-call consultation",
+            "subtitle": "On-call, remote consultation",
             "text": "Discuss your concerns remotely and understand the next step.",
             "points": "Programme information and next steps\nGuidance on the MARCEL OMR Therapy™ pathways\nHelp finding a professional assessment",
-            "button_label": "Talk to a MARCEL OSMF Consultant",
+            "button_label": "Book a Consultation",
             "link_to": "consult",
             "link": "",
             "button2_label": "",
@@ -360,7 +360,7 @@
             "subtitle": "In-clinic, in-person consultation",
             "text": "A doctor can examine your mouth, assess mouth opening and evaluate oral tissue changes directly.",
             "points": "Qualified clinical assessment\nEvaluation of symptoms and mouth opening\nProfessional guidance on diagnosis and management",
-            "button_label": "Find an OSMF Specialist Doctor",
+            "button_label": "",
             "link_to": "specialists",
             "link": "",
             "button2_label": "",
@@ -377,7 +377,7 @@
         "anchor": "",
         "eyebrow": "Get guidance",
         "heading": "Not Sure Whether Device-Assisted Exercises Are Right for You?",
-        "text": "Contact a MARCEL OSMF Consultant for programme information and next-step guidance, or consult an OSMF Specialist doctor for qualified clinical assessment.",
+        "text": "Contact a MARCEL OSMF Consultant for programme information and next-step guidance, or consult an OSMF Specialist Doctor for qualified clinical assessment.",
         "center": false,
         "note": "The MARCEL OSMF Consultant gives programme information and next-step guidance. Diagnosis, staging and treatment decisions are made by a qualified healthcare professional.",
         "background": "mist",
@@ -454,7 +454,7 @@
           "type": "question",
           "settings": {
             "question": "Where does it fit within MARCEL OMR Therapy™?",
-            "answer": "<p>It may be used as an optional adjunct in the functional-rehabilitation component of the MARCEL OMR Therapy™ Advance programme, where appropriate.</p>"
+            "answer": "<p>It may be used as an optional adjunct in the functional-rehabilitation component of the MARCEL OMR Therapy™ Advance Kit programme, where appropriate.</p>"
           }
         }
       },
@@ -474,8 +474,8 @@
         "schema_markup": true,
         "show_help": true,
         "help_title": "Have Questions?",
-        "help_text": "Our In-house OSMF Consultant can help with programme questions and your next step.",
-        "whatsapp_label": "WhatsApp the MARCEL Team",
+        "help_text": "Our MARCEL OSMF Consultants can help with programme questions and your next step.",
+        "whatsapp_label": "WhatsApp MARCEL Team",
         "link_label": "See all FAQs",
         "link": "/pages/faq",
         "background": "mist",

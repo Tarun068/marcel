@@ -53,7 +53,7 @@
         "text": "The MARCEL OSMF Self-Check gives an initial indication of your possible stage. It cannot diagnose OSMF.",
         "button_1_label": "Check Your OSMF Stage",
         "button_1_to": "test",
-        "button_2_label": "Talk to a MARCEL OSMF Consultant",
+        "button_2_label": "Book a Consultation",
         "button_2_to": "consult",
         "background": "paper",
         "sheet": false,

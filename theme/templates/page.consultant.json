@@ -22,8 +22,8 @@
         "spacing": "none",
         "parent_label": "Get Help",
         "parent_link": "/pages/get-help",
-        "current_label": "OSMF Consultant",
-        "eyebrow": "In-house OSMF consultation",
+        "current_label": "MARCEL OSMF Consultant",
+        "eyebrow": "MARCEL OSMF Consultants",
         "heading": "Book Your OSMF Consultation",
         "text": "Share your details, choose an available consultation slot and pay the booking fee. The fee is adjusted against an eligible MARCEL product purchase, subject to the published terms."
       }
@@ -34,7 +34,7 @@
         "fee_fallback": "₹50",
         "source_label": "OSMF Consultant booking request",
         "details_heading": "Your Details",
-        "details_text": "Please complete the required fields so our in-house consultation team can contact you.",
+        "details_text": "Please complete the required fields so a MARCEL OSMF Consultant can contact you.",
         "name_label": "Full name",
         "age_label": "Age",
         "phone_label": "Phone number",
@@ -80,20 +80,20 @@
         "stage_titles": "healthy | No signs of OSMF yet | #0A8A96\nstage1 | Possible Stage 1 | #2B9759\nstage2 | Possible Stage 2 | #C4860B\nstage3 | Possible Stage 3 | #D5602A\nstage4 | Possible Stage 4 | #C23838\ninvestigate | Under 5 mm, investigation advised | #C23838\nstage5 | Possible Stage 5 | #C23838",
         "summary_title": "Your Consultation",
         "sum_type": "Consultation",
-        "type_value": "In-house MARCEL OSMF Consultant, on call",
+        "type_value": "MARCEL OSMF Consultant, on call",
         "sum_when": "When",
         "sum_result": "Self-check result",
         "sum_fee": "Booking fee",
         "not_chosen": "Not chosen yet",
         "not_taken": "Not taken yet",
         "take_now": "Check your OSMF stage",
-        "role_note": "The OSMF Consultant discusses your concerns and guides the next step. For an examination, diagnosis or treatment, please see an OSMF Specialist doctor.",
+        "role_note": "A MARCEL OSMF Consultant discusses your concerns and guides the next step. For an examination, diagnosis or treatment, please see an OSMF Specialist Doctor.",
         "help_text": "Need help? WhatsApp [phone]",
         "done_eyebrow": "Request received",
         "done_heading": "Thank You",
         "booking_id_label": "Booking reference",
         "next_label": "What happens next",
-        "done_next": "Our in-house consultation team will contact you to confirm the slot and the booking fee.\nKeep your self-check result handy for the call.\nFor an examination, the consultant may advise you to see an OSMF Specialist doctor in person.",
+        "done_next": "A MARCEL OSMF Consultant will contact you to confirm the slot and the booking fee.\nKeep your self-check result handy for the call.\nFor an examination, the consultant may advise you to see an OSMF Specialist Doctor in person.",
         "new_label": "Make another booking",
         "background": "paper",
         "sheet": false,
@@ -110,8 +110,8 @@
         "schema_markup": true,
         "show_help": false,
         "help_title": "Have Questions?",
-        "help_text": "Our In-house OSMF Consultant can help with programme questions and your next step.",
-        "whatsapp_label": "WhatsApp the MARCEL Team",
+        "help_text": "Our MARCEL OSMF Consultants can help with programme questions and your next step.",
+        "whatsapp_label": "WhatsApp MARCEL Team",
         "link_label": "",
         "background": "mist",
         "sheet": false,
@@ -123,21 +123,21 @@
           "type": "question",
           "settings": {
             "question": "Which consultation should I choose?",
-            "answer": "<p>If you want to discuss your symptoms and understand how to proceed, start with the OSMF Consultant on-call service. If you need a direct examination, have significant difficulty opening your mouth, or notice a persistent ulcer, unexplained lump, bleeding or another concerning change, arrange an in-clinic consultation with an OSMF Specialist doctor.</p>"
+            "answer": "<p>If you want to discuss your symptoms and understand how to proceed, start with the MARCEL OSMF Consultant on-call service. If you need a direct examination, have significant difficulty opening your mouth, or notice a persistent ulcer, unexplained lump, bleeding or another concerning change, arrange an in-clinic consultation with an OSMF Specialist Doctor.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
             "question": "Can I follow care from home if I cannot visit a clinic?",
-            "answer": "<p>An on-call consultation can help you discuss your symptoms and understand the next step without travelling first. If an examination is needed, the consultant can advise you to visit an OSMF Specialist doctor in person.</p>"
+            "answer": "<p>An on-call consultation can help you discuss your symptoms and understand the next step without travelling first. If an examination is needed, the consultant can advise you to visit an OSMF Specialist Doctor in person.</p>"
           }
         },
         "question_3": {
           "type": "question",
           "settings": {
             "question": "Can I use MARCEL OMR Therapy™ while receiving treatment from another doctor?",
-            "answer": "<p>Tell the OSMF Consultant or your treating doctor about the medicines, procedures and oral products you are currently using. Do not stop or change prescribed treatment on your own. They can help you decide whether the approaches can be used together and whether an in-person assessment is needed.</p>"
+            "answer": "<p>Tell the MARCEL OSMF Consultant or your treating doctor about the medicines, procedures and oral products you are currently using. Do not stop or change prescribed treatment on your own. They can help you decide whether the approaches can be used together and whether an in-person assessment is needed.</p>"
           }
         }
       },

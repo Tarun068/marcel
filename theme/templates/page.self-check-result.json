@@ -26,7 +26,7 @@
         "healthy_value": "More than 35 mm",
         "retake_label": "Take the self-check again",
         "clinic_title": "First: A Professional Assessment",
-        "clinic_text": "A qualified OSMF Specialist doctor examines your mouth, assesses your mouth opening and confirms the diagnosis, stage and care pathway.",
+        "clinic_text": "A qualified OSMF Specialist Doctor examines your mouth, assesses your mouth opening and confirms the diagnosis, stage and care pathway.",
         "exercises_title": "Prescribed Mouth and Jaw Exercises",
         "exercises_text": "Exercises may form part of your care routine when recommended by your healthcare professional. Do not force movements or continue through pain.",
         "assess_label": "Get Professional Assessment",
@@ -35,7 +35,7 @@
         "tips_heading": "Steps That Protect Your Oral Health",
         "show_report": false,
         "report_title": "Get This Report on WhatsApp",
-        "report_text": "Keep a copy of your result and get a follow-up from our In-house OSMF Consultant.",
+        "report_text": "Keep a copy of your result and get a follow-up from our MARCEL OSMF Consultants.",
         "report_phone_label": "WhatsApp number",
         "report_button": "Send",
         "report_error": "Enter a 10-digit mobile number.",
@@ -72,9 +72,9 @@
             "next_title": "Questions About Your Oral Health?",
             "next_text": "A MARCEL OSMF Consultant can answer your questions and guide you on what to watch for.",
             "next_action": "consult",
-            "next_label": "Talk to a MARCEL OSMF Consultant",
+            "next_label": "Book a Consultation",
             "alt_action": "whatsapp",
-            "alt_label": "WhatsApp the MARCEL Team"
+            "alt_label": "WhatsApp MARCEL Team"
           }
         },
         "outcome_2": {
@@ -89,22 +89,22 @@
             "range": "More than 35 mm",
             "pathway": "foundation",
             "plan_eyebrow": "Relevant pathway",
-            "plan_title": "MARCEL OMR Therapy™ Foundation",
-            "plan_intro": "Foundation is associated with professionally assessed Stage 1 or 2 OSMF. A qualified healthcare professional should confirm the diagnosis, stage and care pathway.",
+            "plan_title": "MARCEL OMR Therapy™ Foundation Kit",
+            "plan_intro": "The Foundation Kit is associated with professionally assessed Stage 1 or 2 OSMF. A qualified healthcare professional should confirm the diagnosis, stage and care pathway.",
             "clinic_first": false,
             "exercises": true,
-            "box_eyebrow": "What Foundation includes",
-            "box_title": "MARCEL OMR Therapy™ Foundation",
+            "box_eyebrow": "What the Foundation Kit includes",
+            "box_title": "MARCEL OMR Therapy™ Foundation Kit",
             "box_points": "MARCEL Ora-Care™ Oral Spray, 50 mL\nMARCEL Smile™ Toothpaste, 30 g\nPrescribed mouth/jaw exercises\nProfessional guidance and patient support",
-            "pathway_label": "Explore MARCEL OMR Therapy™ Foundation",
+            "pathway_label": "Explore MARCEL OMR Therapy™ Foundation Kit",
             "kit_label": "Add Foundation Kit to cart",
             "next_tag": "Recommended",
             "next_title": "Confirm Your Stage with a Professional",
-            "next_text": "A MARCEL OSMF Consultant can discuss your result and guide the next step. An OSMF Specialist doctor can examine you and confirm your stage.",
+            "next_text": "A MARCEL OSMF Consultant can discuss your result and guide the next step. An OSMF Specialist Doctor can examine you and confirm your stage.",
             "next_action": "consult",
-            "next_label": "Talk to a MARCEL OSMF Consultant",
-            "alt_action": "specialists",
-            "alt_label": "Find an OSMF Specialist Doctor"
+            "next_label": "Book a Consultation",
+            "alt_action": "whatsapp",
+            "alt_label": "WhatsApp MARCEL Team"
           }
         },
         "outcome_3": {
@@ -119,22 +119,22 @@
             "range": "26 to 35 mm",
             "pathway": "foundation",
             "plan_eyebrow": "Relevant pathway",
-            "plan_title": "MARCEL OMR Therapy™ Foundation",
-            "plan_intro": "Foundation is associated with professionally assessed Stage 1 or 2 OSMF. A qualified healthcare professional should confirm the diagnosis, stage and care pathway.",
+            "plan_title": "MARCEL OMR Therapy™ Foundation Kit",
+            "plan_intro": "The Foundation Kit is associated with professionally assessed Stage 1 or 2 OSMF. A qualified healthcare professional should confirm the diagnosis, stage and care pathway.",
             "clinic_first": false,
             "exercises": true,
-            "box_eyebrow": "What Foundation includes",
-            "box_title": "MARCEL OMR Therapy™ Foundation",
+            "box_eyebrow": "What the Foundation Kit includes",
+            "box_title": "MARCEL OMR Therapy™ Foundation Kit",
             "box_points": "MARCEL Ora-Care™ Oral Spray, 50 mL\nMARCEL Smile™ Toothpaste, 30 g\nPrescribed mouth/jaw exercises\nProfessional guidance and patient support",
-            "pathway_label": "Explore MARCEL OMR Therapy™ Foundation",
+            "pathway_label": "Explore MARCEL OMR Therapy™ Foundation Kit",
             "kit_label": "Add Foundation Kit to cart",
             "next_tag": "Recommended",
             "next_title": "Confirm Your Stage with a Professional",
-            "next_text": "A MARCEL OSMF Consultant can discuss your result and guide the next step. An OSMF Specialist doctor can examine you and confirm your stage.",
+            "next_text": "A MARCEL OSMF Consultant can discuss your result and guide the next step. An OSMF Specialist Doctor can examine you and confirm your stage.",
             "next_action": "consult",
-            "next_label": "Talk to a MARCEL OSMF Consultant",
-            "alt_action": "specialists",
-            "alt_label": "Find an OSMF Specialist Doctor"
+            "next_label": "Book a Consultation",
+            "alt_action": "whatsapp",
+            "alt_label": "WhatsApp MARCEL Team"
           }
         },
         "outcome_4": {
@@ -149,22 +149,22 @@
             "range": "15 to 25 mm",
             "pathway": "advance",
             "plan_eyebrow": "Relevant pathway",
-            "plan_title": "MARCEL OMR Therapy™ Advance",
-            "plan_intro": "Advance is associated with professionally assessed Stage 3 or 4 OSMF. A qualified healthcare professional should confirm the diagnosis, stage and care pathway.",
+            "plan_title": "MARCEL OMR Therapy™ Advance Kit",
+            "plan_intro": "The Advance Kit is associated with professionally assessed Stage 3 or 4 OSMF. A qualified healthcare professional should confirm the diagnosis, stage and care pathway.",
             "clinic_first": false,
             "exercises": true,
-            "box_eyebrow": "What Advance includes",
-            "box_title": "MARCEL OMR Therapy™ Advance",
+            "box_eyebrow": "What the Advance Kit includes",
+            "box_title": "MARCEL OMR Therapy™ Advance Kit",
             "box_points": "MARCEL Ora-Shield™ Oral Rinse, 10 mL\nMARCEL Smile™ Toothpaste, 30 g\nMARCEL® MO Device (optional adjunct)\nPrescribed mouth/jaw exercises\nProfessional guidance and patient support",
-            "pathway_label": "Explore MARCEL OMR Therapy™ Advance",
+            "pathway_label": "Explore MARCEL OMR Therapy™ Advance Kit",
             "kit_label": "Add Advance Kit to cart",
             "next_tag": "Important",
             "next_title": "Arrange a Professional Assessment",
-            "next_text": "A MARCEL OSMF Consultant can discuss your result and guide the next step. An OSMF Specialist doctor can examine you and confirm your stage.",
+            "next_text": "A MARCEL OSMF Consultant can discuss your result and guide the next step. An OSMF Specialist Doctor can examine you and confirm your stage.",
             "next_action": "specialists",
             "next_label": "Find an OSMF Specialist Doctor",
             "alt_action": "consult",
-            "alt_label": "Talk to a MARCEL OSMF Consultant"
+            "alt_label": "Book a Consultation"
           }
         },
         "outcome_5": {
@@ -174,19 +174,19 @@
             "color": "#C23838",
             "lead": "Your answers indicate",
             "title": "Possible Stage 4 OSMF",
-            "text": "Your mouth opening is significantly restricted. Please arrange an in-person assessment with an OSMF Specialist doctor, who can confirm the diagnosis, stage and care pathway.",
+            "text": "Your mouth opening is significantly restricted. Please arrange an in-person assessment with an OSMF Specialist Doctor, who can confirm the diagnosis, stage and care pathway.",
             "range_label": "Stage 4 band",
             "range": "Less than 15 mm",
             "pathway": "advance",
             "plan_eyebrow": "Relevant pathway",
-            "plan_title": "MARCEL OMR Therapy™ Advance",
-            "plan_intro": "Advance is associated with professionally assessed Stage 3 or 4 OSMF. A qualified healthcare professional should confirm the diagnosis, stage and care pathway.",
+            "plan_title": "MARCEL OMR Therapy™ Advance Kit",
+            "plan_intro": "The Advance Kit is associated with professionally assessed Stage 3 or 4 OSMF. A qualified healthcare professional should confirm the diagnosis, stage and care pathway.",
             "clinic_first": true,
             "exercises": true,
-            "box_eyebrow": "What Advance includes",
-            "box_title": "MARCEL OMR Therapy™ Advance",
+            "box_eyebrow": "What the Advance Kit includes",
+            "box_title": "MARCEL OMR Therapy™ Advance Kit",
             "box_points": "MARCEL Ora-Shield™ Oral Rinse, 10 mL\nMARCEL Smile™ Toothpaste, 30 g\nMARCEL® MO Device (optional adjunct)\nPrescribed mouth/jaw exercises\nProfessional guidance and patient support",
-            "pathway_label": "Explore MARCEL OMR Therapy™ Advance",
+            "pathway_label": "Explore MARCEL OMR Therapy™ Advance Kit",
             "kit_label": "Add Advance Kit to cart",
             "next_tag": "Important",
             "next_title": "See an OSMF Specialist Doctor",
@@ -194,7 +194,7 @@
             "next_action": "specialists",
             "next_label": "Find an OSMF Specialist Doctor",
             "alt_action": "consult",
-            "alt_label": "Talk to a MARCEL OSMF Consultant"
+            "alt_label": "Book a Consultation"
           }
         },
         "outcome_6": {
@@ -220,12 +220,12 @@
             "kit_label": "",
             "next_tag": "Priority",
             "next_title": "See an OSMF Specialist Doctor",
-            "next_text": "Please arrange an in-person examination with an OSMF Specialist doctor as soon as you can.",
+            "next_text": "Please arrange an in-person examination with an OSMF Specialist Doctor as soon as you can.",
             "next_action": "specialists",
             "next_label": "Find an OSMF Specialist Doctor",
             "alt_action": "consult",
-            "alt_label": "Talk to a MARCEL OSMF Consultant",
-            "alert": "Please consult an OSMF Specialist doctor for investigation. The self-check cannot assess this level of restriction."
+            "alt_label": "Book a Consultation",
+            "alert": "Please consult an OSMF Specialist Doctor for investigation. The self-check cannot assess this level of restriction."
           }
         },
         "outcome_7": {
@@ -241,7 +241,7 @@
             "pathway": "none",
             "plan_eyebrow": "Recommended action",
             "plan_title": "Immediate Specialist Consultation",
-            "plan_intro": "Please see an OSMF Specialist doctor promptly. They can examine you and set out the appropriate medical care.",
+            "plan_intro": "Please see an OSMF Specialist Doctor promptly. They can examine you and set out the appropriate medical care.",
             "clinic_first": true,
             "exercises": false,
             "box_eyebrow": "Start here",
@@ -255,7 +255,7 @@
             "next_action": "specialists",
             "next_label": "Find an OSMF Specialist Doctor",
             "alt_action": "consult",
-            "alt_label": "Talk to a MARCEL OSMF Consultant",
+            "alt_label": "Book a Consultation",
             "alert": "MARCEL OMR Therapy™ is not recommended as the primary care pathway. Prompt specialist medical evaluation and management is required."
           }
         },
@@ -280,7 +280,7 @@
           "settings": {
             "icon": "info",
             "title": "Don’t Change Products on Your Own",
-            "text": "Do not increase the amount or frequency of a product on your own. Follow the approved instructions or ask the OSMF Consultant."
+            "text": "Do not increase the amount or frequency of a product on your own. Follow the approved instructions or ask the MARCEL OSMF Consultant."
           }
         },
         "tip_4": {

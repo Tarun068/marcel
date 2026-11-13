@@ -38,9 +38,9 @@
         "schema_markup": true,
         "show_help": true,
         "help_title": "Can’t Find Your Answer?",
-        "help_text": "Our In-house OSMF Consultant can help with programme questions and your next step.",
-        "whatsapp_label": "WhatsApp the MARCEL Team",
-        "link_label": "Talk to a MARCEL OSMF Consultant",
+        "help_text": "Our MARCEL OSMF Consultants can help with programme questions and your next step.",
+        "whatsapp_label": "WhatsApp MARCEL Team",
+        "link_label": "Book a Consultation",
         "background": "paper",
         "sheet": false,
         "spacing": "tight",
@@ -105,14 +105,14 @@
           "type": "question",
           "settings": {
             "question": "Can MARCEL OMR Therapy™ help improve mouth opening?",
-            "answer": "<p>Supporting oral comfort and function may be part of the care goal, but the amount of change in mouth opening varies from person to person. It depends on the degree of restriction, the individual’s condition and the care plan. A consultation with an OSMF Consultant can help establish a baseline and discuss realistic goals.</p>"
+            "answer": "<p>Supporting oral comfort and function may be part of the care goal, but the amount of change in mouth opening varies from person to person. It depends on the degree of restriction, the individual’s condition and the care plan. A consultation with a MARCEL OSMF Consultant can help establish a baseline and discuss realistic goals.</p>"
           }
         },
         "question_8": {
           "type": "question",
           "settings": {
             "question": "Will it completely cure OSMF or restore my mouth to how it was before?",
-            "answer": "<p>A complete cure or a return to exactly the same mouth opening cannot be promised. The focus is to assess the condition, address symptoms and work toward the best achievable function for the individual. A qualified OSMF Specialist doctor can explain the options after assessing the case.</p>"
+            "answer": "<p>A complete cure or a return to exactly the same mouth opening cannot be promised. The focus is to assess the condition, address symptoms and work toward the best achievable function for the individual. A qualified OSMF Specialist Doctor can explain the options after assessing the case.</p>"
           }
         },
         "question_9": {
@@ -138,36 +138,36 @@
         "question_11": {
           "type": "question",
           "settings": {
-            "question": "What is the difference between an OSMF Consultant and an OSMF Specialist doctor?",
-            "answer": "<p>An OSMF Consultant provides an in-house on-call consultation, allowing you to discuss your concerns and understand the next step remotely. An OSMF Specialist doctor provides an in-clinic, in-person consultation, where the doctor can examine your mouth, assess mouth opening and evaluate oral tissue changes directly.</p>"
+            "question": "What is the difference between a MARCEL OSMF Consultant and an OSMF Specialist Doctor?",
+            "answer": "<p>A MARCEL OSMF Consultant provides an on-call consultation, allowing you to discuss your concerns and understand the next step remotely. An OSMF Specialist Doctor provides an in-clinic, in-person consultation, where the doctor can examine your mouth, assess mouth opening and evaluate oral tissue changes directly.</p>"
           }
         },
         "question_12": {
           "type": "question",
           "settings": {
             "question": "Which consultation should I choose?",
-            "answer": "<p>If you want to discuss your symptoms and understand how to proceed, start with the OSMF Consultant on-call service. If you need a direct examination, have significant difficulty opening your mouth, or notice a persistent ulcer, unexplained lump, bleeding or another concerning change, arrange an in-clinic consultation with an OSMF Specialist doctor.</p>"
+            "answer": "<p>If you want to discuss your symptoms and understand how to proceed, start with the MARCEL OSMF Consultant on-call service. If you need a direct examination, have significant difficulty opening your mouth, or notice a persistent ulcer, unexplained lump, bleeding or another concerning change, arrange an in-clinic consultation with an OSMF Specialist Doctor.</p>"
           }
         },
         "question_13": {
           "type": "question",
           "settings": {
             "question": "Can I follow care from home if I cannot visit a clinic?",
-            "answer": "<p>An on-call consultation can help you discuss your symptoms and understand the next step without travelling first. If an examination is needed, the consultant can advise you to visit an OSMF Specialist doctor in person.</p>"
+            "answer": "<p>An on-call consultation can help you discuss your symptoms and understand the next step without travelling first. If an examination is needed, the consultant can advise you to visit an OSMF Specialist Doctor in person.</p>"
           }
         },
         "question_14": {
           "type": "question",
           "settings": {
             "question": "Can I use MARCEL OMR Therapy™ while receiving treatment from another doctor?",
-            "answer": "<p>Tell the OSMF Consultant or your treating doctor about the medicines, procedures and oral products you are currently using. Do not stop or change prescribed treatment on your own. They can help you decide whether the approaches can be used together and whether an in-person assessment is needed.</p>"
+            "answer": "<p>Tell the MARCEL OSMF Consultant or your treating doctor about the medicines, procedures and oral products you are currently using. Do not stop or change prescribed treatment on your own. They can help you decide whether the approaches can be used together and whether an in-person assessment is needed.</p>"
           }
         },
         "question_15": {
           "type": "question",
           "settings": {
             "question": "Do I need surgery if my mouth opening is very limited?",
-            "answer": "<p>Not everyone with OSMF needs surgery. The decision depends on the degree of restriction and the clinical findings. An OSMF Specialist doctor can examine you and discuss appropriate options, including whether non-surgical care, a procedure or a combination should be considered.</p>"
+            "answer": "<p>Not everyone with OSMF needs surgery. The decision depends on the degree of restriction and the clinical findings. An OSMF Specialist Doctor can examine you and discuss appropriate options, including whether non-surgical care, a procedure or a combination should be considered.</p>"
           }
         },
         "category_4": {
@@ -180,21 +180,21 @@
           "type": "question",
           "settings": {
             "question": "Do I need to use every component of the recommended care plan?",
-            "answer": "<p>The components may serve different purposes, so do not assume that using one product alone will provide the same approach. Follow the care plan recommended for you and the approved instructions supplied with each product. If you are unsure what to use, ask the OSMF Consultant before changing the plan.</p>"
+            "answer": "<p>The components may serve different purposes, so do not assume that using one product alone will provide the same approach. Follow the care plan recommended for you and the approved instructions supplied with each product. If you are unsure what to use, ask the MARCEL OSMF Consultant before changing the plan.</p>"
           }
         },
         "question_17": {
           "type": "question",
           "settings": {
             "question": "What should I do if I experience strong burning, swelling or sores after using a product?",
-            "answer": "<p>If you experience a strong or worsening reaction, stop using the product until you have received medical advice and contact the OSMF Consultant. Seek urgent care for difficulty breathing, marked swelling or another severe reaction. Keep the product pack available so the clinician can review what you used.</p>"
+            "answer": "<p>If you experience a strong or worsening reaction, stop using the product until you have received medical advice and contact the MARCEL OSMF Consultant. Seek urgent care for difficulty breathing, marked swelling or another severe reaction. Keep the product pack available so the clinician can review what you used.</p>"
           }
         },
         "question_18": {
           "type": "question",
           "settings": {
             "question": "What should I do if my symptoms are not improving?",
-            "answer": "<p>Do not increase the amount or frequency of a product on your own. Note changes in burning, eating comfort and mouth opening, then contact the OSMF Consultant for a review. If symptoms worsen or you notice an ulcer, lump, bleeding or another unusual change, arrange an in-person assessment promptly.</p>"
+            "answer": "<p>Do not increase the amount or frequency of a product on your own. Note changes in burning, eating comfort and mouth opening, then contact the MARCEL OSMF Consultant for a review. If symptoms worsen or you notice an ulcer, lump, bleeding or another unusual change, arrange an in-person assessment promptly.</p>"
           }
         }
       },

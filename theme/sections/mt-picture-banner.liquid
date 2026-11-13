@@ -1,6 +1,9 @@
 {%- comment -%}
-  Marcel picture banner: a finished picture (its text is in the picture) shown whole, at its own shape,
-  inside the page container. The picture can link anywhere, including #specialist-search on the same page.
+  Marcel picture banner: a finished picture (its text is in the picture).
+  Size "picture": shown whole, at its own shape, inside the page container.
+  Size "banner": the same box as the home banner slider, full width, 8:3 on desktop (up to 720 px tall) and 3:4 on
+  phones; the picture fills the box. The built-in Hindi banner has its own 8:3 and 3:4 versions, so no text is cut off.
+  The picture can link anywhere, including #specialist-search on the same page.
 {%- endcomment -%}
 {%- style -%}
   .mt-pbanner--join { padding-bottom: clamp(24px, 3vw, 40px); }
@@ -9,8 +12,15 @@
   a.mt-pbanner-pic { transition: transform .25s ease, box-shadow .25s ease; }
   a.mt-pbanner-pic:hover { transform: translateY(-3px); box-shadow: 0 32px 60px -34px rgba(12, 42, 61, .55); }
   a.mt-pbanner-pic:focus-visible { outline: 3px solid var(--mt-teal); outline-offset: 4px; }
+  /* Same box as the home banner slider */
+  .mt-pbanner--banner .mt-pbanner-pic { width: 100%; aspect-ratio: 8 / 3; max-height: 720px; border-radius: 0; box-shadow: none; }
+  .mt-pbanner--banner .mt-pbanner-pic picture, .mt-pbanner--banner .mt-pbanner-pic img { width: 100%; height: 100%; }
+  .mt-pbanner--banner .mt-pbanner-pic img { object-fit: cover; }
+  .mt-pbanner--banner a.mt-pbanner-pic:hover { transform: none; box-shadow: none; }
+  .mt-pbanner--banner a.mt-pbanner-pic:focus-visible { outline-offset: -4px; }
   @media (max-width: 749px) {
     .mt-pbanner-pic { border-radius: var(--mt-r); }
+    .mt-pbanner--banner .mt-pbanner-pic { aspect-ratio: 3 / 4; max-height: none; border-radius: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
     a.mt-pbanner-pic, a.mt-pbanner-pic:hover { transition: none; transform: none; }
@@ -24,6 +34,10 @@
   if img != blank
     assign art = 'none'
   endif
+  assign banner = false
+  if section.settings.size == 'banner'
+    assign banner = true
+  endif
   assign art_w = 1600
   assign art_h = 900
   if art == 'symptoms-hi'
@@ -35,12 +49,17 @@
     assign loading = 'eager'
   endif
   assign sizes = '(min-width: 1440px) 1360px, calc(100vw - 32px)'
+  assign mob_sizes = 'calc(100vw - 32px)'
+  if banner
+    assign sizes = '100vw'
+    assign mob_sizes = '100vw'
+  endif
   assign link_to = section.settings.link_to | default: 'none'
 -%}
 {%- capture link -%}{% render 'mt-link-to', key: link_to, url: section.settings.link %}{%- endcapture -%}
 
-<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-pbanner' %}{% if section.settings.join_next %} mt-pbanner--join{% endif %}">
-  <div class="mt-wrap">
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-pbanner' %}{% if banner %} mt-pbanner--banner{% endif %}{% if section.settings.join_next %} mt-pbanner--join{% endif %}">
+  {%- unless banner -%}<div class="mt-wrap">{%- endunless -%}
     {%- if img != blank or art != 'none' -%}
       {%- if link_to != 'none' -%}
         <a class="mt-pbanner-pic" href="{{ link | strip }}"{% if link_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}{% if section.settings.lang == 'hi' %} lang="hi"{% endif %}>
@@ -52,13 +71,35 @@
           <source
             media="(max-width: 749px)"
             srcset="{{ mob | image_url: width: 750 }} 750w, {{ mob | image_url: width: 1100 }} 1100w"
-            sizes="calc(100vw - 32px)"
+            sizes="{{ mob_sizes }}"
             width="{{ mob.width }}"
             height="{{ mob.height }}"
           >
+        {%- elsif banner and art == 'symptoms-hi' -%}
+          <source
+            media="(max-width: 749px)"
+            srcset="{{ 'mt-pic-symptoms-hi-m-720.webp' | asset_url }} 720w, {{ 'mt-pic-symptoms-hi-m.webp' | asset_url }} 1080w"
+            sizes="100vw"
+            width="1080"
+            height="1440"
+          >
         {%- endif -%}
         {%- if img != blank -%}
-          {{ img | image_url: width: 2240 | image_tag: loading: loading, sizes: sizes, widths: '800, 1100, 1600, 2240', alt: alt }}
+          {%- if banner -%}
+            {{ img | image_url: width: 2880 | image_tag: loading: loading, sizes: sizes, widths: '750, 1100, 1440, 2160, 2880', alt: alt }}
+          {%- else -%}
+            {{ img | image_url: width: 2240 | image_tag: loading: loading, sizes: sizes, widths: '800, 1100, 1600, 2240', alt: alt }}
+          {%- endif -%}
+        {%- elsif banner and art == 'symptoms-hi' -%}
+          <img
+            src="{{ 'mt-pic-symptoms-hi-d-1440.webp' | asset_url }}"
+            srcset="{{ 'mt-pic-symptoms-hi-d-1440.webp' | asset_url }} 1440w, {{ 'mt-pic-symptoms-hi-d.webp' | asset_url }} 2880w"
+            sizes="100vw"
+            width="2880"
+            height="1080"
+            alt="{{ alt | escape }}"
+            loading="{{ loading }}"
+          >
         {%- else -%}
           <img
             src="{{ 'mt-pic-' | append: art | append: '-800.webp' | asset_url }}"
@@ -75,7 +116,7 @@
     {%- elsif request.design_mode -%}
       <p class="mt-placeholder">Choose a picture for this banner.</p>
     {%- endif -%}
-  </div>
+  {%- unless banner -%}</div>{%- endunless -%}
 </section>
 
 {% schema %}
@@ -112,6 +153,23 @@
         }
       ],
       "default": "none"
+    },
+    {
+      "type": "select",
+      "id": "size",
+      "label": "Banner size",
+      "options": [
+        {
+          "value": "picture",
+          "label": "Picture shape, inside the page width"
+        },
+        {
+          "value": "banner",
+          "label": "Same as the home banners"
+        }
+      ],
+      "default": "picture",
+      "info": "Same as the home banners: full width, 8:3 on desktop and 3:4 on phones. Choose a mobile picture too, or the picture is cropped to fit."
     },
     {
       "type": "image_picker",

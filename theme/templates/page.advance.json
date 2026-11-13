@@ -26,7 +26,7 @@
         "eyebrow": "MARCEL OMR Therapy™ Advance Kit for Stage 3 or 4 OSMF",
         "heading": "A Structured Approach to Advanced OSMF Care",
         "text": "MARCEL OMR Therapy™ Advance Kit is intended for individuals assessed by a qualified healthcare professional as having Stage 3 or Stage 4 Oral Submucous Fibrosis (OSMF). The programme includes MARCEL Ora-Shield™ Oral Rinse, MARCEL Smile™ Toothpaste, prescribed mouth/jaw exercises when advised, and the optional MARCEL® MO Device where recommended by a healthcare professional.",
-        "button_1_label": "Talk to a MARCEL OSMF Consultant",
+        "button_1_label": "Book a Consultation",
         "button_2_label": "Check Your OSMF Stage",
         "note": "If you have not been assessed, the MARCEL OSMF SELF CHECK™ can provide an initial indication of your possible stage. It cannot diagnose OSMF or confirm your stage.",
         "back_label": "Back to MARCEL OMR Therapy™ Overview",
@@ -36,8 +36,8 @@
     "components": {
       "type": "mt-components",
       "settings": {
-        "eyebrow": "What Advance care includes",
-        "heading": "The Components of the Advance Routine",
+        "eyebrow": "What the Advance Kit includes",
+        "heading": "The Components of the Advance Kit Routine",
         "columns": "4",
         "background": "paper",
         "sheet": false,
@@ -51,7 +51,7 @@
             "icon": "s-open",
             "title": "MARCEL Ora-Shield™ Oral Rinse",
             "size": "10 mL",
-            "text": "The core therapy component of Advance. Use only according to the current approved product label and the directions of your physician or MARCEL OSMF Consultant.",
+            "text": "The core therapy component of the Advance Kit. Use only according to the current approved product label and the directions of your physician or MARCEL OSMF Consultant.",
             "button_label": "Explore MARCEL Ora-Shield™",
             "link_to": "product",
             "show_price": false,
@@ -65,7 +65,7 @@
             "icon": "s-open",
             "title": "MARCEL Smile™ Toothpaste",
             "size": "30 g",
-            "text": "Supports everyday oral hygiene as part of the Advance routine. Use according to the product label and maintain regular brushing habits.",
+            "text": "Supports everyday oral hygiene as part of the Advance Kit routine. Use according to the product label and maintain regular brushing habits.",
             "button_label": "Explore MARCEL Smile™",
             "link_to": "product",
             "show_price": false,
@@ -114,7 +114,7 @@
       "settings": {
         "layout": "journey",
         "eyebrow": "Follow your recommended routine",
-        "heading": "Your Advance Routine",
+        "heading": "Your Advance Kit Routine",
         "link_label": "",
         "background": "mist",
         "sheet": false,
@@ -133,7 +133,7 @@
         "step_2": {
           "type": "step",
           "settings": {
-            "title": "Prepare and use MARCEL Ora-Shield™ Oral Rinse exactly as stated on the approved label or as directed by your OSMF Specialist doctor or MARCEL OSMF Consultant.",
+            "title": "Prepare and use MARCEL Ora-Shield™ Oral Rinse exactly as stated on the approved label or as directed by your OSMF Specialist Doctor or MARCEL OSMF Consultant.",
             "text": ""
           }
         },
@@ -275,7 +275,7 @@
       "type": "mt-support",
       "settings": {
         "eyebrow": "Need guidance?",
-        "heading": "Not Sure Whether Advance Is Appropriate for You?",
+        "heading": "Not Sure Whether the Advance Kit Is Appropriate for You?",
         "text": "A MARCEL OSMF Consultant can help you understand the next steps and guide you towards suitable professional assessment.",
         "center": false,
         "note": "The MARCEL OSMF Consultant gives programme information and next-step guidance. Diagnosis, staging and treatment decisions are made by a qualified healthcare professional.",
@@ -290,9 +290,9 @@
             "icon": "phone",
             "eyebrow": "Option A",
             "title": "MARCEL OSMF Consultant",
-            "subtitle": "In-house, on-call consultation",
+            "subtitle": "On-call, remote consultation",
             "text": "Discuss your concerns remotely and understand the next step.",
-            "button_label": "Talk to a MARCEL OSMF Consultant",
+            "button_label": "Book a Consultation",
             "link_to": "consult",
             "link2_to": "test",
             "points": "Programme information and next steps\nGuidance on the MARCEL OMR Therapy™ pathways\nHelp finding a professional assessment",
@@ -307,7 +307,7 @@
             "title": "OSMF Specialist Doctors",
             "subtitle": "In-clinic, in-person consultation",
             "text": "A doctor can examine your mouth, assess mouth opening and evaluate oral tissue changes directly.",
-            "button_label": "Find an OSMF Specialist Doctor",
+            "button_label": "",
             "link_to": "specialists",
             "link2_to": "whatsapp",
             "points": "Qualified clinical assessment\nEvaluation of symptoms and mouth opening\nProfessional guidance on diagnosis and management",
@@ -323,10 +323,10 @@
     "cta": {
       "type": "mt-cta-band",
       "settings": {
-        "eyebrow": "Advance pathway",
+        "eyebrow": "Advance Kit pathway",
         "heading": "Take the Next Step with Structured Care",
         "text": "If the Advance Kit has been recommended for you, explore its components and follow your personalised care advice.",
-        "button_1_label": "Talk to a MARCEL OSMF Consultant",
+        "button_1_label": "Book a Consultation",
         "button_1_to": "consult",
         "button_2_label": "Explore MARCEL Ora-Shield™",
         "button_2_to": "custom",
@@ -349,7 +349,7 @@
           "type": "link",
           "settings": {
             "lead": "Looking for the other pathway?",
-            "label": "Explore MARCEL OMR Therapy™ Foundation",
+            "label": "Explore MARCEL OMR Therapy™ Foundation Kit",
             "link_to": "foundation",
             "back": false
           }

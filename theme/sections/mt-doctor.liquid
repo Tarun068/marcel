@@ -1,0 +1,263 @@
+{%- comment -%}
+  Marcel featured doctor: photo, name, qualification, role, a short introduction, key points and an optional button.
+  Without a photo it shows the doctor's initials, so no stock face stands in for a real person.
+{%- endcomment -%}
+{%- style -%}
+  .mt-doc { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+  .mt-doc-media { position: relative; width: 100%; max-width: 440px; }
+  .mt-doc-photo { position: relative; display: grid; place-items: center; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--mt-r-xl); background: linear-gradient(160deg, var(--mt-tint), var(--mt-mist)); box-shadow: 0 30px 60px -40px rgba(12, 42, 61, .55); }
+  .mt-doc-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .mt-doc-initials { display: grid; place-items: center; width: 46%; aspect-ratio: 1; border-radius: 50%; background: var(--mt-paper); color: var(--mt-teal); font-family: var(--mt-serif); font-size: clamp(44px, 6vw, 84px); font-weight: 600; letter-spacing: -.02em; box-shadow: 0 18px 40px -26px rgba(12, 42, 61, .45); }
+  .mt-doc-badge { position: absolute; left: 18px; right: 18px; bottom: 18px; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: var(--mt-r); background: rgba(255, 255, 255, .94); box-shadow: 0 14px 30px -20px rgba(12, 42, 61, .5); font-size: 14px; font-weight: 700; color: var(--mt-ink); }
+  .mt-doc-badge .mt-i { width: 22px; height: 22px; color: var(--mt-teal); }
+  .mt-doc-body { display: grid; gap: 18px; justify-items: start; }
+  .mt .mt-doc-name { font-size: var(--mt-fs-h); line-height: 1.08; letter-spacing: -.026em; }
+  .mt-type-serif .mt .mt-doc-name { font-family: var(--mt-serif); font-weight: 600; letter-spacing: -.018em; }
+  .mt-doc-cred { display: flex; flex-wrap: wrap; gap: 8px; }
+  .mt-doc-cred span { padding: 6px 12px; border-radius: 99px; background: var(--mt-tint); color: var(--mt-teal); font-size: 14px; font-weight: 700; }
+  .mt-doc-text { max-width: 62ch; }
+  .mt-doc-points { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+  .mt-doc-points li { display: flex; gap: 10px; align-items: flex-start; color: var(--mt-ink); font-weight: 600; }
+  .mt-doc-points .mt-i { width: 20px; height: 20px; margin-top: 3px; color: var(--mt-teal); stroke-width: 2.4; flex: none; }
+  .mt-bg-navy .mt-doc-points li, .mt-bg-navy .mt .mt-doc-name { color: var(--mt-on-dark); }
+  @media (max-width: 860px) {
+    .mt-doc { grid-template-columns: minmax(0, 1fr); }
+    .mt-doc-media { max-width: 420px; }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign s = section.settings
+  assign initials = ''
+  assign parts = s.name | remove: 'Dr.' | remove: 'Dr ' | strip | split: ' '
+  for p in parts limit: 2
+    assign ch = p | slice: 0
+    assign initials = initials | append: ch
+  endfor
+-%}
+{%- capture btn_link -%}{% render 'mt-link-to', key: s.button_to, url: s.button_link %}{%- endcapture -%}
+
+{%- if s.name != blank or request.design_mode -%}
+  <section class="{% render 'mt-section-class', s: s, extra: 'mt-doctor' %}">
+    <div class="mt-wrap mt-doc">
+      <div class="mt-doc-media">
+        <div class="mt-doc-photo">
+          {%- if s.photo != blank -%}
+            {{ s.photo | image_url: width: 1000 | image_tag: loading: 'lazy', sizes: '(min-width: 1440px) 520px, (min-width: 861px) 38vw, 92vw', widths: '400, 600, 800, 1000', alt: s.name }}
+          {%- else -%}
+            <span class="mt-doc-initials" aria-hidden="true">{{ initials | upcase }}</span>
+          {%- endif -%}
+        </div>
+        {%- if s.badge != blank -%}
+          <p class="mt-doc-badge">{%- render 'mt-icon', icon: 'doctor' -%}{{ s.badge | escape }}</p>
+        {%- endif -%}
+      </div>
+      <div class="mt-doc-body">
+        {%- if s.eyebrow != blank -%}<span class="mt-eyebrow">{{ s.eyebrow | escape }}</span>{%- endif -%}
+        <h2 class="mt-doc-name">{{ s.name | escape }}</h2>
+        {%- if s.qualification != blank or s.role != blank -%}
+          <div class="mt-doc-cred">
+            {%- if s.qualification != blank -%}<span>{{ s.qualification | escape }}</span>{%- endif -%}
+            {%- if s.role != blank -%}<span>{{ s.role | escape }}</span>{%- endif -%}
+          </div>
+        {%- endif -%}
+        {%- if s.text != blank -%}<div class="mt-doc-text mt-rte">{{ s.text }}</div>{%- endif -%}
+        {%- assign points = s.points | newline_to_br | split: '<br />' -%}
+        {%- if s.points != blank -%}
+          <ul class="mt-doc-points" role="list">
+            {%- for point in points -%}
+              {%- assign point = point | strip -%}
+              {%- if point != blank -%}<li>{%- render 'mt-icon', icon: 'check' -%}<span>{{ point | escape }}</span></li>{%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+        {%- if s.button_label != blank -%}
+          <a class="mt-btn mt-btn-primary" href="{{ btn_link | strip }}"{% if s.button_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
+            {{- s.button_label | escape -}}
+            {%- render 'mt-icon', icon: 'arrow-right' -%}
+          </a>
+        {%- endif -%}
+        {%- if s.note != blank -%}<p class="mt-fine">{{ s.note | escape }}</p>{%- endif -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Marcel featured doctor",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Featured doctor"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo",
+      "label": "Photo",
+      "info": "A real photo of the doctor, portrait shape (4:5). Without one, the initials show."
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Name",
+      "default": "Dr. Niyati Thakker"
+    },
+    {
+      "type": "text",
+      "id": "qualification",
+      "label": "Qualification",
+      "default": "BDS"
+    },
+    {
+      "type": "text",
+      "id": "role",
+      "label": "Role",
+      "default": "MARCEL OSMF Clinical Consultant"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Photo caption",
+      "default": "JanSuta Pharmaceuticals"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Introduction",
+      "default": "<p>Dr. Niyati Thakker is the clinical point of contact for doctors in the OSMF Specialist Doctor network. She helps them understand MARCEL OMR Therapy™, supports clinical orientation and coordinates with the JanSuta team.</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "points",
+      "label": "Key points",
+      "info": "One per line.",
+      "default": "A designated clinical contact for participating doctors\nBetter orientation to the MARCEL OMR Therapy™ approach\nStronger communication and professional coordination"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button",
+      "info": "Optional."
+    },
+    {
+      "type": "select",
+      "id": "button_to",
+      "label": "Button opens",
+      "options": [
+        {
+          "value": "custom",
+          "label": "Custom link below"
+        },
+        {
+          "value": "test",
+          "label": "MARCEL OSMF Self-Check"
+        },
+        {
+          "value": "therapy",
+          "label": "MARCEL OMR Therapy page"
+        },
+        {
+          "value": "consult",
+          "label": "MARCEL OSMF Consultant booking"
+        },
+        {
+          "value": "specialists",
+          "label": "Find an OSMF Specialist Doctor"
+        },
+        {
+          "value": "help",
+          "label": "Get Help page"
+        },
+        {
+          "value": "evidence",
+          "label": "Clinical evidence page"
+        },
+        {
+          "value": "whatsapp",
+          "label": "WhatsApp chat"
+        }
+      ],
+      "default": "custom"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button custom link"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Small print"
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "normal"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel featured doctor"
+    }
+  ]
+}
+{% endschema %}

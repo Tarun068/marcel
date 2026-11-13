@@ -256,7 +256,13 @@ if (!customElements.get('mt-self-test')) {
         this.bar.style.width = '100%';
 
         const post = window.MarcelTheme && window.MarcelTheme.postForm;
-        if (this.dataset.send === 'true' && post) {
+        const store = window.MarcelTheme && window.MarcelTheme.storage;
+        // Someone retaking the check with the same number in the same visit isn't sent again. Shopify's spam check
+        // asks a repeat sender to solve a puzzle, and the team already has this person's details.
+        const last = store ? store('mt-lead-sent') : null;
+        const repeat = !!(last && last.phone === phone && Date.now() - (last.at || 0) < 30 * 60 * 1000);
+        if (this.dataset.send === 'true' && post && !repeat) {
+          if (store) store('mt-lead-sent', { phone, at: Date.now() });
           const result = this.compute();
           this.form.querySelector('[data-mt-field="result"]').value = result.key;
           this.form.querySelector('[data-mt-field="severity"]').value = result.severity;

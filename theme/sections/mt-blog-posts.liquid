@@ -1,0 +1,216 @@
+{%- comment -%}
+  Marcel blog posts: the latest articles of a blog in the site carousel (arrows and dots), using the same card as the
+  blog page. Hidden on the store until the blog has at least one article.
+{%- endcomment -%}
+{%- liquid
+  assign blog = section.settings.blog
+  if blog == blank
+    assign blog = blogs.news
+  endif
+  assign posts_count = 0
+  if blog != blank
+    assign posts_count = blog.articles_count
+  endif
+  assign per = section.settings.per_desktop | default: '3'
+-%}
+
+{%- if posts_count > 0 or request.design_mode -%}
+  {{ 'mt-pages.css' | asset_url | stylesheet_tag }}
+  {{ 'mt-carousel.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'mt-carousel.js' | asset_url }}" defer="defer"></script>
+
+  <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-blogposts' %}">
+    <mt-carousel
+      class="mt-wrap mt-car mt-car--{{ per }}"
+      style="--per-d: {{ per }};"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="{{ section.settings.heading | strip_html | escape }}"
+    >
+      <div class="mt-sec-head-row">
+        {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
+        <div class="mt-car-side">
+          {%- if section.settings.link_label != blank and posts_count > 0 -%}
+            <a class="mt-link" href="{{ blog.url }}">
+              {{- section.settings.link_label | escape -}}
+              {%- render 'mt-icon', icon: 'arrow-right' -%}
+            </a>
+          {%- endif -%}
+          <div class="mt-car-nav" hidden>
+            <button type="button" class="mt-car-arrow" data-dir="-1" aria-label="{{ section.settings.prev_label | escape }}">
+              {%- render 'mt-icon', icon: 'arrow-left' -%}
+            </button>
+            <button type="button" class="mt-car-arrow" data-dir="1" aria-label="{{ section.settings.next_label | escape }}">
+              {%- render 'mt-icon', icon: 'arrow-right' -%}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {%- if posts_count > 0 -%}
+        <ul class="mt-car-track" role="list">
+          {%- for article in blog.articles limit: section.settings.count -%}
+            <li class="mt-car-item">
+              {%- render 'mt-article-card',
+                article: article,
+                read_label: section.settings.read_label,
+                show_image: true,
+                sizes: '(min-width: 1440px) 450px, (min-width: 750px) 40vw, 82vw'
+              -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+        <div class="mt-car-dots"></div>
+      {%- else -%}
+        <p class="mt-placeholder">This blog has no articles yet. The section stays hidden on the store until the first article is published.</p>
+      {%- endif -%}
+    </mt-carousel>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Marcel blog posts",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "From the blog"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Practical Reads on <em>OSMF Care</em>"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog",
+      "info": "Empty uses the News blog."
+    },
+    {
+      "type": "range",
+      "id": "count",
+      "label": "Articles shown",
+      "min": 3,
+      "max": 9,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "select",
+      "id": "per_desktop",
+      "label": "Articles in view on desktop",
+      "options": [
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "text",
+      "id": "read_label",
+      "label": "Read time",
+      "info": "[n] is the minutes.",
+      "default": "[n] min read"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link to the blog",
+      "default": "Read all articles"
+    },
+    {
+      "type": "text",
+      "id": "prev_label",
+      "label": "Previous button (screen readers)",
+      "default": "Previous articles"
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "Next button (screen readers)",
+      "default": "Next articles"
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "normal"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel blog posts"
+    }
+  ]
+}
+{% endschema %}

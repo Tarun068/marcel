@@ -16,7 +16,7 @@
           "type": "perk",
           "settings": {
             "icon": "target",
-            "text": "Foundation for Stage 1 or 2, Advance for Stage 3 or 4"
+            "text": "Foundation Kit for Stage 1 or 2, Advance Kit for Stage 3 or 4"
           }
         },
         "feature_2": {
@@ -150,11 +150,11 @@
         "eyebrow": "Need guidance?",
         "heading": "Not Sure What to Do Next?",
         "text": "Explore MARCEL OMR Therapy™ or connect with our team to understand the next steps.",
-        "button_1_label": "Talk to a MARCEL OSMF Consultant",
+        "button_1_label": "Book a Consultation",
         "button_1_to": "consult",
         "button_1_link": "",
-        "button_2_label": "Find an OSMF Specialist Doctor",
-        "button_2_to": "specialists",
+        "button_2_label": "WhatsApp MARCEL Team",
+        "button_2_to": "whatsapp",
         "button_2_link": "",
         "background": "paper",
         "sheet": false,
@@ -215,8 +215,8 @@
         "schema_markup": true,
         "show_help": true,
         "help_title": "Have Questions?",
-        "help_text": "Our In-house OSMF Consultant can help with programme questions and your next step.",
-        "whatsapp_label": "WhatsApp the MARCEL Team",
+        "help_text": "Our MARCEL OSMF Consultants can help with programme questions and your next step.",
+        "whatsapp_label": "WhatsApp MARCEL Team",
         "link_label": "See all FAQs",
         "link": "/pages/faq",
         "background": "mist",

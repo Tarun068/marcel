@@ -166,3 +166,18 @@
   .mt-bs-trust-clip { overflow-x: auto; }
   .mt-bs-trust-row--clone { display: none !important; }
 }
+
+/* Hindi finished banner (built-in art "hi"). While it shows, the arrows sit at the bottom right, over plain sky,
+   so they never cover its button. When the slider is taller than the banner shape, the plain sky at the sides is
+   what gets cropped; on screens wider than the shape (over 1920 px, where the slider stops growing), the whole
+   banner shows with its own sky colours either side. */
+/* A finished picture carries its own text, so it never gets the text shade. */
+.mt-bs-slide--image::after { content: none; }
+@media (min-width: 750px) {
+  .mt-bs-stage:has(.mt-bs-art-hi.is-active) .mt-bs-controls { left: auto; right: max(var(--mt-gutter), (100% - var(--mt-wrap)) / 2 + var(--mt-gutter)); }
+  .mt-bs-art-hi .mt-bs-img { object-position: center; }
+}
+@media (min-width: 1921px) {
+  .mt-bs-art-hi { background: linear-gradient(180deg, #d4e8f6, #e3f0fa 25%, #e0f0fe 50%, #d7e8f0 75%, #d2e1e7) left / 50% 100% no-repeat, linear-gradient(180deg, #bedff3, #c6e4f6 25%, #d1e2ea 50%, #edf3f6 75%, #e6f0f9) right / 50% 100% no-repeat; }
+  .mt-bs-art-hi .mt-bs-img { object-fit: contain; }
+}

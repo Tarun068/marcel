@@ -30,7 +30,7 @@
           "type": "perk",
           "settings": {
             "icon": "shield",
-            "text": "Core component of ADVANCE MARCEL OMR Therapy™"
+            "text": "Core component of the MARCEL OMR Therapy™ Advance Kit"
           }
         },
         "feature_4": {
@@ -65,8 +65,8 @@
       ],
       "settings": {
         "headline": "Support for advanced OSMF care",
-        "supporting": "A core component of ADVANCE MARCEL OMR Therapy™",
-        "intro": "<p>MARCEL Ora-Shield™ is a therapeutic oral rinse used as part of a care plan for Oral Submucous Fibrosis (OSMF). It is part of ADVANCE MARCEL OMR Therapy™ for Stage 3 and Stage 4 OSMF, along with guidance from a healthcare professional and a care routine suited to you.</p>",
+        "supporting": "A core component of the MARCEL OMR Therapy™ Advance Kit",
+        "intro": "<p>MARCEL Ora-Shield™ is a therapeutic oral rinse used as part of a care plan for Oral Submucous Fibrosis (OSMF). It is part of the MARCEL OMR Therapy™ Advance Kit for Stage 3 and Stage 4 OSMF, along with guidance from a healthcare professional and a care routine suited to you.</p>",
         "details": "10 mL. MRP includes all taxes.",
         "how_lines": "MARCEL Ora-Shield™ is a concentrate. Dilute it before use.\nAdd 5 to 10 drops to about 160 mL of lukewarm water.\nGargle or rinse for 20 to 30 seconds, then spit out.\nUse twice daily, or as advised by your physician or MARCEL OSMF Consultant.\nAfter each rinse, do the prescribed mouth and jaw exercises.",
         "safety": "Do not swallow.",
@@ -127,14 +127,14 @@
       "settings": {
         "art": "advance",
         "media_side": "right",
-        "eyebrow": "Advance routine",
+        "eyebrow": "Advance Kit routine",
         "heading": "Used as Part of the <em>Advance Kit</em>",
-        "text": "<p>MARCEL Ora-Shield™ Oral Rinse is used with MARCEL Smile™ Toothpaste, prescribed mouth and jaw exercises and, when advised, the MARCEL® MO Device. A qualified healthcare professional should confirm that the Advance pathway is right for you.</p>",
+        "text": "<p>MARCEL Ora-Shield™ Oral Rinse is used with MARCEL Smile™ Toothpaste, prescribed mouth and jaw exercises and, when advised, the MARCEL® MO Device. A qualified healthcare professional should confirm that the Advance Kit pathway is right for you.</p>",
         "points": "",
         "button_1_label": "See the Advance Kit",
         "button_1_to": "advance",
         "button_1_link": "",
-        "button_2_label": "Talk to a Consultant",
+        "button_2_label": "Book a Consultation",
         "button_2_to": "consult",
         "button_2_link": "",
         "note": "",
@@ -172,13 +172,13 @@
           "type": "question",
           "settings": {
             "question": "What is MARCEL Ora-Shield™?",
-            "answer": "<p>MARCEL Ora-Shield™ is a therapeutic oral rinse and a key part of ADVANCE MARCEL OMR Therapy™. It is used as part of a care plan for OSMF, with guidance from a healthcare professional.</p>"
+            "answer": "<p>MARCEL Ora-Shield™ is a therapeutic oral rinse and a key part of the MARCEL OMR Therapy™ Advance Kit. It is used as part of a care plan for OSMF, with guidance from a healthcare professional.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
-            "question": "Who can use ADVANCE MARCEL OMR Therapy™?",
+            "question": "Who can use the MARCEL OMR Therapy™ Advance Kit?",
             "answer": "<p>It is for people with Stage 3 and Stage 4 OSMF. A MARCEL OSMF Consultant can help you understand which care approach may be suitable, and a qualified healthcare professional should confirm your stage.</p>"
           }
         },
@@ -193,7 +193,7 @@
           "type": "question",
           "settings": {
             "question": "Can I use only MARCEL Ora-Shield™?",
-            "answer": "<p>MARCEL Ora-Shield™ is one part of ADVANCE MARCEL OMR Therapy™. The complete routine includes:</p><ul><li>MARCEL Ora-Shield™ Therapeutic Oral Rinse</li><li>MARCEL Smile™ Toothpaste</li><li>Prescribed mouth and jaw exercises</li><li>Follow-up with your MARCEL OSMF Consultant</li></ul><p>Following only one part may leave your care routine incomplete. We recommend following the complete routine as advised by your consultant.</p>"
+            "answer": "<p>MARCEL Ora-Shield™ is one part of the MARCEL OMR Therapy™ Advance Kit. The complete routine includes:</p><ul><li>MARCEL Ora-Shield™ Therapeutic Oral Rinse</li><li>MARCEL Smile™ Toothpaste</li><li>Prescribed mouth and jaw exercises</li><li>Follow-up with your MARCEL OSMF Consultant</li></ul><p>Following only one part may leave your care routine incomplete. We recommend following the complete routine as advised by your consultant.</p>"
           }
         },
         "question_5": {
@@ -207,7 +207,7 @@
           "type": "question",
           "settings": {
             "question": "Where can I get professional guidance?",
-            "answer": "<p><a href=\"/pages/osmf-consultant\" title=\"Talk to a MARCEL OSMF Consultant\">Talk to a MARCEL OSMF Consultant</a> to contact MARCEL. For a diagnosis or advice about your own care, please speak to a qualified OSMF Specialist doctor.</p>"
+            "answer": "<p><a href=\"/pages/osmf-consultant\" title=\"Talk to a MARCEL OSMF Consultant\">Talk to a MARCEL OSMF Consultant</a> to contact MARCEL. For a diagnosis or advice about your own care, please speak to a qualified OSMF Specialist Doctor.</p>"
           }
         }
       },
@@ -227,8 +227,8 @@
         "schema_markup": true,
         "show_help": true,
         "help_title": "Have Questions?",
-        "help_text": "Our In-house OSMF Consultant can help with programme questions and your next step.",
-        "whatsapp_label": "WhatsApp the MARCEL Team",
+        "help_text": "Our MARCEL OSMF Consultants can help with programme questions and your next step.",
+        "whatsapp_label": "WhatsApp MARCEL Team",
         "link_label": "See all FAQs",
         "link": "/pages/faq",
         "background": "mist",

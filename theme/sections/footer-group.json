@@ -52,7 +52,7 @@
       "settings": {
         "description": "A structured approach to oral mucosal care for people living with Oral Submucous Fibrosis (OSMF).",
         "show_contact": true,
-        "whatsapp_label": "WhatsApp the MARCEL Team",
+        "whatsapp_label": "WhatsApp MARCEL Team",
         "disclaimer": "",
         "ai_heading": "",
         "ai_prompt": "",
@@ -125,7 +125,7 @@
         "enable": true,
         "message": "",
         "button_text": "",
-        "label": "WhatsApp the MARCEL Team",
+        "label": "WhatsApp MARCEL Team",
         "hide_mobile": true
       }
     }

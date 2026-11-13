@@ -64,6 +64,7 @@
       {%- endif -%}
 
       <div class="mt-head-actions">
+        {%- render 'mt-lang-switch', place: 'head', id: 'MtLangHead' -%}
         {%- if section.settings.show_whatsapp and settings.mt_whatsapp_number != blank -%}
           <a class="mt-icon-btn mt-head-wa" href="{{ wa_url }}" target="_blank" rel="noopener" aria-label="{{ section.settings.whatsapp_label | escape }}">
             {%- render 'mt-icon', icon: 'whatsapp' -%}
@@ -181,6 +182,7 @@
           {%- endif -%}
         </div>
       {%- endif -%}
+      {%- render 'mt-lang-switch', place: 'drawer', id: 'MtLangDrawer' -%}
     </div>
   </aside>
 
@@ -440,7 +442,7 @@
       "type": "text",
       "id": "whatsapp_label",
       "label": "WhatsApp link label",
-      "default": "WhatsApp the MARCEL Team"
+      "default": "WhatsApp MARCEL Team"
     }
   ]
 }

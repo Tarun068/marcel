@@ -30,7 +30,7 @@
           "type": "perk",
           "settings": {
             "icon": "shield",
-            "text": "Core component of Foundation MARCEL OMR Therapy™"
+            "text": "Core component of the MARCEL OMR Therapy™ Foundation Kit"
           }
         },
         "feature_4": {
@@ -65,8 +65,8 @@
       ],
       "settings": {
         "headline": "Foundational oral support",
-        "supporting": "A core component of Foundation MARCEL OMR Therapy™",
-        "intro": "<p>MARCEL Ora-Care™ is a metered oral spray that gives a measured amount with every spray. It is the foundational format in Foundation MARCEL OMR Therapy™ and is meant to be part of your regular oral-care routine, with guidance from a qualified healthcare professional.</p>",
+        "supporting": "A core component of the MARCEL OMR Therapy™ Foundation Kit",
+        "intro": "<p>MARCEL Ora-Care™ is a metered oral spray that gives a measured amount with every spray. It is the foundational format in the MARCEL OMR Therapy™ Foundation Kit and is meant to be part of your regular oral-care routine, with guidance from a qualified healthcare professional.</p>",
         "details": "50 mL. MRP includes all taxes.",
         "how_lines": "Spray 6 to 7 puffs evenly throughout the mouth.\nUse twice daily, or as directed by your physician or MARCEL OSMF Consultant.\nAfter each spray, do the prescribed mouth and jaw exercises.",
         "safety": "Safety: Keep out of reach of children. Avoid contact with the eyes.",
@@ -127,14 +127,14 @@
       "settings": {
         "art": "foundation",
         "media_side": "right",
-        "eyebrow": "Foundation routine",
+        "eyebrow": "Foundation Kit routine",
         "heading": "Used as Part of the <em>Foundation Kit</em>",
-        "text": "<p>MARCEL Ora-Care™ Oral Spray sits alongside MARCEL Smile™ Toothpaste and the mouth and jaw exercises your healthcare professional prescribes. Whether the Foundation pathway suits you should be decided after a professional assessment.</p>",
+        "text": "<p>MARCEL Ora-Care™ Oral Spray sits alongside MARCEL Smile™ Toothpaste and the mouth and jaw exercises your healthcare professional prescribes. Whether the Foundation Kit suits you should be decided after a professional assessment.</p>",
         "points": "",
         "button_1_label": "See the Foundation Kit",
         "button_1_to": "foundation",
         "button_1_link": "",
-        "button_2_label": "Talk to a Consultant",
+        "button_2_label": "Book a Consultation",
         "button_2_to": "consult",
         "button_2_link": "",
         "note": "",
@@ -172,7 +172,7 @@
           "type": "question",
           "settings": {
             "question": "What is MARCEL Ora-Care™ Oral Spray?",
-            "answer": "<p>MARCEL Ora-Care™ is a metered oral spray and a core component of Foundation MARCEL OMR Therapy™. It gives a measured, repeatable application as part of a regular oral-care routine.</p>"
+            "answer": "<p>MARCEL Ora-Care™ is a metered oral spray and a core component of the MARCEL OMR Therapy™ Foundation Kit. It gives a measured, repeatable application as part of a regular oral-care routine.</p>"
           }
         },
         "question_2": {
@@ -185,7 +185,7 @@
         "question_3": {
           "type": "question",
           "settings": {
-            "question": "What is Foundation MARCEL OMR Therapy™?",
+            "question": "What is the MARCEL OMR Therapy™ Foundation Kit?",
             "answer": "<p>It is the foundational care format within the MARCEL OMR Therapy™ system. MARCEL Ora-Care™ Oral Spray is its core component.</p>"
           }
         },
@@ -193,7 +193,7 @@
           "type": "question",
           "settings": {
             "question": "Can I use only MARCEL Ora-Care™?",
-            "answer": "<p>MARCEL Ora-Care™ is one part of Foundation MARCEL OMR Therapy™. The complete routine includes:</p><ul><li>MARCEL Ora-Care™ Oral Spray</li><li>MARCEL Smile™ Toothpaste</li><li>Prescribed mouth and jaw exercises</li><li>Follow-up with your MARCEL OSMF Consultant</li></ul><p>Following only one part may leave your care routine incomplete. We recommend following the complete routine as advised by your consultant.</p>"
+            "answer": "<p>MARCEL Ora-Care™ is one part of the MARCEL OMR Therapy™ Foundation Kit. The complete routine includes:</p><ul><li>MARCEL Ora-Care™ Oral Spray</li><li>MARCEL Smile™ Toothpaste</li><li>Prescribed mouth and jaw exercises</li><li>Follow-up with your MARCEL OSMF Consultant</li></ul><p>Following only one part may leave your care routine incomplete. We recommend following the complete routine as advised by your consultant.</p>"
           }
         },
         "question_5": {
@@ -235,8 +235,8 @@
         "schema_markup": true,
         "show_help": true,
         "help_title": "Have Questions?",
-        "help_text": "Our In-house OSMF Consultant can help with programme questions and your next step.",
-        "whatsapp_label": "WhatsApp the MARCEL Team",
+        "help_text": "Our MARCEL OSMF Consultants can help with programme questions and your next step.",
+        "whatsapp_label": "WhatsApp MARCEL Team",
         "link_label": "See all FAQs",
         "link": "/pages/faq",
         "background": "mist",

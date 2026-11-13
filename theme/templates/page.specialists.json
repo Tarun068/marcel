@@ -22,10 +22,10 @@
         "spacing": "none",
         "parent_label": "Get Help",
         "parent_link": "/pages/get-help",
-        "current_label": "Find an OSMF Specialist",
-        "eyebrow": "MARCEL OSMF Care Specialist directory",
-        "heading": "Find an OSMF Care Specialist Near You",
-        "text": "Enter your city or PIN code to find verified OSMF Care Specialists in the same city, prioritising clinics in your PIN-code area and nearby localities."
+        "current_label": "Find an OSMF Specialist Doctor",
+        "eyebrow": "OSMF Specialist Doctor directory",
+        "heading": "Find an OSMF Specialist Doctor Near You",
+        "text": "Enter your city or PIN code to find verified OSMF Specialist Doctors in the same city, prioritising clinics in your PIN-code area and nearby localities."
       },
       "blocks": {
         "search_1": {
@@ -33,7 +33,7 @@
           "settings": {
             "icon": "pin",
             "placeholder": "Your city or PIN code",
-            "button_label": "Find specialists",
+            "button_label": "Find an OSMF Specialist Doctor",
             "param": "q"
           }
         }
@@ -68,20 +68,20 @@
         "locating_label": "Finding your location…",
         "no_location": "We couldn’t get your location. Please search by city or PIN code.",
         "km_label": "about [n] km away",
-        "count_one": "[n] OSMF Care Specialist in [where]",
-        "count_many": "[n] OSMF Care Specialists in [where]",
+        "count_one": "[n] OSMF Specialist Doctor in [where]",
+        "count_many": "[n] OSMF Specialist Doctors in [where]",
         "where_all": "India",
         "where_search": "your search",
         "near_you": "order of distance from you",
-        "role_label": "MARCEL OSMF Care Specialist",
+        "role_label": "OSMF Specialist Doctor",
         "registration_label": "Reg. no.",
         "call_label": "Call clinic",
         "directions_label": "Get directions",
-        "empty_title": "No OSMF Care Specialist Listed for [where] Yet",
+        "empty_title": "No OSMF Specialist Doctor Listed for [where] Yet",
         "empty_text": "We are adding verified specialists. Meanwhile, a MARCEL OSMF Consultant can discuss your concerns and guide your next step.",
-        "empty_consult_label": "Talk to a MARCEL OSMF Consultant",
+        "empty_consult_label": "Book a Consultation",
         "empty_all_label": "Show all specialists",
-        "note": "Only verified OSMF Care Specialist information is listed. Please call the clinic to confirm hours and appointments. The clinic visit is with the healthcare professional, not with MARCEL.",
+        "note": "Only verified OSMF Specialist Doctor information is listed. Please call the clinic to confirm hours and appointments. The clinic visit is with the healthcare professional, not with MARCEL.",
         "background": "paper",
         "sheet": false,
         "spacing": "tight"
@@ -148,9 +148,9 @@
             "icon": "phone",
             "eyebrow": "Option A",
             "title": "MARCEL OSMF Consultant",
-            "subtitle": "In-house, on-call consultation",
+            "subtitle": "On-call, remote consultation",
             "text": "Discuss your concerns remotely and understand the next step.",
-            "button_label": "Talk to a MARCEL OSMF Consultant",
+            "button_label": "Book a Consultation",
             "link_to": "consult",
             "link2_to": "whatsapp",
             "points": "Programme information and next steps\nGuidance on the MARCEL OMR Therapy™ pathways\nHelp finding a professional assessment",

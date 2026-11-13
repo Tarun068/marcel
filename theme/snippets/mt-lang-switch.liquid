@@ -1,0 +1,31 @@
+{%- comment -%}
+  Language switch (English / Hindi). Renders only when the store has more than one published language
+  (Settings > Languages), so nothing shows until Hindi is published. Each other language is a submit button of
+  Shopify's localization form; Shopify returns the visitor to the same page in that language.
+
+  Accepts:
+  - place: {String} 'head' (compact pill in the header) or 'drawer' (full-width button in the mobile menu)
+  - id: {String} unique form id
+
+  Usage:
+  {% render 'mt-lang-switch', place: 'head', id: 'MtLangHead' %}
+{%- endcomment -%}
+{%- if localization.available_languages.size > 1 -%}
+  {%- assign lang_class = 'mt-lang mt-lang--' | append: place -%}
+  {%- form 'localization', id: id, class: lang_class -%}
+    {%- for language in localization.available_languages -%}
+      {%- unless language.iso_code == localization.language.iso_code -%}
+        <button
+          type="submit"
+          class="mt-lang-btn"
+          name="language_code"
+          value="{{ language.iso_code }}"
+          lang="{{ language.iso_code }}"
+        >
+          {%- if place == 'drawer' -%}{%- render 'mt-icon', icon: 'refresh' -%}{%- endif -%}
+          {{- language.endonym_name | capitalize -}}
+        </button>
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endform -%}
+{%- endif -%}

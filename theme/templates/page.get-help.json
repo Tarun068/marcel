@@ -23,7 +23,7 @@
         "current_label": "Get Help",
         "eyebrow": "Patient support",
         "heading": "Get the Right Support",
-        "text": "MARCEL offers two different kinds of support. The MARCEL OSMF Consultant gives programme guidance by phone. OSMF Specialist doctors give qualified clinical assessment in person."
+        "text": "MARCEL offers two different kinds of support. The MARCEL OSMF Consultant gives programme guidance by phone. OSMF Specialist Doctors give qualified clinical assessment in person."
       }
     },
     "support": {
@@ -45,13 +45,13 @@
             "icon": "phone",
             "eyebrow": "Option A",
             "title": "MARCEL OSMF Consultant",
-            "subtitle": "In-house consultation over a call. The booking fee is adjusted against an eligible MARCEL product purchase.",
+            "subtitle": "A call with a MARCEL OSMF Consultant. The booking fee is adjusted against an eligible MARCEL product purchase.",
             "text": "Discuss your concerns remotely and understand the next step.",
-            "button_label": "Talk to a MARCEL OSMF Consultant",
+            "button_label": "Book a Consultation",
             "link_to": "consult",
             "link2_to": "whatsapp",
             "points": "Programme information\nGuidance on navigating the website and pathway information\nExplaining programme components and next steps\nContact coordination and support",
-            "button2_label": "WhatsApp the MARCEL Team"
+            "button2_label": "WhatsApp MARCEL Team"
           }
         },
         "route_2": {
@@ -85,8 +85,8 @@
         "schema_markup": true,
         "show_help": true,
         "help_title": "Have Questions?",
-        "help_text": "Our In-house OSMF Consultant can help with programme questions and your next step.",
-        "whatsapp_label": "WhatsApp the MARCEL Team",
+        "help_text": "Our MARCEL OSMF Consultants can help with programme questions and your next step.",
+        "whatsapp_label": "WhatsApp MARCEL Team",
         "link_label": "",
         "background": "mist",
         "sheet": false,
@@ -97,36 +97,36 @@
         "question_1": {
           "type": "question",
           "settings": {
-            "question": "What is the difference between an OSMF Consultant and an OSMF Specialist doctor?",
-            "answer": "<p>An OSMF Consultant provides an in-house on-call consultation, allowing you to discuss your concerns and understand the next step remotely. An OSMF Specialist doctor provides an in-clinic, in-person consultation, where the doctor can examine your mouth, assess mouth opening and evaluate oral tissue changes directly.</p>"
+            "question": "What is the difference between a MARCEL OSMF Consultant and an OSMF Specialist Doctor?",
+            "answer": "<p>A MARCEL OSMF Consultant provides an on-call consultation, allowing you to discuss your concerns and understand the next step remotely. An OSMF Specialist Doctor provides an in-clinic, in-person consultation, where the doctor can examine your mouth, assess mouth opening and evaluate oral tissue changes directly.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
             "question": "Which consultation should I choose?",
-            "answer": "<p>If you want to discuss your symptoms and understand how to proceed, start with the OSMF Consultant on-call service. If you need a direct examination, have significant difficulty opening your mouth, or notice a persistent ulcer, unexplained lump, bleeding or another concerning change, arrange an in-clinic consultation with an OSMF Specialist doctor.</p>"
+            "answer": "<p>If you want to discuss your symptoms and understand how to proceed, start with the MARCEL OSMF Consultant on-call service. If you need a direct examination, have significant difficulty opening your mouth, or notice a persistent ulcer, unexplained lump, bleeding or another concerning change, arrange an in-clinic consultation with an OSMF Specialist Doctor.</p>"
           }
         },
         "question_3": {
           "type": "question",
           "settings": {
             "question": "Can I follow care from home if I cannot visit a clinic?",
-            "answer": "<p>An on-call consultation can help you discuss your symptoms and understand the next step without travelling first. If an examination is needed, the consultant can advise you to visit an OSMF Specialist doctor in person.</p>"
+            "answer": "<p>An on-call consultation can help you discuss your symptoms and understand the next step without travelling first. If an examination is needed, the consultant can advise you to visit an OSMF Specialist Doctor in person.</p>"
           }
         },
         "question_4": {
           "type": "question",
           "settings": {
             "question": "Can I use MARCEL OMR Therapy™ while receiving treatment from another doctor?",
-            "answer": "<p>Tell the OSMF Consultant or your treating doctor about the medicines, procedures and oral products you are currently using. Do not stop or change prescribed treatment on your own. They can help you decide whether the approaches can be used together and whether an in-person assessment is needed.</p>"
+            "answer": "<p>Tell the MARCEL OSMF Consultant or your treating doctor about the medicines, procedures and oral products you are currently using. Do not stop or change prescribed treatment on your own. They can help you decide whether the approaches can be used together and whether an in-person assessment is needed.</p>"
           }
         },
         "question_5": {
           "type": "question",
           "settings": {
             "question": "Do I need surgery if my mouth opening is very limited?",
-            "answer": "<p>Not everyone with OSMF needs surgery. The decision depends on the degree of restriction and the clinical findings. An OSMF Specialist doctor can examine you and discuss appropriate options, including whether non-surgical care, a procedure or a combination should be considered.</p>"
+            "answer": "<p>Not everyone with OSMF needs surgery. The decision depends on the degree of restriction and the clinical findings. An OSMF Specialist Doctor can examine you and discuss appropriate options, including whether non-surgical care, a procedure or a combination should be considered.</p>"
           }
         }
       },
@@ -146,7 +146,7 @@
         "heading": "Send Us an Enquiry",
         "text": "Choose the type of enquiry so it reaches the right team.",
         "show_whatsapp": true,
-        "whatsapp_label": "WhatsApp the MARCEL Team",
+        "whatsapp_label": "WhatsApp MARCEL Team",
         "whatsapp_note": "For questions about the programme and your next step",
         "phone_note": "Call the MARCEL Team",
         "email_note": "For professional, business and research enquiries",
@@ -160,7 +160,7 @@
         "message_label": "Your message",
         "submit_label": "Send enquiry",
         "success_text": "Thank you. Your enquiry has reached the MARCEL Team.",
-        "fine": "Please do not send personal medical records through this form. For an examination, see an OSMF Specialist doctor.",
+        "fine": "Please do not send personal medical records through this form. For an examination, see an OSMF Specialist Doctor.",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"

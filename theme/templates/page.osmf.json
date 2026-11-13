@@ -167,7 +167,7 @@
           "type": "table",
           "settings": {
             "head": "Stage | Mouth opening | MARCEL OMR Therapy™ pathway",
-            "rows": "Stage 1 #2B9759 | More than 35 mm, with symptoms | Foundation\nStage 2 #C4860B | 26 to 35 mm | Foundation\nStage 3 #D5602A | 15 to 25 mm | Advance\nStage 4 #C23838 | Less than 15 mm | Advance\nStage 5 #C23838 | Less than 5 mm with a persistent ulcer or confirmed carcinoma | Immediate specialist consultation",
+            "rows": "Stage 1 #2B9759 | More than 35 mm, with symptoms | Foundation Kit\nStage 2 #C4860B | 26 to 35 mm | Foundation Kit\nStage 3 #D5602A | 15 to 25 mm | Advance Kit\nStage 4 #C23838 | Less than 15 mm | Advance Kit\nStage 5 #C23838 | Less than 5 mm with a persistent ulcer or confirmed carcinoma | Immediate specialist consultation",
             "bold_col": 2
           }
         },
@@ -210,7 +210,7 @@
         "text_6": {
           "type": "text",
           "settings": {
-            "text": "<p>Start with the MARCEL OSMF Self-Check for an initial indication, talk to a MARCEL OSMF Consultant about your next step, and see an OSMF Specialist doctor for an examination, diagnosis and stage.</p>"
+            "text": "<p>Start with the MARCEL OSMF Self-Check for an initial indication, talk to a MARCEL OSMF Consultant about your next step, and see an OSMF Specialist Doctor for an examination, diagnosis and stage.</p>"
           }
         },
         "link_2": {
@@ -258,8 +258,8 @@
         "schema_markup": true,
         "show_help": true,
         "help_title": "Have Questions?",
-        "help_text": "Our In-house OSMF Consultant can help with programme questions and your next step.",
-        "whatsapp_label": "WhatsApp the MARCEL Team",
+        "help_text": "Our MARCEL OSMF Consultants can help with programme questions and your next step.",
+        "whatsapp_label": "WhatsApp MARCEL Team",
         "link_label": "See all FAQs",
         "background": "mist",
         "sheet": false,
