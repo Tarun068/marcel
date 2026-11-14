@@ -111,7 +111,11 @@ if (!customElements.get('mt-reels')) {
       update() {
         const pos = this.position();
         const max = this.positions() - 1;
-        this.dotsBox?.querySelectorAll('.mt-reels-dot').forEach((d, i) => d.toggleAttribute('aria-current', i === Math.min(pos, max)));
+        // aria-current="true" on the dot of the reel in view: it is what fills that dot (see mt-reels.css).
+        this.dotsBox?.querySelectorAll('.mt-reels-dot').forEach((d, i) => {
+          if (i === Math.min(pos, max)) d.setAttribute('aria-current', 'true');
+          else d.removeAttribute('aria-current');
+        });
         if (this.arrows.length === 2) {
           this.arrows[0].disabled = this.track.scrollLeft < 4;
           this.arrows[1].disabled = this.track.scrollLeft > this.track.scrollWidth - this.track.clientWidth - 4;

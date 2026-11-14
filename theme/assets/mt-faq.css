@@ -24,4 +24,15 @@ mt-accordion { display: block; }
 .mt-acc-in > * + * { margin-top: 0; }
 @media (max-width: 480px) {
   .mt-acc-in { padding-right: 22px; }
+}
+
+/* Layout "Heading beside the questions" (client product page design, 2026-11-14): heading column on the left,
+   questions as separate white cards on the right. */
+.mt-faq-cols { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.5fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
+.mt-faq-left { display: grid; gap: 22px; align-content: start; }
+.mt-faq--side .mt-faq-head { margin: 0; }
+.mt-faq--side .mt-acc-item, .mt-bg-paper.mt-faq--side .mt-acc-item { border: 1px solid var(--mt-line); background: var(--mt-paper); box-shadow: 0 10px 26px -20px rgba(8, 22, 58, .35); }
+.mt-faq--side .mt-pm { background: color-mix(in srgb, var(--mt-aqua) 14%, #fff); color: var(--mt-teal); }
+@media (max-width: 900px) {
+  .mt-faq-cols { grid-template-columns: minmax(0, 1fr); }
 }

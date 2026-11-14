@@ -5,6 +5,10 @@
     {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text, center: section.settings.center -%}
     {%- if section.blocks.size > 0 -%}
       <div class="mt-cards" style="--mt-cols: {{ section.settings.columns }};">
+        {%- liquid
+          # Built-in pictures that have a whole-picture 4:3 version (mt-card-<art>-wide.webp) for "Large photo, whole picture".
+          assign wide_arts = 'careplan,therapy,exercise,diet,device,consultant,doctor' | split: ','
+        -%}
         {%- for block in section.blocks -%}
           {%- liquid
             assign media = section.settings.media | default: 'icon'
@@ -15,11 +19,13 @@
               endif
             endif
           -%}
-          <div class="mt-mini-card{% if media != 'icon' %} mt-mini-card--{{ media }}{% endif %}" {{ block.shopify_attributes }}>
+          <div class="mt-mini-card{% if media != 'icon' %} mt-mini-card--{{ media }}{% endif %}{% if section.settings.card_style == 'benefit' %} mt-mini-card--benefit{% endif %}{% if block.settings.highlight %} is-highlight{% endif %}" {{ block.shopify_attributes }}>
             {%- if has_photo -%}
               <span class="mt-card-photo">
                 {%- if block.settings.image != blank -%}
                   {{- block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '240, 360, 600, 900', sizes: '(min-width: 990px) 320px, (min-width: 750px) 45vw, 92vw', alt: block.settings.image.alt -}}
+                {%- elsif media == 'full' and wide_arts contains block.settings.art -%}
+                  <img src="{{ 'mt-card-' | append: block.settings.art | append: '-wide.webp' | asset_url }}" alt="" width="640" height="480" loading="lazy">
                 {%- else -%}
                   <img src="{{ 'mt-card-' | append: block.settings.art | append: '.webp' | asset_url }}" alt="" width="360" height="360" loading="lazy">
                 {%- endif -%}
@@ -116,10 +122,31 @@
         {
           "value": "cover",
           "label": "Large photo on top"
+        },
+        {
+          "value": "full",
+          "label": "Large photo, whole picture"
         }
       ],
       "default": "icon",
-      "info": "Photos come from each card's Photo setting. Cards without one show their icon in the same tile."
+      "info": "Photos come from each card's Photo setting. Cards without one show their icon in the same tile. Large photo, whole picture shows each photo uncropped at 4:3."
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "options": [
+        {
+          "value": "default",
+          "label": "Standard"
+        },
+        {
+          "value": "benefit",
+          "label": "Benefit cards"
+        }
+      ],
+      "default": "default",
+      "info": "Benefit cards: white cards with a coloured top line and a round icon, as on the product pages. A card set to Highlight turns navy."
     },
     {
       "type": "header",
@@ -193,7 +220,7 @@
           "type": "image_picker",
           "id": "image",
           "label": "Photo",
-          "info": "Shown when Card picture is set to a photo. Square works best for small photos, 16:10 for large."
+          "info": "Shown when Card picture is set to a photo. Square works best for small photos, 16:10 for large, 4:3 for the whole picture."
         },
         {
           "type": "select",
@@ -227,6 +254,13 @@
           "id": "title",
           "label": "Title",
           "default": "Clinical responsibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "highlight",
+          "label": "Highlight",
+          "info": "Benefit cards only: shows this card in navy.",
+          "default": false
         },
         {
           "type": "textarea",

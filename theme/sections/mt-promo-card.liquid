@@ -1,0 +1,213 @@
+{{ 'mt-pd.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Promo card from the client product page design: copy and a button on the left, an illustration on a blue panel on
+  the right. "Overlap" pulls it up over the section above (the navy product hero).
+{%- endcomment -%}
+{%- liquid
+  assign promo_extra = 'mt-promo-sec'
+  if section.settings.overlap
+    assign promo_extra = 'mt-promo-sec mt-promo-sec--overlap'
+  endif
+-%}
+{%- capture btn_href -%}{% render 'mt-link-to', key: section.settings.button_to, url: section.settings.button_link %}{%- endcapture -%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: promo_extra %}">
+  <div class="mt-wrap">
+    <div class="mt-promo{% if section.settings.art == 'none' %} mt-promo--solo{% endif %}">
+      <div class="mt-promo-copy">
+        {%- if section.settings.heading != blank -%}<h2 class="mt-promo-h">{{ section.settings.heading }}</h2>{%- endif -%}
+        {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a class="mt-btn mt-promo-btn" href="{{ btn_href }}"{% if section.settings.button_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
+            {{- section.settings.button_label | escape -}}
+            {%- render 'mt-icon', icon: 'arrow-right' -%}
+          </a>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.art != 'none' -%}
+        <div class="mt-promo-art" aria-hidden="true">{%- render 'mt-pd-art', art: section.settings.art -%}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel promo card",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Experiencing OSMF symptoms?"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "Understand the common signs, symptoms and stages of Oral Submucous Fibrosis."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Explore OSMF Symptoms"
+    },
+    {
+      "type": "select",
+      "id": "button_to",
+      "label": "Button opens",
+      "options": [
+        {
+          "value": "custom",
+          "label": "Custom link below"
+        },
+        {
+          "value": "test",
+          "label": "MARCEL OSMF Self-Check"
+        },
+        {
+          "value": "therapy",
+          "label": "MARCEL OMR Therapy page"
+        },
+        {
+          "value": "foundation",
+          "label": "Foundation Kit page"
+        },
+        {
+          "value": "advance",
+          "label": "Advance Kit page"
+        },
+        {
+          "value": "journey",
+          "label": "12-Week Care Journey"
+        },
+        {
+          "value": "consult",
+          "label": "MARCEL OSMF Consultant booking"
+        },
+        {
+          "value": "specialists",
+          "label": "Find an OSMF Specialist"
+        },
+        {
+          "value": "help",
+          "label": "Get Help page"
+        },
+        {
+          "value": "evidence",
+          "label": "Clinical evidence page"
+        },
+        {
+          "value": "products",
+          "label": "All products"
+        },
+        {
+          "value": "whatsapp",
+          "label": "WhatsApp chat"
+        }
+      ],
+      "default": "custom"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button custom link"
+    },
+    {
+      "type": "select",
+      "id": "art",
+      "label": "Illustration",
+      "options": [
+        {
+          "value": "symptoms",
+          "label": "Symptoms chart"
+        },
+        {
+          "value": "guide",
+          "label": "Talk to the team"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "symptoms"
+    },
+    {
+      "type": "checkbox",
+      "id": "overlap",
+      "label": "Overlap the section above",
+      "default": true,
+      "info": "Pulls the card up over the section above, as under the navy product hero."
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "tight"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel promo card"
+    }
+  ]
+}
+{% endschema %}

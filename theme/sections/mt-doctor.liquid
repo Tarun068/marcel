@@ -5,6 +5,10 @@
 {%- style -%}
   .mt-doc { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
   .mt-doc-media { position: relative; width: 100%; max-width: 440px; }
+  /* Picture on the right (setting Picture side): copy first, the picture after it on phones too. */
+  .mt-doc--right { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+  .mt-doc--right .mt-doc-media { order: 2; justify-self: end; max-width: 520px; }
+  .mt-doc-photo--art { aspect-ratio: 1 / 1; background: #F4F8FA; }
   .mt-doc-photo { position: relative; display: grid; place-items: center; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--mt-r-xl); background: linear-gradient(160deg, var(--mt-tint), var(--mt-mist)); box-shadow: 0 30px 60px -40px rgba(12, 42, 61, .55); }
   .mt-doc-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .mt-doc-initials { display: grid; place-items: center; width: 46%; aspect-ratio: 1; border-radius: 50%; background: var(--mt-paper); color: var(--mt-teal); font-family: var(--mt-serif); font-size: clamp(44px, 6vw, 84px); font-weight: 600; letter-spacing: -.02em; box-shadow: 0 18px 40px -26px rgba(12, 42, 61, .45); }
@@ -21,8 +25,8 @@
   .mt-doc-points .mt-i { width: 20px; height: 20px; margin-top: 3px; color: var(--mt-teal); stroke-width: 2.4; flex: none; }
   .mt-bg-navy .mt-doc-points li, .mt-bg-navy .mt .mt-doc-name { color: var(--mt-on-dark); }
   @media (max-width: 860px) {
-    .mt-doc { grid-template-columns: minmax(0, 1fr); }
-    .mt-doc-media { max-width: 420px; }
+    .mt-doc, .mt-doc--right { grid-template-columns: minmax(0, 1fr); }
+    .mt-doc-media, .mt-doc--right .mt-doc-media { max-width: 420px; justify-self: start; }
   }
 {%- endstyle -%}
 
@@ -37,14 +41,16 @@
 -%}
 {%- capture btn_link -%}{% render 'mt-link-to', key: s.button_to, url: s.button_link %}{%- endcapture -%}
 
-{%- if s.name != blank or request.design_mode -%}
+{%- if s.name != blank or s.heading != blank or request.design_mode -%}
   <section class="{% render 'mt-section-class', s: s, extra: 'mt-doctor' %}">
-    <div class="mt-wrap mt-doc">
+    <div class="mt-wrap mt-doc{% if s.media_side == 'right' %} mt-doc--right{% endif %}">
       <div class="mt-doc-media">
-        <div class="mt-doc-photo">
+        <div class="mt-doc-photo{% if s.photo == blank and s.art == 'team' %} mt-doc-photo--art{% endif %}">
           {%- if s.photo != blank -%}
             {{ s.photo | image_url: width: 1000 | image_tag: loading: 'lazy', sizes: '(min-width: 1440px) 520px, (min-width: 861px) 38vw, 92vw', widths: '400, 600, 800, 1000', alt: s.name }}
-          {%- else -%}
+          {%- elsif s.art == 'team' -%}
+            <img src="{{ 'mt-doctor-team.webp' | asset_url }}" alt="" width="1000" height="1000" loading="lazy">
+          {%- elsif initials != blank -%}
             <span class="mt-doc-initials" aria-hidden="true">{{ initials | upcase }}</span>
           {%- endif -%}
         </div>
@@ -54,7 +60,8 @@
       </div>
       <div class="mt-doc-body">
         {%- if s.eyebrow != blank -%}<span class="mt-eyebrow">{{ s.eyebrow | escape }}</span>{%- endif -%}
-        <h2 class="mt-doc-name">{{ s.name | escape }}</h2>
+        {%- assign doc_heading = s.heading | default: s.name -%}
+        {%- if doc_heading != blank -%}<h2 class="mt-doc-name">{{ doc_heading | escape }}</h2>{%- endif -%}
         {%- if s.qualification != blank or s.role != blank -%}
           <div class="mt-doc-cred">
             {%- if s.qualification != blank -%}<span>{{ s.qualification | escape }}</span>{%- endif -%}
@@ -100,16 +107,55 @@
       "default": "Featured doctor"
     },
     {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Shown as the section heading. Leave empty to show the doctor's name."
+    },
+    {
+      "type": "select",
+      "id": "media_side",
+      "label": "Picture side",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
       "type": "image_picker",
       "id": "photo",
       "label": "Photo",
       "info": "A real photo of the doctor, portrait shape (4:5). Without one, the initials show."
     },
     {
+      "type": "select",
+      "id": "art",
+      "label": "Picture without a photo",
+      "options": [
+        {
+          "value": "initials",
+          "label": "The doctor's initials"
+        },
+        {
+          "value": "team",
+          "label": "Illustration: doctor with a care team"
+        }
+      ],
+      "default": "initials",
+      "info": "Used until a photo is added. The illustration shows no real person."
+    },
+    {
       "type": "text",
       "id": "name",
       "label": "Name",
-      "default": "Dr. Niyati Thakker"
+      "info": "Leave empty to hide the name; then add a Heading."
     },
     {
       "type": "text",
@@ -133,14 +179,14 @@
       "type": "richtext",
       "id": "text",
       "label": "Introduction",
-      "default": "<p>Dr. Niyati Thakker is the clinical point of contact for doctors in the OSMF Specialist Doctor network. She helps them understand MARCEL OMR Therapy™, supports clinical orientation and coordinates with the JanSuta team.</p>"
+      "default": "<p>Dr. Niyati Thakker is the clinical point of contact for doctors in the OSMF Specialist Doctor network. She helps them understand MARCEL OMR Therapy, supports clinical orientation and coordinates with the JanSuta team.</p>"
     },
     {
       "type": "textarea",
       "id": "points",
       "label": "Key points",
       "info": "One per line.",
-      "default": "A designated clinical contact for participating doctors\nBetter orientation to the MARCEL OMR Therapy™ approach\nStronger communication and professional coordination"
+      "default": "A designated clinical contact for participating doctors\nBetter orientation to the MARCEL OMR Therapy approach\nStronger communication and professional coordination"
     },
     {
       "type": "text",

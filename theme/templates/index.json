@@ -23,27 +23,17 @@
             "eyebrow_icon": "shield",
             "eyebrow": "Care beyond teeth, gums & enamel",
             "heading": "A Structured Approach to <em>Oral Sub Mucous Fibrosis (OSMF)</em>",
-            "text": "MARCEL OMR Therapy™ brings together oral mucosal care, functional support, guided progress and dietary guidance for people living with OSMF.",
+            "text": "MARCEL OMR Therapy brings together oral mucosal care, functional support, guided progress and dietary guidance for people living with OSMF.",
             "show_text_mobile": false,
             "button_1_label": "Check Your OSMF Stage",
             "button_1_to": "test",
             "button_1_link": "",
-            "button_2_label": "Explore MARCEL OMR Therapy™",
+            "button_2_label": "Explore Marcel OMR Therapy",
             "button_2_to": "therapy",
             "button_2_link": "",
             "align": "left",
             "text_color": "dark",
             "scrim": 0
-          }
-        },
-        "slide_hindi": {
-          "type": "slide",
-          "settings": {
-            "style": "image",
-            "art": "hi",
-            "alt": "MARCEL OMR Therapy. क्या मुँह खोलने में परेशानी हो रही है? मुँह में जलन, गालों में खिंचाव, मुँह में जकड़न। ये OSMF के लक्षण हो सकते हैं। OSMF की अवस्था के अनुसार देखभाल। अपने लक्षण पहचानें। सही जाँच कराएं।",
-            "link_to": "test",
-            "link": ""
           }
         },
         "slide_check": {
@@ -174,7 +164,6 @@
       },
       "block_order": [
         "slide_therapy",
-        "slide_hindi",
         "slide_check",
         "slide_consult",
         "slide_journey",
@@ -191,7 +180,7 @@
         "max_height": "720",
         "heading_font": "serif",
         "first_h1": true,
-        "seo_heading": "MARCEL OMR Therapy™: A Structured Approach to Oral Sub Mucous Fibrosis (OSMF)",
+        "seo_heading": "MARCEL OMR Therapy: A Structured Approach to Oral Sub Mucous Fibrosis (OSMF)",
         "show_arrows": true,
         "trust_background": "paper",
         "label": "Featured",
@@ -287,7 +276,7 @@
         "button_1_label": "Check Your OSMF Stage",
         "button_1_to": "test",
         "button_1_link": "",
-        "button_2_label": "Explore MARCEL OMR Therapy™",
+        "button_2_label": "Explore MARCEL OMR Therapy",
         "button_2_to": "therapy",
         "button_2_link": "",
         "button_2_icon": "shield",
@@ -343,7 +332,6 @@
     },
     "symptom_banner": {
       "type": "mt-picture-banner",
-      "disabled": true,
       "settings": {
         "art": "symptoms-hi",
         "size": "banner",
@@ -625,7 +613,7 @@
             "title": "Stage 1",
             "text": "Mouth opening is still more than 35 mm, but symptoms such as burning or cheek tightness have started. This is a good time to act, with professional guidance.",
             "notice": "Burning with spicy food\nTightness in the cheeks\nEating is usually still comfortable",
-            "helps": "Stop supari, gutkha and tobacco\nMARCEL OMR Therapy™ Foundation Kit may be considered\nA professional assessment to confirm the stage",
+            "helps": "Stop supari, gutkha and tobacco\nMARCEL OMR Therapy Foundation Kit may be considered\nA professional assessment to confirm the stage",
             "button_label": "Am I in this stage?",
             "button_to": "test",
             "button_link": "",
@@ -663,7 +651,7 @@
             "title": "Stage 3",
             "text": "Mouth opening and oral function are more restricted. Eating is commonly harder, and burning and cheek tightness are often present.",
             "notice": "Greater restriction in mouth opening\nBurning and cheek tightness\nDifficulty chewing is common",
-            "helps": "A professional assessment first\nMARCEL OMR Therapy™ Advance Kit may be considered with professional guidance\nPrescribed mouth and jaw exercises",
+            "helps": "A professional assessment first\nMARCEL OMR Therapy Advance Kit may be considered with professional guidance\nPrescribed mouth and jaw exercises",
             "button_label": "Am I in this stage?",
             "button_to": "test",
             "button_link": "",
@@ -699,7 +687,7 @@
             "range": "Under 5 mm",
             "color": "#8e2424",
             "title": "Stage 5: Specialist Care",
-            "text": "A very restricted opening with a chronic ulcer, or with carcinoma confirmed by a biopsy, needs prompt specialist medical evaluation. MARCEL OMR Therapy™ is not the primary care pathway here.",
+            "text": "A very restricted opening with a chronic ulcer, or with carcinoma confirmed by a biopsy, needs prompt specialist medical evaluation. MARCEL OMR Therapy is not the primary care pathway here.",
             "notice": "The mouth barely opens (less than 5 mm)\nA chronic ulcer in the mouth\nOr carcinoma confirmed by a biopsy",
             "helps": "Prompt specialist medical evaluation\nDo not delay care\nBring any reports to your appointment",
             "button_label": "Find an OSMF Specialist Doctor",
@@ -811,7 +799,7 @@
           "settings": {
             "video_url": "",
             "art": "4",
-            "title": "How MARCEL OMR Therapy™ Works",
+            "title": "How MARCEL OMR Therapy Works",
             "subtitle": "Foundation Kit and Advance Kit",
             "duration": ""
           }
@@ -829,10 +817,10 @@
       "settings": {
         "eyebrow": "Watch and learn",
         "heading": "Short Videos That Answer <em>Common Questions</em>",
-        "text": "Our MARCEL OSMF Consultants and OSMF Specialist Doctors explain the signs, the habits behind OSMF and how MARCEL OMR Therapy™ fits into care.",
+        "text": "Our MARCEL OSMF Consultants and OSMF Specialist Doctors explain the signs, the habits behind OSMF and how MARCEL OMR Therapy fits into care.",
         "per_desktop": 4,
-        "per_mobile": 2,
-        "preview": "hover",
+        "per_mobile": 1,
+        "preview": "view",
         "show_placeholders": true,
         "soon_text": "This video is coming soon.",
         "button_label": "Book a Consultation",
@@ -869,7 +857,7 @@
           "settings": {
             "icon": "shield",
             "art": "therapy",
-            "title": "MARCEL OMR Therapy™",
+            "title": "MARCEL OMR Therapy",
             "text": "A structured therapy approach designed to support the management of OSMF.",
             "link_label": "Explore the therapy",
             "link_to": "therapy",
@@ -949,10 +937,10 @@
       "settings": {
         "eyebrow": "The full care plan",
         "heading": "Products Are <em>Only One Part</em> of OSMF Care",
-        "text": "A structured approach that combines personalised care planning, MARCEL OMR Therapy™, exercises, nutrition and professional guidance for better oral health.",
+        "text": "A structured approach that combines personalised care planning, MARCEL OMR Therapy, exercises, nutrition and professional guidance for better oral health.",
         "center": false,
         "columns": "4",
-        "media": "photo",
+        "media": "full",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"
@@ -982,7 +970,7 @@
           "settings": {
             "number": "",
             "title": "Start Your 12-Week Journey",
-            "text": "Begin your MARCEL OMR Therapy™ journey with your structured care routine, daily oral care, exercises and progress tracking."
+            "text": "Begin your MARCEL OMR Therapy journey with your structured care routine, daily oral care, exercises and progress tracking."
           }
         },
         "step_4": {
@@ -1005,7 +993,7 @@
         "eyebrow": "How to get started",
         "heading": "Take the First Step Towards <em>Better Oral Health</em>",
         "text": "",
-        "link_label": "Explore MARCEL OMR Therapy™",
+        "link_label": "Explore MARCEL OMR Therapy",
         "link": "/pages/marcel-omr-therapy",
         "button_label": "Check Your OSMF Stage",
         "button_link": "",
@@ -1022,9 +1010,10 @@
           "settings": {
             "tone": "teal",
             "stages": "Stages 1 and 2",
-            "title": "MARCEL OMR Therapy™ Foundation Kit",
-            "subtitle": "For earlier-stage OSMF symptoms and functional restriction.",
+            "title": "Marcel OMR Therapy Foundation Kit",
+            "subtitle": "For earlier-stage OSMF symptoms",
             "bands": "Stage 1 | More than 35 mm, with symptoms\nStage 2 | 26 to 35 mm",
+            "image": "shopify://shop_images/Foundation-1.png",
             "art": "foundation",
             "points": "Burning or cheek tightness\nDifficulty chewing may be present\nModerate restriction in mouth opening at Stage 2",
             "summary": "May be considered based on individual assessment.",
@@ -1038,7 +1027,7 @@
           "settings": {
             "tone": "blue",
             "stages": "Stages 3 and 4",
-            "title": "MARCEL OMR Therapy™ Advance Kit",
+            "title": "MARCEL OMR Therapy Advance Kit",
             "subtitle": "For greater restriction in mouth opening and oral function.",
             "bands": "Stage 3 | 15 to 25 mm\nStage 4 | Less than 15 mm",
             "art": "advance",
@@ -1060,7 +1049,7 @@
             "image": "shopify://shop_images/banner1.jpg",
             "art": "none",
             "points": "Very restricted opening\nChronic ulcer in the mouth\nOr histopathologically proven carcinoma",
-            "summary": "MARCEL OMR Therapy™ is not recommended as the primary care pathway. Prompt specialist medical evaluation and management is required.",
+            "summary": "MARCEL OMR Therapy is not recommended as the primary care pathway. Prompt specialist medical evaluation and management is required.",
             "button_label": "OSMF Specialist Doctor",
             "link_to": "specialists",
             "link": ""
@@ -1075,10 +1064,10 @@
       "settings": {
         "anchor": "",
         "eyebrow": "Honest expectations",
-        "heading": "Which MARCEL OMR Therapy™ Is Appropriate for <em>Your Stage?</em>",
-        "text": "Your mouth opening and symptoms help indicate the stage of OSMF and the MARCEL OMR Therapy™ pathway that may be considered. A qualified healthcare professional must confirm the diagnosis and stage.",
+        "heading": "Which MARCEL OMR Therapy Is Appropriate for <em>Your Stage?</em>",
+        "text": "Your mouth opening and symptoms help indicate the stage of OSMF and the MARCEL OMR Therapy pathway that may be considered. A qualified healthcare professional must confirm the diagnosis and stage.",
         "center": false,
-        "note": "MARCEL OMR Therapy™ is intended to support OSMF management in appropriate patients. This information is for education only. Please consult an OSMF Specialist Doctor or a qualified healthcare professional for individual assessment and guidance.",
+        "note": "MARCEL OMR Therapy is intended to support OSMF management in appropriate patients. This information is for education only. Please consult an OSMF Specialist Doctor or a qualified healthcare professional for individual assessment and guidance.",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"
@@ -1170,11 +1159,11 @@
         "anchor": "",
         "eyebrow": "When can you expect to see progress?",
         "heading": "A Healthier, More Comfortable Mouth, Step by Step",
-        "text": "Every person’s progress is different. Regular assessment helps you understand your individual response throughout the 12-week MARCEL OMR Therapy™ journey.",
+        "text": "Every person’s progress is different. Regular assessment helps you understand your individual response throughout the 12-week MARCEL OMR Therapy journey.",
         "center": false,
         "layout": "cards",
         "columns": 5,
-        "note": "<strong>Progress varies from person to person.</strong> MARCEL OMR Therapy™ does not promise a fixed timeline or outcome. Regular assessment by an OSMF Specialist Doctor or qualified healthcare professional helps you understand your individual progress and adjust care as needed.",
+        "note": "<strong>Progress varies from person to person.</strong> MARCEL OMR Therapy does not promise a fixed timeline or outcome. Regular assessment by an OSMF Specialist Doctor or qualified healthcare professional helps you understand your individual progress and adjust care as needed.",
         "button_label": "Explore the 12-Week Care Journey",
         "button_to": "journey",
         "button_link": "",
@@ -1267,13 +1256,13 @@
           "settings": {
             "product": "marcel-omr-therapy™-foundation-kit",
             "variant": "",
-            "title": "MARCEL OMR Therapy™ Foundation Kit",
+            "title": "MARCEL OMR Therapy Foundation Kit",
             "meta": "Oral spray and toothpaste kit",
             "badge": "none",
             "step": "1",
             "role": "Stage 1 or 2",
             "color": "#168c83",
-            "benefits": "MARCEL Ora-Care™ Oral Spray\nMARCEL Smile™ Toothpaste\nUse as advised by a healthcare professional",
+            "benefits": "MARCEL Ora-Care Oral Spray\nMARCEL Smile Toothpaste\nUse as advised by a healthcare professional",
             "best": "Foundation Kit pathway",
             "art": "kit-foundation",
             "link_to": "foundation",
@@ -1286,13 +1275,13 @@
           "settings": {
             "product": "marcel-omr-therapy™-advance",
             "variant": "",
-            "title": "MARCEL OMR Therapy™ Advance Kit",
+            "title": "MARCEL OMR Therapy Advance Kit",
             "meta": "Oral rinse and toothpaste kit",
             "badge": "none",
             "step": "1",
             "role": "Stage 3 or 4",
             "color": "#5a5cbe",
-            "benefits": "MARCEL Ora-Shield™ Oral Rinse\nMARCEL Smile™ Toothpaste\nUse as advised by a healthcare professional",
+            "benefits": "MARCEL Ora-Shield Oral Rinse\nMARCEL Smile Toothpaste\nUse as advised by a healthcare professional",
             "best": "Advance Kit pathway",
             "art": "kit-advance",
             "link_to": "advance",
@@ -1305,13 +1294,13 @@
           "settings": {
             "product": "marcel-ora-care",
             "variant": "",
-            "title": "MARCEL Ora-Care™ Oral Spray",
+            "title": "MARCEL Ora-Care Oral Spray",
             "meta": "Metered oral spray, 50 mL",
             "badge": "hide",
             "step": "1",
             "role": "Foundation Kit",
             "color": "#168c83",
-            "benefits": "Part of the MARCEL OMR Therapy™ Foundation Kit\nMay support the management of burning and tightness\nA measured amount with every spray",
+            "benefits": "Part of the MARCEL OMR Therapy Foundation Kit\nMay support the management of burning and tightness\nA measured amount with every spray",
             "best": "Foundation Kit pathway",
             "art": "ora-care",
             "link_to": "none",
@@ -1324,13 +1313,13 @@
           "settings": {
             "product": "marcel-ora-shield",
             "variant": "",
-            "title": "MARCEL Ora-Shield™ Oral Rinse",
+            "title": "MARCEL Ora-Shield Oral Rinse",
             "meta": "",
             "badge": "hide",
             "step": "1",
             "role": "Advance Kit",
             "color": "#5a5cbe",
-            "benefits": "Part of the MARCEL OMR Therapy™ Advance Kit\nA concentrate, diluted before use\nUsed with professional guidance",
+            "benefits": "Part of the MARCEL OMR Therapy Advance Kit\nA concentrate, diluted before use\nUsed with professional guidance",
             "best": "Advance Kit pathway",
             "art": "ora-shield",
             "link_to": "none",
@@ -1343,7 +1332,7 @@
           "settings": {
             "product": "marcel-smile",
             "variant": "30g",
-            "title": "MARCEL Smile™ Toothpaste",
+            "title": "MARCEL Smile Toothpaste",
             "meta": "",
             "badge": "none",
             "step": "1",
@@ -1387,7 +1376,7 @@
       ],
       "settings": {
         "eyebrow": "Products",
-        "heading": "Products Within MARCEL OMR Therapy™",
+        "heading": "Products Within MARCEL OMR Therapy",
         "text": "Each product has a defined role in the therapy. See what it is, how it is used and where it fits.",
         "link_label": "Explore Our Products",
         "link": "/collections/all",
@@ -1402,7 +1391,7 @@
         "next_label": "Next products",
         "show_kit": false,
         "kit_product": "",
-        "kit_eyebrow": "MARCEL OMR Therapy™",
+        "kit_eyebrow": "MARCEL OMR Therapy",
         "kit_heading": "Foundation Kit and Advance Kit",
         "kit_text": "Each kit brings together the components of one pathway. A qualified healthcare professional should confirm which pathway is appropriate.",
         "kit_add_label": "Add kit to cart",
@@ -1484,20 +1473,23 @@
     "doctor": {
       "type": "mt-doctor",
       "settings": {
-        "eyebrow": "Featured doctor",
-        "name": "Dr. Niyati Thakker",
-        "qualification": "BDS",
-        "role": "MARCEL OSMF Clinical Consultant",
+        "eyebrow": "",
+        "name": "",
+        "qualification": "",
+        "role": "",
         "badge": "JanSuta Pharmaceuticals",
-        "text": "<p>Dr. Niyati Thakker is the clinical point of contact for doctors in the OSMF Specialist Doctor network. She helps them understand MARCEL OMR Therapy™, supports clinical orientation and coordinates with the JanSuta team.</p>",
-        "points": "A designated clinical contact for participating doctors\nBetter orientation to the MARCEL OMR Therapy™ approach\nStronger communication and professional coordination",
+        "text": "<p>Dr. Niyati Thakker is the clinical point of contact for doctors in the OSMF Specialist Doctor network. She helps them understand MARCEL OMR Therapy, supports clinical orientation and coordinates with the JanSuta team.</p>",
+        "points": "A designated clinical contact for participating doctors\nBetter orientation to the MARCEL OMR Therapy approach\nStronger communication and professional coordination",
         "button_label": "",
         "button_to": "custom",
         "button_link": "",
         "note": "",
         "background": "paper",
         "sheet": false,
-        "spacing": "normal"
+        "spacing": "normal",
+        "heading": "Featured Doctor",
+        "media_side": "right",
+        "art": "team"
       }
     },
     "evidence": {
@@ -1607,7 +1599,7 @@
         "anchor": "",
         "eyebrow": "Clinical research evidence",
         "heading": "What the 2026 Clinical Study Found",
-        "text": "A clinical study was conducted in 2026 to evaluate MARCEL OMR Therapy™ in people with OSMF.",
+        "text": "A clinical study was conducted in 2026 to evaluate MARCEL OMR Therapy in people with OSMF.",
         "hero_value": "14.86 mm",
         "hero_extra": "(71.25%)",
         "hero_label": "Average increase in mouth opening",
@@ -1648,7 +1640,7 @@
       "settings": {
         "eyebrow": "Understand OSMF with experts",
         "heading": "Short Videos That Answer Common Questions",
-        "text": "Doctors and the MARCEL Team explain reduced mouth opening, the signs to watch for and how MARCEL OMR Therapy™ works.",
+        "text": "Doctors and the MARCEL Team explain reduced mouth opening, the signs to watch for and how MARCEL OMR Therapy works.",
         "shape": "landscape",
         "columns": 3,
         "play_label": "Play video",
@@ -1681,7 +1673,7 @@
           "settings": {
             "icon": "shield",
             "art": "none",
-            "title": "How MARCEL OMR Therapy™ Works",
+            "title": "How MARCEL OMR Therapy Works",
             "text": "The four pillars, the daily routine, mouth exercises and guided progress reviews.",
             "link_label": "See how the therapy works",
             "link_to": "therapy",
@@ -1809,8 +1801,8 @@
         "question_2": {
           "type": "question",
           "settings": {
-            "question": "What is MARCEL OMR Therapy™?",
-            "answer": "<p>MARCEL OMR Therapy™ is a structured approach to oral mucosal care, designed around a planned care journey rather than using products at random. The appropriate care plan depends on the person’s needs and the approved instructions for each product.</p>"
+            "question": "What is MARCEL OMR Therapy?",
+            "answer": "<p>MARCEL OMR Therapy is a structured approach to oral mucosal care, designed around a planned care journey rather than using products at random. The appropriate care plan depends on the person’s needs and the approved instructions for each product.</p>"
           }
         },
         "question_3": {
@@ -1889,7 +1881,7 @@
         "anchor": "",
         "eyebrow": "Have questions?",
         "heading": "Our MARCEL OSMF Consultants Are Here to Help.",
-        "text": "Get personalised guidance about your symptoms, MARCEL OMR Therapy™ journey and progress. For an examination, find an OSMF Specialist Doctor.",
+        "text": "Get personalised guidance about your symptoms, MARCEL OMR Therapy journey and progress. For an examination, find an OSMF Specialist Doctor.",
         "center": false,
         "note": "The MARCEL OSMF Consultant gives programme information and next-step guidance. Diagnosis, staging and treatment decisions are made by a qualified healthcare professional.",
         "background": "navy",

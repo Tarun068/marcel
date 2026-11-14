@@ -11,8 +11,42 @@
   <div class="mt-wrap">
     <div class="mt-foot-grid" style="--mt-foot-cols: {{ section.blocks.size | at_least: 1 }};">
       <div class="mt-foot-brand">
-        <a class="mt-foot-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
-          {%- render 'mt-logo', image: section.settings.logo, light: true, tagline: true, sizes: '200px' -%}
+        {%- liquid
+          # Same trims as the header: cut the empty canvas around the logo so the drawing itself fills the height.
+          assign foot_logo = section.settings.logo
+          assign foot_h = section.settings.logo_height | default: 112
+          assign f_left = 0
+          assign f_top = 0
+          assign f_width = 0
+          assign f_height = 0
+          assign foot_sizes = '200px'
+          if foot_logo != blank
+            assign foot_ratio = foot_logo.aspect_ratio
+            assign t_top = section.settings.logo_trim_top | default: 0
+            assign t_right = section.settings.logo_trim_right | default: 0
+            assign t_bottom = section.settings.logo_trim_bottom | default: 0
+            assign t_left = section.settings.logo_trim_left | default: 0
+            assign keep_w = 100 | minus: t_left | minus: t_right
+            assign keep_h = 100 | minus: t_top | minus: t_bottom
+            assign trim_total = t_top | plus: t_right | plus: t_bottom | plus: t_left
+            if trim_total > 0 and keep_w > 0 and keep_h > 0
+              assign f_left = foot_logo.width | times: t_left | divided_by: 100
+              assign f_top = foot_logo.height | times: t_top | divided_by: 100
+              assign f_width = foot_logo.width | times: keep_w | divided_by: 100
+              assign f_height = foot_logo.height | times: keep_h | divided_by: 100
+              assign foot_ratio = f_width | times: 1.0 | divided_by: f_height
+            endif
+            assign foot_w = foot_h | times: foot_ratio | ceil
+            assign foot_sizes = foot_w | append: 'px'
+          endif
+        -%}
+        <a
+          class="mt-foot-logo{% if section.settings.logo_white %} mt-foot-logo--white{% endif %}"
+          href="{{ routes.root_url }}"
+          aria-label="{{ shop.name | escape }}"
+          style="--mt-foot-logo-h: {{ foot_h }}px;"
+        >
+          {%- render 'mt-logo', image: foot_logo, light: true, tagline: true, sizes: foot_sizes, crop_left: f_left, crop_top: f_top, crop_width: f_width, crop_height: f_height -%}
         </a>
         {%- if section.settings.description != blank -%}
           <p>{{ section.settings.description | escape | newline_to_br }}</p>
@@ -49,7 +83,7 @@
           {%- case block.type -%}
             {%- when 'menu' -%}
               {%- for link in block.settings.menu.links -%}
-                <a href="{{ link.url }}">{{ link.title | escape }}</a>
+                <a href="{{ link.url }}">{{ link.title | remove: '™' | escape }}</a>
               {%- endfor -%}
             {%- when 'policies' -%}
               {%- for policy in shop.policies -%}
@@ -57,7 +91,7 @@
               {%- endfor -%}
               {%- if block.settings.menu != blank -%}
                 {%- for link in block.settings.menu.links -%}
-                  <a href="{{ link.url }}">{{ link.title | escape }}</a>
+                  <a href="{{ link.url }}">{{ link.title | remove: '™' | escape }}</a>
                 {%- endfor -%}
               {%- endif -%}
           {%- endcase -%}
@@ -118,8 +152,69 @@
     {
       "type": "image_picker",
       "id": "logo",
-      "label": "Logo image for dark background",
+      "label": "Logo image",
       "info": "Leave empty to use the white Marcel mark with the logo text."
+    },
+    {
+      "type": "checkbox",
+      "id": "logo_white",
+      "label": "Show the logo in white",
+      "info": "The footer is dark, so a coloured logo turns white to stay visible.",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo height",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 112
+    },
+    {
+      "type": "paragraph",
+      "content": "Trim the empty space built into the logo file, so the logo itself fills the height above. The image is cropped by Shopify; the file is not changed."
+    },
+    {
+      "type": "range",
+      "id": "logo_trim_top",
+      "label": "Trim top",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "logo_trim_bottom",
+      "label": "Trim bottom",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "logo_trim_left",
+      "label": "Trim left",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "logo_trim_right",
+      "label": "Trim right",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "%",
+      "default": 0
     },
     {
       "type": "textarea",
@@ -144,7 +239,7 @@
       "type": "richtext",
       "id": "disclaimer",
       "label": "Disclaimer",
-      "default": "<p>This website provides general information and is not a substitute for an examination or advice from a qualified healthcare professional. MARCEL OMR Therapy™ does not guarantee a cure or reversal of OSMF. The MARCEL OSMF Self-Check is preliminary and cannot diagnose OSMF. Please seek prompt professional assessment for persistent or worsening symptoms or any unusual oral change.</p>"
+      "default": "<p>This website provides general information and is not a substitute for an examination or advice from a qualified healthcare professional. MARCEL OMR Therapy does not guarantee a cure or reversal of OSMF. The MARCEL OSMF Self-Check is preliminary and cannot diagnose OSMF. Please seek prompt professional assessment for persistent or worsening symptoms or any unusual oral change.</p>"
     },
     {
       "type": "header",
@@ -161,7 +256,7 @@
       "type": "textarea",
       "id": "ai_prompt",
       "label": "Question sent to the AI",
-      "default": "Summarise what MARCEL OMR Therapy™ (marceltherapy.com) is, who it is for, and how its OSMF Self-Check, MARCEL OSMF Consultant and OSMF Specialist support work."
+      "default": "Summarise what MARCEL OMR Therapy (marceltherapy.com) is, who it is for, and how its OSMF Self-Check, MARCEL OSMF Consultant and OSMF Specialist support work."
     },
     {
       "type": "text",
@@ -175,7 +270,7 @@
       "id": "copyright",
       "label": "Copyright text",
       "info": "[year] is replaced with the current year.",
-      "default": "© [year] MARCEL OMR Therapy™ by JanSuta Pharmaceuticals. MARCEL® is a registered trademark of JanSuta Pharmaceuticals."
+      "default": "© [year] MARCEL OMR Therapy by JanSuta Pharmaceuticals. MARCEL® is a registered trademark of JanSuta Pharmaceuticals."
     },
     {
       "type": "text",

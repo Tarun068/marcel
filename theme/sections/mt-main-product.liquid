@@ -47,10 +47,22 @@
   if is_kit or mf.ingredients.value.size > 0 or mf.free_from.value.size > 0
     assign has_ing = true
   endif
+  # Navy hero style (client design 2026-11-14): copy and buying on the left, pictures on the right, on a navy
+  # gradient. It leaves out the info slides, key features and details list; the sections below carry that content.
+  assign hero = false
+  assign sec_extra = 'mt-pdp-sec'
+  if section.settings.style == 'hero'
+    assign hero = true
+    assign sec_extra = 'mt-pdp-sec mt-pdp-sec--hero'
+    assign has_how = false
+    assign has_ing = false
+  endif
+  assign badge = section.settings.badge | default: eyebrow
 -%}
 
-<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-pdp-sec' %}">
+<section class="{% render 'mt-section-class', s: section.settings, extra: sec_extra %}">
   <div class="mt-wrap">
+    {%- unless hero -%}
     <nav class="mt-crumbs" aria-label="Breadcrumb">
       <a href="{{ routes.root_url }}">{{ section.settings.home_label | escape }}</a>
       {%- render 'mt-icon', icon: 'chevron-right' -%}
@@ -58,8 +70,9 @@
       {%- render 'mt-icon', icon: 'chevron-right' -%}
       <span aria-current="page">{{ product.title | escape }}</span>
     </nav>
+    {%- endunless -%}
 
-    <div class="mt-pdp" style="--pc: {{ color }};">
+    <div class="mt-pdp{% if hero %} mt-pdp--hero{% endif %}" style="--pc: {{ color }};">
       {%- liquid
         # Slides: every product picture (or the pack art), then the How to use and Ingredients slides.
         assign slide_total = product.media.size | at_least: 1
@@ -84,7 +97,7 @@
       -%}
       <mt-gallery class="mt-gallery"{% if start_slide != blank and start_slide != 'm0' %} data-start="{{ start_slide }}"{% endif %}>
         <div class="mt-gmain">
-          {%- if role != blank -%}
+          {%- if role != blank and hero == false -%}
             <span class="mt-role{% unless is_kit or mf.step.value != blank %} mt-role--plain{% endunless %}">
               {%- if is_kit -%}<i>{%- render 'mt-icon', icon: 'sparkle' -%}</i>{%- elsif mf.step.value != blank -%}<i>{{ mf.step.value | escape }}</i>{%- endif -%}
               {{- role | escape -}}
@@ -164,6 +177,16 @@
           {%- endif -%}
           </div>
 
+          {%- if hero and section.settings.image_chips -%}
+            <div class="mt-gchips" aria-hidden="true">
+              {%- if badge != blank -%}<span class="mt-gchip mt-gchip--tl">{{ badge | escape }}</span>{%- endif -%}
+              {%- if section.settings.pack_size != blank -%}<span class="mt-gchip mt-gchip--r">{{ section.settings.pack_size | escape }}</span>{%- endif -%}
+              {%- if product.has_only_default_variant and settings.mt_hide_prices != true -%}
+                <span class="mt-gchip mt-gchip--bl">{{ section.settings.mrp_label | escape }} {{ variant.price | money_without_trailing_zeros }}</span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
           {%- if slide_total > 1 -%}
             <button type="button" class="mt-garrow mt-garrow--prev" data-dir="-1" aria-label="{{ section.settings.prev_label | escape }}" disabled>
               {%- render 'mt-icon', icon: 'chevron-left' -%}
@@ -211,14 +234,20 @@
 
       <div class="mt-pdp-info">
         <div class="mt-stack-sm">
-          {%- if eyebrow != blank -%}<span class="mt-eyebrow mt-pdp-eyebrow">{{ eyebrow | escape }}</span>{%- endif -%}
-          <h1 class="mt-pdp-title">{{ product.title | escape }}</h1>
+          {%- if hero -%}
+            {%- if badge != blank -%}<span class="mt-pdh-badge">{{ badge | escape }}</span>{%- endif -%}
+            <h1 class="mt-pdp-title">{{ section.settings.hero_title | default: product.title | escape }}</h1>
+          {%- else -%}
+            {%- if eyebrow != blank -%}<span class="mt-eyebrow mt-pdp-eyebrow">{{ eyebrow | escape }}</span>{%- endif -%}
+            <h1 class="mt-pdp-title">{{ product.title | escape }}</h1>
+          {%- endif -%}
           {%- assign sub = section.settings.supporting | default: mf.tagline.value -%}
           {%- if sub != blank -%}<p class="mt-pdp-sub">{{ sub | escape }}</p>{%- endif -%}
         </div>
         {%- if section.settings.intro != blank -%}<div class="mt-rte mt-pdp-intro">{{ section.settings.intro }}</div>{%- endif -%}
         {%- if section.settings.details != blank -%}<p class="mt-pdp-details">{{ section.settings.details | escape }}</p>{%- endif -%}
 
+        {%- unless hero -%}
         {%- if mf.specs.value.size > 0 -%}
           <div class="mt-spec-chips">
             {%- for spec in mf.specs.value -%}<span class="mt-chip">{{ spec | escape }}</span>{%- endfor -%}
@@ -245,14 +274,24 @@
             {%- endfor -%}
           </div>
         {%- endif -%}
+        {%- endunless -%}
 
         <div class="mt-buy-box">
+          {%- if hero -%}
+            <div class="mt-pdh-specs">
+              {%- if section.settings.pack_size != blank -%}
+                <div class="mt-pdh-spec"><small>{{ section.settings.pack_size_label | escape }}</small><b>{{ section.settings.pack_size | escape }}</b></div>
+              {%- endif -%}
+              <div class="mt-pdh-spec"><small>{{ section.settings.mrp_label | escape }}</small>{%- render 'mt-price', product: product, variant: variant -%}</div>
+            </div>
+          {%- else -%}
           <div class="mt-buy-top">
             {%- render 'mt-price', product: product, variant: variant -%}
             {%- if mf.best_for.value != blank -%}
               <span class="mt-best">{%- render 'mt-icon', icon: 'target' -%}{{ section.settings.best_prefix | escape }} {{ mf.best_for.value | escape }}</span>
             {%- endif -%}
           </div>
+          {%- endif -%}
 
           {%- unless product.has_only_default_variant -%}
             <mt-variant-select class="mt-field" data-form="{{ form_id }}" data-add-label="{{ section.settings.add_label | escape }}" data-sold-label="{{ section.settings.sold_out_label | escape }}"{% if settings.mt_hide_prices %} data-hide-price{% endif %}>
@@ -345,7 +384,7 @@
 
         {%- comment -%} Key features: the "Feature" blocks (block type perk), shown under the buy box. {%- endcomment -%}
         {%- assign perks = section.blocks | where: 'type', 'perk' -%}
-        {%- if perks.size > 0 -%}
+        {%- if perks.size > 0 and hero == false -%}
           <div class="mt-features">
             {%- if section.settings.features_heading != blank -%}
               <p class="mt-mini-h">{{ section.settings.features_heading | escape }}</p>
@@ -364,12 +403,25 @@
         {%- if section.settings.cta_label != blank or section.settings.cta2_label != blank -%}
           {%- capture cta_href -%}{% render 'mt-link-to', key: section.settings.cta_to, url: section.settings.cta_link %}{%- endcapture -%}
           {%- capture cta2_href -%}{% render 'mt-link-to', key: section.settings.cta2_to, url: section.settings.cta2_link %}{%- endcapture -%}
+          {%- if hero -%}
+            <div class="mt-pdh-ctas">
+              {%- if section.settings.cta_label != blank -%}
+                <a class="mt-btn mt-btn-outline-light mt-btn-block" href="{{ cta_href }}"{% if section.settings.cta_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
+                  {%- if section.settings.cta_to == 'whatsapp' -%}{%- render 'mt-icon', icon: 'whatsapp' -%}{%- endif -%}
+                  {{- section.settings.cta_label | escape -}}
+                </a>
+              {%- endif -%}
+              {%- if section.settings.cta2_label != blank -%}<a class="mt-pdh-link" href="{{ cta2_href }}">{{ section.settings.cta2_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>{%- endif -%}
+            </div>
+          {%- else -%}
           <div class="mt-btn-row mt-pdp-ctas">
             {%- if section.settings.cta_label != blank -%}<a class="mt-btn mt-btn-secondary" href="{{ cta_href }}">{{ section.settings.cta_label | escape }}</a>{%- endif -%}
             {%- if section.settings.cta2_label != blank -%}<a class="mt-link" href="{{ cta2_href }}">{{ section.settings.cta2_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>{%- endif -%}
           </div>
+          {%- endif -%}
         {%- endif -%}
 
+        {%- unless hero -%}
         <mt-accordion class="mt-acc" data-single="false">
           {%- liquid
             assign acc_open = true
@@ -445,11 +497,12 @@
             {%- endif -%}
           {%- endfor -%}
         </mt-accordion>
+        {%- endunless -%}
       </div>
     </div>
   </div>
   <script type="application/ld+json">
-    {{ product | structured_data }}
+    {{ product | structured_data | remove: '™' }}
   </script>
 </section>
 
@@ -463,6 +516,63 @@
     ]
   },
   "settings": [
+    {
+      "type": "header",
+      "content": "Page style"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Page style",
+      "options": [
+        {
+          "value": "classic",
+          "label": "Classic"
+        },
+        {
+          "value": "hero",
+          "label": "Navy hero"
+        }
+      ],
+      "default": "classic",
+      "info": "Navy hero: copy and buying on the left, pictures on the right, on a navy background. It leaves out key features and the details list, so add the product page sections below it for that content."
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero title",
+      "info": "Navy hero. Leave empty to use the product title."
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge",
+      "info": "Navy hero, for example Stage 3 & Stage 4 OSMF. Leave empty to use the headline."
+    },
+    {
+      "type": "text",
+      "id": "pack_size",
+      "label": "Pack size",
+      "info": "Navy hero, for example 10 mL."
+    },
+    {
+      "type": "text",
+      "id": "pack_size_label",
+      "label": "Pack size label",
+      "default": "Pack Size"
+    },
+    {
+      "type": "text",
+      "id": "mrp_label",
+      "label": "Price label",
+      "default": "MRP"
+    },
+    {
+      "type": "checkbox",
+      "id": "image_chips",
+      "label": "Show badge, pack size and price on the picture",
+      "default": true
+    },
     {
       "type": "paragraph",
       "content": "Pack details come from the product’s ‘marcel’ metafields: role, step, colour, tagline, specs, benefits, how to use, ingredients, caution, storage, stage text and kit items."
@@ -583,7 +693,7 @@
       "type": "text",
       "id": "cta2_label",
       "label": "Text link",
-      "info": "e.g. Explore the MARCEL OMR Therapy™ Foundation Kit"
+      "info": "e.g. Explore the MARCEL OMR Therapy Foundation Kit"
     },
     {
       "type": "select",
@@ -796,7 +906,7 @@
       "id": "add_label",
       "label": "Add to cart label",
       "default": "Add to cart",
-      "info": "[price] is replaced by the price, e.g. Buy MARCEL Ora-Care™ for [price]."
+      "info": "[price] is replaced by the price, e.g. Buy MARCEL Ora-Care for [price]."
     },
     {
       "type": "text",

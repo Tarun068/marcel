@@ -1,0 +1,83 @@
+/* ==========================================================================
+   Product page sections from the client design (2026-11-14): the symptoms promo card (mt-promo-card), how to
+   use steps (mt-use-steps) and the product information table (mt-spec-table), plus the line illustrations
+   (snippets/mt-pd-art). Headings are bold sans in the brand blue.
+   ========================================================================== */
+
+/* ---------- Illustrations ---------- */
+.mt-art { display: block; width: 100%; height: 100%; color: var(--mt-blue); fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.mt-art .a { fill: var(--mt-aqua); stroke: none; }
+.mt-art .w { fill: color-mix(in srgb, var(--mt-aqua) 22%, #fff); stroke: none; }
+.mt-art--symptoms { color: #fff; stroke-width: 4; }
+
+/* ---------- Promo card ---------- */
+/* "Overlap" pulls the card up over the section above (the navy product hero); the top of this section stays see-through. */
+.mt-section.mt-promo-sec--overlap { --ov: clamp(64px, 7vw, 96px); position: relative; z-index: 2; margin-top: calc(-1 * var(--ov)); padding-top: 0; background: linear-gradient(to bottom, transparent var(--ov), var(--mt-section-bg, var(--mt-paper)) var(--ov)); }
+.mt-promo { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); border-radius: 24px; overflow: hidden; background: var(--mt-paper); box-shadow: 0 34px 70px -40px rgba(8, 22, 58, .5), 0 0 0 1px rgba(31, 62, 136, .07); }
+.mt-promo--solo { grid-template-columns: minmax(0, 1fr); }
+.mt-promo-copy { display: grid; gap: 14px; align-content: center; justify-items: start; padding: clamp(28px, 4.5vw, 56px); }
+.mt .mt-promo-h { color: var(--mt-blue); font-family: var(--mt-font); font-size: clamp(24px, 2.4vw, 30px); font-weight: 800; line-height: 1.2; letter-spacing: -.02em; }
+.mt-promo-copy p { max-width: 46ch; color: var(--mt-ink-2); font-size: var(--mt-fs-body); line-height: 1.6; }
+.mt .mt-promo-btn { margin-top: 6px; background: var(--mt-blue); color: var(--mt-on-dark); }
+.mt .mt-promo-btn:hover { background: color-mix(in srgb, var(--mt-blue) 80%, #000); }
+.mt-promo-art { display: grid; place-items: center; min-height: 230px; padding: 20px; background: radial-gradient(60% 70% at 50% 50%, rgba(255, 255, 255, .12), rgba(255, 255, 255, 0) 70%), linear-gradient(135deg, var(--mt-blue), #2F74BE); }
+.mt-promo-art .mt-art { width: min(300px, 90%); height: auto; }
+@media (max-width: 760px) {
+  .mt-promo { grid-template-columns: minmax(0, 1fr); }
+  .mt-promo-art { min-height: 170px; }
+  .mt-promo-art .mt-art { width: 220px; }
+}
+
+/* ---------- How to use ---------- */
+/* Numbered circles on a dotted line above the cards; each card has an illustration in a soft circle. In the step
+   text, bold marks amounts and times (blue, underlined) and italic marks warnings (red, underlined). */
+.mt-usesteps { --n: 4; position: relative; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 24px); margin-top: 6px; }
+.mt-usesteps::before { content: ""; position: absolute; top: 18px; left: calc(100% / var(--n) / 2); right: calc(100% / var(--n) / 2); border-top: 2px dotted color-mix(in srgb, var(--mt-blue) 38%, transparent); }
+.mt-usestep { display: grid; grid-template-rows: auto 1fr; justify-items: center; gap: 18px; min-width: 0; }
+.mt-usestep-n { position: relative; z-index: 1; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: var(--mt-blue); color: var(--mt-on-dark); font-size: 15px; font-weight: 800; box-shadow: 0 0 0 6px color-mix(in srgb, var(--mt-blue) 14%, #fff); }
+.mt-usestep-card { display: grid; justify-items: center; align-content: start; gap: 10px; width: 100%; padding: 26px 20px 28px; border-radius: 20px; background: var(--mt-paper); box-shadow: 0 22px 44px -32px rgba(8, 22, 58, .45), 0 0 0 1px rgba(31, 62, 136, .05); text-align: center; }
+.mt-usestep-art { display: grid; place-items: center; width: 132px; height: 132px; margin-bottom: 6px; border-radius: 50%; background: color-mix(in srgb, var(--mt-blue) 8%, #fff); }
+.mt-usestep-art .mt-art { width: 84px; height: 84px; }
+.mt .mt-usestep-card h3 { color: var(--mt-ink); font-family: var(--mt-font); font-size: 19px; font-weight: 800; line-height: 1.3; }
+.mt-usestep-card p { color: var(--mt-ink-2); font-size: 15px; line-height: 1.6; }
+.mt-usestep-card strong { color: var(--mt-blue); font-weight: 800; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.mt-usestep-card em { color: #C62828; font-style: normal; font-weight: 800; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.mt-usesteps-note { margin-top: 24px; color: var(--mt-ink-2); font-size: 15px; text-align: center; }
+.mt-usesteps-note strong { color: var(--mt-ink); }
+@media (max-width: 960px) {
+  .mt-usesteps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
+  .mt-usesteps::before { display: none; }
+}
+/* Phones: one card per row, illustration on the left, the number on its corner. */
+@media (max-width: 520px) {
+  .mt-usesteps { grid-template-columns: minmax(0, 1fr); row-gap: 12px; }
+  .mt-usestep { position: relative; display: block; }
+  .mt-usestep-n { position: absolute; top: 12px; left: 12px; z-index: 2; width: 30px; height: 30px; font-size: 13px; box-shadow: 0 0 0 4px #fff; }
+  .mt-usestep-card { grid-template-columns: 84px minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: 16px; row-gap: 4px; justify-items: start; align-items: start; padding: 18px; text-align: left; }
+  .mt-usestep-art { grid-row: 1 / span 2; width: 84px; height: 84px; margin: 0; }
+  .mt-usestep-art .mt-art { width: 54px; height: 54px; }
+  .mt .mt-usestep-card h3 { font-size: 18px; }
+}
+
+/* ---------- Product information ---------- */
+.mt-spec { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: clamp(24px, 4vw, 48px); align-items: stretch; }
+.mt-spec--solo { grid-template-columns: minmax(0, 1fr); max-width: 900px; }
+/* The product photo has a white background, so it sits inside a white disc on the tinted card. */
+.mt-spec-media { display: grid; place-items: center; min-height: 360px; padding: clamp(20px, 3vw, 36px); border-radius: 24px; background: color-mix(in srgb, var(--mt-blue) 7%, #fff); }
+.mt-spec-disc { display: grid; place-items: center; width: 100%; max-width: 380px; aspect-ratio: 1; border-radius: 50%; background: #fff; overflow: hidden; box-shadow: 0 20px 40px -30px rgba(8, 22, 58, .4); }
+.mt-spec-disc img { width: 74%; height: 74%; object-fit: contain; }
+.mt-spec-wrap { align-self: start; overflow: hidden; border-radius: 20px; background: var(--mt-paper); box-shadow: 0 24px 50px -36px rgba(8, 22, 58, .45), 0 0 0 1px var(--mt-line); }
+.mt-spec-table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; }
+.mt-spec-table thead th { padding: 16px 22px; background: linear-gradient(90deg, color-mix(in srgb, var(--mt-blue) 72%, #04112e), var(--mt-blue)); color: var(--mt-on-dark); font-size: 14px; font-weight: 700; text-align: left; }
+.mt-spec-table tbody th, .mt-spec-table tbody td { padding: 15px 22px; border-top: 1px solid var(--mt-line); text-align: left; vertical-align: top; }
+.mt-spec-table tbody tr:first-child > * { border-top: 0; }
+.mt-spec-table tbody th { width: 42%; background: color-mix(in srgb, var(--mt-blue) 4%, #fff); color: var(--mt-ink); font-weight: 700; }
+.mt-spec-table tbody td { color: var(--mt-ink-2); }
+@media (max-width: 900px) {
+  .mt-spec { grid-template-columns: minmax(0, 1fr); }
+  .mt-spec-media { min-height: 0; width: 100%; max-width: 440px; justify-self: center; }
+}
+@media (max-width: 520px) {
+  .mt-spec-table thead th, .mt-spec-table tbody th, .mt-spec-table tbody td { padding: 12px 14px; }
+  .mt-spec-table { font-size: 14.5px; }
+}

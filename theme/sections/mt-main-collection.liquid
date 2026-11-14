@@ -7,6 +7,14 @@
   assign test_link = section.settings.promo_link | default: settings.mt_link_test | default: routes.root_url
   assign label_lines = section.settings.type_labels | newline_to_br | split: '<br />'
   assign card_sizes = '(min-width: 1440px) 450px, (min-width: 961px) 31vw, (min-width: 761px) 46vw, 92vw'
+  assign compact_cards = false
+  if section.settings.card_style == 'compact'
+    assign compact_cards = true
+  endif
+  assign grid_cols = section.settings.columns | default: '4'
+  if grid_cols == '4'
+    assign card_sizes = '(min-width: 1440px) 340px, (min-width: 1100px) 23vw, (min-width: 961px) 31vw, (min-width: 761px) 46vw, 92vw'
+  endif
   assign hidden_count = 0
   for p in collection.products
     if p.tags contains 'mt-hidden'
@@ -49,7 +57,7 @@
           </span>
         </div>
 
-        <div class="mt-pgrid">
+        <div class="mt-pgrid mt-pgrid--cols-{{ grid_cols }}">
           {%- for product in collection.products -%}
             {%- if product.tags contains 'mt-hidden' -%}{%- continue -%}{%- endif -%}
             <div class="mt-filter-item" data-type="{{ product.type | handleize }}">
@@ -60,7 +68,8 @@
                 details_label: section.settings.details_label,
                 sold_out_label: section.settings.sold_out_label,
                 image_fit: section.settings.image_fit,
-                sizes: card_sizes
+                sizes: card_sizes,
+                compact: compact_cards
               -%}
             </div>
           {%- else -%}
@@ -196,6 +205,39 @@
         }
       ],
       "default": "cover"
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "options": [
+        {
+          "value": "compact",
+          "label": "Compact, as on the home page"
+        },
+        {
+          "value": "detailed",
+          "label": "Detailed"
+        }
+      ],
+      "default": "compact",
+      "info": "Compact cards have a shorter 4:3 picture and keep the price and Add to cart on one row."
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Cards per row on desktop",
+      "options": [
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ],
+      "default": "4"
     },
     {
       "type": "text",

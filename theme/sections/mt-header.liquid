@@ -31,7 +31,14 @@
     assign logo_w = section.settings.logo_height | times: logo_ratio | ceil
     assign logo_sizes = logo_w | append: 'px'
   endif
+  # The header bar grows with the logo (6 px above and below), so a tall stacked logo is never squeezed.
+  assign header_h = section.settings.logo_height | plus: 12 | at_least: 72
+  assign header_h_mobile = section.settings.logo_height_mobile | plus: 12 | at_least: 64
 -%}
+<style>
+  :root { --mt-header-h: {{ header_h }}px; }
+  @media (max-width: 760px) { :root { --mt-header-h: {{ header_h_mobile }}px; } }
+</style>
 {%- capture wa_url -%}{% render 'mt-wa-url' %}{%- endcapture -%}
 
 <mt-header
@@ -57,14 +64,13 @@
                 aria-current="page"
               {% endif %}
             >
-              {{- link.title | escape -}}
+              {{- link.title | remove: '™' | escape -}}
             </a>
           {%- endfor -%}
         </nav>
       {%- endif -%}
 
       <div class="mt-head-actions">
-        {%- render 'mt-lang-switch', place: 'head', id: 'MtLangHead' -%}
         {%- if section.settings.show_whatsapp and settings.mt_whatsapp_number != blank -%}
           <a class="mt-icon-btn mt-head-wa" href="{{ wa_url }}" target="_blank" rel="noopener" aria-label="{{ section.settings.whatsapp_label | escape }}">
             {%- render 'mt-icon', icon: 'whatsapp' -%}
@@ -93,6 +99,7 @@
             {{- section.settings.cta_label | escape -}}
           </a>
         {%- endif -%}
+        {%- render 'mt-lang-switch', place: 'head', id: 'MtLangHead' -%}
         <button
           type="button"
           class="mt-icon-btn mt-menu-btn"
@@ -141,7 +148,7 @@
                 aria-current="page"
               {% endif %}
             >
-              {{- link.title | escape -}}
+              {{- link.title | remove: '™' | escape -}}
               {%- render 'mt-icon', icon: 'chevron-right' -%}
             </a>
             {%- for child in link.links -%}
@@ -247,7 +254,7 @@
                     {%- endif -%}
                   </span>
                   <span>
-                    <b>{{ link.title | escape }}</b>
+                    <b>{{ link.title | remove: '™' | escape }}</b>
                   </span>
                   <span class="mt-sr-type">{{ type_label }}</span>
                 </a>
@@ -286,7 +293,7 @@
       "id": "logo_height",
       "label": "Logo height on desktop",
       "min": 28,
-      "max": 72,
+      "max": 120,
       "step": 2,
       "unit": "px",
       "default": 48
@@ -296,7 +303,7 @@
       "id": "logo_height_mobile",
       "label": "Logo height on mobile",
       "min": 24,
-      "max": 60,
+      "max": 80,
       "step": 2,
       "unit": "px",
       "default": 40

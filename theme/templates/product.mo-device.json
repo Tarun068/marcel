@@ -65,16 +65,16 @@
       ],
       "settings": {
         "headline": "Mouth-opening support device",
-        "supporting": "Gentle and gradual, never forced.",
-        "intro": "<h3>Support your mouth-opening exercises with guided movement</h3><p>MARCEL® MOFlex Device is a mouth-opening support tool designed to support guided, gradual mouth-opening exercises as part of a structured rehabilitation routine for selected individuals experiencing restricted mouth opening.</p><p>It is an optional support tool, not a standalone solution, and should be used according to appropriate professional guidance.</p>",
-        "details": "MRP per piece, inclusive of all taxes",
+        "supporting": "Mouth Opening Support Device",
+        "intro": "<p><strong>Support your mouth opening exercises with guided movement.</strong></p><p>MARCEL® MOFlex is a mouth opening support tool designed to support guided, gradual mouth opening exercises as part of a structured rehabilitation routine for selected individuals experiencing restricted mouth opening. It is an optional support tool, not a standalone solution, and should be used according to appropriate professional guidance.</p>",
+        "details": "",
         "how_lines": "",
         "safety": "",
-        "cta_label": "",
-        "cta_to": "consult",
+        "cta_label": "WhatsApp MARCEL Team",
+        "cta_to": "whatsapp",
         "cta_link": "",
-        "cta2_label": "",
-        "cta2_to": "custom",
+        "cta2_label": "Explore MARCEL OMR Therapy Advance Kit",
+        "cta2_to": "advance",
         "cta2_link": "#how-it-works",
         "shop_link": "",
         "home_label": "Home",
@@ -102,7 +102,7 @@
         "variant_style": "cards",
         "pack_label": "Pack size",
         "pack_notes": "",
-        "show_buy_now": true,
+        "show_buy_now": false,
         "features_heading": "Key Features",
         "qty_label": "Quantity",
         "minus_label": "Decrease quantity",
@@ -119,11 +119,19 @@
         "acc_about": "About this product",
         "background": "paper",
         "sheet": false,
-        "spacing": "tight"
+        "spacing": "tight",
+        "style": "hero",
+        "pack_size_label": "Pack Size",
+        "mrp_label": "MRP",
+        "image_chips": true,
+        "hero_title": "MARCEL® MOFlex",
+        "badge": "Gentle. Gradual. Guided.",
+        "pack_size": "1 piece"
       }
     },
     "use": {
       "type": "mt-media-text",
+      "disabled": true,
       "settings": {
         "art": "device",
         "media_side": "left",
@@ -212,13 +220,13 @@
         "text_4": {
           "type": "text",
           "settings": {
-            "text": "<p>The MARCEL® MOFlex Device may be considered as an optional adjunct for selected individuals who need additional support with mouth-opening exercises. It is intended to support functional rehabilitation as part of a broader care plan. It does not replace:</p><ul><li>Professional assessment or personalised clinical advice</li><li>The broader care plan recommended for you</li><li>Mouth-opening exercises and follow-up guidance</li></ul><p>It is associated with the functional-rehabilitation component of the MARCEL OMR Therapy™ Advance Kit programme, where appropriate. It is not required by every patient.</p>"
+            "text": "<p>The MARCEL® MOFlex Device may be considered as an optional adjunct for selected individuals who need additional support with mouth-opening exercises. It is intended to support functional rehabilitation as part of a broader care plan. It does not replace:</p><ul><li>Professional assessment or personalised clinical advice</li><li>The broader care plan recommended for you</li><li>Mouth-opening exercises and follow-up guidance</li></ul><p>It is associated with the functional-rehabilitation component of the MARCEL OMR Therapy Advance Kit programme, where appropriate. It is not required by every patient.</p>"
           }
         },
         "link_2": {
           "type": "link",
           "settings": {
-            "label": "Explore MARCEL OMR Therapy™ Advance Kit",
+            "label": "Explore MARCEL OMR Therapy Advance Kit",
             "url": "/pages/advance-kit"
           }
         },
@@ -333,6 +341,7 @@
     },
     "support": {
       "type": "mt-support",
+      "disabled": true,
       "blocks": {
         "route_1": {
           "type": "route",
@@ -342,7 +351,7 @@
             "title": "MARCEL OSMF Consultant",
             "subtitle": "On-call, remote consultation",
             "text": "Discuss your concerns remotely and understand the next step.",
-            "points": "Programme information and next steps\nGuidance on the MARCEL OMR Therapy™ pathways\nHelp finding a professional assessment",
+            "points": "Programme information and next steps\nGuidance on the MARCEL OMR Therapy pathways\nHelp finding a professional assessment",
             "button_label": "Book a Consultation",
             "link_to": "consult",
             "link": "",
@@ -453,8 +462,8 @@
         "question_6": {
           "type": "question",
           "settings": {
-            "question": "Where does it fit within MARCEL OMR Therapy™?",
-            "answer": "<p>It may be used as an optional adjunct in the functional-rehabilitation component of the MARCEL OMR Therapy™ Advance Kit programme, where appropriate.</p>"
+            "question": "Where does it fit within MARCEL OMR Therapy?",
+            "answer": "<p>It may be used as an optional adjunct in the functional-rehabilitation component of the MARCEL OMR Therapy Advance Kit programme, where appropriate.</p>"
           }
         }
       },
@@ -467,20 +476,21 @@
         "question_6"
       ],
       "settings": {
-        "eyebrow": "MARCEL® MOFlex",
+        "eyebrow": "",
         "heading": "Frequently Asked Questions",
         "open_first": false,
         "one_at_a_time": false,
         "schema_markup": true,
-        "show_help": true,
+        "show_help": false,
         "help_title": "Have Questions?",
         "help_text": "Our MARCEL OSMF Consultants can help with programme questions and your next step.",
         "whatsapp_label": "WhatsApp MARCEL Team",
         "link_label": "See all FAQs",
         "link": "/pages/faq",
-        "background": "mist",
+        "background": "paper",
         "sheet": false,
-        "spacing": "normal"
+        "spacing": "normal",
+        "layout": "side"
       }
     },
     "1794375495143032e6": {
@@ -502,16 +512,254 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "promo": {
+      "type": "mt-promo-card",
+      "settings": {
+        "heading": "Experiencing OSMF symptoms?",
+        "text": "Understand the common signs, symptoms and stages of Oral Submucous Fibrosis.",
+        "button_label": "Explore OSMF Symptoms",
+        "button_to": "custom",
+        "button_link": "/pages/understand-osmf#signs",
+        "art": "symptoms",
+        "overlap": true,
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      }
+    },
+    "benefits": {
+      "type": "mt-icon-cards",
+      "blocks": {
+        "benefit_1": {
+          "type": "card",
+          "settings": {
+            "icon": "refresh",
+            "art": "none",
+            "title": "Guided Exercise Routines",
+            "highlight": false,
+            "text": "Supports guided mouth opening exercise routines as part of a structured rehabilitation routine.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "benefit_2": {
+          "type": "card",
+          "settings": {
+            "icon": "target",
+            "art": "none",
+            "title": "Gradual, Controlled Movement",
+            "highlight": false,
+            "text": "Approach movement gradually rather than forcefully. Begin with comfortable movement and progress only as advised.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "benefit_3": {
+          "type": "card",
+          "settings": {
+            "icon": "calendar",
+            "art": "none",
+            "title": "Consistency Matters",
+            "highlight": false,
+            "text": "Helps you build a regular exercise routine. Consistency matters more than intensity.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "benefit_4": {
+          "type": "card",
+          "settings": {
+            "icon": "shield",
+            "art": "none",
+            "title": "Part of a Broader Care Plan",
+            "highlight": true,
+            "text": "An optional adjunct for selected individuals. It does not replace professional assessment, your care plan or follow-up guidance.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "What It Is Designed to Support",
+        "text": "",
+        "center": false,
+        "columns": "4",
+        "media": "icon",
+        "card_style": "benefit",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "how": {
+      "type": "mt-use-steps",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Get Guidance",
+            "art": "guide",
+            "text": "Use the device only as advised by a <strong>qualified healthcare professional</strong>."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Start Gently",
+            "art": "gentle",
+            "text": "Begin with <strong>comfortable movement</strong> and progress only as advised."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Never Force",
+            "art": "exercise",
+            "text": "<em>Do not force movement or continue through pain.</em>"
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "Keep It Clean",
+            "art": "clean",
+            "text": "Clean and maintain the device according to the <strong>approved instructions</strong>."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "How to Use MARCEL® MOFlex",
+        "text": "Follow the recommended directions for use:",
+        "note": "Individual experiences and outcomes vary. Do not expect instant results, and do not force movement to reach a target.",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "info": {
+      "type": "mt-spec-table",
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Product Name",
+            "value": "MARCEL® MOFlex"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Product Category",
+            "value": "Mouth Opening Support Device"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Use",
+            "value": "Guided mouth opening exercises, as advised"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Therapy Association",
+            "value": "Optional adjunct in MARCEL OMR Therapy Advance Kit, where appropriate"
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "Suitable For",
+            "value": "Selected individuals with restricted mouth opening, based on individual assessment"
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "label": "Pack Size",
+            "value": "1 piece"
+          }
+        },
+        "row_7": {
+          "type": "row",
+          "settings": {
+            "label": "MRP",
+            "value": "[price] per piece (inclusive of all taxes)"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6",
+        "row_7"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Product Information",
+        "text": "",
+        "head_1": "Particulars",
+        "head_2": "Details",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "cta": {
+      "type": "mt-cta-band",
+      "settings": {
+        "style": "navy",
+        "eyebrow": "",
+        "heading": "Not Sure Whether Device-Assisted Exercises Are Right for You?",
+        "text": "Contact a MARCEL OSMF Consultant for programme information and next step guidance, or consult an OSMF Specialist Doctor for qualified clinical assessment.",
+        "button_1_label": "WhatsApp MARCEL Team",
+        "button_1_to": "whatsapp",
+        "button_1_link": "",
+        "button_2_label": "Book a Consultation",
+        "button_2_to": "consult",
+        "button_2_link": "",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
     }
   },
   "order": [
     "main",
     "use",
+    "promo",
+    "benefits",
+    "how",
+    "info",
     "details",
     "1794375495143032e6",
     "related",
     "support",
+    "faq",
     "disclaimer",
-    "faq"
+    "cta"
   ]
 }

@@ -1,0 +1,214 @@
+{{ 'mt-pd.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Product information from the client product page design: the product picture on the left, a two-column table on
+  the right. In a row value, [price] shows the product's current price.
+{%- endcomment -%}
+{%- liquid
+  assign spec_img = blank
+  if section.settings.show_image
+    assign spec_img = section.settings.image
+    if spec_img == blank and product != blank
+      assign spec_img = product.featured_image
+    endif
+  endif
+  assign spec_alt = spec_img.alt | default: product.title
+  assign price_text = ''
+  if product != blank
+    assign spec_variant = product.selected_or_first_available_variant
+    assign price_text = spec_variant.price | money_without_trailing_zeros
+  endif
+-%}
+
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-spec-sec' %}">
+  <div class="mt-wrap">
+    {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
+    <div class="mt-spec{% if spec_img == blank %} mt-spec--solo{% endif %}">
+      {%- if spec_img != blank -%}
+        <div class="mt-spec-media">
+          <span class="mt-spec-disc">
+            {{- spec_img | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 380px, 80vw', alt: spec_alt -}}
+          </span>
+        </div>
+      {%- endif -%}
+      {%- if section.blocks.size > 0 -%}
+        <div class="mt-spec-wrap">
+          <table class="mt-spec-table">
+            <thead>
+              <tr>
+                <th scope="col">{{ section.settings.head_1 | escape }}</th>
+                <th scope="col">{{ section.settings.head_2 | escape }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for block in section.blocks -%}
+                <tr {{ block.shopify_attributes }}>
+                  <th scope="row">{{ block.settings.label | escape }}</th>
+                  <td>{{ block.settings.value | escape | replace: '[price]', price_text }}</td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel product info",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 16,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Product Information"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "Show a picture",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Picture",
+      "info": "Leave empty to use the product's first picture."
+    },
+    {
+      "type": "text",
+      "id": "head_1",
+      "label": "First column heading",
+      "default": "Particulars"
+    },
+    {
+      "type": "text",
+      "id": "head_2",
+      "label": "Second column heading",
+      "default": "Details"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "normal"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Particular"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "info": "[price] shows the product's current price."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel product info",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "label": "Product Name",
+            "value": "Product name"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Pack Size",
+            "value": "Pack size"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "MRP",
+            "value": "[price]"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

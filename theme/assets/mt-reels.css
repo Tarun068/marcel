@@ -1,4 +1,5 @@
-/* Marcel video reels (sections/mt-reels.liquid): a snap-scrolling row of 9:16 cards and a full-screen player. */
+/* Marcel video reels (sections/mt-reels.liquid): a snap-scrolling row of 4:5 cards (short enough to fit the screen)
+   and a full-screen 9:16 player. */
 mt-reels { display: block; }
 .mt-reels { --gap: 20px; --per: var(--per-d, 3); }
 .mt-reels-nav { display: flex; gap: 10px; }
@@ -14,7 +15,7 @@ mt-reels { display: block; }
 .mt-reels-track::-webkit-scrollbar { display: none; }
 .mt-reel { min-width: 0; scroll-snap-align: start; }
 
-.mt .mt-reel-card { position: relative; display: block; width: 100%; aspect-ratio: 9 / 16; overflow: hidden; isolation: isolate; border-radius: 22px; background: var(--mt-navy); color: var(--mt-on-dark); text-align: left; box-shadow: 0 22px 44px -28px rgba(12, 42, 61, .55); transition: transform .45s cubic-bezier(.2, .7, .2, 1), box-shadow .45s; }
+.mt .mt-reel-card { position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; overflow: hidden; isolation: isolate; border-radius: 22px; background: var(--mt-navy); color: var(--mt-on-dark); text-align: left; box-shadow: 0 22px 44px -28px rgba(12, 42, 61, .55); transition: transform .45s cubic-bezier(.2, .7, .2, 1), box-shadow .45s; }
 .mt-reel-media, .mt-reel-media :is(img, video) { position: absolute; inset: 0; width: 100%; height: 100%; }
 .mt-reel-media :is(img, video) { object-fit: cover; transition: transform .8s cubic-bezier(.2, .7, .2, 1), opacity .4s; }
 .mt-reel-preview { opacity: 0; }
@@ -83,6 +84,8 @@ html:has(.mt-reel-modal[open]) { overflow: hidden; }
 }
 @media (max-width: 749px) {
   .mt-reels { --gap: 12px; --per: var(--per-m, 2); }
+  /* The next reel peeks in at the edge, so it is clear the row scrolls. */
+  .mt-reels-track { grid-auto-columns: calc((100% - var(--per) * var(--gap)) / (var(--per) + .3)); }
   .mt-reels-nav { display: none; }
   .mt .mt-reel-card { border-radius: 16px; }
   .mt-reel-play { width: 48px; height: 48px; margin: -24px 0 0 -24px; }

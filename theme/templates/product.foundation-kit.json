@@ -1,0 +1,461 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "mt-main-product",
+      "blocks": {
+        "feature_1": {
+          "type": "perk",
+          "settings": {
+            "icon": "target",
+            "text": "Foundation Kit for Stage 1 or 2, Advance Kit for Stage 3 or 4"
+          }
+        },
+        "feature_2": {
+          "type": "perk",
+          "settings": {
+            "icon": "check",
+            "text": "Includes MARCEL Smile Toothpaste"
+          }
+        },
+        "feature_3": {
+          "type": "perk",
+          "settings": {
+            "icon": "clock",
+            "text": "A structured daily routine"
+          }
+        },
+        "feature_4": {
+          "type": "perk",
+          "settings": {
+            "icon": "calendar",
+            "text": "Organised around a 12-week care journey"
+          }
+        },
+        "feature_5": {
+          "type": "perk",
+          "settings": {
+            "icon": "doctor",
+            "text": "Use as advised by a healthcare professional"
+          }
+        },
+        "accordion_1": {
+          "type": "accordion",
+          "settings": {
+            "title": "Delivery and returns",
+            "text": "<p>Ships across India in discreet packaging. Delivery times are shown at checkout.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4",
+        "feature_5",
+        "accordion_1"
+      ],
+      "settings": {
+        "headline": "",
+        "supporting": "MARCEL OMR Therapy",
+        "intro": "<p><strong>Build a strong foundation for OSMF care.</strong></p><p>MARCEL OMR Therapy Foundation Kit is intended for individuals assessed by a qualified healthcare professional as having Stage 1 or Stage 2 Oral Submucous Fibrosis (OSMF). It brings together key elements of a daily care routine in one structured programme.</p>",
+        "details": "",
+        "how_lines": "",
+        "safety": "",
+        "cta_label": "WhatsApp MARCEL Team",
+        "cta_to": "whatsapp",
+        "cta_link": "",
+        "cta2_label": "See the Foundation Kit routine",
+        "cta2_to": "foundation",
+        "cta2_link": "",
+        "shop_link": "",
+        "home_label": "Home",
+        "shop_label": "Products",
+        "image_fit": "cover",
+        "gallery_label": "Product images and details",
+        "thumbs_label": "Choose a picture",
+        "prev_label": "Previous picture",
+        "next_label": "Next picture",
+        "thumbs_prev_label": "Earlier pictures",
+        "thumbs_next_label": "More pictures",
+        "how_title": "How to Use",
+        "how_thumb": "How to use",
+        "routine_title": "Your Routine",
+        "routine_thumb": "Routine",
+        "ingredients_title": "Key Ingredients",
+        "ingredients_thumb": "Ingredients",
+        "free_title": "Made with Care",
+        "kit_inside_title": "What’s Inside",
+        "kit_thumb": "In the kit",
+        "kit_heading": "In This Kit",
+        "best_prefix": "Best for",
+        "add_label": "Add to cart",
+        "sold_out_label": "Sold out",
+        "variant_style": "cards",
+        "pack_label": "Pack size",
+        "pack_notes": "",
+        "show_buy_now": false,
+        "features_heading": "Key Features",
+        "qty_label": "Quantity",
+        "minus_label": "Decrease quantity",
+        "plus_label": "Increase quantity",
+        "acc_how": "How to use",
+        "acc_kit": "What’s in the kit",
+        "acc_routine": "Your daily routine",
+        "acc_ingredients": "Ingredients",
+        "acc_whats_in": "What’s in it",
+        "free_note": "Full ingredient list as printed on the pack.",
+        "acc_caution": "Caution and storage",
+        "acc_stage": "Which stage is it for?",
+        "show_description": true,
+        "acc_about": "About this product",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight",
+        "style": "hero",
+        "pack_size_label": "Kit Includes",
+        "mrp_label": "MRP",
+        "image_chips": true,
+        "hero_title": "Foundation Kit",
+        "badge": "Stage 1 & Stage 2 OSMF",
+        "pack_size": "Spray and toothpaste"
+      }
+    },
+    "related": {
+      "type": "mt-related-products",
+      "settings": {
+        "source": "metafield",
+        "intent": "related",
+        "limit": 6,
+        "eyebrow": "More from MARCEL",
+        "heading": "You May Also Like",
+        "details_label": "View product details",
+        "add_label": "Add to cart",
+        "sold_out_label": "Sold out",
+        "card_style": "compact",
+        "image_fit": "cover",
+        "layout": "carousel",
+        "per_desktop": "4",
+        "prev_label": "Previous products",
+        "next_label": "Next products",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "cta": {
+      "type": "mt-cta-band",
+      "settings": {
+        "style": "navy",
+        "eyebrow": "",
+        "heading": "Need Guidance? Talk to MARCEL Team.",
+        "text": "If you are unsure whether the Foundation Kit is appropriate for you, a MARCEL OSMF Consultant can help you understand the next steps and guide you towards suitable professional assessment.",
+        "button_1_label": "WhatsApp MARCEL Team",
+        "button_1_to": "whatsapp",
+        "button_1_link": "",
+        "button_2_label": "Book a Consultation",
+        "button_2_to": "consult",
+        "button_2_link": "",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "faq": {
+      "type": "mt-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Do I need to use every component of the recommended care plan?",
+            "answer": "<p>The components may serve different purposes, so do not assume that using one product alone will provide the same approach. Follow the care plan recommended for you and the approved instructions supplied with each product. If you are unsure what to use, ask a MARCEL OSMF Consultant before changing the plan.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "How soon will I notice a result?",
+            "answer": "<p>There is no single timeline that applies to everyone. Burning, eating comfort and mouth opening are different outcomes and may change at different rates. Follow the recommended care plan and arrange a review if progress is not as expected.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "What should I do if my symptoms are not improving?",
+            "answer": "<p>Do not increase the amount or frequency of a product on your own. Note changes in burning, eating comfort and mouth opening, then contact a MARCEL OSMF Consultant for a review. If symptoms worsen or you notice an ulcer, lump, bleeding or another unusual change, arrange an in-person assessment promptly.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "What should I do if I experience strong burning, swelling or sores after using a product?",
+            "answer": "<p>If you experience a strong or worsening reaction, stop using the product until you have received medical advice and contact a MARCEL OSMF Consultant. Seek urgent care for difficulty breathing, marked swelling or another severe reaction. Keep the product pack available so the clinician can review what you used.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use MARCEL OMR Therapy while receiving treatment from another doctor?",
+            "answer": "<p>Tell a MARCEL OSMF Consultant or your treating doctor about the medicines, procedures and oral products you are currently using. Do not stop or change prescribed treatment on your own. They can help you decide whether the approaches can be used together and whether an in-person assessment is needed.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Frequently Asked Questions",
+        "open_first": false,
+        "one_at_a_time": false,
+        "schema_markup": true,
+        "show_help": false,
+        "help_title": "Have Questions?",
+        "help_text": "Our MARCEL OSMF Consultants can help with programme questions and your next step.",
+        "whatsapp_label": "WhatsApp MARCEL Team",
+        "link_label": "See all FAQs",
+        "link": "/pages/faq",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal",
+        "layout": "side"
+      }
+    },
+    "179437565770c9ea1b": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_BmeE7x": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_BmeE7x"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "promo": {
+      "type": "mt-promo-card",
+      "settings": {
+        "heading": "Experiencing OSMF symptoms?",
+        "text": "Understand the common signs, symptoms and stages of Oral Submucous Fibrosis.",
+        "button_label": "Explore OSMF Symptoms",
+        "button_to": "custom",
+        "button_link": "/pages/understand-osmf#signs",
+        "art": "symptoms",
+        "overlap": true,
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      }
+    },
+    "benefits": {
+      "type": "mt-icon-cards",
+      "blocks": {
+        "benefit_1": {
+          "type": "card",
+          "settings": {
+            "icon": "drop",
+            "art": "none",
+            "title": "MARCEL Ora-Care Oral Spray, 50 mL",
+            "highlight": false,
+            "text": "The core therapy component of the Foundation Kit, used as part of a structured daily routine according to the approved label or the directions of your physician or MARCEL OSMF Consultant.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "benefit_2": {
+          "type": "card",
+          "settings": {
+            "icon": "sparkle",
+            "art": "none",
+            "title": "MARCEL Smile Toothpaste, 30 g",
+            "highlight": false,
+            "text": "Supports everyday oral hygiene as part of the Foundation routine. Use according to the product label and maintain regular brushing habits.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "benefit_3": {
+          "type": "card",
+          "settings": {
+            "icon": "s-open",
+            "art": "none",
+            "title": "Prescribed Mouth and Jaw Exercises",
+            "highlight": true,
+            "text": "Exercises may form part of your care routine when recommended by your healthcare professional. Do not force movements or continue through pain.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "What the Kit Includes",
+        "text": "",
+        "center": false,
+        "columns": "3",
+        "media": "icon",
+        "card_style": "benefit",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "how": {
+      "type": "mt-use-steps",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Get Assessed",
+            "art": "guide",
+            "text": "Get an appropriate <strong>professional assessment</strong> and confirm the care pathway."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Use the Spray",
+            "art": "spray",
+            "text": "Use MARCEL Ora-Care Oral Spray according to the <strong>approved label</strong> or professional advice."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Exercise",
+            "art": "exercise",
+            "text": "Perform the <strong>prescribed mouth and jaw exercises</strong> as instructed."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "Brush Daily",
+            "art": "brush",
+            "text": "Maintain daily oral hygiene with <strong>MARCEL Smile Toothpaste</strong>."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Follow Your Recommended Routine",
+        "text": "Follow the recommended directions for use:",
+        "note": "Attend follow-up appointments and report new or worsening symptoms.",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "info": {
+      "type": "mt-spec-table",
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Product Name",
+            "value": "MARCEL OMR Therapy Foundation Kit"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Kit Contents",
+            "value": "MARCEL Ora-Care Oral Spray 50 mL and MARCEL Smile Toothpaste 30 g"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Intended Stage Association",
+            "value": "Stage 1 & Stage 2 OSMF"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Also Part of the Routine",
+            "value": "Prescribed mouth and jaw exercises, and professional guidance as appropriate"
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "Care Journey",
+            "value": "12 weeks in four phases: Relief, Activation, Restoration and Reinforcement"
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "label": "MRP",
+            "value": "[price] (inclusive of all taxes)"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Product Information",
+        "text": "",
+        "head_1": "Particulars",
+        "head_2": "Details",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "promo",
+    "benefits",
+    "how",
+    "info",
+    "179437565770c9ea1b",
+    "related",
+    "faq",
+    "cta"
+  ]
+}

@@ -27,14 +27,21 @@
       "block_order": [
         "item_3"
       ],
-      "settings": {}
+      "settings": {
+        "motion": "scroll",
+        "speed": "normal"
+      }
     },
     "header": {
       "type": "mt-header",
       "settings": {
-        "logo": "shopify://shop_images/OMR_Logo_Color.png",
-        "logo_height": 72,
-        "logo_height_mobile": 52,
+        "logo": "shopify://shop_images/Updated_Logo_0ab6a006-c98e-4448-960a-6fc46aad7f96.png",
+        "logo_height": 88,
+        "logo_height_mobile": 60,
+        "logo_trim_top": 10,
+        "logo_trim_bottom": 28,
+        "logo_trim_left": 15,
+        "logo_trim_right": 12,
         "menu": "main-menu",
         "cta_label": "Book a Consultation",
         "cta_link": "",
@@ -48,11 +55,7 @@
         "drawer_cta_label": "Get Help",
         "drawer_cta_link": "",
         "show_contact": true,
-        "whatsapp_label": "WhatsApp MARCEL Team",
-        "logo_trim_top": 9,
-        "logo_trim_bottom": 15,
-        "logo_trim_left": 10,
-        "logo_trim_right": 5
+        "whatsapp_label": "WhatsApp MARCEL Team"
       }
     }
   },

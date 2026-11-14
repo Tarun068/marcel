@@ -6,15 +6,28 @@
   assign link = section.settings.link | default: routes.root_url
 -%}
 
-<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-faq' %}">
+{%- liquid
+  # Layout "side" (client product page design): the heading, and the help card when shown, sit in a column to the
+  # left of the questions.
+  assign faq_side = false
+  assign faq_extra = 'mt-faq'
+  if section.settings.layout == 'side'
+    assign faq_side = true
+    assign faq_extra = 'mt-faq mt-faq--side'
+  endif
+-%}
+<section class="{% render 'mt-section-class', s: section.settings, extra: faq_extra %}">
   <div class="mt-wrap">
+    {%- if faq_side -%}<div class="mt-faq-cols"><div class="mt-faq-left">{%- endif -%}
     {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
       <div class="mt-sec-head mt-faq-head">
         {%- if section.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
         {%- if section.settings.heading != blank -%}<h2 class="mt-h2">{{ section.settings.heading }}</h2>{%- endif -%}
       </div>
     {%- endif -%}
+    {%- unless faq_side -%}
     <div class="mt-faq-layout{% unless section.settings.show_help %} mt-faq-layout--solo{% endunless %}">
+    {%- endunless -%}
     {%- if section.settings.show_help -%}
     <div class="mt-faq-side">
         <div class="mt-help-card">
@@ -37,6 +50,7 @@
         </div>
     </div>
     {%- endif -%}
+    {%- if faq_side -%}</div>{%- endif -%}
 
     <mt-accordion class="mt-acc" data-single="{{ section.settings.one_at_a_time }}">
       {%- for block in section.blocks -%}
@@ -85,6 +99,22 @@
   },
   "max_blocks": 30,
   "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "stacked",
+          "label": "Heading above the questions"
+        },
+        {
+          "value": "side",
+          "label": "Heading beside the questions"
+        }
+      ],
+      "default": "stacked"
+    },
     {
       "type": "text",
       "id": "eyebrow",
@@ -245,8 +275,8 @@
         {
           "type": "question",
           "settings": {
-            "question": "What is MARCEL OMR Therapy™?",
-            "answer": "<p>MARCEL OMR Therapy™ is a structured approach to oral mucosal care, designed around a planned care journey rather than using products at random. The appropriate care plan depends on the person’s needs and the approved instructions for each product.</p>"
+            "question": "What is MARCEL OMR Therapy?",
+            "answer": "<p>MARCEL OMR Therapy is a structured approach to oral mucosal care, designed around a planned care journey rather than using products at random. The appropriate care plan depends on the person’s needs and the approved instructions for each product.</p>"
           }
         },
         {

@@ -25,6 +25,18 @@
   .mt .mt-path-foot .mt-btn { width: 100%; }
   .mt .mt-path--red .mt-path-foot .mt-btn-primary { background: #C23838; }
   .mt-paths-note { margin-top: 18px; }
+  /* Side by side, the cards share rows (subgrid): every header, stage box row, picture, list and button lines up
+     across the cards, whatever the length of their text. */
+  @media (min-width: 961px) {
+    .mt-paths { grid-template-rows: repeat(5, auto); row-gap: 0; }
+    .mt-path { display: grid; grid-row: span 5; grid-template-rows: subgrid; }
+    .mt-path-head { grid-row: 1; align-content: start; }
+    .mt-path-body { display: grid; grid-row: 2 / span 4; grid-template-rows: subgrid; row-gap: 16px; }
+    .mt-path-bands { grid-row: 1; grid-auto-rows: 1fr; }
+    .mt-path-media { grid-row: 2; }
+    .mt-path-body > .mt-checks { grid-row: 3; align-self: start; }
+    .mt-path-foot { grid-row: 4; margin-top: 0; align-self: end; }
+  }
 {%- endstyle -%}
 
 {%- assign paths = section.blocks | where: 'type', 'pathway' -%}
@@ -116,7 +128,7 @@
       "type": "inline_richtext",
       "id": "heading",
       "label": "Heading",
-      "default": "Which MARCEL OMR Therapy™ is appropriate for your stage?"
+      "default": "Which MARCEL OMR Therapy is appropriate for your stage?"
     },
     {
       "type": "inline_richtext",
@@ -134,7 +146,7 @@
       "type": "inline_richtext",
       "id": "note",
       "label": "Note under the cards",
-      "default": "MARCEL OMR Therapy™ is intended to support OSMF management in appropriate patients. This information is for education only. Please consult an OSMF Specialist Doctor or a qualified healthcare professional for individual assessment and guidance."
+      "default": "MARCEL OMR Therapy is intended to support OSMF management in appropriate patients. This information is for education only. Please consult an OSMF Specialist Doctor or a qualified healthcare professional for individual assessment and guidance."
     },
     {"type":"header","content":"Section style"},
     {"type":"select","id":"background","label":"Background","options":[{"value":"paper","label":"White"},{"value":"mist","label":"Light"},{"value":"tint","label":"Tinted"},{"value":"navy","label":"Navy"}],"default":"mist"},
@@ -176,7 +188,7 @@
           "type": "text",
           "id": "title",
           "label": "Title",
-          "default": "MARCEL OMR Therapy™ Foundation Kit"
+          "default": "MARCEL OMR Therapy Foundation Kit"
         },
         {
           "type": "text",
@@ -226,7 +238,7 @@
           "type": "text",
           "id": "button_label",
           "label": "Button",
-          "default": "Explore MARCEL OMR Therapy™ Foundation Kit"
+          "default": "Explore MARCEL OMR Therapy Foundation Kit"
         },
         {
           "type": "select",
@@ -258,12 +270,12 @@
           "settings": {
             "tone": "blue",
             "stages": "Stages 3 and 4",
-            "title": "MARCEL OMR Therapy™ Advance Kit",
+            "title": "MARCEL OMR Therapy Advance Kit",
             "subtitle": "For greater restriction in mouth opening and oral function.",
             "bands": "Stage 3 | 15 to 25 mm\nStage 4 | Less than 15 mm",
             "points": "Greater restriction in mouth opening\nDifficulty chewing common\nDifficulty in tongue movement may be present",
             "summary": "May be considered with professional guidance.",
-            "button_label": "Explore MARCEL OMR Therapy™ Advance Kit",
+            "button_label": "Explore MARCEL OMR Therapy Advance Kit",
             "link_to": "advance"
           }
         }

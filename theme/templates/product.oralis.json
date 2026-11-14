@@ -1,0 +1,591 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "mt-main-product",
+      "blocks": {
+        "feature_1": {
+          "type": "perk",
+          "settings": {
+            "icon": "target",
+            "text": "Foundation Kit for Stage 1 or 2, Advance Kit for Stage 3 or 4"
+          }
+        },
+        "feature_2": {
+          "type": "perk",
+          "settings": {
+            "icon": "check",
+            "text": "Includes MARCEL Smile Toothpaste"
+          }
+        },
+        "feature_3": {
+          "type": "perk",
+          "settings": {
+            "icon": "clock",
+            "text": "A structured daily routine"
+          }
+        },
+        "feature_4": {
+          "type": "perk",
+          "settings": {
+            "icon": "calendar",
+            "text": "Organised around a 12-week care journey"
+          }
+        },
+        "feature_5": {
+          "type": "perk",
+          "settings": {
+            "icon": "doctor",
+            "text": "Use as advised by a healthcare professional"
+          }
+        },
+        "accordion_1": {
+          "type": "accordion",
+          "settings": {
+            "title": "Delivery and returns",
+            "text": "<p>Ships across India in discreet packaging. Delivery times are shown at checkout.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4",
+        "feature_5",
+        "accordion_1"
+      ],
+      "settings": {
+        "headline": "",
+        "supporting": "Herbal Mouthwash",
+        "intro": "<p><strong>Designed to complement your daily oral hygiene routine.</strong></p><p>MARCEL OraLis is a proprietary Ayurvedic mouthwash, traditionally used to help maintain oral hygiene, support freshness of breath and provide gentle daily oral comfort.</p>",
+        "details": "",
+        "how_lines": "",
+        "safety": "",
+        "cta_label": "WhatsApp MARCEL Team",
+        "cta_to": "whatsapp",
+        "cta_link": "",
+        "cta2_label": "See all MARCEL products",
+        "cta2_to": "products",
+        "cta2_link": "",
+        "shop_link": "",
+        "home_label": "Home",
+        "shop_label": "Products",
+        "image_fit": "cover",
+        "gallery_label": "Product images and details",
+        "thumbs_label": "Choose a picture",
+        "prev_label": "Previous picture",
+        "next_label": "Next picture",
+        "thumbs_prev_label": "Earlier pictures",
+        "thumbs_next_label": "More pictures",
+        "how_title": "How to Use",
+        "how_thumb": "How to use",
+        "routine_title": "Your Routine",
+        "routine_thumb": "Routine",
+        "ingredients_title": "Key Ingredients",
+        "ingredients_thumb": "Ingredients",
+        "free_title": "Made with Care",
+        "kit_inside_title": "What’s Inside",
+        "kit_thumb": "In the kit",
+        "kit_heading": "In This Kit",
+        "best_prefix": "Best for",
+        "add_label": "Add to cart",
+        "sold_out_label": "Sold out",
+        "variant_style": "cards",
+        "pack_label": "Pack size",
+        "pack_notes": "",
+        "show_buy_now": false,
+        "features_heading": "Key Features",
+        "qty_label": "Quantity",
+        "minus_label": "Decrease quantity",
+        "plus_label": "Increase quantity",
+        "acc_how": "How to use",
+        "acc_kit": "What’s in the kit",
+        "acc_routine": "Your daily routine",
+        "acc_ingredients": "Ingredients",
+        "acc_whats_in": "What’s in it",
+        "free_note": "Full ingredient list as printed on the pack.",
+        "acc_caution": "Caution and storage",
+        "acc_stage": "Which stage is it for?",
+        "show_description": true,
+        "acc_about": "About this product",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight",
+        "style": "hero",
+        "hero_title": "MARCEL OraLis",
+        "badge": "Care Beyond Teeth and Gums",
+        "pack_size": "250 mL",
+        "pack_size_label": "Pack Size",
+        "mrp_label": "MRP",
+        "image_chips": true
+      }
+    },
+    "related": {
+      "type": "mt-related-products",
+      "settings": {
+        "source": "metafield",
+        "intent": "related",
+        "limit": 6,
+        "eyebrow": "More from MARCEL",
+        "heading": "You May Also Like",
+        "details_label": "View product details",
+        "add_label": "Add to cart",
+        "sold_out_label": "Sold out",
+        "card_style": "compact",
+        "image_fit": "cover",
+        "layout": "carousel",
+        "per_desktop": "4",
+        "prev_label": "Previous products",
+        "next_label": "Next products",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "cta": {
+      "type": "mt-cta-band",
+      "settings": {
+        "style": "navy",
+        "eyebrow": "",
+        "heading": "Questions About MARCEL OraLis? Talk to MARCEL Team.",
+        "text": "The MARCEL Team can help with any question about MARCEL OraLis and how it fits into your daily oral hygiene routine.",
+        "button_1_label": "WhatsApp MARCEL Team",
+        "button_1_to": "whatsapp",
+        "button_1_link": "",
+        "button_2_label": "",
+        "button_2_to": "consult",
+        "button_2_link": "",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "faq": {
+      "type": "mt-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "What is MARCEL OraLis?",
+            "answer": "<p>MARCEL OraLis is a proprietary Ayurvedic herbal mouthwash, designed to complement your daily oral hygiene routine.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "How do I use MARCEL OraLis?",
+            "answer": "<p>Rinse with 10 mL (about 2 capfuls) for 30 to 60 seconds, then spit out. Use twice daily. Do not swallow.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "What is in MARCEL OraLis?",
+            "answer": "<p>Triphala, Bakula, Khadir, Yashtimadhu and Majuphal extracts, with peppermint, spearmint and Japanese mint oils and natural menthol, in an aqueous base. The full composition is listed on this page and on the pack.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Does MARCEL OraLis treat or cure any condition?",
+            "answer": "<p>No. It is not intended to diagnose, treat, cure or prevent any disease. If symptoms persist, consult a physician.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Can I swallow it?",
+            "answer": "<p>No. MARCEL OraLis is for external use only. Do not swallow it, and use it under medical supervision.</p>"
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "How should I store it?",
+            "answer": "<p>Store it in a cool, dry place and protect it from light. Keep it out of reach of children. Use within 24 months from the date of manufacture.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Frequently Asked Questions",
+        "open_first": false,
+        "one_at_a_time": false,
+        "schema_markup": true,
+        "show_help": false,
+        "help_title": "Have Questions?",
+        "help_text": "The MARCEL Team can help with any question about MARCEL OraLis.",
+        "whatsapp_label": "WhatsApp MARCEL Team",
+        "link_label": "See all FAQs",
+        "link": "/pages/faq",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal",
+        "layout": "side"
+      }
+    },
+    "179437565770c9ea1b": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_BmeE7x": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_BmeE7x"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "benefits": {
+      "type": "mt-icon-cards",
+      "blocks": {
+        "benefit_1": {
+          "type": "card",
+          "settings": {
+            "icon": "drop",
+            "art": "none",
+            "title": "pH Balanced",
+            "highlight": false,
+            "text": "A pH balanced herbal mouthwash for use twice daily.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "benefit_2": {
+          "type": "card",
+          "settings": {
+            "icon": "shield",
+            "art": "none",
+            "title": "Antibacterial",
+            "highlight": false,
+            "text": "Traditionally used to help maintain oral hygiene as part of your daily routine.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "benefit_3": {
+          "type": "card",
+          "settings": {
+            "icon": "sparkle",
+            "art": "none",
+            "title": "Fresh Breath",
+            "highlight": false,
+            "text": "Traditionally used to support freshness of breath.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "benefit_4": {
+          "type": "card",
+          "settings": {
+            "icon": "leaf",
+            "art": "none",
+            "title": "Cooling",
+            "highlight": true,
+            "text": "With peppermint, spearmint and Japanese mint oils and natural menthol, for gentle daily oral comfort.",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Key Benefits",
+        "text": "",
+        "center": false,
+        "columns": "4",
+        "media": "icon",
+        "card_style": "benefit",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "how": {
+      "type": "mt-use-steps",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Measure",
+            "art": "water",
+            "text": "Pour <strong>10 mL</strong>, about <strong>2 capfuls</strong>."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Rinse",
+            "art": "rinse",
+            "text": "Rinse your mouth for <strong>30 to 60 seconds</strong>."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Spit Out",
+            "art": "spit",
+            "text": "Spit it out after rinsing. <em>Do not swallow.</em>"
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "Repeat",
+            "art": "repeat",
+            "text": "Use <strong>twice daily</strong>."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "How to Use MARCEL OraLis",
+        "text": "Follow the recommended directions for use:",
+        "note": "For external use only. Use under medical supervision. If symptoms persist, consult a physician.",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "info": {
+      "type": "mt-spec-table",
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Product Name",
+            "value": "MARCEL OraLis"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Product Category",
+            "value": "Herbal Mouthwash, a proprietary Ayurvedic medicine"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Pack Size",
+            "value": "250 mL"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Key Ingredients",
+            "value": "Triphala, Bakula, Khadir, Yashtimadhu and Majuphal extracts, with peppermint, spearmint and Japanese mint oils and natural menthol"
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "Directions",
+            "value": "Rinse with 10 mL (about 2 capfuls) for 30 to 60 seconds, then spit out"
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "label": "Frequency",
+            "value": "Twice daily"
+          }
+        },
+        "row_7": {
+          "type": "row",
+          "settings": {
+            "label": "Storage",
+            "value": "Store in a cool, dry place and protect from light. Keep out of reach of children."
+          }
+        },
+        "row_8": {
+          "type": "row",
+          "settings": {
+            "label": "Shelf Life",
+            "value": "Use within 24 months from the date of manufacture"
+          }
+        },
+        "row_9": {
+          "type": "row",
+          "settings": {
+            "label": "MRP",
+            "value": "[price] (inclusive of all taxes)"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6",
+        "row_7",
+        "row_8",
+        "row_9"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Product Information",
+        "text": "",
+        "show_image": true,
+        "head_1": "Particulars",
+        "head_2": "Details",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "composition": {
+      "type": "mt-spec-table",
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Triphala Extract (Terminalia chebula)",
+            "value": "1.00"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Bakula Extract (Mimusops elengi)",
+            "value": "0.80"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Khadir Extract (Acacia catechu)",
+            "value": "0.60"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Yashtimadhu Extract (Glycyrrhiza glabra)",
+            "value": "0.50"
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "Majuphal Extract (Quercus infectoria)",
+            "value": "0.30"
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "label": "Peppermint Oil (Mentha × piperita)",
+            "value": "0.05"
+          }
+        },
+        "row_7": {
+          "type": "row",
+          "settings": {
+            "label": "Spearmint Oil (Mentha spicata L.)",
+            "value": "0.04"
+          }
+        },
+        "row_8": {
+          "type": "row",
+          "settings": {
+            "label": "Natural Menthol (mint derived)",
+            "value": "0.02"
+          }
+        },
+        "row_9": {
+          "type": "row",
+          "settings": {
+            "label": "Japanese Mint Oil (Mentha arvensis)",
+            "value": "0.01"
+          }
+        },
+        "row_10": {
+          "type": "row",
+          "settings": {
+            "label": "Aqueous Base",
+            "value": "q.s. to make 100%"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6",
+        "row_7",
+        "row_8",
+        "row_9",
+        "row_10"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Composition",
+        "text": "",
+        "show_image": false,
+        "head_1": "Ingredient",
+        "head_2": "Quantity (% w/v)",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "benefits",
+    "how",
+    "info",
+    "composition",
+    "179437565770c9ea1b",
+    "related",
+    "faq",
+    "cta"
+  ]
+}

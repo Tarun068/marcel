@@ -45,6 +45,13 @@
 }
 
 /* ---------- Collection page ---------- */
+/* Cards per row (Marcel product grid > Cards per row): four on wide screens, three on laptops. */
+@media (min-width: 1100px) {
+  .mt-pgrid.mt-pgrid--cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+}
+@media (min-width: 961px) and (max-width: 1099px) {
+  .mt-pgrid.mt-pgrid--cols-4 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 mt-filter { display: block; }
 .mt-filter-item { display: grid; }
 .mt-promo-card { display: flex; flex-direction: column; justify-content: space-between; gap: 20px; min-height: 100%; padding: 26px; border-radius: var(--mt-r-lg); background: var(--mt-navy); color: var(--mt-navy-ink); }

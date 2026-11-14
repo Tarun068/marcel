@@ -22,7 +22,7 @@
         "spacing": "none",
         "current_label": "FAQs",
         "heading": "Frequently Asked Questions",
-        "text": "Answers about OSMF, MARCEL OMR Therapy™, consultations and products.",
+        "text": "Answers about OSMF, MARCEL OMR Therapy, consultations and products.",
         "note": "This website provides general information and is not a substitute for an examination or advice from a qualified healthcare professional. Please seek prompt professional assessment for persistent or worsening symptoms or any unusual oral change.",
         "art": "faq"
       }
@@ -91,20 +91,20 @@
         "category_2": {
           "type": "category",
           "settings": {
-            "title": "MARCEL OMR Therapy™"
+            "title": "MARCEL OMR Therapy"
           }
         },
         "question_6": {
           "type": "question",
           "settings": {
-            "question": "What is MARCEL OMR Therapy™?",
-            "answer": "<p>MARCEL OMR Therapy™ is a structured approach to oral mucosal care. It provides a planned framework for care rather than relying on random or inconsistent product use. The appropriate approach and products depend on the individual’s needs and the approved instructions for each product.</p>"
+            "question": "What is MARCEL OMR Therapy?",
+            "answer": "<p>MARCEL OMR Therapy is a structured approach to oral mucosal care. It provides a planned framework for care rather than relying on random or inconsistent product use. The appropriate approach and products depend on the individual’s needs and the approved instructions for each product.</p>"
           }
         },
         "question_7": {
           "type": "question",
           "settings": {
-            "question": "Can MARCEL OMR Therapy™ help improve mouth opening?",
+            "question": "Can MARCEL OMR Therapy help improve mouth opening?",
             "answer": "<p>Supporting oral comfort and function may be part of the care goal, but the amount of change in mouth opening varies from person to person. It depends on the degree of restriction, the individual’s condition and the care plan. A consultation with a MARCEL OSMF Consultant can help establish a baseline and discuss realistic goals.</p>"
           }
         },
@@ -118,7 +118,7 @@
         "question_9": {
           "type": "question",
           "settings": {
-            "question": "Is MARCEL OMR Therapy™ only for early-stage OSMF?",
+            "question": "Is MARCEL OMR Therapy only for early-stage OSMF?",
             "answer": "<p>The care needed depends on the person’s symptoms, mouth opening and clinical findings, not simply on an assumed stage. People with more restricted mouth opening should be assessed to determine the appropriate plan and whether additional medical care is needed.</p>"
           }
         },
@@ -159,7 +159,7 @@
         "question_14": {
           "type": "question",
           "settings": {
-            "question": "Can I use MARCEL OMR Therapy™ while receiving treatment from another doctor?",
+            "question": "Can I use MARCEL OMR Therapy while receiving treatment from another doctor?",
             "answer": "<p>Tell the MARCEL OSMF Consultant or your treating doctor about the medicines, procedures and oral products you are currently using. Do not stop or change prescribed treatment on your own. They can help you decide whether the approaches can be used together and whether an in-person assessment is needed.</p>"
           }
         },

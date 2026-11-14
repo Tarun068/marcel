@@ -64,17 +64,17 @@
         "accordion_1"
       ],
       "settings": {
-        "headline": "Oral care beyond teeth & gums™",
-        "supporting": "The Real Total Oral Care",
-        "intro": "<p>You already look after your teeth and gums. MARCEL Smile™ invites you to care for the soft tissues inside your mouth too, as part of a more complete daily routine.</p>",
-        "details": "MRP inclusive of all taxes",
+        "headline": "Oral care beyond teeth & gums",
+        "supporting": "Therapeutic Toothpaste",
+        "intro": "<p><strong>The Real Total Oral Care.</strong></p><p>You already look after your teeth and gums. MARCEL Smile invites you to care for the soft tissues inside your mouth too, as part of a more complete daily routine.</p>",
+        "details": "",
         "how_lines": "Take a pea-sized amount.\nBrush thoroughly for at least two minutes, preferably twice daily, or as directed by a qualified professional.\nSpit out and rinse your mouth with water.",
         "safety": "",
-        "cta_label": "",
-        "cta_to": "consult",
+        "cta_label": "WhatsApp MARCEL Team",
+        "cta_to": "whatsapp",
         "cta_link": "",
         "cta2_label": "",
-        "cta2_to": "foundation",
+        "cta2_to": "products",
         "cta2_link": "",
         "shop_link": "",
         "home_label": "Home",
@@ -102,7 +102,7 @@
         "variant_style": "cards",
         "pack_label": "Pack size",
         "pack_notes": "30 g | Compact pack, handy for travel\n100 g | Larger pack, better value for home use",
-        "show_buy_now": true,
+        "show_buy_now": false,
         "features_heading": "Key Features",
         "qty_label": "Quantity",
         "minus_label": "Decrease quantity",
@@ -119,7 +119,14 @@
         "acc_about": "About this product",
         "background": "paper",
         "sheet": false,
-        "spacing": "tight"
+        "spacing": "tight",
+        "style": "hero",
+        "pack_size_label": "Pack Size",
+        "mrp_label": "MRP",
+        "image_chips": true,
+        "hero_title": "MARCEL Smile",
+        "badge": "Oral Care Beyond Teeth & Gums",
+        "pack_size": ""
       }
     },
     "matters": {
@@ -136,7 +143,7 @@
         "text_1": {
           "type": "text",
           "settings": {
-            "text": "<p>Most toothpastes focus on teeth, gums and fresh breath. The soft tissue that lines the inside of your mouth matters too.</p><p>MARCEL Smile™ brings that lining into your daily brushing, so your routine covers the whole mouth.</p>"
+            "text": "<p>Most toothpastes focus on teeth, gums and fresh breath. The soft tissue that lines the inside of your mouth matters too.</p><p>MARCEL Smile brings that lining into your daily brushing, so your routine covers the whole mouth.</p>"
           }
         }
       },
@@ -170,7 +177,8 @@
             "text": "A blend of plant extracts.",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "highlight": true
           }
         },
         "card_2": {
@@ -231,14 +239,15 @@
       ],
       "settings": {
         "eyebrow": "What’s inside",
-        "heading": "Five Things That Make MARCEL Smile™ Different",
+        "heading": "Five Things That Make MARCEL Smile Different",
         "text": "",
         "center": false,
         "columns": "5",
         "media": "icon",
         "background": "paper",
         "sheet": false,
-        "spacing": "normal"
+        "spacing": "normal",
+        "card_style": "benefit"
       }
     },
     "related": {
@@ -270,14 +279,14 @@
         "question_1": {
           "type": "question",
           "settings": {
-            "question": "How do I use MARCEL Smile™?",
+            "question": "How do I use MARCEL Smile?",
             "answer": "<p>Take a pea-sized amount. Brush thoroughly for at least two minutes, preferably twice daily, or as directed by a qualified professional. Spit out and rinse your mouth with water.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
-            "question": "What is inside MARCEL Smile™?",
+            "question": "What is inside MARCEL Smile?",
             "answer": "<ul><li>Premium Herbal Complex, a blend of plant extracts</li><li>Natural flavors</li><li>No artificial sweeteners, for a naturally pleasant taste</li><li>No parabens, so no synthetic preservatives</li><li>No SLS, a harsh foaming agent</li></ul>"
           }
         },
@@ -292,7 +301,7 @@
           "type": "question",
           "settings": {
             "question": "Why care for the soft tissues in my mouth?",
-            "answer": "<p>Teeth, gums, enamel and fresh breath all matter, and so do the soft tissues lining the inside of your mouth. MARCEL Smile™ brings these tissues into your daily oral care, so your routine looks after more than just teeth and gums.</p>"
+            "answer": "<p>Teeth, gums, enamel and fresh breath all matter, and so do the soft tissues lining the inside of your mouth. MARCEL Smile brings these tissues into your daily oral care, so your routine looks after more than just teeth and gums.</p>"
           }
         }
       },
@@ -303,20 +312,21 @@
         "question_4"
       ],
       "settings": {
-        "eyebrow": "MARCEL Smile™",
+        "eyebrow": "",
         "heading": "Frequently Asked Questions",
         "open_first": false,
         "one_at_a_time": false,
         "schema_markup": true,
-        "show_help": true,
+        "show_help": false,
         "help_title": "Have Questions?",
-        "help_text": "The MARCEL Team can help with any question about MARCEL Smile™.",
+        "help_text": "The MARCEL Team can help with any question about MARCEL Smile.",
         "whatsapp_label": "WhatsApp MARCEL Team",
         "link_label": "",
         "link": "/pages/faq",
-        "background": "mist",
+        "background": "paper",
         "sheet": false,
-        "spacing": "normal"
+        "spacing": "normal",
+        "layout": "side"
       }
     },
     "1794375560ff80f120": {
@@ -338,14 +348,167 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "how": {
+      "type": "mt-use-steps",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Take",
+            "art": "paste",
+            "text": "Take a <strong>pea-sized amount</strong>."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Brush",
+            "art": "brush",
+            "text": "Brush thoroughly for <strong>at least two minutes</strong>, preferably <strong>twice daily</strong>, or as directed by a qualified professional."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Rinse",
+            "art": "water",
+            "text": "Spit out and rinse your mouth with water."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "How to Use MARCEL Smile",
+        "text": "Follow the recommended directions for use:",
+        "note": "",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "info": {
+      "type": "mt-spec-table",
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Product Name",
+            "value": "MARCEL Smile"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Product Category",
+            "value": "Therapeutic Toothpaste"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Pack Sizes",
+            "value": "30 g and 100 g"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Key Ingredients",
+            "value": "Premium herbal complex, a blend of plant extracts"
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "Flavour",
+            "value": "Natural flavors"
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "label": "Free From",
+            "value": "Artificial sweeteners, parabens and SLS"
+          }
+        },
+        "row_7": {
+          "type": "row",
+          "settings": {
+            "label": "Directions",
+            "value": "A pea-sized amount, brushed for at least two minutes"
+          }
+        },
+        "row_8": {
+          "type": "row",
+          "settings": {
+            "label": "Frequency",
+            "value": "Preferably twice daily"
+          }
+        },
+        "row_9": {
+          "type": "row",
+          "settings": {
+            "label": "MRP",
+            "value": "From [price] (inclusive of all taxes)"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6",
+        "row_7",
+        "row_8",
+        "row_9"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Product Information",
+        "text": "",
+        "head_1": "Particulars",
+        "head_2": "Details",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "cta": {
+      "type": "mt-cta-band",
+      "settings": {
+        "style": "navy",
+        "eyebrow": "",
+        "heading": "Questions About MARCEL Smile? Talk to MARCEL Team.",
+        "text": "The MARCEL Team can help with any question about MARCEL Smile, including which pack size suits your daily routine.",
+        "button_1_label": "WhatsApp MARCEL Team",
+        "button_1_to": "whatsapp",
+        "button_1_link": "",
+        "button_2_label": "",
+        "button_2_to": "consult",
+        "button_2_link": "",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
     }
   },
   "order": [
     "main",
     "matters",
     "inside",
+    "how",
+    "info",
     "1794375560ff80f120",
     "related",
-    "faq"
+    "faq",
+    "cta"
   ]
 }

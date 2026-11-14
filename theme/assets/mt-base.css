@@ -124,7 +124,7 @@ body { font-size: var(--mt-fs-body); }
 .mt-rte ol li::before { counter-increment: r; content: counter(r) "."; position: absolute; left: 0; font-weight: 800; color: var(--mt-teal); }
 
 /* ---------- Buttons + links ---------- */
-.mt .mt-btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: 999px; font-weight: 800; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; text-align: center; text-decoration: none; transition: background .2s, color .2s, box-shadow .2s, transform .15s; }
+.mt .mt-btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 24px; border-radius: 999px; font-weight: 700; font-size: 16px; letter-spacing: 0; text-transform: none; line-height: 1.2; text-align: center; text-decoration: none; transition: background .2s, color .2s, box-shadow .2s, transform .15s; }
 .mt-btn .mt-i { width: 18px; height: 18px; stroke-width: 2.2; }
 .mt-btn:active { transform: translateY(1px); }
 .mt .mt-btn-primary { background: var(--mt-teal); color: var(--mt-on-dark); }
@@ -140,7 +140,7 @@ body { font-size: var(--mt-fs-body); }
 .mt .mt-btn-wa { background: var(--mt-wa-soft); color: var(--mt-wa-ink); box-shadow: inset 0 0 0 1.5px #BFE8CC; }
 .mt .mt-btn-wa:hover { background: #D7F2DF; }
 .mt-btn-wa .mt-i { color: #16A34A; }
-.mt .mt-btn-sm { min-height: 42px; padding: 0 18px; font-size: 12.5px; }
+.mt .mt-btn-sm { min-height: 42px; padding: 0 18px; font-size: 14.5px; }
 .mt .mt-btn-block { width: 100%; }
 .mt .mt-btn:is([disabled], [aria-disabled="true"]) { opacity: .4; cursor: not-allowed; transform: none; }
 .mt .mt-btn.loading { pointer-events: none; }
@@ -157,7 +157,7 @@ body { font-size: var(--mt-fs-body); }
 .mt-btn-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 @media (max-width: 480px) {
   .mt .mt-btn { font-size: 13px; letter-spacing: .04em; padding-inline: 22px; }
-  .mt .mt-btn-sm { font-size: 12px; padding-inline: 16px; }
+  .mt .mt-btn-sm { font-size: 14px; padding-inline: 16px; }
 }
 
 /* ---------- Pills, tags, chips ---------- */

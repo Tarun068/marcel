@@ -23,7 +23,7 @@
           "type": "perk",
           "settings": {
             "icon": "check",
-            "text": "Includes MARCEL Smile™ Toothpaste"
+            "text": "Includes MARCEL Smile Toothpaste"
           }
         },
         "feature_3": {
@@ -149,7 +149,7 @@
       "settings": {
         "eyebrow": "Need guidance?",
         "heading": "Not Sure What to Do Next?",
-        "text": "Explore MARCEL OMR Therapy™ or connect with our team to understand the next steps.",
+        "text": "Explore MARCEL OMR Therapy or connect with our team to understand the next steps.",
         "button_1_label": "Book a Consultation",
         "button_1_to": "consult",
         "button_1_link": "",
@@ -195,7 +195,7 @@
         "question_5": {
           "type": "question",
           "settings": {
-            "question": "Can I use MARCEL OMR Therapy™ while receiving treatment from another doctor?",
+            "question": "Can I use MARCEL OMR Therapy while receiving treatment from another doctor?",
             "answer": "<p>Tell a MARCEL OSMF Consultant or your treating doctor about the medicines, procedures and oral products you are currently using. Do not stop or change prescribed treatment on your own. They can help you decide whether the approaches can be used together and whether an in-person assessment is needed.</p>"
           }
         }
@@ -208,7 +208,7 @@
         "question_5"
       ],
       "settings": {
-        "eyebrow": "MARCEL OMR Therapy™",
+        "eyebrow": "MARCEL OMR Therapy",
         "heading": "Frequently Asked Questions",
         "open_first": false,
         "one_at_a_time": false,

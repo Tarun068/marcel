@@ -32,7 +32,7 @@
       "settings": {
         "eyebrow": "Clinical research evidence",
         "heading": "What the 2026 Clinical Study Found",
-        "text": "A clinical study was conducted in 2026 to evaluate MARCEL OMR Therapy™ in people with OSMF.",
+        "text": "A clinical study was conducted in 2026 to evaluate MARCEL OMR Therapy in people with OSMF.",
         "hero_value": "14.86 mm",
         "hero_extra": "(71.25%)",
         "hero_label": "Average increase in mouth opening",
@@ -386,7 +386,7 @@
         "text": "Healthcare professionals can contact the MARCEL Team for research and clinical information.",
         "button_1_label": "Professional enquiry",
         "button_1_to": "custom",
-        "button_2_label": "Explore MARCEL OMR Therapy™",
+        "button_2_label": "Explore MARCEL OMR Therapy",
         "button_2_to": "therapy",
         "background": "paper",
         "sheet": false,

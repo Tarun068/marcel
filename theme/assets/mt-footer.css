@@ -6,7 +6,12 @@
 }
 .mt-foot-brand { display: grid; gap: 18px; align-content: start; max-width: 380px; }
 .mt-foot-logo { display: flex; align-items: center; width: fit-content; }
-.mt-foot-logo .mt-logo-img { height: 48px; width: auto; }
+.mt-foot-logo .mt-logo-img { height: var(--mt-foot-logo-h, 112px); width: auto; }
+/* A coloured logo on the navy footer is shown in white so it stays visible (setting "Show the logo in white"). */
+.mt-foot-logo--white .mt-logo-img { filter: brightness(0) invert(1); }
+@media (max-width: 760px) {
+  .mt-foot-logo .mt-logo-img { height: min(var(--mt-foot-logo-h, 112px), 96px); }
+}
 .mt-foot-contact { display: grid; gap: 10px; }
 .mt-foot-contact a { display: inline-flex; align-items: center; gap: 10px; color: var(--mt-on-dark); font-weight: 700; width: fit-content; }
 .mt-foot-contact a:hover { color: var(--mt-mint); }

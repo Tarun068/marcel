@@ -28,7 +28,7 @@ mt-header { display: block; }
 .mt .mt-lang-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 0 13px; border-radius: 99px; background: var(--mt-paper); box-shadow: inset 0 0 0 1.5px var(--mt-line-2); color: var(--mt-ink); font-size: 14px; font-weight: 700; line-height: 1; white-space: nowrap; transition: box-shadow .15s, color .15s; }
 .mt .mt-lang-btn:hover { box-shadow: inset 0 0 0 1.5px var(--mt-teal); color: var(--mt-teal); }
 .mt .mt-lang-btn:focus-visible { outline: 3px solid var(--mt-aqua); outline-offset: 2px; }
-.mt-lang--head { margin-right: 6px; }
+.mt-lang--head { margin-left: 8px; }
 .mt-lang--drawer { margin-top: 18px; }
 .mt .mt-lang--drawer .mt-lang-btn { width: 100%; height: 48px; font-size: 16px; }
 .mt-lang--drawer .mt-i { width: 18px; height: 18px; }
@@ -54,7 +54,7 @@ mt-header { display: block; }
 .mt-drawer { position: fixed; top: 0; bottom: 0; left: 0; z-index: 90; width: min(88vw, 380px); background: var(--mt-mist); display: flex; flex-direction: column; transform: translateX(-105%); visibility: hidden; transition: transform .32s cubic-bezier(.2, .8, .2, 1), visibility 0s .32s; }
 .mt-drawer.is-open { transform: none; visibility: visible; transition: transform .32s cubic-bezier(.2, .8, .2, 1); }
 .mt-drawer-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; background: var(--mt-paper); border-bottom: 1px solid var(--mt-line); }
-.mt-drawer-head .mt-logo .mt-logo-img { height: 40px; }
+.mt-drawer-head .mt-logo .mt-logo-img { height: 56px; }
 .mt-drawer-body { flex: 1; overflow: auto; padding: 18px; }
 .mt .mt-drawer-cta { margin-bottom: 10px; }
 .mt-mnav-links { display: grid; margin-top: 8px; }

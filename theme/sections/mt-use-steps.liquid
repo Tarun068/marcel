@@ -1,0 +1,235 @@
+{{ 'mt-pd.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  How to use, from the client product page design: numbered steps on a dotted line, each in a card with an
+  illustration. In the step text, bold marks amounts and times and italic marks warnings (shown in red).
+{%- endcomment -%}
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-usesteps-sec' %}">
+  <div class="mt-wrap">
+    {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
+    {%- if section.blocks.size > 0 -%}
+      <ol class="mt-usesteps" style="--n: {{ section.blocks.size }};">
+        {%- for block in section.blocks -%}
+          <li class="mt-usestep" {{ block.shopify_attributes }}>
+            <span class="mt-usestep-n" aria-hidden="true">{{ forloop.index }}</span>
+            <div class="mt-usestep-card">
+              {%- if block.settings.art != 'none' -%}
+                <span class="mt-usestep-art">{%- render 'mt-pd-art', art: block.settings.art -%}</span>
+              {%- endif -%}
+              <h3>{{ block.settings.title | escape }}</h3>
+              {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    {%- endif -%}
+    {%- if section.settings.note != blank -%}<p class="mt-usesteps-note">{{ section.settings.note }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel how to use",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How to Use"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "Follow the recommended directions for use:"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "note",
+      "label": "Note under the steps"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "mist"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "normal"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Step"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "info": "Bold marks amounts and times. Italic marks a warning and shows in red."
+        },
+        {
+          "type": "select",
+          "id": "art",
+          "label": "Illustration",
+          "options": [
+            {
+              "value": "dilute",
+              "label": "Drops into water"
+            },
+            {
+              "value": "rinse",
+              "label": "Rinse or gargle"
+            },
+            {
+              "value": "spit",
+              "label": "Spit out"
+            },
+            {
+              "value": "repeat",
+              "label": "Morning and night"
+            },
+            {
+              "value": "spray",
+              "label": "Oral spray"
+            },
+            {
+              "value": "paste",
+              "label": "Toothpaste"
+            },
+            {
+              "value": "brush",
+              "label": "Brushing"
+            },
+            {
+              "value": "water",
+              "label": "Glass of water"
+            },
+            {
+              "value": "exercise",
+              "label": "Mouth opening exercise"
+            },
+            {
+              "value": "gentle",
+              "label": "Gentle movement"
+            },
+            {
+              "value": "clean",
+              "label": "Clean"
+            },
+            {
+              "value": "guide",
+              "label": "Professional guidance"
+            },
+            {
+              "value": "none",
+              "label": "None"
+            }
+          ],
+          "default": "none"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel how to use",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Prepare",
+            "art": "dilute"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Use",
+            "art": "rinse"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Finish",
+            "art": "spit"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Repeat",
+            "art": "repeat"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -22,7 +22,7 @@
         "spacing": "none",
         "current_label": "For healthcare professionals",
         "eyebrow": "For dentists and healthcare professionals",
-        "heading": "MARCEL OMR Therapy™ for Healthcare Professionals",
+        "heading": "MARCEL OMR Therapy for Healthcare Professionals",
         "text": "Information about the therapy, OSMF, clinical evidence, research and the OSMF Specialist Doctor network.",
         "button_1_label": "Professional enquiry",
         "button_1_link": "#enquiry",
@@ -45,7 +45,7 @@
           "type": "card",
           "settings": {
             "icon": "shield",
-            "title": "MARCEL OMR Therapy™ Overview",
+            "title": "MARCEL OMR Therapy Overview",
             "text": "The 4-pillar approach, the Foundation Kit and Advance Kit pathways and the 12-week care journey.",
             "link_to": "therapy",
             "link_label": "Read the overview"
@@ -88,7 +88,7 @@
           "settings": {
             "icon": "box",
             "title": "Product Information",
-            "text": "MARCEL Ora-Care™, Ora-Shield™, Smile™ and the MO Device.",
+            "text": "MARCEL Ora-Care, Ora-Shield, Smile and the MO Device.",
             "link_to": "products",
             "link_label": "View products"
           }
@@ -130,7 +130,7 @@
         "sheet": false,
         "spacing": "normal",
         "story_eyebrow": "Your clinical contact",
-        "body": "<ul><li>A designated clinical contact for participating doctors</li><li>Orientation to the MARCEL OMR Therapy™ approach</li><li>Communication and professional coordination with the JanSuta team</li></ul>"
+        "body": "<ul><li>A designated clinical contact for participating doctors</li><li>Orientation to the MARCEL OMR Therapy approach</li><li>Communication and professional coordination with the JanSuta team</li></ul>"
       }
     },
     "enquiry": {

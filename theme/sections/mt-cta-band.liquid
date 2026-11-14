@@ -14,6 +14,18 @@
     .mt-cta-band .mt-btn-row { width: 100%; }
     .mt .mt-cta-band .mt-btn { width: 100%; }
   }
+  /* Style "Navy" (client product page design, 2026-11-14): navy-blue gradient with soft wave lines, copy on the left
+     and the buttons on the right; the first button is aqua. */
+  .mt-cta-band--navy { grid-template-columns: minmax(0, 1fr) auto; align-items: center; justify-items: stretch; column-gap: clamp(24px, 5vw, 72px); background: radial-gradient(70% 130% at 100% 0%, rgba(255, 255, 255, .14), rgba(255, 255, 255, 0) 60%), linear-gradient(120deg, color-mix(in srgb, var(--mt-blue) 62%, #04112e) 0%, var(--mt-blue) 100%); }
+  .mt-cta-band--navy::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300' preserveAspectRatio='none'%3E%3Cg fill='none' stroke='%23FFFFFF' stroke-width='1.2'%3E%3Cpath stroke-opacity='.12' d='M-20 240C200 160 420 280 640 210S1010 110 1220 160'/%3E%3Cpath stroke-opacity='.08' d='M-20 275C220 200 440 300 670 245S1030 150 1220 200'/%3E%3C/g%3E%3C/svg%3E"); background-size: 100% 100%; -webkit-mask-image: none; mask-image: none; }
+  .mt .mt-cta-band--navy h2 { max-width: 30ch; font-family: var(--mt-font); font-weight: 800; letter-spacing: -.02em; }
+  .mt-cta-band--navy .mt-btn-row { justify-content: flex-end; }
+  .mt .mt-cta-band--navy .mt-btn-light { background: var(--mt-aqua); color: var(--mt-navy); }
+  .mt .mt-cta-band--navy .mt-btn-light:hover { background: color-mix(in srgb, var(--mt-aqua) 80%, #fff); }
+  @media (max-width: 760px) {
+    .mt-cta-band--navy { grid-template-columns: minmax(0, 1fr); }
+    .mt-cta-band--navy .mt-btn-row { justify-content: flex-start; }
+  }
 {%- endstyle -%}
 
 {%- capture btn1_link -%}{% render 'mt-link-to', key: section.settings.button_1_to, url: section.settings.button_1_link %}{%- endcapture -%}
@@ -21,7 +33,7 @@
 
 <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-cta' %}">
   <div class="mt-wrap">
-    <div class="mt-cta-band mt-on-dark">
+    <div class="mt-cta-band mt-on-dark{% if section.settings.style == 'navy' %} mt-cta-band--navy{% endif %}">
       <div class="mt-cta-copy">
         {%- if section.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
         {%- if section.settings.heading != blank -%}<h2 class="mt-h2">{{ section.settings.heading }}</h2>{%- endif -%}
@@ -31,8 +43,9 @@
         <div class="mt-btn-row">
           {%- if section.settings.button_1_label != blank -%}
             <a class="mt-btn mt-btn-light" href="{{ btn1_link }}"{% if section.settings.button_1_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
+              {%- if section.settings.button_1_to == 'whatsapp' -%}{%- render 'mt-icon', icon: 'whatsapp' -%}{%- endif -%}
               {{- section.settings.button_1_label | escape -}}
-              {%- render 'mt-icon', icon: 'arrow-right' -%}
+              {%- unless section.settings.button_1_to == 'whatsapp' -%}{%- render 'mt-icon', icon: 'arrow-right' -%}{%- endunless -%}
             </a>
           {%- endif -%}
           {%- if section.settings.button_2_label != blank -%}
@@ -55,6 +68,22 @@
   },
   "settings": [
     {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "options": [
+        {
+          "value": "teal",
+          "label": "Teal"
+        },
+        {
+          "value": "navy",
+          "label": "Navy, buttons on the right"
+        }
+      ],
+      "default": "teal"
+    },
+    {
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow",
@@ -70,7 +99,7 @@
       "type": "inline_richtext",
       "id": "text",
       "label": "Text",
-      "default": "Explore MARCEL OMR Therapy™ or connect with our team to understand the next steps."
+      "default": "Explore MARCEL OMR Therapy or connect with our team to understand the next steps."
     },
     {
       "type": "text",
