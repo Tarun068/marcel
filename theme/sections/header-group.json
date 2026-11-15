@@ -29,15 +29,15 @@
       ],
       "settings": {
         "motion": "scroll",
-        "speed": "normal"
+        "speed": "slow"
       }
     },
     "header": {
       "type": "mt-header",
       "settings": {
         "logo": "shopify://shop_images/Updated_Logo_0ab6a006-c98e-4448-960a-6fc46aad7f96.png",
-        "logo_height": 88,
-        "logo_height_mobile": 60,
+        "logo_height": 100,
+        "logo_height_mobile": 80,
         "logo_trim_top": 10,
         "logo_trim_bottom": 28,
         "logo_trim_left": 15,
