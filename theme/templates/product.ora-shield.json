@@ -64,9 +64,16 @@
         "accordion_7"
       ],
       "settings": {
+        "style": "hero",
+        "hero_title": "Marcel OraShield",
+        "badge": "Stage 3 & Stage 4 OSMF",
+        "pack_size": "10 mL",
+        "pack_size_label": "Pack Size",
+        "mrp_label": "MRP",
+        "image_chips": true,
         "headline": "Support for advanced OSMF care",
         "supporting": "Therapeutic Oral Rinse",
-        "intro": "<p><strong>A key component of MARCEL OMR Therapy Advance Kit for Stage 3 &amp; Stage 4 OSMF.</strong></p><p>MARCEL OraShield is a therapeutic oral rinse included in MARCEL OMR Therapy Advance Kit for individuals experiencing Stage 3 and Stage 4 Oral Submucous Fibrosis (OSMF).</p>",
+        "intro": "<p><strong>A core component of Marcel OMR Therapy™ Advance Programme.</strong><br/><br/>Developed to support the management of burning sensation, oral tightness and reduced mouth opening associated with Stage 3–4 Oral Submucous Fibrosis (OSMF).</p>",
         "details": "",
         "how_lines": "MARCEL Ora-Shield is a concentrate. Dilute it before use.\nAdd 5 to 10 drops to about 160 mL of lukewarm water.\nGargle or rinse for 20 to 30 seconds, then spit out.\nUse twice daily, or as advised by your physician or MARCEL OSMF Consultant.\nAfter each rinse, do the prescribed mouth and jaw exercises.",
         "safety": "Do not swallow.",
@@ -119,14 +126,7 @@
         "acc_about": "About this product",
         "background": "paper",
         "sheet": false,
-        "spacing": "tight",
-        "style": "hero",
-        "hero_title": "MARCEL OraShield",
-        "badge": "Stage 3 & Stage 4 OSMF",
-        "pack_size": "10 mL",
-        "pack_size_label": "Pack Size",
-        "mrp_label": "MRP",
-        "image_chips": true
+        "spacing": "tight"
       }
     },
     "fit": {
@@ -149,128 +149,6 @@
         "background": "mist",
         "sheet": false,
         "spacing": "normal"
-      }
-    },
-    "related": {
-      "type": "mt-related-products",
-      "settings": {
-        "source": "metafield",
-        "intent": "related",
-        "limit": 6,
-        "eyebrow": "More from MARCEL",
-        "heading": "You May Also Like",
-        "details_label": "View product details",
-        "add_label": "Add to cart",
-        "sold_out_label": "Sold out",
-        "card_style": "compact",
-        "image_fit": "cover",
-        "layout": "carousel",
-        "per_desktop": "4",
-        "prev_label": "Previous products",
-        "next_label": "Next products",
-        "background": "paper",
-        "sheet": false,
-        "spacing": "normal"
-      }
-    },
-    "faq": {
-      "type": "mt-faq",
-      "blocks": {
-        "question_1": {
-          "type": "question",
-          "settings": {
-            "question": "What is MARCEL OraShield?",
-            "answer": "<p>MARCEL OraShield is a therapeutic oral rinse and a key part of MARCEL OMR Therapy Advance Kit. It is used as part of a care plan for OSMF, with guidance from a healthcare professional.</p>"
-          }
-        },
-        "question_2": {
-          "type": "question",
-          "settings": {
-            "question": "Who is MARCEL OraShield intended for?",
-            "answer": "<p>It is for people with Stage 3 and Stage 4 OSMF. A MARCEL OSMF Consultant can assess you and help decide which care approach is suitable.</p>"
-          }
-        },
-        "question_3": {
-          "type": "question",
-          "settings": {
-            "question": "How should I use MARCEL OraShield?",
-            "answer": "<p>It comes as a concentrate. Add 5 to 10 drops to about 160 mL of lukewarm water, gargle or rinse for 20 to 30 seconds and spit out. Do not swallow. Follow each rinse with your prescribed mouth and jaw exercises.</p>"
-          }
-        },
-        "question_4": {
-          "type": "question",
-          "settings": {
-            "question": "How frequently should I use it?",
-            "answer": "<p>Use it twice daily, or as advised by your physician or MARCEL OSMF Consultant.</p>"
-          }
-        },
-        "question_5": {
-          "type": "question",
-          "settings": {
-            "question": "Can MARCEL OraShield be used alone?",
-            "answer": "<p>MARCEL OraShield is one part of MARCEL OMR Therapy Advance Kit. The complete routine includes:</p><ul><li>MARCEL OraShield Therapeutic Oral Rinse</li><li>MARCEL Smile Toothpaste</li><li>Prescribed mouth and jaw exercises</li><li>Follow-up with your MARCEL OSMF Consultant</li></ul><p>Following only one part may leave your care routine incomplete. We recommend following the complete routine as advised by your consultant.</p>"
-          }
-        },
-        "question_6": {
-          "type": "question",
-          "settings": {
-            "question": "Does MARCEL OraShield cure OSMF?",
-            "answer": "<p>A complete cure or a return to exactly the same mouth opening cannot be promised. The focus is to assess the condition, address symptoms and work toward the best achievable function for the individual. A qualified OSMF Specialist Doctor can explain the options after assessing the case.</p>"
-          }
-        },
-        "question_7": {
-          "type": "question",
-          "settings": {
-            "question": "What if I feel irritation or an unusual reaction?",
-            "answer": "<p>Stop using the product and ask a qualified healthcare professional for advice. Follow the safety instructions on the product label.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "question_1",
-        "question_2",
-        "question_3",
-        "question_4",
-        "question_5",
-        "question_6",
-        "question_7"
-      ],
-      "settings": {
-        "eyebrow": "",
-        "heading": "Frequently Asked Questions",
-        "open_first": false,
-        "one_at_a_time": false,
-        "schema_markup": true,
-        "show_help": false,
-        "help_title": "Have Questions?",
-        "help_text": "Our MARCEL OSMF Consultants can help with programme questions and your next step.",
-        "whatsapp_label": "WhatsApp MARCEL Team",
-        "link_label": "See all FAQs",
-        "link": "/pages/faq",
-        "background": "paper",
-        "sheet": false,
-        "spacing": "normal",
-        "layout": "side"
-      }
-    },
-    "17943754375ac09f7e": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_eADHpa": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "sample_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_eADHpa"
-      ],
-      "settings": {
-        "include_margins": true
       }
     },
     "promo": {
@@ -356,32 +234,32 @@
           "type": "step",
           "settings": {
             "title": "Dilute",
-            "art": "dilute",
-            "text": "Add <strong>5 to 10 drops</strong> of MARCEL OraShield to about <strong>160 mL of lukewarm water</strong>."
+            "text": "Add <strong>5 to 10 drops</strong> of MARCEL OraShield to about <strong>160 mL of lukewarm water</strong>.",
+            "art": "dilute"
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
             "title": "Rinse",
-            "art": "rinse",
-            "text": "Gargle or rinse your mouth for <strong>20 to 30 seconds</strong>."
+            "text": "Gargle or rinse your mouth for <strong>20 to 30 seconds</strong>.",
+            "art": "rinse"
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
             "title": "Spit Out",
-            "art": "spit",
-            "text": "Spit out the solution after rinsing. <em>Do not swallow.</em>"
+            "text": "Spit out the solution after rinsing. <em>Do not swallow.</em>",
+            "art": "spit"
           }
         },
         "step_4": {
           "type": "step",
           "settings": {
             "title": "Repeat",
-            "art": "repeat",
-            "text": "Use <strong>twice daily</strong>, or as advised by your physician or MARCEL OSMF Consultant."
+            "text": "Use <strong>twice daily</strong>, or as advised by your physician or MARCEL OSMF Consultant.",
+            "art": "repeat"
           }
         }
       },
@@ -483,8 +361,132 @@
         "eyebrow": "",
         "heading": "Product Information",
         "text": "",
+        "show_image": true,
+        "image": "shopify://shop_images/MARCEL_3D_OraShield.png",
         "head_1": "Particulars",
         "head_2": "Details",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "17943754375ac09f7e": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_eADHpa": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_eADHpa"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "faq": {
+      "type": "mt-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "What is MARCEL OraShield?",
+            "answer": "<p>MARCEL OraShield is a therapeutic oral rinse and a key part of MARCEL OMR Therapy Advance Kit. It is used as part of a care plan for OSMF, with guidance from a healthcare professional.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Who is MARCEL OraShield intended for?",
+            "answer": "<p>It is for people with Stage 3 and Stage 4 OSMF. A MARCEL OSMF Consultant can assess you and help decide which care approach is suitable.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "How should I use MARCEL OraShield?",
+            "answer": "<p>It comes as a concentrate. Add 5 to 10 drops to about 160 mL of lukewarm water, gargle or rinse for 20 to 30 seconds and spit out. Do not swallow. Follow each rinse with your prescribed mouth and jaw exercises.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "How frequently should I use it?",
+            "answer": "<p>Use it twice daily, or as advised by your physician or MARCEL OSMF Consultant.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Can MARCEL OraShield be used alone?",
+            "answer": "<p>MARCEL OraShield is one part of MARCEL OMR Therapy Advance Kit. The complete routine includes:</p><ul><li>MARCEL OraShield Therapeutic Oral Rinse</li><li>MARCEL Smile Toothpaste</li><li>Prescribed mouth and jaw exercises</li><li>Follow-up with your MARCEL OSMF Consultant</li></ul><p>Following only one part may leave your care routine incomplete. We recommend following the complete routine as advised by your consultant.</p>"
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "Does MARCEL OraShield cure OSMF?",
+            "answer": "<p>A complete cure or a return to exactly the same mouth opening cannot be promised. The focus is to assess the condition, address symptoms and work toward the best achievable function for the individual. A qualified OSMF Specialist Doctor can explain the options after assessing the case.</p>"
+          }
+        },
+        "question_7": {
+          "type": "question",
+          "settings": {
+            "question": "What if I feel irritation or an unusual reaction?",
+            "answer": "<p>Stop using the product and ask a qualified healthcare professional for advice. Follow the safety instructions on the product label.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6",
+        "question_7"
+      ],
+      "settings": {
+        "layout": "side",
+        "eyebrow": "",
+        "heading": "Frequently Asked Questions",
+        "open_first": false,
+        "one_at_a_time": false,
+        "schema_markup": true,
+        "show_help": false,
+        "help_title": "Have Questions?",
+        "help_text": "Our MARCEL OSMF Consultants can help with programme questions and your next step.",
+        "whatsapp_label": "WhatsApp MARCEL Team",
+        "link_label": "See all FAQs",
+        "link": "/pages/faq",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "related": {
+      "type": "mt-related-products",
+      "settings": {
+        "source": "metafield",
+        "intent": "related",
+        "limit": 6,
+        "eyebrow": "More from MARCEL",
+        "heading": "You May Also Like",
+        "details_label": "View product details",
+        "add_label": "Add to cart",
+        "sold_out_label": "Sold out",
+        "card_style": "compact",
+        "image_fit": "cover",
+        "layout": "carousel",
+        "per_desktop": "4",
+        "prev_label": "Previous products",
+        "next_label": "Next products",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"
@@ -516,9 +518,9 @@
     "benefits",
     "how",
     "info",
+    "faq",
     "17943754375ac09f7e",
     "related",
-    "faq",
     "cta"
   ]
 }
