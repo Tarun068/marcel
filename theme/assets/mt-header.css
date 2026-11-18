@@ -23,15 +23,25 @@ mt-header { display: block; }
 @keyframes mt-bump { 40% { transform: scale(1.35); } }
 .mt .mt-head-cta { margin-left: 4px; padding-inline: 16px; white-space: nowrap; }
 
-/* Language switch (snippet mt-lang-switch): shows once a second language is published. */
-.mt-lang { display: flex; margin: 0; }
-.mt .mt-lang-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 0 13px; border-radius: 99px; background: var(--mt-paper); box-shadow: inset 0 0 0 1.5px var(--mt-line-2); color: var(--mt-ink); font-size: 14px; font-weight: 700; line-height: 1; white-space: nowrap; transition: box-shadow .15s, color .15s; }
-.mt .mt-lang-btn:hover { box-shadow: inset 0 0 0 1.5px var(--mt-teal); color: var(--mt-teal); }
-.mt .mt-lang-btn:focus-visible { outline: 3px solid var(--mt-aqua); outline-offset: 2px; }
+/* Language toggle (snippet mt-lang-switch): every published language in one pill, the current one filled in teal. */
+.mt-lang { display: flex; align-items: center; margin: 0; }
+.mt-lang-seg { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border-radius: 99px; background: var(--mt-mist); box-shadow: inset 0 0 0 1px var(--mt-line); }
+.mt .mt-lang-opt { display: inline-flex; align-items: center; justify-content: center; height: 32px; padding: 0 13px; border-radius: 99px; background: transparent; color: var(--mt-ink-2); font-size: 13.5px; font-weight: 700; line-height: 1; white-space: nowrap; cursor: pointer; transition: background-color .15s, color .15s, box-shadow .15s; }
+.mt .mt-lang-opt:hover { background: var(--mt-paper); color: var(--mt-teal); box-shadow: 0 1px 3px rgba(var(--mt-navy-rgb), .14); }
+.mt .mt-lang-opt:focus-visible { outline: 3px solid var(--mt-aqua); outline-offset: 1px; }
+.mt .mt-lang-opt.is-active { background: var(--mt-teal); color: var(--mt-on-dark); box-shadow: 0 6px 14px -8px color-mix(in srgb, var(--mt-teal) 85%, transparent); cursor: default; }
+.mt-lang-short { display: none; }
 .mt-lang--head { margin-left: 8px; }
-.mt-lang--drawer { margin-top: 18px; }
-.mt .mt-lang--drawer .mt-lang-btn { width: 100%; height: 48px; font-size: 16px; }
-.mt-lang--drawer .mt-i { width: 18px; height: 18px; }
+@media (min-width: 1321px) and (max-width: 1499px) {
+  .mt-lang--head .mt-lang-full { display: none; }
+  .mt-lang--head .mt-lang-short { display: inline; }
+  .mt .mt-lang--head .mt-lang-opt { min-width: 38px; padding: 0 10px; }
+}
+/* Mobile menu: a small label, then the toggle across the full width. */
+.mt-lang--drawer { flex-direction: column; align-items: stretch; gap: 8px; margin-top: 20px; }
+.mt-lang-label { color: var(--mt-ink-3); font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.mt-lang--drawer .mt-lang-seg { display: flex; background: var(--mt-paper); }
+.mt .mt-lang--drawer .mt-lang-opt { flex: 1 1 0; height: 42px; font-size: 15px; }
 @media (max-width: 599px) {
   .mt-lang--head { display: none; }
 }

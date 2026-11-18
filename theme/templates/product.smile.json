@@ -66,8 +66,8 @@
       "settings": {
         "headline": "Oral care beyond teeth & gums",
         "supporting": "Therapeutic Toothpaste",
-        "intro": "<p><strong>The Real Total Oral Care.</strong></p><p>You already look after your teeth and gums. MARCEL Smile invites you to care for the soft tissues inside your mouth too, as part of a more complete daily routine.</p>",
-        "details": "",
+        "intro": "<p><strong>Thoughtfully designed for everyday oral care.</strong></p><p>MARCEL Smile supports oral mucosal health, healthy gums and strong enamel, while helping keep teeth clean and breath fresh.</p>",
+        "details": "Made with real herbal extracts and natural flavours, with no artificial sweeteners and no SLS or parabens.",
         "how_lines": "Take a pea-sized amount.\nBrush thoroughly for at least two minutes, preferably twice daily, or as directed by a qualified professional.\nSpit out and rinse your mouth with water.",
         "safety": "",
         "cta_label": "WhatsApp MARCEL Team",
@@ -123,14 +123,20 @@
         "style": "hero",
         "pack_size_label": "Pack Size",
         "mrp_label": "MRP",
-        "image_chips": true,
+        "image_chips": false,
         "hero_title": "MARCEL Smile",
-        "badge": "Oral Care Beyond Teeth & Gums",
-        "pack_size": ""
+        "badge": "",
+        "pack_size": "",
+        "hero_media": "image",
+        "badge_pill": false,
+        "hero_tone": "light",
+        "hero_art": "life-smile",
+        "hero_frame": "photo"
       }
     },
     "matters": {
       "type": "mt-guide",
+      "disabled": true,
       "blocks": {
         "chapter_1": {
           "type": "chapter",
@@ -167,6 +173,7 @@
     },
     "inside": {
       "type": "mt-icon-cards",
+      "disabled": true,
       "blocks": {
         "card_1": {
           "type": "card",
@@ -279,29 +286,36 @@
         "question_1": {
           "type": "question",
           "settings": {
-            "question": "How do I use MARCEL Smile?",
-            "answer": "<p>Take a pea-sized amount. Brush thoroughly for at least two minutes, preferably twice daily, or as directed by a qualified professional. Spit out and rinse your mouth with water.</p>"
+            "question": "What is MARCEL Smile Toothpaste?",
+            "answer": "<p>MARCEL Smile is a therapeutic toothpaste designed for everyday oral care. It supports oral mucosal health, healthy gums and strong enamel, and helps keep teeth strong and breath fresh.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
-            "question": "What is inside MARCEL Smile?",
-            "answer": "<ul><li>Premium Herbal Complex, a blend of plant extracts</li><li>Natural flavors</li><li>No artificial sweeteners, for a naturally pleasant taste</li><li>No parabens, so no synthetic preservatives</li><li>No SLS, a harsh foaming agent</li></ul>"
+            "question": "What are the key product features?",
+            "answer": "<p>MARCEL Smile is made with real herbal extracts and natural flavours, with no artificial sweeteners and no SLS or parabens. See the carton for the complete declared product information.</p>"
           }
         },
         "question_3": {
           "type": "question",
           "settings": {
-            "question": "Which pack size should I choose?",
-            "answer": "<p>The 30 g pack is compact and handy for travel. The 100 g pack is the larger pack and the best value for home.</p>"
+            "question": "What pack sizes are available?",
+            "answer": "<p>MARCEL Smile is available in 30 g and 100 g packs.</p>"
           }
         },
         "question_4": {
           "type": "question",
           "settings": {
-            "question": "Why care for the soft tissues in my mouth?",
-            "answer": "<p>Teeth, gums, enamel and fresh breath all matter, and so do the soft tissues lining the inside of your mouth. MARCEL Smile brings these tissues into your daily oral care, so your routine looks after more than just teeth and gums.</p>"
+            "question": "How should I use MARCEL Smile?",
+            "answer": "<p>Follow the directions printed on the pack or the advice of your dental or healthcare professional.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Can MARCEL Smile replace professional dental care?",
+            "answer": "<p>No. MARCEL Smile is a toothpaste for everyday oral care. It does not replace professional dental assessment, diagnosis or treatment.</p>"
           }
         }
       },
@@ -309,10 +323,11 @@
         "question_1",
         "question_2",
         "question_3",
-        "question_4"
+        "question_4",
+        "question_5"
       ],
       "settings": {
-        "eyebrow": "",
+        "eyebrow": "Patient information",
         "heading": "Frequently Asked Questions",
         "open_first": false,
         "one_at_a_time": false,
@@ -351,6 +366,7 @@
     },
     "how": {
       "type": "mt-use-steps",
+      "disabled": true,
       "blocks": {
         "step_1": {
           "type": "step",
@@ -419,43 +435,36 @@
         "row_4": {
           "type": "row",
           "settings": {
-            "label": "Key Ingredients",
-            "value": "Premium herbal complex, a blend of plant extracts"
+            "label": "MRP for 30 g",
+            "value": "[price:30g] (inclusive of all taxes)"
           }
         },
         "row_5": {
           "type": "row",
           "settings": {
-            "label": "Flavour",
-            "value": "Natural flavors"
+            "label": "MRP for 100 g",
+            "value": "[price:100g] (inclusive of all taxes)"
           }
         },
         "row_6": {
           "type": "row",
           "settings": {
-            "label": "Free From",
-            "value": "Artificial sweeteners, parabens and SLS"
+            "label": "Product Use",
+            "value": "Everyday oral care"
           }
         },
         "row_7": {
           "type": "row",
           "settings": {
-            "label": "Directions",
-            "value": "A pea-sized amount, brushed for at least two minutes"
+            "label": "Product Attributes",
+            "value": "Real herbal extracts, natural flavours, no artificial sweeteners, no SLS and parabens"
           }
         },
         "row_8": {
           "type": "row",
           "settings": {
-            "label": "Frequency",
-            "value": "Preferably twice daily"
-          }
-        },
-        "row_9": {
-          "type": "row",
-          "settings": {
-            "label": "MRP",
-            "value": "From [price] (inclusive of all taxes)"
+            "label": "Directions",
+            "value": "Follow the directions printed on the product packaging or the advice of your dental or healthcare professional."
           }
         }
       },
@@ -467,16 +476,18 @@
         "row_5",
         "row_6",
         "row_7",
-        "row_8",
-        "row_9"
+        "row_8"
       ],
       "settings": {
-        "eyebrow": "",
+        "eyebrow": "At a glance",
         "heading": "Product Information",
-        "text": "",
+        "text": "Key details for MARCEL Smile Therapeutic Toothpaste.",
+        "show_image": true,
+        "art": "pd-smile",
+        "media_style": "plain",
         "head_1": "Particulars",
         "head_2": "Details",
-        "background": "paper",
+        "background": "mist",
         "sheet": false,
         "spacing": "normal"
       }
@@ -486,8 +497,8 @@
       "settings": {
         "style": "navy",
         "eyebrow": "",
-        "heading": "Questions About MARCEL Smile? Talk to MARCEL Team.",
-        "text": "The MARCEL Team can help with any question about MARCEL Smile, including which pack size suits your daily routine.",
+        "heading": "Need Guidance? Talk to MARCEL Team.",
+        "text": "Have a question about MARCEL Smile or your everyday oral care? Connect with the MARCEL Team for product information and guidance.",
         "button_1_label": "WhatsApp MARCEL Team",
         "button_1_to": "whatsapp",
         "button_1_link": "",
@@ -496,12 +507,179 @@
         "button_2_link": "",
         "background": "paper",
         "sheet": false,
+        "spacing": "normal",
+        "form": true
+      }
+    },
+    "promo": {
+      "type": "mt-promo-card",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "title": "Oral Mucosal Health",
+            "text": "Supports oral mucosal health as part of your daily oral-care routine."
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "title": "Healthy Gums & Enamel",
+            "text": "Designed to support healthy gums and strong enamel."
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "title": "Clean Teeth & Fresh Breath",
+            "text": "Helps maintain clean teeth and a fresh-feeling mouth."
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3"
+      ],
+      "settings": {
+        "eyebrow": "Everyday oral care",
+        "heading": "Care Beyond the Everyday Brush",
+        "text": "A daily toothpaste experience that brings together oral mucosal health support, gum and enamel care, clean teeth and fresh breath.",
+        "text_2": "",
+        "button_label": "",
+        "button_to": "custom",
+        "button_link": "",
+        "art": "none",
+        "numbered": false,
+        "note": "",
+        "tone": "blue",
+        "overlap": true,
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      }
+    },
+    "nav": {
+      "type": "mt-page-nav",
+      "blocks": {
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Benefits",
+            "target": "benefits"
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Product information",
+            "target": "info"
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "FAQs",
+            "target": "faq"
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Contact MARCEL Team",
+            "target": "cta"
+          }
+        }
+      },
+      "block_order": [
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4"
+      ],
+      "settings": {
+        "label": "On this page"
+      }
+    },
+    "benefits": {
+      "type": "mt-icon-cards",
+      "blocks": {
+        "benefit_1": {
+          "type": "card",
+          "settings": {
+            "icon": "heart",
+            "art": "none",
+            "title": "Oral Mucosal Health Support",
+            "highlight": false,
+            "text": "Supports oral mucosal health as part of your daily oral-care routine.",
+            "pill": "",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "benefit_2": {
+          "type": "card",
+          "settings": {
+            "icon": "sparkle",
+            "art": "none",
+            "title": "Healthy Gums & Strong Enamel",
+            "highlight": false,
+            "text": "Designed to support healthy gums and strong enamel with regular oral hygiene.",
+            "pill": "",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "benefit_3": {
+          "type": "card",
+          "settings": {
+            "icon": "check",
+            "art": "none",
+            "title": "Strong Teeth & Fresh Breath",
+            "highlight": false,
+            "text": "Helps maintain clean teeth and a fresh-feeling mouth as part of everyday care.",
+            "pill": "",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Key Benefits",
+        "subheading": "Care for Every Smile",
+        "text": "A considered combination of everyday oral-care benefits in one therapeutic toothpaste.",
+        "center": false,
+        "columns": "3",
+        "media": "icon",
+        "card_style": "benefit",
+        "accent": "blue",
+        "intro_badge": "",
+        "intro_title": "",
+        "intro_text": "",
+        "intro_note": "",
+        "ticks": "",
+        "note": "<p>Use as part of regular oral hygiene. Refer to the product packaging for complete declared product information.</p>",
+        "note_style": "plain",
+        "background": "paper",
+        "sheet": false,
         "spacing": "normal"
       }
     }
   },
   "order": [
     "main",
+    "promo",
+    "nav",
+    "benefits",
     "matters",
     "inside",
     "how",

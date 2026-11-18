@@ -2,26 +2,83 @@
 
 {%- comment -%}
   How to use, from the client product page design: numbered steps on a dotted line, each in a card with an
-  illustration. In the step text, bold marks amounts and times and italic marks warnings (shown in red).
+  illustration, or a list of steps. A picture can sit above the steps (list layout: the steps sit under the picture in
+  the same card); a second built-in picture sits beside the first at the same height, neither one cropped.
+  In the step text, bold marks amounts and times and italic marks warnings (shown in red).
 {%- endcomment -%}
+{%- liquid
+  assign padded = false
+  if section.settings.number_style == 'padded'
+    assign padded = true
+  endif
+  assign has_media = false
+  if section.settings.media_image != blank or section.settings.media_art != 'none'
+    assign has_media = true
+  endif
+  assign media_pair = false
+  if has_media and section.settings.media_art_2 != 'none'
+    assign media_pair = true
+  endif
+  # Built-in picture sizes (width / height); the close-up of the drops is 3:2, the others 4:3.
+  assign m1_h = 900
+  if section.settings.media_art == 'howto-orashield-drops'
+    assign m1_h = 800
+  endif
+  assign m2_h = 900
+  if section.settings.media_art_2 == 'howto-orashield-drops'
+    assign m2_h = 800
+  endif
+  assign m1_ar = 1200.0 | divided_by: m1_h | round: 3
+  assign m2_ar = 1200.0 | divided_by: m2_h | round: 3
+-%}
+{%- capture media_img -%}
+  {%- if section.settings.media_image != blank -%}
+    {%- assign up_ar = section.settings.media_image.aspect_ratio | round: 3 -%}
+    {%- capture up_style -%}--ar: {{ up_ar }};{%- endcapture -%}
+    {{ section.settings.media_image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '600, 900, 1200, 1400', sizes: '(min-width: 1200px) 1100px, 94vw', alt: section.settings.media_image.alt, style: up_style }}
+  {%- elsif section.settings.media_art != 'none' -%}
+    <img src="{{ 'mt-' | append: section.settings.media_art | append: '.webp' | asset_url }}" alt="{{ section.settings.media_alt | escape }}" width="1200" height="{{ m1_h }}" style="--ar: {{ m1_ar }};" loading="lazy">
+  {%- endif -%}
+  {%- if media_pair -%}
+    <img src="{{ 'mt-' | append: section.settings.media_art_2 | append: '.webp' | asset_url }}" alt="{{ section.settings.media_alt_2 | escape }}" width="1200" height="{{ m2_h }}" style="--ar: {{ m2_ar }};" loading="lazy">
+  {%- endif -%}
+{%- endcapture -%}
+
 <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-usesteps-sec' %}">
   <div class="mt-wrap">
     {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
-    {%- if section.blocks.size > 0 -%}
-      <ol class="mt-usesteps" style="--n: {{ section.blocks.size }};">
-        {%- for block in section.blocks -%}
-          <li class="mt-usestep" {{ block.shopify_attributes }}>
-            <span class="mt-usestep-n" aria-hidden="true">{{ forloop.index }}</span>
-            <div class="mt-usestep-card">
-              {%- if block.settings.art != 'none' -%}
-                <span class="mt-usestep-art">{%- render 'mt-pd-art', art: block.settings.art -%}</span>
-              {%- endif -%}
-              <h3>{{ block.settings.title | escape }}</h3>
-              {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}
-            </div>
-          </li>
-        {%- endfor -%}
-      </ol>
+    {%- if section.settings.layout == 'list' -%}
+      <div class="mt-usesteps-card">
+        {%- if has_media -%}<figure class="mt-usesteps-figure{% if media_pair %} mt-usesteps-figure--pair{% endif %}">{{ media_img }}</figure>{%- endif -%}
+        <ol class="mt-usesteps-list" role="list">
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}>
+              <span class="mt-usesteps-mark{% if section.settings.list_mark == 'check' %} mt-usesteps-mark--check{% endif %}" aria-hidden="true">
+                {%- if section.settings.list_mark == 'check' -%}{%- render 'mt-icon', icon: 'check' -%}{%- else -%}{% if padded and forloop.index < 10 %}0{% endif %}{{ forloop.index }}{%- endif -%}
+              </span>
+              <p>{% if block.settings.title != blank %}<b>{{ block.settings.title | escape }}</b> {% endif %}{{ block.settings.text }}</p>
+            </li>
+          {%- endfor -%}
+        </ol>
+      </div>
+    {%- else -%}
+      {%- if has_media -%}<figure class="mt-usesteps-figure mt-usesteps-figure--solo{% if media_pair %} mt-usesteps-figure--pair{% endif %}">{{ media_img }}</figure>{%- endif -%}
+      {%- if section.blocks.size > 0 -%}
+        <ol class="mt-usesteps" style="--n: {{ section.blocks.size }};">
+          {%- for block in section.blocks -%}
+            <li class="mt-usestep" {{ block.shopify_attributes }}>
+              <span class="mt-usestep-n" aria-hidden="true">{% if padded and forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+              <div class="mt-usestep-card">
+                {%- if block.settings.art != 'none' -%}
+                  <span class="mt-usestep-art">{%- render 'mt-pd-art', art: block.settings.art -%}</span>
+                {%- endif -%}
+                <h3>{{ block.settings.title | escape }}</h3>
+                {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}
+              </div>
+            </li>
+          {%- endfor -%}
+        </ol>
+      {%- endif -%}
     {%- endif -%}
     {%- if section.settings.note != blank -%}<p class="mt-usesteps-note">{{ section.settings.note }}</p>{%- endif -%}
   </div>
@@ -59,6 +116,123 @@
       "type": "inline_richtext",
       "id": "note",
       "label": "Note under the steps"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "cards",
+          "label": "Cards in a row"
+        },
+        {
+          "value": "list",
+          "label": "List under the picture"
+        }
+      ],
+      "default": "cards"
+    },
+    {
+      "type": "select",
+      "id": "number_style",
+      "label": "Numbers",
+      "options": [
+        {
+          "value": "plain",
+          "label": "1, 2, 3"
+        },
+        {
+          "value": "padded",
+          "label": "01, 02, 03"
+        }
+      ],
+      "default": "plain"
+    },
+    {
+      "type": "select",
+      "id": "list_mark",
+      "label": "List marker",
+      "options": [
+        {
+          "value": "number",
+          "label": "Number"
+        },
+        {
+          "value": "check",
+          "label": "Tick"
+        }
+      ],
+      "default": "number"
+    },
+    {
+      "type": "header",
+      "content": "Picture"
+    },
+    {
+      "type": "select",
+      "id": "media_art",
+      "label": "Built-in picture",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "howto-oracare",
+          "label": "Ora-Care: 6 to 7 puffs guide"
+        },
+        {
+          "value": "howto-orashield",
+          "label": "OraShield: drops into water"
+        },
+        {
+          "value": "howto-orashield-drops",
+          "label": "OraShield: close-up of drops"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "image_picker",
+      "id": "media_image",
+      "label": "Picture (upload)"
+    },
+    {
+      "type": "text",
+      "id": "media_alt",
+      "label": "Picture description",
+      "info": "For screen readers, used with the built-in picture."
+    },
+    {
+      "type": "select",
+      "id": "media_art_2",
+      "label": "Second built-in picture",
+      "info": "Shown beside the first picture at the same height.",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "howto-oracare",
+          "label": "Ora-Care: 6 to 7 puffs guide"
+        },
+        {
+          "value": "howto-orashield",
+          "label": "OraShield: drops into water"
+        },
+        {
+          "value": "howto-orashield-drops",
+          "label": "OraShield: close-up of drops"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "text",
+      "id": "media_alt_2",
+      "label": "Second picture description"
     },
     {
       "type": "header",

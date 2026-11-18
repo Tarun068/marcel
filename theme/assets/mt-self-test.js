@@ -1,9 +1,10 @@
 /* MARCEL OSMF Self-Check: one question at a time, a details step (name and WhatsApp number), then the result page.
-   Scoring follows the Self-Check Master Matrix v1.0:
-   - mouth opening sets the base stage,
-   - difficulty moving the tongue (Yes / Often) raises it by one, up to Stage 4,
-   - the other four symptoms only feed the symptom summary,
-   - under 5 mm plus a persistent ulcer or confirmed carcinoma is Stage 5. */
+   Scoring follows the client's Mouth Opening Guide (Staging.docx, 2026-11-17); only the mouth opening answer sets
+   the stage:
+   - 4 fingers or more (more than 35 mm) Stage 1, 3 fingers (26 to 35 mm) Stage 2, 2 fingers (15 to 25 mm) Stage 3,
+     1 finger or less (under 15 mm) Stage 4, barely opens (under 5 mm) Stage 4 too,
+   - Stage 5: under 5 mm with a persistent ulcer, or oral cancer confirmed by histopathology,
+   - every symptom question only feeds the symptom summary (none of them changes the stage). */
 if (!customElements.get('mt-self-test')) {
   const BASE = { gt35: 1, '26to35': 2, '15to25': 3, lt15: 4, lt5: 4 };
   const FINGERS = { gt35: 3, '26to35': 2, '15to25': 1, lt15: 0, lt5: 0 };
@@ -180,20 +181,17 @@ if (!customElements.get('mt-self-test')) {
         }
       }
 
-      /* Returns { key, stage, severity } where key is healthy, stage1–stage4, investigate or stage5. */
+      /* Returns { key, severity } where key is stage1 to stage5 (Mouth Opening Guide; see the top of this file). */
       compute() {
         const a = this.answers;
         const opening = a.opening || 'gt35';
         const symptoms = SYMPTOMS.map((id) => a[id] || 'no');
-
-        if (opening === 'lt5') {
-          const key = a.ulcer === 'yes' || a.carcinoma === 'yes' ? 'stage5' : 'investigate';
-          return { key, severity: this.severity(symptoms) };
+        // Stage 5 is the special-attention category: confirmed oral cancer, or under 5 mm with a persistent ulcer.
+        // (Both questions are asked only after the "barely opens" answer.)
+        if (a.carcinoma === 'yes' || (opening === 'lt5' && a.ulcer === 'yes')) {
+          return { key: 'stage5', severity: this.severity(symptoms) };
         }
-        let stage = BASE[opening];
-        if (a.tongue === 'often') stage = Math.min(4, stage + 1);
-        const key = opening === 'gt35' && symptoms.every((s) => s === 'no') ? 'healthy' : `stage${stage}`;
-        return { key, severity: this.severity(symptoms) };
+        return { key: `stage${BASE[opening] || 1}`, severity: this.severity(symptoms) };
       }
 
       /* Symptom summary: No = mild, Occasional = moderate, Yes / Often = extreme. Never changes the stage. */

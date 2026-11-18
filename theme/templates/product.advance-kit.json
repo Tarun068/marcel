@@ -65,15 +65,15 @@
       ],
       "settings": {
         "headline": "",
-        "supporting": "MARCEL OMR Therapy",
-        "intro": "<p><strong>A structured approach to advanced OSMF care.</strong></p><p>MARCEL OMR Therapy Advance Kit is intended for individuals assessed by a qualified healthcare professional as having Stage 3 or Stage 4 Oral Submucous Fibrosis (OSMF). It brings together selected oral care components and professional guidance within a structured routine.</p>",
+        "supporting": "A structured care programme for Stage 3 & Stage 4 OSMF",
+        "intro": "<p><strong>Two core products in one structured oral-care programme.</strong></p><p>Designed for individuals assessed by a qualified healthcare professional as suitable within the Stage 3 and Stage 4 Oral Submucous Fibrosis (OSMF) care framework. The programme combines MARCEL OraShield Therapeutic Oral Rinse and MARCEL Smile Toothpaste. MARCEL® MOFlex is an optional adjunct where professionally recommended.</p>",
         "details": "",
         "how_lines": "",
         "safety": "",
         "cta_label": "WhatsApp MARCEL Team",
         "cta_to": "whatsapp",
         "cta_link": "",
-        "cta2_label": "See the Advance Kit routine",
+        "cta2_label": "",
         "cta2_to": "advance",
         "cta2_link": "",
         "shop_link": "",
@@ -115,18 +115,24 @@
         "free_note": "Full ingredient list as printed on the pack.",
         "acc_caution": "Caution and storage",
         "acc_stage": "Which stage is it for?",
-        "show_description": true,
+        "show_description": false,
         "acc_about": "About this product",
         "background": "paper",
         "sheet": false,
         "spacing": "tight",
         "style": "hero",
-        "pack_size_label": "Kit Includes",
+        "pack_size_label": "Kit Contents",
         "mrp_label": "MRP",
         "image_chips": true,
-        "hero_title": "Advance Kit",
+        "hero_title": "MARCEL OMR Therapy Advance Programme",
         "badge": "Stage 3 & Stage 4 OSMF",
-        "pack_size": "Rinse and toothpaste"
+        "pack_size": "OraShield 10 mL + Smile 30 g",
+        "hero_media": "image",
+        "hero_note": "MARCEL® MOFlex is optional and is not included in the two-product Advance Kit.",
+        "badge_pill": false,
+        "hero_tone": "blue",
+        "hero_art": "pd-advance",
+        "hero_frame": "card"
       }
     },
     "related": {
@@ -156,8 +162,8 @@
       "settings": {
         "style": "navy",
         "eyebrow": "",
-        "heading": "Need Guidance? Talk to MARCEL Team.",
-        "text": "If you are unsure whether the Advance Kit is appropriate for you, a MARCEL OSMF Consultant can help you understand the next steps and guide you towards suitable professional assessment.",
+        "heading": "Need Guidance About MARCEL OMR Therapy Advance Programme?",
+        "text": "Every individual’s OSMF experience is different. Speak with the MARCEL Team to understand the Advance Programme, its two core products and the professional support pathways available.",
         "button_1_label": "WhatsApp MARCEL Team",
         "button_1_to": "whatsapp",
         "button_1_link": "",
@@ -166,7 +172,8 @@
         "button_2_link": "",
         "background": "paper",
         "sheet": false,
-        "spacing": "normal"
+        "spacing": "normal",
+        "form": true
       }
     },
     "faq": {
@@ -175,36 +182,64 @@
         "question_1": {
           "type": "question",
           "settings": {
-            "question": "Do I need to use every component of the recommended care plan?",
-            "answer": "<p>The components may serve different purposes, so do not assume that using one product alone will provide the same approach. Follow the care plan recommended for you and the approved instructions supplied with each product. If you are unsure what to use, ask a MARCEL OSMF Consultant before changing the plan.</p>"
+            "question": "What is MARCEL OMR Therapy Advance Programme?",
+            "answer": "<p>It is a structured oral-care programme for patients assessed by their treating healthcare professional as suitable within the Stage 3 and Stage 4 OSMF framework. It brings together MARCEL OraShield Therapeutic Oral Rinse and MARCEL Smile Toothpaste.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
-            "question": "How soon will I notice a result?",
-            "answer": "<p>There is no single timeline that applies to everyone. Burning, eating comfort and mouth opening are different outcomes and may change at different rates. Follow the recommended care plan and arrange a review if progress is not as expected.</p>"
+            "question": "What is included in the Advance Kit?",
+            "answer": "<p>The two core products are MARCEL OraShield Therapeutic Oral Rinse (10 mL) and MARCEL Smile Toothpaste (30 g). MARCEL® MOFlex is an optional adjunct and is not included in the two-product kit.</p>"
           }
         },
         "question_3": {
           "type": "question",
           "settings": {
-            "question": "What should I do if my symptoms are not improving?",
-            "answer": "<p>Do not increase the amount or frequency of a product on your own. Note changes in burning, eating comfort and mouth opening, then contact a MARCEL OSMF Consultant for a review. If symptoms worsen or you notice an ulcer, lump, bleeding or another unusual change, arrange an in-person assessment promptly.</p>"
+            "question": "What is the role of OraShield?",
+            "answer": "<p>OraShield is the therapeutic oral-rinse component. Dilute 5 to 10 drops in about 160 mL of lukewarm water, rinse and gargle for 20 to 30 seconds, then spit out. Do not swallow.</p>"
           }
         },
         "question_4": {
           "type": "question",
           "settings": {
-            "question": "What should I do if I experience strong burning, swelling or sores after using a product?",
-            "answer": "<p>If you experience a strong or worsening reaction, stop using the product until you have received medical advice and contact a MARCEL OSMF Consultant. Seek urgent care for difficulty breathing, marked swelling or another severe reaction. Keep the product pack available so the clinician can review what you used.</p>"
+            "question": "What is the role of Smile Toothpaste?",
+            "answer": "<p>Smile is the daily oral-hygiene component of the programme. Brush thoroughly for at least two minutes, preferably twice daily or as directed by a dentist or physician.</p>"
           }
         },
         "question_5": {
           "type": "question",
           "settings": {
-            "question": "Can I use MARCEL OMR Therapy while receiving treatment from another doctor?",
-            "answer": "<p>Tell a MARCEL OSMF Consultant or your treating doctor about the medicines, procedures and oral products you are currently using. Do not stop or change prescribed treatment on your own. They can help you decide whether the approaches can be used together and whether an in-person assessment is needed.</p>"
+            "question": "Is MOFlex included in the Advance Kit?",
+            "answer": "<p>No. MARCEL® MOFlex is optional and separate from the two core kit products. It should only be recommended after an individual professional assessment and used with proper instructions.</p>"
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "Does the Advance Programme cure OSMF?",
+            "answer": "<p>No cure or guaranteed reversal claim is made. The programme is a structured oral-care approach and does not replace diagnosis, individualised treatment planning or indicated medical and dental management.</p>"
+          }
+        },
+        "question_7": {
+          "type": "question",
+          "settings": {
+            "question": "Why is professional assessment important?",
+            "answer": "<p>OSMF stage and suitability cannot be established from symptoms alone. A qualified healthcare professional should assess your condition and decide on the right care, investigations and referral.</p>"
+          }
+        },
+        "question_8": {
+          "type": "question",
+          "settings": {
+            "question": "What is the 12-week care journey?",
+            "answer": "<p>It is a framework organised into Relief (Weeks 1 and 2), Activation (Weeks 3 to 6), Restoration (Weeks 6 to 10) and Reinforcement (Weeks 11 and 12). It is not a guarantee of a particular clinical outcome.</p>"
+          }
+        },
+        "question_9": {
+          "type": "question",
+          "settings": {
+            "question": "When should I seek prompt medical or dental review?",
+            "answer": "<p>Seek timely professional evaluation for persistent oral ulcers, suspicious oral changes, worsening symptoms or significant difficulty opening your mouth.</p>"
           }
         }
       },
@@ -213,10 +248,14 @@
         "question_2",
         "question_3",
         "question_4",
-        "question_5"
+        "question_5",
+        "question_6",
+        "question_7",
+        "question_8",
+        "question_9"
       ],
       "settings": {
-        "eyebrow": "",
+        "eyebrow": "Patient information",
         "heading": "Frequently Asked Questions",
         "open_first": false,
         "one_at_a_time": false,
@@ -255,13 +294,86 @@
     },
     "promo": {
       "type": "mt-promo-card",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "title": "Difficulty Opening the Mouth",
+            "text": "The mouth may not open as wide as before. Eating larger bites, yawning or reaching the back teeth while brushing can become difficult."
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "title": "Tight or Stiff Cheeks",
+            "text": "The inside of the cheeks may feel tight, firm or less stretchy. Some people notice a pulling sensation when trying to open their mouth."
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "title": "Burning While Eating",
+            "text": "Chilli, spicy foods, hot drinks or certain sour foods may cause burning or irritation inside the mouth."
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "title": "Reduced Tongue Movement",
+            "text": "The tongue may feel less flexible or harder to move, stretch out or move from side to side."
+          }
+        },
+        "item_5": {
+          "type": "item",
+          "settings": {
+            "title": "Dryness or Changes in Taste",
+            "text": "The mouth may feel unusually dry, and some people notice that food tastes different or less distinct."
+          }
+        },
+        "item_6": {
+          "type": "item",
+          "settings": {
+            "title": "Difficulty Chewing or Eating",
+            "text": "Chewing may take longer or feel uncomfortable. Restricted mouth opening can make it harder to take bites or manage certain foods."
+          }
+        },
+        "item_7": {
+          "type": "item",
+          "settings": {
+            "title": "Changes in Speaking or Oral Hygiene",
+            "text": "Tightness or reduced tongue movement may make some words harder to pronounce. Cleaning the teeth and inner cheeks may also become more difficult."
+          }
+        },
+        "item_8": {
+          "type": "item",
+          "settings": {
+            "title": "Difficulty Puffing the Cheeks or Whistling",
+            "text": "Reduced flexibility of the cheeks and lips may make it harder to blow out the cheeks, whistle or stretch the lips comfortably."
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5",
+        "item_6",
+        "item_7",
+        "item_8"
+      ],
       "settings": {
-        "heading": "Experiencing OSMF symptoms?",
-        "text": "Understand the common signs, symptoms and stages of Oral Submucous Fibrosis.",
-        "button_label": "Explore OSMF Symptoms",
+        "eyebrow": "Understanding Stage 3 & Stage 4 OSMF",
+        "heading": "When Mouth Tightness Starts Affecting Everyday Life",
+        "text": "In more advanced OSMF, the tissues inside the cheeks, lips, tongue and other parts of the mouth may become less flexible. The experience is different for each person. Some people notice several of the concerns below; others may have only a few.",
+        "text_2": "<p>These symptoms can occur in OSMF, but they do not establish the stage or confirm a diagnosis on their own. A dentist or other qualified healthcare professional needs to examine the mouth and assess mouth opening and other findings.</p>",
+        "button_label": "",
         "button_to": "custom",
-        "button_link": "/pages/understand-osmf#signs",
-        "art": "symptoms",
+        "button_link": "",
+        "art": "none",
+        "numbered": true,
+        "note": "<p><strong>Important:</strong> Do not ignore a new or persistent mouth change. A non-healing ulcer, a red or white patch, a lump, unexplained bleeding or a change that is worsening needs prompt examination by a dentist or doctor. These changes should not simply be assumed to be OSMF.</p>",
+        "tone": "blue",
         "overlap": true,
         "background": "paper",
         "sheet": false,
@@ -274,11 +386,12 @@
         "benefit_1": {
           "type": "card",
           "settings": {
-            "icon": "drop",
+            "icon": "none",
             "art": "none",
-            "title": "MARCEL OraShield Oral Rinse, 10 mL",
+            "title": "Stage-Focused Care",
             "highlight": false,
-            "text": "The core therapy component of the Advance Kit. Use only according to the approved product label and the directions of your physician or MARCEL OSMF Consultant.",
+            "text": "A programme framework intended for individuals assessed as suitable within Stage 3 and Stage 4 OSMF.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -287,11 +400,12 @@
         "benefit_2": {
           "type": "card",
           "settings": {
-            "icon": "sparkle",
+            "icon": "none",
             "art": "none",
-            "title": "MARCEL Smile Toothpaste, 30 g",
+            "title": "Two Complementary Products",
             "highlight": false,
-            "text": "Supports everyday oral hygiene as part of the Advance routine. Use according to the product label and maintain regular brushing habits.",
+            "text": "OraShield is the therapeutic oral-rinse component; Smile is the daily oral-hygiene component.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -300,11 +414,12 @@
         "benefit_3": {
           "type": "card",
           "settings": {
-            "icon": "ruler",
+            "icon": "none",
             "art": "none",
-            "title": "MARCEL® MOFlex, Optional",
+            "title": "A Consistent Daily Routine",
             "highlight": false,
-            "text": "May be considered as an adjunct to prescribed mouth opening exercises when recommended by a healthcare professional. It is not a mandatory component for every individual and is sold separately.",
+            "text": "Clear product-use instructions help patients understand and follow their advised oral-care routine.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -313,11 +428,40 @@
         "benefit_4": {
           "type": "card",
           "settings": {
-            "icon": "s-open",
+            "icon": "none",
             "art": "none",
-            "title": "Prescribed Mouth and Jaw Exercises",
-            "highlight": true,
-            "text": "Exercises may form part of your care routine when recommended by your healthcare professional. Do not force movements or continue through pain.",
+            "title": "Professionally Guided Exercises",
+            "highlight": false,
+            "text": "Mouth and jaw exercises may be included when selected and demonstrated by the treating professional.",
+            "pill": "",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "benefit_5": {
+          "type": "card",
+          "settings": {
+            "icon": "none",
+            "art": "none",
+            "title": "Optional Device Support",
+            "highlight": false,
+            "text": "MARCEL® MOFlex may be recommended for selected individuals as an adjunct to mouth-opening exercises.",
+            "pill": "",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "benefit_6": {
+          "type": "card",
+          "settings": {
+            "icon": "none",
+            "art": "none",
+            "title": "Follow-Up and Review",
+            "highlight": false,
+            "text": "Care should be reviewed according to the individual’s condition, symptoms and functional needs.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -328,16 +472,27 @@
         "benefit_1",
         "benefit_2",
         "benefit_3",
-        "benefit_4"
+        "benefit_4",
+        "benefit_5",
+        "benefit_6"
       ],
       "settings": {
-        "eyebrow": "",
-        "heading": "What the Kit Includes",
+        "eyebrow": "The programme at a glance",
+        "heading": "A Structured Approach to Advanced-Stage OSMF Care",
+        "subheading": "Therapy First, Products Second",
         "text": "",
         "center": false,
-        "columns": "4",
+        "columns": "3",
         "media": "icon",
-        "card_style": "benefit",
+        "card_style": "numbered",
+        "accent": "blue",
+        "intro_badge": "",
+        "intro_title": "",
+        "intro_text": "",
+        "intro_note": "",
+        "ticks": "",
+        "note": "<p>The programme is a structured oral-care approach. It is not a stand-alone cure for OSMF and does not guarantee reversal of fibrosis or a particular improvement in mouth opening.</p>",
+        "note_style": "plain",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"
@@ -345,6 +500,7 @@
     },
     "how": {
       "type": "mt-use-steps",
+      "disabled": true,
       "blocks": {
         "step_1": {
           "type": "step",
@@ -401,39 +557,60 @@
         "row_1": {
           "type": "row",
           "settings": {
-            "label": "Product Name",
-            "value": "MARCEL OMR Therapy Advance Kit"
+            "label": "Programme Name",
+            "value": "MARCEL OMR Therapy Advance Programme"
           }
         },
         "row_2": {
           "type": "row",
           "settings": {
-            "label": "Kit Contents",
-            "value": "MARCEL OraShield Oral Rinse 10 mL and MARCEL Smile Toothpaste 30 g"
+            "label": "Intended Programme Framework",
+            "value": "Stage 3 & Stage 4 OSMF, subject to professional assessment"
           }
         },
         "row_3": {
           "type": "row",
           "settings": {
-            "label": "Optional, Sold Separately",
-            "value": "MARCEL® MOFlex, when recommended by a healthcare professional"
+            "label": "Core Kit Contents",
+            "value": "MARCEL OraShield Therapeutic Oral Rinse, 10 mL, and MARCEL Smile Toothpaste, 30 g"
           }
         },
         "row_4": {
           "type": "row",
           "settings": {
-            "label": "Intended Stage Association",
-            "value": "Stage 3 & Stage 4 OSMF"
+            "label": "Optional Adjunct",
+            "value": "MARCEL® MOFlex device, optional and not included in the two-product kit"
           }
         },
         "row_5": {
           "type": "row",
           "settings": {
-            "label": "Also Part of the Routine",
-            "value": "Prescribed mouth and jaw exercises, and professional guidance as appropriate"
+            "label": "OraShield Directions",
+            "value": "5 to 10 drops (roughly ½ mL) in about 160 mL of lukewarm water. Rinse and gargle for 20 to 30 seconds, then spit out. Do not swallow."
           }
         },
         "row_6": {
+          "type": "row",
+          "settings": {
+            "label": "OraShield Frequency",
+            "value": "Twice daily or as advised by the treating professional"
+          }
+        },
+        "row_7": {
+          "type": "row",
+          "settings": {
+            "label": "Smile Directions",
+            "value": "Brush thoroughly for at least two minutes, preferably twice daily or as directed. Rinse thoroughly and do not swallow."
+          }
+        },
+        "row_8": {
+          "type": "row",
+          "settings": {
+            "label": "Care Framework",
+            "value": "12 weeks: Relief, Activation, Restoration and Reinforcement"
+          }
+        },
+        "row_9": {
           "type": "row",
           "settings": {
             "label": "MRP",
@@ -447,14 +624,321 @@
         "row_3",
         "row_4",
         "row_5",
-        "row_6"
+        "row_6",
+        "row_7",
+        "row_8",
+        "row_9"
+      ],
+      "settings": {
+        "eyebrow": "At a glance",
+        "heading": "Advance Programme Information",
+        "text": "Core kit contents, intended programme association and key directions.",
+        "show_image": false,
+        "art": "none",
+        "media_style": "plain",
+        "head_1": "",
+        "head_2": "",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "nav": {
+      "type": "mt-page-nav",
+      "blocks": {
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "The programme",
+            "target": "benefits"
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Kit contents",
+            "target": "parts"
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Daily routine",
+            "target": "routine"
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "12-week journey",
+            "target": "journey"
+          }
+        },
+        "link_5": {
+          "type": "link",
+          "settings": {
+            "label": "Progress tracker",
+            "target": "download"
+          }
+        },
+        "link_6": {
+          "type": "link",
+          "settings": {
+            "label": "Is it right for you?",
+            "target": "guidance"
+          }
+        },
+        "link_7": {
+          "type": "link",
+          "settings": {
+            "label": "Programme information",
+            "target": "info"
+          }
+        },
+        "link_8": {
+          "type": "link",
+          "settings": {
+            "label": "FAQs",
+            "target": "faq"
+          }
+        },
+        "link_9": {
+          "type": "link",
+          "settings": {
+            "label": "Contact MARCEL Team",
+            "target": "cta"
+          }
+        }
+      },
+      "block_order": [
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "link_5",
+        "link_6",
+        "link_7",
+        "link_8",
+        "link_9"
+      ],
+      "settings": {
+        "label": "On this page"
+      }
+    },
+    "parts": {
+      "type": "mt-kit-parts",
+      "blocks": {
+        "part_1": {
+          "type": "part",
+          "settings": {
+            "art": "pd-orashield",
+            "tag": "Core kit component",
+            "title": "MARCEL OraShield",
+            "subtitle": "Therapeutic Oral Rinse, 10 mL",
+            "text": "The oral-rinse component of the Advance Programme. Dilute as directed, rinse and gargle for 20 to 30 seconds, then spit out. Use twice daily or as advised by the treating professional.",
+            "optional": false,
+            "link_label": "View product",
+            "link_to": "custom",
+            "link": "/products/marcel-ora-shield"
+          }
+        },
+        "part_2": {
+          "type": "part",
+          "settings": {
+            "art": "pd-smile",
+            "tag": "Core kit component",
+            "title": "MARCEL Smile",
+            "subtitle": "Therapeutic Toothpaste, 30 g",
+            "text": "The daily oral-hygiene component. It supports oral hygiene, healthy gums, fresh breath and oral mucosal care as part of the wider programme.",
+            "optional": false,
+            "link_label": "View product",
+            "link_to": "custom",
+            "link": "/products/marcel-smile"
+          }
+        },
+        "part_3": {
+          "type": "part",
+          "settings": {
+            "art": "pd-moflex",
+            "tag": "Optional adjunct",
+            "title": "MARCEL® MOFlex",
+            "subtitle": "Mouth-opening device",
+            "text": "May be recommended by an OSMF Care Specialist for selected mouth-opening exercises. It is not one of the two core kit products and is not appropriate for every patient.",
+            "optional": true,
+            "link_label": "View product",
+            "link_to": "custom",
+            "link": "/products/marcel-mo-device"
+          }
+        }
+      },
+      "block_order": [
+        "part_1",
+        "part_2",
+        "part_3"
+      ],
+      "settings": {
+        "eyebrow": "What the Advance Programme brings together",
+        "heading": "Two Core Products and One Optional Adjunct",
+        "text": "The kit contains two core products. The optional MOFlex device is considered separately and should only be used when recommended following individual professional assessment.",
+        "layout": "stack",
+        "note": "<p><strong>Important:</strong> MARCEL® MOFlex is optional. Do not use the device without an individual assessment and instructions from a qualified professional. Never force mouth opening or exercise into pain.</p>",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "routine": {
+      "type": "mt-routine",
+      "blocks": {
+        "routine_1": {
+          "type": "routine",
+          "settings": {
+            "title": "MARCEL OraShield: Oral Rinse",
+            "items": "Dilute 5 to 10 drops (roughly ½ mL) in about 160 mL of lukewarm water.\nRinse and gargle for 20 to 30 seconds.\nSpit out the solution. Do not swallow.\nUse twice daily, or as advised by your physician or MARCEL OSMF Consultant."
+          }
+        },
+        "routine_2": {
+          "type": "routine",
+          "settings": {
+            "title": "MARCEL Smile: Toothpaste",
+            "items": "Brush thoroughly for at least two minutes.\nPreferably use twice daily, or as directed by a dentist or physician.\nRinse thoroughly after brushing.\nUse only as directed. Do not swallow."
+          }
+        }
+      },
+      "block_order": [
+        "routine_1",
+        "routine_2"
       ],
       "settings": {
         "eyebrow": "",
-        "heading": "Product Information",
-        "text": "",
-        "head_1": "Particulars",
-        "head_2": "Details",
+        "heading": "The Daily Advance Programme Routine",
+        "text": "Follow the directions on each product label and the care plan provided by your treating healthcare professional.",
+        "note": "<p><strong>Exercises:</strong> Where prescribed, perform mouth and jaw exercises selected and demonstrated by the treating professional. Follow the advised technique and do not force movement or stretch into pain. Stop and seek guidance if an exercise causes pain or concerning symptoms.</p>",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "journey": {
+      "type": "mt-icon-cards",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "icon": "none",
+            "art": "none",
+            "title": "Relief",
+            "highlight": false,
+            "text": "Initial focus on addressing discomfort and supporting oral comfort.",
+            "pill": "Weeks 1 and 2",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "icon": "none",
+            "art": "none",
+            "title": "Activation",
+            "highlight": false,
+            "text": "Build consistency with the recommended oral-care routine and professional guidance.",
+            "pill": "Weeks 3 to 6",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "icon": "none",
+            "art": "none",
+            "title": "Restoration",
+            "highlight": false,
+            "text": "Continue the structured approach to oral comfort and function, with progress reviewed individually.",
+            "pill": "Weeks 6 to 10",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "icon": "none",
+            "art": "none",
+            "title": "Reinforcement",
+            "highlight": false,
+            "text": "Reinforce care habits, follow-up and ongoing professional support.",
+            "pill": "Weeks 11 and 12",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ],
+      "settings": {
+        "eyebrow": "A structured care framework",
+        "heading": "The 12-Week Care Journey",
+        "subheading": "",
+        "text": "The 12-week framework organises care into four phases. It is a care journey, not a clinical trial, a fixed prescription for every patient or a guarantee of an outcome.",
+        "center": false,
+        "columns": "4",
+        "media": "icon",
+        "card_style": "numbered",
+        "accent": "blue",
+        "intro_badge": "",
+        "intro_title": "",
+        "intro_text": "",
+        "intro_note": "",
+        "ticks": "",
+        "note": "",
+        "note_style": "plain",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "download": {
+      "type": "mt-download",
+      "settings": {
+        "eyebrow": "Track your progress",
+        "heading": "Your 3-Week Recovery Tracker",
+        "text": "Once a week, circle the number that best describes how you feel and note how many fingers fit comfortably when you open your mouth. At the end of each week, share a clear photo of the tracker with the MARCEL Team on WhatsApp so we can guide your next steps.",
+        "points": "Rate burning while eating, mouth tightness and eating comfort every week\nRecord your mouth opening with the finger guide, before therapy and each week\nTick off your daily routine, mouth opening exercises and habit goals",
+        "button_label": "Download the tracker (PDF)",
+        "file_link": "",
+        "note": "Measure only comfortable opening. Never force your mouth open.",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "guidance": {
+      "type": "mt-fit-guide",
+      "settings": {
+        "eyebrow": "Who this is for",
+        "heading": "Honest Guidance: <em>Is This Kit Right for You?</em>",
+        "text": "We want every patient to make an informed decision based on their diagnosis, stage and individual situation.",
+        "yes_title": "This programme may be suitable to discuss if:",
+        "yes_items": "A qualified healthcare professional has assessed you and considers you suitable within the Stage 3 and Stage 4 OSMF care framework.\nYou are looking for a structured oral-care routine rather than trying individual products without guidance.\nYou experience ongoing oral tightness, burning discomfort, restricted mouth opening or difficulties with eating and oral hygiene.\nYou want the two core products, MARCEL OraShield and MARCEL Smile, to form part of one organised daily routine.\nYou are prepared to follow the recommended routine and take part in the full 12-week care journey, with professional review as advised.",
+        "no_title": "Consider getting guidance first if:",
+        "no_items": "You have not been examined or are unsure whether your symptoms are due to OSMF. Arrange a professional assessment before choosing a programme.\nYou are in an early stage, have mild symptoms or are unsure whether the Advance Programme is appropriate. The right approach depends on your clinical assessment.\nYou want to try one product on its own before choosing a kit. Discuss the most appropriate option with a healthcare professional.\nYou would like help understanding the products or programme. Contact Team MARCEL for general assistance, or request a teleconsultation with a MARCEL OSMF Consultant.\nYou have a persistent mouth ulcer, a red or white patch, a lump, unexplained bleeding or rapidly worsening symptoms. Seek prompt in-person examination rather than relying on a product kit.",
+        "link_1_label": "Contact Team MARCEL",
+        "link_1_to": "whatsapp",
+        "link_1": "",
+        "link_2_label": "Request teleconsultation",
+        "link_2_to": "consult",
+        "link_2": "",
+        "note": "Symptoms alone cannot confirm OSMF or determine its stage. The Advance Programme is intended for patients assessed by a qualified healthcare professional as suitable within the Stage 3 and Stage 4 framework. It does not replace diagnosis, individualised treatment planning, indicated medical or dental care, or referral.",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"
@@ -464,8 +948,14 @@
   "order": [
     "main",
     "promo",
+    "nav",
     "benefits",
+    "parts",
+    "routine",
     "how",
+    "journey",
+    "download",
+    "guidance",
     "info",
     "179437565770c9ea1b",
     "related",

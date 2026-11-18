@@ -1,0 +1,284 @@
+{{ 'mt-pd.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  "Honest guidance, is this right for you?" from the client REF pack: who it may suit (ticks) and when to get guidance
+  first (arrows), two links and a note. Italic text in the heading shows in orange.
+{%- endcomment -%}
+{%- capture l1 -%}{% render 'mt-link-to', key: section.settings.link_1_to, url: section.settings.link_1 %}{%- endcapture -%}
+{%- capture l2 -%}{% render 'mt-link-to', key: section.settings.link_2_to, url: section.settings.link_2 %}{%- endcapture -%}
+{%- assign yes_items = section.settings.yes_items | newline_to_br | split: '<br />' -%}
+{%- assign no_items = section.settings.no_items | newline_to_br | split: '<br />' -%}
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-fit-sec' %}">
+  <div class="mt-wrap">
+    <div class="mt-fit-head">
+      {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
+    </div>
+    <div class="mt-fit">
+      <div class="mt-fit-col mt-fit-col--yes">
+        <p class="mt-fit-h">{%- render 'mt-icon', icon: 'check' -%}{{ section.settings.yes_title | escape }}</p>
+        <ul role="list">{%- for t in yes_items -%}{%- assign t = t | strip -%}{%- if t != blank -%}<li>{%- render 'mt-icon', icon: 'check' -%}<span>{{ t | escape }}</span></li>{%- endif -%}{%- endfor -%}</ul>
+      </div>
+      <div class="mt-fit-col mt-fit-col--no">
+        <p class="mt-fit-h">{%- render 'mt-icon', icon: 'arrow-right' -%}{{ section.settings.no_title | escape }}</p>
+        <ul role="list">{%- for t in no_items -%}{%- assign t = t | strip -%}{%- if t != blank -%}<li>{%- render 'mt-icon', icon: 'arrow-right' -%}<span>{{ t | escape }}</span></li>{%- endif -%}{%- endfor -%}</ul>
+        {%- if section.settings.link_1_label != blank or section.settings.link_2_label != blank -%}
+          <div class="mt-fit-links">
+            {%- if section.settings.link_1_label != blank -%}<a class="mt-btn mt-btn-primary mt-btn-sm" href="{{ l1 }}"{% if section.settings.link_1_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>{{ section.settings.link_1_label | escape }}</a>{%- endif -%}
+            {%- if section.settings.link_2_label != blank -%}<a class="mt-btn mt-btn-secondary mt-btn-sm" href="{{ l2 }}"{% if section.settings.link_2_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>{{ section.settings.link_2_label | escape }}</a>{%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+    {%- if section.settings.note != blank -%}<p class="mt-fit-note">{{ section.settings.note | escape }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel honest guidance",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "yes_title",
+      "label": "Suitable column title",
+      "default": "This may be suitable to discuss if:"
+    },
+    {
+      "type": "textarea",
+      "id": "yes_items",
+      "label": "Suitable points",
+      "info": "One per line."
+    },
+    {
+      "type": "text",
+      "id": "no_title",
+      "label": "Guidance column title",
+      "default": "Consider getting guidance first if:"
+    },
+    {
+      "type": "textarea",
+      "id": "no_items",
+      "label": "Guidance points",
+      "info": "One per line."
+    },
+    {
+      "type": "text",
+      "id": "link_1_label",
+      "label": "First button"
+    },
+    {
+      "type": "select",
+      "id": "link_1_to",
+      "label": "First button opens",
+      "options": [
+        {
+          "value": "custom",
+          "label": "Custom link below"
+        },
+        {
+          "value": "test",
+          "label": "MARCEL OSMF Self-Check"
+        },
+        {
+          "value": "therapy",
+          "label": "MARCEL OMR Therapy page"
+        },
+        {
+          "value": "foundation",
+          "label": "Foundation Kit page"
+        },
+        {
+          "value": "advance",
+          "label": "Advance Kit page"
+        },
+        {
+          "value": "journey",
+          "label": "12-Week Care Journey"
+        },
+        {
+          "value": "consult",
+          "label": "MARCEL OSMF Consultant booking"
+        },
+        {
+          "value": "specialists",
+          "label": "Find an OSMF Specialist"
+        },
+        {
+          "value": "help",
+          "label": "Get Help page"
+        },
+        {
+          "value": "evidence",
+          "label": "Clinical evidence page"
+        },
+        {
+          "value": "products",
+          "label": "All products"
+        },
+        {
+          "value": "whatsapp",
+          "label": "WhatsApp chat"
+        }
+      ],
+      "default": "whatsapp"
+    },
+    {
+      "type": "url",
+      "id": "link_1",
+      "label": "First button custom link"
+    },
+    {
+      "type": "text",
+      "id": "link_2_label",
+      "label": "Second button"
+    },
+    {
+      "type": "select",
+      "id": "link_2_to",
+      "label": "Second button opens",
+      "options": [
+        {
+          "value": "custom",
+          "label": "Custom link below"
+        },
+        {
+          "value": "test",
+          "label": "MARCEL OSMF Self-Check"
+        },
+        {
+          "value": "therapy",
+          "label": "MARCEL OMR Therapy page"
+        },
+        {
+          "value": "foundation",
+          "label": "Foundation Kit page"
+        },
+        {
+          "value": "advance",
+          "label": "Advance Kit page"
+        },
+        {
+          "value": "journey",
+          "label": "12-Week Care Journey"
+        },
+        {
+          "value": "consult",
+          "label": "MARCEL OSMF Consultant booking"
+        },
+        {
+          "value": "specialists",
+          "label": "Find an OSMF Specialist"
+        },
+        {
+          "value": "help",
+          "label": "Get Help page"
+        },
+        {
+          "value": "evidence",
+          "label": "Clinical evidence page"
+        },
+        {
+          "value": "products",
+          "label": "All products"
+        },
+        {
+          "value": "whatsapp",
+          "label": "WhatsApp chat"
+        }
+      ],
+      "default": "consult"
+    },
+    {
+      "type": "url",
+      "id": "link_2",
+      "label": "Second button custom link"
+    },
+    {
+      "type": "textarea",
+      "id": "note",
+      "label": "Note"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "normal"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel honest guidance"
+    }
+  ]
+}
+{% endschema %}

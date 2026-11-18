@@ -135,9 +135,29 @@
         "label": "WhatsApp MARCEL Team",
         "hide_mobile": true
       }
+    },
+    "guidance": {
+      "type": "mt-cta-band",
+      "settings": {
+        "style": "navy",
+        "eyebrow": "",
+        "heading": "Need Guidance? Talk to MARCEL Team.",
+        "text": "If you have questions about your oral health, your habits or the next steps, connect with Team MARCEL for guidance. A persistent ulcer or suspicious red or white patch needs prompt professional assessment.",
+        "form": true,
+        "button_1_label": "WhatsApp MARCEL Team",
+        "button_1_to": "whatsapp",
+        "button_1_link": "",
+        "button_2_label": "",
+        "button_2_to": "consult",
+        "button_2_link": "",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
     }
   },
   "order": [
+    "guidance",
     "footer",
     "mobile_bar",
     "whatsapp"

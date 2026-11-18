@@ -1,31 +1,58 @@
 {%- comment -%}
-  Language switch (English / Hindi). Renders only when the store has more than one published language
-  (Settings > Languages), so nothing shows until Hindi is published. Each other language is a submit button of
-  Shopify's localization form; Shopify returns the visitor to the same page in that language.
+  Language toggle: every published language (Settings > Languages) in one pill, the current language filled in. The
+  others are submit buttons of Shopify's localization form, which returns the visitor to the same page in that
+  language. Renders only when the store has more than one published language. In the header the labels shorten to
+  EN, हिं, ગુ where the full menu leaves little room (1321 to 1499 px).
 
   Accepts:
-  - place: {String} 'head' (compact pill in the header) or 'drawer' (full-width button in the mobile menu)
+  - place: {String} 'head' (compact toggle in the header) or 'drawer' (full-width toggle in the mobile menu)
   - id: {String} unique form id
 
   Usage:
   {% render 'mt-lang-switch', place: 'head', id: 'MtLangHead' %}
 {%- endcomment -%}
 {%- if localization.available_languages.size > 1 -%}
-  {%- assign lang_class = 'mt-lang mt-lang--' | append: place -%}
+  {%- liquid
+    assign lang_class = 'mt-lang mt-lang--' | append: place
+    case localization.language.iso_code
+      when 'hi'
+        assign lang_label = 'भाषा'
+      when 'gu'
+        assign lang_label = 'ભાષા'
+      else
+        assign lang_label = 'localization.language_label' | t
+    endcase
+  -%}
   {%- form 'localization', id: id, class: lang_class -%}
-    {%- for language in localization.available_languages -%}
-      {%- unless language.iso_code == localization.language.iso_code -%}
-        <button
-          type="submit"
-          class="mt-lang-btn"
-          name="language_code"
-          value="{{ language.iso_code }}"
-          lang="{{ language.iso_code }}"
-        >
-          {%- if place == 'drawer' -%}{%- render 'mt-icon', icon: 'refresh' -%}{%- endif -%}
-          {{- language.endonym_name | capitalize -}}
-        </button>
-      {%- endunless -%}
-    {%- endfor -%}
+    {%- if place == 'drawer' -%}<span class="mt-lang-label" aria-hidden="true">{{ lang_label | escape }}</span>{%- endif -%}
+    <div class="mt-lang-seg" role="group" aria-label="{{ lang_label | escape }}">
+      {%- for language in localization.available_languages -%}
+        {%- liquid
+          assign lang_full = language.endonym_name | capitalize
+          case language.iso_code
+            when 'en'
+              assign lang_short = 'EN'
+            when 'hi'
+              assign lang_short = 'हिं'
+            when 'gu'
+              assign lang_short = 'ગુ'
+            else
+              assign lang_short = language.iso_code | slice: 0, 2 | upcase
+          endcase
+        -%}
+        {%- capture lang_text -%}
+          <span class="visually-hidden">{{ lang_full | escape }}</span>
+          <span class="mt-lang-full" aria-hidden="true">{{ lang_full | escape }}</span>
+          <span class="mt-lang-short" aria-hidden="true">{{ lang_short | escape }}</span>
+        {%- endcapture -%}
+        {%- if language.iso_code == localization.language.iso_code -%}
+          <span class="mt-lang-opt is-active" aria-current="true" lang="{{ language.iso_code }}">{{ lang_text }}</span>
+        {%- else -%}
+          <button type="submit" class="mt-lang-opt" name="language_code" value="{{ language.iso_code }}" lang="{{ language.iso_code }}">
+            {{- lang_text -}}
+          </button>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
   {%- endform -%}
 {%- endif -%}

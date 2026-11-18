@@ -1,0 +1,733 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "mt-main-product",
+      "blocks": {
+        "feature_1": {
+          "type": "perk",
+          "settings": {
+            "icon": "target",
+            "text": "Foundation Kit for Stage 1 or 2, Advance Kit for Stage 3 or 4"
+          }
+        },
+        "feature_2": {
+          "type": "perk",
+          "settings": {
+            "icon": "check",
+            "text": "Includes MARCEL Smile Toothpaste"
+          }
+        },
+        "feature_3": {
+          "type": "perk",
+          "settings": {
+            "icon": "clock",
+            "text": "A structured daily routine"
+          }
+        },
+        "feature_4": {
+          "type": "perk",
+          "settings": {
+            "icon": "calendar",
+            "text": "Organised around a 12-week care journey"
+          }
+        },
+        "feature_5": {
+          "type": "perk",
+          "settings": {
+            "icon": "doctor",
+            "text": "Use as advised by a healthcare professional"
+          }
+        },
+        "accordion_1": {
+          "type": "accordion",
+          "settings": {
+            "title": "Delivery and returns",
+            "text": "<p>Ships across India in discreet packaging. Delivery times are shown at checkout.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4",
+        "feature_5",
+        "accordion_1"
+      ],
+      "settings": {
+        "headline": "",
+        "supporting": "Care beyond teeth and gums",
+        "intro": "<p><strong>A thoughtful addition to your daily oral-care routine.</strong></p><p>MARCEL OMR Therapy Protection Kit combines MARCEL OraLis Herbal Mouthwash and MARCEL Smile Therapeutic Toothpaste in one convenient kit for everyday oral hygiene.</p>",
+        "details": "",
+        "how_lines": "",
+        "safety": "",
+        "cta_label": "WhatsApp MARCEL Team",
+        "cta_to": "whatsapp",
+        "cta_link": "",
+        "cta2_label": "",
+        "cta2_to": "products",
+        "cta2_link": "",
+        "shop_link": "",
+        "home_label": "Home",
+        "shop_label": "Products",
+        "image_fit": "cover",
+        "gallery_label": "Product images and details",
+        "thumbs_label": "Choose a picture",
+        "prev_label": "Previous picture",
+        "next_label": "Next picture",
+        "thumbs_prev_label": "Earlier pictures",
+        "thumbs_next_label": "More pictures",
+        "how_title": "How to Use",
+        "how_thumb": "How to use",
+        "routine_title": "Your Routine",
+        "routine_thumb": "Routine",
+        "ingredients_title": "Key Ingredients",
+        "ingredients_thumb": "Ingredients",
+        "free_title": "Made with Care",
+        "kit_inside_title": "What’s Inside",
+        "kit_thumb": "In the kit",
+        "kit_heading": "In This Kit",
+        "best_prefix": "Best for",
+        "add_label": "Add to cart",
+        "sold_out_label": "Sold out",
+        "variant_style": "cards",
+        "pack_label": "Pack size",
+        "pack_notes": "",
+        "show_buy_now": false,
+        "features_heading": "Key Features",
+        "qty_label": "Quantity",
+        "minus_label": "Decrease quantity",
+        "plus_label": "Increase quantity",
+        "acc_how": "How to use",
+        "acc_kit": "What’s in the kit",
+        "acc_routine": "Your daily routine",
+        "acc_ingredients": "Ingredients",
+        "acc_whats_in": "What’s in it",
+        "free_note": "Full ingredient list as printed on the pack.",
+        "acc_caution": "Caution and storage",
+        "acc_stage": "Which stage is it for?",
+        "show_description": false,
+        "acc_about": "About this product",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight",
+        "style": "hero",
+        "hero_title": "MARCEL OMR Therapy Protection Kit",
+        "badge": "A two-product daily oral-care kit",
+        "pack_size": "OraLis 250 mL + Smile 30 g",
+        "pack_size_label": "Kit Contents",
+        "mrp_label": "MRP",
+        "image_chips": false,
+        "hero_media": "image",
+        "badge_pill": true,
+        "hero_tone": "green",
+        "hero_art": "life-protection",
+        "hero_frame": "photo",
+        "hero_note": ""
+      }
+    },
+    "promo": {
+      "type": "mt-promo-card",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "title": "Daily Oral Hygiene",
+            "text": "Everyday support for oral hygiene."
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "title": "Habit Awareness",
+            "text": "Recognise the risks associated with areca nut and tobacco use."
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "title": "Take Action Early",
+            "text": "Quitting and professional examination matter."
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Daily Oral Care Deserves Attention",
+        "text": "Using gutkha, mawa, pan masala, supari or tobacco is not harmless just because you feel normal today. Make informed choices about your oral health.",
+        "text_2": "",
+        "button_label": "",
+        "button_to": "custom",
+        "button_link": "",
+        "art": "none",
+        "numbered": false,
+        "note": "",
+        "tone": "green",
+        "overlap": true,
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      }
+    },
+    "nav": {
+      "type": "mt-page-nav",
+      "blocks": {
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Kit contents",
+            "target": "parts"
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Awareness check",
+            "target": "awareness"
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Next steps",
+            "target": "steps"
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Daily routine",
+            "target": "routine"
+          }
+        },
+        "link_5": {
+          "type": "link",
+          "settings": {
+            "label": "Kit information",
+            "target": "info"
+          }
+        },
+        "link_6": {
+          "type": "link",
+          "settings": {
+            "label": "FAQs",
+            "target": "faq"
+          }
+        },
+        "link_7": {
+          "type": "link",
+          "settings": {
+            "label": "Contact MARCEL Team",
+            "target": "cta"
+          }
+        }
+      },
+      "block_order": [
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "link_5",
+        "link_6",
+        "link_7"
+      ],
+      "settings": {
+        "label": "On this page"
+      }
+    },
+    "parts": {
+      "type": "mt-kit-parts",
+      "blocks": {
+        "part_1": {
+          "type": "part",
+          "settings": {
+            "art": "pd-oralis",
+            "tag": "",
+            "title": "MARCEL OraLis",
+            "subtitle": "Herbal Mouthwash",
+            "text": "Complements daily oral hygiene by helping maintain oral cleanliness, freshening breath and leaving the mouth feeling refreshed.",
+            "optional": false,
+            "link_label": "View product",
+            "link_to": "custom",
+            "link": "/products/marcel-oralis"
+          }
+        },
+        "part_2": {
+          "type": "part",
+          "settings": {
+            "art": "pd-smile",
+            "tag": "",
+            "title": "MARCEL Smile",
+            "subtitle": "Therapeutic Toothpaste",
+            "text": "Designed for everyday oral care, supporting oral mucosal health, healthy gums and strong enamel while helping keep teeth clean and breath fresh.",
+            "optional": false,
+            "link_label": "View product",
+            "link_to": "custom",
+            "link": "/products/marcel-smile"
+          }
+        }
+      },
+      "block_order": [
+        "part_1",
+        "part_2"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Two Products in One Daily Oral-Care Combination",
+        "text": "The Protection Kit combines two products with different roles in everyday oral hygiene. Each product should be used according to its label directions.",
+        "layout": "row",
+        "note": "",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "awareness": {
+      "type": "mt-awareness",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "qid": "q1",
+            "text": "Do you consume gutkha, pan masala, supari (areca nut), khaini, mawa, padiki, tobacco, or any other product containing supari or tobacco?",
+            "options": "yes | Yes\nno | No"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "qid": "q2",
+            "text": "Do you believe that your habit will not cause you any health problems in the future?",
+            "options": "yes | Yes\nno | No\nunsure | Not sure"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "qid": "q3",
+            "text": "Do you believe that because many elders consumed tobacco or supari for years without any obvious illness, the same will be true for you?",
+            "options": "yes | Yes\nno | No\nunsure | Not sure"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "qid": "q4",
+            "text": "Are you aware of how serious the health problems associated with consuming supari or tobacco can be?",
+            "options": "yes | Yes\nno | No\nunsure | Not sure"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "qid": "q5",
+            "text": "Have you ever tried to quit this habit?",
+            "options": "yes | Yes\nno | No\ntried | Tried, but couldn’t quit"
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "qid": "q6",
+            "text": "Do you know that this habit can lead to conditions such as Oral Submucous Fibrosis (OSMF), difficulty opening the mouth, persistent oral ulcers and oral cancer?",
+            "options": "yes | Yes\nno | No\nunsure | Not sure"
+          }
+        },
+        "question_7": {
+          "type": "question",
+          "settings": {
+            "qid": "q7",
+            "text": "Are you willing to take steps today to quit this habit and protect your oral health, rather than wait for symptoms or health problems to appear?",
+            "options": "ready | Yes, I am ready\nhelp | I need help\nnotready | Not ready yet"
+          }
+        },
+        "question_8": {
+          "type": "changes",
+          "settings": {
+            "text": "Have you noticed any of the following changes in your mouth?",
+            "help": "Select all that apply. If none, select “None of these”.",
+            "options": "Burning while eating spicy food\nCheek tightness or stiffness\nDifficulty opening the mouth\nPersistent oral ulcers\nUnusual red or white patches\nNone of these"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6",
+        "question_7",
+        "question_8"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "How Much Do You Know About the Risks of Your Habit?",
+        "text": "Answer these questions honestly. This awareness check is designed to help you reflect and identify sensible next steps. It is not a medical diagnosis or a personal risk score.",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "steps": {
+      "type": "mt-icon-cards",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "icon": "none",
+            "art": "none",
+            "title": "Work Towards Quitting",
+            "highlight": false,
+            "text": "Stop using tobacco and areca nut products. If quitting is difficult, seek help from a qualified healthcare professional or a tobacco-cessation service.",
+            "pill": "",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "icon": "none",
+            "art": "none",
+            "title": "Get Your Mouth Examined",
+            "highlight": false,
+            "text": "Arrange an oral examination with a qualified dentist or medical professional, even if you do not notice symptoms.",
+            "pill": "",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "icon": "none",
+            "art": "none",
+            "title": "Maintain Daily Oral Hygiene",
+            "highlight": false,
+            "text": "Brush regularly and use appropriate oral-care products as directed. The Protection Kit can complement these steps, not replace them.",
+            "pill": "",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "What Matters Most Is Taking the Right Next Step",
+        "subheading": "",
+        "text": "If you use gutkha, mawa, pan masala, supari or tobacco, do not wait for symptoms before taking your oral health seriously.",
+        "center": false,
+        "columns": "3",
+        "media": "icon",
+        "card_style": "numbered",
+        "accent": "green",
+        "intro_badge": "",
+        "intro_title": "",
+        "intro_text": "",
+        "intro_note": "",
+        "ticks": "",
+        "note": "<p><strong>Important:</strong> The Protection Kit is a daily oral-care combination. It has not been established as preventing OSMF, reversing fibrosis, neutralising the effects of tobacco or areca nut, or making continued use safe. It does not replace quitting, oral examination, diagnosis or medical and dental care. Persistent burning, cheek tightness, reduced mouth opening, a non-healing ulcer, or unusual red or white patches need professional assessment.</p>",
+        "note_style": "warn",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "routine": {
+      "type": "mt-use-steps",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Brush with MARCEL Smile",
+            "text": "Brush thoroughly for <strong>at least two minutes</strong>. Preferably use it <strong>twice daily</strong>, or as directed by your dental or healthcare professional. <em>Do not swallow.</em>",
+            "art": "brush"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Rinse with MARCEL OraLis",
+            "text": "Rinse with <strong>10 mL</strong>, about <strong>2 capfuls</strong>, for <strong>30 to 60 seconds</strong>, then spit out. <em>Do not swallow.</em>",
+            "art": "rinse"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Keep Up the Routine",
+            "text": "Use MARCEL OraLis <strong>twice daily</strong> or as directed by an Ayurvedic physician. Keep brushing regularly and cleaning between your teeth.",
+            "art": "repeat"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "A Simple Daily Oral-Care Routine",
+        "text": "Use each product according to its own label directions. Mouthwash complements brushing; it does not replace it.",
+        "note": "Follow the directions printed on the current product packs. If you have oral symptoms, a diagnosed condition, or are under treatment, ask your treating professional whether these products are suitable for you.",
+        "layout": "cards",
+        "number_style": "padded",
+        "list_mark": "number",
+        "media_art": "none",
+        "media_alt": "",
+        "media_art_2": "none",
+        "media_alt_2": "",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "info": {
+      "type": "mt-spec-table",
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Kit Name",
+            "value": "MARCEL OMR Therapy Protection Kit"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Component 1",
+            "value": "MARCEL OraLis Herbal Mouthwash, 250 mL"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Component 2",
+            "value": "MARCEL Smile Therapeutic Toothpaste, 30 g"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Kit MRP",
+            "value": "[price] (inclusive of all taxes)"
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "Product Use",
+            "value": "Everyday oral hygiene"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Protection Kit Information",
+        "text": "A quick reference to the kit contents and individual product details.",
+        "show_image": true,
+        "art": "pd-protection",
+        "media_style": "plain",
+        "head_1": "Particulars",
+        "head_2": "Details",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "179437565770c9ea1b": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_BmeE7x": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_BmeE7x"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "related": {
+      "type": "mt-related-products",
+      "settings": {
+        "source": "metafield",
+        "intent": "related",
+        "limit": 6,
+        "eyebrow": "More from MARCEL",
+        "heading": "You May Also Like",
+        "details_label": "View product details",
+        "add_label": "Add to cart",
+        "sold_out_label": "Sold out",
+        "card_style": "compact",
+        "image_fit": "cover",
+        "layout": "carousel",
+        "per_desktop": "4",
+        "prev_label": "Previous products",
+        "next_label": "Next products",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "faq": {
+      "type": "mt-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "What is the MARCEL OMR Therapy Protection Kit?",
+            "answer": "<p>It is a two-product daily oral-care combination containing MARCEL OraLis Herbal Mouthwash (250 mL) and MARCEL Smile Therapeutic Toothpaste (30 g).</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Who is this kit intended for?",
+            "answer": "<p>It is a two-product daily oral-care kit. People who use gutkha, mawa, pan masala, supari or tobacco should make quitting their priority and arrange a professional oral examination. The kit is not a substitute for either step.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Does the Protection Kit prevent OSMF?",
+            "answer": "<p>No. The kit has not been shown to prevent OSMF or reduce the risk of developing it. It should never be a reason to continue tobacco or areca nut use.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Can I continue using gutkha or supari if I use this kit?",
+            "answer": "<p>No oral-care product makes continued gutkha, tobacco or areca nut use safe. The important step is to stop using these products and to seek help if you find quitting difficult.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "How do I use MARCEL OraLis?",
+            "answer": "<p>Rinse with 10 mL (about 2 capfuls) for 30 to 60 seconds, then spit out. Do not swallow. Use twice daily or as directed by an Ayurvedic physician, following the product label.</p>"
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "How do I use MARCEL Smile?",
+            "answer": "<p>Brush thoroughly for at least two minutes, preferably twice daily or as directed by your dental or healthcare professional. Follow the directions on the pack and do not swallow.</p>"
+          }
+        },
+        "question_7": {
+          "type": "question",
+          "settings": {
+            "question": "Should I wait until symptoms appear before getting examined?",
+            "answer": "<p>No. If you use tobacco or areca nut products, take the risks seriously and ask a professional about an oral examination. Persistent burning, tightness, reduced mouth opening, ulcers or unusual red or white patches need prompt assessment.</p>"
+          }
+        },
+        "question_8": {
+          "type": "question",
+          "settings": {
+            "question": "Can this kit replace OSMF treatment or a dental examination?",
+            "answer": "<p>No. It is a daily oral-care combination, not an OSMF treatment programme. It does not replace clinical assessment, diagnosis, quitting risk habits or any treatment recommended by a qualified professional.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6",
+        "question_7",
+        "question_8"
+      ],
+      "settings": {
+        "eyebrow": "Patient information",
+        "heading": "Frequently Asked Questions",
+        "open_first": false,
+        "one_at_a_time": false,
+        "schema_markup": true,
+        "show_help": false,
+        "help_title": "Have Questions?",
+        "help_text": "The MARCEL Team can help with any question about the Protection Kit.",
+        "whatsapp_label": "WhatsApp MARCEL Team",
+        "link_label": "See all FAQs",
+        "link": "/pages/faq",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal",
+        "layout": "side"
+      }
+    },
+    "cta": {
+      "type": "mt-cta-band",
+      "settings": {
+        "style": "navy",
+        "eyebrow": "",
+        "heading": "Need Guidance? Talk to MARCEL Team.",
+        "text": "If you have questions about your oral health, your habits or the next steps, connect with Team MARCEL for guidance. A persistent ulcer or suspicious red or white patch needs prompt professional assessment.",
+        "form": true,
+        "button_1_label": "WhatsApp MARCEL Team",
+        "button_1_to": "whatsapp",
+        "button_1_link": "",
+        "button_2_label": "",
+        "button_2_to": "consult",
+        "button_2_link": "",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "promo",
+    "nav",
+    "parts",
+    "awareness",
+    "steps",
+    "routine",
+    "info",
+    "179437565770c9ea1b",
+    "related",
+    "faq",
+    "cta"
+  ]
+}

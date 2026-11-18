@@ -1,0 +1,144 @@
+{{ 'mt-pd.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Download card from the client REF pack: the 3-week recovery tracker (PDF) with its preview. The file is the
+  uploaded link when given, otherwise the built-in PDF.
+{%- endcomment -%}
+{%- liquid
+  assign file = section.settings.file_link
+  if file == blank
+    assign file = 'mt-recovery-tracker.pdf' | asset_url
+  endif
+-%}
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-dl-sec' %}">
+  <div class="mt-wrap">
+    <div class="mt-dl">
+      <a class="mt-dl-thumb" href="{{ file }}" target="_blank" rel="noopener" aria-label="{{ section.settings.button_label | escape }}">
+        <img src="{{ 'mt-tracker-thumb.webp' | asset_url }}" alt="" width="620" height="878" loading="lazy">
+      </a>
+      <div class="mt-dl-body">
+        {%- if section.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2 class="mt-h2">{{ section.settings.heading }}</h2>{%- endif -%}
+        {%- if section.settings.text != blank -%}<div class="mt-dl-text">{{ section.settings.text }}</div>{%- endif -%}
+        {%- if section.settings.points != blank -%}
+          {%- assign pts = section.settings.points | newline_to_br | split: '<br />' -%}
+          <ul class="mt-dl-points" role="list">{%- for t in pts -%}{%- assign t = t | strip -%}{%- if t != blank -%}<li>{%- render 'mt-icon', icon: 'check' -%}<span>{{ t | escape }}</span></li>{%- endif -%}{%- endfor -%}</ul>
+        {%- endif -%}
+        <a class="mt-btn mt-btn-primary" href="{{ file }}" target="_blank" rel="noopener" download>{%- render 'mt-icon', icon: 'arrow-right' -%}{{ section.settings.button_label | escape }}</a>
+        {%- if section.settings.note != blank -%}<p class="mt-dl-note">{{ section.settings.note | escape }}</p>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel download",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "textarea",
+      "id": "points",
+      "label": "Points",
+      "info": "One per line."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button",
+      "default": "Download the tracker (PDF)"
+    },
+    {
+      "type": "url",
+      "id": "file_link",
+      "label": "File link",
+      "info": "Optional: a PDF uploaded to Content > Files. Leave empty for the built-in tracker."
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Small note"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "normal"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel download"
+    }
+  ]
+}
+{% endschema %}

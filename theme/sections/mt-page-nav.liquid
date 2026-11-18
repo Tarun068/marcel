@@ -1,0 +1,98 @@
+{{ 'mt-pd.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  "On this page" from the client REF pack: a bar of links to the sections below, which stays under the header while
+  the page scrolls and marks the section in view. A link's target is the section's name in the template JSON (for
+  example faq); the guidance band above the footer is "guidance".
+{%- endcomment -%}
+<nav class="mt mt-pagenav-sec" aria-label="{{ section.settings.label | escape }}">
+  <div class="mt-wrap mt-pagenav">
+    {%- if section.settings.label != blank -%}<span class="mt-pagenav-label">{{ section.settings.label | escape }}</span>{%- endif -%}
+    <div class="mt-pagenav-links">
+      {%- for block in section.blocks -%}
+        <a href="#{{ block.settings.target | handleize }}" data-mt-target="{{ block.settings.target | strip }}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</a>
+      {%- endfor -%}
+    </div>
+  </div>
+</nav>
+<script>
+  (() => {
+    const nav = document.currentScript.previousElementSibling;
+    if (!nav || nav.dataset.ready) return;
+    nav.dataset.ready = '1';
+    // The sections below the bar are parsed after this script runs, so link them up once the page has loaded.
+    const init = () => {
+      const links = [...nav.querySelectorAll('[data-mt-target]')];
+      const find = (key) => document.querySelector(`[id$="__${CSS.escape(key)}"]`) || document.getElementById(key);
+      const pairs = links.map((a) => [a, find(a.dataset.mtTarget)]).filter(([, el]) => el);
+      links.forEach((a) => { if (!pairs.some(([x]) => x === a)) a.hidden = true; });
+      const offset = () => (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--mt-header-h')) || 72) + nav.offsetHeight + 8;
+      pairs.forEach(([a, el]) => a.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset() + 2, behavior: 'smooth' });
+      }));
+      const mark = () => {
+        const y = offset() + 4;
+        let current = null;
+        pairs.forEach(([a, el]) => { if (el.getBoundingClientRect().top <= y) current = a; });
+        links.forEach((a) => a.toggleAttribute('aria-current', a === current));
+        nav.classList.toggle('is-stuck', nav.getBoundingClientRect().top <= (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--mt-header-h')) || 72) + 1);
+        if (current && current.offsetParent) {
+          const box = current.parentElement;
+          if (current.offsetLeft < box.scrollLeft || current.offsetLeft + current.offsetWidth > box.scrollLeft + box.clientWidth) box.scrollTo({ left: current.offsetLeft - 16, behavior: 'smooth' });
+        }
+    };
+    let raf;
+    window.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(mark); }, { passive: true });
+    mark();
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
+    else init();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Marcel on this page",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "On this page"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Section"
+        },
+        {
+          "type": "text",
+          "id": "target",
+          "label": "Section name",
+          "info": "The section's name in the template JSON, for example benefits, how, info or faq. Use guidance for the band above the footer."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel on this page"
+    }
+  ]
+}
+{% endschema %}

@@ -65,7 +65,7 @@
       ],
       "settings": {
         "style": "hero",
-        "hero_title": "Marcel OraShield",
+        "hero_title": "MARCEL OraShield",
         "badge": "Stage 3 & Stage 4 OSMF",
         "pack_size": "10 mL",
         "pack_size_label": "Pack Size",
@@ -73,7 +73,7 @@
         "image_chips": true,
         "headline": "Support for advanced OSMF care",
         "supporting": "Therapeutic Oral Rinse",
-        "intro": "<p><strong>A core component of Marcel OMR Therapy™ Advance Programme.</strong><br/><br/>Developed to support the management of burning sensation, oral tightness and reduced mouth opening associated with Stage 3–4 Oral Submucous Fibrosis (OSMF).</p>",
+        "intro": "<p><strong>A core component of MARCEL OMR Therapy Advance Programme.</strong></p><p>Developed to support the management of burning sensation, oral tightness and reduced mouth opening associated with Stage 3 and Stage 4 Oral Submucous Fibrosis (OSMF).</p>",
         "details": "",
         "how_lines": "MARCEL Ora-Shield is a concentrate. Dilute it before use.\nAdd 5 to 10 drops to about 160 mL of lukewarm water.\nGargle or rinse for 20 to 30 seconds, then spit out.\nUse twice daily, or as advised by your physician or MARCEL OSMF Consultant.\nAfter each rinse, do the prescribed mouth and jaw exercises.",
         "safety": "Do not swallow.",
@@ -126,7 +126,12 @@
         "acc_about": "About this product",
         "background": "paper",
         "sheet": false,
-        "spacing": "tight"
+        "spacing": "tight",
+        "hero_media": "image",
+        "badge_pill": false,
+        "hero_tone": "blue",
+        "hero_art": "pd-orashield",
+        "hero_frame": "none"
       }
     },
     "fit": {
@@ -153,13 +158,46 @@
     },
     "promo": {
       "type": "mt-promo-card",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "title": "Burning Sensation",
+            "text": "Discomfort, especially while eating certain foods."
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "title": "Oral Tightness",
+            "text": "A feeling of tightness within the oral tissues."
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "title": "Reduced Mouth Opening",
+            "text": "Difficulty opening the mouth fully."
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3"
+      ],
       "settings": {
-        "heading": "Experiencing OSMF symptoms?",
-        "text": "Understand the common signs, symptoms and stages of Oral Submucous Fibrosis.",
-        "button_label": "Explore OSMF Symptoms",
+        "eyebrow": "Understanding advanced-stage OSMF",
+        "heading": "Experiencing These Symptoms?",
+        "text": "Stage 3 and Stage 4 OSMF may involve burning sensation, oral tightness and reduced mouth opening. Understanding these concerns is an important part of seeking appropriate care.",
+        "text_2": "",
+        "button_label": "",
         "button_to": "custom",
-        "button_link": "/pages/understand-osmf#signs",
-        "art": "symptoms",
+        "button_link": "",
+        "art": "none",
+        "numbered": false,
+        "note": "",
+        "tone": "blue",
         "overlap": true,
         "background": "paper",
         "sheet": false,
@@ -172,11 +210,12 @@
         "benefit_1": {
           "type": "card",
           "settings": {
-            "icon": "shield",
+            "icon": "s-burn",
             "art": "none",
-            "title": "Supports Oral Comfort",
+            "title": "Helps Reduce Oral Discomfort",
             "highlight": false,
-            "text": "Helps support the management of oral discomfort, including burning sensation while eating spicy food. It also forms part of the care approach for individuals experiencing discomfort associated with oral tightness and restricted mouth opening.",
+            "text": "Developed to support the management of burning sensation and oral discomfort associated with OSMF.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -185,11 +224,12 @@
         "benefit_2": {
           "type": "card",
           "settings": {
-            "icon": "drop",
+            "icon": "s-tight",
             "art": "none",
-            "title": "Supports Oral Mucosal Care",
+            "title": "Supports Reduced Oral Tightness",
             "highlight": false,
-            "text": "Supports the oral care approach for individuals experiencing dryness, tightness and discomfort of the inner lining of the mouth.",
+            "text": "Part of a structured care approach for concerns involving oral tightness.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -198,11 +238,12 @@
         "benefit_3": {
           "type": "card",
           "settings": {
-            "icon": "chart",
+            "icon": "s-open",
             "art": "none",
-            "title": "Supports Functional Care",
-            "highlight": true,
-            "text": "Forms part of a structured approach for individuals experiencing restricted mouth opening (trismus) and related functional difficulties.",
+            "title": "Supports Better Mouth Opening",
+            "highlight": false,
+            "text": "Included in the Advance Programme alongside appropriate prescribed mouth and jaw exercises.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -217,11 +258,20 @@
       "settings": {
         "eyebrow": "",
         "heading": "Key Benefits",
-        "text": "",
+        "subheading": "Support for Concerns Associated with Stage 3 & Stage 4 OSMF",
+        "text": "MARCEL OraShield is a core component of MARCEL OMR Therapy Advance Programme. Its supportive benefit areas are:",
         "center": false,
         "columns": "3",
         "media": "icon",
         "card_style": "benefit",
+        "accent": "blue",
+        "intro_badge": "",
+        "intro_title": "",
+        "intro_text": "",
+        "intro_note": "",
+        "ticks": "",
+        "note": "<p>These are supportive product benefit statements, not a guarantee of individual results. MARCEL OraShield does not replace professional diagnosis or treatment.</p>",
+        "note_style": "plain",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"
@@ -276,7 +326,14 @@
         "note": "After each rinse, do the prescribed mouth and jaw exercises.",
         "background": "mist",
         "sheet": false,
-        "spacing": "normal"
+        "spacing": "normal",
+        "layout": "cards",
+        "number_style": "plain",
+        "list_mark": "number",
+        "media_art": "howto-orashield",
+        "media_alt": "MARCEL OraShield drops being added to a glass of lukewarm water, next to the bottle and carton",
+        "media_art_2": "howto-orashield-drops",
+        "media_alt_2": "Close-up of a drop falling from the bottle into the water"
       }
     },
     "info": {
@@ -307,7 +364,7 @@
           "type": "row",
           "settings": {
             "label": "Therapy Association",
-            "value": "MARCEL OMR Therapy Advance Kit"
+            "value": "MARCEL OMR Therapy Advance Programme"
           }
         },
         "row_5": {
@@ -328,14 +385,14 @@
           "type": "row",
           "settings": {
             "label": "Rinsing Duration",
-            "value": "20 to 30 seconds"
+            "value": "20 to 30 seconds, then spit out. Do not swallow."
           }
         },
         "row_8": {
           "type": "row",
           "settings": {
             "label": "Frequency",
-            "value": "Twice daily, or as advised"
+            "value": "Twice daily, or as advised by your MARCEL OSMF Consultant or an OSMF Specialist Doctor"
           }
         },
         "row_9": {
@@ -358,14 +415,16 @@
         "row_9"
       ],
       "settings": {
-        "eyebrow": "",
+        "eyebrow": "At a glance",
         "heading": "Product Information",
-        "text": "",
+        "text": "Key details for MARCEL OraShield Therapeutic Oral Rinse.",
         "show_image": true,
         "image": "shopify://shop_images/MARCEL_3D_OraShield.png",
+        "art": "pd-orashield",
+        "media_style": "plain",
         "head_1": "Particulars",
         "head_2": "Details",
-        "background": "paper",
+        "background": "mist",
         "sheet": false,
         "spacing": "normal"
       }
@@ -397,45 +456,38 @@
           "type": "question",
           "settings": {
             "question": "What is MARCEL OraShield?",
-            "answer": "<p>MARCEL OraShield is a therapeutic oral rinse and a key part of MARCEL OMR Therapy Advance Kit. It is used as part of a care plan for OSMF, with guidance from a healthcare professional.</p>"
+            "answer": "<p>MARCEL OraShield is a therapeutic oral rinse and a core component of MARCEL OMR Therapy Advance Programme for Stage 3 and Stage 4 OSMF.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
             "question": "Who is MARCEL OraShield intended for?",
-            "answer": "<p>It is for people with Stage 3 and Stage 4 OSMF. A MARCEL OSMF Consultant can assess you and help decide which care approach is suitable.</p>"
+            "answer": "<p>It is included in the Advance Programme for people experiencing Stage 3 or Stage 4 Oral Submucous Fibrosis (OSMF). Please discuss whether it suits you with a qualified doctor.</p>"
           }
         },
         "question_3": {
           "type": "question",
           "settings": {
             "question": "How should I use MARCEL OraShield?",
-            "answer": "<p>It comes as a concentrate. Add 5 to 10 drops to about 160 mL of lukewarm water, gargle or rinse for 20 to 30 seconds and spit out. Do not swallow. Follow each rinse with your prescribed mouth and jaw exercises.</p>"
+            "answer": "<p>Dilute 5 to 10 drops in about 160 mL of lukewarm water. Rinse and gargle for 20 to 30 seconds, then spit out. Do not swallow.</p>"
           }
         },
         "question_4": {
           "type": "question",
           "settings": {
             "question": "How frequently should I use it?",
-            "answer": "<p>Use it twice daily, or as advised by your physician or MARCEL OSMF Consultant.</p>"
+            "answer": "<p>Twice daily, or as advised by your MARCEL OSMF Consultant or OSMF Specialist Doctor.</p>"
           }
         },
         "question_5": {
           "type": "question",
           "settings": {
-            "question": "Can MARCEL OraShield be used alone?",
-            "answer": "<p>MARCEL OraShield is one part of MARCEL OMR Therapy Advance Kit. The complete routine includes:</p><ul><li>MARCEL OraShield Therapeutic Oral Rinse</li><li>MARCEL Smile Toothpaste</li><li>Prescribed mouth and jaw exercises</li><li>Follow-up with your MARCEL OSMF Consultant</li></ul><p>Following only one part may leave your care routine incomplete. We recommend following the complete routine as advised by your consultant.</p>"
+            "question": "Can MARCEL OraShield cure OSMF?",
+            "answer": "<p>No cure claim is made. MARCEL OraShield is a supportive part of a broader OSMF care approach and does not replace professional diagnosis or treatment.</p>"
           }
         },
         "question_6": {
-          "type": "question",
-          "settings": {
-            "question": "Does MARCEL OraShield cure OSMF?",
-            "answer": "<p>A complete cure or a return to exactly the same mouth opening cannot be promised. The focus is to assess the condition, address symptoms and work toward the best achievable function for the individual. A qualified OSMF Specialist Doctor can explain the options after assessing the case.</p>"
-          }
-        },
-        "question_7": {
           "type": "question",
           "settings": {
             "question": "What if I feel irritation or an unusual reaction?",
@@ -449,12 +501,11 @@
         "question_3",
         "question_4",
         "question_5",
-        "question_6",
-        "question_7"
+        "question_6"
       ],
       "settings": {
         "layout": "side",
-        "eyebrow": "",
+        "eyebrow": "Patient information",
         "heading": "Frequently Asked Questions",
         "open_first": false,
         "one_at_a_time": false,
@@ -507,6 +558,80 @@
         "button_2_link": "",
         "background": "paper",
         "sheet": false,
+        "spacing": "normal",
+        "form": true
+      }
+    },
+    "nav": {
+      "type": "mt-page-nav",
+      "blocks": {
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Benefits",
+            "target": "benefits"
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "How to use",
+            "target": "how"
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Progress tracker",
+            "target": "download"
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Product information",
+            "target": "info"
+          }
+        },
+        "link_5": {
+          "type": "link",
+          "settings": {
+            "label": "FAQs",
+            "target": "faq"
+          }
+        },
+        "link_6": {
+          "type": "link",
+          "settings": {
+            "label": "Contact MARCEL Team",
+            "target": "cta"
+          }
+        }
+      },
+      "block_order": [
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "link_5",
+        "link_6"
+      ],
+      "settings": {
+        "label": "On this page"
+      }
+    },
+    "download": {
+      "type": "mt-download",
+      "settings": {
+        "eyebrow": "Track your progress",
+        "heading": "Your 3-Week Recovery Tracker",
+        "text": "Once a week, circle the number that best describes how you feel and note how many fingers fit comfortably when you open your mouth. At the end of each week, share a clear photo of the tracker with the MARCEL Team on WhatsApp so we can guide your next steps.",
+        "points": "Rate burning while eating, mouth tightness and eating comfort every week\nRecord your mouth opening with the finger guide, before therapy and each week\nTick off your daily routine, mouth opening exercises and habit goals",
+        "button_label": "Download the tracker (PDF)",
+        "file_link": "",
+        "note": "Measure only comfortable opening. Never force your mouth open.",
+        "background": "paper",
+        "sheet": false,
         "spacing": "normal"
       }
     }
@@ -515,8 +640,10 @@
     "main",
     "fit",
     "promo",
+    "nav",
     "benefits",
     "how",
+    "download",
     "info",
     "faq",
     "17943754375ac09f7e",

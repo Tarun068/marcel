@@ -230,3 +230,30 @@
 .mt-mini-card--benefit.is-highlight p { color: rgba(255, 255, 255, .78); }
 .mt-mini-card--benefit.is-highlight > .mt-i { background: var(--mt-paper); color: var(--mt-blue); }
 .mt-mini-card--benefit.is-highlight::after { background: rgba(255, 255, 255, .07); }
+
+/* Icon cards, client REF pack round (2026-11-16): subheading, intro card, numbered cards, pills, tick list, note,
+   green accent. */
+.mt-ic-subhead { display: grid; gap: 8px; max-width: 860px; margin: 0 0 clamp(22px, 3vw, 32px); }
+.mt-sec-head:has(+ .mt-ic-subhead) { margin-bottom: 12px; }
+.mt-ic-subhead--center { margin-inline: auto; text-align: center; }
+.mt .mt-ic-sub { color: var(--mt-ink); font-family: var(--mt-font); font-size: 20px; font-weight: 800; line-height: 1.3; }
+.mt-ic-intro { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 18px; padding: clamp(20px, 3vw, 30px); border-radius: 20px; background: color-mix(in srgb, var(--mt-blue) 5%, #fff); box-shadow: inset 4px 0 0 var(--mt-blue), 0 0 0 1px color-mix(in srgb, var(--mt-blue) 14%, #fff); }
+.mt-ic-intro-badge { flex: none; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 14px; background: var(--mt-blue); color: var(--mt-on-dark); font-size: 22px; font-weight: 800; }
+.mt-ic-intro-title { color: var(--mt-blue); font-size: 20px; font-weight: 800; letter-spacing: .04em; line-height: 1.3; text-transform: uppercase; }
+.mt-ic-intro-text { margin-top: 8px; color: var(--mt-ink-2); font-size: 15.5px; line-height: 1.65; }
+.mt-ic-intro-note { margin-top: 10px; color: var(--mt-ink-3); font-size: 13px; line-height: 1.55; }
+.mt-ic-accent-green .mt-ic-intro { background: color-mix(in srgb, #1E9E5A 6%, #fff); box-shadow: inset 4px 0 0 #1E9E5A, 0 0 0 1px color-mix(in srgb, #1E9E5A 18%, #fff); }
+.mt-ic-accent-green .mt-ic-intro-badge { background: #1E9E5A; }
+.mt-ic-accent-green .mt-ic-intro-title { color: #137A45; }
+.mt-card-num { display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 6px; border-radius: 50%; background: color-mix(in srgb, var(--mt-aqua) 14%, #fff); color: var(--mt-teal); font-size: 15px; font-weight: 800; }
+.mt-card-pill { justify-self: start; margin-top: 4px; padding: 4px 10px; border-radius: 99px; background: color-mix(in srgb, var(--mt-aqua) 14%, #fff); color: var(--mt-teal); font-size: 12.5px; font-weight: 800; }
+.mt-ic-ticks { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 22px 0 0; padding: 0; list-style: none; }
+.mt-ic-ticks li { display: flex; gap: 8px; align-items: center; color: var(--mt-ink); font-size: 15px; font-weight: 700; }
+.mt-ic-ticks .mt-i { width: 18px; height: 18px; color: var(--mt-teal); stroke-width: 2.6; }
+.mt-ic-note { margin-top: 16px; color: var(--mt-ink-3); font-size: 13px; line-height: 1.6; }
+.mt-ic-accent-green .mt-ic-ticks .mt-i { color: #1E9E5A; }
+.mt-ic-accent-green .mt-mini-card--benefit::before { background: linear-gradient(90deg, #34C38B, #1E9E5A); }
+.mt-ic-accent-green .mt-mini-card--benefit > .mt-i { background: color-mix(in srgb, #1E9E5A 10%, #fff); color: #137A45; }
+.mt-ic-accent-green .mt-card-num, .mt-ic-accent-green .mt-card-pill { background: color-mix(in srgb, #1E9E5A 12%, #fff); color: #137A45; }
+.mt-ic-note--warn { margin-top: 22px; padding: 14px 18px; border-radius: 14px; background: #FFF7E6; box-shadow: inset 0 0 0 1px #F2D49A; color: #5E4208; font-size: 14.5px; }
+.mt-ic-note--warn strong { color: #8A5A00; }

@@ -26,6 +26,23 @@
     .mt-cta-band--navy { grid-template-columns: minmax(0, 1fr); }
     .mt-cta-band--navy .mt-btn-row { justify-content: flex-start; }
   }
+  /* Name and Mobile No. form (setting "Show the WhatsApp form"): fields side by side, the button under them. */
+  .mt-cta-band--form { grid-template-columns: minmax(0, 1fr); justify-items: start; }
+  .mt-cta-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px; width: min(100%, 720px); }
+  .mt-cta-form label { display: grid; gap: 6px; color: var(--mt-on-dark); font-size: 14px; font-weight: 700; }
+  .mt .mt-cta-form .mt-input { height: 50px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, .32); background: rgba(255, 255, 255, .1); color: var(--mt-on-dark); font-size: 15px; }
+  .mt .mt-cta-form .mt-input::placeholder { color: rgba(255, 255, 255, .62); }
+  .mt .mt-cta-form .mt-input:focus { outline: none; border-color: var(--mt-mint); background: rgba(255, 255, 255, .16); }
+  .mt .mt-cta-form .mt-input.is-invalid { border-color: #FFB4B4; }
+  .mt-cta-form .mt-btn { grid-column: 1 / -1; justify-self: start; }
+  .mt-cta-form-err { grid-column: 1 / -1; margin: 0; color: #FFD2D2; font-size: 14px; font-weight: 600; }
+  @media (max-width: 560px) {
+    .mt-cta-form { grid-template-columns: minmax(0, 1fr); }
+    .mt .mt-cta-form .mt-btn { width: 100%; justify-self: stretch; }
+  }
+  /* The guidance band in the footer group shows on every page, except a page that has its own form band (each
+     product page has one in its own words), so the form never shows twice. */
+  body:has(#MainContent [data-mt-wa-form]) .shopify-section-group-footer-group:has([data-mt-wa-form]) { display: none; }
 {%- endstyle -%}
 
 {%- capture btn1_link -%}{% render 'mt-link-to', key: section.settings.button_1_to, url: section.settings.button_1_link %}{%- endcapture -%}
@@ -33,13 +50,47 @@
 
 <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-cta' %}">
   <div class="mt-wrap">
-    <div class="mt-cta-band mt-on-dark{% if section.settings.style == 'navy' %} mt-cta-band--navy{% endif %}">
+    <div class="mt-cta-band mt-on-dark{% if section.settings.style == 'navy' %} mt-cta-band--navy{% endif %}{% if section.settings.form %} mt-cta-band--form{% endif %}">
       <div class="mt-cta-copy">
         {%- if section.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
         {%- if section.settings.heading != blank -%}<h2 class="mt-h2">{{ section.settings.heading }}</h2>{%- endif -%}
         {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
       </div>
-      {%- if section.settings.button_1_label != blank or section.settings.button_2_label != blank -%}
+      {%- if section.settings.form -%}
+        {%- liquid
+          assign wa_digits = settings.mt_whatsapp_number | remove: ' ' | remove: '+' | remove: '-' | remove: '(' | remove: ')'
+          assign regarding = page_title | default: shop.name
+        -%}
+        <form class="mt-cta-form" data-mt-wa-form data-wa="{{ wa_digits }}" data-intro="{{ section.settings.wa_intro | escape }}" data-regarding="{{ regarding | escape }}" data-regarding-label="{{ section.settings.regarding_label | escape }}" data-name-label="{{ section.settings.name_label | escape }}" data-mobile-label="{{ section.settings.mobile_label | escape }}" novalidate>
+          <label>{{ section.settings.name_label | escape }}<input class="mt-input" type="text" name="name" autocomplete="name" placeholder="{{ section.settings.name_placeholder | escape }}" required></label>
+          <label>{{ section.settings.mobile_label | escape }}<input class="mt-input" type="tel" name="mobile" inputmode="numeric" autocomplete="tel" maxlength="13" placeholder="{{ section.settings.mobile_placeholder | escape }}" required></label>
+          <p class="mt-cta-form-err" data-mt-wa-error hidden>{{ section.settings.form_error | escape }}</p>
+          <button type="submit" class="mt-btn mt-btn-light">{%- render 'mt-icon', icon: 'whatsapp' -%}{{ section.settings.form_button | escape }}</button>
+        </form>
+        <script>
+          (() => {
+            const form = document.currentScript.previousElementSibling;
+            if (!form || form.dataset.ready) return;
+            form.dataset.ready = '1';
+            const err = form.querySelector('[data-mt-wa-error]');
+            const name = form.querySelector('[name="name"]');
+            const mobile = form.querySelector('[name="mobile"]');
+            mobile.addEventListener('input', () => (mobile.value = mobile.value.replace(/[^0-9+]/g, '')));
+            form.addEventListener('submit', (e) => {
+              e.preventDefault();
+              const n = name.value.trim();
+              const digits = mobile.value.replace(/\D/g, '').replace(/^91(?=\d{10}$)/, '');
+              const bad = [!n && name, !/^[6-9]\d{9}$/.test(digits) && mobile].filter(Boolean);
+              [name, mobile].forEach((i) => i.classList.toggle('is-invalid', bad.includes(i)));
+              err.hidden = !bad.length;
+              if (bad.length) { bad[0].focus(); return; }
+              const d = form.dataset;
+              const text = `${d.intro}\n${d.nameLabel}: ${n}\n${d.mobileLabel}: ${digits}` + (d.regarding ? `\n${d.regardingLabel}: ${d.regarding}` : '');
+              window.open(`https://wa.me/${d.wa}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+            });
+          })();
+        </script>
+      {%- elsif section.settings.button_1_label != blank or section.settings.button_2_label != blank -%}
         <div class="mt-btn-row">
           {%- if section.settings.button_1_label != blank -%}
             <a class="mt-btn mt-btn-light" href="{{ btn1_link }}"{% if section.settings.button_1_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
@@ -62,8 +113,7 @@
   "name": "Marcel call to action",
   "disabled_on": {
     "groups": [
-      "header",
-      "footer"
+      "header"
     ]
   },
   "settings": [
@@ -111,7 +161,56 @@
       "type": "select",
       "id": "button_1_to",
       "label": "Button 1 opens",
-      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "options": [
+        {
+          "value": "custom",
+          "label": "Custom link below"
+        },
+        {
+          "value": "test",
+          "label": "MARCEL OSMF Self-Check"
+        },
+        {
+          "value": "therapy",
+          "label": "MARCEL OMR Therapy page"
+        },
+        {
+          "value": "foundation",
+          "label": "Foundation Kit page"
+        },
+        {
+          "value": "advance",
+          "label": "Advance Kit page"
+        },
+        {
+          "value": "journey",
+          "label": "12-Week Care Journey"
+        },
+        {
+          "value": "consult",
+          "label": "MARCEL OSMF Consultant booking"
+        },
+        {
+          "value": "specialists",
+          "label": "Find an OSMF Specialist"
+        },
+        {
+          "value": "help",
+          "label": "Get Help page"
+        },
+        {
+          "value": "evidence",
+          "label": "Clinical evidence page"
+        },
+        {
+          "value": "products",
+          "label": "All products"
+        },
+        {
+          "value": "whatsapp",
+          "label": "WhatsApp chat"
+        }
+      ],
       "default": "consult"
     },
     {
@@ -129,13 +228,122 @@
       "type": "select",
       "id": "button_2_to",
       "label": "Button 2 opens",
-      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "options": [
+        {
+          "value": "custom",
+          "label": "Custom link below"
+        },
+        {
+          "value": "test",
+          "label": "MARCEL OSMF Self-Check"
+        },
+        {
+          "value": "therapy",
+          "label": "MARCEL OMR Therapy page"
+        },
+        {
+          "value": "foundation",
+          "label": "Foundation Kit page"
+        },
+        {
+          "value": "advance",
+          "label": "Advance Kit page"
+        },
+        {
+          "value": "journey",
+          "label": "12-Week Care Journey"
+        },
+        {
+          "value": "consult",
+          "label": "MARCEL OSMF Consultant booking"
+        },
+        {
+          "value": "specialists",
+          "label": "Find an OSMF Specialist"
+        },
+        {
+          "value": "help",
+          "label": "Get Help page"
+        },
+        {
+          "value": "evidence",
+          "label": "Clinical evidence page"
+        },
+        {
+          "value": "products",
+          "label": "All products"
+        },
+        {
+          "value": "whatsapp",
+          "label": "WhatsApp chat"
+        }
+      ],
       "default": "specialists"
     },
     {
       "type": "url",
       "id": "button_2_link",
       "label": "Button 2 custom link"
+    },
+    {
+      "type": "header",
+      "content": "WhatsApp form"
+    },
+    {
+      "type": "checkbox",
+      "id": "form",
+      "label": "Show the WhatsApp form",
+      "default": false,
+      "info": "Name and Mobile No. fields in place of the buttons. Sending opens WhatsApp with these details; nothing is stored."
+    },
+    {
+      "type": "text",
+      "id": "name_label",
+      "label": "Name label",
+      "default": "Name"
+    },
+    {
+      "type": "text",
+      "id": "name_placeholder",
+      "label": "Name placeholder",
+      "default": "Enter your name"
+    },
+    {
+      "type": "text",
+      "id": "mobile_label",
+      "label": "Mobile label",
+      "default": "Mobile No."
+    },
+    {
+      "type": "text",
+      "id": "mobile_placeholder",
+      "label": "Mobile placeholder",
+      "default": "Enter your mobile number"
+    },
+    {
+      "type": "text",
+      "id": "form_button",
+      "label": "Form button",
+      "default": "Talk to Team MARCEL on WhatsApp"
+    },
+    {
+      "type": "text",
+      "id": "form_error",
+      "label": "Form error",
+      "default": "Please enter your name and a 10 digit mobile number."
+    },
+    {
+      "type": "text",
+      "id": "wa_intro",
+      "label": "Message start",
+      "default": "Hello Team MARCEL, I would like guidance."
+    },
+    {
+      "type": "text",
+      "id": "regarding_label",
+      "label": "Page line label",
+      "default": "Regarding",
+      "info": "The message ends with this label and the page title."
     },
     {
       "type": "header",

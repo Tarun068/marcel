@@ -116,8 +116,6 @@
                   <img class="mt-open-photo{% if v == open_default %} is-on{% endif %}" data-v="{{ v }}" src="{{ 'mt-stage-' | append: forloop.index | append: '.webp' | asset_url }}" width="720" height="540" alt="" loading="lazy">
                 {%- endfor -%}
               </span>
-              <div class="mt-gauge-row"><span>{{ section.settings.healthy_label | escape }}</span><b>{{ section.settings.healthy_value | escape }}</b></div>
-              <div class="mt-gauge-row"><span>{{ block.settings.range_label | escape }}</span><b>{{ block.settings.range | escape }}</b></div>
               <a class="mt-link" href="{{ test_link }}" data-mt-retake>{%- render 'mt-icon', icon: 'refresh' -%}{{ section.settings.retake_label | escape }}</a>
             </aside>
           </div>

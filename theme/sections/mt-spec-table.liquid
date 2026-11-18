@@ -2,13 +2,17 @@
 
 {%- comment -%}
   Product information from the client product page design: the product picture on the left, a two-column table on
-  the right. In a row value, [price] shows the product's current price.
+  the right. In a row value, [price] shows the product's current price and [price:30g] the price of the size named
+  after the colon, written exactly as the size is named in the admin.
 {%- endcomment -%}
 {%- liquid
   assign spec_img = blank
+  assign spec_art = blank
   if section.settings.show_image
     assign spec_img = section.settings.image
-    if spec_img == blank and product != blank
+    if spec_img == blank and section.settings.art != 'none'
+      assign spec_art = 'mt-' | append: section.settings.art | append: '.webp'
+    elsif spec_img == blank and product != blank
       assign spec_img = product.featured_image
     endif
   endif
@@ -18,14 +22,32 @@
     assign spec_variant = product.selected_or_first_available_variant
     assign price_text = spec_variant.price | money_without_trailing_zeros
   endif
+  case section.settings.art
+    when 'pd-protection'
+      assign art_w = 1200
+      assign art_h = 800
+    when 'pd-oralis'
+      assign art_w = 600
+      assign art_h = 900
+    when 'pd-moflex-features'
+      assign art_w = 416
+      assign art_h = 300
+    else
+      assign art_w = 900
+      assign art_h = 900
+  endcase
 -%}
 
 <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-spec-sec' %}">
   <div class="mt-wrap">
     {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
-    <div class="mt-spec{% if spec_img == blank %} mt-spec--solo{% endif %}">
-      {%- if spec_img != blank -%}
-        <div class="mt-spec-media">
+    <div class="mt-spec{% if spec_img == blank and spec_art == blank %} mt-spec--solo{% endif %}">
+      {%- if spec_art != blank -%}
+        <div class="mt-spec-media mt-spec-media--{{ section.settings.media_style }}">
+          <span class="mt-spec-disc"><img src="{{ spec_art | asset_url }}" alt="{{ product.title | escape }}" loading="lazy" width="{{ art_w }}" height="{{ art_h }}"></span>
+        </div>
+      {%- elsif spec_img != blank -%}
+        <div class="mt-spec-media mt-spec-media--{{ section.settings.media_style }}">
           <span class="mt-spec-disc">
             {{- spec_img | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 380px, 80vw', alt: spec_alt -}}
           </span>
@@ -34,17 +56,29 @@
       {%- if section.blocks.size > 0 -%}
         <div class="mt-spec-wrap">
           <table class="mt-spec-table">
+            {%- if section.settings.head_1 != blank or section.settings.head_2 != blank -%}
             <thead>
               <tr>
                 <th scope="col">{{ section.settings.head_1 | escape }}</th>
                 <th scope="col">{{ section.settings.head_2 | escape }}</th>
               </tr>
             </thead>
+            {%- endif -%}
             <tbody>
               {%- for block in section.blocks -%}
                 <tr {{ block.shopify_attributes }}>
                   <th scope="row">{{ block.settings.label | escape }}</th>
-                  <td>{{ block.settings.value | escape | replace: '[price]', price_text }}</td>
+                  {%- liquid
+                    assign cell = block.settings.value | escape | replace: '[price]', price_text
+                    if cell contains '[price:' and product != blank
+                      for v in product.variants
+                        assign token = v.title | escape | prepend: '[price:' | append: ']'
+                        assign v_price = v.price | money_without_trailing_zeros
+                        assign cell = cell | replace: token, v_price
+                      endfor
+                    endif
+                  -%}
+                  <td>{{ cell }}</td>
                 </tr>
               {%- endfor -%}
             </tbody>
@@ -95,16 +129,83 @@
       "info": "Leave empty to use the product's first picture."
     },
     {
+      "type": "select",
+      "id": "art",
+      "label": "Built-in picture",
+      "options": [
+        {
+          "value": "none",
+          "label": "None (product photo)"
+        },
+        {
+          "value": "pd-orashield",
+          "label": "OraShield pack"
+        },
+        {
+          "value": "pd-oracare",
+          "label": "Ora-Care pack"
+        },
+        {
+          "value": "pd-smile",
+          "label": "Smile tubes"
+        },
+        {
+          "value": "pd-foundation",
+          "label": "Foundation Kit"
+        },
+        {
+          "value": "pd-advance",
+          "label": "Advance Kit"
+        },
+        {
+          "value": "pd-protection",
+          "label": "Protection Kit"
+        },
+        {
+          "value": "pd-oralis",
+          "label": "OraLis bottle"
+        },
+        {
+          "value": "pd-moflex",
+          "label": "MOFlex device"
+        },
+        {
+          "value": "pd-moflex-features",
+          "label": "MOFlex design features"
+        }
+      ],
+      "default": "none",
+      "info": "Used when no picture is uploaded above."
+    },
+    {
+      "type": "select",
+      "id": "media_style",
+      "label": "Picture style",
+      "options": [
+        {
+          "value": "disc",
+          "label": "In a white circle"
+        },
+        {
+          "value": "plain",
+          "label": "On the tinted card"
+        }
+      ],
+      "default": "disc"
+    },
+    {
       "type": "text",
       "id": "head_1",
       "label": "First column heading",
-      "default": "Particulars"
+      "default": "Particulars",
+      "info": "Leave both headings empty to hide the heading row."
     },
     {
       "type": "text",
       "id": "head_2",
       "label": "Second column heading",
-      "default": "Details"
+      "default": "Details",
+      "info": "Leave both headings empty to hide the heading row."
     },
     {
       "type": "header",
@@ -177,7 +278,7 @@
           "type": "text",
           "id": "value",
           "label": "Value",
-          "info": "[price] shows the product's current price."
+          "info": "[price] shows the product's current price; [price:30g] shows the price of the size named 30g, written exactly as in the admin."
         }
       ]
     }

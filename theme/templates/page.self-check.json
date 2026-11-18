@@ -70,7 +70,7 @@
             "qid": "opening",
             "short": "Mouth opening",
             "question": "How many fingers fit vertically in your mouth?",
-            "options": "gt35 | 3 fingers | Opens comfortably, more than 35 mm | 3 fingers (over 35 mm)\n26to35 | 2 fingers | Feels a little tight, 26 to 35 mm | 2 fingers (26 to 35 mm)\n15to25 | 1 finger | Clearly restricted, 15 to 25 mm | 1 finger (15 to 25 mm)\nlt15 | Less than 1 finger | Very hard to open, under 15 mm | Less than 1 finger (under 15 mm)\nlt5 | Barely opens | Hardly any opening, under 5 mm | Barely opens (under 5 mm)",
+            "options": "gt35 | 4 fingers or more | Opens comfortably, more than 35 mm | 4 fingers or more (over 35 mm)\n26to35 | 3 fingers | Feels a little tight, 26 to 35 mm | 3 fingers (26 to 35 mm)\n15to25 | 2 fingers | Clearly restricted, 15 to 25 mm | 2 fingers (15 to 25 mm)\nlt15 | 1 finger or less | Very hard to open, under 15 mm | 1 finger or less (under 15 mm)\nlt5 | Barely able to open | Hardly any opening, under 5 mm | Barely able to open (under 5 mm)",
             "help": "Stack your fingers one above the other between your upper and lower front teeth. Don’t force it. If you measured with a ruler, use the millimetre range under each answer."
           }
         },

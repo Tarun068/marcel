@@ -1,0 +1,379 @@
+{{ 'mt-pd.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mt-awareness.js' | asset_url }}" defer="defer"></script>
+
+{%- comment -%}
+  Habit awareness check from the client REF pack (Protection Kit): questions with fixed IDs (q1 to q7) and a mouth
+  changes question; the result is worked out in the browser (assets/mt-awareness.js) and never sent or stored.
+  Answer values: q1 yes, no; q2, q3, q4, q6 yes, no, unsure; q5 yes, no, tried; q7 ready, help, notready.
+{%- endcomment -%}
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-aware-sec' %}">
+  <div class="mt-wrap">
+    {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
+    <mt-awareness class="mt-aware">
+      <script type="application/json" data-mt-aware-copy>{"submit_label": {{ section.settings.submit_label | json }}, "clear_label": {{ section.settings.clear_label | json }}, "privacy": {{ section.settings.privacy | json }}, "required_msg": {{ section.settings.required_msg | json }}, "nonuser_title": {{ section.settings.nonuser_title | json }}, "nonuser_text": {{ section.settings.nonuser_text | json }}, "nonuser_act_1": {{ section.settings.nonuser_act_1 | json }}, "nonuser_act_2": {{ section.settings.nonuser_act_2 | json }}, "user_title": {{ section.settings.user_title | json }}, "user_text": {{ section.settings.user_text | json }}, "user_act_1": {{ section.settings.user_act_1 | json }}, "user_act_2": {{ section.settings.user_act_2 | json }}, "belief_text": {{ section.settings.belief_text | json }}, "aware_text": {{ section.settings.aware_text | json }}, "tried_text": {{ section.settings.tried_text | json }}, "not_tried_text": {{ section.settings.not_tried_text | json }}, "ready_act": {{ section.settings.ready_act | json }}, "help_act": {{ section.settings.help_act | json }}, "notready_act": {{ section.settings.notready_act | json }}, "concern_title": {{ section.settings.concern_title | json }}, "concern_text": {{ section.settings.concern_text | json }}, "concern_act": {{ section.settings.concern_act | json }}, "none_text": {{ section.settings.none_text | json }}, "next_heading": {{ section.settings.next_heading | json }}, "remember": {{ section.settings.remember | json }}}</script>
+      <form class="mt-aware-form" novalidate>
+        {%- for block in section.blocks -%}
+          {%- assign lines = block.settings.options | newline_to_br | split: '<br />' -%}
+          {%- if block.type == 'question' -%}
+            <fieldset class="mt-aware-q" data-q="{{ block.settings.qid }}" {{ block.shopify_attributes }}>
+              <legend>{{ forloop.index }}. {{ block.settings.text | escape }}</legend>
+              <div class="mt-aware-opts">
+                {%- for line in lines -%}
+                  {%- assign parts = line | split: '|' -%}
+                  {%- assign v = parts[0] | strip -%}
+                  {%- assign l = parts[1] | default: parts[0] | strip -%}
+                  {%- if v != blank -%}
+                    <label class="mt-aware-opt"><input type="radio" name="{{ block.settings.qid }}" value="{{ v | escape }}"><span>{{ l | escape }}</span></label>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </fieldset>
+          {%- else -%}
+            <fieldset class="mt-aware-q mt-aware-q--multi" data-q="changes" {{ block.shopify_attributes }}>
+              <legend>{{ forloop.index }}. {{ block.settings.text | escape }}</legend>
+              {%- if block.settings.help != blank -%}<p class="mt-aware-help">{{ block.settings.help | escape }}</p>{%- endif -%}
+              <div class="mt-aware-checks">
+                {%- for line in lines -%}
+                  {%- assign l = line | strip -%}
+                  {%- if l != blank -%}
+                    <label class="mt-aware-opt"><input type="checkbox" name="changes" value="{{ l | escape }}"{% if forloop.last %} data-none{% endif %}><span>{{ l | escape }}</span></label>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </fieldset>
+          {%- endif -%}
+        {%- endfor -%}
+        <p class="mt-aware-error" data-mt-aware-error hidden>{{ section.settings.required_msg | escape }}</p>
+        <div class="mt-aware-actions">
+          <button type="submit" class="mt-btn mt-btn-primary">{{ section.settings.submit_label | escape }}</button>
+          <button type="reset" class="mt-aware-clear">{{ section.settings.clear_label | escape }}</button>
+        </div>
+        <p class="mt-aware-privacy">{{ section.settings.privacy | escape }}</p>
+      </form>
+      <div class="mt-aware-result" data-mt-aware-result hidden tabindex="-1" aria-live="polite"></div>
+    </mt-awareness>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel awareness check",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "header",
+      "content": "Result copy"
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Button",
+      "default": "See my awareness result"
+    },
+    {
+      "type": "text",
+      "id": "clear_label",
+      "label": "Clear button",
+      "default": "Clear answers"
+    },
+    {
+      "type": "textarea",
+      "id": "privacy",
+      "label": "Privacy line",
+      "default": "Your answers are processed only in this page. They are not sent to MARCEL or stored. This questionnaire cannot diagnose OSMF or determine your individual disease risk."
+    },
+    {
+      "type": "text",
+      "id": "required_msg",
+      "label": "Message when a question is unanswered",
+      "default": "Please answer every question."
+    },
+    {
+      "type": "text",
+      "id": "nonuser_title",
+      "label": "Result title, not using these products",
+      "default": "You are making an important choice by staying away."
+    },
+    {
+      "type": "textarea",
+      "id": "nonuser_text",
+      "label": "Result text, not using",
+      "default": "If you do not currently use tobacco or areca nut products, continue to avoid them. Not using these products is an important way to protect your oral health."
+    },
+    {
+      "type": "text",
+      "id": "nonuser_act_1",
+      "label": "Next step 1, not using",
+      "default": "Stay away from gutkha, tobacco, supari and products containing them."
+    },
+    {
+      "type": "textarea",
+      "id": "nonuser_act_2",
+      "label": "Next step 2, not using",
+      "default": "If you notice any persistent or unusual change in your mouth, arrange a professional examination."
+    },
+    {
+      "type": "text",
+      "id": "user_title",
+      "label": "Result title, using these products",
+      "default": "It is time to take this habit seriously."
+    },
+    {
+      "type": "textarea",
+      "id": "user_text",
+      "label": "Result text, using",
+      "default": "Using gutkha, pan masala, supari, khaini, mawa, padiki or tobacco can have serious consequences for oral health. Feeling healthy today does not mean that there is no risk."
+    },
+    {
+      "type": "textarea",
+      "id": "user_act_1",
+      "label": "Next step 1, using",
+      "default": "Work towards stopping the use of tobacco and areca nut products. If quitting feels difficult, seek help from a qualified healthcare professional or tobacco cessation service."
+    },
+    {
+      "type": "textarea",
+      "id": "user_act_2",
+      "label": "Next step 2, using",
+      "default": "Arrange an oral examination with a qualified dentist or oral medicine specialist, even if you do not currently notice symptoms."
+    },
+    {
+      "type": "textarea",
+      "id": "belief_text",
+      "label": "When questions 2 or 3 are answered Yes",
+      "default": "A reassuring belief, or the experience of older family members, cannot guarantee that you will remain free of harm. Health effects differ from person to person."
+    },
+    {
+      "type": "textarea",
+      "id": "aware_text",
+      "label": "When questions 4 or 6 are not answered Yes",
+      "default": "It is important to know that areca nut and tobacco use are associated with conditions including OSMF, restricted mouth opening, oral lesions and oral cancer. This does not mean every user will develop these conditions, but the risks should not be ignored."
+    },
+    {
+      "type": "textarea",
+      "id": "tried_text",
+      "label": "When question 5 is Tried, but couldn't quit",
+      "default": "You have tried before, and finding it difficult does not mean you cannot quit. Support and a planned quit attempt can help."
+    },
+    {
+      "type": "textarea",
+      "id": "not_tried_text",
+      "label": "When question 5 is No",
+      "default": "If you have not tried quitting yet, consider making this your first step. You do not need to wait for symptoms or a diagnosis."
+    },
+    {
+      "type": "textarea",
+      "id": "ready_act",
+      "label": "Next step when question 7 is Yes, I am ready",
+      "default": "Choose a quit date and ask someone you trust or a healthcare professional to support you."
+    },
+    {
+      "type": "textarea",
+      "id": "help_act",
+      "label": "Next step when question 7 is I need help",
+      "default": "Ask a healthcare professional or tobacco cessation service for help making a realistic quit plan."
+    },
+    {
+      "type": "textarea",
+      "id": "notready_act",
+      "label": "Next step when question 7 is Not ready yet",
+      "default": "Start by discussing your concerns with a healthcare professional and learning about the support available to help you quit."
+    },
+    {
+      "type": "text",
+      "id": "concern_title",
+      "label": "Result title when mouth changes are ticked",
+      "default": "Please arrange an oral health examination."
+    },
+    {
+      "type": "textarea",
+      "id": "concern_text",
+      "label": "Text when mouth changes are ticked ([list] shows them)",
+      "default": "You selected: [list]. These symptoms do not establish a diagnosis, but they should not be ignored. Talk to Team MARCEL for guidance. A persistent ulcer or suspicious red or white patch needs prompt professional assessment."
+    },
+    {
+      "type": "textarea",
+      "id": "concern_act",
+      "label": "First next step when mouth changes are ticked",
+      "default": "Do not delay professional assessment or rely on mouthwash or toothpaste to address these symptoms."
+    },
+    {
+      "type": "textarea",
+      "id": "none_text",
+      "label": "Text for None of these",
+      "default": "You selected “None of these”. That is useful information, but the absence of symptoms does not rule out early disease or remove the risks associated with tobacco and areca nut use."
+    },
+    {
+      "type": "text",
+      "id": "next_heading",
+      "label": "Next steps heading",
+      "default": "Recommended next steps"
+    },
+    {
+      "type": "textarea",
+      "id": "remember",
+      "label": "Closing reminder",
+      "default": "Remember: This awareness result is not a diagnosis or a personal risk assessment. The MARCEL OMR Therapy Protection Kit is for everyday oral care only. It is not proven to prevent or treat OSMF and does not make continued tobacco or supari use safe."
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "mist"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "normal"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "select",
+          "id": "qid",
+          "label": "Question ID",
+          "options": [
+            {
+              "value": "q1",
+              "label": "q1"
+            },
+            {
+              "value": "q2",
+              "label": "q2"
+            },
+            {
+              "value": "q3",
+              "label": "q3"
+            },
+            {
+              "value": "q4",
+              "label": "q4"
+            },
+            {
+              "value": "q5",
+              "label": "q5"
+            },
+            {
+              "value": "q6",
+              "label": "q6"
+            },
+            {
+              "value": "q7",
+              "label": "q7"
+            }
+          ],
+          "default": "q1",
+          "info": "The result logic reads q1 to q7; keep one block per ID."
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Answers",
+          "info": "One per line: value | label. Keep the values listed in the section."
+        }
+      ]
+    },
+    {
+      "type": "changes",
+      "name": "Mouth changes",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Question"
+        },
+        {
+          "type": "text",
+          "id": "help",
+          "label": "Hint"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Changes",
+          "info": "One per line; the last line is the None of these choice."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel awareness check"
+    }
+  ]
+}
+{% endschema %}

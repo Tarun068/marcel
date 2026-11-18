@@ -1,0 +1,137 @@
+{{ 'mt-pd.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%} Daily routine from the client REF pack: one card per product with a numbered list, then a note. {%- endcomment -%}
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-routine-sec' %}">
+  <div class="mt-wrap">
+    {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
+    {%- if section.blocks.size > 0 -%}
+      <div class="mt-routine" style="--n: {{ section.blocks.size | at_most: 3 }};">
+        {%- for block in section.blocks -%}
+          {%- assign lines = block.settings.items | newline_to_br | split: '<br />' -%}
+          <div class="mt-routine-card" {{ block.shopify_attributes }}>
+            <h3>{{ block.settings.title | escape }}</h3>
+            <ol>
+              {%- for line in lines -%}{%- assign line = line | strip -%}{%- if line != blank -%}<li>{{ line | escape }}</li>{%- endif -%}{%- endfor -%}
+            </ol>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+    {%- if section.settings.note != blank -%}<div class="mt-note mt-note--info">{{ section.settings.note }}</div>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel daily routine",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "richtext",
+      "id": "note",
+      "label": "Note"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "mist"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "normal"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "routine",
+      "name": "Routine",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Product"
+        },
+        {
+          "type": "textarea",
+          "id": "items",
+          "label": "Steps",
+          "info": "One per line."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel daily routine"
+    }
+  ]
+}
+{% endschema %}

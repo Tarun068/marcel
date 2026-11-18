@@ -1,0 +1,305 @@
+{{ 'mt-pd.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Kit contents from the client REF pack: one card per product with its picture, a tag (core component, optional
+  adjunct), name, subtitle and text; an optional card has a dashed border. Layout "row" puts the picture beside the text.
+{%- endcomment -%}
+<section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-parts-sec' %}">
+  <div class="mt-wrap">
+    {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
+    {%- if section.blocks.size > 0 -%}
+      <div class="mt-parts mt-parts--{{ section.settings.layout }}" style="--n: {{ section.blocks.size | at_most: 3 }};">
+        {%- for block in section.blocks -%}
+          {%- capture part_href -%}{% render 'mt-link-to', key: block.settings.link_to, url: block.settings.link %}{%- endcapture -%}
+          <article class="mt-part{% if block.settings.optional %} mt-part--optional{% endif %}" {{ block.shopify_attributes }}>
+            <span class="mt-part-media">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '300, 500, 700', sizes: '(min-width: 990px) 380px, 90vw', alt: block.settings.title }}
+              {%- elsif block.settings.art != 'none' -%}
+                <img src="{{ 'mt-' | append: block.settings.art | append: '.webp' | asset_url }}" alt="{{ block.settings.title | escape }}" width="900" height="900" loading="lazy">
+              {%- endif -%}
+            </span>
+            <div class="mt-part-body">
+              {%- if block.settings.tag != blank -%}<span class="mt-part-tag">{{ block.settings.tag | escape }}</span>{%- endif -%}
+              <h3>{{ block.settings.title | escape }}</h3>
+              {%- if block.settings.subtitle != blank -%}<p class="mt-part-sub">{{ block.settings.subtitle | escape }}</p>{%- endif -%}
+              {%- if block.settings.text != blank -%}<p>{{ block.settings.text | escape }}</p>{%- endif -%}
+              {%- if block.settings.link_label != blank -%}<a class="mt-link" href="{{ part_href }}">{{ block.settings.link_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>{%- endif -%}
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+    {%- if section.settings.note != blank -%}<div class="mt-note mt-note--info">{{ section.settings.note }}</div>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel kit contents",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "stack",
+          "label": "Picture above"
+        },
+        {
+          "value": "row",
+          "label": "Picture beside"
+        }
+      ],
+      "default": "stack"
+    },
+    {
+      "type": "richtext",
+      "id": "note",
+      "label": "Important note"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "mist"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "normal"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "part",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "select",
+          "id": "art",
+          "label": "Built-in picture",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "pd-orashield",
+              "label": "OraShield pack"
+            },
+            {
+              "value": "pd-oracare",
+              "label": "Ora-Care pack"
+            },
+            {
+              "value": "pd-smile",
+              "label": "Smile tubes"
+            },
+            {
+              "value": "pd-foundation",
+              "label": "Foundation Kit"
+            },
+            {
+              "value": "pd-advance",
+              "label": "Advance Kit"
+            },
+            {
+              "value": "pd-protection",
+              "label": "Protection Kit"
+            },
+            {
+              "value": "pd-oralis",
+              "label": "OraLis bottle"
+            },
+            {
+              "value": "pd-moflex",
+              "label": "MOFlex device"
+            },
+            {
+              "value": "pd-moflex-features",
+              "label": "MOFlex design features"
+            },
+            {
+              "value": "howto-orashield-drops",
+              "label": "OraShield drops into water"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Picture (upload)"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag",
+          "info": "For example Core kit component."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Name",
+          "default": "Product"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "checkbox",
+          "id": "optional",
+          "label": "Optional (dashed border)",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label"
+        },
+        {
+          "type": "select",
+          "id": "link_to",
+          "label": "Link opens",
+          "options": [
+            {
+              "value": "custom",
+              "label": "Custom link below"
+            },
+            {
+              "value": "test",
+              "label": "MARCEL OSMF Self-Check"
+            },
+            {
+              "value": "therapy",
+              "label": "MARCEL OMR Therapy page"
+            },
+            {
+              "value": "foundation",
+              "label": "Foundation Kit page"
+            },
+            {
+              "value": "advance",
+              "label": "Advance Kit page"
+            },
+            {
+              "value": "journey",
+              "label": "12-Week Care Journey"
+            },
+            {
+              "value": "consult",
+              "label": "MARCEL OSMF Consultant booking"
+            },
+            {
+              "value": "specialists",
+              "label": "Find an OSMF Specialist"
+            },
+            {
+              "value": "help",
+              "label": "Get Help page"
+            },
+            {
+              "value": "evidence",
+              "label": "Clinical evidence page"
+            },
+            {
+              "value": "products",
+              "label": "All products"
+            },
+            {
+              "value": "whatsapp",
+              "label": "WhatsApp chat"
+            }
+          ],
+          "default": "custom"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Custom link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel kit contents"
+    }
+  ]
+}
+{% endschema %}

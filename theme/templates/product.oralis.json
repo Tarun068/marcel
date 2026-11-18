@@ -66,7 +66,7 @@
       "settings": {
         "headline": "",
         "supporting": "Herbal Mouthwash",
-        "intro": "<p><strong>Designed to complement your daily oral hygiene routine.</strong></p><p>MARCEL OraLis is a proprietary Ayurvedic mouthwash, traditionally used to help maintain oral hygiene, support freshness of breath and provide gentle daily oral comfort.</p>",
+        "intro": "<p><strong>Everyday oral care, with attention beyond teeth and gums.</strong></p><p>MARCEL OraLis is a premium herbal mouthwash designed for care beyond teeth and gums. It complements daily oral hygiene by helping maintain oral cleanliness, freshening breath and leaving the mouth feeling refreshed. For people mindful of oral mucosal health, it can form part of a broader daily care routine.</p>",
         "details": "",
         "how_lines": "",
         "safety": "",
@@ -115,18 +115,23 @@
         "free_note": "Full ingredient list as printed on the pack.",
         "acc_caution": "Caution and storage",
         "acc_stage": "Which stage is it for?",
-        "show_description": true,
+        "show_description": false,
         "acc_about": "About this product",
         "background": "paper",
         "sheet": false,
         "spacing": "tight",
         "style": "hero",
         "hero_title": "MARCEL OraLis",
-        "badge": "Care Beyond Teeth and Gums",
+        "badge": "Thoughtful Daily Oral Care",
         "pack_size": "250 mL",
-        "pack_size_label": "Pack Size",
+        "pack_size_label": "Net Quantity",
         "mrp_label": "MRP",
-        "image_chips": true
+        "image_chips": false,
+        "hero_media": "image",
+        "badge_pill": true,
+        "hero_tone": "green",
+        "hero_art": "pd-oralis",
+        "hero_frame": "card"
       }
     },
     "related": {
@@ -156,8 +161,8 @@
       "settings": {
         "style": "navy",
         "eyebrow": "",
-        "heading": "Questions About MARCEL OraLis? Talk to MARCEL Team.",
-        "text": "The MARCEL Team can help with any question about MARCEL OraLis and how it fits into your daily oral hygiene routine.",
+        "heading": "Make Thoughtful Oral Care Part of Your Daily Routine",
+        "text": "For product information, ordering assistance or questions about where MARCEL OraLis fits within everyday oral hygiene, contact Team MARCEL. For OSMF symptoms or persistent oral changes, seek professional clinical assessment.",
         "button_1_label": "WhatsApp MARCEL Team",
         "button_1_to": "whatsapp",
         "button_1_link": "",
@@ -166,7 +171,8 @@
         "button_2_link": "",
         "background": "paper",
         "sheet": false,
-        "spacing": "normal"
+        "spacing": "normal",
+        "form": true
       }
     },
     "faq": {
@@ -176,42 +182,77 @@
           "type": "question",
           "settings": {
             "question": "What is MARCEL OraLis?",
-            "answer": "<p>MARCEL OraLis is a proprietary Ayurvedic herbal mouthwash, designed to complement your daily oral hygiene routine.</p>"
+            "answer": "<p>MARCEL OraLis is a herbal mouthwash designed to complement daily oral hygiene. It helps maintain oral cleanliness, freshens breath and leaves the mouth feeling clean and refreshed.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
             "question": "How do I use MARCEL OraLis?",
-            "answer": "<p>Rinse with 10 mL (about 2 capfuls) for 30 to 60 seconds, then spit out. Use twice daily. Do not swallow.</p>"
+            "answer": "<p>Rinse with 10 mL (about 2 capfuls) for 30 to 60 seconds, then spit out. Do not swallow.</p>"
           }
         },
         "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "How often should I use MARCEL OraLis?",
+            "answer": "<p>Use it twice daily, or as directed by an Ayurvedic physician.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Should I swallow the mouthwash?",
+            "answer": "<p>No. Spit it out after rinsing. Do not swallow.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Does MARCEL OraLis replace brushing?",
+            "answer": "<p>No. A mouthwash complements your daily oral hygiene routine. It does not replace brushing and cleaning between the teeth.</p>"
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "Is MARCEL OraLis alcohol free?",
+            "answer": "<p>Yes. MARCEL OraLis is free from alcohol, SLS, artificial colours and artificial sweeteners. Please check the pack label for the complete ingredient and product information.</p>"
+          }
+        },
+        "question_7": {
           "type": "question",
           "settings": {
             "question": "What is in MARCEL OraLis?",
             "answer": "<p>Triphala, Bakula, Khadir, Yashtimadhu and Majuphal extracts, with peppermint, spearmint and Japanese mint oils and natural menthol, in an aqueous base. The full composition is listed on this page and on the pack.</p>"
           }
         },
-        "question_4": {
+        "question_8": {
           "type": "question",
           "settings": {
-            "question": "Does MARCEL OraLis treat or cure any condition?",
-            "answer": "<p>No. It is not intended to diagnose, treat, cure or prevent any disease. If symptoms persist, consult a physician.</p>"
+            "question": "Can MARCEL OraLis prevent or treat OSMF?",
+            "answer": "<p>No. MARCEL OraLis is a mouthwash for daily oral hygiene and has not been shown to prevent or treat OSMF. Anyone with mouth tightness, burning, reduced mouth opening, persistent ulcers or suspected OSMF should be assessed by a qualified healthcare professional.</p>"
           }
         },
-        "question_5": {
+        "question_9": {
           "type": "question",
           "settings": {
-            "question": "Can I swallow it?",
-            "answer": "<p>No. MARCEL OraLis is for external use only. Do not swallow it, and use it under medical supervision.</p>"
+            "question": "Can I use it if I have OSMF or oral symptoms?",
+            "answer": "<p>Ask your treating dentist or physician whether it suits your situation. A mouthwash does not replace OSMF assessment, stopping risk habits or care directed by your clinician.</p>"
           }
         },
-        "question_6": {
+        "question_10": {
           "type": "question",
           "settings": {
             "question": "How should I store it?",
             "answer": "<p>Store it in a cool, dry place and protect it from light. Keep it out of reach of children. Use within 24 months from the date of manufacture.</p>"
+          }
+        },
+        "question_11": {
+          "type": "question",
+          "settings": {
+            "question": "What is the pack size?",
+            "answer": "<p>MARCEL OraLis comes in a 250 mL pack. The current price is shown at the top of this page.</p>"
           }
         }
       },
@@ -221,10 +262,15 @@
         "question_3",
         "question_4",
         "question_5",
-        "question_6"
+        "question_6",
+        "question_7",
+        "question_8",
+        "question_9",
+        "question_10",
+        "question_11"
       ],
       "settings": {
-        "eyebrow": "",
+        "eyebrow": "Patient information",
         "heading": "Frequently Asked Questions",
         "open_first": false,
         "one_at_a_time": false,
@@ -267,11 +313,12 @@
         "benefit_1": {
           "type": "card",
           "settings": {
-            "icon": "drop",
+            "icon": "sparkle",
             "art": "none",
-            "title": "pH Balanced",
+            "title": "Supports Oral Cleanliness",
             "highlight": false,
-            "text": "A pH balanced herbal mouthwash for use twice daily.",
+            "text": "Helps maintain a clean-mouth feeling when used as part of a consistent daily oral hygiene routine.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -280,11 +327,12 @@
         "benefit_2": {
           "type": "card",
           "settings": {
-            "icon": "shield",
+            "icon": "drop",
             "art": "none",
-            "title": "Antibacterial",
+            "title": "Fresh-Breath Finish",
             "highlight": false,
-            "text": "Traditionally used to help maintain oral hygiene as part of your daily routine.",
+            "text": "Helps freshen breath and leaves a pleasant, refreshed feeling after rinsing.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -293,24 +341,12 @@
         "benefit_3": {
           "type": "card",
           "settings": {
-            "icon": "sparkle",
-            "art": "none",
-            "title": "Fresh Breath",
-            "highlight": false,
-            "text": "Traditionally used to support freshness of breath.",
-            "link_label": "",
-            "link_to": "custom",
-            "link": ""
-          }
-        },
-        "benefit_4": {
-          "type": "card",
-          "settings": {
             "icon": "leaf",
             "art": "none",
-            "title": "Cooling",
-            "highlight": true,
-            "text": "With peppermint, spearmint and Japanese mint oils and natural menthol, for gentle daily oral comfort.",
+            "title": "Refreshing After-Rinse Feel",
+            "highlight": false,
+            "text": "Leaves the mouth feeling clean and refreshed, making daily oral care feel complete.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -320,17 +356,25 @@
       "block_order": [
         "benefit_1",
         "benefit_2",
-        "benefit_3",
-        "benefit_4"
+        "benefit_3"
       ],
       "settings": {
-        "eyebrow": "",
-        "heading": "Key Benefits",
-        "text": "",
+        "eyebrow": "The MARCEL OraLis experience",
+        "heading": "Everyday Care, Thoughtfully Refreshed",
+        "subheading": "",
+        "text": "A well-rounded oral hygiene routine includes regular brushing, cleaning between teeth and an appropriate mouthwash step. MARCEL OraLis is designed to complement these daily habits, not replace them.",
         "center": false,
-        "columns": "4",
+        "columns": "3",
         "media": "icon",
         "card_style": "benefit",
+        "accent": "green",
+        "intro_badge": "M",
+        "intro_title": "Care Beyond Teeth & Gums",
+        "intro_text": "<p>Oral care also means being mindful of the soft tissues inside the mouth. MARCEL OraLis is designed to complement everyday oral hygiene as part of a broader approach to oral cleanliness and freshness, not only brushing for teeth.</p>",
+        "intro_note": "OSMF awareness: persistent burning, tightness, restricted mouth opening, ulcers or unusual red or white patches need assessment by a qualified dental or medical professional. MARCEL OraLis has not been shown to prevent OSMF or to reduce the risk of developing it.",
+        "ticks": "",
+        "note": "",
+        "note_style": "plain",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"
@@ -379,11 +423,11 @@
         "step_4"
       ],
       "settings": {
-        "eyebrow": "",
+        "eyebrow": "Simple daily routine",
         "heading": "How to Use MARCEL OraLis",
-        "text": "Follow the recommended directions for use:",
-        "note": "For external use only. Use under medical supervision. If symptoms persist, consult a physician.",
-        "background": "mist",
+        "text": "Use as directed on the product label. Make rinsing a consistent part of your daily oral hygiene routine.",
+        "note": "Mouthwash complements your daily oral hygiene routine. It does not replace regular toothbrushing or cleaning between the teeth. For external use only. Use under medical supervision, and follow the product label or your Ayurvedic physician’s advice.",
+        "background": "paper",
         "sheet": false,
         "spacing": "normal"
       }
@@ -467,15 +511,17 @@
         "row_9"
       ],
       "settings": {
-        "eyebrow": "",
+        "eyebrow": "At a glance",
         "heading": "Product Information",
-        "text": "",
+        "text": "Key details for MARCEL OraLis Herbal Mouthwash.",
         "show_image": true,
         "head_1": "Particulars",
         "head_2": "Details",
-        "background": "paper",
+        "background": "mist",
         "sheet": false,
-        "spacing": "normal"
+        "spacing": "normal",
+        "art": "pd-oralis",
+        "media_style": "plain"
       }
     },
     "composition": {
@@ -571,7 +617,171 @@
         "show_image": false,
         "head_1": "Ingredient",
         "head_2": "Quantity (% w/v)",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "promo": {
+      "type": "mt-promo-card",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "title": "Daily Oral Cleanliness",
+            "text": "Complements brushing and regular oral hygiene."
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "title": "Breath Freshness",
+            "text": "Helps leave the mouth feeling fresh after rinsing."
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "title": "Refreshing Feel",
+            "text": "A clean, cooling sensation as part of everyday care."
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3"
+      ],
+      "settings": {
+        "eyebrow": "Care beyond teeth and gums",
+        "heading": "A Considered Step in Your Daily Oral-Care Routine",
+        "text": "Oral care is more than brushing alone. MARCEL OraLis adds a simple rinse to your routine, supporting oral cleanliness, breath freshness and a refreshed after-rinse feel.",
+        "text_2": "",
+        "button_label": "",
+        "button_to": "custom",
+        "button_link": "",
+        "art": "none",
+        "numbered": false,
+        "note": "",
+        "tone": "green",
+        "overlap": true,
         "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      }
+    },
+    "nav": {
+      "type": "mt-page-nav",
+      "blocks": {
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Benefits",
+            "target": "benefits"
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Product features",
+            "target": "features"
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "How to use",
+            "target": "how"
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Product information",
+            "target": "info"
+          }
+        },
+        "link_5": {
+          "type": "link",
+          "settings": {
+            "label": "FAQs",
+            "target": "faq"
+          }
+        },
+        "link_6": {
+          "type": "link",
+          "settings": {
+            "label": "Contact MARCEL Team",
+            "target": "cta"
+          }
+        }
+      },
+      "block_order": [
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "link_5",
+        "link_6"
+      ],
+      "settings": {
+        "label": "On this page"
+      }
+    },
+    "features": {
+      "type": "mt-icon-cards",
+      "blocks": {
+        "feature_1": {
+          "type": "card",
+          "settings": {
+            "icon": "flask",
+            "art": "none",
+            "title": "pH-Balanced Formulation",
+            "highlight": false,
+            "text": "Designed with a pH-balanced formulation for everyday oral-care use.",
+            "pill": "",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        },
+        "feature_2": {
+          "type": "card",
+          "settings": {
+            "icon": "leaf",
+            "art": "none",
+            "title": "Herbal Mouthwash",
+            "highlight": false,
+            "text": "A herbal mouthwash developed to complement routine oral hygiene and help maintain a fresh, clean-mouth feeling.",
+            "pill": "",
+            "link_label": "",
+            "link_to": "custom",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2"
+      ],
+      "settings": {
+        "eyebrow": "Thoughtfully developed",
+        "heading": "Considered Formulation for Everyday Use",
+        "subheading": "",
+        "text": "MARCEL OraLis is a herbal mouthwash for routine oral hygiene. Its role is supportive and complementary. It is not a treatment for OSMF and is not proven to protect against developing the condition.",
+        "center": false,
+        "columns": "2",
+        "media": "icon",
+        "card_style": "benefit",
+        "accent": "green",
+        "intro_badge": "",
+        "intro_title": "",
+        "intro_text": "",
+        "intro_note": "",
+        "ticks": "Alcohol free\nSLS free\nNo artificial colours\nNo artificial sweeteners\nFree from harsh chemical preservatives and dyes",
+        "note": "",
+        "note_style": "plain",
+        "background": "mist",
         "sheet": false,
         "spacing": "normal"
       }
@@ -579,7 +789,10 @@
   },
   "order": [
     "main",
+    "promo",
+    "nav",
     "benefits",
+    "features",
     "how",
     "info",
     "composition",

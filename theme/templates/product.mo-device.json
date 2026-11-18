@@ -65,17 +65,17 @@
       ],
       "settings": {
         "headline": "Mouth-opening support device",
-        "supporting": "Mouth Opening Support Device",
-        "intro": "<p><strong>Support your mouth opening exercises with guided movement.</strong></p><p>MARCEL® MOFlex is a mouth opening support tool designed to support guided, gradual mouth opening exercises as part of a structured rehabilitation routine for selected individuals experiencing restricted mouth opening. It is an optional support tool, not a standalone solution, and should be used according to appropriate professional guidance.</p>",
-        "details": "",
+        "supporting": "Mouth Opening Device",
+        "intro": "<p><strong>An optional support device for guided mouth-opening exercises.</strong></p><p>MARCEL® MOFlex is designed to support gradual, controlled mouth-opening practice for selected individuals experiencing restricted mouth opening, including some people with Oral Submucous Fibrosis (OSMF), when recommended as part of an appropriate care plan.</p>",
+        "details": "Use at home only after professional demonstration and training, or by following the official MARCEL training video if advised by your doctor. Do not force movement.",
         "how_lines": "",
         "safety": "",
         "cta_label": "WhatsApp MARCEL Team",
         "cta_to": "whatsapp",
         "cta_link": "",
-        "cta2_label": "Explore MARCEL OMR Therapy Advance Kit",
+        "cta2_label": "Explore MARCEL OMR Therapy Advance Programme",
         "cta2_to": "advance",
-        "cta2_link": "#how-it-works",
+        "cta2_link": "",
         "shop_link": "",
         "home_label": "Home",
         "shop_label": "Products",
@@ -123,10 +123,15 @@
         "style": "hero",
         "pack_size_label": "Pack Size",
         "mrp_label": "MRP",
-        "image_chips": true,
+        "image_chips": false,
         "hero_title": "MARCEL® MOFlex",
-        "badge": "Gentle. Gradual. Guided.",
-        "pack_size": "1 piece"
+        "badge": "",
+        "pack_size": "1 piece",
+        "hero_media": "image",
+        "badge_pill": false,
+        "hero_tone": "blue",
+        "hero_art": "pd-moflex",
+        "hero_frame": "card"
       }
     },
     "use": {
@@ -153,6 +158,7 @@
     },
     "details": {
       "type": "mt-guide",
+      "disabled": true,
       "blocks": {
         "chapter_1": {
           "type": "chapter",
@@ -396,6 +402,7 @@
     },
     "disclaimer": {
       "type": "mt-guide",
+      "disabled": true,
       "blocks": {
         "fine_1": {
           "type": "fine",
@@ -427,43 +434,57 @@
         "question_1": {
           "type": "question",
           "settings": {
-            "question": "Is the MARCEL® MOFlex Device required for every patient?",
-            "answer": "<p>No. It is an optional support tool and may be considered for selected individuals based on their needs and mouth-opening status.</p>"
+            "question": "What is MARCEL® MOFlex?",
+            "answer": "<p>MARCEL® MOFlex is a Heister-type mouth-opening device designed to support guided mouth-opening exercises for selected individuals with restricted mouth opening.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
-            "question": "Can I use the device on its own?",
-            "answer": "<p>It is not a standalone solution. It is intended to support guided exercises as part of a broader care and rehabilitation plan.</p>"
+            "question": "Who may be considered for using it?",
+            "answer": "<p>It may be considered for selected individuals with restricted mouth opening, including some people with OSMF. A qualified healthcare professional should decide whether it suits you after an individual assessment.</p>"
           }
         },
         "question_3": {
           "type": "question",
           "settings": {
-            "question": "Will it increase mouth opening immediately?",
-            "answer": "<p>No immediate or guaranteed result should be expected. Progress, if any, is individual and may be gradual.</p>"
+            "question": "Can I use MARCEL® MOFlex at home?",
+            "answer": "<p>Home use is intended only after a doctor has demonstrated the correct technique and given you individual instructions, or where your doctor has advised the official MARCEL training video as your guide.</p>"
           }
         },
         "question_4": {
           "type": "question",
           "settings": {
-            "question": "Should I force my mouth open while using it?",
-            "answer": "<p>No. Do not force movement. Follow the final approved instructions and personalised guidance from a qualified healthcare professional.</p>"
+            "question": "Can I start using it without consulting a doctor?",
+            "answer": "<p>No. Have your mouth opening assessed and learn the correct placement and operation before you start using it at home.</p>"
           }
         },
         "question_5": {
           "type": "question",
           "settings": {
-            "question": "How do I know whether it is suitable for me?",
-            "answer": "<p>Discuss your mouth-opening status and exercise needs with a MARCEL OSMF Consultant.</p>"
+            "question": "How often should I use the device?",
+            "answer": "<p>Your healthcare professional will set the frequency, repetitions and duration for you. Exercise routines described in published OSMF studies used different devices and methods, so they may not apply to MARCEL® MOFlex.</p>"
           }
         },
         "question_6": {
           "type": "question",
           "settings": {
-            "question": "Where does it fit within MARCEL OMR Therapy?",
-            "answer": "<p>It may be used as an optional adjunct in the functional-rehabilitation component of the MARCEL OMR Therapy Advance Kit programme, where appropriate.</p>"
+            "question": "Should I force my mouth open to get better results?",
+            "answer": "<p>No. Use only the movement and range demonstrated and prescribed for you. Do not force movement or continue through pain.</p>"
+          }
+        },
+        "question_7": {
+          "type": "question",
+          "settings": {
+            "question": "Does the device cure OSMF or guarantee increased mouth opening?",
+            "answer": "<p>No. MARCEL® MOFlex is an optional support device for guided exercises. It is not a cure or a standalone treatment, and individual experiences and outcomes vary.</p>"
+          }
+        },
+        "question_8": {
+          "type": "question",
+          "settings": {
+            "question": "How do I clean or sterilise the device?",
+            "answer": "<p>Follow only the manufacturer’s instructions supplied with the device. If anything is unclear, ask the MARCEL Team or your healthcare professional before use.</p>"
           }
         }
       },
@@ -473,10 +494,12 @@
         "question_3",
         "question_4",
         "question_5",
-        "question_6"
+        "question_6",
+        "question_7",
+        "question_8"
       ],
       "settings": {
-        "eyebrow": "",
+        "eyebrow": "Patient information",
         "heading": "Frequently Asked Questions",
         "open_first": false,
         "one_at_a_time": false,
@@ -515,13 +538,46 @@
     },
     "promo": {
       "type": "mt-promo-card",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "title": "Eating",
+            "text": "Restricted opening may make some everyday eating activities more difficult."
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "title": "Speaking",
+            "text": "Limited mouth movement may affect comfort during speech."
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "title": "Oral Hygiene",
+            "text": "Reduced access may make routine oral hygiene more challenging."
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3"
+      ],
       "settings": {
-        "heading": "Experiencing OSMF symptoms?",
-        "text": "Understand the common signs, symptoms and stages of Oral Submucous Fibrosis.",
-        "button_label": "Explore OSMF Symptoms",
+        "eyebrow": "Understanding restricted mouth opening",
+        "heading": "When Mouth Opening Becomes Difficult",
+        "text": "Limited mouth opening or a feeling of tightness may make everyday activities such as eating, speaking and oral hygiene more difficult. Whether a mouth-opening device is appropriate depends on individual assessment by a qualified healthcare professional.",
+        "text_2": "",
+        "button_label": "",
         "button_to": "custom",
-        "button_link": "/pages/understand-osmf#signs",
-        "art": "symptoms",
+        "button_link": "",
+        "art": "none",
+        "numbered": false,
+        "note": "",
+        "tone": "blue",
         "overlap": true,
         "background": "paper",
         "sheet": false,
@@ -534,11 +590,12 @@
         "benefit_1": {
           "type": "card",
           "settings": {
-            "icon": "refresh",
+            "icon": "s-open",
             "art": "none",
-            "title": "Guided Exercise Routines",
+            "title": "Guided Mouth-Opening Practice",
             "highlight": false,
-            "text": "Supports guided mouth opening exercise routines as part of a structured rehabilitation routine.",
+            "text": "Supports a structured approach to mouth-opening exercises when recommended by a healthcare professional.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -547,11 +604,12 @@
         "benefit_2": {
           "type": "card",
           "settings": {
-            "icon": "target",
+            "icon": "clock",
             "art": "none",
             "title": "Gradual, Controlled Movement",
             "highlight": false,
-            "text": "Approach movement gradually rather than forcefully. Begin with comfortable movement and progress only as advised.",
+            "text": "Designed to assist progressive movement within the individual’s advised and comfortable range.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -560,24 +618,12 @@
         "benefit_3": {
           "type": "card",
           "settings": {
-            "icon": "calendar",
+            "icon": "check",
             "art": "none",
-            "title": "Consistency Matters",
+            "title": "Routine Consistency",
             "highlight": false,
-            "text": "Helps you build a regular exercise routine. Consistency matters more than intensity.",
-            "link_label": "",
-            "link_to": "custom",
-            "link": ""
-          }
-        },
-        "benefit_4": {
-          "type": "card",
-          "settings": {
-            "icon": "shield",
-            "art": "none",
-            "title": "Part of a Broader Care Plan",
-            "highlight": true,
-            "text": "An optional adjunct for selected individuals. It does not replace professional assessment, your care plan or follow-up guidance.",
+            "text": "Can support adherence to a personalised home exercise routine after appropriate instruction.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -587,17 +633,25 @@
       "block_order": [
         "benefit_1",
         "benefit_2",
-        "benefit_3",
-        "benefit_4"
+        "benefit_3"
       ],
       "settings": {
         "eyebrow": "",
-        "heading": "What It Is Designed to Support",
-        "text": "",
+        "heading": "Key Benefits",
+        "subheading": "Designed to Support a Gradual Exercise Routine",
+        "text": "MARCEL® MOFlex may be considered for selected individuals with restricted mouth opening, including some people with OSMF, when recommended as part of an appropriate care plan.",
         "center": false,
-        "columns": "4",
+        "columns": "3",
         "media": "icon",
         "card_style": "benefit",
+        "accent": "blue",
+        "intro_badge": "",
+        "intro_title": "",
+        "intro_text": "",
+        "intro_note": "",
+        "ticks": "",
+        "note": "<p>MARCEL® MOFlex is an optional support tool, not a standalone treatment for OSMF. Individual suitability and exercise instructions should be determined by a qualified healthcare professional.</p>",
+        "note_style": "plain",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"
@@ -609,33 +663,33 @@
         "step_1": {
           "type": "step",
           "settings": {
-            "title": "Get Guidance",
-            "art": "guide",
-            "text": "Use the device only as advised by a <strong>qualified healthcare professional</strong>."
+            "title": "Learn the Correct Placement",
+            "text": "Understand where and how the device should be positioned, as demonstrated by your doctor or in the official training video.",
+            "art": "guide"
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
-            "title": "Start Gently",
-            "art": "gentle",
-            "text": "Begin with <strong>comfortable movement</strong> and progress only as advised."
+            "title": "Begin Gently",
+            "text": "Operate the device slowly and only within the range advised for you. <em>Do not force your mouth open.</em>",
+            "art": "gentle"
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
-            "title": "Never Force",
-            "art": "exercise",
-            "text": "<em>Do not force movement or continue through pain.</em>"
+            "title": "Follow Your Prescribed Routine",
+            "text": "Use only for the repetitions, duration and frequency recommended for your individual needs by your healthcare professional.",
+            "art": "exercise"
           }
         },
         "step_4": {
           "type": "step",
           "settings": {
-            "title": "Keep It Clean",
-            "art": "clean",
-            "text": "Clean and maintain the device according to the <strong>approved instructions</strong>."
+            "title": "Review Your Progress",
+            "text": "Attend follow-up reviews as advised. Your doctor may assess mouth opening and adjust your exercise plan.",
+            "art": "repeat"
           }
         }
       },
@@ -648,8 +702,15 @@
       "settings": {
         "eyebrow": "",
         "heading": "How to Use MARCEL® MOFlex",
-        "text": "Follow the recommended directions for use:",
-        "note": "Individual experiences and outcomes vary. Do not expect instant results, and do not force movement to reach a target.",
+        "text": "Before using the device at home, receive a demonstration from your doctor or watch the official MARCEL training video if your doctor has advised this method. Follow the individual instructions provided for you.",
+        "note": "<strong>Important:</strong> Stop using the device if you experience pain, bleeding, new or worsening discomfort, or any unexpected problem, and contact your healthcare professional. Never force movement or increase the opening beyond the range demonstrated and prescribed for you. A training video does not replace an initial clinical assessment and instruction.",
+        "layout": "cards",
+        "number_style": "plain",
+        "list_mark": "number",
+        "media_art": "none",
+        "media_alt": "",
+        "media_art_2": "none",
+        "media_alt_2": "",
         "background": "mist",
         "sheet": false,
         "spacing": "normal"
@@ -669,38 +730,31 @@
           "type": "row",
           "settings": {
             "label": "Product Category",
-            "value": "Mouth Opening Support Device"
+            "value": "Mouth Opening Device"
           }
         },
         "row_3": {
           "type": "row",
           "settings": {
-            "label": "Use",
-            "value": "Guided mouth opening exercises, as advised"
+            "label": "Device Type",
+            "value": "Heister-type mouth opener"
           }
         },
         "row_4": {
           "type": "row",
           "settings": {
-            "label": "Therapy Association",
-            "value": "Optional adjunct in MARCEL OMR Therapy Advance Kit, where appropriate"
+            "label": "Material",
+            "value": "SS 410 stainless steel"
           }
         },
         "row_5": {
           "type": "row",
           "settings": {
-            "label": "Suitable For",
-            "value": "Selected individuals with restricted mouth opening, based on individual assessment"
+            "label": "Therapy Association",
+            "value": "Optional support tool within MARCEL OMR Therapy Advance Programme, where clinically appropriate"
           }
         },
         "row_6": {
-          "type": "row",
-          "settings": {
-            "label": "Pack Size",
-            "value": "1 piece"
-          }
-        },
-        "row_7": {
           "type": "row",
           "settings": {
             "label": "MRP",
@@ -714,16 +768,18 @@
         "row_3",
         "row_4",
         "row_5",
-        "row_6",
-        "row_7"
+        "row_6"
       ],
       "settings": {
-        "eyebrow": "",
-        "heading": "Product Information",
-        "text": "",
+        "eyebrow": "At a glance",
+        "heading": "Device Information",
+        "text": "Key details for MARCEL® MOFlex Mouth Opening Device.",
+        "show_image": true,
+        "art": "pd-moflex-features",
+        "media_style": "plain",
         "head_1": "Particulars",
         "head_2": "Details",
-        "background": "paper",
+        "background": "mist",
         "sheet": false,
         "spacing": "normal"
       }
@@ -733,14 +789,88 @@
       "settings": {
         "style": "navy",
         "eyebrow": "",
-        "heading": "Not Sure Whether Device-Assisted Exercises Are Right for You?",
-        "text": "Contact a MARCEL OSMF Consultant for programme information and next step guidance, or consult an OSMF Specialist Doctor for qualified clinical assessment.",
+        "heading": "Need Guidance on Using MARCEL® MOFlex?",
+        "text": "Mouth-opening exercises should be appropriate to your individual condition and performed with proper instruction. Contact Team MARCEL for product information and guidance on the next step in your care journey.",
         "button_1_label": "WhatsApp MARCEL Team",
         "button_1_to": "whatsapp",
         "button_1_link": "",
         "button_2_label": "Book a Consultation",
         "button_2_to": "consult",
         "button_2_link": "",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal",
+        "form": true
+      }
+    },
+    "nav": {
+      "type": "mt-page-nav",
+      "blocks": {
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Benefits",
+            "target": "benefits"
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "How to use",
+            "target": "how"
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Progress tracker",
+            "target": "download"
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Device information",
+            "target": "info"
+          }
+        },
+        "link_5": {
+          "type": "link",
+          "settings": {
+            "label": "FAQs",
+            "target": "faq"
+          }
+        },
+        "link_6": {
+          "type": "link",
+          "settings": {
+            "label": "Contact MARCEL Team",
+            "target": "cta"
+          }
+        }
+      },
+      "block_order": [
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "link_5",
+        "link_6"
+      ],
+      "settings": {
+        "label": "On this page"
+      }
+    },
+    "download": {
+      "type": "mt-download",
+      "settings": {
+        "eyebrow": "Track your progress",
+        "heading": "Your 3-Week Recovery Tracker",
+        "text": "Once a week, circle the number that best describes how you feel and note how many fingers fit comfortably when you open your mouth. At the end of each week, share a clear photo of the tracker with the MARCEL Team on WhatsApp so we can guide your next steps.",
+        "points": "Rate burning while eating, mouth tightness and eating comfort every week\nRecord your mouth opening with the finger guide, before therapy and each week\nTick off your daily routine, mouth opening exercises and habit goals",
+        "button_label": "Download the tracker (PDF)",
+        "file_link": "",
+        "note": "Measure only comfortable opening. Never force your mouth open.",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"
@@ -751,8 +881,10 @@
     "main",
     "use",
     "promo",
+    "nav",
     "benefits",
     "how",
+    "download",
     "info",
     "details",
     "1794375495143032e6",

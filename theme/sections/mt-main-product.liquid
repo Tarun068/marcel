@@ -53,10 +53,32 @@
   assign sec_extra = 'mt-pdp-sec'
   if section.settings.style == 'hero'
     assign hero = true
-    assign sec_extra = 'mt-pdp-sec mt-pdp-sec--hero'
+    assign sec_extra = 'mt-pdp-sec mt-pdp-sec--hero mt-pdp-sec--tone-' | append: section.settings.hero_tone
     assign has_how = false
     assign has_ing = false
   endif
+  # A single picture in place of the gallery: an uploaded picture, or one of the built-in pack shots and photos.
+  assign hero_figure = false
+  if hero and section.settings.hero_media == 'image'
+    if section.settings.hero_image != blank or section.settings.hero_art != 'none' or section.settings.hero_video != blank
+      assign hero_figure = true
+    endif
+  endif
+  assign hero_alt = section.settings.hero_image.alt | default: product.title
+  case section.settings.hero_art
+    when 'pd-protection', 'life-protection'
+      assign art_w = 1200
+      assign art_h = 800
+    when 'life-smile'
+      assign art_w = 1400
+      assign art_h = 788
+    when 'pd-oralis'
+      assign art_w = 600
+      assign art_h = 900
+    else
+      assign art_w = 900
+      assign art_h = 900
+  endcase
   assign badge = section.settings.badge | default: eyebrow
 -%}
 
@@ -95,6 +117,24 @@
           endfor
         endif
       -%}
+      {%- if hero_figure -%}
+        <figure class="mt-pdh-figure mt-pdh-figure--{{ section.settings.hero_frame }}">
+          {%- if section.settings.hero_video != blank -%}
+            {{ section.settings.hero_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', image_size: '1400x', alt: hero_alt }}
+            <script>
+              (() => {
+                const v = document.currentScript.previousElementSibling;
+                if (v && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); }
+              })();
+            </script>
+          {%- elsif section.settings.hero_image != blank -%}
+            {{ section.settings.hero_image | image_url: width: 1400 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '500, 800, 1100, 1400', sizes: '(min-width: 901px) 46vw, 92vw', alt: hero_alt }}
+          {%- else -%}
+            <img src="{{ 'mt-' | append: section.settings.hero_art | append: '.webp' | asset_url }}" alt="{{ hero_alt | escape }}" width="{{ art_w }}" height="{{ art_h }}" loading="eager" fetchpriority="high">
+          {%- endif -%}
+          {%- if section.settings.image_chips and badge != blank -%}<span class="mt-gchip mt-gchip--tl">{{ badge | escape }}</span>{%- endif -%}
+        </figure>
+      {%- else -%}
       <mt-gallery class="mt-gallery"{% if start_slide != blank and start_slide != 'm0' %} data-start="{{ start_slide }}"{% endif %}>
         <div class="mt-gmain">
           {%- if role != blank and hero == false -%}
@@ -231,11 +271,12 @@
         </div>
         {%- endif -%}
       </mt-gallery>
+      {%- endif -%}
 
       <div class="mt-pdp-info">
         <div class="mt-stack-sm">
           {%- if hero -%}
-            {%- if badge != blank -%}<span class="mt-pdh-badge">{{ badge | escape }}</span>{%- endif -%}
+            {%- if badge != blank and section.settings.badge_pill -%}<span class="mt-pdh-badge">{{ badge | escape }}</span>{%- endif -%}
             <h1 class="mt-pdp-title">{{ section.settings.hero_title | default: product.title | escape }}</h1>
           {%- else -%}
             {%- if eyebrow != blank -%}<span class="mt-eyebrow mt-pdp-eyebrow">{{ eyebrow | escape }}</span>{%- endif -%}
@@ -421,6 +462,7 @@
           {%- endif -%}
         {%- endif -%}
 
+        {%- if hero and section.settings.hero_note != blank -%}<p class="mt-pdh-note">{{ section.settings.hero_note | escape }}</p>{%- endif -%}
         {%- unless hero -%}
         <mt-accordion class="mt-acc" data-single="false">
           {%- liquid
@@ -572,6 +614,137 @@
       "id": "image_chips",
       "label": "Show badge, pack size and price on the picture",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "hero_tone",
+      "label": "Hero colour",
+      "options": [
+        {
+          "value": "blue",
+          "label": "Navy blue"
+        },
+        {
+          "value": "green",
+          "label": "Navy to green"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        }
+      ],
+      "default": "blue"
+    },
+    {
+      "type": "select",
+      "id": "hero_media",
+      "label": "Hero picture",
+      "options": [
+        {
+          "value": "gallery",
+          "label": "Product photos with thumbnails"
+        },
+        {
+          "value": "image",
+          "label": "One picture"
+        }
+      ],
+      "default": "gallery"
+    },
+    {
+      "type": "select",
+      "id": "hero_art",
+      "label": "Built-in picture",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "pd-orashield",
+          "label": "OraShield pack (cut-out)"
+        },
+        {
+          "value": "pd-oracare",
+          "label": "Ora-Care pack (cut-out)"
+        },
+        {
+          "value": "pd-smile",
+          "label": "Smile tubes (cut-out)"
+        },
+        {
+          "value": "pd-foundation",
+          "label": "Foundation Kit (cut-out)"
+        },
+        {
+          "value": "pd-advance",
+          "label": "Advance Kit"
+        },
+        {
+          "value": "pd-protection",
+          "label": "Protection Kit"
+        },
+        {
+          "value": "pd-oralis",
+          "label": "OraLis bottle"
+        },
+        {
+          "value": "pd-moflex",
+          "label": "MOFlex device"
+        },
+        {
+          "value": "life-protection",
+          "label": "Photo: Protection Kit at home"
+        },
+        {
+          "value": "life-smile",
+          "label": "Photo: Smile on a bathroom counter"
+        }
+      ],
+      "default": "none",
+      "info": "One picture only. An uploaded picture below takes its place."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero picture (upload)"
+    },
+    {
+      "type": "video",
+      "id": "hero_video",
+      "label": "Hero video",
+      "info": "Plays silently on a loop in place of the picture. Upload it in Content > Files first."
+    },
+    {
+      "type": "select",
+      "id": "hero_frame",
+      "label": "Picture frame",
+      "options": [
+        {
+          "value": "none",
+          "label": "None, for cut-out packs"
+        },
+        {
+          "value": "card",
+          "label": "White card"
+        },
+        {
+          "value": "photo",
+          "label": "Rounded photo"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "checkbox",
+      "id": "badge_pill",
+      "label": "Show the badge above the title",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "hero_note",
+      "label": "Small note under the buttons"
     },
     {
       "type": "paragraph",
