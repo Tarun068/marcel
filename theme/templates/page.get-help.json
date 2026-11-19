@@ -23,17 +23,17 @@
         "current_label": "Get Help",
         "eyebrow": "Patient support",
         "heading": "Get the Right Support",
-        "text": "MARCEL offers two different kinds of support. The MARCEL OSMF Consultant gives programme guidance by phone. OSMF Specialist Doctors give qualified clinical assessment in person."
+        "text": "MARCEL offers three kinds of support. The MARCEL Team helps with information and assistance, the MARCEL OSMF Consultant gives one-to-one guidance by phone or video, and OSMF Specialist Doctors give qualified clinical assessment in person."
       }
     },
     "support": {
       "type": "mt-support",
       "settings": {
-        "eyebrow": "Two support routes",
-        "heading": "Programme Guidance or Clinical Assessment",
-        "text": "",
-        "center": false,
-        "note": "The MARCEL OSMF Consultant gives programme information and care navigation. The consultant does not diagnose OSMF, confirm your stage, prescribe or replace a doctor. Diagnosis, staging and treatment decisions are made by a qualified healthcare professional.",
+        "eyebrow": "Patient support",
+        "heading": "Three Ways to Get Help from MARCEL",
+        "text": "Choose the support that suits your need, from information and assistance to a one-to-one discussion or an in-clinic consultation.",
+        "center": true,
+        "note": "The MARCEL OSMF Consultant provides guidance through teleconsultation. For clinical examination, diagnosis, staging and treatment decisions, consult an OSMF Specialist Doctor.",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"
@@ -42,37 +42,62 @@
         "route_1": {
           "type": "route",
           "settings": {
-            "icon": "phone",
-            "eyebrow": "Option A",
-            "title": "MARCEL OSMF Consultant",
-            "subtitle": "A call with a MARCEL OSMF Consultant. The booking fee is adjusted against an eligible MARCEL product purchase.",
-            "text": "Discuss your concerns remotely and understand the next step.",
-            "button_label": "Book a Consultation",
-            "link_to": "consult",
+            "icon": "headset",
+            "tone": "auto",
+            "eyebrow": "Option 1",
+            "title": "Guidance and Support",
+            "subtitle": "With MARCEL Team",
+            "text": "Get information, assistance and help to navigate MARCEL services.",
+            "points": "Information about MARCEL products and programmes\nHelp with ordering, appointments and support services\nGuidance on the next step for your oral care journey",
+            "button_label": "Connect with MARCEL Team",
+            "link_to": "whatsapp",
+            "link": "",
+            "button2_label": "",
             "link2_to": "whatsapp",
-            "points": "Programme information\nGuidance on navigating the website and pathway information\nExplaining programme components and next steps\nContact coordination and support",
-            "button2_label": "WhatsApp MARCEL Team"
+            "link2": ""
           }
         },
         "route_2": {
           "type": "route",
           "settings": {
-            "icon": "doctor",
-            "eyebrow": "Option B",
-            "title": "OSMF Specialist Doctors",
-            "subtitle": "In-clinic, in-person consultation",
-            "text": "A doctor can examine your mouth, assess mouth opening and evaluate oral tissue changes directly.",
+            "icon": "laptop",
+            "tone": "auto",
+            "eyebrow": "Option 2",
+            "title": "Teleconsultation",
+            "subtitle": "With a MARCEL OSMF Consultant",
+            "text": "Have a one-to-one discussion about your symptoms, concerns and MARCEL OMR Therapy care pathway.",
+            "points": "Discuss your symptoms and oral health concerns\nUnderstand your care options and programme approach\nGet personalised guidance on the next step",
+            "button_label": "Book a Teleconsultation",
+            "link_to": "consult",
+            "link": "",
+            "button2_label": "",
+            "link2_to": "whatsapp",
+            "link2": ""
+          }
+        },
+        "route_3": {
+          "type": "route",
+          "settings": {
+            "icon": "clinic",
+            "tone": "auto",
+            "eyebrow": "Option 3",
+            "title": "In-Clinic Consultation",
+            "subtitle": "With an OSMF Specialist Doctor",
+            "text": "Meet a qualified OSMF Specialist Doctor for a clinical assessment and personalised management plan.",
+            "points": "In-person examination of your mouth and oral tissues\nAssessment of mouth opening and overall condition\nProfessional guidance on diagnosis and management",
             "button_label": "Find an OSMF Specialist Doctor",
             "link_to": "specialists",
+            "link": "",
+            "button2_label": "",
             "link2_to": "whatsapp",
-            "points": "Qualified clinical assessment\nEvaluation of symptoms and mouth opening\nProfessional guidance on diagnosis and appropriate management",
-            "button2_label": ""
+            "link2": ""
           }
         }
       },
       "block_order": [
         "route_1",
-        "route_2"
+        "route_2",
+        "route_3"
       ]
     },
     "faq": {

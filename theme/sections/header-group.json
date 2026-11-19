@@ -43,7 +43,7 @@
         "logo_trim_left": 15,
         "logo_trim_right": 12,
         "menu": "main-menu",
-        "cta_label": "Book a Consultation",
+        "cta_label": "Talk to MARCEL Team",
         "cta_link": "",
         "show_whatsapp": false,
         "show_search": true,
@@ -55,7 +55,8 @@
         "drawer_cta_label": "Get Help",
         "drawer_cta_link": "",
         "show_contact": true,
-        "whatsapp_label": "WhatsApp MARCEL Team"
+        "whatsapp_label": "WhatsApp MARCEL Team",
+        "cta_to": "whatsapp"
       }
     }
   },

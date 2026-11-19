@@ -141,7 +141,7 @@
     
               {%- when 'link' -%}
                 {%- if block.settings.label != blank -%}
-                  <a class="mt-link" href="{{ block.settings.url | default: settings.mt_link_test | default: routes.root_url }}" {{ block.shopify_attributes }}>
+                  <a class="mt-link" href="{{ block.settings.url | default: settings.mt_link_test | default: routes.root_url }}"{% if block.settings.url contains 'wa.me' %} target="_blank" rel="noopener"{% endif %} {{ block.shopify_attributes }}>
                     {{- block.settings.label | escape -}}
                     {%- render 'mt-icon', icon: 'arrow-right' -%}
                   </a>

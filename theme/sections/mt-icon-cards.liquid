@@ -32,7 +32,7 @@
       <div class="mt-cards" style="--mt-cols: {{ section.settings.columns }};">
         {%- liquid
           # Built-in pictures that have a whole-picture 4:3 version (mt-card-<art>-wide.webp) for "Large photo, whole picture".
-          assign wide_arts = 'careplan,therapy,exercise,diet,device,consultant,doctor' | split: ','
+          assign wide_arts = 'careplan,therapy,exercise,diet,device,consultant,doctor,tracker' | split: ','
         -%}
         {%- for block in section.blocks -%}
           {%- liquid

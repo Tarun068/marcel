@@ -1,23 +1,46 @@
 {{ 'mt-pages.css' | asset_url | stylesheet_tag }}
 {%- style -%}
-  .mt-support-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .mt-support-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .mt-support-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .mt-support-grid--1 { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
-  @media (max-width: 860px) {
-    .mt-support-grid { grid-template-columns: minmax(0, 1fr); }
+  @media (max-width: 1100px) {
+    .mt-support-grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
-  .mt-route { display: grid; gap: 16px; align-content: start; padding: clamp(22px, 3vw, 30px); border-radius: var(--mt-r-xl); background: var(--mt-paper); border: 1px solid var(--mt-line); }
-  .mt-bg-paper .mt-route { background: var(--mt-mist); border-color: transparent; }
-  .mt-bg-navy .mt-route { background: rgba(255, 255, 255, .06); border-color: rgba(255, 255, 255, .14); }
-  .mt-route-top { display: flex; gap: 14px; align-items: center; }
-  .mt-route-top .mt-wico { width: 52px; height: 52px; border-radius: 16px; background: var(--mt-tint); color: var(--mt-teal); }
-  .mt-bg-navy .mt-route-top .mt-wico { background: rgba(var(--mt-aqua-rgb), .18); color: var(--mt-mint); }
-  .mt-route-top .mt-wico .mt-i { width: 26px; height: 26px; }
-  .mt .mt-route h3 { font-size: var(--mt-fs-sub); line-height: 1.2; letter-spacing: -.015em; }
-  .mt-route-sub { font-size: 14px; font-weight: 700; color: var(--mt-ink-3); }
-  .mt-bg-navy .mt-route-sub { color: var(--mt-navy-ink); }
+  @media (max-width: 760px) {
+    .mt-support-grid, .mt-support-grid--3 { grid-template-columns: minmax(0, 1fr); }
+  }
+  /* One card per route; --rt is the card colour, set by its destination or the tone setting. */
+  .mt-route { --rt: var(--mt-teal); --rt-btn: var(--rt); position: relative; isolation: isolate; overflow: hidden; display: grid; grid-template-rows: auto auto 1fr auto; gap: 16px; padding: clamp(20px, 2.4vw, 28px); border-radius: 22px; background: var(--mt-paper); box-shadow: 0 18px 40px -32px rgba(8, 22, 58, .4), 0 0 0 1px var(--mt-line); }
+  .mt-route::before { content: ""; position: absolute; top: 0; right: 0; z-index: -1; width: 70%; height: 60%; background: radial-gradient(85% 95% at 100% 0%, color-mix(in srgb, var(--rt) 13%, transparent), transparent 72%); pointer-events: none; }
+  .mt-route--green { --rt: #12916B; --rt-btn: linear-gradient(90deg, #13A076, #0D7F62); }
+  .mt-route--blue { --rt: #1E6FA3; --rt-btn: linear-gradient(90deg, #1E78AE, #155183); }
+  .mt-route--orange { --rt: #E0803F; --rt-btn: linear-gradient(90deg, #237B66, #155446); }
+  .mt-route--teal { --rt: var(--mt-teal); --rt-btn: var(--mt-teal); }
+  .mt-route-top { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: center; }
+  .mt-route-top .mt-wico { display: grid; place-items: center; width: 66px; height: 66px; border-radius: 18px; background: color-mix(in srgb, var(--rt) 13%, #FFFFFF); color: var(--rt); }
+  .mt-route-top .mt-wico .mt-i { width: 32px; height: 32px; stroke-width: 1.6; }
+  .mt-route-titles { display: grid; gap: 4px; min-width: 0; padding-left: 16px; border-left: 1.5px solid var(--mt-line-2); }
+  .mt-route-titles .mt-eyebrow { color: var(--mt-teal); }
+  .mt .mt-route h3 { color: var(--mt-ink); font-size: 22px; line-height: 1.2; letter-spacing: -.015em; }
+  .mt-route-sub { color: var(--mt-teal); font-size: 12.5px; font-weight: 800; letter-spacing: .12em; line-height: 1.4; text-transform: uppercase; }
+  .mt-route > p { color: var(--mt-ink-2); }
+  .mt-route .mt-checks { align-content: start; }
   .mt-route .mt-checks li { font-size: var(--mt-fs-body); }
-  .mt-route .mt-btn-row { margin-top: auto; padding-top: 4px; }
-  .mt-support-note { margin-top: 18px; }
+  .mt-route .mt-btn-row { flex-direction: column; align-items: stretch; margin-top: auto; padding-top: 4px; }
+  .mt .mt-route .mt-route-btn { width: 100%; justify-content: center; background: var(--rt-btn); color: #FFFFFF; box-shadow: 0 12px 24px -16px color-mix(in srgb, var(--rt) 80%, transparent); }
+  .mt .mt-route .mt-route-btn .mt-i { width: 20px; height: 20px; }
+  .mt-bg-navy .mt-route { background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14); }
+  .mt-bg-navy .mt-route-titles { border-color: rgba(255, 255, 255, .2); }
+  .mt-bg-navy .mt-route h3 { color: var(--mt-on-dark); }
+  .mt-bg-navy .mt-route-sub, .mt-bg-navy .mt-route-titles .mt-eyebrow { color: var(--mt-mint); }
+  .mt-bg-navy .mt-route > p { color: var(--mt-navy-ink); }
+  /* Centred head: the eyebrow sits between two short rules. */
+  .mt-support .mt-sec-head--center .mt-eyebrow { display: inline-flex; align-items: center; gap: 16px; }
+  .mt-support .mt-sec-head--center .mt-eyebrow::before, .mt-support .mt-sec-head--center .mt-eyebrow::after { content: ""; width: clamp(28px, 6vw, 90px); height: 1.5px; background: currentColor; opacity: .55; }
+  /* Note bar under the cards. */
+  .mt-support .mt-support-note { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 20px; padding: 14px 20px; border-radius: 16px; background: var(--mt-mist); color: var(--mt-ink-2); text-align: left; }
+  .mt-support .mt-support-note .mt-i { flex: none; width: 20px; height: 20px; padding-right: 14px; box-sizing: content-box; border-right: 1.5px solid var(--mt-line-2); color: var(--mt-ink-3); }
+  .mt-bg-mist .mt-support-note { background: var(--mt-paper); }
 {%- endstyle -%}
 
 {%- assign routes_list = section.blocks | where: 'type', 'route' -%}
@@ -25,23 +48,47 @@
 <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-support' %}"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handleize }}"{% endif %}>
   <div class="mt-wrap">
     {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text, center: section.settings.center -%}
-    <div class="mt-support-grid{% if routes_list.size == 1 %} mt-support-grid--1{% endif %}">
+    <div class="mt-support-grid{% if routes_list.size == 1 %} mt-support-grid--1{% elsif routes_list.size >= 3 %} mt-support-grid--3{% endif %}">
       {%- for block in routes_list -%}
         {%- liquid
           assign points = block.settings.points | newline_to_br | split: '<br />'
+          # Colour and button icon follow the destination unless a tone is chosen.
+          assign tone = block.settings.tone | default: 'auto'
+          if tone == 'auto'
+            case block.settings.link_to
+              when 'whatsapp'
+                assign tone = 'green'
+              when 'consult'
+                assign tone = 'blue'
+              when 'specialists'
+                assign tone = 'orange'
+              else
+                assign tone = 'teal'
+            endcase
+          endif
+          case block.settings.link_to
+            when 'whatsapp'
+              assign btn_icon = 'whatsapp'
+            when 'consult'
+              assign btn_icon = 'video'
+            when 'specialists'
+              assign btn_icon = 'pin'
+            else
+              assign btn_icon = 'none'
+          endcase
         -%}
         {%- capture href1 -%}{% render 'mt-link-to', key: block.settings.link_to, url: block.settings.link %}{%- endcapture -%}
         {%- capture href2 -%}{% render 'mt-link-to', key: block.settings.link2_to, url: block.settings.link2 %}{%- endcapture -%}
-        <article class="mt-route" {{ block.shopify_attributes }}>
+        <article class="mt-route mt-route--{{ tone }}" {{ block.shopify_attributes }}>
           <div class="mt-route-top">
             <span class="mt-wico">{%- render 'mt-icon', icon: block.settings.icon -%}</span>
-            <div>
+            <div class="mt-route-titles">
               {%- if block.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ block.settings.eyebrow | escape }}</span>{%- endif -%}
               <h3>{{ block.settings.title | escape }}</h3>
+              {%- if block.settings.subtitle != blank -%}<p class="mt-route-sub">{{ block.settings.subtitle | escape }}</p>{%- endif -%}
             </div>
           </div>
-          {%- if block.settings.subtitle != blank -%}<p class="mt-route-sub">{{ block.settings.subtitle | escape }}</p>{%- endif -%}
-          {%- if block.settings.text != blank -%}<p>{{ block.settings.text | escape }}</p>{%- endif -%}
+          {%- if block.settings.text != blank -%}<p>{{ block.settings.text | escape }}</p>{%- else -%}<span></span>{%- endif -%}
           {%- if block.settings.points != blank -%}
             <ul class="mt-checks">
               {%- for line in points -%}
@@ -49,16 +96,19 @@
                 {%- if item != blank -%}<li>{%- render 'mt-icon', icon: 'check' -%}<span>{{ item | escape }}</span></li>{%- endif -%}
               {%- endfor -%}
             </ul>
+          {%- else -%}
+            <span></span>
           {%- endif -%}
           <div class="mt-btn-row">
             {%- if block.settings.button_label != blank -%}
-              <a class="mt-btn {% if section.settings.background == 'navy' %}mt-btn-light{% else %}mt-btn-primary{% endif %}" href="{{ href1 }}"{% if block.settings.link_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
-                {%- if block.settings.link_to == 'whatsapp' -%}{%- render 'mt-icon', icon: 'whatsapp' -%}{%- endif -%}
+              <a class="mt-btn mt-route-btn" href="{{ href1 | strip }}"{% if block.settings.link_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
+                {%- render 'mt-icon', icon: btn_icon -%}
                 {{- block.settings.button_label | escape -}}
+                {%- render 'mt-icon', icon: 'arrow-right' -%}
               </a>
             {%- endif -%}
             {%- if block.settings.button2_label != blank -%}
-              <a class="mt-btn {% if section.settings.background == 'navy' %}mt-btn-outline-light{% else %}mt-btn-secondary{% endif %}" href="{{ href2 }}"{% if block.settings.link2_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
+              <a class="mt-btn {% if section.settings.background == 'navy' %}mt-btn-outline-light{% else %}mt-btn-secondary{% endif %}" href="{{ href2 | strip }}"{% if block.settings.link2_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
                 {%- if block.settings.link2_to == 'whatsapp' -%}{%- render 'mt-icon', icon: 'whatsapp' -%}{%- endif -%}
                 {{- block.settings.button2_label | escape -}}
               </a>
@@ -68,7 +118,7 @@
       {%- endfor -%}
     </div>
     {%- if section.settings.note != blank -%}
-      <div class="mt-callout mt-callout--muted mt-support-note">{%- render 'mt-icon', icon: 'info' -%}<span>{{ section.settings.note }}</span></div>
+      <div class="mt-support-note">{%- render 'mt-icon', icon: 'info' -%}<span>{{ section.settings.note }}</span></div>
     {%- endif -%}
   </div>
 </section>
@@ -120,10 +170,61 @@
       "label": "Note under the cards",
       "default": "The MARCEL OSMF Consultant gives programme information and next-step guidance. Diagnosis, staging and treatment decisions are made by a qualified healthcare professional."
     },
-    {"type":"header","content":"Section style"},
-    {"type":"select","id":"background","label":"Background","options":[{"value":"paper","label":"White"},{"value":"mist","label":"Light"},{"value":"tint","label":"Tinted"},{"value":"navy","label":"Navy"}],"default":"paper"},
-    {"type":"checkbox","id":"sheet","label":"Rounded top edge","info":"Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.","default":false},
-    {"type":"select","id":"spacing","label":"Spacing","options":[{"value":"normal","label":"Normal"},{"value":"tight","label":"Compact"},{"value":"none","label":"None"}],"default":"normal"}
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "normal"
+    }
   ],
   "blocks": [
     {
@@ -134,8 +235,238 @@
           "type": "select",
           "id": "icon",
           "label": "Icon",
-          "options": [{"value":"none","label":"None"},{"value":"arrow-right","label":"Arrow"},{"value":"check","label":"Check"},{"value":"video","label":"Video call"},{"value":"whatsapp","label":"WhatsApp"},{"value":"clinic","label":"Clinic"},{"value":"doctor","label":"Doctor"},{"value":"calendar","label":"Calendar"},{"value":"clock","label":"Clock"},{"value":"shield","label":"Shield"},{"value":"flask","label":"Research flask"},{"value":"patent","label":"Patent document"},{"value":"leaf","label":"Leaf"},{"value":"users","label":"People"},{"value":"heart","label":"Heart"},{"value":"india","label":"Globe"},{"value":"pin","label":"Location pin"},{"value":"phone","label":"Phone"},{"value":"mail","label":"Email"},{"value":"lock","label":"Lock"},{"value":"truck","label":"Delivery"},{"value":"box","label":"Package"},{"value":"bag","label":"Shopping bag"},{"value":"search","label":"Search"},{"value":"info","label":"Info"},{"value":"alert","label":"Alert"},{"value":"refresh","label":"Refresh"},{"value":"sparkle","label":"Sparkle"},{"value":"star","label":"Star"},{"value":"target","label":"Target"},{"value":"chart","label":"Chart"},{"value":"home","label":"Home"},{"value":"grid","label":"Grid"},{"value":"test","label":"Self-check"},{"value":"book","label":"Guide"},{"value":"drop","label":"Drop"},{"value":"sun","label":"Sun"},{"value":"moon","label":"Moon"},{"value":"bowl","label":"Food bowl"},{"value":"ban","label":"Quit habit"},{"value":"ruler","label":"Ruler"},{"value":"s-open","label":"Symptom: mouth opening"},{"value":"s-burn","label":"Symptom: burning"},{"value":"s-tight","label":"Symptom: tightness"},{"value":"s-ulcer","label":"Symptom: ulcers"},{"value":"s-bands","label":"Symptom: white bands"},{"value":"s-tongue","label":"Symptom: tongue"},{"value":"s-pain","label":"Symptom: pain"}],
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "arrow-right",
+              "label": "Arrow"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "video",
+              "label": "Video call"
+            },
+            {
+              "value": "whatsapp",
+              "label": "WhatsApp"
+            },
+            {
+              "value": "clinic",
+              "label": "Clinic"
+            },
+            {
+              "value": "doctor",
+              "label": "Doctor"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "flask",
+              "label": "Research flask"
+            },
+            {
+              "value": "patent",
+              "label": "Patent document"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "users",
+              "label": "People"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "india",
+              "label": "Globe"
+            },
+            {
+              "value": "pin",
+              "label": "Location pin"
+            },
+            {
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "value": "mail",
+              "label": "Email"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "truck",
+              "label": "Delivery"
+            },
+            {
+              "value": "box",
+              "label": "Package"
+            },
+            {
+              "value": "bag",
+              "label": "Shopping bag"
+            },
+            {
+              "value": "search",
+              "label": "Search"
+            },
+            {
+              "value": "info",
+              "label": "Info"
+            },
+            {
+              "value": "alert",
+              "label": "Alert"
+            },
+            {
+              "value": "refresh",
+              "label": "Refresh"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "target",
+              "label": "Target"
+            },
+            {
+              "value": "chart",
+              "label": "Chart"
+            },
+            {
+              "value": "home",
+              "label": "Home"
+            },
+            {
+              "value": "grid",
+              "label": "Grid"
+            },
+            {
+              "value": "test",
+              "label": "Self-check"
+            },
+            {
+              "value": "book",
+              "label": "Guide"
+            },
+            {
+              "value": "drop",
+              "label": "Drop"
+            },
+            {
+              "value": "sun",
+              "label": "Sun"
+            },
+            {
+              "value": "moon",
+              "label": "Moon"
+            },
+            {
+              "value": "bowl",
+              "label": "Food bowl"
+            },
+            {
+              "value": "ban",
+              "label": "Quit habit"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "s-open",
+              "label": "Symptom: mouth opening"
+            },
+            {
+              "value": "s-burn",
+              "label": "Symptom: burning"
+            },
+            {
+              "value": "s-tight",
+              "label": "Symptom: tightness"
+            },
+            {
+              "value": "s-ulcer",
+              "label": "Symptom: ulcers"
+            },
+            {
+              "value": "s-bands",
+              "label": "Symptom: white bands"
+            },
+            {
+              "value": "s-tongue",
+              "label": "Symptom: tongue"
+            },
+            {
+              "value": "s-pain",
+              "label": "Symptom: pain"
+            },
+            {
+              "value": "headset",
+              "label": "Headset"
+            },
+            {
+              "value": "laptop",
+              "label": "Laptop"
+            }
+          ],
           "default": "phone"
+        },
+        {
+          "type": "select",
+          "id": "tone",
+          "label": "Card colour",
+          "options": [
+            {
+              "value": "auto",
+              "label": "From the button destination"
+            },
+            {
+              "value": "teal",
+              "label": "Teal"
+            },
+            {
+              "value": "green",
+              "label": "Green"
+            },
+            {
+              "value": "blue",
+              "label": "Blue"
+            },
+            {
+              "value": "orange",
+              "label": "Orange"
+            }
+          ],
+          "default": "auto",
+          "info": "WhatsApp is green, consultant booking blue and the specialist finder orange."
         },
         {
           "type": "text",
@@ -177,7 +508,56 @@
           "type": "select",
           "id": "link_to",
           "label": "Button opens",
-          "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+          "options": [
+            {
+              "value": "custom",
+              "label": "Custom link below"
+            },
+            {
+              "value": "test",
+              "label": "MARCEL OSMF Self-Check"
+            },
+            {
+              "value": "therapy",
+              "label": "MARCEL OMR Therapy page"
+            },
+            {
+              "value": "foundation",
+              "label": "Foundation Kit page"
+            },
+            {
+              "value": "advance",
+              "label": "Advance Kit page"
+            },
+            {
+              "value": "journey",
+              "label": "12-Week Care Journey"
+            },
+            {
+              "value": "consult",
+              "label": "MARCEL OSMF Consultant booking"
+            },
+            {
+              "value": "specialists",
+              "label": "Find an OSMF Specialist"
+            },
+            {
+              "value": "help",
+              "label": "Get Help page"
+            },
+            {
+              "value": "evidence",
+              "label": "Clinical evidence page"
+            },
+            {
+              "value": "products",
+              "label": "All products"
+            },
+            {
+              "value": "whatsapp",
+              "label": "WhatsApp chat"
+            }
+          ],
           "default": "consult"
         },
         {
@@ -194,7 +574,56 @@
           "type": "select",
           "id": "link2_to",
           "label": "Second button opens",
-          "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+          "options": [
+            {
+              "value": "custom",
+              "label": "Custom link below"
+            },
+            {
+              "value": "test",
+              "label": "MARCEL OSMF Self-Check"
+            },
+            {
+              "value": "therapy",
+              "label": "MARCEL OMR Therapy page"
+            },
+            {
+              "value": "foundation",
+              "label": "Foundation Kit page"
+            },
+            {
+              "value": "advance",
+              "label": "Advance Kit page"
+            },
+            {
+              "value": "journey",
+              "label": "12-Week Care Journey"
+            },
+            {
+              "value": "consult",
+              "label": "MARCEL OSMF Consultant booking"
+            },
+            {
+              "value": "specialists",
+              "label": "Find an OSMF Specialist"
+            },
+            {
+              "value": "help",
+              "label": "Get Help page"
+            },
+            {
+              "value": "evidence",
+              "label": "Clinical evidence page"
+            },
+            {
+              "value": "products",
+              "label": "All products"
+            },
+            {
+              "value": "whatsapp",
+              "label": "WhatsApp chat"
+            }
+          ],
           "default": "whatsapp"
         },
         {

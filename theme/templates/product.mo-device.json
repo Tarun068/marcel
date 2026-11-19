@@ -144,8 +144,8 @@
         "heading": "Support for Your <em>Exercise Routine</em>",
         "text": "<p>The MARCEL® MOFlex Device is an optional aid for guided mouth-opening exercises. Use it only in the way your healthcare professional shows you, and never force your mouth open.</p>",
         "points": "",
-        "button_1_label": "Book a Consultation",
-        "button_1_to": "consult",
+        "button_1_label": "Talk to MARCEL Team",
+        "button_1_to": "whatsapp",
         "button_1_link": "",
         "button_2_label": "WhatsApp MARCEL Team",
         "button_2_to": "whatsapp",
@@ -190,8 +190,8 @@
         "link_1": {
           "type": "link",
           "settings": {
-            "label": "Book a Consultation",
-            "url": "/pages/osmf-consultant"
+            "label": "Talk to MARCEL Team",
+            "url": "https://wa.me/919909329920"
           }
         },
         "chapter_2": {
@@ -790,12 +790,12 @@
         "style": "navy",
         "eyebrow": "",
         "heading": "Need Guidance on Using MARCEL® MOFlex?",
-        "text": "Mouth-opening exercises should be appropriate to your individual condition and performed with proper instruction. Contact Team MARCEL for product information and guidance on the next step in your care journey.",
+        "text": "Mouth-opening exercises should be appropriate to your individual condition and performed with proper instruction. Contact MARCEL Team for product information and guidance on the next step in your care journey.",
         "button_1_label": "WhatsApp MARCEL Team",
         "button_1_to": "whatsapp",
         "button_1_link": "",
-        "button_2_label": "Book a Consultation",
-        "button_2_to": "consult",
+        "button_2_label": "Talk to MARCEL Team",
+        "button_2_to": "whatsapp",
         "button_2_link": "",
         "background": "paper",
         "sheet": false,

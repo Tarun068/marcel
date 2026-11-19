@@ -14,6 +14,7 @@
   - details_label: {String} label of the product-details link (optional)
   - enquire_label: {String} WhatsApp enquiry label shown instead of Add to cart while prices are hidden (optional)
   - compact: {Boolean} shorter card: no "best for" tag or details link, price and button on one line (optional)
+  - explore_label: {String} start of the Explore button under the card, followed by the short product name (optional, default 'Explore')
 
   Products with more than one size show a size choice; the chosen size sets the price, picture, link and Add to cart.
 
@@ -70,6 +71,9 @@
   if current != blank
     assign url = current.url
   endif
+  # "Explore <name>" button under the card (client, 2026-11-19), with the short name from mt-product-defaults.
+  assign explore_name = d[5] | default: title
+  assign explore = explore_label | default: 'Explore'
   assign fit = image_fit
   if compact
     assign fit = 'contain'
@@ -169,5 +173,9 @@
       -%}
       {%- endif -%}
     </div>
+    <a class="mt-btn mt-btn-secondary mt-btn-sm mt-pexplore" href="{{ url }}">
+      {{- explore | escape }} {{ explore_name | escape -}}
+      {%- render 'mt-icon', icon: 'arrow-right' -%}
+    </a>
   </div>
 </article>

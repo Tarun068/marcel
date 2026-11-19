@@ -1,4 +1,4 @@
-/* MARCEL OSMF Care Specialist finder: search by state, city or PIN code, or sort by distance from the visitor.
+/* MARCEL OSMF Specialist finder: search by state, city or PIN code, or sort by distance from the visitor.
    A PIN code search shows specialists in that PIN area first, then nearby PIN codes in the same region. */
 if (!customElements.get('mt-specialists')) {
   const el = (tag, cls, text) => {
@@ -203,25 +203,37 @@ if (!customElements.get('mt-specialists')) {
         head.append(el('h3', '', p.name), el('p', 'mt-clinic-where', [p.qualification, this.t.role].filter(Boolean).join(', ')));
         top.append(avatar, head);
 
+        // Contact No., City / Town and Address as labelled rows (client list), then hours and registration.
         const meta = el('div', 'mt-clinic-meta');
-        const line = (name, text) => {
+        const row = (name, label, text, href) => {
           if (!text) return;
-          const span = el('span');
-          span.append(icon(name), document.createTextNode(text));
-          meta.append(span);
+          const r = el('div', 'mt-clinic-row');
+          const body = el('p');
+          if (label) body.append(el('b', '', `${label}: `));
+          if (href) {
+            const a = el('a', '', text);
+            a.href = href;
+            a.addEventListener('click', () => this.track('call', p));
+            body.append(a);
+          } else {
+            body.append(document.createTextNode(text));
+          }
+          r.append(icon(name), body);
+          meta.append(r);
         };
-        line('clinic', p.clinic);
-        line('pin', [p.address, p.area, p.city, p.state].filter(Boolean).join(', ') + (p.pin ? ` ${p.pin}` : ''));
-        line('clock', p.hours);
-        line('phone', p.phone);
-        if (p.registration) line('patent', `${this.t.reg} ${p.registration}`);
-        if (p.dist !== undefined) line('target', (this.t.km || '[n] km').replace('[n]', p.dist < 10 ? p.dist.toFixed(1) : Math.round(p.dist)));
+        row('phone', this.t.phoneLabel, p.phone, p.phone ? `tel:${p.phone.replace(/\s/g, '')}` : '');
+        row('pin', this.t.cityLabel, [p.city, p.state].filter(Boolean).join(', '));
+        row('clinic', this.t.addressLabel, [p.clinic, p.address, p.area].filter(Boolean).join(', ') + (p.pin ? ` ${p.pin}` : ''));
+        row('clock', '', p.hours);
+        if (p.registration) row('patent', '', `${this.t.reg} ${p.registration}`);
+        if (p.dist !== undefined) row('target', '', (this.t.km || '[n] km').replace('[n]', p.dist < 10 ? p.dist.toFixed(1) : Math.round(p.dist)));
 
         const actions = el('div', 'mt-clinic-actions');
         if (p.phone) {
           const call = el('a', 'mt-btn mt-btn-primary mt-btn-sm');
           call.href = `tel:${p.phone.replace(/\s/g, '')}`;
           call.append(icon('phone'), document.createTextNode(this.t.call));
+          call.addEventListener('click', () => this.track('call', p));
           actions.append(call);
         }
         const dir = el('a', 'mt-btn mt-btn-secondary mt-btn-sm');
@@ -230,10 +242,39 @@ if (!customElements.get('mt-specialists')) {
         dir.target = '_blank';
         dir.rel = 'noopener';
         dir.append(icon('pin'), document.createTextNode(this.t.directions));
+        dir.addEventListener('click', () => this.track('directions', p));
         actions.append(dir);
+        if (this.t.wa && this.t.share) {
+          // A WhatsApp message naming the doctor, so the MARCEL Team knows who is visiting whom.
+          const msg = (this.t.shareMessage || '').replace('[doctor]', p.name || '').replace('[city]', p.city || '');
+          const share = el('a', 'mt-btn mt-btn-wa mt-btn-sm');
+          share.href = `https://wa.me/${this.t.wa}${msg ? `?text=${encodeURIComponent(msg)}` : ''}`;
+          share.target = '_blank';
+          share.rel = 'noopener';
+          share.append(icon('whatsapp'), document.createTextNode(this.t.share));
+          share.addEventListener('click', () => this.track('whatsapp', p));
+          actions.append(share);
+        }
 
-        card.append(top, meta, actions);
+        card.append(top, meta);
+        if (this.t.referral) {
+          const ref = el('p', 'mt-clinic-ref');
+          ref.append(icon('info'), document.createTextNode(this.t.referral));
+          card.append(ref);
+        }
+        card.append(actions);
         return card;
+      }
+
+      // Customer event for Settings > Customer events (a custom pixel can store which doctor was contacted).
+      track(action, p) {
+        try {
+          if (window.Shopify && Shopify.analytics && typeof Shopify.analytics.publish === 'function') {
+            Shopify.analytics.publish('marcel_specialist_contact', { action, doctor: p.name || '', city: p.city || '', id: p.id || '' });
+          }
+        } catch (e) {
+          /* tracking is optional */
+        }
       }
     }
   );

@@ -88,7 +88,7 @@
             <div class="mt-path-foot">
               {%- if block.settings.summary != blank -%}<p>{{ block.settings.summary | escape }}</p>{%- endif -%}
               {%- if block.settings.button_label != blank -%}
-                <div class="mt-btn-row"><a class="mt-btn mt-btn-primary" href="{{ href }}">{{ block.settings.button_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a></div>
+                <div class="mt-btn-row"><a class="mt-btn mt-btn-primary" href="{{ href }}"{% if block.settings.link_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>{{ block.settings.button_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a></div>
               {%- endif -%}
             </div>
           </div>

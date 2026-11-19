@@ -93,6 +93,13 @@ mt-clinics { display: block; }
 .mt-clinic-meta { display: grid; gap: 6px; font-size: var(--mt-fs-body); }
 .mt-clinic-meta span { display: flex; gap: 9px; align-items: center; }
 .mt-clinic-meta .mt-i { width: 16px; height: 16px; flex: none; color: var(--mt-ink-3); }
+.mt-clinic-row { display: flex; gap: 9px; align-items: flex-start; }
+.mt-clinic-row .mt-i { margin-top: 4px; }
+.mt-clinic-row p { margin: 0; color: var(--mt-ink-2); line-height: 1.5; }
+.mt-clinic-row b { color: var(--mt-ink); font-weight: 700; }
+.mt-clinic-row a { color: var(--mt-teal); font-weight: 700; }
+.mt-clinic-ref { display: flex; gap: 8px; align-items: flex-start; margin: 0; padding: 10px 12px; border-radius: 12px; background: color-mix(in srgb, var(--mt-aqua) 9%, #FFFFFF); color: var(--mt-ink-2); font-size: 14px; line-height: 1.5; }
+.mt-clinic-ref .mt-i { flex: none; width: 16px; height: 16px; margin-top: 2px; color: var(--mt-teal); }
 .mt-clinic-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .mt-clinic-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 @media (max-width: 420px) {

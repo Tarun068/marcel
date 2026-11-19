@@ -162,7 +162,7 @@
         "style": "navy",
         "eyebrow": "",
         "heading": "Make Thoughtful Oral Care Part of Your Daily Routine",
-        "text": "For product information, ordering assistance or questions about where MARCEL OraLis fits within everyday oral hygiene, contact Team MARCEL. For OSMF symptoms or persistent oral changes, seek professional clinical assessment.",
+        "text": "For product information, ordering assistance or questions about where MARCEL OraLis fits within everyday oral hygiene, contact MARCEL Team. For OSMF symptoms or persistent oral changes, seek professional clinical assessment.",
         "button_1_label": "WhatsApp MARCEL Team",
         "button_1_to": "whatsapp",
         "button_1_link": "",
@@ -224,7 +224,7 @@
           "type": "question",
           "settings": {
             "question": "What is in MARCEL OraLis?",
-            "answer": "<p>Triphala, Bakula, Khadir, Yashtimadhu and Majuphal extracts, with peppermint, spearmint and Japanese mint oils and natural menthol, in an aqueous base. The full composition is listed on this page and on the pack.</p>"
+            "answer": "<p>Triphala, Bakula, Khadir, Yashtimadhu and Majuphal extracts, with peppermint, spearmint and Japanese mint oils and natural menthol, in an aqueous base. The full composition is listed on the pack.</p>"
           }
         },
         "question_8": {
@@ -526,6 +526,7 @@
     },
     "composition": {
       "type": "mt-spec-table",
+      "disabled": true,
       "blocks": {
         "row_1": {
           "type": "row",

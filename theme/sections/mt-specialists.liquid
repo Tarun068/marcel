@@ -2,8 +2,10 @@
 {{ 'mt-booking.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'mt-specialists.js' | asset_url }}" defer="defer"></script>
 
-{%- capture consult_link -%}{% render 'mt-link-to', key: 'consult' %}{%- endcapture -%}
 {%- assign s = section.settings -%}
+{%- assign empty_key = s.empty_consult_to | default: 'consult' -%}
+{%- capture consult_link -%}{% render 'mt-link-to', key: empty_key %}{%- endcapture -%}
+{%- assign wa_digits = settings.mt_whatsapp_number | remove: ' ' | remove: '+' | remove: '-' | remove: '(' | remove: ')' -%}
 
 <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-clinics-page' %}"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handleize }}"{% endif %}>
   <div class="mt-wrap">
@@ -25,7 +27,14 @@
           "emptyTitle": {{ s.empty_title | json }},
           "locating": {{ s.locating_label | json }},
           "noLocation": {{ s.no_location | json }},
-          "km": {{ s.km_label | json }}
+          "km": {{ s.km_label | json }},
+          "phoneLabel": {{ s.phone_label | json }},
+          "cityLabel": {{ s.city_label | json }},
+          "addressLabel": {{ s.address_label | json }},
+          "referral": {{ s.referral_text | json }},
+          "share": {{ s.share_label | json }},
+          "shareMessage": {{ s.share_message | json }},
+          "wa": {{ wa_digits | json }}
         }
       </script>
 
@@ -52,7 +61,10 @@
         {%- if s.empty_text != blank -%}<p class="mt-muted">{{ s.empty_text | escape }}</p>{%- endif -%}
         <div class="mt-btn-row">
           {%- if s.empty_consult_label != blank -%}
-            <a class="mt-btn mt-btn-primary" href="{{ consult_link }}">{{ s.empty_consult_label | escape }}</a>
+            <a class="mt-btn mt-btn-primary" href="{{ consult_link | strip }}"{% if empty_key == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
+              {%- if empty_key == 'whatsapp' -%}{%- render 'mt-icon', icon: 'whatsapp' -%}{%- endif -%}
+              {{- s.empty_consult_label | escape -}}
+            </a>
           {%- endif -%}
           <button type="button" class="mt-btn mt-btn-secondary" data-mt-city="" data-mt-reset>{{ s.empty_all_label | escape }}</button>
         </div>
@@ -205,6 +217,43 @@
       "default": "Get directions"
     },
     {
+      "type": "text",
+      "id": "phone_label",
+      "label": "Contact number label",
+      "default": "Contact No."
+    },
+    {
+      "type": "text",
+      "id": "city_label",
+      "label": "City label",
+      "default": "City / Town"
+    },
+    {
+      "type": "text",
+      "id": "address_label",
+      "label": "Address label",
+      "default": "Address"
+    },
+    {
+      "type": "textarea",
+      "id": "referral_text",
+      "label": "Referral line on each doctor",
+      "default": "When you call or visit, please tell the doctor that MARCEL referred you."
+    },
+    {
+      "type": "text",
+      "id": "share_label",
+      "label": "WhatsApp the MARCEL Team button",
+      "default": "Tell MARCEL Team"
+    },
+    {
+      "type": "textarea",
+      "id": "share_message",
+      "label": "WhatsApp message",
+      "default": "Hello MARCEL Team, I found [doctor] in [city] on the MARCEL website and would like to consult them.",
+      "info": "[doctor] and [city] are filled in from the doctor's details."
+    },
+    {
       "type": "header",
       "content": "No results"
     },
@@ -228,6 +277,62 @@
       "default": "Book a Consultation"
     },
     {
+      "type": "select",
+      "id": "empty_consult_to",
+      "label": "Empty list button opens",
+      "options": [
+        {
+          "value": "custom",
+          "label": "Custom link below"
+        },
+        {
+          "value": "test",
+          "label": "MARCEL OSMF Self-Check"
+        },
+        {
+          "value": "therapy",
+          "label": "MARCEL OMR Therapy page"
+        },
+        {
+          "value": "foundation",
+          "label": "Foundation Kit page"
+        },
+        {
+          "value": "advance",
+          "label": "Advance Kit page"
+        },
+        {
+          "value": "journey",
+          "label": "12-Week Care Journey"
+        },
+        {
+          "value": "consult",
+          "label": "MARCEL OSMF Consultant booking"
+        },
+        {
+          "value": "specialists",
+          "label": "Find an OSMF Specialist"
+        },
+        {
+          "value": "help",
+          "label": "Get Help page"
+        },
+        {
+          "value": "evidence",
+          "label": "Clinical evidence page"
+        },
+        {
+          "value": "products",
+          "label": "All products"
+        },
+        {
+          "value": "whatsapp",
+          "label": "WhatsApp chat"
+        }
+      ],
+      "default": "consult"
+    },
+    {
       "type": "text",
       "id": "empty_all_label",
       "label": "Show all button",
@@ -239,10 +344,61 @@
       "label": "Note",
       "default": "Only verified OSMF Specialist Doctor information is listed. Please call the clinic to confirm hours and appointments. The clinic visit is with the healthcare professional, not with MARCEL."
     },
-    {"type":"header","content":"Section style"},
-    {"type":"select","id":"background","label":"Background","options":[{"value":"paper","label":"White"},{"value":"mist","label":"Light"},{"value":"tint","label":"Tinted"},{"value":"navy","label":"Navy"}],"default":"paper"},
-    {"type":"checkbox","id":"sheet","label":"Rounded top edge","info":"Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.","default":false},
-    {"type":"select","id":"spacing","label":"Spacing","options":[{"value":"normal","label":"Normal"},{"value":"tight","label":"Compact"},{"value":"none","label":"None"}],"default":"tight"}
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "tight"
+    }
   ],
   "presets": [
     {

@@ -78,13 +78,14 @@
         "call_label": "Call clinic",
         "directions_label": "Get directions",
         "empty_title": "No OSMF Specialist Doctor Listed for [where] Yet",
-        "empty_text": "We are adding verified specialists. Meanwhile, a MARCEL OSMF Consultant can discuss your concerns and guide your next step.",
-        "empty_consult_label": "Book a Consultation",
-        "empty_all_label": "Show all specialists",
+        "empty_text": "We are adding verified OSMF Specialists. Meanwhile, a MARCEL OSMF Consultant can discuss your concerns and guide your next step.",
+        "empty_consult_label": "Talk to MARCEL Team",
+        "empty_all_label": "Show all OSMF Specialists",
         "note": "Only verified OSMF Specialist Doctor information is listed. Please call the clinic to confirm hours and appointments. The clinic visit is with the healthcare professional, not with MARCEL.",
         "background": "paper",
         "sheet": false,
-        "spacing": "tight"
+        "spacing": "tight",
+        "empty_consult_to": "whatsapp"
       }
     },
     "how": {
@@ -131,6 +132,7 @@
     },
     "support": {
       "type": "mt-support",
+      "disabled": true,
       "settings": {
         "eyebrow": "Not ready for a clinic visit?",
         "heading": "Talk to a MARCEL OSMF Consultant First",

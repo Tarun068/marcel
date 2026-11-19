@@ -1,51 +1,67 @@
 {%- style -%}
-  .mt-consult { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
-  @media (max-width: 960px) {
+  /* Client layout 2026-11-19: copy and two route cards on the left, the booking card on the right. */
+  .mt-consult-sec.mt-bg-navy { background: radial-gradient(70% 120% at 100% 0%, rgba(14, 140, 150, .32), rgba(14, 140, 150, 0) 62%), var(--mt-navy); }
+  .mt-consult { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(24px, 3.4vw, 48px); align-items: center; }
+  @media (max-width: 1100px) {
     .mt-consult { grid-template-columns: minmax(0, 1fr); }
   }
-  .mt-consult-copy { display: grid; gap: 22px; min-width: 0; }
-  .mt-consult-copy .mt-sec-head { margin-bottom: 0; }
+  .mt-consult-copy { display: grid; gap: 26px; min-width: 0; }
+  .mt-consult-copy .mt-sec-head { max-width: 780px; margin-bottom: 0; }
+  .mt-consult-sec .mt-sec-head .mt-eyebrow { display: inline-flex; align-items: center; gap: 14px; }
+  .mt-consult-sec .mt-sec-head .mt-eyebrow::after { content: ""; width: 48px; height: 2px; border-radius: 2px; background: currentColor; opacity: .75; }
   .mt.mt-consult--serif .mt-sec-head .mt-h2 { font-family: var(--mt-serif); font-weight: 600; font-size: var(--mt-fs-h); line-height: 1.08; letter-spacing: -.02em; }
 
-  .mt-routes { display: grid; gap: 12px; }
-  .mt .mt-route-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: 16px; padding: 18px 20px; border-radius: 22px; background: rgba(255, 255, 255, .05); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); color: var(--mt-navy-ink); text-decoration: none; transition: background .15s, box-shadow .15s; }
-  .mt .mt-route-row:hover { background: rgba(255, 255, 255, .09); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .24); }
-  .mt .mt-route-row:focus-visible { outline: 2px solid var(--mt-mint); outline-offset: 2px; }
-  .mt-route-ico { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 16px; background: rgba(14, 140, 150, .28); color: var(--mt-mint); }
-  .mt-route-ico .mt-i { width: 24px; height: 24px; }
-  .mt-route-row b { display: block; font-size: var(--mt-fs-sub); font-weight: 800; line-height: 1.3; color: var(--mt-on-dark); }
-  .mt-route-row small { display: block; margin-top: 2px; font-size: var(--mt-fs-body); line-height: 1.4; color: var(--mt-navy-ink); }
-  .mt-route-badge { padding: 5px 12px; border-radius: 99px; background: #E3F6EA; color: var(--mt-wa-ink); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
-  .mt-route-row > .mt-i { width: 20px; height: 20px; color: var(--mt-mint); transition: transform .15s; }
-  .mt-route-row:hover > .mt-i { transform: translateX(3px); }
+  .mt-croutes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .mt-croute { display: grid; grid-template-rows: auto 1fr auto; gap: 18px; padding: clamp(20px, 2vw, 26px); border-radius: 22px; background: rgba(255, 255, 255, .04); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2); }
+  .mt-croute-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px; align-items: center; }
+  .mt-croute-ico { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(160deg, #22B6C0, var(--mt-teal)); color: #FFFFFF; box-shadow: 0 12px 24px -14px rgba(0, 0, 0, .7); }
+  .mt-croute-ico .mt-i { width: 28px; height: 28px; }
+  .mt-croute-titles { display: grid; gap: 6px; min-width: 0; padding-left: 18px; border-left: 1px solid rgba(255, 255, 255, .24); }
+  .mt-croute-titles b { color: var(--mt-on-dark); font-size: 20px; font-weight: 800; line-height: 1.25; }
+  .mt-croute-titles small { color: var(--mt-mint); font-size: 15px; font-weight: 600; line-height: 1.35; }
+  .mt-croute p { color: var(--mt-navy-ink); font-size: var(--mt-fs-body); line-height: 1.6; }
+  .mt .mt-croute .mt-btn { justify-self: start; }
+  .mt .mt-croute .mt-btn--outline { background: transparent; color: var(--mt-mint); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--mt-mint) 72%, transparent); }
+  .mt .mt-croute .mt-btn--outline:hover { background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1.5px var(--mt-mint); }
   .mt-consult .mt-fine { color: rgba(255, 255, 255, .6); }
-  @media (max-width: 560px) {
-    .mt .mt-route-row { grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; padding: 14px; }
-    .mt-route-ico { width: 46px; height: 46px; border-radius: 14px; }
-    .mt-route-row b { font-size: var(--mt-fs-sub); }
-    .mt-route-row small { font-size: var(--mt-fs-body); }
-    .mt-route-badge { grid-column: 2; grid-row: 2; justify-self: start; }
-    .mt-route-row > .mt-i { grid-column: 3; grid-row: 1 / span 2; }
+  @media (max-width: 680px) {
+    .mt-croutes { grid-template-columns: minmax(0, 1fr); }
+    .mt-croute-ico { width: 54px; height: 54px; }
+    .mt-croute-titles { padding-left: 14px; }
   }
 
-  /* Slot card */
-  mt-slot-card { display: grid; gap: 18px; padding: clamp(22px, 3vw, 34px); border-radius: 30px; background: var(--mt-paper); color: var(--mt-ink-2); box-shadow: 0 30px 70px -30px rgba(0, 0, 0, .6); }
-  .mt-slot-head { display: flex; align-items: center; gap: 14px; }
-  .mt-slot-hex { display: grid; place-items: center; width: 56px; height: 64px; flex: none; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); background: linear-gradient(160deg, var(--mt-teal), #1C5C86); color: #FFFFFF; }
-  .mt-slot-hex .mt-i { width: 24px; height: 24px; }
-  .mt-slot-head b { display: block; font-size: var(--mt-fs-sub); font-weight: 800; color: var(--mt-ink); }
-  .mt-slot-head small { display: block; margin-top: 2px; font-size: var(--mt-fs-body); color: var(--mt-ink-3); }
-  .mt-slot-days { display: grid; gap: 16px; }
-  .mt-slot-day p { margin-bottom: 10px; font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--mt-ink-3); }
-  .mt-slot-times { display: flex; flex-wrap: wrap; gap: 10px; }
-  .mt .mt-slot-times a { display: inline-flex; align-items: center; min-height: 50px; padding: 0 16px; border-radius: 14px; background: var(--mt-paper); box-shadow: inset 0 0 0 1.5px var(--mt-line-2); font-size: 16.5px; font-weight: 700; color: var(--mt-ink); text-decoration: none; font-variant-numeric: tabular-nums; transition: box-shadow .15s, background .15s; }
-  .mt .mt-slot-times a:hover { background: var(--mt-tint); box-shadow: inset 0 0 0 2px var(--mt-teal); }
-  .mt-slot-empty { font-size: 15px; color: var(--mt-ink-3); }
-  @media (max-width: 480px) {
-    .mt-slot-times { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-    .mt .mt-slot-times a { justify-content: center; min-height: 46px; padding: 0 6px; font-size: 15px; }
-  }
-  .mt-bg-navy mt-slot-card .mt-link { width: fit-content; font-size: 17px; color: var(--mt-teal); }
+  /* Booking card */
+  mt-slot-card { display: grid; gap: 20px; padding: clamp(22px, 2.6vw, 32px); border-radius: 28px; background: var(--mt-paper); color: var(--mt-ink-2); box-shadow: 0 30px 70px -30px rgba(0, 0, 0, .6); }
+  .mt-slot-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px; align-items: center; }
+  .mt-slot-ico { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 50%; background: color-mix(in srgb, var(--mt-aqua) 20%, #FFFFFF); color: var(--mt-teal); }
+  .mt-slot-ico .mt-i { width: 32px; height: 32px; }
+  .mt-slot-head b { display: block; color: var(--mt-ink); font-size: 22px; font-weight: 800; line-height: 1.25; }
+  .mt-slot-head small { display: block; margin-top: 6px; color: var(--mt-ink-3); font-size: 15px; line-height: 1.5; }
+  .mt-slot-pick { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px 18px; }
+  .mt-slot-field { display: grid; gap: 10px; min-width: 0; }
+  .mt-slot-field--date { flex: 1 1 190px; }
+  .mt-slot-field--time { flex: 0 1 auto; }
+  .mt-slot-label { color: var(--mt-ink-3); font-size: 12.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+  .mt-slot-select { position: relative; display: flex; align-items: center; }
+  .mt-slot-select .mt-i { position: absolute; width: 20px; height: 20px; color: var(--mt-ink-2); pointer-events: none; }
+  .mt-slot-select .mt-i:first-child { left: 15px; }
+  .mt-slot-select .mt-i:last-child { right: 14px; }
+  .mt .mt-slot-select select { width: 100%; height: 52px; padding: 0 42px 0 46px; border: 1.5px solid var(--mt-line-2); border-radius: 14px; background: #FFFFFF; color: var(--mt-ink); font: inherit; font-size: 15.5px; font-weight: 700; cursor: pointer; -webkit-appearance: none; appearance: none; }
+  .mt .mt-slot-select select:focus-visible { outline: 3px solid var(--mt-aqua); outline-offset: 2px; }
+  .mt-slot-times { display: flex; flex-wrap: wrap; gap: 8px; }
+  .mt .mt-slot-times a { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 16px; border-radius: 99px; background: #FFFFFF; box-shadow: inset 0 0 0 1.5px var(--mt-line-2); color: var(--mt-ink); font-size: 15.5px; font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; text-decoration: none; transition: background .15s, box-shadow .15s, color .15s; }
+  .mt .mt-slot-times:not(:hover, :focus-within) a:first-child,
+  .mt .mt-slot-times a:hover,
+  .mt .mt-slot-times a:focus-visible { background: var(--mt-teal); color: var(--mt-on-dark); box-shadow: none; }
+  .mt-slot-empty { color: var(--mt-ink-3); font-size: 15px; }
+  .mt-slot-mode { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: center; padding: 16px 18px; border-radius: 16px; background: color-mix(in srgb, var(--mt-aqua) 9%, #FFFFFF); }
+  .mt-slot-mode-ico { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: color-mix(in srgb, var(--mt-aqua) 22%, #FFFFFF); color: var(--mt-teal); }
+  .mt-slot-mode-ico .mt-i { width: 22px; height: 22px; }
+  .mt-slot-mode b { display: block; color: var(--mt-ink); font-size: 16px; font-weight: 800; line-height: 1.3; }
+  .mt-slot-mode small { display: block; margin-top: 4px; color: var(--mt-ink-3); font-size: 14.5px; }
+  .mt-bg-navy mt-slot-card .mt-link { width: fit-content; color: var(--mt-teal); font-size: 15.5px; font-weight: 800; }
+  .mt-slot-note { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; color: var(--mt-ink-3); font-size: 13.5px; line-height: 1.55; }
+  .mt-slot-note .mt-i { width: 18px; height: 18px; margin-top: 1px; }
 {%- endstyle -%}
 
 <script src="{{ 'mt-consult.js' | asset_url }}" defer="defer"></script>
@@ -64,22 +80,27 @@
       <div class="mt-consult-copy">
         {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
         {%- if section.blocks.size > 0 -%}
-          <div class="mt-routes">
+          <div class="mt-croutes">
             {%- for block in section.blocks -%}
               {%- capture href -%}{% render 'mt-link-to', key: block.settings.link_to, url: block.settings.link %}{%- endcapture -%}
-              <a class="mt-route-row" href="{{ href }}"{% if block.settings.link_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %} {{ block.shopify_attributes }}>
-                <span class="mt-route-ico">{%- render 'mt-icon', icon: block.settings.icon -%}</span>
-                <span>
-                  <b>{{ block.settings.title | escape }}</b>
-                  {%- if block.settings.text != blank -%}<small>{{ block.settings.text | escape }}</small>{%- endif -%}
-                </span>
-                {%- if block.settings.badge != blank -%}<span class="mt-route-badge">{{ block.settings.badge | escape }}</span>{%- else -%}<span></span>{%- endif -%}
-                {%- render 'mt-icon', icon: 'arrow-right' -%}
-              </a>
+              {%- assign btn_label = block.settings.button_label | default: block.settings.title -%}
+              <div class="mt-croute" {{ block.shopify_attributes }}>
+                <div class="mt-croute-head">
+                  <span class="mt-croute-ico">{%- render 'mt-icon', icon: block.settings.icon -%}</span>
+                  <span class="mt-croute-titles">
+                    <b>{{ block.settings.title | escape }}</b>
+                    {%- if block.settings.subtitle != blank -%}<small>{{ block.settings.subtitle | escape }}</small>{%- endif -%}
+                  </span>
+                </div>
+                {%- if block.settings.text != blank -%}<p>{{ block.settings.text | escape }}</p>{%- else -%}<span></span>{%- endif -%}
+                <a class="mt-btn{% if block.settings.button_style == 'outline' %} mt-btn--outline{% else %} mt-btn-primary{% endif %}" href="{{ href | strip }}"{% if block.settings.link_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
+                  {{- btn_label | escape -}}
+                  {%- render 'mt-icon', icon: 'arrow-right' -%}
+                </a>
+              </div>
             {%- endfor -%}
           </div>
         {%- endif -%}
-        {%- if section.settings.note != blank -%}<p class="mt-fine">{{ section.settings.note }}</p>{%- endif -%}
       </div>
 
       {%- if section.settings.show_card -%}
@@ -93,19 +114,42 @@
           data-tomorrow="{{ section.settings.tomorrow_label | escape }}"
         >
           <div class="mt-slot-head">
-            <span class="mt-slot-hex">{%- render 'mt-icon', icon: section.settings.card_icon -%}</span>
+            <span class="mt-slot-ico">{%- render 'mt-icon', icon: section.settings.card_icon -%}</span>
             <span>
               <b>{{ section.settings.card_title | escape }}</b>
               {%- if section.settings.card_text != blank -%}<small>{{ section.settings.card_text | escape }}</small>{%- endif -%}
             </span>
           </div>
-          <div class="mt-slot-days" data-mt-slot-days>
-            <p class="mt-slot-empty">{{ section.settings.empty_text | escape }}</p>
+          <div class="mt-slot-pick">
+            <label class="mt-slot-field mt-slot-field--date">
+              <span class="mt-slot-label">{{ section.settings.date_label | escape }}</span>
+              <span class="mt-slot-select">
+                {%- render 'mt-icon', icon: 'calendar' -%}
+                <select data-mt-slot-date disabled><option>{{ section.settings.empty_text | escape }}</option></select>
+                {%- render 'mt-icon', icon: 'chevron-down' -%}
+              </span>
+            </label>
+            <div class="mt-slot-field mt-slot-field--time" role="group" aria-label="{{ section.settings.time_label | escape }}">
+              <span class="mt-slot-label" aria-hidden="true">{{ section.settings.time_label | escape }}</span>
+              <div class="mt-slot-times" data-mt-slot-times></div>
+            </div>
           </div>
+          {%- if section.settings.mode_title != blank -%}
+            <div class="mt-slot-mode">
+              <span class="mt-slot-mode-ico">{%- render 'mt-icon', icon: section.settings.mode_icon -%}</span>
+              <span>
+                <b>{{ section.settings.mode_title | escape }}</b>
+                {%- if section.settings.mode_text != blank -%}<small>{{ section.settings.mode_text | escape }}</small>{%- endif -%}
+              </span>
+            </div>
+          {%- endif -%}
           {%- if section.settings.all_label != blank -%}
             <a class="mt-link" href="{{ book_url | strip }}">{{ section.settings.all_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>
           {%- endif -%}
+          {%- if section.settings.note != blank -%}<p class="mt-slot-note">{%- render 'mt-icon', icon: 'info' -%}<span>{{ section.settings.note }}</span></p>{%- endif -%}
         </mt-slot-card>
+      {%- elsif section.settings.note != blank -%}
+        <p class="mt-fine">{{ section.settings.note }}</p>
       {%- endif -%}
     </div>
   </div>
@@ -120,7 +164,7 @@
       "footer"
     ]
   },
-  "max_blocks": 5,
+  "max_blocks": 4,
   "settings": [
     {
       "type": "text",
@@ -176,8 +220,201 @@
       "type": "select",
       "id": "card_icon",
       "label": "Icon",
-      "options": [{"value":"none","label":"None"},{"value":"arrow-right","label":"Arrow"},{"value":"check","label":"Check"},{"value":"video","label":"Video call"},{"value":"whatsapp","label":"WhatsApp"},{"value":"clinic","label":"Clinic"},{"value":"doctor","label":"Doctor"},{"value":"calendar","label":"Calendar"},{"value":"clock","label":"Clock"},{"value":"shield","label":"Shield"},{"value":"flask","label":"Research flask"},{"value":"patent","label":"Patent document"},{"value":"leaf","label":"Leaf"},{"value":"users","label":"People"},{"value":"heart","label":"Heart"},{"value":"india","label":"Globe"},{"value":"pin","label":"Location pin"},{"value":"phone","label":"Phone"},{"value":"mail","label":"Email"},{"value":"lock","label":"Lock"},{"value":"truck","label":"Delivery"},{"value":"box","label":"Package"},{"value":"bag","label":"Shopping bag"},{"value":"search","label":"Search"},{"value":"info","label":"Info"},{"value":"alert","label":"Alert"},{"value":"refresh","label":"Refresh"},{"value":"sparkle","label":"Sparkle"},{"value":"star","label":"Star"},{"value":"target","label":"Target"},{"value":"chart","label":"Chart"},{"value":"home","label":"Home"},{"value":"grid","label":"Grid"},{"value":"test","label":"Self-check"},{"value":"book","label":"Guide"},{"value":"drop","label":"Drop"},{"value":"sun","label":"Sun"},{"value":"moon","label":"Moon"},{"value":"bowl","label":"Food bowl"},{"value":"ban","label":"Quit habit"},{"value":"ruler","label":"Ruler"},{"value":"s-open","label":"Symptom: mouth opening"},{"value":"s-burn","label":"Symptom: burning"},{"value":"s-tight","label":"Symptom: tightness"},{"value":"s-ulcer","label":"Symptom: ulcers"},{"value":"s-bands","label":"Symptom: white bands"},{"value":"s-tongue","label":"Symptom: tongue"},{"value":"s-pain","label":"Symptom: pain"}],
-      "default": "phone"
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "arrow-right",
+          "label": "Arrow"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "video",
+          "label": "Video call"
+        },
+        {
+          "value": "whatsapp",
+          "label": "WhatsApp"
+        },
+        {
+          "value": "clinic",
+          "label": "Clinic"
+        },
+        {
+          "value": "doctor",
+          "label": "Doctor"
+        },
+        {
+          "value": "calendar",
+          "label": "Calendar"
+        },
+        {
+          "value": "clock",
+          "label": "Clock"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "flask",
+          "label": "Research flask"
+        },
+        {
+          "value": "patent",
+          "label": "Patent document"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "users",
+          "label": "People"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "india",
+          "label": "Globe"
+        },
+        {
+          "value": "pin",
+          "label": "Location pin"
+        },
+        {
+          "value": "phone",
+          "label": "Phone"
+        },
+        {
+          "value": "mail",
+          "label": "Email"
+        },
+        {
+          "value": "lock",
+          "label": "Lock"
+        },
+        {
+          "value": "truck",
+          "label": "Delivery"
+        },
+        {
+          "value": "box",
+          "label": "Package"
+        },
+        {
+          "value": "bag",
+          "label": "Shopping bag"
+        },
+        {
+          "value": "search",
+          "label": "Search"
+        },
+        {
+          "value": "info",
+          "label": "Info"
+        },
+        {
+          "value": "alert",
+          "label": "Alert"
+        },
+        {
+          "value": "refresh",
+          "label": "Refresh"
+        },
+        {
+          "value": "sparkle",
+          "label": "Sparkle"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "target",
+          "label": "Target"
+        },
+        {
+          "value": "chart",
+          "label": "Chart"
+        },
+        {
+          "value": "home",
+          "label": "Home"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "test",
+          "label": "Self-check"
+        },
+        {
+          "value": "book",
+          "label": "Guide"
+        },
+        {
+          "value": "drop",
+          "label": "Drop"
+        },
+        {
+          "value": "sun",
+          "label": "Sun"
+        },
+        {
+          "value": "moon",
+          "label": "Moon"
+        },
+        {
+          "value": "bowl",
+          "label": "Food bowl"
+        },
+        {
+          "value": "ban",
+          "label": "Quit habit"
+        },
+        {
+          "value": "ruler",
+          "label": "Ruler"
+        },
+        {
+          "value": "s-open",
+          "label": "Symptom: mouth opening"
+        },
+        {
+          "value": "s-burn",
+          "label": "Symptom: burning"
+        },
+        {
+          "value": "s-tight",
+          "label": "Symptom: tightness"
+        },
+        {
+          "value": "s-ulcer",
+          "label": "Symptom: ulcers"
+        },
+        {
+          "value": "s-bands",
+          "label": "Symptom: white bands"
+        },
+        {
+          "value": "s-tongue",
+          "label": "Symptom: tongue"
+        },
+        {
+          "value": "s-pain",
+          "label": "Symptom: pain"
+        }
+      ],
+      "default": "calendar"
     },
     {
       "type": "text",
@@ -195,13 +432,286 @@
       "type": "select",
       "id": "card_to",
       "label": "Booking page",
-      "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+      "options": [
+        {
+          "value": "custom",
+          "label": "Custom link below"
+        },
+        {
+          "value": "test",
+          "label": "MARCEL OSMF Self-Check"
+        },
+        {
+          "value": "therapy",
+          "label": "MARCEL OMR Therapy page"
+        },
+        {
+          "value": "foundation",
+          "label": "Foundation Kit page"
+        },
+        {
+          "value": "advance",
+          "label": "Advance Kit page"
+        },
+        {
+          "value": "journey",
+          "label": "12-Week Care Journey"
+        },
+        {
+          "value": "consult",
+          "label": "MARCEL OSMF Consultant booking"
+        },
+        {
+          "value": "specialists",
+          "label": "Find an OSMF Specialist"
+        },
+        {
+          "value": "help",
+          "label": "Get Help page"
+        },
+        {
+          "value": "evidence",
+          "label": "Clinical evidence page"
+        },
+        {
+          "value": "products",
+          "label": "All products"
+        },
+        {
+          "value": "whatsapp",
+          "label": "WhatsApp chat"
+        }
+      ],
       "default": "consult"
     },
     {
       "type": "url",
       "id": "card_link",
       "label": "Booking page custom link"
+    },
+    {
+      "type": "text",
+      "id": "date_label",
+      "label": "Date label",
+      "default": "Date"
+    },
+    {
+      "type": "text",
+      "id": "time_label",
+      "label": "Time label",
+      "default": "Time"
+    },
+    {
+      "type": "select",
+      "id": "mode_icon",
+      "label": "Consultation mode icon",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "arrow-right",
+          "label": "Arrow"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "video",
+          "label": "Video call"
+        },
+        {
+          "value": "whatsapp",
+          "label": "WhatsApp"
+        },
+        {
+          "value": "clinic",
+          "label": "Clinic"
+        },
+        {
+          "value": "doctor",
+          "label": "Doctor"
+        },
+        {
+          "value": "calendar",
+          "label": "Calendar"
+        },
+        {
+          "value": "clock",
+          "label": "Clock"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "flask",
+          "label": "Research flask"
+        },
+        {
+          "value": "patent",
+          "label": "Patent document"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "users",
+          "label": "People"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "india",
+          "label": "Globe"
+        },
+        {
+          "value": "pin",
+          "label": "Location pin"
+        },
+        {
+          "value": "phone",
+          "label": "Phone"
+        },
+        {
+          "value": "mail",
+          "label": "Email"
+        },
+        {
+          "value": "lock",
+          "label": "Lock"
+        },
+        {
+          "value": "truck",
+          "label": "Delivery"
+        },
+        {
+          "value": "box",
+          "label": "Package"
+        },
+        {
+          "value": "bag",
+          "label": "Shopping bag"
+        },
+        {
+          "value": "search",
+          "label": "Search"
+        },
+        {
+          "value": "info",
+          "label": "Info"
+        },
+        {
+          "value": "alert",
+          "label": "Alert"
+        },
+        {
+          "value": "refresh",
+          "label": "Refresh"
+        },
+        {
+          "value": "sparkle",
+          "label": "Sparkle"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "target",
+          "label": "Target"
+        },
+        {
+          "value": "chart",
+          "label": "Chart"
+        },
+        {
+          "value": "home",
+          "label": "Home"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "test",
+          "label": "Self-check"
+        },
+        {
+          "value": "book",
+          "label": "Guide"
+        },
+        {
+          "value": "drop",
+          "label": "Drop"
+        },
+        {
+          "value": "sun",
+          "label": "Sun"
+        },
+        {
+          "value": "moon",
+          "label": "Moon"
+        },
+        {
+          "value": "bowl",
+          "label": "Food bowl"
+        },
+        {
+          "value": "ban",
+          "label": "Quit habit"
+        },
+        {
+          "value": "ruler",
+          "label": "Ruler"
+        },
+        {
+          "value": "s-open",
+          "label": "Symptom: mouth opening"
+        },
+        {
+          "value": "s-burn",
+          "label": "Symptom: burning"
+        },
+        {
+          "value": "s-tight",
+          "label": "Symptom: tightness"
+        },
+        {
+          "value": "s-ulcer",
+          "label": "Symptom: ulcers"
+        },
+        {
+          "value": "s-bands",
+          "label": "Symptom: white bands"
+        },
+        {
+          "value": "s-tongue",
+          "label": "Symptom: tongue"
+        },
+        {
+          "value": "s-pain",
+          "label": "Symptom: pain"
+        }
+      ],
+      "default": "video"
+    },
+    {
+      "type": "text",
+      "id": "mode_title",
+      "label": "Consultation mode",
+      "default": "Video or phone consultation"
+    },
+    {
+      "type": "text",
+      "id": "mode_text",
+      "label": "Consultation mode detail",
+      "default": "Duration: 15 to 20 minutes"
     },
     {
       "type": "textarea",
@@ -220,11 +730,11 @@
     {
       "type": "range",
       "id": "days_shown",
-      "label": "Days to show",
+      "label": "Days in the date list",
       "min": 1,
-      "max": 4,
+      "max": 14,
       "step": 1,
-      "default": 2
+      "default": 7
     },
     {
       "type": "range",
@@ -250,7 +760,7 @@
     {
       "type": "text",
       "id": "empty_text",
-      "label": "Text before times load",
+      "label": "Text before the dates load",
       "default": "Choose a time on the booking page."
     },
     {
@@ -259,10 +769,61 @@
       "label": "Link label",
       "default": "See all times"
     },
-    {"type":"header","content":"Section style"},
-    {"type":"select","id":"background","label":"Background","options":[{"value":"paper","label":"White"},{"value":"mist","label":"Light"},{"value":"tint","label":"Tinted"},{"value":"navy","label":"Navy"}],"default":"navy"},
-    {"type":"checkbox","id":"sheet","label":"Rounded top edge","info":"Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.","default":false},
-    {"type":"select","id":"spacing","label":"Spacing","options":[{"value":"normal","label":"Normal"},{"value":"tight","label":"Compact"},{"value":"none","label":"None"}],"default":"normal"}
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        {
+          "value": "paper",
+          "label": "White"
+        },
+        {
+          "value": "mist",
+          "label": "Light"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        },
+        {
+          "value": "navy",
+          "label": "Navy"
+        }
+      ],
+      "default": "navy"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets. Looks best when the background differs from the section above.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "tight",
+          "label": "Compact"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "normal"
+    }
   ],
   "blocks": [
     {
@@ -273,7 +834,200 @@
           "type": "select",
           "id": "icon",
           "label": "Icon",
-          "options": [{"value":"none","label":"None"},{"value":"arrow-right","label":"Arrow"},{"value":"check","label":"Check"},{"value":"video","label":"Video call"},{"value":"whatsapp","label":"WhatsApp"},{"value":"clinic","label":"Clinic"},{"value":"doctor","label":"Doctor"},{"value":"calendar","label":"Calendar"},{"value":"clock","label":"Clock"},{"value":"shield","label":"Shield"},{"value":"flask","label":"Research flask"},{"value":"patent","label":"Patent document"},{"value":"leaf","label":"Leaf"},{"value":"users","label":"People"},{"value":"heart","label":"Heart"},{"value":"india","label":"Globe"},{"value":"pin","label":"Location pin"},{"value":"phone","label":"Phone"},{"value":"mail","label":"Email"},{"value":"lock","label":"Lock"},{"value":"truck","label":"Delivery"},{"value":"box","label":"Package"},{"value":"bag","label":"Shopping bag"},{"value":"search","label":"Search"},{"value":"info","label":"Info"},{"value":"alert","label":"Alert"},{"value":"refresh","label":"Refresh"},{"value":"sparkle","label":"Sparkle"},{"value":"star","label":"Star"},{"value":"target","label":"Target"},{"value":"chart","label":"Chart"},{"value":"home","label":"Home"},{"value":"grid","label":"Grid"},{"value":"test","label":"Self-check"},{"value":"book","label":"Guide"},{"value":"drop","label":"Drop"},{"value":"sun","label":"Sun"},{"value":"moon","label":"Moon"},{"value":"bowl","label":"Food bowl"},{"value":"ban","label":"Quit habit"},{"value":"ruler","label":"Ruler"},{"value":"s-open","label":"Symptom: mouth opening"},{"value":"s-burn","label":"Symptom: burning"},{"value":"s-tight","label":"Symptom: tightness"},{"value":"s-ulcer","label":"Symptom: ulcers"},{"value":"s-bands","label":"Symptom: white bands"},{"value":"s-tongue","label":"Symptom: tongue"},{"value":"s-pain","label":"Symptom: pain"}],
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "arrow-right",
+              "label": "Arrow"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "video",
+              "label": "Video call"
+            },
+            {
+              "value": "whatsapp",
+              "label": "WhatsApp"
+            },
+            {
+              "value": "clinic",
+              "label": "Clinic"
+            },
+            {
+              "value": "doctor",
+              "label": "Doctor"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "flask",
+              "label": "Research flask"
+            },
+            {
+              "value": "patent",
+              "label": "Patent document"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "users",
+              "label": "People"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "india",
+              "label": "Globe"
+            },
+            {
+              "value": "pin",
+              "label": "Location pin"
+            },
+            {
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "value": "mail",
+              "label": "Email"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "truck",
+              "label": "Delivery"
+            },
+            {
+              "value": "box",
+              "label": "Package"
+            },
+            {
+              "value": "bag",
+              "label": "Shopping bag"
+            },
+            {
+              "value": "search",
+              "label": "Search"
+            },
+            {
+              "value": "info",
+              "label": "Info"
+            },
+            {
+              "value": "alert",
+              "label": "Alert"
+            },
+            {
+              "value": "refresh",
+              "label": "Refresh"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "target",
+              "label": "Target"
+            },
+            {
+              "value": "chart",
+              "label": "Chart"
+            },
+            {
+              "value": "home",
+              "label": "Home"
+            },
+            {
+              "value": "grid",
+              "label": "Grid"
+            },
+            {
+              "value": "test",
+              "label": "Self-check"
+            },
+            {
+              "value": "book",
+              "label": "Guide"
+            },
+            {
+              "value": "drop",
+              "label": "Drop"
+            },
+            {
+              "value": "sun",
+              "label": "Sun"
+            },
+            {
+              "value": "moon",
+              "label": "Moon"
+            },
+            {
+              "value": "bowl",
+              "label": "Food bowl"
+            },
+            {
+              "value": "ban",
+              "label": "Quit habit"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "s-open",
+              "label": "Symptom: mouth opening"
+            },
+            {
+              "value": "s-burn",
+              "label": "Symptom: burning"
+            },
+            {
+              "value": "s-tight",
+              "label": "Symptom: tightness"
+            },
+            {
+              "value": "s-ulcer",
+              "label": "Symptom: ulcers"
+            },
+            {
+              "value": "s-bands",
+              "label": "Symptom: white bands"
+            },
+            {
+              "value": "s-tongue",
+              "label": "Symptom: tongue"
+            },
+            {
+              "value": "s-pain",
+              "label": "Symptom: pain"
+            }
+          ],
           "default": "phone"
         },
         {
@@ -281,6 +1035,11 @@
           "id": "title",
           "label": "Title",
           "default": "Book a Consultation"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle"
         },
         {
           "type": "text",
@@ -292,19 +1051,90 @@
           "type": "text",
           "id": "badge",
           "label": "Badge",
-          "info": "Optional short label."
+          "info": "Not shown in this layout."
         },
         {
           "type": "select",
           "id": "link_to",
           "label": "Opens",
-          "options": [{"value":"custom","label":"Custom link below"},{"value":"test","label":"MARCEL OSMF Self-Check"},{"value":"therapy","label":"MARCEL OMR Therapy page"},{"value":"foundation","label":"Foundation Kit page"},{"value":"advance","label":"Advance Kit page"},{"value":"journey","label":"12-Week Care Journey"},{"value":"consult","label":"MARCEL OSMF Consultant booking"},{"value":"specialists","label":"Find an OSMF Specialist"},{"value":"help","label":"Get Help page"},{"value":"evidence","label":"Clinical evidence page"},{"value":"products","label":"All products"},{"value":"whatsapp","label":"WhatsApp chat"}],
+          "options": [
+            {
+              "value": "custom",
+              "label": "Custom link below"
+            },
+            {
+              "value": "test",
+              "label": "MARCEL OSMF Self-Check"
+            },
+            {
+              "value": "therapy",
+              "label": "MARCEL OMR Therapy page"
+            },
+            {
+              "value": "foundation",
+              "label": "Foundation Kit page"
+            },
+            {
+              "value": "advance",
+              "label": "Advance Kit page"
+            },
+            {
+              "value": "journey",
+              "label": "12-Week Care Journey"
+            },
+            {
+              "value": "consult",
+              "label": "MARCEL OSMF Consultant booking"
+            },
+            {
+              "value": "specialists",
+              "label": "Find an OSMF Specialist"
+            },
+            {
+              "value": "help",
+              "label": "Get Help page"
+            },
+            {
+              "value": "evidence",
+              "label": "Clinical evidence page"
+            },
+            {
+              "value": "products",
+              "label": "All products"
+            },
+            {
+              "value": "whatsapp",
+              "label": "WhatsApp chat"
+            }
+          ],
           "default": "consult"
         },
         {
           "type": "url",
           "id": "link",
           "label": "Custom link"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "info": "Empty uses the title."
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "solid",
+              "label": "Filled"
+            },
+            {
+              "value": "outline",
+              "label": "Outline"
+            }
+          ],
+          "default": "solid"
         }
       ]
     }
@@ -316,29 +1146,25 @@
         {
           "type": "route",
           "settings": {
-            "icon": "phone",
-            "title": "Book a Consultation",
-            "text": "An on-call consultation from home, about your concerns and next step",
-            "badge": "",
-            "link_to": "consult"
-          }
-        },
-        {
-          "type": "route",
-          "settings": {
             "icon": "whatsapp",
-            "title": "WhatsApp MARCEL Team",
-            "text": "Chat now and share your questions privately",
-            "link_to": "whatsapp"
+            "title": "Connect with MARCEL Team",
+            "subtitle": "For information and assistance",
+            "text": "Have questions about MARCEL products, programmes, ordering or appointments? MARCEL Team can help.",
+            "link_to": "whatsapp",
+            "button_label": "Connect with MARCEL Team",
+            "button_style": "solid"
           }
         },
         {
           "type": "route",
           "settings": {
-            "icon": "doctor",
-            "title": "Find an OSMF Specialist Doctor",
-            "text": "An in-clinic examination near you, by city or PIN code",
-            "link_to": "specialists"
+            "icon": "video",
+            "title": "Talk to a MARCEL OSMF Consultant",
+            "subtitle": "For one-to-one teleconsultation",
+            "text": "Discuss your symptoms and care pathway in a scheduled phone or video consultation.",
+            "link_to": "consult",
+            "button_label": "Book a Teleconsultation",
+            "button_style": "outline"
           }
         }
       ]

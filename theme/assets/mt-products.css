@@ -72,9 +72,11 @@ mt-related { display: block; }
 .mt-pcard--compact .mt-pmedia { aspect-ratio: 4 / 3; }
 .mt-pcard--compact .mt-pack { background: var(--mt-paper); }
 .mt-pcard--compact .mt-pack img { padding: 5% 6% 1%; }
+/* Room under the label at the top left, so a tall product (MOFlex) never sits behind it. */
+.mt-pcard--compact .mt-pmedia:has(> .mt-role) .mt-pack img { padding-top: 14%; }
 .mt-pcard--compact .mt-pbody { gap: 10px; padding: 18px; }
 .mt .mt-pcard--compact .mt-pbody h3 { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; min-height: 2.4em; }
-.mt-pcard--compact .mt-pmeta { margin-top: -4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mt-pcard--compact .mt-pmeta { margin-top: -4px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
 .mt-pcard--compact .mt-checks { gap: 6px; }
 .mt-pcard--compact .mt-checks li { line-height: 1.4; }
 .mt-pcard--compact .mt-pfoot { display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 10px; padding-top: 14px; }
@@ -99,3 +101,6 @@ mt-related { display: block; }
 
 /* Product cards stay in line on hover: a shadow, no lift. */
 .mt.mt-section .mt-pcard:hover { transform: none; }
+/* "Explore <name>" button under every card (client, 2026-11-19). */
+.mt .mt-pexplore { width: 100%; justify-content: center; margin-top: 12px; }
+.mt-pcard--compact .mt-pexplore { margin-top: 10px; }

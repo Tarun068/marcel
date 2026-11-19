@@ -4,6 +4,12 @@
 {%- liquid
   assign logo = section.settings.logo | default: settings.logo
   assign cta_link = section.settings.cta_link | default: settings.mt_link_test | default: routes.root_url
+  # A destination picked in "Button goes to" wins over the link; WhatsApp opens in a new tab with its icon.
+  if section.settings.cta_to != blank and section.settings.cta_to != 'custom'
+    capture cta_link
+      render 'mt-link-to', key: section.settings.cta_to
+    endcapture
+  endif
   assign drawer_cta_link = section.settings.drawer_cta_link | default: settings.mt_link_help | default: routes.root_url
   assign mobile_menu = section.settings.mobile_menu | default: section.settings.menu
   assign logo_sizes = nil
@@ -95,7 +101,8 @@
           </span>
         </a>
         {%- if section.settings.cta_label != blank -%}
-          <a class="mt-btn mt-btn-primary mt-btn-sm mt-head-cta" href="{{ cta_link }}">
+          <a class="mt-btn mt-btn-primary mt-btn-sm mt-head-cta" href="{{ cta_link | strip }}"{% if section.settings.cta_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
+            {%- if section.settings.cta_to == 'whatsapp' -%}{%- render 'mt-icon', icon: 'whatsapp' -%}{%- endif -%}
             {{- section.settings.cta_label | escape -}}
           </a>
         {%- endif -%}
@@ -373,6 +380,63 @@
       "id": "cta_link",
       "label": "Button link",
       "info": "Empty uses the self-check page from Theme settings."
+    },
+    {
+      "type": "select",
+      "id": "cta_to",
+      "label": "Button goes to",
+      "options": [
+        {
+          "value": "custom",
+          "label": "Link above"
+        },
+        {
+          "value": "test",
+          "label": "OSMF self-check"
+        },
+        {
+          "value": "therapy",
+          "label": "MARCEL OMR Therapy"
+        },
+        {
+          "value": "foundation",
+          "label": "Foundation Kit"
+        },
+        {
+          "value": "advance",
+          "label": "Advance Kit"
+        },
+        {
+          "value": "journey",
+          "label": "12-week care journey"
+        },
+        {
+          "value": "consult",
+          "label": "Consultant booking"
+        },
+        {
+          "value": "specialists",
+          "label": "Find an OSMF Specialist"
+        },
+        {
+          "value": "help",
+          "label": "Get Help"
+        },
+        {
+          "value": "evidence",
+          "label": "Clinical evidence"
+        },
+        {
+          "value": "products",
+          "label": "All products"
+        },
+        {
+          "value": "whatsapp",
+          "label": "WhatsApp MARCEL Team"
+        }
+      ],
+      "default": "custom",
+      "info": "WhatsApp opens a chat with the MARCEL Team in a new tab."
     },
     {
       "type": "header",
