@@ -468,6 +468,7 @@
             "title": "Areca Nut / Supari & Chewing Products",
             "highlight": false,
             "text": "Supari, gutkha, pan masala and mawa",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -481,6 +482,7 @@
             "title": "Tobacco Products",
             "highlight": false,
             "text": "Khaini, chewing tobacco, tobacco mixed with gutkha or pan masala, bidi and cigarettes",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -494,6 +496,7 @@
             "title": "Frequent & Long-Term Chewing",
             "highlight": false,
             "text": "The more often and longer you chew, the greater the risk.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -507,6 +510,7 @@
             "title": "Poor Nutrition",
             "highlight": false,
             "text": "May make oral tissues more vulnerable.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -520,6 +524,7 @@
             "title": "Genetic Susceptibility",
             "highlight": false,
             "text": "Some people may be more vulnerable.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -533,6 +538,7 @@
             "title": "Poor Oral Hygiene",
             "highlight": false,
             "text": "Can contribute to poor overall oral health.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -550,11 +556,20 @@
       "settings": {
         "eyebrow": "What causes OSMF?",
         "heading": "Know the Habits and Factors That Can <em>Affect Your Mouth.</em>",
+        "subheading": "",
         "text": "OSMF is mainly linked to chewing areca nut (supari) and related products. Several other factors can also increase the risk or make the oral tissues more vulnerable.",
         "center": false,
         "columns": "3",
         "media": "photo",
         "card_style": "default",
+        "accent": "blue",
+        "intro_badge": "",
+        "intro_title": "",
+        "intro_text": "",
+        "intro_note": "",
+        "ticks": "",
+        "note": "",
+        "note_style": "plain",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"
@@ -742,7 +757,7 @@
         "reel_1": {
           "type": "reel",
           "settings": {
-            "video": "shopify://files/videos/video2.mp4",
+            "video": "shopify://files/videos/Marcel  OMR Therapy 1.mp4",
             "video_url": "",
             "art": "none",
             "title": "",
@@ -753,7 +768,7 @@
         "reel_2": {
           "type": "reel",
           "settings": {
-            "video": "shopify://files/videos/video1.mp4",
+            "video": "shopify://files/videos/Marcel  OMR Therapy 2.mp4",
             "video_url": "",
             "art": "none",
             "title": "",
@@ -764,7 +779,7 @@
         "reel_3": {
           "type": "reel",
           "settings": {
-            "video": "shopify://files/videos/video3.mp4",
+            "video": "shopify://files/videos/Marcel  OMR Therapy 3_1.mp4",
             "video_url": "",
             "art": "none",
             "title": "",
@@ -775,40 +790,11 @@
         "reel_5": {
           "type": "reel",
           "settings": {
+            "video": "shopify://files/videos/MARCEL 4.mp4",
             "video_url": "",
             "art": "none",
-            "title": "How to Use the MARCEL Kits",
-            "subtitle": "Unboxing and first use",
-            "duration": ""
-          }
-        },
-        "reel_6": {
-          "type": "reel",
-          "settings": {
-            "video_url": "",
-            "art": "none",
-            "title": "Mouth Opening Exercises",
-            "subtitle": "A guided daily routine",
-            "duration": ""
-          }
-        },
-        "reel_7": {
-          "type": "reel",
-          "settings": {
-            "video_url": "",
-            "art": "none",
-            "title": "How to Use the MARCEL® MOFlex Device",
-            "subtitle": "Step by step",
-            "duration": ""
-          }
-        },
-        "reel_4": {
-          "type": "reel",
-          "settings": {
-            "video_url": "",
-            "art": "4",
-            "title": "How MARCEL OMR Therapy Works",
-            "subtitle": "Foundation Kit and Advance Kit",
+            "title": "",
+            "subtitle": "",
             "duration": ""
           }
         }
@@ -817,10 +803,7 @@
         "reel_1",
         "reel_2",
         "reel_3",
-        "reel_5",
-        "reel_6",
-        "reel_7",
-        "reel_4"
+        "reel_5"
       ],
       "settings": {
         "eyebrow": "Watch and learn",
@@ -856,6 +839,7 @@
             "title": "Personalised OSMF Care Plan",
             "highlight": false,
             "text": "Care guidance based on your symptoms, mouth opening and OSMF stage.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -869,6 +853,7 @@
             "title": "MARCEL OMR Therapy",
             "highlight": false,
             "text": "A structured therapy approach designed to support the management of OSMF.",
+            "pill": "",
             "link_label": "Explore the therapy",
             "link_to": "therapy",
             "link": ""
@@ -882,6 +867,7 @@
             "title": "Mouth Opening Exercises",
             "highlight": false,
             "text": "Guided exercises to support mouth opening and oral function.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -895,6 +881,7 @@
             "title": "Personalised Diet Plan",
             "highlight": false,
             "text": "Practical dietary guidance to support your oral health and therapy journey.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -908,6 +895,7 @@
             "title": "Mouth Opening Device",
             "highlight": false,
             "text": "Optional adjunct device to support mouth opening as part of your therapy journey, when recommended.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -921,6 +909,7 @@
             "title": "MARCEL OSMF Consultants",
             "highlight": false,
             "text": "Personalised guidance and follow-up from the MARCEL Team.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -934,6 +923,7 @@
             "title": "Personalised Care by OSMF Specialist Doctors",
             "highlight": false,
             "text": "Clinical assessment and personalised care from OSMF Specialist Doctors.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -947,6 +937,7 @@
             "title": "Progress Tracking and Follow-Up",
             "highlight": false,
             "text": "Record burning, eating comfort and mouth opening every week, and share your progress with the MARCEL Team for follow-up.",
+            "pill": "",
             "link_label": "See the care journey",
             "link_to": "journey",
             "link": ""
@@ -966,11 +957,20 @@
       "settings": {
         "eyebrow": "The full care plan",
         "heading": "Products Are <em>Only One Part</em> of OSMF Care",
+        "subheading": "",
         "text": "A structured approach that combines personalised care planning, MARCEL OMR Therapy, exercises, nutrition and professional guidance for better oral health.",
         "center": false,
         "columns": "4",
         "media": "full",
         "card_style": "default",
+        "accent": "blue",
+        "intro_badge": "",
+        "intro_title": "",
+        "intro_text": "",
+        "intro_note": "",
+        "ticks": "",
+        "note": "",
+        "note_style": "plain",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"
@@ -1219,6 +1219,7 @@
             "title": "3-Week Progress Tracker",
             "highlight": false,
             "text": "With every MARCEL pack. Track symptoms and mouth-opening progress.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -1232,6 +1233,7 @@
             "title": "Regular Progress Reviews",
             "highlight": false,
             "text": "Review your journey at Weeks 3, 6, 9 and 12.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -1245,6 +1247,7 @@
             "title": "Patient Education",
             "highlight": false,
             "text": "Through our WhatsApp channel.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -1258,6 +1261,7 @@
             "title": "Personalised Guidance",
             "highlight": false,
             "text": "From our MARCEL OSMF Consultants.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
             "link": ""
@@ -1273,11 +1277,20 @@
       "settings": {
         "eyebrow": "Progress and support",
         "heading": "You Won’t Be <em>Doing This Alone</em>",
+        "subheading": "",
         "text": "Every MARCEL journey includes structured progress tracking and access to our MARCEL OSMF Consultants, to help you stay informed, consistent and supported throughout your 12-week journey.",
         "center": false,
         "columns": "4",
         "media": "icon",
         "card_style": "default",
+        "accent": "blue",
+        "intro_badge": "",
+        "intro_title": "",
+        "intro_text": "",
+        "intro_note": "",
+        "ticks": "",
+        "note": "",
+        "note_style": "plain",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"
@@ -1485,6 +1498,11 @@
         "card_text": "Choose a time that works for you. Our MARCEL OSMF Consultant will connect with you at the scheduled time.",
         "card_to": "consult",
         "card_link": "",
+        "date_label": "Date",
+        "time_label": "Time",
+        "mode_icon": "video",
+        "mode_title": "Video or phone consultation",
+        "mode_text": "Duration: 15 to 20 minutes",
         "slots": "10:00 AM to 10:15 AM, 11:00 AM to 11:15 AM, 03:00 PM to 03:15 PM",
         "closed_days": "Sun",
         "days_shown": 7,
@@ -1495,12 +1513,7 @@
         "all_label": "View all available times",
         "background": "navy",
         "sheet": false,
-        "spacing": "normal",
-        "date_label": "Date",
-        "time_label": "Time",
-        "mode_icon": "video",
-        "mode_title": "Video or phone consultation",
-        "mode_text": "Duration: 15 to 20 minutes"
+        "spacing": "normal"
       }
     },
     "doctor": {
@@ -1709,6 +1722,7 @@
             "title": "Understand the Stages of OSMF",
             "highlight": false,
             "text": "How mouth opening and symptoms are used to describe Stage 1 to Stage 5. General information, not an assessment of your condition.",
+            "pill": "",
             "link_label": "Read about the stages",
             "link_to": "custom",
             "link": "/pages/understand-osmf#stages"
@@ -1722,6 +1736,7 @@
             "title": "How MARCEL OMR Therapy Works",
             "highlight": false,
             "text": "The four pillars, the daily routine, mouth exercises and guided progress reviews.",
+            "pill": "",
             "link_label": "See how the therapy works",
             "link_to": "therapy",
             "link": ""
@@ -1735,6 +1750,7 @@
             "title": "Can My Mouth Opening Improve?",
             "highlight": false,
             "text": "Care may help manage symptoms and support mouth opening. How much changes differs from person to person, and a cure cannot be promised.",
+            "pill": "",
             "link_label": "What to expect over 12 weeks",
             "link_to": "journey",
             "link": ""
@@ -1748,6 +1764,7 @@
             "title": "Patient Guide",
             "highlight": false,
             "text": "Practical reads, from checking your mouth opening at home to quitting gutkha and supari.",
+            "pill": "",
             "link_label": "Read the patient guide",
             "link_to": "custom",
             "link": "/blogs/patient-guide"
@@ -1764,11 +1781,20 @@
       "settings": {
         "eyebrow": "Find answers",
         "heading": "Questions People Ask Before They Start",
+        "subheading": "",
         "text": "",
         "center": false,
         "columns": "4",
         "media": "icon",
         "card_style": "default",
+        "accent": "blue",
+        "intro_badge": "",
+        "intro_title": "",
+        "intro_text": "",
+        "intro_note": "",
+        "ticks": "",
+        "note": "",
+        "note_style": "plain",
         "background": "mist",
         "sheet": false,
         "spacing": "normal"
@@ -1893,6 +1919,7 @@
           "type": "route",
           "settings": {
             "icon": "phone",
+            "tone": "auto",
             "eyebrow": "Option A",
             "title": "MARCEL OSMF Consultant",
             "subtitle": "On-call, remote consultation",
@@ -1910,6 +1937,7 @@
           "type": "route",
           "settings": {
             "icon": "doctor",
+            "tone": "auto",
             "eyebrow": "Option B",
             "title": "OSMF Specialist Doctors",
             "subtitle": "In-clinic, in-person consultation",
