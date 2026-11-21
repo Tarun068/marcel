@@ -124,7 +124,7 @@
         "pack_size_label": "Pack Size",
         "mrp_label": "MRP",
         "image_chips": true,
-        "hero_title": "MARCEL Ora-Care",
+        "hero_title": "MARCEL OraCare",
         "badge": "Stage 1 & Stage 2 OSMF",
         "pack_size": "50 mL",
         "hero_media": "image",
@@ -142,7 +142,7 @@
         "media_side": "right",
         "eyebrow": "Foundation Kit routine",
         "heading": "Used as Part of the <em>Foundation Kit</em>",
-        "text": "<p>MARCEL Ora-Care Oral Spray sits alongside MARCEL Smile Toothpaste and the mouth and jaw exercises your healthcare professional prescribes. Whether the Foundation Kit suits you should be decided after a professional assessment.</p>",
+        "text": "<p>MARCEL OraCare Oral Spray sits alongside MARCEL Smile Toothpaste and the mouth and jaw exercises your healthcare professional prescribes. Whether the Foundation Kit suits you should be decided after a professional assessment.</p>",
         "points": "",
         "button_1_label": "See the Foundation Kit",
         "button_1_to": "foundation",
@@ -184,21 +184,21 @@
         "question_1": {
           "type": "question",
           "settings": {
-            "question": "What is MARCEL Ora-Care?",
-            "answer": "<p>MARCEL Ora-Care is a therapeutic oral spray included in MARCEL OMR Therapy Foundation Programme for people experiencing Stage 1 or Stage 2 OSMF.</p>"
+            "question": "What is MARCEL OraCare?",
+            "answer": "<p>MARCEL OraCare is a therapeutic oral spray included in MARCEL OMR Therapy Foundation Programme for people experiencing Stage 1 or Stage 2 OSMF.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
-            "question": "Who is MARCEL Ora-Care intended for?",
+            "question": "Who is MARCEL OraCare intended for?",
             "answer": "<p>It is part of the Foundation Programme, intended for people experiencing Stage 1 or Stage 2 OSMF, subject to appropriate clinical evaluation.</p>"
           }
         },
         "question_3": {
           "type": "question",
           "settings": {
-            "question": "How should I use MARCEL Ora-Care?",
+            "question": "How should I use MARCEL OraCare?",
             "answer": "<p>Apply 6 to 7 puffs evenly throughout the mouth to ensure complete coverage of the oral tissues.</p>"
           }
         },
@@ -212,15 +212,15 @@
         "question_5": {
           "type": "question",
           "settings": {
-            "question": "Can MARCEL Ora-Care be used as a standalone treatment for OSMF?",
-            "answer": "<p>No. MARCEL Ora-Care is one component of MARCEL OMR Therapy Foundation Programme. It is not a standalone cure and does not replace professional OSMF evaluation and care.</p>"
+            "question": "Can MARCEL OraCare be used as a standalone treatment for OSMF?",
+            "answer": "<p>No. MARCEL OraCare is one component of MARCEL OMR Therapy Foundation Programme. It is not a standalone cure and does not replace professional OSMF evaluation and care.</p>"
           }
         },
         "question_6": {
           "type": "question",
           "settings": {
-            "question": "Does MARCEL Ora-Care cure OSMF?",
-            "answer": "<p>No. MARCEL Ora-Care is not claimed to cure OSMF or reverse fibrosis on its own. OSMF needs appropriate professional evaluation and follow-up.</p>"
+            "question": "Does MARCEL OraCare cure OSMF?",
+            "answer": "<p>No. MARCEL OraCare is not claimed to cure OSMF or reverse fibrosis on its own. OSMF needs appropriate professional evaluation and follow-up.</p>"
           }
         },
         "question_7": {
@@ -381,7 +381,7 @@
         "eyebrow": "",
         "heading": "Key Benefits",
         "subheading": "Support for Concerns Associated with Stage 1 & Stage 2 OSMF",
-        "text": "MARCEL Ora-Care is a core component of MARCEL OMR Therapy Foundation Programme. Its supportive benefit areas include:",
+        "text": "MARCEL OraCare is a core component of MARCEL OMR Therapy Foundation Programme. Its supportive benefit areas include:",
         "center": false,
         "columns": "3",
         "media": "icon",
@@ -392,7 +392,7 @@
         "intro_text": "",
         "intro_note": "",
         "ticks": "",
-        "note": "<p>These are supportive product benefit statements, not a guarantee of individual results. MARCEL Ora-Care does not replace professional diagnosis or OSMF care.</p>",
+        "note": "<p>These are supportive product benefit statements, not a guarantee of individual results. MARCEL OraCare does not replace professional diagnosis or OSMF care.</p>",
         "note_style": "plain",
         "background": "paper",
         "sheet": false,
@@ -416,14 +416,14 @@
       ],
       "settings": {
         "eyebrow": "Simple application, twice daily",
-        "heading": "How to Use MARCEL Ora-Care",
+        "heading": "How to Use MARCEL OraCare",
         "text": "Follow the product directions to apply the spray evenly throughout the mouth.",
         "note": "",
         "layout": "list",
         "number_style": "plain",
         "list_mark": "check",
         "media_art": "howto-oracare",
-        "media_alt": "MARCEL Ora-Care oral spray guide showing 6 to 7 puffs directed towards the inner oral surfaces for even coverage throughout the mouth",
+        "media_alt": "MARCEL OraCare oral spray guide showing 6 to 7 puffs directed towards the inner oral surfaces for even coverage throughout the mouth",
         "media_art_2": "none",
         "media_alt_2": "",
         "background": "mist",
@@ -438,7 +438,7 @@
           "type": "row",
           "settings": {
             "label": "Product Name",
-            "value": "MARCEL Ora-Care"
+            "value": "MARCEL OraCare"
           }
         },
         "row_2": {
@@ -504,7 +504,7 @@
       "settings": {
         "eyebrow": "At a glance",
         "heading": "Product Information",
-        "text": "Key details for MARCEL Ora-Care Therapeutic Oral Spray.",
+        "text": "Key details for MARCEL OraCare Therapeutic Oral Spray.",
         "show_image": true,
         "art": "pd-oracare",
         "media_style": "plain",
@@ -521,7 +521,7 @@
         "style": "navy",
         "eyebrow": "",
         "heading": "Need Guidance? Talk to MARCEL Team.",
-        "text": "Every individual’s OSMF experience is different. If you are experiencing burning while eating, tightness inside your cheeks, dryness of the mouth or difficulty opening your mouth, connect with the MARCEL Team to understand MARCEL Ora-Care and its role in MARCEL OMR Therapy Foundation Programme.",
+        "text": "Every individual’s OSMF experience is different. If you are experiencing burning while eating, tightness inside your cheeks, dryness of the mouth or difficulty opening your mouth, connect with the MARCEL Team to understand MARCEL OraCare and its role in MARCEL OMR Therapy Foundation Programme.",
         "button_1_label": "WhatsApp MARCEL Team",
         "button_1_to": "whatsapp",
         "button_1_link": "",

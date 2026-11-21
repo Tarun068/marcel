@@ -25,7 +25,7 @@
         "current_label": "Advance Kit",
         "eyebrow": "MARCEL OMR Therapy Advance Kit for Stage 3 or 4 OSMF",
         "heading": "A Structured Approach to Advanced OSMF Care",
-        "text": "MARCEL OMR Therapy Advance Kit is intended for individuals assessed by a qualified healthcare professional as having Stage 3 or Stage 4 Oral Submucous Fibrosis (OSMF). The programme includes MARCEL Ora-Shield Oral Rinse, MARCEL Smile Toothpaste, prescribed mouth/jaw exercises when advised, and the optional MARCEL® MO Device where recommended by a healthcare professional.",
+        "text": "MARCEL OMR Therapy Advance Kit is intended for individuals assessed by a qualified healthcare professional as having Stage 3 or Stage 4 Oral Submucous Fibrosis (OSMF). The programme includes MARCEL OraShield Oral Rinse, MARCEL Smile Toothpaste, prescribed mouth/jaw exercises when advised, and the optional MARCEL® MO Device where recommended by a healthcare professional.",
         "button_1_label": "Talk to MARCEL Team",
         "button_2_label": "Check Your OSMF Stage",
         "note": "If you have not been assessed, the MARCEL OSMF SELF CHECK can provide an initial indication of your possible stage. It cannot diagnose OSMF or confirm your stage.",
@@ -49,10 +49,10 @@
           "settings": {
             "art": "ora-shield",
             "icon": "s-open",
-            "title": "MARCEL Ora-Shield Oral Rinse",
+            "title": "MARCEL OraShield Oral Rinse",
             "size": "10 mL",
             "text": "The core therapy component of the Advance Kit. Use only according to the current approved product label and the directions of your physician or MARCEL OSMF Consultant.",
-            "button_label": "Explore MARCEL Ora-Shield",
+            "button_label": "Explore MARCEL OraShield",
             "link_to": "product",
             "show_price": false,
             "link": "/products/marcel-ora-shield"
@@ -133,7 +133,7 @@
         "step_2": {
           "type": "step",
           "settings": {
-            "title": "Prepare and use MARCEL Ora-Shield Oral Rinse exactly as stated on the approved label or as directed by your OSMF Specialist Doctor or MARCEL OSMF Consultant.",
+            "title": "Prepare and use MARCEL OraShield Oral Rinse exactly as stated on the approved label or as directed by your OSMF Specialist Doctor or MARCEL OSMF Consultant.",
             "text": ""
           }
         },
@@ -328,7 +328,7 @@
         "text": "If the Advance Kit has been recommended for you, explore its components and follow your personalised care advice.",
         "button_1_label": "Talk to MARCEL Team",
         "button_1_to": "whatsapp",
-        "button_2_label": "Explore MARCEL Ora-Shield",
+        "button_2_label": "Explore MARCEL OraShield",
         "button_2_to": "custom",
         "background": "paper",
         "sheet": false,

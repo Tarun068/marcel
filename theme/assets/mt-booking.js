@@ -130,6 +130,12 @@ if (!customElements.get('mt-booking')) {
         phone.addEventListener('input', () => {
           phone.value = phone.value.replace(/\D/g, '');
         });
+        const pin = this.form.querySelector('[name="contact[pincode]"]');
+        if (pin) {
+          pin.addEventListener('input', () => {
+            pin.value = pin.value.replace(/\D/g, '').slice(0, 6);
+          });
+        }
         this.form.addEventListener('submit', (e) => this.submit(e));
       }
 
@@ -200,14 +206,18 @@ if (!customElements.get('mt-booking')) {
           [get('age'), /^\d{1,3}$/.test(get('age').value.trim()) && Number(get('age').value) > 0, this.t.errAge],
           [get('phone'), /^[6-9]\d{9}$/.test(get('phone').value.replace(/\D/g, '').replace(/^91(?=\d{10}$)/, '')), this.t.errPhone],
           [get('patient_email'), !get('patient_email').value.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(get('patient_email').value.trim()), this.t.errEmail],
-          [get('address'), get('address').value.trim().length >= 5, this.t.errAddress],
+          [get('town_city'), get('town_city').value.trim().length >= 2, this.t.errAddress],
+          [get('taluk_tehsil'), get('taluk_tehsil').value.trim().length >= 2, this.t.errAddress],
+          [get('pincode'), /^[1-9]\d{5}$/.test(get('pincode').value.trim()), this.t.errPincode],
+          [get('state'), !!get('state').value, this.t.errAddress],
         ];
         const errs = [];
         let firstBad = null;
         checks.forEach(([input, ok, msg]) => {
           input.classList.toggle('is-invalid', !ok);
           if (!ok) {
-            errs.push(msg);
+            // One message per kind of problem (the three address parts share one).
+            if (!errs.includes(msg)) errs.push(msg);
             firstBad = firstBad || input;
           }
         });
@@ -231,7 +241,10 @@ if (!customElements.get('mt-booking')) {
           age: v('age').trim(),
           phone: v('phone').replace(/\D/g, '').replace(/^91(?=\d{10}$)/, ''),
           email: v('patient_email').trim(),
-          address: v('address').trim(),
+          city: v('town_city').trim(),
+          taluk: v('taluk_tehsil').trim(),
+          pincode: v('pincode').trim(),
+          state: v('state').trim(),
           date: d ? `${d.dow}, ${d.num} ${d.mon} ${d.year}` : '',
           slot: this.state.slot,
           when: this.when(),
@@ -289,7 +302,10 @@ if (!customElements.get('mt-booking')) {
         add(p.age, b.age);
         add(p.phone, `+91 ${b.phone}`);
         add(p.email, b.email);
-        add(p.address, b.address);
+        add(p.city, b.city);
+        add(p.taluk, b.taluk);
+        add(p.pincode, b.pincode);
+        add(p.state, b.state);
         add(p.date, b.date);
         add(p.slot, b.slot);
         add(p.result, b.result);

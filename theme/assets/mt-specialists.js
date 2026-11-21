@@ -40,6 +40,10 @@ if (!customElements.get('mt-specialists')) {
           this.t = JSON.parse(this.querySelector('[data-mt-text]').textContent);
           const data = JSON.parse(this.querySelector('[data-mt-specialists]').textContent);
           this.people = (data.list || []).map((p) => Object.assign({}, p, { lat: parseFloat(p.lat), lng: parseFloat(p.lng) }));
+          const home = String(this.t.firstState || '').trim().toLowerCase();
+          const rank = (p) => (home && String(p.state || '').toLowerCase() === home ? 0 : 1);
+          const by = (k) => (a, b) => String(a[k] || '').localeCompare(String(b[k] || ''));
+          this.people.sort((a, b) => rank(a) - rank(b) || by('state')(a, b) || by('city')(a, b) || by('name')(a, b));
           this.sample = !!data.sample;
         } catch (e) {
           this.t = {};
@@ -148,7 +152,7 @@ if (!customElements.get('mt-specialists')) {
           const n = Number(digits.padEnd(6, '0'));
           return near.sort((a, b) => Math.abs(Number(a.pin) - n) - Math.abs(Number(b.pin) - n));
         }
-        return list.filter((p) => [p.city, p.area, p.state, p.name, p.clinic].some((v) => String(v || '').toLowerCase().includes(q)));
+        return list.filter((p) => [p.city, p.district, p.area, p.state, p.name, p.clinic].some((v) => String(v || '').toLowerCase().includes(q)));
       }
 
       update() {
@@ -221,9 +225,26 @@ if (!customElements.get('mt-specialists')) {
           r.append(icon(name), body);
           meta.append(r);
         };
-        row('phone', this.t.phoneLabel, p.phone, p.phone ? `tel:${p.phone.replace(/\s/g, '')}` : '');
-        row('pin', this.t.cityLabel, [p.city, p.state].filter(Boolean).join(', '));
-        row('clinic', this.t.addressLabel, [p.clinic, p.address, p.area].filter(Boolean).join(', ') + (p.pin ? ` ${p.pin}` : ''));
+        // Up to two numbers, each one a call link.
+        const nums = [p.phone, p.phone2].filter(Boolean);
+        if (nums.length) {
+          const r = el('div', 'mt-clinic-row');
+          const body = el('p');
+          if (this.t.phoneLabel) body.append(el('b', '', `${this.t.phoneLabel}: `));
+          nums.forEach((n, i) => {
+            if (i) body.append(document.createTextNode(', '));
+            const a = el('a', '', n);
+            a.href = `tel:${n.replace(/\s/g, '')}`;
+            a.addEventListener('click', () => this.track('call', p));
+            body.append(a);
+          });
+          r.append(icon('phone'), body);
+          meta.append(r);
+        }
+        row('pin', this.t.cityLabel, p.city || p.district || '');
+        // Address in the Indian order: clinic and street when given, then town, district (when it differs), state, PIN.
+        const district = p.district && p.district.toLowerCase() !== String(p.city || '').toLowerCase() ? p.district : '';
+        row('clinic', this.t.addressLabel, [p.clinic, p.address, p.area, p.city, district, p.state].filter(Boolean).join(', ') + (p.pin ? ` ${p.pin}` : ''));
         row('clock', '', p.hours);
         if (p.registration) row('patent', '', `${this.t.reg} ${p.registration}`);
         if (p.dist !== undefined) row('target', '', (this.t.km || '[n] km').replace('[n]', p.dist < 10 ? p.dist.toFixed(1) : Math.round(p.dist)));
@@ -236,14 +257,17 @@ if (!customElements.get('mt-specialists')) {
           call.addEventListener('click', () => this.track('call', p));
           actions.append(call);
         }
-        const dir = el('a', 'mt-btn mt-btn-secondary mt-btn-sm');
-        const query = !Number.isNaN(p.lat) && !Number.isNaN(p.lng) ? `${p.lat},${p.lng}` : [p.clinic, p.address, p.area, p.city, p.pin].filter(Boolean).join(', ');
-        dir.href = p.map || `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(query)}`;
-        dir.target = '_blank';
-        dir.rel = 'noopener';
-        dir.append(icon('pin'), document.createTextNode(this.t.directions));
-        dir.addEventListener('click', () => this.track('directions', p));
-        actions.append(dir);
+        const located = p.map || (!Number.isNaN(p.lat) && !Number.isNaN(p.lng)) || p.clinic || p.address;
+        if (located) {
+          const dir = el('a', 'mt-btn mt-btn-secondary mt-btn-sm');
+          const query = !Number.isNaN(p.lat) && !Number.isNaN(p.lng) ? `${p.lat},${p.lng}` : [p.clinic, p.address, p.area, p.city, p.pin].filter(Boolean).join(', ');
+          dir.href = p.map || `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(query)}`;
+          dir.target = '_blank';
+          dir.rel = 'noopener';
+          dir.append(icon('pin'), document.createTextNode(this.t.directions));
+          dir.addEventListener('click', () => this.track('directions', p));
+          actions.append(dir);
+        }
         if (this.t.wa && this.t.share) {
           // A WhatsApp message naming the doctor, so the MARCEL Team knows who is visiting whom.
           const msg = (this.t.shareMessage || '').replace('[doctor]', p.name || '').replace('[city]', p.city || '');

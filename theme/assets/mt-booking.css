@@ -35,6 +35,9 @@ mt-booking { display: grid; }
 /* Form */
 .mt-req { color: #C23838; font-weight: 800; }
 .mt .mt-input--short { min-height: 84px; }
+/* Address in four parts: a plain group with a heading in the label style, the fields on the two-column grid. */
+.mt-book-address { min-width: 0; margin: 0; padding: 0; border: 0; }
+.mt-book-legend { margin-bottom: 10px; padding: 0; font-size: 14.5px; font-weight: 800; color: var(--mt-ink); }
 .mt-book-gap { margin-top: 8px; padding-top: 22px; border-top: 1px solid var(--mt-line); }
 .mt-slots--range { grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); }
 /* The booking fee is highlighted in red, here and in the summary, so the charge is clear before booking. */
@@ -97,7 +100,7 @@ mt-clinics { display: block; }
 .mt-clinic-row .mt-i { margin-top: 4px; }
 .mt-clinic-row p { margin: 0; color: var(--mt-ink-2); line-height: 1.5; }
 .mt-clinic-row b { color: var(--mt-ink); font-weight: 700; }
-.mt-clinic-row a { color: var(--mt-teal); font-weight: 700; }
+.mt-clinic-row a { color: var(--mt-teal); font-weight: 700; white-space: nowrap; }
 .mt-clinic-ref { display: flex; gap: 8px; align-items: flex-start; margin: 0; padding: 10px 12px; border-radius: 12px; background: color-mix(in srgb, var(--mt-aqua) 9%, #FFFFFF); color: var(--mt-ink-2); font-size: 14px; line-height: 1.5; }
 .mt-clinic-ref .mt-i { flex: none; width: 16px; height: 16px; margin-top: 2px; color: var(--mt-teal); }
 .mt-clinic-tags { display: flex; flex-wrap: wrap; gap: 6px; }

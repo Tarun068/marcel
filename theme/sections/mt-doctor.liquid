@@ -1,91 +1,256 @@
 {%- comment -%}
-  Marcel featured doctor: photo, name, qualification, role, a short introduction, key points and an optional button.
+  Marcel featured doctor, laid out as the client's "OSMF Specialist Doctor Spotlight": a heading, a profile card
+  (photo, role tag, name, qualification, introduction, clinic and phone) and the doctor's own words in a quote panel.
   Without a photo it shows the doctor's initials, so no stock face stands in for a real person.
 {%- endcomment -%}
 {%- style -%}
-  .mt-doc { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
-  .mt-doc-media { position: relative; width: 100%; max-width: 440px; }
-  /* Picture on the right (setting Picture side): copy first, the picture after it on phones too. */
-  .mt-doc--right { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
-  .mt-doc--right .mt-doc-media { order: 2; justify-self: end; max-width: 520px; }
-  .mt-doc-photo--art { aspect-ratio: 1 / 1; background: #F4F8FA; }
-  .mt-doc-photo { position: relative; display: grid; place-items: center; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--mt-r-xl); background: linear-gradient(160deg, var(--mt-tint), var(--mt-mist)); box-shadow: 0 30px 60px -40px rgba(12, 42, 61, .55); }
-  .mt-doc-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .mt-doc-initials { display: grid; place-items: center; width: 46%; aspect-ratio: 1; border-radius: 50%; background: var(--mt-paper); color: var(--mt-teal); font-family: var(--mt-serif); font-size: clamp(44px, 6vw, 84px); font-weight: 600; letter-spacing: -.02em; box-shadow: 0 18px 40px -26px rgba(12, 42, 61, .45); }
-  .mt-doc-badge { position: absolute; left: 18px; right: 18px; bottom: 18px; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: var(--mt-r); background: rgba(255, 255, 255, .94); box-shadow: 0 14px 30px -20px rgba(12, 42, 61, .5); font-size: 14px; font-weight: 700; color: var(--mt-ink); }
-  .mt-doc-badge .mt-i { width: 22px; height: 22px; color: var(--mt-teal); }
-  .mt-doc-body { display: grid; gap: 18px; justify-items: start; }
-  .mt .mt-doc-name { font-size: var(--mt-fs-h); line-height: 1.08; letter-spacing: -.026em; }
-  .mt-type-serif .mt .mt-doc-name { font-family: var(--mt-serif); font-weight: 600; letter-spacing: -.018em; }
-  .mt-doc-cred { display: flex; flex-wrap: wrap; gap: 8px; }
-  .mt-doc-cred span { padding: 6px 12px; border-radius: 99px; background: var(--mt-tint); color: var(--mt-teal); font-size: 14px; font-weight: 700; }
-  .mt-doc-text { max-width: 62ch; }
-  .mt-doc-points { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
-  .mt-doc-points li { display: flex; gap: 10px; align-items: flex-start; color: var(--mt-ink); font-weight: 600; }
-  .mt-doc-points .mt-i { width: 20px; height: 20px; margin-top: 3px; color: var(--mt-teal); stroke-width: 2.4; flex: none; }
-  .mt-bg-navy .mt-doc-points li, .mt-bg-navy .mt .mt-doc-name { color: var(--mt-on-dark); }
-  @media (max-width: 860px) {
-    .mt-doc, .mt-doc--right { grid-template-columns: minmax(0, 1fr); }
-    .mt-doc-media, .mt-doc--right .mt-doc-media { max-width: 420px; justify-self: start; }
+  .mt-spot { --mt-spot-gold: #B88B45; --mt-spot-jade: #39745E; --mt-spot-deep: #10464B; --mt-spot-soft: #EAF1EE; }
+  .mt-spot-head { display: grid; gap: 14px; max-width: 760px; margin-bottom: clamp(24px, 3.4vw, 36px); }
+  .mt-spot-kicker { display: flex; align-items: center; gap: 12px; color: var(--mt-spot-jade); font-size: 12.5px; font-weight: 800; letter-spacing: .16em; line-height: 1.5; text-transform: uppercase; }
+  .mt-spot-kicker::before { content: ""; width: 30px; height: 2px; flex: none; background: var(--mt-spot-gold); }
+  .mt .mt-spot-title { font-family: var(--mt-serif); font-weight: 400; font-size: var(--mt-fs-h); line-height: 1.1; letter-spacing: -.02em; }
+  .mt .mt-spot-title :is(em, i) { font-style: italic; font-weight: inherit; color: var(--mt-teal); }
+  .mt-spot-lead { max-width: 66ch; font-size: var(--mt-fs-body); line-height: 1.7; color: var(--mt-ink-2); }
+  .mt-spot :is(.mt-spot-lead, .mt-spot-note, blockquote, .mt-spot-member) { text-wrap: pretty; }
+
+  .mt-spot-card { display: grid; grid-template-columns: clamp(240px, 38%, 440px) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: stretch; padding: clamp(14px, 1.8vw, 24px); border: 1px solid var(--mt-line); border-radius: var(--mt-r-lg); background: var(--mt-paper); box-shadow: 0 18px 48px -40px rgba(12, 42, 61, .42); }
+  .mt-spot-card--right { grid-template-columns: minmax(0, 1fr) clamp(240px, 38%, 440px); }
+  .mt-spot-card--right .mt-spot-photo { order: 2; }
+  .mt-spot-photo { position: relative; display: grid; place-items: center; min-height: clamp(380px, 36vw, 520px); margin: 0; overflow: hidden; border-radius: var(--mt-r); background: linear-gradient(160deg, var(--mt-tint), var(--mt-mist)); }
+  .mt-spot-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 32%; }
+  .mt-spot-photo--art { background: #F4F8FA; }
+  .mt-spot-photo--art img { object-fit: contain; }
+  .mt-spot-initials { display: grid; place-items: center; width: 46%; aspect-ratio: 1; border-radius: 50%; background: var(--mt-paper); color: var(--mt-teal); font-family: var(--mt-serif); font-size: clamp(44px, 6vw, 84px); font-weight: 600; letter-spacing: -.02em; box-shadow: 0 18px 40px -26px rgba(12, 42, 61, .45); }
+  .mt-spot-badge { position: absolute; left: 14px; right: 14px; bottom: 14px; display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: var(--mt-r-sm); background: rgba(255, 255, 255, .94); font-size: 14px; font-weight: 700; color: var(--mt-ink); }
+  .mt-spot-badge .mt-i { width: 20px; height: 20px; color: var(--mt-teal); }
+
+  .mt-spot-info { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; min-width: 0; padding: clamp(6px, 2vw, 20px) clamp(2px, 1.5vw, 18px); }
+  .mt-spot-roleline { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 16px; }
+  .mt-spot-role { display: inline-flex; padding: 7px 11px; border-radius: 6px; background: var(--mt-spot-soft); color: var(--mt-spot-deep); font-size: 11px; font-weight: 800; letter-spacing: .13em; line-height: 1.2; text-transform: uppercase; }
+  .mt-spot-member { color: var(--mt-spot-jade); font-size: 13.5px; font-weight: 700; line-height: 1.4; }
+  .mt .mt-spot-name { font-family: var(--mt-serif); font-weight: 500; font-size: var(--mt-fs-h); line-height: 1.12; letter-spacing: -.02em; }
+  .mt-spot-qual { margin-top: 6px; color: var(--mt-ink-3); font-size: 14px; letter-spacing: .04em; }
+  .mt-spot-rule { display: block; width: 54px; height: 2px; margin: 20px 0; background: var(--mt-spot-gold); }
+  .mt-spot-note { max-width: 58ch; line-height: 1.7; color: var(--mt-ink-2); }
+  .mt-spot-points { display: grid; gap: 10px; margin-top: 16px; }
+  .mt-spot-points li { display: flex; gap: 10px; align-items: flex-start; color: var(--mt-ink); font-weight: 600; }
+  .mt-spot-points .mt-i { width: 20px; height: 20px; margin-top: 3px; color: var(--mt-teal); stroke-width: 2.4; }
+  .mt-spot-contact { display: flex; flex-wrap: wrap; gap: 14px 36px; align-self: stretch; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--mt-line); }
+  .mt-spot-contact-item { display: flex; gap: 10px; align-items: flex-start; color: var(--mt-ink); font-size: 14px; line-height: 1.5; }
+  .mt-spot-contact-item .mt-i { width: 18px; height: 18px; margin-top: 1px; color: var(--mt-teal); }
+  .mt-spot-contact-item strong { display: block; font-weight: 700; }
+  .mt-spot-contact-item a:hover { color: var(--mt-teal); text-decoration: underline; text-underline-offset: 3px; }
+  .mt-spot-info > .mt-btn { margin-top: 22px; }
+  .mt-spot-info > .mt-fine { margin-top: 14px; }
+
+  .mt-spot-quote { position: relative; overflow: hidden; margin-top: 24px; padding: clamp(26px, 4.4vw, 52px); border: 1px solid #D4E2DE; border-left: 4px solid var(--mt-spot-jade); border-radius: var(--mt-r-lg); background: linear-gradient(125deg, #F0F5F3 0%, #E5EFED 100%); color: #19383D; box-shadow: 0 16px 38px -34px rgba(12, 42, 61, .38); }
+  .mt-spot-quote::after { content: "\201C"; position: absolute; top: -38px; right: 30px; font-family: Georgia, serif; font-size: 220px; line-height: 1; color: rgba(var(--mt-teal-rgb), .08); pointer-events: none; }
+  .mt-spot-quote > * { position: relative; z-index: 1; }
+  .mt-spot-quote-label { margin-bottom: 16px; color: var(--mt-spot-jade); font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+  .mt-spot-quote blockquote { max-width: 72ch; font-family: var(--mt-serif); font-size: var(--mt-fs-sub); line-height: 1.65; letter-spacing: -.005em; color: #19383D; }
+  .mt-spot-credit { display: flex; align-items: center; gap: 13px; margin-top: 24px; }
+  .mt-spot-credit::before { content: ""; width: 30px; height: 2px; flex: none; background: var(--mt-spot-gold); }
+  .mt-spot-credit strong { display: block; font-size: 15px; color: #19383D; }
+  .mt-spot-credit span span { display: block; margin-top: 3px; color: #587074; font-size: 13px; }
+
+  .mt-spot-sign { display: flex; justify-content: space-between; align-items: center; gap: 8px 18px; margin-top: 20px; padding-inline: 4px; color: var(--mt-ink-3); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; }
+  .mt-spot-sign strong { color: var(--mt-teal); font-size: 12px; letter-spacing: .12em; }
+
+  .mt-spot--sans .mt-spot-title, .mt-spot--sans .mt-spot-name, .mt-spot--sans .mt-spot-quote blockquote { font-family: var(--mt-font); letter-spacing: -.02em; }
+  .mt-spot--sans .mt-spot-title, .mt-spot--sans .mt-spot-name { font-weight: 800; }
+  .mt-spot--sans .mt-spot-title :is(em, i) { font-style: normal; }
+  .mt-bg-navy .mt-spot-kicker { color: var(--mt-mint); }
+  .mt-bg-navy .mt-spot-lead, .mt-bg-navy .mt-spot-sign { color: var(--mt-navy-ink); }
+  .mt-bg-navy .mt-spot-title :is(em, i), .mt-bg-navy .mt-spot-sign strong { color: var(--mt-mint); }
+
+  @media (max-width: 760px) {
+    .mt-spot-card, .mt-spot-card--right { grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 12px; }
+    .mt-spot-card--right .mt-spot-photo { order: 0; }
+    .mt-spot-photo { min-height: 0; aspect-ratio: 4 / 3; }
+    .mt-spot-photo img { object-position: center 26%; }
+    .mt-spot-info { padding: 18px 6px 8px; }
+    .mt-spot-quote { margin-top: 16px; }
+    .mt-spot-quote::after { top: -30px; right: 18px; font-size: 160px; }
+    .mt-spot-sign { flex-direction: column; align-items: flex-start; }
   }
 {%- endstyle -%}
 
 {%- liquid
   assign s = section.settings
+
   assign initials = ''
   assign parts = s.name | remove: 'Dr.' | remove: 'Dr ' | strip | split: ' '
   for p in parts limit: 2
     assign ch = p | slice: 0
     assign initials = initials | append: ch
   endfor
+
+  comment
+    Line under the name in the quote panel: the setting, or the qualification, role, clinic and town in a row.
+  endcomment
+  assign credit = s.quote_credit | strip
+  if credit == blank
+    assign credit_raw = s.qualification | append: '|' | append: s.role | append: '|' | append: s.clinic | append: '|' | append: s.location
+    assign credit_parts = credit_raw | split: '|'
+    for part in credit_parts
+      assign part = part | strip
+      if part != blank
+        if credit != blank
+          assign credit = credit | append: ', '
+        endif
+        assign credit = credit | append: part
+      endif
+    endfor
+  endif
+
+  assign photo_alt = s.name
+  if s.name != blank and credit != blank
+    assign photo_alt = s.name | append: ', ' | append: credit
+  endif
+
+  comment
+    Phone link: digits only, Indian numbers get +91.
+  endcomment
+  assign phone_href = ''
+  if s.phone != blank
+    assign digits = s.phone | remove: ' ' | remove: '-' | remove: '(' | remove: ')' | remove: '.' | remove: '+'
+    assign first_digit = digits | slice: 0
+    if digits.size == 10
+      assign phone_href = '+91' | append: digits
+    elsif digits.size == 11 and first_digit == '0'
+      assign rest = digits | slice: 1, 10
+      assign phone_href = '+91' | append: rest
+    else
+      assign phone_href = '+' | append: digits
+    endif
+  endif
+
+  comment
+    Quote: quotation marks are added here, so any typed at the start or end are dropped.
+  endcomment
+  assign quote = s.quote | strip
+  assign q_first = quote | slice: 0
+  if q_first == '“' or q_first == '"'
+    assign quote = quote | slice: 1, quote.size | strip
+  endif
+  assign q_last = quote | slice: -1
+  if q_last == '”' or q_last == '"'
+    assign q_len = quote.size | minus: 1
+    assign quote = quote | slice: 0, q_len | strip
+  endif
+
+  assign name_tag = 'h3'
+  if s.heading == blank
+    assign name_tag = 'h2'
+  endif
 -%}
 {%- capture btn_link -%}{% render 'mt-link-to', key: s.button_to, url: s.button_link %}{%- endcapture -%}
 
 {%- if s.name != blank or s.heading != blank or request.design_mode -%}
-  <section class="{% render 'mt-section-class', s: s, extra: 'mt-doctor' %}">
-    <div class="mt-wrap mt-doc{% if s.media_side == 'right' %} mt-doc--right{% endif %}">
-      <div class="mt-doc-media">
-        <div class="mt-doc-photo{% if s.photo == blank and s.art == 'team' %} mt-doc-photo--art{% endif %}">
+  <section class="{% render 'mt-section-class', s: s, extra: 'mt-doctor mt-spot' %}{% if s.heading_font == 'sans' %} mt-spot--sans{% endif %}">
+    <div class="mt-wrap">
+      {%- if s.eyebrow != blank or s.heading != blank or s.lead != blank -%}
+        <header class="mt-spot-head">
+          {%- if s.eyebrow != blank -%}<p class="mt-spot-kicker">{{ s.eyebrow | escape }}</p>{%- endif -%}
+          {%- if s.heading != blank -%}<h2 class="mt-spot-title">{{ s.heading }}</h2>{%- endif -%}
+          {%- if s.lead != blank -%}<p class="mt-spot-lead">{{ s.lead }}</p>{%- endif -%}
+        </header>
+      {%- endif -%}
+
+      <article class="mt-spot-card{% if s.media_side == 'right' %} mt-spot-card--right{% endif %}"{% if s.name != blank %} aria-label="{{ s.name | escape }}"{% endif %}>
+        <figure class="mt-spot-photo{% if s.photo == blank and s.art == 'team' %} mt-spot-photo--art{% endif %}">
           {%- if s.photo != blank -%}
-            {{ s.photo | image_url: width: 1000 | image_tag: loading: 'lazy', sizes: '(min-width: 1440px) 520px, (min-width: 861px) 38vw, 92vw', widths: '400, 600, 800, 1000', alt: s.name }}
+            {{ s.photo | image_url: width: 1000 | image_tag: loading: 'lazy', sizes: '(min-width: 1440px) 440px, (min-width: 761px) 32vw, 92vw', widths: '400, 600, 800, 1000', alt: photo_alt }}
+          {%- elsif s.art == 'spotlight' -%}
+            <img src="{{ 'mt-doctor-spotlight.jpg' | asset_url }}" alt="{{ photo_alt | escape }}" width="640" height="856" loading="lazy">
           {%- elsif s.art == 'team' -%}
             <img src="{{ 'mt-doctor-team.webp' | asset_url }}" alt="" width="1000" height="1000" loading="lazy">
           {%- elsif initials != blank -%}
-            <span class="mt-doc-initials" aria-hidden="true">{{ initials | upcase }}</span>
+            <span class="mt-spot-initials" aria-hidden="true">{{ initials | upcase }}</span>
           {%- endif -%}
+          {%- if s.badge != blank -%}
+            <figcaption class="mt-spot-badge">{%- render 'mt-icon', icon: 'doctor' -%}{{ s.badge | escape }}</figcaption>
+          {%- endif -%}
+        </figure>
+
+        <div class="mt-spot-info">
+          {%- if s.role != blank or s.member != blank -%}
+            <div class="mt-spot-roleline">
+              {%- if s.role != blank -%}<span class="mt-spot-role">{{ s.role | escape }}</span>{%- endif -%}
+              {%- if s.member != blank -%}<span class="mt-spot-member">{{ s.member | escape }}</span>{%- endif -%}
+            </div>
+          {%- endif -%}
+          {%- if s.name != blank -%}<{{ name_tag }} class="mt-spot-name">{{ s.name | escape }}</{{ name_tag }}>{%- endif -%}
+          {%- if s.qualification != blank -%}<p class="mt-spot-qual">{{ s.qualification | escape }}</p>{%- endif -%}
+          {%- if s.text != blank -%}
+            <span class="mt-spot-rule" aria-hidden="true"></span>
+            <div class="mt-spot-note mt-rte">{{ s.text }}</div>
+          {%- endif -%}
+          {%- if s.points != blank -%}
+            {%- assign points = s.points | newline_to_br | split: '<br />' -%}
+            <ul class="mt-spot-points" role="list">
+              {%- for point in points -%}
+                {%- assign point = point | strip -%}
+                {%- if point != blank -%}<li>{%- render 'mt-icon', icon: 'check' -%}<span>{{ point | escape }}</span></li>{%- endif -%}
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+          {%- if s.clinic != blank or s.location != blank or s.phone != blank -%}
+            <div class="mt-spot-contact">
+              {%- if s.clinic != blank or s.location != blank -%}
+                <p class="mt-spot-contact-item">
+                  {%- render 'mt-icon', icon: 'clinic' -%}
+                  <span>
+                    {%- if s.clinic != blank -%}
+                      <strong>{{ s.clinic | escape }}</strong>{{ s.location | escape }}
+                    {%- else -%}
+                      <strong>{{ s.location | escape }}</strong>
+                    {%- endif -%}
+                  </span>
+                </p>
+              {%- endif -%}
+              {%- if s.phone != blank -%}
+                <p class="mt-spot-contact-item">
+                  {%- render 'mt-icon', icon: 'phone' -%}
+                  <span>
+                    {%- if s.contact_label != blank -%}<strong>{{ s.contact_label | escape }}</strong>{%- endif -%}
+                    <a href="tel:{{ phone_href }}">{{ s.phone | escape }}</a>
+                  </span>
+                </p>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+          {%- if s.button_label != blank -%}
+            <a class="mt-btn mt-btn-primary" href="{{ btn_link | strip }}"{% if s.button_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
+              {{- s.button_label | escape -}}
+              {%- render 'mt-icon', icon: 'arrow-right' -%}
+            </a>
+          {%- endif -%}
+          {%- if s.note != blank -%}<p class="mt-fine">{{ s.note | escape }}</p>{%- endif -%}
         </div>
-        {%- if s.badge != blank -%}
-          <p class="mt-doc-badge">{%- render 'mt-icon', icon: 'doctor' -%}{{ s.badge | escape }}</p>
-        {%- endif -%}
-      </div>
-      <div class="mt-doc-body">
-        {%- if s.eyebrow != blank -%}<span class="mt-eyebrow">{{ s.eyebrow | escape }}</span>{%- endif -%}
-        {%- assign doc_heading = s.heading | default: s.name -%}
-        {%- if doc_heading != blank -%}<h2 class="mt-doc-name">{{ doc_heading | escape }}</h2>{%- endif -%}
-        {%- if s.qualification != blank or s.role != blank -%}
-          <div class="mt-doc-cred">
-            {%- if s.qualification != blank -%}<span>{{ s.qualification | escape }}</span>{%- endif -%}
-            {%- if s.role != blank -%}<span>{{ s.role | escape }}</span>{%- endif -%}
-          </div>
-        {%- endif -%}
-        {%- if s.text != blank -%}<div class="mt-doc-text mt-rte">{{ s.text }}</div>{%- endif -%}
-        {%- assign points = s.points | newline_to_br | split: '<br />' -%}
-        {%- if s.points != blank -%}
-          <ul class="mt-doc-points" role="list">
-            {%- for point in points -%}
-              {%- assign point = point | strip -%}
-              {%- if point != blank -%}<li>{%- render 'mt-icon', icon: 'check' -%}<span>{{ point | escape }}</span></li>{%- endif -%}
-            {%- endfor -%}
-          </ul>
-        {%- endif -%}
-        {%- if s.button_label != blank -%}
-          <a class="mt-btn mt-btn-primary" href="{{ btn_link | strip }}"{% if s.button_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
-            {{- s.button_label | escape -}}
-            {%- render 'mt-icon', icon: 'arrow-right' -%}
-          </a>
-        {%- endif -%}
-        {%- if s.note != blank -%}<p class="mt-fine">{{ s.note | escape }}</p>{%- endif -%}
-      </div>
+      </article>
+
+      {%- if quote != blank -%}
+        <figure class="mt-spot-quote">
+          {%- if s.quote_label != blank -%}<p class="mt-spot-quote-label">{{ s.quote_label | escape }}</p>{%- endif -%}
+          <blockquote><p>“{{ quote | escape | newline_to_br }}”</p></blockquote>
+          {%- if s.name != blank or credit != blank -%}
+            <figcaption class="mt-spot-credit">
+              <span>
+                {%- if s.name != blank -%}<strong>{{ s.name | escape }}</strong>{%- endif -%}
+                {%- if credit != blank -%}<span>{{ credit | escape }}</span>{%- endif -%}
+              </span>
+            </figcaption>
+          {%- endif -%}
+        </figure>
+      {%- endif -%}
+
+      {%- if s.signoff != blank or s.signoff_brand != blank -%}
+        <p class="mt-spot-sign">
+          {%- if s.signoff != blank -%}<span>{{ s.signoff | escape }}</span>{%- endif -%}
+          {%- if s.signoff_brand != blank -%}<strong>{{ s.signoff_brand | escape }}</strong>{%- endif -%}
+        </p>
+      {%- endif -%}
     </div>
   </section>
 {%- endif -%}
@@ -104,18 +269,45 @@
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow",
-      "default": "Featured doctor"
+      "default": "MARCEL OSMF Specialist Doctor Community"
     },
     {
-      "type": "text",
+      "type": "inline_richtext",
       "id": "heading",
       "label": "Heading",
-      "info": "Shown as the section heading. Leave empty to show the doctor's name."
+      "default": "OSMF Specialist <em>Doctor Spotlight</em>",
+      "info": "Italic words show in teal italics. Leave empty to show the doctor's name as the heading."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "lead",
+      "label": "Text under the heading",
+      "default": "Recognising the doctors who contribute their clinical experience to the understanding and stage-based care of Oral Submucous Fibrosis."
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading font",
+      "options": [
+        {
+          "value": "serif",
+          "label": "Serif, like the client's design"
+        },
+        {
+          "value": "sans",
+          "label": "Same as the rest of the site"
+        }
+      ],
+      "default": "serif"
+    },
+    {
+      "type": "header",
+      "content": "Doctor"
     },
     {
       "type": "select",
       "id": "media_side",
-      "label": "Picture side",
+      "label": "Photo side",
       "options": [
         {
           "value": "left",
@@ -132,7 +324,7 @@
       "type": "image_picker",
       "id": "photo",
       "label": "Photo",
-      "info": "A real photo of the doctor, portrait shape (4:5). Without one, the initials show."
+      "info": "A real photo of the doctor, portrait shape (3:4). It replaces the picture chosen below."
     },
     {
       "type": "select",
@@ -144,49 +336,77 @@
           "label": "The doctor's initials"
         },
         {
+          "value": "spotlight",
+          "label": "Dr. Hitendra H. Patel's photo (theme file)"
+        },
+        {
           "value": "team",
           "label": "Illustration: doctor with a care team"
         }
       ],
       "default": "initials",
-      "info": "Used until a photo is added. The illustration shows no real person."
-    },
-    {
-      "type": "text",
-      "id": "name",
-      "label": "Name",
-      "info": "Leave empty to hide the name; then add a Heading."
-    },
-    {
-      "type": "text",
-      "id": "qualification",
-      "label": "Qualification",
-      "default": "BDS"
+      "info": "Used when no photo is picked above. The illustration shows no real person."
     },
     {
       "type": "text",
       "id": "role",
-      "label": "Role",
-      "default": "MARCEL OSMF Clinical Consultant"
+      "label": "Role tag",
+      "default": "OSMF Specialist"
     },
     {
       "type": "text",
-      "id": "badge",
-      "label": "Photo caption",
-      "default": "JanSuta Pharmaceuticals"
+      "id": "member",
+      "label": "Line beside the role tag",
+      "info": "For example: First Member of the OSMF Specialist Doctor Community."
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Name"
+    },
+    {
+      "type": "text",
+      "id": "qualification",
+      "label": "Qualification"
     },
     {
       "type": "richtext",
       "id": "text",
-      "label": "Introduction",
-      "default": "<p>Dr. Niyati Thakker is the clinical point of contact for doctors in the OSMF Specialist Doctor network. She helps them understand MARCEL OMR Therapy, supports clinical orientation and coordinates with the JanSuta team.</p>"
+      "label": "About the doctor"
     },
     {
       "type": "textarea",
       "id": "points",
       "label": "Key points",
-      "info": "One per line.",
-      "default": "A designated clinical contact for participating doctors\nBetter orientation to the MARCEL OMR Therapy approach\nStronger communication and professional coordination"
+      "info": "Optional. One per line."
+    },
+    {
+      "type": "text",
+      "id": "clinic",
+      "label": "Clinic"
+    },
+    {
+      "type": "text",
+      "id": "location",
+      "label": "Town and state"
+    },
+    {
+      "type": "text",
+      "id": "contact_label",
+      "label": "Phone label",
+      "default": "Contact"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone number",
+      "info": "Shown as typed and opens the phone dialler. Leave empty to hide."
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Photo caption",
+      "info": "Optional. Shows on the photo."
     },
     {
       "type": "text",
@@ -246,6 +466,44 @@
     },
     {
       "type": "header",
+      "content": "In the doctor's words"
+    },
+    {
+      "type": "text",
+      "id": "quote_label",
+      "label": "Label above the quote",
+      "default": "In the doctor's words"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "info": "The doctor's own words. Quotation marks are added for you. Leave empty to hide the quote panel."
+    },
+    {
+      "type": "text",
+      "id": "quote_credit",
+      "label": "Line under the name",
+      "info": "Leave empty to show the qualification, role tag, clinic and town."
+    },
+    {
+      "type": "header",
+      "content": "Closing line"
+    },
+    {
+      "type": "text",
+      "id": "signoff",
+      "label": "Text",
+      "default": "Recognising clinical experience and collaborative care"
+    },
+    {
+      "type": "text",
+      "id": "signoff_brand",
+      "label": "Brand name",
+      "default": "MARCEL OMR Therapy"
+    },
+    {
+      "type": "header",
       "content": "Section"
     },
     {
@@ -270,7 +528,7 @@
           "label": "Navy"
         }
       ],
-      "default": "paper"
+      "default": "mist"
     },
     {
       "type": "checkbox",

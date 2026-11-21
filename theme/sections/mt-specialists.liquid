@@ -34,7 +34,8 @@
           "referral": {{ s.referral_text | json }},
           "share": {{ s.share_label | json }},
           "shareMessage": {{ s.share_message | json }},
-          "wa": {{ wa_digits | json }}
+          "wa": {{ wa_digits | json }},
+          "firstState": {{ s.first_state | json }}
         }
       </script>
 
@@ -252,6 +253,13 @@
       "label": "WhatsApp message",
       "default": "Hello MARCEL Team, I found [doctor] in [city] on the MARCEL website and would like to consult them.",
       "info": "[doctor] and [city] are filled in from the doctor's details."
+    },
+    {
+      "type": "text",
+      "id": "first_state",
+      "label": "List this state first",
+      "default": "Gujarat",
+      "info": "Doctors in this state come first, then the other states. Within a state they are listed by town and name."
     },
     {
       "type": "header",

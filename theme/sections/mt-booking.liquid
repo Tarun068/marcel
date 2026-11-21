@@ -79,6 +79,7 @@
           "errPhone": {{ s.err_phone | json }},
           "errEmail": {{ s.err_email | json }},
           "errAddress": {{ s.err_address | json }},
+          "errPincode": {{ s.err_pincode | json }},
           "errSlot": {{ s.err_slot | json }},
           "errConsent": {{ s.err_consent | json }},
           "errSend": {{ s.err_send | json }},
@@ -87,7 +88,10 @@
             "age": {{ s.prop_age | json }},
             "phone": {{ s.prop_phone | json }},
             "email": {{ s.prop_email | json }},
-            "address": {{ s.prop_address | json }},
+            "city": {{ s.city_label | json }},
+            "taluk": {{ s.taluk_label | json }},
+            "pincode": {{ s.pincode_label | json }},
+            "state": {{ s.state_label | json }},
             "date": {{ s.prop_date | json }},
             "slot": {{ s.prop_slot | json }},
             "id": {{ s.prop_id | json }},
@@ -130,10 +134,32 @@
               <input class="mt-input" id="MtBookEmail-{{ section.id }}" name="contact[patient_email]" type="email" autocomplete="email">
             </div>
           </div>
-          <div class="mt-field">
-            <label for="MtBookAddress-{{ section.id }}">{{ s.address_label | escape }} <span class="mt-req">{{ required }}</span></label>
-            <textarea class="mt-input mt-input--short" id="MtBookAddress-{{ section.id }}" name="contact[address]" autocomplete="street-address" required></textarea>
-          </div>
+          {%- comment -%} Address in parts (client, 2026-11-20): town or city, taluk or tehsil, pincode and state. {%- endcomment -%}
+          <fieldset class="mt-book-address">
+            {%- if s.address_label != blank -%}<legend class="mt-book-legend">{{ s.address_label | escape }}</legend>{%- endif -%}
+            <div class="mt-form-grid mt-form-grid--2">
+              <div class="mt-field">
+                <label for="MtBookCity-{{ section.id }}">{{ s.city_label | escape }} <span class="mt-req">{{ required }}</span></label>
+                <input class="mt-input" id="MtBookCity-{{ section.id }}" name="contact[town_city]" autocomplete="address-level2" required>
+              </div>
+              <div class="mt-field">
+                <label for="MtBookTaluk-{{ section.id }}">{{ s.taluk_label | escape }} <span class="mt-req">{{ required }}</span></label>
+                <input class="mt-input" id="MtBookTaluk-{{ section.id }}" name="contact[taluk_tehsil]" autocomplete="address-level3" required>
+              </div>
+              <div class="mt-field">
+                <label for="MtBookPin-{{ section.id }}">{{ s.pincode_label | escape }} <span class="mt-req">{{ required }}</span></label>
+                <input class="mt-input" id="MtBookPin-{{ section.id }}" name="contact[pincode]" inputmode="numeric" maxlength="6" autocomplete="postal-code" required>
+              </div>
+              <div class="mt-field">
+                <label for="MtBookState-{{ section.id }}">{{ s.state_label | escape }} <span class="mt-req">{{ required }}</span></label>
+                <select class="mt-input" id="MtBookState-{{ section.id }}" name="contact[state]" autocomplete="address-level1" required>
+                  <option value="">{{ s.state_placeholder | escape }}</option>
+                  {%- assign mt_states = 'Andaman and Nicobar Islands|Andhra Pradesh|Arunachal Pradesh|Assam|Bihar|Chandigarh|Chhattisgarh|Dadra and Nagar Haveli and Daman and Diu|Delhi|Goa|Gujarat|Haryana|Himachal Pradesh|Jammu and Kashmir|Jharkhand|Karnataka|Kerala|Ladakh|Lakshadweep|Madhya Pradesh|Maharashtra|Manipur|Meghalaya|Mizoram|Nagaland|Odisha|Puducherry|Punjab|Rajasthan|Sikkim|Tamil Nadu|Telangana|Tripura|Uttar Pradesh|Uttarakhand|West Bengal' | split: '|' -%}
+                  {%- for st in mt_states -%}<option value="{{ st }}">{{ st }}</option>{%- endfor -%}
+                </select>
+              </div>
+            </div>
+          </fieldset>
 
           <div class="mt-stack-sm mt-book-gap">
             <h2 class="mt-book-h">{{ s.slot_heading | escape }}</h2>
@@ -302,8 +328,39 @@
     {
       "type": "text",
       "id": "address_label",
-      "label": "Address label",
-      "default": "Address"
+      "label": "Address heading",
+      "default": "Address",
+      "info": "Shown above the town or city, taluk or tehsil, pincode and state fields."
+    },
+    {
+      "type": "text",
+      "id": "city_label",
+      "label": "Town or city label",
+      "default": "Town / City"
+    },
+    {
+      "type": "text",
+      "id": "taluk_label",
+      "label": "Taluk or tehsil label",
+      "default": "Taluk / Tehsil"
+    },
+    {
+      "type": "text",
+      "id": "pincode_label",
+      "label": "Pincode label",
+      "default": "Pincode"
+    },
+    {
+      "type": "text",
+      "id": "state_label",
+      "label": "State label",
+      "default": "State"
+    },
+    {
+      "type": "text",
+      "id": "state_placeholder",
+      "label": "State menu prompt",
+      "default": "Select your state"
     },
     {
       "type": "text",
@@ -468,7 +525,13 @@
       "type": "text",
       "id": "err_address",
       "label": "Address error",
-      "default": "Enter your address."
+      "default": "Fill in your town or city, taluk or tehsil and state."
+    },
+    {
+      "type": "text",
+      "id": "err_pincode",
+      "label": "Pincode error",
+      "default": "Enter a valid 6-digit pincode."
     },
     {
       "type": "text",
@@ -515,12 +578,6 @@
       "id": "prop_email",
       "label": "Email",
       "default": "Email"
-    },
-    {
-      "type": "text",
-      "id": "prop_address",
-      "label": "Address",
-      "default": "Address"
     },
     {
       "type": "text",

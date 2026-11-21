@@ -66,7 +66,7 @@
       "settings": {
         "headline": "",
         "supporting": "A structured care programme for Stage 1 & Stage 2 OSMF",
-        "intro": "<p><strong>Two core products in one structured oral-care programme.</strong></p><p>Designed for individuals assessed by a qualified healthcare professional as suitable within the Stage 1 and Stage 2 Oral Submucous Fibrosis (OSMF) care framework. The programme brings together MARCEL Ora-Care Oral Spray and MARCEL Smile Toothpaste as part of a consistent daily oral-care routine. MARCEL® MOFlex may be considered separately as an optional adjunct where professionally recommended.</p>",
+        "intro": "<p><strong>Two core products in one structured oral-care programme.</strong></p><p>Designed for individuals assessed by a qualified healthcare professional as suitable within the Stage 1 and Stage 2 Oral Submucous Fibrosis (OSMF) care framework. The programme brings together MARCEL OraCare Oral Spray and MARCEL Smile Toothpaste as part of a consistent daily oral-care routine. MARCEL® MOFlex may be considered separately as an optional adjunct where professionally recommended.</p>",
         "details": "",
         "how_lines": "",
         "safety": "",
@@ -126,7 +126,7 @@
         "image_chips": true,
         "hero_title": "MARCEL OMR Therapy Foundation Programme",
         "badge": "Stage 1 & Stage 2 OSMF",
-        "pack_size": "Ora-Care 50 mL + Smile 30 g",
+        "pack_size": "OraCare 50 mL + Smile 30 g",
         "hero_media": "image",
         "hero_note": "MARCEL® MOFlex is optional, is not included in the two-product Foundation Kit and should only be used when professionally recommended.",
         "badge_pill": false,
@@ -183,20 +183,20 @@
           "type": "question",
           "settings": {
             "question": "What is MARCEL OMR Therapy Foundation Programme?",
-            "answer": "<p>It is a structured oral-care programme for patients assessed by their treating healthcare professional as suitable within the Stage 1 and Stage 2 OSMF framework. It brings together MARCEL Ora-Care Oral Spray and MARCEL Smile Toothpaste.</p>"
+            "answer": "<p>It is a structured oral-care programme for patients assessed by their treating healthcare professional as suitable within the Stage 1 and Stage 2 OSMF framework. It brings together MARCEL OraCare Oral Spray and MARCEL Smile Toothpaste.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
             "question": "What is included in the Foundation Kit?",
-            "answer": "<p>The two core products are MARCEL Ora-Care Therapeutic Oral Spray (50 mL) and MARCEL Smile Toothpaste (30 g). MARCEL® MOFlex is an optional adjunct and is not included in the two-product kit.</p>"
+            "answer": "<p>The two core products are MARCEL OraCare Therapeutic Oral Spray (50 mL) and MARCEL Smile Toothpaste (30 g). MARCEL® MOFlex is an optional adjunct and is not included in the two-product kit.</p>"
           }
         },
         "question_3": {
           "type": "question",
           "settings": {
-            "question": "How do I use Ora-Care Oral Spray?",
+            "question": "How do I use OraCare Oral Spray?",
             "answer": "<p>Apply 6 to 7 puffs evenly throughout the mouth to ensure complete coverage of the oral tissues. Use twice daily. Follow the product label and advice from your treating professional.</p>"
           }
         },
@@ -404,7 +404,7 @@
             "art": "none",
             "title": "Two Complementary Products",
             "highlight": false,
-            "text": "Ora-Care is the oral-spray component; Smile is the daily oral-hygiene component.",
+            "text": "OraCare is the oral-spray component; Smile is the daily oral-hygiene component.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
@@ -515,7 +515,7 @@
           "settings": {
             "title": "Use the Spray",
             "art": "spray",
-            "text": "Use MARCEL Ora-Care Oral Spray according to the <strong>approved label</strong> or professional advice."
+            "text": "Use MARCEL OraCare Oral Spray according to the <strong>approved label</strong> or professional advice."
           }
         },
         "step_3": {
@@ -572,7 +572,7 @@
           "type": "row",
           "settings": {
             "label": "Core Kit Contents",
-            "value": "MARCEL Ora-Care Therapeutic Oral Spray, 50 mL, and MARCEL Smile Toothpaste, 30 g"
+            "value": "MARCEL OraCare Therapeutic Oral Spray, 50 mL, and MARCEL Smile Toothpaste, 30 g"
           }
         },
         "row_4": {
@@ -585,14 +585,14 @@
         "row_5": {
           "type": "row",
           "settings": {
-            "label": "Ora-Care Directions",
+            "label": "OraCare Directions",
             "value": "Apply 6 to 7 puffs evenly throughout the mouth to ensure complete coverage of the oral tissues"
           }
         },
         "row_6": {
           "type": "row",
           "settings": {
-            "label": "Ora-Care Frequency",
+            "label": "OraCare Frequency",
             "value": "Twice daily"
           }
         },
@@ -733,7 +733,7 @@
           "settings": {
             "art": "pd-oracare",
             "tag": "Core kit component",
-            "title": "MARCEL Ora-Care",
+            "title": "MARCEL OraCare",
             "subtitle": "Therapeutic Oral Spray, 50 mL",
             "text": "The core spray component of the Foundation Programme. Apply 6 to 7 puffs evenly throughout the mouth to ensure complete coverage of the oral tissues. Use twice daily.",
             "optional": false,
@@ -793,7 +793,7 @@
         "routine_1": {
           "type": "routine",
           "settings": {
-            "title": "MARCEL Ora-Care: Oral Spray",
+            "title": "MARCEL OraCare: Oral Spray",
             "items": "Apply 6 to 7 puffs evenly throughout the mouth.\nEnsure complete coverage of the oral tissues.\nUse twice daily.\nFollow any additional instructions provided by your treating professional."
           }
         },
@@ -929,7 +929,7 @@
         "heading": "Honest Guidance: <em>Is This Kit Right for You?</em>",
         "text": "The Foundation Programme is intended for people assessed as having Stage 1 or Stage 2 OSMF, where symptoms and functional changes may still be relatively early.",
         "yes_title": "This programme may be suitable to discuss if:",
-        "yes_items": "A qualified healthcare professional has assessed you and considers your condition consistent with Stage 1 or Stage 2 OSMF.\nYou experience burning mainly when eating spicy or hot food.\nYou have early cheek sensitivity, mild tightness or a feeling that the inner cheek lining is less flexible.\nYou have noticed subtle changes in mouth opening, without assuming that this alone confirms OSMF or its stage.\nYou want a structured daily routine built around MARCEL Ora-Care Oral Spray and MARCEL Smile Toothpaste, as part of professionally guided care.",
+        "yes_items": "A qualified healthcare professional has assessed you and considers your condition consistent with Stage 1 or Stage 2 OSMF.\nYou experience burning mainly when eating spicy or hot food.\nYou have early cheek sensitivity, mild tightness or a feeling that the inner cheek lining is less flexible.\nYou have noticed subtle changes in mouth opening, without assuming that this alone confirms OSMF or its stage.\nYou want a structured daily routine built around MARCEL OraCare Oral Spray and MARCEL Smile Toothpaste, as part of professionally guided care.",
         "no_title": "Consider getting guidance first if:",
         "no_items": "You have not been examined or are unsure whether your symptoms are due to OSMF. Arrange a professional assessment first.\nYour mouth opening is markedly restricted, cheek or tongue movement is significantly affected, or symptoms are progressing. Seek clinical review to find the right care pathway.\nYou are unsure whether the Foundation Programme is appropriate. Contact MARCEL Team for product information or request a teleconsultation with a MARCEL OSMF Consultant.\nYou have a persistent mouth ulcer, red or white patch, lump, unexplained bleeding or worsening symptoms. Seek prompt in-person examination rather than relying on a product kit.",
         "link_1_label": "Contact MARCEL Team",

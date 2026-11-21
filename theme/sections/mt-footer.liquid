@@ -83,7 +83,7 @@
           {%- case block.type -%}
             {%- when 'menu' -%}
               {%- for link in block.settings.menu.links -%}
-                <a href="{{ link.url }}">{{ link.title | remove: '™' | escape }}</a>
+                <a href="{{ link.url }}"{% if link.url contains 'wa.me' %} target="_blank" rel="noopener"{% endif %}>{{ link.title | remove: '™' | escape }}</a>
               {%- endfor -%}
             {%- when 'policies' -%}
               {%- for policy in shop.policies -%}
@@ -91,7 +91,7 @@
               {%- endfor -%}
               {%- if block.settings.menu != blank -%}
                 {%- for link in block.settings.menu.links -%}
-                  <a href="{{ link.url }}">{{ link.title | remove: '™' | escape }}</a>
+                  <a href="{{ link.url }}"{% if link.url contains 'wa.me' %} target="_blank" rel="noopener"{% endif %}>{{ link.title | remove: '™' | escape }}</a>
                 {%- endfor -%}
               {%- endif -%}
           {%- endcase -%}
