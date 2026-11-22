@@ -5,6 +5,8 @@
   illustration, or a list of steps. A picture can sit above the steps (list layout: the steps sit under the picture in
   the same card); a second built-in picture sits beside the first at the same height, neither one cropped.
   In the step text, bold marks amounts and times and italic marks warnings (shown in red).
+  A video can sit beside the steps (client's how-to videos, 2026-11-22; portrait 9:16 suits it best). It loads only
+  when the visitor presses play, then plays with sound. Hosted videos show their length under the frame.
 {%- endcomment -%}
 {%- liquid
   assign padded = false
@@ -30,7 +32,66 @@
   endif
   assign m1_ar = 1200.0 | divided_by: m1_h | round: 3
   assign m2_ar = 1200.0 | divided_by: m2_h | round: 3
+
+  assign video = section.settings.video
+  assign video_url = section.settings.video_url
+  assign has_video = false
+  if video != blank or video_url != blank
+    assign has_video = true
+  endif
+  assign video_kind = 'hosted'
+  if video == blank
+    assign video_kind = video_url.type
+  endif
+  # Length as m:ss from the hosted video (duration is in milliseconds).
+  assign video_len = ''
+  if video_kind == 'hosted' and video.duration > 0
+    assign len_total = video.duration | divided_by: 1000
+    assign len_m = len_total | divided_by: 60
+    assign len_s = len_total | modulo: 60
+    if len_s < 10
+      assign video_len = len_m | append: ':0' | append: len_s
+    else
+      assign video_len = len_m | append: ':' | append: len_s
+    endif
+  endif
 -%}
+{%- if has_video -%}
+  <script src="{{ 'mt-videos.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+{%- capture video_html -%}
+  {%- if has_video -%}
+    <figure class="mt-usevideo">
+      <mt-video data-kind="{{ video_kind }}"{% if video_kind != 'hosted' %} data-id="{{ video_url.id | escape }}"{% endif %} data-title="{{ section.settings.video_title | escape }}">
+        {%- if section.settings.video_cover != blank -%}
+          {{- section.settings.video_cover | image_url: width: 720 | image_tag: loading: 'lazy', widths: '360, 540, 720', sizes: '340px', alt: '' -}}
+        {%- elsif video_kind == 'hosted' and video.preview_image != blank -%}
+          {{- video.preview_image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '360, 540, 720', sizes: '340px', alt: '' -}}
+        {%- elsif video_kind == 'youtube' -%}
+          {% # theme-check-disable-next-line RemoteAsset %}
+          <img src="https://i.ytimg.com/vi/{{ video_url.id | escape }}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+        {%- endif -%}
+        {%- if video_kind == 'hosted' -%}
+          <template>{{ video | video_tag: controls: true, autoplay: true, playsinline: true, preload: 'none' }}</template>
+        {%- endif -%}
+        <button type="button" class="mt-video-play" aria-label="{{ section.settings.video_title | default: 'Play video' | escape }}">
+          <span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12-7.5z"/></svg></span>
+        </button>
+      </mt-video>
+      {%- if section.settings.video_title != blank or video_len != blank or section.settings.video_note != blank -%}
+        <figcaption>
+          {%- if section.settings.video_title != blank -%}<b>{{ section.settings.video_title | escape }}</b>{%- endif -%}
+          {%- if video_len != blank or section.settings.video_note != blank -%}
+            <span class="mt-usevideo-tags">
+              {%- if video_len != blank -%}<span>{%- render 'mt-icon', icon: 'clock' -%}{{ video_len }}</span>{%- endif -%}
+              {%- if section.settings.video_note != blank -%}<span>{{ section.settings.video_note | escape }}</span>{%- endif -%}
+            </span>
+          {%- endif -%}
+        </figcaption>
+      {%- endif -%}
+    </figure>
+  {%- endif -%}
+{%- endcapture -%}
 {%- capture media_img -%}
   {%- if section.settings.media_image != blank -%}
     {%- assign up_ar = section.settings.media_image.aspect_ratio | round: 3 -%}
@@ -48,6 +109,7 @@
   <div class="mt-wrap">
     {%- render 'mt-sec-head', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text -%}
     {%- if section.settings.layout == 'list' -%}
+      {%- if has_video -%}<div class="mt-usesteps-split">{%- endif -%}
       <div class="mt-usesteps-card">
         {%- if has_media -%}<figure class="mt-usesteps-figure{% if media_pair %} mt-usesteps-figure--pair{% endif %}">{{ media_img }}</figure>{%- endif -%}
         <ol class="mt-usesteps-list" role="list">
@@ -61,8 +123,10 @@
           {%- endfor -%}
         </ol>
       </div>
+      {%- if has_video -%}{{ video_html }}</div>{%- endif -%}
     {%- else -%}
       {%- if has_media -%}<figure class="mt-usesteps-figure mt-usesteps-figure--solo{% if media_pair %} mt-usesteps-figure--pair{% endif %}">{{ media_img }}</figure>{%- endif -%}
+      {%- if has_video -%}<div class="mt-usesteps-split mt-usesteps-split--cards">{%- endif -%}
       {%- if section.blocks.size > 0 -%}
         <ol class="mt-usesteps" style="--n: {{ section.blocks.size }};">
           {%- for block in section.blocks -%}
@@ -79,6 +143,7 @@
           {%- endfor -%}
         </ol>
       {%- endif -%}
+      {%- if has_video -%}{{ video_html }}</div>{%- endif -%}
     {%- endif -%}
     {%- if section.settings.note != blank -%}<p class="mt-usesteps-note">{{ section.settings.note }}</p>{%- endif -%}
   </div>
@@ -233,6 +298,44 @@
       "type": "text",
       "id": "media_alt_2",
       "label": "Second picture description"
+    },
+    {
+      "type": "header",
+      "content": "Video",
+      "info": "Shown beside the steps on computers and under them on phones. Portrait 9:16 videos suit it best."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video uploaded to Shopify"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Or a YouTube or Vimeo link",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "video_cover",
+      "label": "Cover picture",
+      "info": "Shown until the video is played. Empty uses the video's own preview frame."
+    },
+    {
+      "type": "text",
+      "id": "video_title",
+      "label": "Video caption",
+      "info": "Shown under the video and read out by screen readers.",
+      "default": "Watch the Video Guide"
+    },
+    {
+      "type": "text",
+      "id": "video_note",
+      "label": "Note beside the length",
+      "info": "Optional, for example In Hindi."
     },
     {
       "type": "header",

@@ -5,16 +5,16 @@
   assign s = section.settings
   assign year = 'now' | date: '%Y'
   assign copyright = s.copyright | replace: '[year]', year
-  assign payments = s.payment_labels | split: ','
 
-  # Menu blocks set to "Line of links" sit in the full-width lines under the top row (client, 2026-11-21);
-  # every other block is a column in the top row.
+  # Layout after the sample the user shared (2026-11-22): menu and states blocks are the link columns on the left,
+  # policies blocks sit with the company details on the right, and menus set to "Line of links" become full-width
+  # lines under the top row (the client's three-lines idea, 2026-11-21, still available per menu).
   assign col_count = 0
   assign line_count = 0
   for block in section.blocks
     if block.type == 'menu' and block.settings.layout == 'line'
       assign line_count = line_count | plus: 1
-    else
+    elsif block.type != 'policies'
       assign col_count = col_count | plus: 1
     endif
   endfor
@@ -39,10 +39,22 @@
       endif
     -%}
     {%- if social_url != blank -%}
-      <a href="{{ social_url }}" target="_blank" rel="noopener" aria-label="{{ parts[1] }}" title="{{ parts[1] }}">{%- render 'mt-icon', icon: parts[2] -%}</a>
+      <a href="{{ social_url }}" target="_blank" rel="noopener" aria-label="{{ parts[1] }}" title="{{ parts[1] }}">{%- render 'mt-brand-icon', icon: parts[0] -%}</a>
     {%- endif -%}
   {%- endfor -%}
 {%- endcapture -%}
+{%- comment -%}
+  No links yet (the client will send them): the icons show only in the theme editor, dimmed, as a reminder of
+  where the links go. The live store shows each icon once its link is added.
+{%- endcomment -%}
+{%- if social_links == blank and request.design_mode -%}
+  {%- capture social_links -%}
+    {%- for row in socials -%}
+      {%- assign parts = row | split: ':' -%}
+      <span class="mt-foot-social-ph" title="Add the {{ parts[1] }} link under Catch us on in the footer settings">{%- render 'mt-brand-icon', icon: parts[0] -%}</span>
+    {%- endfor -%}
+  {%- endcapture -%}
+{%- endif -%}
 
 {%- capture company_logo -%}
   {%- if s.company_logo_show -%}
@@ -62,52 +74,10 @@
 <footer class="mt mt-footer">
   <div class="mt-wrap">
     <div class="mt-foot-top">
-      <div class="mt-foot-brand">
-        {%- liquid
-          # Same trims as the header: cut the empty canvas around the logo so the drawing itself fills the height.
-          assign foot_logo = s.logo
-          assign foot_h = s.logo_height | default: 112
-          assign f_left = 0
-          assign f_top = 0
-          assign f_width = 0
-          assign f_height = 0
-          assign foot_sizes = '200px'
-          if foot_logo != blank
-            assign foot_ratio = foot_logo.aspect_ratio
-            assign t_top = s.logo_trim_top | default: 0
-            assign t_right = s.logo_trim_right | default: 0
-            assign t_bottom = s.logo_trim_bottom | default: 0
-            assign t_left = s.logo_trim_left | default: 0
-            assign keep_w = 100 | minus: t_left | minus: t_right
-            assign keep_h = 100 | minus: t_top | minus: t_bottom
-            assign trim_total = t_top | plus: t_right | plus: t_bottom | plus: t_left
-            if trim_total > 0 and keep_w > 0 and keep_h > 0
-              assign f_left = foot_logo.width | times: t_left | divided_by: 100
-              assign f_top = foot_logo.height | times: t_top | divided_by: 100
-              assign f_width = foot_logo.width | times: keep_w | divided_by: 100
-              assign f_height = foot_logo.height | times: keep_h | divided_by: 100
-              assign foot_ratio = f_width | times: 1.0 | divided_by: f_height
-            endif
-            assign foot_w = foot_h | times: foot_ratio | ceil
-            assign foot_sizes = foot_w | append: 'px'
-          endif
-        -%}
-        <a
-          class="mt-foot-logo{% if s.logo_white %} mt-foot-logo--white{% endif %}"
-          href="{{ routes.root_url }}"
-          aria-label="{{ shop.name | escape }}"
-          style="--mt-foot-logo-h: {{ foot_h }}px;"
-        >
-          {%- render 'mt-logo', image: foot_logo, light: true, tagline: true, sizes: foot_sizes, crop_left: f_left, crop_top: f_top, crop_width: f_width, crop_height: f_height -%}
-        </a>
-        {%- if s.description != blank -%}
-          <p>{{ s.description | escape | newline_to_br }}</p>
-        {%- endif -%}
-      </div>
-
       {%- if col_count > 0 -%}
         <div class="mt-foot-cols">
           {%- for block in section.blocks -%}
+            {%- if block.type == 'policies' -%}{%- continue -%}{%- endif -%}
             {%- if block.type == 'menu' and block.settings.layout == 'line' -%}{%- continue -%}{%- endif -%}
             <div class="mt-foot-col mt-foot-col--{{ block.type }}" {{ block.shopify_attributes }}>
               {%- if block.settings.heading != blank -%}<b class="mt-foot-head">{{ block.settings.heading | escape }}</b>{%- endif -%}
@@ -117,15 +87,6 @@
                     {%- for link in block.settings.menu.links -%}
                       <a href="{{ link.url }}"{% if link.url contains 'wa.me' %} target="_blank" rel="noopener"{% endif %}>{{ link.title | remove: '™' | escape }}</a>
                     {%- endfor -%}
-                  {%- when 'policies' -%}
-                    {%- for policy in shop.policies -%}
-                      <a href="{{ policy.url }}">{{ policy.title | escape }}</a>
-                    {%- endfor -%}
-                    {%- if block.settings.menu != blank -%}
-                      {%- for link in block.settings.menu.links -%}
-                        <a href="{{ link.url }}"{% if link.url contains 'wa.me' %} target="_blank" rel="noopener"{% endif %}>{{ link.title | remove: '™' | escape }}</a>
-                      {%- endfor -%}
-                    {%- endif -%}
                   {%- when 'states' -%}
                     {%- liquid
                       # States with OSMF Specialist Doctors: the list typed in the block, or every state found in the
@@ -158,39 +119,86 @@
         </div>
       {%- endif -%}
 
-      {%- if s.show_contact or has_company -%}
-        <div class="mt-foot-info">
-          {%- if s.show_contact -%}
-            <div class="mt-foot-contact">
+      {%- liquid
+        assign has_wa = false
+        if s.show_contact and settings.mt_whatsapp_number != blank and s.whatsapp_label != blank
+          assign has_wa = true
+        endif
+        assign has_mail_btn = false
+        if s.show_contact and settings.mt_email != blank and s.email_label != blank
+          assign has_mail_btn = true
+        endif
+        assign has_reach = false
+        if s.show_contact
+          if settings.mt_phone != blank or settings.mt_email != blank
+            assign has_reach = true
+          endif
+        endif
+        assign cookie_shown = false
+      -%}
+      <div class="mt-foot-info">
+        {%- if has_wa or has_mail_btn -%}
+          <div class="mt-foot-talk">
+            {%- if s.talk_heading != blank -%}
+              <span class="mt-foot-talk-label">{%- render 'mt-icon', icon: 'headset' -%}{{ s.talk_heading | escape }}</span>
+            {%- endif -%}
+            <div class="mt-foot-talk-btns">
+              {%- if has_wa -%}
+                <a href="{{ wa_url }}" target="_blank" rel="noopener">{%- render 'mt-icon', icon: 'whatsapp' -%}{{ s.whatsapp_label | escape }}</a>
+              {%- endif -%}
+              {%- if has_mail_btn -%}
+                <a href="mailto:{{ settings.mt_email }}">{%- render 'mt-icon', icon: 'mail' -%}{{ s.email_label | escape }}</a>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        <div class="mt-foot-details">
+          {%- if has_reach -%}
+            <div class="mt-foot-reach">
               {%- if settings.mt_phone != blank -%}
-                <a class="mt-foot-phone" href="tel:{{ settings.mt_phone | remove: ' ' }}">
-                  {%- render 'mt-icon', icon: 'phone' -%}
-                  {{- settings.mt_phone | escape -}}
-                </a>
+                <a href="tel:{{ settings.mt_phone | remove: ' ' }}">{%- render 'mt-icon', icon: 'phone' -%}{{ settings.mt_phone | escape }}</a>
               {%- endif -%}
               {%- if settings.mt_email != blank -%}
-                <a href="mailto:{{ settings.mt_email }}">
-                  {%- render 'mt-icon', icon: 'mail' -%}
-                  {{- settings.mt_email | escape -}}
-                </a>
-              {%- endif -%}
-              {%- if settings.mt_whatsapp_number != blank and s.whatsapp_label != blank -%}
-                <a href="{{ wa_url }}" target="_blank" rel="noopener">
-                  {%- render 'mt-icon', icon: 'whatsapp' -%}
-                  {{- s.whatsapp_label | escape -}}
-                </a>
+                <a href="mailto:{{ settings.mt_email }}">{%- render 'mt-icon', icon: 'mail' -%}{{ settings.mt_email | escape }}</a>
               {%- endif -%}
             </div>
           {%- endif -%}
+          {%- if copyright != blank -%}<p class="mt-foot-copy">{{ copyright }}</p>{%- endif -%}
           {%- if has_company -%}
             <address class="mt-foot-company">
-              {%- if s.company_name != blank -%}<strong>{{ s.company_name | escape }}</strong>{%- endif -%}
-              {%- if s.address != blank -%}<span>{{ s.address | escape | newline_to_br }}</span>{%- endif -%}
-              {%- if s.gst != blank -%}<span class="mt-foot-gst">{{ s.gst | escape }}</span>{%- endif -%}
+              {%- if s.company_name != blank or s.address != blank -%}
+                <p>
+                  {%- if s.company_name != blank -%}<b>{{ s.company_name | escape }}{% if s.address != blank %}:{% endif %}</b> {% endif -%}
+                  {{- s.address | escape | newline_to_br | strip_newlines | replace: '<br />', ', ' -}}
+                </p>
+              {%- endif -%}
+              {%- if s.gst != blank -%}<p class="mt-foot-gst">{{ s.gst | escape }}</p>{%- endif -%}
             </address>
           {%- endif -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type != 'policies' -%}{%- continue -%}{%- endif -%}
+            <div class="mt-foot-legal" {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}<b>{{ block.settings.heading | escape }}</b>{%- endif -%}
+              {%- for policy in shop.policies -%}
+                <a href="{{ policy.url }}">{{ policy.title | escape }}</a>
+              {%- endfor -%}
+              {%- if block.settings.menu != blank -%}
+                {%- for link in block.settings.menu.links -%}
+                  <a href="{{ link.url }}">{{ link.title | remove: '™' | escape }}</a>
+                {%- endfor -%}
+              {%- endif -%}
+              {%- if s.cookie_label != blank and cookie_shown == false -%}
+                <button type="button" class="mt-foot-cookie" data-mt-cookie hidden>{{ s.cookie_label | escape }}</button>
+                {%- assign cookie_shown = true -%}
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+          {%- if s.cookie_label != blank and cookie_shown == false -%}
+            <button type="button" class="mt-foot-cookie" data-mt-cookie hidden>{{ s.cookie_label | escape }}</button>
+          {%- endif -%}
         </div>
-      {%- endif -%}
+      </div>
     </div>
 
     {%- if line_count > 0 -%}
@@ -210,58 +218,100 @@
       </div>
     {%- endif -%}
 
-    {%- if social_links != blank or s.ai_heading != blank or company_logo != blank -%}
-      <div class="mt-foot-connect">
-        {%- if social_links != blank -%}
-          <div class="mt-foot-social">
-            {%- if s.social_heading != blank -%}<span class="mt-foot-connect-label">{{ s.social_heading | escape }}</span>{%- endif -%}
-            <div class="mt-foot-social-links">{{ social_links }}</div>
-          </div>
-        {%- endif -%}
+    <div class="mt-foot-bar">
+      {%- if social_links != blank -%}
+        <div class="mt-foot-social">
+          {%- if s.social_heading != blank -%}<span class="mt-foot-bar-label">{{ s.social_heading | escape }}</span>{%- endif -%}
+          <div class="mt-foot-social-links">{{ social_links }}</div>
+        </div>
+      {%- endif -%}
 
-        {%- if s.ai_heading != blank -%}
-          {%- liquid
-            assign ai_prompt = s.ai_prompt | url_encode | replace: '+', '%20'
-            assign ai_list = s.ai_tools | split: ','
-          -%}
-          <div class="mt-ai-row">
-            <span class="mt-foot-connect-label">{{ s.ai_heading | escape }}</span>
-            <div class="mt-ai-links">
-              {%- for tool in ai_list -%}
-                {%- assign t = tool | strip | downcase -%}
-                {%- case t -%}
-                  {%- when 'chatgpt' -%}<a href="https://chatgpt.com/?q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">{%- render 'mt-icon', icon: 'sparkle' -%}ChatGPT</a>
-                  {%- when 'perplexity' -%}<a href="https://www.perplexity.ai/search?q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">{%- render 'mt-icon', icon: 'sparkle' -%}Perplexity</a>
-                  {%- when 'claude' -%}<a href="https://claude.ai/new?q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">{%- render 'mt-icon', icon: 'sparkle' -%}Claude</a>
-                  {%- when 'google' -%}<a href="https://www.google.com/search?udm=50&q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">{%- render 'mt-icon', icon: 'sparkle' -%}Google AI</a>
-                  {%- when 'grok' -%}<a href="https://grok.com/?q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">{%- render 'mt-icon', icon: 'sparkle' -%}Grok</a>
-                {%- endcase -%}
-              {%- endfor -%}
-            </div>
+      {%- if s.ai_heading != blank -%}
+        {%- liquid
+          assign ai_prompt = s.ai_prompt | url_encode | replace: '+', '%20'
+          assign ai_list = s.ai_tools | split: ','
+        -%}
+        <div class="mt-ai-row">
+          <span class="mt-foot-bar-label">{{ s.ai_heading | escape }}</span>
+          <div class="mt-ai-links">
+            {%- comment -%} Square brand icons, as in the sample; each opens the assistant with the summary prompt. {%- endcomment -%}
+            {%- for tool in ai_list -%}
+              {%- liquid
+                assign t = tool | strip | downcase
+                assign ai_name = ''
+                case t
+                  when 'chatgpt'
+                    assign ai_name = 'ChatGPT'
+                    assign ai_href = 'https://chatgpt.com/?q=' | append: ai_prompt
+                  when 'perplexity'
+                    assign ai_name = 'Perplexity'
+                    assign ai_href = 'https://www.perplexity.ai/search?q=' | append: ai_prompt
+                  when 'grok'
+                    assign ai_name = 'Grok'
+                    assign ai_href = 'https://grok.com/?q=' | append: ai_prompt
+                  when 'google'
+                    assign ai_name = 'Google AI'
+                    assign ai_href = 'https://www.google.com/search?udm=50&q=' | append: ai_prompt
+                  when 'claude'
+                    assign ai_name = 'Claude'
+                    assign ai_href = 'https://claude.ai/new?q=' | append: ai_prompt
+                endcase
+              -%}
+              {%- if ai_name != blank -%}
+                <a class="mt-ai-ico mt-ai-ico--{{ t }}" href="{{ ai_href }}" target="_blank" rel="noopener nofollow" aria-label="{{ ai_name }}" title="{{ ai_name }}">
+                  {%- render 'mt-brand-icon', icon: t -%}
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
           </div>
-        {%- endif -%}
+        </div>
+      {%- endif -%}
 
+      <div class="mt-foot-brands">
+        {%- liquid
+          # Same trims as the header: cut the empty canvas around the logo so the drawing itself fills the height.
+          assign foot_logo = s.logo
+          assign foot_h = s.logo_height | default: 84
+          assign f_left = 0
+          assign f_top = 0
+          assign f_width = 0
+          assign f_height = 0
+          assign foot_sizes = '120px'
+          if foot_logo != blank
+            assign foot_ratio = foot_logo.aspect_ratio
+            assign t_top = s.logo_trim_top | default: 0
+            assign t_right = s.logo_trim_right | default: 0
+            assign t_bottom = s.logo_trim_bottom | default: 0
+            assign t_left = s.logo_trim_left | default: 0
+            assign keep_w = 100 | minus: t_left | minus: t_right
+            assign keep_h = 100 | minus: t_top | minus: t_bottom
+            assign trim_total = t_top | plus: t_right | plus: t_bottom | plus: t_left
+            if trim_total > 0 and keep_w > 0 and keep_h > 0
+              assign f_left = foot_logo.width | times: t_left | divided_by: 100
+              assign f_top = foot_logo.height | times: t_top | divided_by: 100
+              assign f_width = foot_logo.width | times: keep_w | divided_by: 100
+              assign f_height = foot_logo.height | times: keep_h | divided_by: 100
+              assign foot_ratio = f_width | times: 1.0 | divided_by: f_height
+            endif
+            assign foot_w = foot_h | times: foot_ratio | ceil
+            assign foot_sizes = foot_w | append: 'px'
+          endif
+        -%}
+        <a
+          class="mt-foot-logo{% if s.logo_white %} mt-foot-logo--white{% endif %}"
+          href="{{ routes.root_url }}"
+          aria-label="{{ shop.name | escape }}"
+          style="--mt-foot-logo-h: {{ foot_h }}px;"
+        >
+          {%- render 'mt-logo', image: foot_logo, light: true, tagline: true, sizes: foot_sizes, crop_left: f_left, crop_top: f_top, crop_width: f_width, crop_height: f_height -%}
+        </a>
         {{ company_logo }}
       </div>
-    {%- endif -%}
+    </div>
 
     {%- if s.disclaimer != blank -%}
       <div class="mt-disclaimer">{{ s.disclaimer }}</div>
     {%- endif -%}
-
-    <div class="mt-foot-bottom">
-      <span>{{ copyright }}</span>
-      {%- if s.cookie_label != blank -%}
-        <button type="button" class="mt-foot-cookie" data-mt-cookie hidden>{{ s.cookie_label | escape }}</button>
-      {%- endif -%}
-      {%- if s.payment_labels != blank -%}
-        <div class="mt-pay-row" aria-label="Payment options">
-          {%- for p in payments -%}
-            <span>{{ p | strip | escape }}</span>
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
-    </div>
   </div>
 </footer>
 
@@ -309,11 +359,12 @@
       "type": "range",
       "id": "logo_height",
       "label": "Logo height",
+      "info": "The logo sits at the bottom right, beside the company logo.",
       "min": 40,
       "max": 160,
       "step": 4,
       "unit": "px",
-      "default": 112
+      "default": 84
     },
     {
       "type": "paragraph",
@@ -363,20 +414,34 @@
       "type": "textarea",
       "id": "description",
       "label": "Description",
+      "info": "Not shown in the current footer layout.",
       "default": "A structured approach to oral mucosal care for people living with Oral Submucous Fibrosis (OSMF)."
     },
     {
       "type": "checkbox",
       "id": "show_contact",
       "label": "Show contact details",
-      "info": "Phone, email and WhatsApp from Theme settings.",
+      "info": "Phone, email and WhatsApp from Theme settings, on the right.",
       "default": true
     },
     {
       "type": "text",
+      "id": "talk_heading",
+      "label": "Contact heading",
+      "info": "Shown above the WhatsApp and email buttons.",
+      "default": "Talk to the MARCEL Team"
+    },
+    {
+      "type": "text",
       "id": "whatsapp_label",
-      "label": "WhatsApp link label",
-      "default": "WhatsApp MARCEL Team"
+      "label": "WhatsApp button",
+      "default": "Chat on WhatsApp"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email button",
+      "default": "Email Us"
     },
     {
       "type": "header",
@@ -489,7 +554,7 @@
     },
     {
       "type": "header",
-      "content": "Bottom line"
+      "content": "Copyright and cookie link (shown on the right)"
     },
     {
       "type": "text",
@@ -509,7 +574,7 @@
       "type": "text",
       "id": "payment_labels",
       "label": "Payment options",
-      "info": "Separate with commas.",
+      "info": "Not shown in the current footer layout.",
       "default": "UPI, Cards, Net banking, Cash on delivery"
     }
   ],
@@ -548,7 +613,7 @@
       "settings": [
         {
           "type": "paragraph",
-          "content": "Lists the store policies from Settings > Policies."
+          "content": "Lists the store policies from Settings > Policies. Shown with the company details on the right, not as a column."
         },
         {
           "type": "text",

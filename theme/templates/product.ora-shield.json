@@ -396,26 +396,12 @@
         "media_alt": "MARCEL OraShield drops being added to a glass of lukewarm water, next to the bottle and carton",
         "media_art_2": "howto-orashield-drops",
         "media_alt_2": "Close-up of a drop falling from the bottle into the water",
+        "video": "shopify://files/videos/How to Use_MARCEL  Ora-Shield.mp4",
+        "video_title": "Watch the Video Guide",
+        "video_note": "In Hindi",
         "background": "mist",
         "sheet": false,
         "spacing": "normal"
-      }
-    },
-    "mt_guide_BV8bP4": {
-      "type": "mt-guide",
-      "name": "Marcel guide",
-      "settings": {
-        "show_toc": true,
-        "toc_title": "On this page",
-        "read_label": "[n] min read",
-        "no_articles": "Articles will appear here once they are published.",
-        "card_media": "icon",
-        "video": "shopify://files/videos/How to Use_MARCEL  Ora-Shield.mp4",
-        "video_title": "",
-        "video_shape": "landscape",
-        "background": "paper",
-        "sheet": false,
-        "spacing": "tight"
       }
     },
     "download": {
@@ -676,7 +662,6 @@
     "nav",
     "benefits",
     "how",
-    "mt_guide_BV8bP4",
     "download",
     "info",
     "faq",

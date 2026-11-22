@@ -369,24 +369,10 @@
         "media_alt": "MARCEL OraCare oral spray guide showing 6 to 7 puffs directed towards the inner oral surfaces for even coverage throughout the mouth",
         "media_art_2": "none",
         "media_alt_2": "",
-        "background": "mist",
-        "sheet": false,
-        "spacing": "normal"
-      }
-    },
-    "mt_guide_7HfVNn": {
-      "type": "mt-guide",
-      "name": "Marcel guide",
-      "settings": {
-        "show_toc": true,
-        "toc_title": "",
-        "read_label": "[n] min read",
-        "no_articles": "Articles will appear here once they are published.",
-        "card_media": "icon",
         "video": "shopify://files/videos/How ti use_MARCEL Ora-Care.mp4",
-        "video_title": "How to use MARCEL OraCare",
-        "video_shape": "landscape",
-        "background": "paper",
+        "video_title": "Watch the Video Guide",
+        "video_note": "In Hindi",
+        "background": "mist",
         "sheet": false,
         "spacing": "normal"
       }
@@ -648,7 +634,6 @@
     "nav",
     "benefits",
     "how",
-    "mt_guide_7HfVNn",
     "download",
     "info",
     "179437506049e61be9",

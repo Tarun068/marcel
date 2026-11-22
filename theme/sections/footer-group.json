@@ -19,7 +19,7 @@
           "settings": {
             "heading": "Products",
             "menu": "footer-shop",
-            "layout": "line"
+            "layout": "column"
           }
         },
         "menu_2": {
@@ -27,7 +27,7 @@
           "settings": {
             "heading": "Get Help",
             "menu": "footer-help",
-            "layout": "line"
+            "layout": "column"
           }
         },
         "menu_3": {
@@ -35,7 +35,7 @@
           "settings": {
             "heading": "Learn",
             "menu": "footer-learn",
-            "layout": "line"
+            "layout": "column"
           }
         },
         "policies_1": {
@@ -64,14 +64,16 @@
       "settings": {
         "logo": "shopify://shop_images/Updated_Logo_0ab6a006-c98e-4448-960a-6fc46aad7f96.png",
         "logo_white": true,
-        "logo_height": 112,
+        "logo_height": 84,
         "logo_trim_top": 10,
         "logo_trim_bottom": 28,
         "logo_trim_left": 15,
         "logo_trim_right": 12,
         "description": "A structured approach to oral mucosal care for people living with Oral Submucous Fibrosis (OSMF).",
         "show_contact": true,
-        "whatsapp_label": "WhatsApp MARCEL Team",
+        "talk_heading": "Talk to the MARCEL Team",
+        "whatsapp_label": "Chat on WhatsApp",
+        "email_label": "Email Us",
         "company_name": "JanSuta Pharmaceuticals",
         "address": "D-405, Sun Central Place\nS.P. Ring Road, Ahmedabad-380058, Gujarat",
         "gst": "GST No: 24AFGPB2002J1Z7",
@@ -80,7 +82,7 @@
         "disclaimer": "",
         "ai_heading": "Ask AI for a summary of MARCEL OMR Therapy:",
         "ai_prompt": "Summarise what MARCEL OMR Therapy (marceltherapy.com) is, who it is for, and how its OSMF Self-Check, MARCEL OSMF Consultant and OSMF Specialist support work.",
-        "ai_tools": "chatgpt, perplexity, google, claude, grok",
+        "ai_tools": "chatgpt, perplexity, grok, google, claude",
         "cookie_label": "Cookie preferences",
         "copyright": "© [year] MARCEL OMR Therapy by JanSuta Pharmaceuticals. MARCEL® is a registered trademark of JanSuta Pharmaceuticals.",
         "payment_labels": "UPI, Cards, Net banking, Cash on delivery"

@@ -148,8 +148,14 @@ if (!customElements.get('mt-reels')) {
         const { kind, id, title, sub } = src.dataset;
         let player;
         if (kind === 'hosted') {
-          player = src.content.querySelector('video')?.cloneNode(true);
-          if (player) player.autoplay = true;
+          // importNode, and drop the loading="lazy" that Shopify's video_tag adds: newer browsers honour it on video
+          // and never fetch a player added after the click.
+          const tplVideo = src.content.querySelector('video');
+          player = tplVideo ? document.importNode(tplVideo, true) : null;
+          if (player) {
+            player.removeAttribute('loading');
+            player.autoplay = true;
+          }
         } else if (kind === 'youtube' || kind === 'vimeo') {
           player = document.createElement('iframe');
           player.src =
@@ -173,7 +179,10 @@ if (!customElements.get('mt-reels')) {
         this.modal.querySelector('.mt-reel-mcap b').textContent = title || '';
         this.modal.querySelector('.mt-reel-mcap small').textContent = sub || '';
         this.modal.querySelectorAll('.mt-reel-step').forEach((b) => (b.hidden = count < 2));
-        if (player && player.tagName === 'VIDEO') player.play().catch(() => {});
+        if (player && player.tagName === 'VIDEO') {
+          player.load();
+          player.play().catch(() => {});
+        }
       }
     }
   );

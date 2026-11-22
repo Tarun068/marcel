@@ -14,7 +14,8 @@ if (!customElements.get('mt-video')) {
         if (kind === 'hosted') {
           const tpl = this.querySelector('template');
           if (!tpl) return;
-          player = tpl.content.firstElementChild.cloneNode(true);
+          // importNode, not cloneNode: a video copied inside the template's inert document never picks its source.
+          player = document.importNode(tpl.content.firstElementChild, true);
         } else {
           player = document.createElement('iframe');
           player.src =
@@ -25,10 +26,25 @@ if (!customElements.get('mt-video')) {
           player.allowFullscreen = true;
           player.title = title || '';
         }
+        // Shopify's video_tag adds muted with autoplay, and loading="lazy", which newer browsers honour on video and
+        // then never fetch a player added after the click. The visitor pressed play, so load now and start with sound
+        // (falls back to muted only if the browser still refuses).
+        if (player.tagName === 'VIDEO') {
+          player.removeAttribute('loading');
+          player.removeAttribute('muted');
+          player.defaultMuted = false;
+          player.muted = false;
+        }
         this.querySelectorAll('img, .mt-video-play').forEach((el) => el.remove());
         this.classList.add('is-playing');
         this.appendChild(player);
-        if (player.tagName === 'VIDEO') player.play().catch(() => {});
+        if (player.tagName === 'VIDEO') {
+          player.load();
+          player.play().catch(() => {
+            player.muted = true;
+            player.play().catch(() => {});
+          });
+        }
         player.focus();
       }
     }
