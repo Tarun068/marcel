@@ -71,6 +71,12 @@
         "pack_size_label": "Pack Size",
         "mrp_label": "MRP",
         "image_chips": true,
+        "hero_tone": "blue",
+        "hero_media": "image",
+        "hero_art": "pd-orashield",
+        "hero_frame": "none",
+        "badge_pill": false,
+        "hero_note": "",
         "headline": "Support for advanced OSMF care",
         "supporting": "Therapeutic Oral Rinse",
         "intro": "<p><strong>A core component of MARCEL OMR Therapy Advance Programme.</strong></p><p>Developed to support the management of burning sensation, oral tightness and reduced mouth opening associated with Stage 3 and Stage 4 Oral Submucous Fibrosis (OSMF).</p>",
@@ -126,12 +132,7 @@
         "acc_about": "About this product",
         "background": "paper",
         "sheet": false,
-        "spacing": "tight",
-        "hero_media": "image",
-        "badge_pill": false,
-        "hero_tone": "blue",
-        "hero_art": "pd-orashield",
-        "hero_frame": "none"
+        "spacing": "tight"
       }
     },
     "fit": {
@@ -204,6 +205,64 @@
         "spacing": "tight"
       }
     },
+    "nav": {
+      "type": "mt-page-nav",
+      "blocks": {
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Benefits",
+            "target": "benefits"
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "How to use",
+            "target": "how"
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Progress tracker",
+            "target": "download"
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Product information",
+            "target": "info"
+          }
+        },
+        "link_5": {
+          "type": "link",
+          "settings": {
+            "label": "FAQs",
+            "target": "faq"
+          }
+        },
+        "link_6": {
+          "type": "link",
+          "settings": {
+            "label": "Contact MARCEL Team",
+            "target": "cta"
+          }
+        }
+      },
+      "block_order": [
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "link_5",
+        "link_6"
+      ],
+      "settings": {
+        "label": "On this page"
+      }
+    },
     "benefits": {
       "type": "mt-icon-cards",
       "blocks": {
@@ -214,11 +273,13 @@
             "art": "none",
             "title": "Helps Reduce Oral Discomfort",
             "highlight": false,
+            "wide": false,
             "text": "Developed to support the management of burning sensation and oral discomfort associated with OSMF.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "benefit_2": {
@@ -228,11 +289,13 @@
             "art": "none",
             "title": "Supports Reduced Oral Tightness",
             "highlight": false,
+            "wide": false,
             "text": "Part of a structured care approach for concerns involving oral tightness.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "benefit_3": {
@@ -242,11 +305,13 @@
             "art": "none",
             "title": "Supports Better Mouth Opening",
             "highlight": false,
+            "wide": false,
             "text": "Included in the Advance Programme alongside appropriate prescribed mouth and jaw exercises.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         }
       },
@@ -324,16 +389,48 @@
         "heading": "How to Use MARCEL OraShield",
         "text": "Follow the recommended directions for use:",
         "note": "After each rinse, do the prescribed mouth and jaw exercises.",
-        "background": "mist",
-        "sheet": false,
-        "spacing": "normal",
         "layout": "cards",
         "number_style": "plain",
         "list_mark": "number",
         "media_art": "howto-orashield",
         "media_alt": "MARCEL OraShield drops being added to a glass of lukewarm water, next to the bottle and carton",
         "media_art_2": "howto-orashield-drops",
-        "media_alt_2": "Close-up of a drop falling from the bottle into the water"
+        "media_alt_2": "Close-up of a drop falling from the bottle into the water",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "mt_guide_BV8bP4": {
+      "type": "mt-guide",
+      "name": "Marcel guide",
+      "settings": {
+        "show_toc": true,
+        "toc_title": "On this page",
+        "read_label": "[n] min read",
+        "no_articles": "Articles will appear here once they are published.",
+        "card_media": "icon",
+        "video": "shopify://files/videos/How to Use_MARCEL  Ora-Shield.mp4",
+        "video_title": "",
+        "video_shape": "landscape",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      }
+    },
+    "download": {
+      "type": "mt-download",
+      "settings": {
+        "eyebrow": "Track your progress",
+        "heading": "Your 3-Week Recovery Tracker",
+        "text": "Once a week, circle the number that best describes how you feel and note how many fingers fit comfortably when you open your mouth. At the end of each week, share a clear photo of the tracker with the MARCEL Team on WhatsApp so we can guide your next steps.",
+        "points": "Rate burning while eating, mouth tightness and eating comfort every week\nRecord your mouth opening with the finger guide, before therapy and each week\nTick off your daily routine, mouth opening exercises and habit goals",
+        "button_label": "Download the tracker (PDF)",
+        "file_link": "",
+        "note": "Measure only comfortable opening. Never force your mouth open.",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
       }
     },
     "info": {
@@ -429,26 +526,6 @@
         "spacing": "normal"
       }
     },
-    "17943754375ac09f7e": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_eADHpa": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "sample_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_eADHpa"
-      ],
-      "settings": {
-        "include_margins": true
-      }
-    },
     "faq": {
       "type": "mt-faq",
       "blocks": {
@@ -521,6 +598,26 @@
         "spacing": "normal"
       }
     },
+    "17943754375ac09f7e": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_eADHpa": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_eADHpa"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
     "related": {
       "type": "mt-related-products",
       "settings": {
@@ -556,80 +653,16 @@
         "button_2_label": "",
         "button_2_to": "consult",
         "button_2_link": "",
-        "background": "paper",
-        "sheet": false,
-        "spacing": "normal",
-        "form": true
-      }
-    },
-    "nav": {
-      "type": "mt-page-nav",
-      "blocks": {
-        "link_1": {
-          "type": "link",
-          "settings": {
-            "label": "Benefits",
-            "target": "benefits"
-          }
-        },
-        "link_2": {
-          "type": "link",
-          "settings": {
-            "label": "How to use",
-            "target": "how"
-          }
-        },
-        "link_3": {
-          "type": "link",
-          "settings": {
-            "label": "Progress tracker",
-            "target": "download"
-          }
-        },
-        "link_4": {
-          "type": "link",
-          "settings": {
-            "label": "Product information",
-            "target": "info"
-          }
-        },
-        "link_5": {
-          "type": "link",
-          "settings": {
-            "label": "FAQs",
-            "target": "faq"
-          }
-        },
-        "link_6": {
-          "type": "link",
-          "settings": {
-            "label": "Contact MARCEL Team",
-            "target": "cta"
-          }
-        }
-      },
-      "block_order": [
-        "link_1",
-        "link_2",
-        "link_3",
-        "link_4",
-        "link_5",
-        "link_6"
-      ],
-      "settings": {
-        "label": "On this page"
-      }
-    },
-    "download": {
-      "type": "mt-download",
-      "settings": {
-        "eyebrow": "Track your progress",
-        "heading": "Your 3-Week Recovery Tracker",
-        "text": "Once a week, circle the number that best describes how you feel and note how many fingers fit comfortably when you open your mouth. At the end of each week, share a clear photo of the tracker with the MARCEL Team on WhatsApp so we can guide your next steps.",
-        "points": "Rate burning while eating, mouth tightness and eating comfort every week\nRecord your mouth opening with the finger guide, before therapy and each week\nTick off your daily routine, mouth opening exercises and habit goals",
-        "button_label": "Download the tracker (PDF)",
-        "file_link": "",
-        "note": "Measure only comfortable opening. Never force your mouth open.",
+        "form": true,
+        "name_label": "Name",
+        "name_placeholder": "Enter your name",
+        "mobile_label": "Mobile No.",
+        "mobile_placeholder": "Enter your mobile number",
+        "form_button": "Talk to MARCEL Team on WhatsApp",
+        "form_error": "Please enter your name and a 10 digit mobile number.",
+        "wa_intro": "Hello MARCEL Team, I would like guidance.",
+        "regarding_label": "Regarding",
+        "hide_on": "",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"
@@ -643,6 +676,7 @@
     "nav",
     "benefits",
     "how",
+    "mt_guide_BV8bP4",
     "download",
     "info",
     "faq",

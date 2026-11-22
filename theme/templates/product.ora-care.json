@@ -64,6 +64,19 @@
         "accordion_8"
       ],
       "settings": {
+        "style": "hero",
+        "hero_title": "MARCEL OraCare",
+        "badge": "Stage 1 & Stage 2 OSMF",
+        "pack_size": "50 mL",
+        "pack_size_label": "Pack Size",
+        "mrp_label": "MRP",
+        "image_chips": true,
+        "hero_tone": "blue",
+        "hero_media": "image",
+        "hero_art": "pd-oracare",
+        "hero_frame": "none",
+        "badge_pill": false,
+        "hero_note": "",
         "headline": "Foundational oral support",
         "supporting": "Therapeutic Oral Spray",
         "intro": "<p><strong>A core component of MARCEL OMR Therapy Foundation Programme.</strong></p><p>Developed to support oral comfort and the management of symptoms such as burning sensation and oral tightness associated with Stage 1 and Stage 2 Oral Submucous Fibrosis (OSMF).</p>",
@@ -119,19 +132,7 @@
         "acc_about": "About this product",
         "background": "paper",
         "sheet": false,
-        "spacing": "tight",
-        "style": "hero",
-        "pack_size_label": "Pack Size",
-        "mrp_label": "MRP",
-        "image_chips": true,
-        "hero_title": "MARCEL OraCare",
-        "badge": "Stage 1 & Stage 2 OSMF",
-        "pack_size": "50 mL",
-        "hero_media": "image",
-        "badge_pill": false,
-        "hero_tone": "blue",
-        "hero_art": "pd-oracare",
-        "hero_frame": "none"
+        "spacing": "tight"
       }
     },
     "fit": {
@@ -154,128 +155,6 @@
         "background": "mist",
         "sheet": false,
         "spacing": "normal"
-      }
-    },
-    "related": {
-      "type": "mt-related-products",
-      "settings": {
-        "source": "metafield",
-        "intent": "related",
-        "limit": 6,
-        "eyebrow": "More from MARCEL",
-        "heading": "You May Also Like",
-        "details_label": "View product details",
-        "add_label": "Add to cart",
-        "sold_out_label": "Sold out",
-        "card_style": "compact",
-        "image_fit": "cover",
-        "layout": "carousel",
-        "per_desktop": "4",
-        "prev_label": "Previous products",
-        "next_label": "Next products",
-        "background": "paper",
-        "sheet": false,
-        "spacing": "normal"
-      }
-    },
-    "faq": {
-      "type": "mt-faq",
-      "blocks": {
-        "question_1": {
-          "type": "question",
-          "settings": {
-            "question": "What is MARCEL OraCare?",
-            "answer": "<p>MARCEL OraCare is a therapeutic oral spray included in MARCEL OMR Therapy Foundation Programme for people experiencing Stage 1 or Stage 2 OSMF.</p>"
-          }
-        },
-        "question_2": {
-          "type": "question",
-          "settings": {
-            "question": "Who is MARCEL OraCare intended for?",
-            "answer": "<p>It is part of the Foundation Programme, intended for people experiencing Stage 1 or Stage 2 OSMF, subject to appropriate clinical evaluation.</p>"
-          }
-        },
-        "question_3": {
-          "type": "question",
-          "settings": {
-            "question": "How should I use MARCEL OraCare?",
-            "answer": "<p>Apply 6 to 7 puffs evenly throughout the mouth to ensure complete coverage of the oral tissues.</p>"
-          }
-        },
-        "question_4": {
-          "type": "question",
-          "settings": {
-            "question": "How frequently should I use it?",
-            "answer": "<p>Use it twice daily, as the product directions state, and follow your healthcare professional’s advice where it applies.</p>"
-          }
-        },
-        "question_5": {
-          "type": "question",
-          "settings": {
-            "question": "Can MARCEL OraCare be used as a standalone treatment for OSMF?",
-            "answer": "<p>No. MARCEL OraCare is one component of MARCEL OMR Therapy Foundation Programme. It is not a standalone cure and does not replace professional OSMF evaluation and care.</p>"
-          }
-        },
-        "question_6": {
-          "type": "question",
-          "settings": {
-            "question": "Does MARCEL OraCare cure OSMF?",
-            "answer": "<p>No. MARCEL OraCare is not claimed to cure OSMF or reverse fibrosis on its own. OSMF needs appropriate professional evaluation and follow-up.</p>"
-          }
-        },
-        "question_7": {
-          "type": "question",
-          "settings": {
-            "question": "What if I feel irritation?",
-            "answer": "<p>Stop using the product and consult a MARCEL OSMF Consultant or a qualified healthcare professional.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "question_1",
-        "question_2",
-        "question_3",
-        "question_4",
-        "question_5",
-        "question_6",
-        "question_7"
-      ],
-      "settings": {
-        "eyebrow": "Patient information",
-        "heading": "Frequently Asked Questions",
-        "open_first": false,
-        "one_at_a_time": false,
-        "schema_markup": true,
-        "show_help": false,
-        "help_title": "Have Questions?",
-        "help_text": "Our MARCEL OSMF Consultants can help with programme questions and your next step.",
-        "whatsapp_label": "WhatsApp MARCEL Team",
-        "link_label": "See all FAQs",
-        "link": "/pages/faq",
-        "background": "paper",
-        "sheet": false,
-        "spacing": "normal",
-        "layout": "side"
-      }
-    },
-    "179437506049e61be9": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_L86nLM": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "sample_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_L86nLM"
-      ],
-      "settings": {
-        "include_margins": true
       }
     },
     "promo": {
@@ -326,6 +205,64 @@
         "spacing": "tight"
       }
     },
+    "nav": {
+      "type": "mt-page-nav",
+      "blocks": {
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Benefits",
+            "target": "benefits"
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "How to use",
+            "target": "how"
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Progress tracker",
+            "target": "download"
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Product information",
+            "target": "info"
+          }
+        },
+        "link_5": {
+          "type": "link",
+          "settings": {
+            "label": "FAQs",
+            "target": "faq"
+          }
+        },
+        "link_6": {
+          "type": "link",
+          "settings": {
+            "label": "Contact MARCEL Team",
+            "target": "cta"
+          }
+        }
+      },
+      "block_order": [
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "link_5",
+        "link_6"
+      ],
+      "settings": {
+        "label": "On this page"
+      }
+    },
     "benefits": {
       "type": "mt-icon-cards",
       "blocks": {
@@ -336,11 +273,13 @@
             "art": "none",
             "title": "Supports Oral Comfort",
             "highlight": false,
+            "wide": false,
             "text": "Helps support the management of burning sensation while eating spicy foods and oral discomfort.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "benefit_2": {
@@ -350,11 +289,13 @@
             "art": "none",
             "title": "Supports Oral Mucosal Care",
             "highlight": false,
+            "wide": false,
             "text": "Supports the care of the inner lining of the mouth when you experience dryness, irritation or soreness.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "benefit_3": {
@@ -364,11 +305,13 @@
             "art": "none",
             "title": "Convenient Oral Application",
             "highlight": false,
+            "wide": false,
             "text": "The easy-to-use spray format allows convenient application inside the mouth as part of your oral care routine.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         }
       },
@@ -427,6 +370,38 @@
         "media_art_2": "none",
         "media_alt_2": "",
         "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "mt_guide_7HfVNn": {
+      "type": "mt-guide",
+      "name": "Marcel guide",
+      "settings": {
+        "show_toc": true,
+        "toc_title": "",
+        "read_label": "[n] min read",
+        "no_articles": "Articles will appear here once they are published.",
+        "card_media": "icon",
+        "video": "shopify://files/videos/How ti use_MARCEL Ora-Care.mp4",
+        "video_title": "How to use MARCEL OraCare",
+        "video_shape": "landscape",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "download": {
+      "type": "mt-download",
+      "settings": {
+        "eyebrow": "Track your progress",
+        "heading": "Your 3-Week Recovery Tracker",
+        "text": "Once a week, circle the number that best describes how you feel and note how many fingers fit comfortably when you open your mouth. At the end of each week, share a clear photo of the tracker with the MARCEL Team on WhatsApp so we can guide your next steps.",
+        "points": "Rate burning while eating, mouth tightness and eating comfort every week\nRecord your mouth opening with the finger guide, before therapy and each week\nTick off your daily routine, mouth opening exercises and habit goals",
+        "button_label": "Download the tracker (PDF)",
+        "file_link": "",
+        "note": "Measure only comfortable opening. Never force your mouth open.",
+        "background": "paper",
         "sheet": false,
         "spacing": "normal"
       }
@@ -515,6 +490,128 @@
         "spacing": "normal"
       }
     },
+    "179437506049e61be9": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_L86nLM": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_L86nLM"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "related": {
+      "type": "mt-related-products",
+      "settings": {
+        "source": "metafield",
+        "intent": "related",
+        "limit": 6,
+        "eyebrow": "More from MARCEL",
+        "heading": "You May Also Like",
+        "details_label": "View product details",
+        "add_label": "Add to cart",
+        "sold_out_label": "Sold out",
+        "card_style": "compact",
+        "image_fit": "cover",
+        "layout": "carousel",
+        "per_desktop": "4",
+        "prev_label": "Previous products",
+        "next_label": "Next products",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "faq": {
+      "type": "mt-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "What is MARCEL OraCare?",
+            "answer": "<p>MARCEL OraCare is a therapeutic oral spray included in MARCEL OMR Therapy Foundation Programme for people experiencing Stage 1 or Stage 2 OSMF.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Who is MARCEL OraCare intended for?",
+            "answer": "<p>It is part of the Foundation Programme, intended for people experiencing Stage 1 or Stage 2 OSMF, subject to appropriate clinical evaluation.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "How should I use MARCEL OraCare?",
+            "answer": "<p>Apply 6 to 7 puffs evenly throughout the mouth to ensure complete coverage of the oral tissues.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "How frequently should I use it?",
+            "answer": "<p>Use it twice daily, as the product directions state, and follow your healthcare professional’s advice where it applies.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Can MARCEL OraCare be used as a standalone treatment for OSMF?",
+            "answer": "<p>No. MARCEL OraCare is one component of MARCEL OMR Therapy Foundation Programme. It is not a standalone cure and does not replace professional OSMF evaluation and care.</p>"
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "Does MARCEL OraCare cure OSMF?",
+            "answer": "<p>No. MARCEL OraCare is not claimed to cure OSMF or reverse fibrosis on its own. OSMF needs appropriate professional evaluation and follow-up.</p>"
+          }
+        },
+        "question_7": {
+          "type": "question",
+          "settings": {
+            "question": "What if I feel irritation?",
+            "answer": "<p>Stop using the product and consult a MARCEL OSMF Consultant or a qualified healthcare professional.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6",
+        "question_7"
+      ],
+      "settings": {
+        "layout": "side",
+        "eyebrow": "Patient information",
+        "heading": "Frequently Asked Questions",
+        "open_first": false,
+        "one_at_a_time": false,
+        "schema_markup": true,
+        "show_help": false,
+        "help_title": "Have Questions?",
+        "help_text": "Our MARCEL OSMF Consultants can help with programme questions and your next step.",
+        "whatsapp_label": "WhatsApp MARCEL Team",
+        "link_label": "See all FAQs",
+        "link": "/pages/faq",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
     "cta": {
       "type": "mt-cta-band",
       "settings": {
@@ -528,80 +625,16 @@
         "button_2_label": "",
         "button_2_to": "consult",
         "button_2_link": "",
-        "background": "paper",
-        "sheet": false,
-        "spacing": "normal",
-        "form": true
-      }
-    },
-    "nav": {
-      "type": "mt-page-nav",
-      "blocks": {
-        "link_1": {
-          "type": "link",
-          "settings": {
-            "label": "Benefits",
-            "target": "benefits"
-          }
-        },
-        "link_2": {
-          "type": "link",
-          "settings": {
-            "label": "How to use",
-            "target": "how"
-          }
-        },
-        "link_3": {
-          "type": "link",
-          "settings": {
-            "label": "Progress tracker",
-            "target": "download"
-          }
-        },
-        "link_4": {
-          "type": "link",
-          "settings": {
-            "label": "Product information",
-            "target": "info"
-          }
-        },
-        "link_5": {
-          "type": "link",
-          "settings": {
-            "label": "FAQs",
-            "target": "faq"
-          }
-        },
-        "link_6": {
-          "type": "link",
-          "settings": {
-            "label": "Contact MARCEL Team",
-            "target": "cta"
-          }
-        }
-      },
-      "block_order": [
-        "link_1",
-        "link_2",
-        "link_3",
-        "link_4",
-        "link_5",
-        "link_6"
-      ],
-      "settings": {
-        "label": "On this page"
-      }
-    },
-    "download": {
-      "type": "mt-download",
-      "settings": {
-        "eyebrow": "Track your progress",
-        "heading": "Your 3-Week Recovery Tracker",
-        "text": "Once a week, circle the number that best describes how you feel and note how many fingers fit comfortably when you open your mouth. At the end of each week, share a clear photo of the tracker with the MARCEL Team on WhatsApp so we can guide your next steps.",
-        "points": "Rate burning while eating, mouth tightness and eating comfort every week\nRecord your mouth opening with the finger guide, before therapy and each week\nTick off your daily routine, mouth opening exercises and habit goals",
-        "button_label": "Download the tracker (PDF)",
-        "file_link": "",
-        "note": "Measure only comfortable opening. Never force your mouth open.",
+        "form": true,
+        "name_label": "Name",
+        "name_placeholder": "Enter your name",
+        "mobile_label": "Mobile No.",
+        "mobile_placeholder": "Enter your mobile number",
+        "form_button": "Talk to MARCEL Team on WhatsApp",
+        "form_error": "Please enter your name and a 10 digit mobile number.",
+        "wa_intro": "Hello MARCEL Team, I would like guidance.",
+        "regarding_label": "Regarding",
+        "hide_on": "",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"
@@ -615,6 +648,7 @@
     "nav",
     "benefits",
     "how",
+    "mt_guide_7HfVNn",
     "download",
     "info",
     "179437506049e61be9",
