@@ -22,6 +22,11 @@
   assign types = s.types | newline_to_br | split: '<br />'
   assign wa_digits = settings.mt_whatsapp_number | remove: ' ' | remove: '+'
   assign form_id = 'MtEnquiry-' | append: section.id
+  assign has_state = false
+  if s.state_label != blank
+    assign has_state = true
+  endif
+  assign states = s.states | newline_to_br | split: '<br />'
 -%}
 {%- capture wa_url -%}{% render 'mt-wa-url' %}{%- endcapture -%}
 
@@ -69,15 +74,41 @@
             <label for="{{ form_id }}-phone">{{ s.phone_label | escape }}</label>
             <input class="mt-input" id="{{ form_id }}-phone" name="contact[phone]" type="tel" autocomplete="tel" required>
           </div>
-          <div class="mt-field">
-            <label for="{{ form_id }}-email">{{ s.email_label | escape }}</label>
-            <input class="mt-input" id="{{ form_id }}-email" name="contact[email]" type="email" autocomplete="email" required>
-          </div>
-          <div class="mt-field">
-            <label for="{{ form_id }}-city">{{ s.city_label | escape }}</label>
-            <input class="mt-input" id="{{ form_id }}-city" name="contact[city]" autocomplete="address-level2">
-          </div>
+          {%- capture f_email -%}
+            <div class="mt-field">
+              <label for="{{ form_id }}-email">{{ s.email_label | escape }}</label>
+              <input class="mt-input" id="{{ form_id }}-email" name="contact[email]" type="email" autocomplete="email" required>
+            </div>
+          {%- endcapture -%}
+          {%- capture f_city -%}
+            <div class="mt-field">
+              <label for="{{ form_id }}-city">{{ s.city_label | escape }}</label>
+              <input class="mt-input" id="{{ form_id }}-city" name="contact[city]" autocomplete="address-level2">
+            </div>
+          {%- endcapture -%}
+          {%- unless has_state -%}{{ f_email }}{{ f_city }}{%- endunless -%}
         </div>
+        {%- if has_state -%}
+          {%- comment -%} With a State field: email on its own row, then city and state side by side. {%- endcomment -%}
+          {{ f_email }}
+          <div class="mt-form-grid mt-form-grid--2">
+            {{ f_city }}
+            <div class="mt-field">
+              <label for="{{ form_id }}-state">{{ s.state_label | escape }}</label>
+              {%- if states.size > 0 -%}
+                <select class="mt-input" id="{{ form_id }}-state" name="contact[state]" autocomplete="address-level1">
+                  <option value="">{{ s.state_prompt | default: 'Select your state' | escape }}</option>
+                  {%- for st in states -%}
+                    {%- assign st = st | strip -%}
+                    {%- if st != blank -%}<option value="{{ st | escape }}">{{ st | escape }}</option>{%- endif -%}
+                  {%- endfor -%}
+                </select>
+              {%- else -%}
+                <input class="mt-input" id="{{ form_id }}-state" name="contact[state]" autocomplete="address-level1">
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
         <div class="mt-field">
           <label for="{{ form_id }}-body">{{ s.message_label | escape }}</label>
           <textarea class="mt-input" id="{{ form_id }}-body" name="contact[body]"></textarea>
@@ -200,6 +231,25 @@
       "id": "city_label",
       "label": "City label",
       "default": "City"
+    },
+    {
+      "type": "text",
+      "id": "state_label",
+      "label": "State label",
+      "info": "Leave empty to hide the State field."
+    },
+    {
+      "type": "text",
+      "id": "state_prompt",
+      "label": "State placeholder",
+      "default": "Select your state"
+    },
+    {
+      "type": "textarea",
+      "id": "states",
+      "label": "States",
+      "info": "One per line. Leave empty to let people type it instead.",
+      "default": "Andaman and Nicobar Islands\nAndhra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChandigarh\nChhattisgarh\nDadra and Nagar Haveli and Daman and Diu\nDelhi\nGoa\nGujarat\nHaryana\nHimachal Pradesh\nJammu and Kashmir\nJharkhand\nKarnataka\nKerala\nLadakh\nLakshadweep\nMadhya Pradesh\nMaharashtra\nManipur\nMeghalaya\nMizoram\nNagaland\nOdisha\nPuducherry\nPunjab\nRajasthan\nSikkim\nTamil Nadu\nTelangana\nTripura\nUttar Pradesh\nUttarakhand\nWest Bengal\nOutside India"
     },
     {
       "type": "text",

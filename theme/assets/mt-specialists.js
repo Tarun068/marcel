@@ -145,6 +145,12 @@ if (!customElements.get('mt-specialists')) {
         if (this.city) return list.filter((p) => p.city === this.city);
         const q = this.q.toLowerCase();
         if (!q) return list;
+        // Registration number such as OSD-0012 (letters and digits, dash optional), checked before the PIN rule.
+        const qKey = q.replace(/[^a-z0-9]/g, '');
+        if (/[a-z]/.test(qKey) && /\d/.test(qKey)) {
+          const byReg = list.filter((p) => String(p.registration || '').toLowerCase().replace(/[^a-z0-9]/g, '').includes(qKey));
+          if (byReg.length) return byReg;
+        }
         const digits = q.replace(/\D/g, '');
         if (digits.length >= 3) {
           // PIN code: the same PIN first, then the same postal district (first 3 digits), closest numbers first.
@@ -152,7 +158,7 @@ if (!customElements.get('mt-specialists')) {
           const n = Number(digits.padEnd(6, '0'));
           return near.sort((a, b) => Math.abs(Number(a.pin) - n) - Math.abs(Number(b.pin) - n));
         }
-        return list.filter((p) => [p.city, p.district, p.area, p.state, p.name, p.clinic].some((v) => String(v || '').toLowerCase().includes(q)));
+        return list.filter((p) => [p.city, p.district, p.area, p.state, p.name, p.clinic, p.registration].some((v) => String(v || '').toLowerCase().includes(q)));
       }
 
       update() {
@@ -207,7 +213,8 @@ if (!customElements.get('mt-specialists')) {
         head.append(el('h3', '', p.name), el('p', 'mt-clinic-where', [p.qualification, this.t.role].filter(Boolean).join(', ')));
         top.append(avatar, head);
 
-        // Contact No., City / Town and Address as labelled rows (client list), then hours and registration.
+        // Registration No. first (client's registered doctor list, 2026-11-22), then Contact No.,
+        // City / Town and Address as labelled rows (client list), then hours.
         const meta = el('div', 'mt-clinic-meta');
         const row = (name, label, text, href) => {
           if (!text) return;
@@ -225,6 +232,7 @@ if (!customElements.get('mt-specialists')) {
           r.append(icon(name), body);
           meta.append(r);
         };
+        row('patent', this.t.reg, p.registration);
         // Up to two numbers, each one a call link.
         const nums = [p.phone, p.phone2].filter(Boolean);
         if (nums.length) {
@@ -246,7 +254,6 @@ if (!customElements.get('mt-specialists')) {
         const district = p.district && p.district.toLowerCase() !== String(p.city || '').toLowerCase() ? p.district : '';
         row('clinic', this.t.addressLabel, [p.clinic, p.address, p.area, p.city, district, p.state].filter(Boolean).join(', ') + (p.pin ? ` ${p.pin}` : ''));
         row('clock', '', p.hours);
-        if (p.registration) row('patent', '', `${this.t.reg} ${p.registration}`);
         if (p.dist !== undefined) row('target', '', (this.t.km || '[n] km').replace('[n]', p.dist < 10 ? p.dist.toFixed(1) : Math.round(p.dist)));
 
         const actions = el('div', 'mt-clinic-actions');

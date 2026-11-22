@@ -94,12 +94,22 @@
             {%- render 'mt-icon', icon: 'search' -%}
           </button>
         {%- endif -%}
-        <a href="{{ routes.cart_url }}" class="mt-icon-btn" data-mt-cart aria-label="Cart ({{ cart.item_count }})">
-          {%- render 'mt-icon', icon: 'bag' -%}
-          <span class="mt-count" data-mt-cart-count data-n="{{ cart.item_count }}" aria-hidden="true">
-            {{- cart.item_count -}}
-          </span>
-        </a>
+        {%- if section.settings.cart_label != blank -%}
+          {%- comment -%} Cart as a text button (client suggestion, 2026-11-21). {%- endcomment -%}
+          <a href="{{ routes.cart_url }}" class="mt-head-cart-text" data-mt-cart data-label="{{ section.settings.cart_label | escape }}" aria-label="{{ section.settings.cart_label | escape }} ({{ cart.item_count }})">
+            <span>{{ section.settings.cart_label | escape }}</span>
+            <span class="mt-count" data-mt-cart-count data-n="{{ cart.item_count }}" aria-hidden="true">
+              {{- cart.item_count -}}
+            </span>
+          </a>
+        {%- else -%}
+          <a href="{{ routes.cart_url }}" class="mt-icon-btn" data-mt-cart aria-label="Cart ({{ cart.item_count }})">
+            {%- render 'mt-icon', icon: 'bag' -%}
+            <span class="mt-count" data-mt-cart-count data-n="{{ cart.item_count }}" aria-hidden="true">
+              {{- cart.item_count -}}
+            </span>
+          </a>
+        {%- endif -%}
         {%- if section.settings.cta_label != blank -%}
           <a class="mt-btn mt-btn-primary mt-btn-sm mt-head-cta" href="{{ cta_link | strip }}"{% if section.settings.cta_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
             {%- if section.settings.cta_to == 'whatsapp' -%}{%- render 'mt-icon', icon: 'whatsapp' -%}{%- endif -%}
@@ -437,6 +447,12 @@
       ],
       "default": "custom",
       "info": "WhatsApp opens a chat with the MARCEL Team in a new tab."
+    },
+    {
+      "type": "text",
+      "id": "cart_label",
+      "label": "Cart button text",
+      "info": "Shows the cart as a text button, for example My Cart. Leave empty for the bag icon."
     },
     {
       "type": "header",

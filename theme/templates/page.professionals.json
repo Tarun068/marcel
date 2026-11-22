@@ -23,10 +23,10 @@
         "current_label": "For healthcare professionals",
         "eyebrow": "For dentists and healthcare professionals",
         "heading": "MARCEL OMR Therapy for Healthcare Professionals",
-        "text": "Information about the therapy, OSMF, clinical evidence, research and the OSMF Specialist Doctor network.",
+        "text": "Information about the therapy, OSMF, clinical resources and the OSMF Specialist Doctor network.",
         "button_1_label": "Professional enquiry",
         "button_1_link": "#enquiry",
-        "button_2_label": "Explore clinical evidence"
+        "button_2_label": ""
       }
     },
     "resources": {
@@ -64,6 +64,7 @@
         },
         "card_3": {
           "type": "card",
+          "disabled": true,
           "settings": {
             "icon": "test",
             "title": "Clinical Evidence",
@@ -74,6 +75,7 @@
         },
         "card_4": {
           "type": "card",
+          "disabled": true,
           "settings": {
             "icon": "flask",
             "title": "Research",
@@ -93,15 +95,27 @@
             "link_label": "View products"
           }
         },
+        "clinical_resources": {
+          "type": "card",
+          "settings": {
+            "icon": "file",
+            "title": "Clinical Resources",
+            "text": "Downloadable clinical references for healthcare professionals.",
+            "downloads": "Differential Clinical Response in Oral Submucous Fibrosis (OSMF) | mt-pro-differential-response.pdf\nClinical Briefing: MARCEL OMR Therapy | mt-pro-clinical-briefing.pdf"
+          }
+        },
         "card_6": {
           "type": "card",
           "settings": {
             "icon": "doctor",
-            "title": "OSMF Specialist Doctor Pathway",
-            "text": "Join the OSMF Specialist Doctor network and appear in the specialist finder.",
+            "title": "OSMF Specialist Community",
+            "highlight": true,
+            "wide": true,
+            "text": "Join the MARCEL OSMF Specialist Community, a network that helps patients find doctors with an interest in OSMF care. Onboarding is free and voluntary, and you appear in the specialist finder only with your consent.",
             "link_to": "custom",
-            "link_label": "Send an enquiry",
-            "link": "#enquiry"
+            "link_label": "Register as an OSMF Specialist",
+            "link": "https://forms.gle/xNUkeVxTvu1yvBPq6",
+            "downloads": "Doctor Registration and Onboarding Form | mt-pro-specialist-form.pdf\nOSMF Specialist Community Introduction Letter | mt-pro-specialist-letter.pdf"
           }
         }
       },
@@ -111,11 +125,66 @@
         "card_3",
         "card_4",
         "card_5",
+        "clinical_resources",
         "card_6"
       ]
     },
+    "challenges": {
+      "type": "mt-learn-points",
+      "blocks": {
+        "variation": {
+          "type": "point",
+          "settings": {
+            "icon": "users",
+            "tone": "sky",
+            "title": "Variation in Recommendations",
+            "text": "Differences in clinical advice and care recommendations can make it challenging for patients to follow a consistent management pathway."
+          }
+        },
+        "routine": {
+          "type": "point",
+          "settings": {
+            "icon": "routine",
+            "tone": "amber",
+            "title": "Lack of a Defined Care Routine",
+            "text": "Without a clearly structured routine, patients may find it difficult to understand and maintain the recommended components of care."
+          }
+        },
+        "monitoring": {
+          "type": "point",
+          "settings": {
+            "icon": "chart-search",
+            "tone": "violet",
+            "title": "Challenges in Monitoring Progress",
+            "text": "Regular assessment of symptoms, mouth opening and functional changes is important for evaluating patient progress."
+          }
+        }
+      },
+      "block_order": [
+        "variation",
+        "routine",
+        "monitoring"
+      ],
+      "settings": {
+        "anchor": "challenges",
+        "eyebrow": "Why a Structured Approach Matters",
+        "eyebrow_icon": "doctor",
+        "heading": "Challenges in OSMF Care Management",
+        "heading_mark": true,
+        "text": "OSMF management can involve multiple clinical considerations, patient-specific needs and ongoing care requirements. A lack of coordination between recommendations, daily routines and follow-up assessment can make continuity of care challenging.",
+        "center": false,
+        "band_icon": "target",
+        "band_label": "The Need for a Structured Care Approach",
+        "band_text": "MARCEL OMR Therapy brings together a structured care routine, stage-appropriate guidance and ongoing support as part of OSMF management.",
+        "waves": "top",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
     "contact": {
       "type": "mt-founder",
+      "disabled": true,
       "settings": {
         "quote_position": "left",
         "quote_eyebrow": "",
@@ -152,6 +221,7 @@
         "phone_label": "Phone number",
         "email_label": "Email ID",
         "city_label": "City",
+        "state_label": "State",
         "message_label": "Your message",
         "submit_label": "Send enquiry",
         "success_text": "Thank you. Your enquiry has reached the MARCEL Team.",
@@ -165,6 +235,7 @@
   "order": [
     "hero",
     "resources",
+    "challenges",
     "contact",
     "enquiry"
   ]

@@ -1,0 +1,22 @@
+{%- comment -%}
+  Heading for the learning sections (mt-learn-*): eyebrow with a short rule, heading with an optional brush mark
+  under it (it draws in when the heading comes into view), and an intro line. Keeps .mt-sec-head, so the theme's
+  heading motion and key-word marker still apply.
+
+  Accepts:
+  - eyebrow: {String}
+  - heading: {String} inline rich text
+  - text: {String} inline rich text
+  - mark: {Boolean} brush mark under the heading
+  - center: {Boolean} centre the heading
+
+  Usage:
+  {% render 'mt-learn-head', eyebrow: s.eyebrow, heading: s.heading, text: s.text, mark: s.heading_mark %}
+{%- endcomment -%}
+{%- if eyebrow != blank or heading != blank or text != blank -%}
+  <div class="mt-sec-head mt-lx-head{% if center %} mt-sec-head--center{% endif %}{% if mark %} has-mark{% endif %}">
+    {%- if eyebrow != blank -%}<span class="mt-eyebrow mt-lx-eyebrow">{{ eyebrow | escape }}</span>{%- endif -%}
+    {%- if heading != blank -%}<h2 class="mt-h2 mt-lx-title">{{ heading }}</h2>{%- endif -%}
+    {%- if text != blank -%}<p class="mt-lead mt-lx-lead">{{ text }}</p>{%- endif -%}
+  </div>
+{%- endif -%}

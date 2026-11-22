@@ -1,0 +1,381 @@
+{{ 'mt-learn.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  What this approach is and is not (OMR Therapy page, client reference 2026-11-21): a heading and up to four
+  cards. Each card has a coloured header with a green tick, red cross, amber warning or teal note, and up to
+  four lines, each with its own icon. Every word is live text; the soft waves are optional.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign cols = section.blocks.size
+  if cols > 4
+    assign cols = 4
+  endif
+  assign extra = 'mt-lx mt-scope'
+  if s.waves
+    assign extra = extra | append: ' mt-scope--waves'
+  endif
+-%}
+<section class="{% render 'mt-section-class', s: s, extra: extra %}"{% if s.anchor != blank %} id="{{ s.anchor | handleize }}"{% endif %}>
+  <div class="mt-wrap">
+    {%- render 'mt-learn-head', eyebrow: s.eyebrow, heading: s.heading, text: s.text, mark: s.heading_mark -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="mt-scope-grid mt-scope-grid--{{ cols }}">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign b = block.settings
+            case b.style
+              when 'no'
+                assign sign = 'x'
+              when 'caution'
+                assign sign = 'warn-solid'
+              when 'info'
+                assign sign = 'info'
+              else
+                assign sign = 'check'
+            endcase
+          -%}
+          <div class="mt-scope-card mt-scope-card--{{ b.style }}" {{ block.shopify_attributes }}>
+            <div class="mt-scope-head">
+              <span class="mt-scope-badge">{%- render 'mt-icon', icon: sign -%}</span>
+              {%- if b.title != blank -%}<h3 class="mt-h3 mt-scope-title">{{ b.title | escape }}</h3>{%- endif -%}
+            </div>
+            {%- capture lines -%}
+              {%- for n in (1..4) -%}
+                {%- assign text_key = 'text_' | append: n -%}
+                {%- assign icon_key = 'icon_' | append: n -%}
+                {%- if b[text_key] != blank -%}
+                  <li{% if b[icon_key] == 'none' %} class="is-plain"{% endif %}>
+                    {%- if b[icon_key] != 'none' -%}<span class="mt-scope-ico">{%- render 'mt-icon', icon: b[icon_key] -%}</span>{%- endif -%}
+                    <span class="mt-scope-text">{{ b[text_key] | escape }}</span>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endcapture -%}
+            {%- if lines != blank -%}<ul class="mt-scope-list">{{ lines }}</ul>{%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if s.note != blank -%}<p class="mt-fine mt-scope-note">{{ s.note }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel is and is not",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Link name",
+      "info": "Links can jump here with #link-name, for example #expectations."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Important to Understand"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What This Approach Is and Is Not"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_mark",
+      "label": "Brush line under the heading",
+      "default": false
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Intro text",
+      "default": "A clear view of what MARCEL OMR Therapy offers, and what to keep in mind for the right expectations."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "note",
+      "label": "Small print under the cards"
+    },
+    {
+      "type": "checkbox",
+      "id": "waves",
+      "label": "Soft waves in the corners",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "paper", "label": "White" },
+        { "value": "mist", "label": "Light" },
+        { "value": "tint", "label": "Tinted" }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "tight", "label": "Compact" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "normal"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Sign and colour",
+          "options": [
+            { "value": "yes", "label": "Green tick" },
+            { "value": "no", "label": "Red cross" },
+            { "value": "caution", "label": "Amber warning" },
+            { "value": "info", "label": "Teal note" }
+          ],
+          "default": "yes"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "This Approach Is"
+        },
+        {
+          "type": "header",
+          "content": "Line 1"
+        },
+        {
+          "type": "select",
+          "id": "icon_1",
+          "label": "Icon",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "check", "label": "Tick" },
+            { "value": "x", "label": "Cross" },
+            { "value": "alert", "label": "Warning" },
+            { "value": "layers", "label": "Layers" },
+            { "value": "calendar-days", "label": "Calendar" },
+            { "value": "calendar-check", "label": "Calendar with a tick" },
+            { "value": "doctor", "label": "Stethoscope" },
+            { "value": "person-care", "label": "Person with a care badge" },
+            { "value": "bolt", "label": "Lightning" },
+            { "value": "refresh", "label": "Circle arrows" },
+            { "value": "pill", "label": "Capsule" },
+            { "value": "ban-leaf", "label": "No areca nut" },
+            { "value": "ban", "label": "Not allowed" },
+            { "value": "routine", "label": "Routine list" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "target", "label": "Target" },
+            { "value": "chart", "label": "Chart" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "drop", "label": "Drop" },
+            { "value": "headset", "label": "Headset" },
+            { "value": "book", "label": "Book" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "text",
+          "id": "text_1",
+          "label": "Text"
+        },
+        {
+          "type": "header",
+          "content": "Line 2"
+        },
+        {
+          "type": "select",
+          "id": "icon_2",
+          "label": "Icon",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "check", "label": "Tick" },
+            { "value": "x", "label": "Cross" },
+            { "value": "alert", "label": "Warning" },
+            { "value": "layers", "label": "Layers" },
+            { "value": "calendar-days", "label": "Calendar" },
+            { "value": "calendar-check", "label": "Calendar with a tick" },
+            { "value": "doctor", "label": "Stethoscope" },
+            { "value": "person-care", "label": "Person with a care badge" },
+            { "value": "bolt", "label": "Lightning" },
+            { "value": "refresh", "label": "Circle arrows" },
+            { "value": "pill", "label": "Capsule" },
+            { "value": "ban-leaf", "label": "No areca nut" },
+            { "value": "ban", "label": "Not allowed" },
+            { "value": "routine", "label": "Routine list" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "target", "label": "Target" },
+            { "value": "chart", "label": "Chart" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "drop", "label": "Drop" },
+            { "value": "headset", "label": "Headset" },
+            { "value": "book", "label": "Book" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "text",
+          "id": "text_2",
+          "label": "Text"
+        },
+        {
+          "type": "header",
+          "content": "Line 3"
+        },
+        {
+          "type": "select",
+          "id": "icon_3",
+          "label": "Icon",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "check", "label": "Tick" },
+            { "value": "x", "label": "Cross" },
+            { "value": "alert", "label": "Warning" },
+            { "value": "layers", "label": "Layers" },
+            { "value": "calendar-days", "label": "Calendar" },
+            { "value": "calendar-check", "label": "Calendar with a tick" },
+            { "value": "doctor", "label": "Stethoscope" },
+            { "value": "person-care", "label": "Person with a care badge" },
+            { "value": "bolt", "label": "Lightning" },
+            { "value": "refresh", "label": "Circle arrows" },
+            { "value": "pill", "label": "Capsule" },
+            { "value": "ban-leaf", "label": "No areca nut" },
+            { "value": "ban", "label": "Not allowed" },
+            { "value": "routine", "label": "Routine list" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "target", "label": "Target" },
+            { "value": "chart", "label": "Chart" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "drop", "label": "Drop" },
+            { "value": "headset", "label": "Headset" },
+            { "value": "book", "label": "Book" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "text",
+          "id": "text_3",
+          "label": "Text"
+        },
+        {
+          "type": "header",
+          "content": "Line 4"
+        },
+        {
+          "type": "select",
+          "id": "icon_4",
+          "label": "Icon",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "check", "label": "Tick" },
+            { "value": "x", "label": "Cross" },
+            { "value": "alert", "label": "Warning" },
+            { "value": "layers", "label": "Layers" },
+            { "value": "calendar-days", "label": "Calendar" },
+            { "value": "calendar-check", "label": "Calendar with a tick" },
+            { "value": "doctor", "label": "Stethoscope" },
+            { "value": "person-care", "label": "Person with a care badge" },
+            { "value": "bolt", "label": "Lightning" },
+            { "value": "refresh", "label": "Circle arrows" },
+            { "value": "pill", "label": "Capsule" },
+            { "value": "ban-leaf", "label": "No areca nut" },
+            { "value": "ban", "label": "Not allowed" },
+            { "value": "routine", "label": "Routine list" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "target", "label": "Target" },
+            { "value": "chart", "label": "Chart" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "drop", "label": "Drop" },
+            { "value": "headset", "label": "Headset" },
+            { "value": "book", "label": "Book" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "text",
+          "id": "text_4",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Marcel is and is not",
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "style": "yes",
+            "title": "This Approach Is",
+            "icon_1": "layers",
+            "text_1": "A structured, stage-based care approach",
+            "icon_2": "calendar-days",
+            "text_2": "A planned routine with appropriate products and exercises",
+            "icon_3": "doctor",
+            "text_3": "Supported by professional guidance"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "style": "no",
+            "title": "This Approach Is Not",
+            "icon_1": "bolt",
+            "text_1": "An instant cure",
+            "icon_2": "refresh",
+            "text_2": "A guaranteed reversal of OSMF",
+            "icon_3": "pill",
+            "text_3": "A replacement for professional medical assessment and treatment"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "style": "caution",
+            "title": "Keep in Mind",
+            "icon_1": "ban-leaf",
+            "text_1": "Avoid areca nut, gutkha, pan masala and tobacco",
+            "icon_2": "calendar-check",
+            "text_2": "Follow the recommended care routine consistently",
+            "icon_3": "person-care",
+            "text_3": "Attend regular follow-ups as advised"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,704 @@
+{{ 'mt-learn.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  Photo cards (Understand OSMF, client references 2026-11-21). One section for several layouts:
+  - card styles: photo on top with an accent bar, photo on top with an icon, photo beside the text (risk factors),
+    round photo with a wide card (one card per row);
+  - extras: a picture at the top right of the heading, a labelled diagram and note beside the cards, do and don't
+    lists, a callout, and journey steps.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign style = s.card_style
+  assign cards = section.blocks | where: 'type', 'card'
+  assign labels = section.blocks | where: 'type', 'label'
+  assign lists = section.blocks | where: 'type', 'list'
+  assign steps = section.blocks | where: 'type', 'step'
+  assign has_head_pic = false
+  if s.head_image != blank or s.head_art != 'none'
+    assign has_head_pic = true
+  endif
+  assign has_diagram = false
+  if s.aside_image != blank or s.aside_art != 'none'
+    assign has_diagram = true
+  endif
+  assign has_aside = false
+  if has_diagram or s.note_text != blank
+    assign has_aside = true
+  endif
+  assign cols = s.columns
+  if style == 'row'
+    assign cols = 1
+  endif
+  case style
+    when 'split'
+      assign pic_sizes = '(min-width: 990px) 200px, 40vw'
+    when 'row'
+      assign pic_sizes = '200px'
+    else
+      assign pic_sizes = '(min-width: 990px) 420px, (min-width: 750px) 50vw, 40vw'
+  endcase
+-%}
+<section class="{% render 'mt-section-class', s: s, extra: 'mt-lx mt-lc' %}"{% if s.anchor != blank %} id="{{ s.anchor | handleize }}"{% endif %}>
+  <div class="mt-wrap">
+    <div class="mt-lx-top{% if has_head_pic %} has-pic{% endif %}">
+      {%- render 'mt-learn-head', eyebrow: s.eyebrow, heading: s.heading, text: s.text, mark: s.heading_mark -%}
+      {%- if has_head_pic -%}
+        <div class="mt-lx-headpic mt-lx-arc">
+          {%- render 'mt-learn-pic', image: s.head_image, art: s.head_art, alt: '', sizes: '(min-width: 750px) 40vw, 1px' -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- capture grid -%}
+      {%- if cards.size > 0 -%}
+        <div class="mt-lx-grid mt-lx-grid--{{ cols }} mt-lx-grid--{{ style }}">
+          {%- for block in cards -%}
+            {%- assign b = block.settings -%}
+            <article class="mt-lx-card mt-lx-card--{{ style }}{% if s.picture_edge == 'curve' and style == 'icon' %} mt-lx-card--curve{% endif %} mt-tone-{{ b.tone }}" {{ block.shopify_attributes }}>
+              {%- if b.image != blank or b.art != 'none' -%}
+                <div class="mt-lx-card-pic">{%- render 'mt-learn-pic', image: b.image, art: b.art, alt: '', sizes: pic_sizes -%}</div>
+              {%- endif -%}
+              <div class="mt-lx-card-body">
+                {%- if style == 'icon' and b.icon != 'none' -%}<span class="mt-lx-ico">{%- render 'mt-icon', icon: b.icon -%}</span>{%- endif -%}
+                <div class="mt-lx-card-copy">
+                  {%- if b.title != blank -%}
+                    <h3 class="mt-h3 mt-lx-card-title">{% if s.numbered %}<span class="mt-lx-n">{{ forloop.index }}.</span> {% endif %}{{ b.title | escape }}</h3>
+                  {%- endif -%}
+                  {%- if style == 'split' -%}<span class="mt-lx-rule" aria-hidden="true"></span>{%- endif -%}
+                  {%- if b.text != blank -%}<p class="mt-lx-card-text">{{ b.text | escape }}</p>{%- endif -%}
+                </div>
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endcapture -%}
+
+    {%- if has_aside -%}
+      <div class="mt-lx-layout">
+        <div class="mt-lx-main">{{ grid }}</div>
+        <aside class="mt-lx-aside">
+          {%- if has_diagram -%}
+            <figure class="mt-lx-diagram">
+              <div class="mt-lx-diagram-pic">
+                {%- render 'mt-learn-pic', image: s.aside_image, art: s.aside_art, alt: s.aside_alt, sizes: '240px' -%}
+                {%- for block in labels -%}
+                  <span class="mt-lx-pin" style="--x: {{ block.settings.x }}%; --y: {{ block.settings.y }}%;" aria-hidden="true"></span>
+                {%- endfor -%}
+              </div>
+              {%- if labels.size > 0 -%}
+                <figcaption class="mt-lx-diagram-labels">
+                  {%- for block in labels -%}
+                    <span class="mt-lx-label" style="--y: {{ block.settings.y }}%;" {{ block.shopify_attributes }}>
+                      <b>{{ block.settings.title | escape }}</b>
+                      {%- if block.settings.sub != blank %} <span>{{ block.settings.sub | escape }}</span>{% endif -%}
+                    </span>
+                  {%- endfor -%}
+                </figcaption>
+              {%- endif -%}
+            </figure>
+          {%- endif -%}
+          {%- if s.note_text != blank -%}
+            <div class="mt-lx-note">
+              {%- if s.note_icon != 'none' -%}<span class="mt-lx-note-ico">{%- render 'mt-icon', icon: s.note_icon -%}</span>{%- endif -%}
+              <div class="mt-lx-note-copy">
+                {%- if s.note_title != blank -%}<h3 class="mt-h3">{{ s.note_title | escape }}</h3>{%- endif -%}
+                <p>{{ s.note_text }}</p>
+              </div>
+            </div>
+          {%- endif -%}
+        </aside>
+      </div>
+    {%- else -%}
+      {{ grid }}
+    {%- endif -%}
+
+    {%- if lists.size > 0 -%}
+      <div class="mt-lx-lists">
+        {%- for block in lists -%}
+          {%- assign b = block.settings -%}
+          {%- if b.style == 'do' -%}{%- assign mark_icon = 'check' -%}{%- else -%}{%- assign mark_icon = 'x' -%}{%- endif -%}
+          {%- assign items = b.items | newline_to_br | split: '<br />' -%}
+          <div class="mt-lx-list mt-lx-list--{{ b.style }}" {{ block.shopify_attributes }}>
+            {%- if b.image != blank or b.art != 'none' -%}
+              <div class="mt-lx-list-pic">{%- render 'mt-learn-pic', image: b.image, art: b.art, alt: '', sizes: '(min-width: 990px) 240px, 36vw' -%}</div>
+            {%- endif -%}
+            <div class="mt-lx-list-body">
+              {%- if b.title != blank -%}
+                <h3 class="mt-h3 mt-lx-list-title"><span class="mt-lx-list-badge">{%- render 'mt-icon', icon: mark_icon -%}</span>{{ b.title | escape }}</h3>
+              {%- endif -%}
+              <ul class="mt-lx-list-items" role="list">
+                {%- for item in items -%}
+                  {%- assign t = item | strip -%}
+                  {%- if t != blank -%}<li>{%- render 'mt-icon', icon: mark_icon -%}<span>{{ t | escape }}</span></li>{%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if s.callout_text != blank -%}
+      <div class="mt-lx-callout">
+        {%- if s.callout_icon != 'none' -%}<span class="mt-lx-callout-ico">{%- render 'mt-icon', icon: s.callout_icon -%}</span>{%- endif -%}
+        <div class="mt-lx-callout-copy">
+          {%- if s.callout_title != blank -%}<h3 class="mt-h3">{{ s.callout_title | escape }}</h3>{%- endif -%}
+          <p>{{ s.callout_text }}</p>
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if steps.size > 0 -%}
+      <div class="mt-lx-journey">
+        {%- if s.steps_title != blank -%}<p class="mt-lx-journey-title">{{ s.steps_title }}</p>{%- endif -%}
+        <ol class="mt-lx-steps" role="list">
+          {%- for block in steps -%}
+            {%- assign b = block.settings -%}
+            {%- capture inner -%}
+              <span class="mt-lx-step-ico">{%- render 'mt-icon', icon: b.icon -%}</span>
+              <b class="mt-lx-step-title">{{ b.title | escape }}</b>
+              {%- if b.text != blank -%}<span class="mt-lx-step-text">{{ b.text | escape }}</span>{%- endif -%}
+            {%- endcapture -%}
+            <li class="mt-lx-step mt-tone-{{ b.tone }}" {{ block.shopify_attributes }}>
+              {%- if b.link_to != 'none' -%}
+                {%- capture href -%}{% render 'mt-link-to', key: b.link_to, url: b.link %}{%- endcapture -%}
+                <a class="mt-lx-step-in" href="{{ href | strip }}"{% if b.link_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>{{ inner }}</a>
+              {%- else -%}
+                <div class="mt-lx-step-in">{{ inner }}</div>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ol>
+      </div>
+    {%- endif -%}
+
+    {%- if s.link_label != blank -%}
+      {%- capture href -%}{% render 'mt-link-to', key: s.link_to, url: s.link %}{%- endcapture -%}
+      <p class="mt-lx-more">
+        <a class="mt-link" href="{{ href | strip }}"{% if s.link_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
+          {{- s.link_label | escape -}}
+          {%- render 'mt-icon', icon: 'arrow-right' -%}
+        </a>
+      </p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel photo cards",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Link name",
+      "info": "Links can jump here with #link-name, for example #risk-factors."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_mark",
+      "label": "Brush line under the heading",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Intro text"
+    },
+    {
+      "type": "image_picker",
+      "id": "head_image",
+      "label": "Picture beside the heading",
+      "info": "Shown from tablet size up. Replaces the built-in picture."
+    },
+    {
+      "type": "select",
+      "id": "head_art",
+      "label": "Built-in picture beside the heading",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "signs-head", "label": "Man touching his cheek" },
+        { "value": "unclear-head", "label": "Man thinking" },
+        { "value": "helps-head", "label": "Doctor with a patient" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "header",
+      "content": "Cards"
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "options": [
+        { "value": "photo", "label": "Photo on top, accent bar" },
+        { "value": "icon", "label": "Photo on top, icon beside the text" },
+        { "value": "split", "label": "Photo beside the text" },
+        { "value": "row", "label": "Round photo with a wide card" }
+      ],
+      "default": "photo"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Cards per row on desktop",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3,
+      "info": "Round photo cards always take a full row."
+    },
+    {
+      "type": "select",
+      "id": "picture_edge",
+      "label": "Photo edge (icon style)",
+      "options": [
+        { "value": "straight", "label": "Rounded corners" },
+        { "value": "curve", "label": "Curved lower edge in the card colour" }
+      ],
+      "default": "straight"
+    },
+    {
+      "type": "checkbox",
+      "id": "numbered",
+      "label": "Number the card titles",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Diagram and note beside the cards"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add Diagram label blocks to name the parts of the diagram picture."
+    },
+    {
+      "type": "image_picker",
+      "id": "aside_image",
+      "label": "Diagram picture",
+      "info": "Replaces the built-in picture."
+    },
+    {
+      "type": "select",
+      "id": "aside_art",
+      "label": "Built-in diagram",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "layers", "label": "Layers of the mouth lining" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "text",
+      "id": "aside_alt",
+      "label": "Diagram description",
+      "info": "Read out by screen readers."
+    },
+    {
+      "type": "select",
+      "id": "note_icon",
+      "label": "Note icon",
+      "options": [
+        { "value": "target", "label": "Target" },
+        { "value": "info", "label": "Info" },
+        { "value": "alert", "label": "Alert" },
+        { "value": "shield", "label": "Shield" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "target"
+    },
+    {
+      "type": "text",
+      "id": "note_title",
+      "label": "Note title"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "note_text",
+      "label": "Note text",
+      "info": "Leave empty to hide the note."
+    },
+    {
+      "type": "header",
+      "content": "Callout under the cards"
+    },
+    {
+      "type": "select",
+      "id": "callout_icon",
+      "label": "Callout icon",
+      "options": [
+        { "value": "question", "label": "Question" },
+        { "value": "info", "label": "Info" },
+        { "value": "alert", "label": "Alert" },
+        { "value": "shield-plus", "label": "Shield" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "question"
+    },
+    {
+      "type": "text",
+      "id": "callout_title",
+      "label": "Callout title"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "callout_text",
+      "label": "Callout text",
+      "info": "Leave empty to hide the callout."
+    },
+    {
+      "type": "header",
+      "content": "Journey steps"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add Journey step blocks to show a row of steps under the cards."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "steps_title",
+      "label": "Steps title",
+      "info": "Bold words show in teal."
+    },
+    {
+      "type": "header",
+      "content": "Link"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link text",
+      "info": "Leave empty to hide the link."
+    },
+    {
+      "type": "select",
+      "id": "link_to",
+      "label": "Link opens",
+      "options": [
+        { "value": "custom", "label": "Custom link below" },
+        { "value": "test", "label": "MARCEL OSMF Self-Check" },
+        { "value": "therapy", "label": "MARCEL OMR Therapy page" },
+        { "value": "foundation", "label": "Foundation Kit page" },
+        { "value": "advance", "label": "Advance Kit page" },
+        { "value": "journey", "label": "12-Week Care Journey" },
+        { "value": "consult", "label": "MARCEL OSMF Consultant booking" },
+        { "value": "specialists", "label": "Find an OSMF Specialist" },
+        { "value": "help", "label": "Get Help page" },
+        { "value": "evidence", "label": "Clinical evidence page" },
+        { "value": "products", "label": "All products" },
+        { "value": "whatsapp", "label": "WhatsApp chat" }
+      ],
+      "default": "test"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Custom link"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "paper", "label": "White" },
+        { "value": "mist", "label": "Light" },
+        { "value": "tint", "label": "Tinted" }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "tight", "label": "Compact" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "normal"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo",
+          "info": "Replaces the built-in photo."
+        },
+        {
+          "type": "select",
+          "id": "art",
+          "label": "Built-in photo",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "sign-burn", "label": "Sign: red tongue (burning)" },
+            { "value": "sign-tight", "label": "Sign: cheek lining (tightness)" },
+            { "value": "sign-open", "label": "Sign: open mouth" },
+            { "value": "sign-patches", "label": "Sign: pale patches" },
+            { "value": "change-bands", "label": "Change: fibrous bands" },
+            { "value": "change-collagen", "label": "Change: collagen fibres" },
+            { "value": "change-stiff", "label": "Change: stiff lining" },
+            { "value": "change-vessels", "label": "Change: small blood vessels" },
+            { "value": "change-deeper", "label": "Change: deeper layers" },
+            { "value": "change-movement", "label": "Change: limited opening" },
+            { "value": "risk-areca", "label": "Risk: areca nut and gutkha" },
+            { "value": "risk-tobacco", "label": "Risk: tobacco" },
+            { "value": "risk-chewing", "label": "Risk: frequent chewing" },
+            { "value": "risk-genetic", "label": "Risk: genetics" },
+            { "value": "risk-hygiene", "label": "Risk: oral hygiene" },
+            { "value": "risk-nutrition", "label": "Risk: nutrition" },
+            { "value": "unclear-slow", "label": "Confusion: slow symptoms" },
+            { "value": "unclear-advice", "label": "Confusion: mixed advice" },
+            { "value": "unclear-results", "label": "Confusion: uneven results" },
+            { "value": "unclear-helps", "label": "Confusion: what helps" },
+            { "value": "help-stage", "label": "Helps: self-check on a phone" },
+            { "value": "help-routine", "label": "Helps: daily routine" },
+            { "value": "help-consistent", "label": "Helps: clock and water" },
+            { "value": "help-support", "label": "Helps: MARCEL OSMF Consultant" }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon (icon style)",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "s-bands", "label": "Bands" },
+            { "value": "layers", "label": "Layers" },
+            { "value": "lock", "label": "Lock" },
+            { "value": "vessel", "label": "Blood vessel" },
+            { "value": "arrows-h", "label": "Both-ways arrow" },
+            { "value": "target", "label": "Target" },
+            { "value": "routine", "label": "Routine list" },
+            { "value": "calendar", "label": "Calendar" },
+            { "value": "doctor", "label": "Doctor" },
+            { "value": "headset", "label": "Headset" },
+            { "value": "test", "label": "Check list" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "drop", "label": "Drop" }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "select",
+          "id": "tone",
+          "label": "Colour",
+          "options": [
+            { "value": "teal", "label": "Teal" },
+            { "value": "rose", "label": "Rose" },
+            { "value": "amber", "label": "Amber" },
+            { "value": "sky", "label": "Blue" },
+            { "value": "violet", "label": "Violet" },
+            { "value": "mint", "label": "Green" }
+          ],
+          "default": "teal"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Card title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "label",
+      "name": "Diagram label",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Label",
+          "default": "Label"
+        },
+        {
+          "type": "text",
+          "id": "sub",
+          "label": "Second line"
+        },
+        {
+          "type": "range",
+          "id": "x",
+          "label": "Dot position across the picture",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 80
+        },
+        {
+          "type": "range",
+          "id": "y",
+          "label": "Dot position down the picture",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        }
+      ]
+    },
+    {
+      "type": "list",
+      "name": "Do or don't list",
+      "settings": [
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "options": [
+            { "value": "dont", "label": "Don't (red crosses)" },
+            { "value": "do", "label": "Do (green ticks)" }
+          ],
+          "default": "do"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo",
+          "info": "Replaces the built-in photo."
+        },
+        {
+          "type": "select",
+          "id": "art",
+          "label": "Built-in photo",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "unclear-dont", "label": "Spice bowls" },
+            { "value": "unclear-do", "label": "Doctor with a patient" }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "What Helps"
+        },
+        {
+          "type": "textarea",
+          "id": "items",
+          "label": "Points",
+          "info": "One per line."
+        }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Journey step",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "search", "label": "Magnifier" },
+            { "value": "calendar", "label": "Calendar" },
+            { "value": "drop", "label": "Drop" },
+            { "value": "box", "label": "Box" },
+            { "value": "chart", "label": "Chart" },
+            { "value": "target", "label": "Target" },
+            { "value": "routine", "label": "Routine list" },
+            { "value": "doctor", "label": "Doctor" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "check", "label": "Tick" }
+          ],
+          "default": "search"
+        },
+        {
+          "type": "select",
+          "id": "tone",
+          "label": "Colour",
+          "options": [
+            { "value": "teal", "label": "Teal" },
+            { "value": "rose", "label": "Rose" },
+            { "value": "amber", "label": "Amber" },
+            { "value": "sky", "label": "Blue" },
+            { "value": "violet", "label": "Violet" },
+            { "value": "mint", "label": "Green" }
+          ],
+          "default": "teal"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Step"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "select",
+          "id": "link_to",
+          "label": "Step opens",
+          "options": [
+            { "value": "none", "label": "No link" },
+            { "value": "custom", "label": "Custom link below" },
+            { "value": "test", "label": "MARCEL OSMF Self-Check" },
+            { "value": "therapy", "label": "MARCEL OMR Therapy page" },
+            { "value": "foundation", "label": "Foundation Kit page" },
+            { "value": "advance", "label": "Advance Kit page" },
+            { "value": "journey", "label": "12-Week Care Journey" },
+            { "value": "consult", "label": "MARCEL OSMF Consultant booking" },
+            { "value": "specialists", "label": "Find an OSMF Specialist" },
+            { "value": "help", "label": "Get Help page" },
+            { "value": "products", "label": "All products" },
+            { "value": "whatsapp", "label": "WhatsApp chat" }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Custom link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel photo cards"
+    }
+  ]
+}
+{% endschema %}

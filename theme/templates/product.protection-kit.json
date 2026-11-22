@@ -15,33 +15,34 @@
         "feature_1": {
           "type": "perk",
           "settings": {
-            "icon": "target",
-            "text": "Foundation Kit for Stage 1 or 2, Advance Kit for Stage 3 or 4"
+            "icon": "check",
+            "text": "MARCEL OraLis Herbal Mouthwash, 250 mL"
           }
         },
         "feature_2": {
           "type": "perk",
           "settings": {
             "icon": "check",
-            "text": "Includes MARCEL Smile Toothpaste"
+            "text": "MARCEL Smile Therapeutic Toothpaste, 30 g"
           }
         },
         "feature_3": {
           "type": "perk",
           "settings": {
             "icon": "clock",
-            "text": "A structured daily routine"
+            "text": "A simple daily oral-care routine"
           }
         },
         "feature_4": {
           "type": "perk",
           "settings": {
-            "icon": "calendar",
-            "text": "Organised around a 12-week care journey"
+            "icon": "doctor",
+            "text": "Use each product according to its label directions"
           }
         },
         "feature_5": {
           "type": "perk",
+          "disabled": true,
           "settings": {
             "icon": "doctor",
             "text": "Use as advised by a healthcare professional"
@@ -66,7 +67,7 @@
       "settings": {
         "headline": "",
         "supporting": "Care beyond teeth and gums",
-        "intro": "<p><strong>A thoughtful addition to your daily oral-care routine.</strong></p><p>MARCEL OMR Therapy Protection Kit combines MARCEL OraLis Herbal Mouthwash and MARCEL Smile Therapeutic Toothpaste in one convenient kit for everyday oral hygiene.</p>",
+        "intro": "<p><strong>A thoughtful addition to your daily oral-care routine.</strong></p><p>The MARCEL OMR Therapy Protection Kit combines MARCEL OraLis Herbal Mouthwash and MARCEL Smile Therapeutic Toothpaste in one convenient kit for everyday oral hygiene.</p>",
         "details": "",
         "how_lines": "",
         "safety": "",
@@ -463,7 +464,7 @@
           "type": "step",
           "settings": {
             "title": "Brush with MARCEL Smile",
-            "text": "Brush thoroughly for <strong>at least two minutes</strong>. Preferably use it <strong>twice daily</strong>, or as directed by your dental or healthcare professional. <em>Do not swallow.</em>",
+            "text": "Brush thoroughly for <strong>at least two minutes</strong>. Preferably use it <strong>twice daily</strong>, or as directed by your dental or healthcare professional. Follow the product label. <em>Do not swallow.</em>",
             "art": "brush"
           }
         },
@@ -471,7 +472,7 @@
           "type": "step",
           "settings": {
             "title": "Rinse with MARCEL OraLis",
-            "text": "Rinse with <strong>10 mL</strong>, about <strong>2 capfuls</strong>, for <strong>30 to 60 seconds</strong>, then spit out. <em>Do not swallow.</em>",
+            "text": "Measure <strong>10 mL</strong> (<strong>one capful</strong>). Rinse around your mouth for <strong>20 to 30 seconds</strong>, then spit out. <em>Do not swallow.</em>",
             "art": "rinse"
           }
         },
@@ -479,7 +480,7 @@
           "type": "step",
           "settings": {
             "title": "Keep Up the Routine",
-            "text": "Use MARCEL OraLis <strong>twice daily</strong> or as directed by an Ayurvedic physician. Keep brushing regularly and cleaning between your teeth.",
+            "text": "Use MARCEL OraLis <strong>twice daily</strong> or as directed by an Ayurvedic physician. Continue regular brushing and cleaning between your teeth.",
             "art": "repeat"
           }
         }
@@ -530,11 +531,18 @@
             "value": "MARCEL Smile Therapeutic Toothpaste, 30 g"
           }
         },
+        "row_mrps": {
+          "type": "row",
+          "settings": {
+            "label": "Individual Product MRPs",
+            "value": "MARCEL OraLis ₹165, MARCEL Smile ₹245"
+          }
+        },
         "row_4": {
           "type": "row",
           "settings": {
             "label": "Kit MRP",
-            "value": "[price] (inclusive of all taxes)"
+            "value": "₹410 (inclusive of all taxes)"
           }
         },
         "row_5": {
@@ -549,6 +557,7 @@
         "row_1",
         "row_2",
         "row_3",
+        "row_mrps",
         "row_4",
         "row_5"
       ],
@@ -614,12 +623,13 @@
         "question_1": {
           "type": "question",
           "settings": {
-            "question": "What is the MARCEL OMR Therapy Protection Kit?",
-            "answer": "<p>It is a two-product daily oral-care combination containing MARCEL OraLis Herbal Mouthwash (250 mL) and MARCEL Smile Therapeutic Toothpaste (30 g).</p>"
+            "question": "What is the Protection Kit?",
+            "answer": "<p>It is a two-product daily oral-care combination containing MARCEL OraLis Herbal Mouthwash (250 mL) and MARCEL Smile Therapeutic Toothpaste (30 g). The kit MRP is ₹410.</p>"
           }
         },
         "question_2": {
           "type": "question",
+          "disabled": true,
           "settings": {
             "question": "Who is this kit intended for?",
             "answer": "<p>It is a two-product daily oral-care kit. People who use gutkha, mawa, pan masala, supari or tobacco should make quitting their priority and arrange a professional oral examination. The kit is not a substitute for either step.</p>"
@@ -628,26 +638,27 @@
         "question_3": {
           "type": "question",
           "settings": {
-            "question": "Does the Protection Kit prevent OSMF?",
-            "answer": "<p>No. The kit has not been shown to prevent OSMF or reduce the risk of developing it. It should never be a reason to continue tobacco or areca nut use.</p>"
+            "question": "Does the kit prevent OSMF?",
+            "answer": "<p>No. The kit has not been established as preventing OSMF or reducing the risk of developing it. It should not be used to justify continuing tobacco or areca nut use.</p>"
           }
         },
         "question_4": {
           "type": "question",
           "settings": {
-            "question": "Can I continue using gutkha or supari if I use this kit?",
-            "answer": "<p>No oral-care product makes continued gutkha, tobacco or areca nut use safe. The important step is to stop using these products and to seek help if you find quitting difficult.</p>"
+            "question": "Can oral-care products make tobacco or areca nut use safe?",
+            "answer": "<p>No. No oral-care product makes continued gutkha, tobacco or areca nut use safe. The important step is to stop using these products and seek help if quitting is difficult.</p>"
           }
         },
         "question_5": {
           "type": "question",
           "settings": {
-            "question": "How do I use MARCEL OraLis?",
-            "answer": "<p>Rinse with 10 mL (about 2 capfuls) for 30 to 60 seconds, then spit out. Do not swallow. Use twice daily or as directed by an Ayurvedic physician, following the product label.</p>"
+            "question": "How should OraLis be used?",
+            "answer": "<p>Use 10 mL (one capful), rinse for 20 to 30 seconds and spit out. Do not swallow. Use twice daily or as directed by an Ayurvedic physician, following the current product label.</p>"
           }
         },
         "question_6": {
           "type": "question",
+          "disabled": true,
           "settings": {
             "question": "How do I use MARCEL Smile?",
             "answer": "<p>Brush thoroughly for at least two minutes, preferably twice daily or as directed by your dental or healthcare professional. Follow the directions on the pack and do not swallow.</p>"
@@ -655,6 +666,7 @@
         },
         "question_7": {
           "type": "question",
+          "disabled": true,
           "settings": {
             "question": "Should I wait until symptoms appear before getting examined?",
             "answer": "<p>No. If you use tobacco or areca nut products, take the risks seriously and ask a professional about an oral examination. Persistent burning, tightness, reduced mouth opening, ulcers or unusual red or white patches need prompt assessment.</p>"
@@ -663,8 +675,8 @@
         "question_8": {
           "type": "question",
           "settings": {
-            "question": "Can this kit replace OSMF treatment or a dental examination?",
-            "answer": "<p>No. It is a daily oral-care combination, not an OSMF treatment programme. It does not replace clinical assessment, diagnosis, quitting risk habits or any treatment recommended by a qualified professional.</p>"
+            "question": "Does this kit treat OSMF?",
+            "answer": "<p>No. It is a daily oral-care combination, not an OSMF treatment programme. It does not replace clinical assessment, diagnosis, risk-factor cessation or any treatment recommended by a qualified professional.</p>"
           }
         }
       },

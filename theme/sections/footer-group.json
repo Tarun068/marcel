@@ -18,28 +18,39 @@
           "type": "menu",
           "settings": {
             "heading": "Products",
-            "menu": "footer-shop"
+            "menu": "footer-shop",
+            "layout": "line"
           }
         },
         "menu_2": {
           "type": "menu",
           "settings": {
             "heading": "Get Help",
-            "menu": "footer-help"
+            "menu": "footer-help",
+            "layout": "line"
           }
         },
         "menu_3": {
           "type": "menu",
           "settings": {
             "heading": "Learn",
-            "menu": "footer-learn"
+            "menu": "footer-learn",
+            "layout": "line"
           }
         },
         "policies_1": {
           "type": "policies",
           "settings": {
-            "heading": "Policies",
+            "heading": "Legal",
             "menu": ""
+          }
+        },
+        "states_1": {
+          "type": "states",
+          "settings": {
+            "heading": "OSMF Specialist Centres",
+            "page": "/pages/find-osmf-specialist",
+            "all_label": "All OSMF Specialists"
           }
         }
       },
@@ -47,7 +58,8 @@
         "menu_1",
         "menu_2",
         "menu_3",
-        "policies_1"
+        "policies_1",
+        "states_1"
       ],
       "settings": {
         "logo": "shopify://shop_images/Updated_Logo_0ab6a006-c98e-4448-960a-6fc46aad7f96.png",
@@ -60,10 +72,16 @@
         "description": "A structured approach to oral mucosal care for people living with Oral Submucous Fibrosis (OSMF).",
         "show_contact": true,
         "whatsapp_label": "WhatsApp MARCEL Team",
+        "company_name": "JanSuta Pharmaceuticals",
+        "address": "D-405, Sun Central Place\nS.P. Ring Road, Ahmedabad-380058, Gujarat",
+        "gst": "GST No: 24AFGPB2002J1Z7",
+        "company_logo_show": true,
+        "social_heading": "Catch us on:",
         "disclaimer": "",
-        "ai_heading": "",
-        "ai_prompt": "",
-        "ai_tools": "",
+        "ai_heading": "Ask AI for a summary of MARCEL OMR Therapy:",
+        "ai_prompt": "Summarise what MARCEL OMR Therapy (marceltherapy.com) is, who it is for, and how its OSMF Self-Check, MARCEL OSMF Consultant and OSMF Specialist support work.",
+        "ai_tools": "chatgpt, perplexity, google, claude, grok",
+        "cookie_label": "Cookie preferences",
         "copyright": "© [year] MARCEL OMR Therapy by JanSuta Pharmaceuticals. MARCEL® is a registered trademark of JanSuta Pharmaceuticals.",
         "payment_labels": "UPI, Cards, Net banking, Cash on delivery"
       }
@@ -142,6 +160,7 @@
         "style": "navy",
         "eyebrow": "",
         "heading": "Need Guidance? Talk to MARCEL Team.",
+        "hide_on": "professionals",
         "text": "If you have questions about your oral health, your habits or the next steps, connect with MARCEL Team for guidance. A persistent ulcer or suspicious red or white patch needs prompt professional assessment.",
         "form": true,
         "button_1_label": "WhatsApp MARCEL Team",

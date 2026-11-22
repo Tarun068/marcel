@@ -44,7 +44,7 @@
               endif
             endif
           -%}
-          <div class="mt-mini-card{% if media != 'icon' %} mt-mini-card--{{ media }}{% endif %}{% if section.settings.card_style == 'benefit' or numbered %} mt-mini-card--benefit{% endif %}{% if numbered %} mt-mini-card--num{% endif %}{% if block.settings.highlight %} is-highlight{% endif %}" {{ block.shopify_attributes }}>
+          <div class="mt-mini-card{% if media != 'icon' %} mt-mini-card--{{ media }}{% endif %}{% if section.settings.card_style == 'benefit' or numbered %} mt-mini-card--benefit{% endif %}{% if numbered %} mt-mini-card--num{% endif %}{% if block.settings.highlight %} is-highlight{% endif %}{% if block.settings.wide %} is-wide{% endif %}" {{ block.shopify_attributes }}>
             {%- if has_photo -%}
               <span class="mt-card-photo">
                 {%- if block.settings.image != blank -%}
@@ -67,7 +67,36 @@
             {%- if block.settings.pill != blank -%}<span class="mt-card-pill">{{ block.settings.pill | escape }}</span>{%- endif -%}
             {%- if block.settings.link_label != blank -%}
               {%- capture href -%}{% render 'mt-link-to', key: block.settings.link_to, url: block.settings.link %}{%- endcapture -%}
-              <a class="mt-link mt-card-link" href="{{ href }}">{{ block.settings.link_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>
+              {%- assign href = href | strip -%}
+              <a class="mt-link mt-card-link" href="{{ href }}"{% if href contains '://' %} target="_blank" rel="noopener"{% endif %}>{{ block.settings.link_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>
+            {%- endif -%}
+            {%- if block.settings.downloads != blank -%}
+              {%- comment -%} Downloads: one per line, "Label | file". A bare file name is a theme asset, anything with a slash is a link. {%- endcomment -%}
+              {%- assign dl_rows = block.settings.downloads | newline_to_br | split: '<br />' -%}
+              <ul class="mt-card-files" role="list">
+                {%- for dl_row in dl_rows -%}
+                  {%- liquid
+                    assign dl_parts = dl_row | split: '|'
+                    assign dl_label = dl_parts[0] | strip
+                    assign dl_target = dl_parts[1] | strip
+                    if dl_target contains '/'
+                      assign dl_href = dl_target
+                    elsif dl_target != blank
+                      assign dl_href = dl_target | asset_url
+                    endif
+                    assign dl_ext = dl_target | split: '?' | first | split: '.' | last | upcase
+                  -%}
+                  {%- if dl_label != blank and dl_target != blank -%}
+                    <li>
+                      <a class="mt-card-file" href="{{ dl_href }}" target="_blank" rel="noopener">
+                        {%- render 'mt-icon', icon: 'file' -%}
+                        <span>{{ dl_label | escape }}</span>
+                        {%- if dl_ext.size > 1 and dl_ext.size < 5 -%}<small>{{ dl_ext }}</small>{%- endif -%}
+                      </a>
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
             {%- endif -%}
           </div>
         {%- endfor -%}
@@ -472,6 +501,10 @@
               "label": "Guide"
             },
             {
+              "value": "file",
+              "label": "Document"
+            },
+            {
               "value": "drop",
               "label": "Drop"
             },
@@ -623,7 +656,14 @@
           "type": "checkbox",
           "id": "highlight",
           "label": "Highlight",
-          "info": "Benefit cards only: shows this card in navy.",
+          "info": "Shows this card in a strong colour: navy for benefit cards, teal for the others.",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "wide",
+          "label": "Wide card",
+          "info": "Takes two columns on tablet and desktop.",
           "default": false
         },
         {
@@ -704,6 +744,12 @@
           "type": "url",
           "id": "link",
           "label": "Custom link"
+        },
+        {
+          "type": "textarea",
+          "id": "downloads",
+          "label": "Downloads",
+          "info": "One per line: label | file. A file name alone points to a PDF in the theme files, or paste a full link."
         }
       ]
     }

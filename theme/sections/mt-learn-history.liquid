@@ -1,0 +1,222 @@
+{{ 'mt-learn.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  Brand history (About page, client artwork 2026-11-21): a heading and the brand's steps in order, each with its
+  product picture, a date pill, a name and a line of text, joined by arrows, and a note under them. Built-in
+  pictures are cut from the client's artwork (assets/mt-brand-*.webp); every word is live text.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign count = section.blocks.size
+  assign extra = 'mt-lx mt-hist-sec'
+  if s.waves == 'top'
+    assign extra = extra | append: ' mt-lx-waves'
+  elsif s.waves == 'both'
+    assign extra = extra | append: ' mt-lx-waves mt-lx-waves--both'
+  endif
+-%}
+<section class="{% render 'mt-section-class', s: s, extra: extra %}"{% if s.anchor != blank %} id="{{ s.anchor | handleize }}"{% endif %}>
+  <div class="mt-wrap">
+    {%- render 'mt-learn-head', eyebrow: s.eyebrow, heading: s.heading, text: s.text, mark: s.heading_mark, center: s.center -%}
+
+    {%- if count > 0 -%}
+      <ol class="mt-hist-list" style="--hist-n: {{ count | at_most: 4 }}">
+        {%- for block in section.blocks -%}
+          {%- assign b = block.settings -%}
+          <li class="mt-hist-step" {{ block.shopify_attributes }}>
+            {%- if b.image != blank or b.art != 'none' -%}
+              <div class="mt-hist-pic">
+                {%- render 'mt-learn-pic', image: b.image, art: b.art, prefix: 'mt-', alt: b.alt, sizes: '(min-width: 1100px) 24vw, (min-width: 750px) 46vw, 40vw' -%}
+              </div>
+            {%- endif -%}
+            <div class="mt-hist-body">
+              {%- if b.when != blank -%}<span class="mt-hist-when">{{ b.when | escape }}</span>{%- endif -%}
+              {%- if b.title != blank -%}<h3 class="mt-h3 mt-hist-title">{{ b.title | escape }}</h3>{%- endif -%}
+              {%- if b.sub != blank -%}<p class="mt-hist-sub">{{ b.sub | escape }}</p>{%- endif -%}
+              {%- if b.text != blank -%}<p class="mt-hist-text">{{ b.text | escape }}</p>{%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    {%- endif -%}
+
+    {%- if s.note != blank -%}
+      <p class="mt-hist-note">
+        <span class="mt-hist-note-ico">{%- render 'mt-icon', icon: 'info' -%}</span>
+        <span>{{ s.note }}</span>
+      </p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel brand history",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Link name",
+      "info": "Links can jump here with #link-name, for example #brand-history."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Brand History"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Evolution of Our Oral Rinse Brand"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_mark",
+      "label": "Brush line under the heading",
+      "default": false
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Line under the heading",
+      "default": "A focused journey from Fibrex to MARCEL, and now to MARCEL OraShield."
+    },
+    {
+      "type": "checkbox",
+      "id": "center",
+      "label": "Centre the heading",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "note",
+      "label": "Note under the steps",
+      "default": "Historical names (Fibrex, MARCEL Poly Herbal Oral Rinse) may appear in legacy records, but are not current product names."
+    },
+    {
+      "type": "select",
+      "id": "waves",
+      "label": "Soft waves",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "top", "label": "Top corner" },
+        { "value": "both", "label": "Top and bottom corners" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "info": "The built-in product pictures sit on white.",
+      "options": [
+        { "value": "paper", "label": "White" },
+        { "value": "mist", "label": "Light" },
+        { "value": "tint", "label": "Tinted" }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "tight", "label": "Compact" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "normal"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Picture",
+          "info": "Replaces the built-in picture. A product on a white background works best."
+        },
+        {
+          "type": "select",
+          "id": "art",
+          "label": "Built-in picture",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "brand-fibrex", "label": "Fibrex pack" },
+            { "value": "brand-marcel", "label": "MARCEL pack, 2014" },
+            { "value": "brand-jansuta", "label": "MARCEL pack, JanSuta" },
+            { "value": "brand-orashield", "label": "MARCEL OraShield pack" }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Picture description",
+          "info": "For screen readers and search engines."
+        },
+        {
+          "type": "text",
+          "id": "when",
+          "label": "Dates",
+          "default": "2003 to 2014"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Name",
+          "default": "Name"
+        },
+        {
+          "type": "text",
+          "id": "sub",
+          "label": "Line under the name"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Marcel brand history",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": { "art": "brand-fibrex", "alt": "Fibrex oral rinse pack and bottle", "when": "2003 to 2014", "title": "Fibrex", "text": "Our original oral rinse, developed for oral mucosal care." }
+        },
+        {
+          "type": "step",
+          "settings": { "art": "brand-marcel", "alt": "MARCEL Poly Herbal Oral Rinse pack", "when": "2014 to 2019", "title": "MARCEL®", "sub": "(Poly Herbal Oral Rinse)", "text": "Fibrex was re-branded as MARCEL® (Poly Herbal Oral Rinse) in 2014." }
+        },
+        {
+          "type": "step",
+          "settings": { "art": "brand-jansuta", "alt": "MARCEL Poly Herbal Oral Rinse pack by JanSuta", "when": "2019 to 2025", "title": "MARCEL®", "sub": "(Poly Herbal Oral Rinse)", "text": "Continued as MARCEL® (Poly Herbal Oral Rinse) under JanSuta." }
+        },
+        {
+          "type": "step",
+          "settings": { "art": "brand-orashield", "alt": "MARCEL OraShield therapeutic oral rinse pack and bottle", "when": "From 1 January 2026", "title": "MARCEL OraShield", "text": "MARCEL® (Poly Herbal Oral Rinse) was re-branded as MARCEL OraShield, effective 1 January 2026." }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

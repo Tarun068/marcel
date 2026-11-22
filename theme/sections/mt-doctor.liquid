@@ -103,9 +103,17 @@
     endfor
   endif
 
+  comment
+    "Details under the name in the quote" off: the quote panel shows the name only (client, 2026-11-21).
+  endcomment
+  if s.quote_details == false
+    assign credit = ''
+  endif
+
   assign photo_alt = s.name
-  if s.name != blank and credit != blank
-    assign photo_alt = s.name | append: ', ' | append: credit
+  assign alt_detail = credit | default: s.qualification
+  if s.name != blank and alt_detail != blank
+    assign photo_alt = s.name | append: ', ' | append: alt_detail
   endif
 
   comment
@@ -485,6 +493,13 @@
       "id": "quote_credit",
       "label": "Line under the name",
       "info": "Leave empty to show the qualification, role tag, clinic and town."
+    },
+    {
+      "type": "checkbox",
+      "id": "quote_details",
+      "label": "Details under the name in the quote",
+      "info": "Untick to show only the name under the quote.",
+      "default": true
     },
     {
       "type": "header",

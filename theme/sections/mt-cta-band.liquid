@@ -48,6 +48,23 @@
 {%- capture btn1_link -%}{% render 'mt-link-to', key: section.settings.button_1_to, url: section.settings.button_1_link %}{%- endcapture -%}
 {%- capture btn2_link -%}{% render 'mt-link-to', key: section.settings.button_2_to, url: section.settings.button_2_link %}{%- endcapture -%}
 
+{%- liquid
+  # "Hide on these pages": page template names or page addresses, e.g. professionals (client, 2026-11-21).
+  assign band_hidden = false
+  if section.settings.hide_on != blank
+    assign hide_keys = section.settings.hide_on | downcase | split: ','
+    for hide_key in hide_keys
+      assign hide_key = hide_key | strip
+      if hide_key == blank
+        continue
+      endif
+      if hide_key == template.suffix or hide_key == page.handle
+        assign band_hidden = true
+      endif
+    endfor
+  endif
+-%}
+{%- unless band_hidden -%}
 <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-cta' %}">
   <div class="mt-wrap">
     <div class="mt-cta-band mt-on-dark{% if section.settings.style == 'navy' %} mt-cta-band--navy{% endif %}{% if section.settings.form %} mt-cta-band--form{% endif %}">
@@ -107,6 +124,7 @@
     </div>
   </div>
 </section>
+{%- endunless -%}
 
 {% schema %}
 {
@@ -344,6 +362,12 @@
       "label": "Page line label",
       "default": "Regarding",
       "info": "The message ends with this label and the page title."
+    },
+    {
+      "type": "text",
+      "id": "hide_on",
+      "label": "Hide on these pages",
+      "info": "Page template names or page addresses, separated by commas, for example professionals. Useful when this band sits in the footer."
     },
     {
       "type": "header",

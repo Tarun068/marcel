@@ -214,7 +214,7 @@
 /* Page hero with centred text (self-check) */
 .mt-phero--center .mt-phero-copy { max-width: 780px; margin-inline: auto; text-align: center; }
 .mt-phero--center .mt-crumbs, .mt-phero--center .mt-phero-btns { justify-content: center; }
-.mt-phero--center .mt-h1, .mt-phero--center .mt-lead, .mt-phero--center .mt-find-form { margin-inline: auto; }
+.mt-phero--center .mt-h1, .mt-phero--center .mt-lead, .mt-phero--center .mt-find-form { margin-inline: auto; }
 
 /* Benefit cards (Marcel icon cards > Card style > Benefit cards; client product page design, 2026-11-14):
    white cards with an aqua to blue top line, a round icon and a soft circle in the corner; Highlight turns a card navy. */
@@ -256,4 +256,29 @@
 .mt-ic-accent-green .mt-mini-card--benefit > .mt-i { background: color-mix(in srgb, #1E9E5A 10%, #fff); color: #137A45; }
 .mt-ic-accent-green .mt-card-num, .mt-ic-accent-green .mt-card-pill { background: color-mix(in srgb, #1E9E5A 12%, #fff); color: #137A45; }
 .mt-ic-note--warn { margin-top: 22px; padding: 14px 18px; border-radius: 14px; background: #FFF7E6; box-shadow: inset 0 0 0 1px #F2D49A; color: #5E4208; font-size: 14.5px; }
+
+/* Icon cards, Professionals page round (2026-11-21): downloads, wide cards and a teal highlight for plain cards. */
+.mt-card-files { display: grid; gap: 8px; margin: 6px 0 0; padding: 0; list-style: none; }
+.mt-card-file { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--mt-line); background: var(--mt-paper); color: var(--mt-ink); font-size: 15px; font-weight: 700; line-height: 1.35; transition: border-color .2s, transform .2s; }
+.mt-card-file:hover { border-color: var(--mt-aqua); transform: translateY(-1px); }
+.mt-card-file .mt-i { width: 22px; height: 22px; color: var(--mt-teal); stroke-width: 1.7; }
+.mt-card-file small { padding: 3px 8px; border-radius: 99px; background: color-mix(in srgb, var(--mt-aqua) 14%, #fff); color: var(--mt-teal); font-size: 11.5px; font-weight: 800; letter-spacing: .06em; }
+@media (min-width: 521px) {
+  .mt-cards > .mt-mini-card.is-wide { grid-column: span 2; }
+  .mt-mini-card.is-wide .mt-card-files { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+}
+.mt-mini-card.is-highlight:not(.mt-mini-card--benefit),
+.mt-bg-paper .mt-mini-card.is-highlight:not(.mt-mini-card--benefit) {
+  border-color: transparent; color: rgba(255, 255, 255, .88);
+  background: radial-gradient(circle at 100% 0, rgba(143, 227, 233, .26), transparent 46%), linear-gradient(150deg, var(--mt-teal), color-mix(in srgb, var(--mt-teal) 60%, #021f26));
+  box-shadow: 0 28px 48px -30px rgba(var(--mt-teal-rgb), .95);
+}
+.mt .mt-mini-card.is-highlight:not(.mt-mini-card--benefit) h3 { color: var(--mt-on-dark); }
+.mt-mini-card.is-highlight:not(.mt-mini-card--benefit) p { max-width: 62ch; color: rgba(255, 255, 255, .86); }
+.mt-mini-card.is-highlight:not(.mt-mini-card--benefit) > .mt-i { color: var(--mt-mint); }
+.mt-mini-card.is-highlight:not(.mt-mini-card--benefit) .mt-card-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; padding: 12px 22px; border-radius: 99px; background: var(--mt-paper); color: var(--mt-teal); font-size: 15px; box-shadow: 0 12px 24px -14px rgba(0, 0, 0, .5); }
+.mt-mini-card.is-highlight:not(.mt-mini-card--benefit) .mt-card-file { border-color: rgba(255, 255, 255, .22); background: rgba(255, 255, 255, .1); color: var(--mt-on-dark); }
+.mt-mini-card.is-highlight:not(.mt-mini-card--benefit) .mt-card-file:hover { border-color: var(--mt-mint); }
+.mt-mini-card.is-highlight:not(.mt-mini-card--benefit) .mt-card-file .mt-i { color: var(--mt-mint); }
+.mt-mini-card.is-highlight:not(.mt-mini-card--benefit) .mt-card-file small { background: rgba(255, 255, 255, .16); color: var(--mt-on-dark); }
 .mt-ic-note--warn strong { color: #8A5A00; }

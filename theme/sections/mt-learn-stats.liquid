@@ -1,0 +1,154 @@
+{{ 'mt-learn.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  Key insight band (Understand OSMF, client references 2026-11-21): a rounded teal band with up to four figures,
+  each with a picture, a large value and a short line.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+<section class="{% render 'mt-section-class', s: s, extra: 'mt-lx mt-ls' %}"{% if s.anchor != blank %} id="{{ s.anchor | handleize }}"{% endif %}>
+  <div class="mt-wrap">
+    <div class="mt-ls-band">
+      {%- if s.heading != blank -%}
+        <h2 class="{% if s.show_heading %}mt-ls-title{% else %}visually-hidden{% endif %}">{{ s.heading | escape }}</h2>
+      {%- endif -%}
+      <ul class="mt-ls-grid mt-ls-grid--{{ section.blocks.size }}" role="list">
+        {%- for block in section.blocks -%}
+          {%- assign b = block.settings -%}
+          <li class="mt-ls-item" {{ block.shopify_attributes }}>
+            {%- if b.image != blank or b.art != 'none' -%}
+              <div class="mt-ls-pic">{%- render 'mt-learn-pic', image: b.image, art: b.art, alt: '', sizes: '160px' -%}</div>
+            {%- elsif b.icon != 'none' -%}
+              <div class="mt-ls-pic mt-ls-pic--icon">{%- render 'mt-icon', icon: b.icon -%}</div>
+            {%- endif -%}
+            {%- if b.value != blank -%}<b class="mt-ls-value">{{ b.value | escape }}</b>{%- endif -%}
+            {%- if b.text != blank -%}<p class="mt-ls-text">{{ b.text | escape }}</p>{%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+      {%- if s.note != blank -%}<p class="mt-ls-note">{{ s.note | escape }}</p>{%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel insight band",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Link name"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Four Key Insights About OSMF"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_heading",
+      "label": "Show the heading",
+      "info": "When off, the heading is still read out by screen readers.",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Small print under the figures"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background around the band",
+      "options": [
+        { "value": "paper", "label": "White" },
+        { "value": "mist", "label": "Light" },
+        { "value": "tint", "label": "Tinted" }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "tight", "label": "Compact" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "tight"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Figure",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Picture",
+          "info": "A picture with a transparent background looks best. Replaces the built-in picture."
+        },
+        {
+          "type": "select",
+          "id": "art",
+          "label": "Built-in picture",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "stat-areca", "label": "Areca nut bowl" },
+            { "value": "stat-layers", "label": "Tissue layers" },
+            { "value": "stat-weeks", "label": "Calendar" },
+            { "value": "stat-stage", "label": "Target" }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon when there is no picture",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "target", "label": "Target" },
+            { "value": "calendar", "label": "Calendar" },
+            { "value": "layers", "label": "Layers" },
+            { "value": "chart", "label": "Chart" },
+            { "value": "leaf", "label": "Leaf" }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "87%"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel insight band"
+    }
+  ]
+}
+{% endschema %}

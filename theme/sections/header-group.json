@@ -47,6 +47,7 @@
         "cta_link": "",
         "show_whatsapp": false,
         "show_search": true,
+        "cart_label": "My Cart",
         "search_placeholder": "Search products, symptoms, guides",
         "search_popular_heading": "Popular",
         "search_menu": "",

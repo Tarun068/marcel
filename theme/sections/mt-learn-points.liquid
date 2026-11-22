@@ -1,0 +1,268 @@
+{{ 'mt-learn.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  Point cards (Professionals page, client artwork 2026-11-21): a heading with a pill label, cards with a coloured
+  icon tile, a title and a short text, and an optional closing band. Every word is live text.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign count = section.blocks.size
+  assign extra = 'mt-lx mt-pt-sec'
+  if s.waves == 'top'
+    assign extra = extra | append: ' mt-lx-waves'
+  elsif s.waves == 'both'
+    assign extra = extra | append: ' mt-lx-waves mt-lx-waves--both'
+  endif
+-%}
+<section class="{% render 'mt-section-class', s: s, extra: extra %}"{% if s.anchor != blank %} id="{{ s.anchor | handleize }}"{% endif %}>
+  <div class="mt-wrap">
+    {%- if s.eyebrow != blank or s.heading != blank or s.text != blank -%}
+      <div class="mt-sec-head mt-lx-head mt-pt-head{% if s.center %} mt-sec-head--center{% endif %}{% if s.heading_mark %} has-mark{% endif %}">
+        {%- if s.eyebrow != blank -%}
+          <span class="mt-pt-eyebrow">
+            {%- if s.eyebrow_icon != 'none' -%}<span class="mt-pt-eyebrow-ico">{%- render 'mt-icon', icon: s.eyebrow_icon -%}</span>{%- endif -%}
+            <span>{{ s.eyebrow | escape }}</span>
+          </span>
+        {%- endif -%}
+        {%- if s.heading != blank -%}<h2 class="mt-h2 mt-lx-title">{{ s.heading }}</h2>{%- endif -%}
+        {%- if s.text != blank -%}<p class="mt-lead mt-lx-lead mt-pt-lead">{{ s.text }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if count > 0 -%}
+      <ul class="mt-pt-grid" role="list" style="--pt-n: {{ count | at_most: 4 }}">
+        {%- for block in section.blocks -%}
+          {%- assign b = block.settings -%}
+          <li class="mt-pt-card mt-tone-{{ b.tone }}" {{ block.shopify_attributes }}>
+            <div class="mt-pt-top">
+              {%- if b.icon != 'none' -%}<span class="mt-pt-ico">{%- render 'mt-icon', icon: b.icon -%}</span>{%- endif -%}
+              {%- if b.title != blank -%}<h3 class="mt-h3 mt-pt-title">{{ b.title | escape }}</h3>{%- endif -%}
+            </div>
+            {%- if b.text != blank -%}<p class="mt-pt-text">{{ b.text | escape }}</p>{%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if s.band_label != blank or s.band_text != blank -%}
+      <div class="mt-pt-band">
+        {%- if s.band_icon != 'none' -%}<span class="mt-pt-band-ico">{%- render 'mt-icon', icon: s.band_icon -%}</span>{%- endif -%}
+        <div class="mt-pt-band-copy">
+          {%- if s.band_label != blank -%}<p class="mt-pt-band-label">{{ s.band_label | escape }}</p>{%- endif -%}
+          {%- if s.band_text != blank -%}<p class="mt-pt-band-text">{{ s.band_text }}</p>{%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel point cards",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Link name",
+      "info": "Links can jump here with #link-name, for example #challenges."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Pill label",
+      "default": "Why a Structured Approach Matters"
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_icon",
+      "label": "Pill icon",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "doctor", "label": "Stethoscope" },
+        { "value": "shield", "label": "Shield" },
+        { "value": "target", "label": "Target" },
+        { "value": "info", "label": "Info" },
+        { "value": "heart", "label": "Heart" }
+      ],
+      "default": "doctor"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Challenges in OSMF Care Management"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_mark",
+      "label": "Brush line under the heading",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Intro text"
+    },
+    {
+      "type": "checkbox",
+      "id": "center",
+      "label": "Centre the heading",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Closing band"
+    },
+    {
+      "type": "select",
+      "id": "band_icon",
+      "label": "Band icon",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "target", "label": "Target" },
+        { "value": "shield-plus", "label": "Shield" },
+        { "value": "check", "label": "Tick" },
+        { "value": "heart", "label": "Heart" },
+        { "value": "routine", "label": "Routine list" }
+      ],
+      "default": "target"
+    },
+    {
+      "type": "text",
+      "id": "band_label",
+      "label": "Band label",
+      "default": "The Need for a Structured Care Approach"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "band_text",
+      "label": "Band text",
+      "default": "MARCEL OMR Therapy brings together a structured care routine, stage-appropriate guidance and ongoing support as part of OSMF management."
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "waves",
+      "label": "Soft waves",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "top", "label": "Top corner" },
+        { "value": "both", "label": "Top and bottom corners" }
+      ],
+      "default": "top"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "paper", "label": "White" },
+        { "value": "mist", "label": "Light" },
+        { "value": "tint", "label": "Tinted" }
+      ],
+      "default": "mist"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "tight", "label": "Compact" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "normal"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "users", "label": "People" },
+            { "value": "doctor", "label": "Stethoscope" },
+            { "value": "person-care", "label": "Person with a care badge" },
+            { "value": "routine", "label": "Routine list" },
+            { "value": "chart-search", "label": "Chart with a magnifier" },
+            { "value": "chart", "label": "Chart" },
+            { "value": "calendar-check", "label": "Calendar with a tick" },
+            { "value": "target", "label": "Target" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "search", "label": "Magnifier" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "alert", "label": "Warning" },
+            { "value": "layers", "label": "Layers" },
+            { "value": "book", "label": "Book" }
+          ],
+          "default": "users"
+        },
+        {
+          "type": "select",
+          "id": "tone",
+          "label": "Colour",
+          "options": [
+            { "value": "sky", "label": "Blue" },
+            { "value": "amber", "label": "Amber" },
+            { "value": "violet", "label": "Violet" },
+            { "value": "teal", "label": "Teal" },
+            { "value": "aqua", "label": "Aqua" },
+            { "value": "mint", "label": "Green" },
+            { "value": "rose", "label": "Rose" }
+          ],
+          "default": "sky"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Card title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Marcel point cards",
+      "blocks": [
+        {
+          "type": "point",
+          "settings": { "icon": "users", "tone": "sky", "title": "Variation in Recommendations", "text": "Differences in clinical advice and care recommendations can make it challenging for patients to follow a consistent management pathway." }
+        },
+        {
+          "type": "point",
+          "settings": { "icon": "routine", "tone": "amber", "title": "Lack of a Defined Care Routine", "text": "Without a clearly structured routine, patients may find it difficult to understand and maintain the recommended components of care." }
+        },
+        {
+          "type": "point",
+          "settings": { "icon": "chart-search", "tone": "violet", "title": "Challenges in Monitoring Progress", "text": "Regular assessment of symptoms, mouth opening and functional changes is important for evaluating patient progress." }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

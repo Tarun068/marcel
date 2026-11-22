@@ -1,0 +1,294 @@
+{{ 'mt-learn.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  Text with a picture (Understand OSMF, client references 2026-11-21): heading, text, an optional callout and
+  link, a picture with a curved left edge or in a circle, and up to four small cards with round pictures below.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign has_media = false
+  if s.image != blank or s.art != 'none'
+    assign has_media = true
+  endif
+-%}
+<section class="{% render 'mt-section-class', s: s, extra: 'mt-lx mt-lm' %}"{% if s.anchor != blank %} id="{{ s.anchor | handleize }}"{% endif %}>
+  <div class="mt-wrap">
+    <div class="mt-lm-grid{% if has_media %} has-media mt-lm-grid--{{ s.media_side }}{% endif %}">
+      <div class="mt-lm-copy">
+        {%- render 'mt-learn-head', eyebrow: s.eyebrow, heading: s.heading, mark: s.heading_mark -%}
+        {%- if s.text != blank -%}<div class="mt-rte mt-lm-text">{{ s.text }}</div>{%- endif -%}
+        {%- if s.callout_text != blank -%}
+          <div class="mt-lm-callout">
+            {%- if s.callout_icon != 'none' -%}<span class="mt-lm-callout-ico">{%- render 'mt-icon', icon: s.callout_icon -%}</span>{%- endif -%}
+            <p>{{ s.callout_text }}</p>
+          </div>
+        {%- endif -%}
+        {%- if s.link_label != blank -%}
+          {%- capture href -%}{% render 'mt-link-to', key: s.link_to, url: s.link %}{%- endcapture -%}
+          <a class="mt-link mt-lm-link" href="{{ href | strip }}"{% if s.link_to == 'whatsapp' %} target="_blank" rel="noopener"{% endif %}>
+            {{- s.link_label | escape -}}
+            {%- render 'mt-icon', icon: 'arrow-right' -%}
+          </a>
+        {%- endif -%}
+      </div>
+      {%- if has_media -%}
+        <figure class="mt-lm-media mt-lm-media--{{ s.media_shape }}">
+          <div class="mt-lm-pic{% if s.media_shape == 'arc' %} mt-lx-arc{% elsif s.media_shape == 'circle' %} mt-lx-circle{% endif %}">
+            {%- render 'mt-learn-pic', image: s.image, art: s.art, alt: s.image_alt, sizes: '(min-width: 990px) 46vw, 100vw' -%}
+          </div>
+        </figure>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="mt-lm-feats mt-lm-feats--{{ section.blocks.size }}">
+        {%- for block in section.blocks -%}
+          {%- assign b = block.settings -%}
+          <div class="mt-lm-feat mt-tone-{{ b.tone }}" {{ block.shopify_attributes }}>
+            {%- if b.image != blank or b.art != 'none' -%}
+              <div class="mt-lm-feat-pic">{%- render 'mt-learn-pic', image: b.image, art: b.art, alt: '', sizes: '120px' -%}</div>
+            {%- endif -%}
+            <div class="mt-lm-feat-copy">
+              {%- if b.title != blank -%}<h3 class="mt-h3">{{ b.title | escape }}</h3>{%- endif -%}
+              {%- if b.text != blank -%}<p>{{ b.text | escape }}</p>{%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel text and picture",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Link name",
+      "info": "Links can jump here with #link-name, for example #what-is-osmf."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_mark",
+      "label": "Brush line under the heading",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "header",
+      "content": "Callout"
+    },
+    {
+      "type": "select",
+      "id": "callout_icon",
+      "label": "Callout icon",
+      "options": [
+        { "value": "shield-plus", "label": "Shield" },
+        { "value": "alert", "label": "Alert" },
+        { "value": "info", "label": "Info" },
+        { "value": "question", "label": "Question" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "shield-plus"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "callout_text",
+      "label": "Callout text",
+      "info": "Leave empty to hide the callout. Bold words stand out."
+    },
+    {
+      "type": "header",
+      "content": "Link"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link text",
+      "info": "Leave empty to hide the link."
+    },
+    {
+      "type": "select",
+      "id": "link_to",
+      "label": "Link opens",
+      "options": [
+        { "value": "custom", "label": "Custom link below" },
+        { "value": "test", "label": "MARCEL OSMF Self-Check" },
+        { "value": "therapy", "label": "MARCEL OMR Therapy page" },
+        { "value": "foundation", "label": "Foundation Kit page" },
+        { "value": "advance", "label": "Advance Kit page" },
+        { "value": "journey", "label": "12-Week Care Journey" },
+        { "value": "consult", "label": "MARCEL OSMF Consultant booking" },
+        { "value": "specialists", "label": "Find an OSMF Specialist" },
+        { "value": "help", "label": "Get Help page" },
+        { "value": "evidence", "label": "Clinical evidence page" },
+        { "value": "products", "label": "All products" },
+        { "value": "whatsapp", "label": "WhatsApp chat" }
+      ],
+      "default": "specialists"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Custom link"
+    },
+    {
+      "type": "header",
+      "content": "Picture"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Picture",
+      "info": "Replaces the built-in picture."
+    },
+    {
+      "type": "select",
+      "id": "art",
+      "label": "Built-in picture",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "what", "label": "Checking inside the mouth" },
+        { "value": "cancer", "label": "Unusual patch in the mouth" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Picture description",
+      "info": "Read out by screen readers."
+    },
+    {
+      "type": "select",
+      "id": "media_shape",
+      "label": "Picture shape",
+      "options": [
+        { "value": "arc", "label": "Curved left edge" },
+        { "value": "circle", "label": "Circle" },
+        { "value": "rounded", "label": "Rounded corners" }
+      ],
+      "default": "arc"
+    },
+    {
+      "type": "select",
+      "id": "media_side",
+      "label": "Picture side",
+      "options": [
+        { "value": "right", "label": "Right" },
+        { "value": "left", "label": "Left" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "paper", "label": "White" },
+        { "value": "mist", "label": "Light" },
+        { "value": "tint", "label": "Tinted" }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "tight", "label": "Compact" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "normal"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Small card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Round picture",
+          "info": "Replaces the built-in picture."
+        },
+        {
+          "type": "select",
+          "id": "art",
+          "label": "Built-in picture",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "what-burn", "label": "Spicy food" },
+            { "value": "what-open", "label": "Mouth opening" },
+            { "value": "what-areca", "label": "Areca nut" }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "select",
+          "id": "tone",
+          "label": "Colour",
+          "options": [
+            { "value": "teal", "label": "Teal" },
+            { "value": "rose", "label": "Rose" },
+            { "value": "amber", "label": "Amber" },
+            { "value": "sky", "label": "Blue" },
+            { "value": "violet", "label": "Violet" },
+            { "value": "mint", "label": "Green" }
+          ],
+          "default": "teal"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcel text and picture"
+    }
+  ]
+}
+{% endschema %}

@@ -2,19 +2,71 @@
 
 {%- capture wa_url -%}{% render 'mt-wa-url' %}{%- endcapture -%}
 {%- liquid
+  assign s = section.settings
   assign year = 'now' | date: '%Y'
-  assign copyright = section.settings.copyright | replace: '[year]', year
-  assign payments = section.settings.payment_labels | split: ','
+  assign copyright = s.copyright | replace: '[year]', year
+  assign payments = s.payment_labels | split: ','
+
+  # Menu blocks set to "Line of links" sit in the full-width lines under the top row (client, 2026-11-21);
+  # every other block is a column in the top row.
+  assign col_count = 0
+  assign line_count = 0
+  for block in section.blocks
+    if block.type == 'menu' and block.settings.layout == 'line'
+      assign line_count = line_count | plus: 1
+    else
+      assign col_count = col_count | plus: 1
+    endif
+  endfor
+
+  assign has_company = false
+  if s.company_name != blank or s.address != blank or s.gst != blank
+    assign has_company = true
+  endif
+  assign company_alt = s.company_name | default: 'JanSuta Pharmaceuticals'
 -%}
+
+{%- capture social_links -%}
+  {%- comment -%} Footer link first, then the matching link from Theme settings > Social media. {%- endcomment -%}
+  {%- assign socials = 'instagram:Instagram:instagram:social_instagram_link,linkedin:LinkedIn:linkedin:,x:X:x-logo:social_twitter_link,facebook:Facebook:facebook:social_facebook_link,youtube:YouTube:youtube:social_youtube_link' | split: ',' -%}
+  {%- for row in socials -%}
+    {%- liquid
+      assign parts = row | split: ':'
+      assign key = 'social_' | append: parts[0]
+      assign social_url = s[key]
+      if social_url == blank and parts[3] != blank
+        assign social_url = settings[parts[3]]
+      endif
+    -%}
+    {%- if social_url != blank -%}
+      <a href="{{ social_url }}" target="_blank" rel="noopener" aria-label="{{ parts[1] }}" title="{{ parts[1] }}">{%- render 'mt-icon', icon: parts[2] -%}</a>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- capture company_logo -%}
+  {%- if s.company_logo_show -%}
+    {%- if s.company_logo != blank -%}
+      {%- assign company_img = s.company_logo | image_url: width: 480 | image_tag: loading: 'lazy', alt: company_alt, class: 'mt-foot-company-img' -%}
+    {%- else -%}
+      {%- capture company_img -%}<img class="mt-foot-company-img" src="{{ 'mt-jansuta-logo.webp' | asset_url }}" width="405" height="160" alt="{{ company_alt | escape }}" loading="lazy">{%- endcapture -%}
+    {%- endif -%}
+    {%- if s.company_logo_link != blank -%}
+      <a class="mt-foot-company-logo" href="{{ s.company_logo_link }}" target="_blank" rel="noopener">{{ company_img }}</a>
+    {%- else -%}
+      <span class="mt-foot-company-logo">{{ company_img }}</span>
+    {%- endif -%}
+  {%- endif -%}
+{%- endcapture -%}
 
 <footer class="mt mt-footer">
   <div class="mt-wrap">
-    <div class="mt-foot-grid" style="--mt-foot-cols: {{ section.blocks.size | at_least: 1 }};">
+    <div class="mt-foot-top">
       <div class="mt-foot-brand">
         {%- liquid
           # Same trims as the header: cut the empty canvas around the logo so the drawing itself fills the height.
-          assign foot_logo = section.settings.logo
-          assign foot_h = section.settings.logo_height | default: 112
+          assign foot_logo = s.logo
+          assign foot_h = s.logo_height | default: 112
           assign f_left = 0
           assign f_top = 0
           assign f_width = 0
@@ -22,10 +74,10 @@
           assign foot_sizes = '200px'
           if foot_logo != blank
             assign foot_ratio = foot_logo.aspect_ratio
-            assign t_top = section.settings.logo_trim_top | default: 0
-            assign t_right = section.settings.logo_trim_right | default: 0
-            assign t_bottom = section.settings.logo_trim_bottom | default: 0
-            assign t_left = section.settings.logo_trim_left | default: 0
+            assign t_top = s.logo_trim_top | default: 0
+            assign t_right = s.logo_trim_right | default: 0
+            assign t_bottom = s.logo_trim_bottom | default: 0
+            assign t_left = s.logo_trim_left | default: 0
             assign keep_w = 100 | minus: t_left | minus: t_right
             assign keep_h = 100 | minus: t_top | minus: t_bottom
             assign trim_total = t_top | plus: t_right | plus: t_bottom | plus: t_left
@@ -41,93 +93,168 @@
           endif
         -%}
         <a
-          class="mt-foot-logo{% if section.settings.logo_white %} mt-foot-logo--white{% endif %}"
+          class="mt-foot-logo{% if s.logo_white %} mt-foot-logo--white{% endif %}"
           href="{{ routes.root_url }}"
           aria-label="{{ shop.name | escape }}"
           style="--mt-foot-logo-h: {{ foot_h }}px;"
         >
           {%- render 'mt-logo', image: foot_logo, light: true, tagline: true, sizes: foot_sizes, crop_left: f_left, crop_top: f_top, crop_width: f_width, crop_height: f_height -%}
         </a>
-        {%- if section.settings.description != blank -%}
-          <p>{{ section.settings.description | escape | newline_to_br }}</p>
-        {%- endif -%}
-        {%- if section.settings.show_contact -%}
-          <div class="mt-foot-contact">
-            {%- if settings.mt_phone != blank -%}
-              <a href="tel:{{ settings.mt_phone | remove: ' ' }}">
-                {%- render 'mt-icon', icon: 'phone' -%}
-                {{- settings.mt_phone | escape -}}
-              </a>
-            {%- endif -%}
-            {%- if settings.mt_email != blank -%}
-              <a href="mailto:{{ settings.mt_email }}">
-                {%- render 'mt-icon', icon: 'mail' -%}
-                {{- settings.mt_email | escape -}}
-              </a>
-            {%- endif -%}
-            {%- if settings.mt_whatsapp_number != blank and section.settings.whatsapp_label != blank -%}
-              <a href="{{ wa_url }}" target="_blank" rel="noopener">
-                {%- render 'mt-icon', icon: 'whatsapp' -%}
-                {{- section.settings.whatsapp_label | escape -}}
-              </a>
-            {%- endif -%}
-          </div>
+        {%- if s.description != blank -%}
+          <p>{{ s.description | escape | newline_to_br }}</p>
         {%- endif -%}
       </div>
 
-      {%- for block in section.blocks -%}
-        <div class="mt-foot-col" {{ block.shopify_attributes }}>
-          {%- if block.settings.heading != blank -%}
-            <b>{{ block.settings.heading | escape }}</b>
+      {%- if col_count > 0 -%}
+        <div class="mt-foot-cols">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'menu' and block.settings.layout == 'line' -%}{%- continue -%}{%- endif -%}
+            <div class="mt-foot-col mt-foot-col--{{ block.type }}" {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}<b class="mt-foot-head">{{ block.settings.heading | escape }}</b>{%- endif -%}
+              <div class="mt-foot-links">
+                {%- case block.type -%}
+                  {%- when 'menu' -%}
+                    {%- for link in block.settings.menu.links -%}
+                      <a href="{{ link.url }}"{% if link.url contains 'wa.me' %} target="_blank" rel="noopener"{% endif %}>{{ link.title | remove: '™' | escape }}</a>
+                    {%- endfor -%}
+                  {%- when 'policies' -%}
+                    {%- for policy in shop.policies -%}
+                      <a href="{{ policy.url }}">{{ policy.title | escape }}</a>
+                    {%- endfor -%}
+                    {%- if block.settings.menu != blank -%}
+                      {%- for link in block.settings.menu.links -%}
+                        <a href="{{ link.url }}"{% if link.url contains 'wa.me' %} target="_blank" rel="noopener"{% endif %}>{{ link.title | remove: '™' | escape }}</a>
+                      {%- endfor -%}
+                    {%- endif -%}
+                  {%- when 'states' -%}
+                    {%- liquid
+                      # States with OSMF Specialist Doctors: the list typed in the block, or every state found in the
+                      # osmf_specialist entries. Each opens the specialist finder for that state (it reads ?state=).
+                      assign finder = block.settings.page | default: '/pages/find-osmf-specialist'
+                      assign state_list = block.settings.states | newline_to_br | strip_newlines | replace: '<br />', '|'
+                      if state_list == blank
+                        for p in shop.metaobjects.osmf_specialist.values
+                          assign one_state = p.state.value | strip
+                          if one_state != blank
+                            assign state_list = state_list | append: one_state | append: '|'
+                          endif
+                        endfor
+                      endif
+                      assign states = state_list | split: '|' | uniq | sort
+                    -%}
+                    {%- for one_state in states -%}
+                      {%- assign one_state = one_state | strip -%}
+                      {%- if one_state != blank -%}
+                        <a href="{{ finder }}?state={{ one_state | url_encode }}#specialist-search">{{ one_state | escape }}</a>
+                      {%- endif -%}
+                    {%- endfor -%}
+                    {%- if block.settings.all_label != blank -%}
+                      <a class="mt-foot-all" href="{{ finder }}#specialist-search">{{ block.settings.all_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</a>
+                    {%- endif -%}
+                {%- endcase -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if s.show_contact or has_company -%}
+        <div class="mt-foot-info">
+          {%- if s.show_contact -%}
+            <div class="mt-foot-contact">
+              {%- if settings.mt_phone != blank -%}
+                <a class="mt-foot-phone" href="tel:{{ settings.mt_phone | remove: ' ' }}">
+                  {%- render 'mt-icon', icon: 'phone' -%}
+                  {{- settings.mt_phone | escape -}}
+                </a>
+              {%- endif -%}
+              {%- if settings.mt_email != blank -%}
+                <a href="mailto:{{ settings.mt_email }}">
+                  {%- render 'mt-icon', icon: 'mail' -%}
+                  {{- settings.mt_email | escape -}}
+                </a>
+              {%- endif -%}
+              {%- if settings.mt_whatsapp_number != blank and s.whatsapp_label != blank -%}
+                <a href="{{ wa_url }}" target="_blank" rel="noopener">
+                  {%- render 'mt-icon', icon: 'whatsapp' -%}
+                  {{- s.whatsapp_label | escape -}}
+                </a>
+              {%- endif -%}
+            </div>
           {%- endif -%}
-          {%- case block.type -%}
-            {%- when 'menu' -%}
-              {%- for link in block.settings.menu.links -%}
-                <a href="{{ link.url }}"{% if link.url contains 'wa.me' %} target="_blank" rel="noopener"{% endif %}>{{ link.title | remove: '™' | escape }}</a>
-              {%- endfor -%}
-            {%- when 'policies' -%}
-              {%- for policy in shop.policies -%}
-                <a href="{{ policy.url }}">{{ policy.title | escape }}</a>
-              {%- endfor -%}
-              {%- if block.settings.menu != blank -%}
+          {%- if has_company -%}
+            <address class="mt-foot-company">
+              {%- if s.company_name != blank -%}<strong>{{ s.company_name | escape }}</strong>{%- endif -%}
+              {%- if s.address != blank -%}<span>{{ s.address | escape | newline_to_br }}</span>{%- endif -%}
+              {%- if s.gst != blank -%}<span class="mt-foot-gst">{{ s.gst | escape }}</span>{%- endif -%}
+            </address>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if line_count > 0 -%}
+      <div class="mt-foot-lines">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'menu' and block.settings.layout == 'line' -%}
+            <div class="mt-foot-line" {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}<b class="mt-foot-head">{{ block.settings.heading | escape }}</b>{%- endif -%}
+              <div class="mt-foot-line-links">
                 {%- for link in block.settings.menu.links -%}
                   <a href="{{ link.url }}"{% if link.url contains 'wa.me' %} target="_blank" rel="noopener"{% endif %}>{{ link.title | remove: '™' | escape }}</a>
                 {%- endfor -%}
-              {%- endif -%}
-          {%- endcase -%}
-        </div>
-      {%- endfor -%}
-    </div>
-
-    {%- if section.settings.disclaimer != blank -%}
-      <div class="mt-disclaimer">{{ section.settings.disclaimer }}</div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
     {%- endif -%}
 
-    {%- if section.settings.ai_heading != blank -%}
-      {%- liquid
-        assign ai_prompt = section.settings.ai_prompt | url_encode | replace: '+', '%20'
-        assign ai_list = section.settings.ai_tools | split: ','
-      -%}
-      <div class="mt-ai-row">
-        <span>{{ section.settings.ai_heading | escape }}</span>
-        <div class="mt-ai-links">
-          {%- for tool in ai_list -%}
-            {%- assign t = tool | strip | downcase -%}
-            {%- case t -%}
-              {%- when 'chatgpt' -%}<a href="https://chatgpt.com/?q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">ChatGPT</a>
-              {%- when 'perplexity' -%}<a href="https://www.perplexity.ai/search?q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">Perplexity</a>
-              {%- when 'claude' -%}<a href="https://claude.ai/new?q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">Claude</a>
-              {%- when 'google' -%}<a href="https://www.google.com/search?udm=50&q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">Google AI Mode</a>
-              {%- when 'grok' -%}<a href="https://grok.com/?q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">Grok</a>
-            {%- endcase -%}
-          {%- endfor -%}
-        </div>
+    {%- if social_links != blank or s.ai_heading != blank or company_logo != blank -%}
+      <div class="mt-foot-connect">
+        {%- if social_links != blank -%}
+          <div class="mt-foot-social">
+            {%- if s.social_heading != blank -%}<span class="mt-foot-connect-label">{{ s.social_heading | escape }}</span>{%- endif -%}
+            <div class="mt-foot-social-links">{{ social_links }}</div>
+          </div>
+        {%- endif -%}
+
+        {%- if s.ai_heading != blank -%}
+          {%- liquid
+            assign ai_prompt = s.ai_prompt | url_encode | replace: '+', '%20'
+            assign ai_list = s.ai_tools | split: ','
+          -%}
+          <div class="mt-ai-row">
+            <span class="mt-foot-connect-label">{{ s.ai_heading | escape }}</span>
+            <div class="mt-ai-links">
+              {%- for tool in ai_list -%}
+                {%- assign t = tool | strip | downcase -%}
+                {%- case t -%}
+                  {%- when 'chatgpt' -%}<a href="https://chatgpt.com/?q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">{%- render 'mt-icon', icon: 'sparkle' -%}ChatGPT</a>
+                  {%- when 'perplexity' -%}<a href="https://www.perplexity.ai/search?q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">{%- render 'mt-icon', icon: 'sparkle' -%}Perplexity</a>
+                  {%- when 'claude' -%}<a href="https://claude.ai/new?q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">{%- render 'mt-icon', icon: 'sparkle' -%}Claude</a>
+                  {%- when 'google' -%}<a href="https://www.google.com/search?udm=50&q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">{%- render 'mt-icon', icon: 'sparkle' -%}Google AI</a>
+                  {%- when 'grok' -%}<a href="https://grok.com/?q={{ ai_prompt }}" target="_blank" rel="noopener nofollow">{%- render 'mt-icon', icon: 'sparkle' -%}Grok</a>
+                {%- endcase -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        {{ company_logo }}
       </div>
+    {%- endif -%}
+
+    {%- if s.disclaimer != blank -%}
+      <div class="mt-disclaimer">{{ s.disclaimer }}</div>
     {%- endif -%}
 
     <div class="mt-foot-bottom">
       <span>{{ copyright }}</span>
-      {%- if section.settings.payment_labels != blank -%}
+      {%- if s.cookie_label != blank -%}
+        <button type="button" class="mt-foot-cookie" data-mt-cookie hidden>{{ s.cookie_label | escape }}</button>
+      {%- endif -%}
+      {%- if s.payment_labels != blank -%}
         <div class="mt-pay-row" aria-label="Payment options">
           {%- for p in payments -%}
             <span>{{ p | strip | escape }}</span>
@@ -138,6 +265,22 @@
   </div>
 </footer>
 
+{%- if s.cookie_label != blank -%}
+  <script>
+    /* "Cookie preferences": shown only when Shopify's cookie banner is on (Settings > Customer privacy). */
+    (function () {
+      var button = document.querySelector('[data-mt-cookie]');
+      if (!button) return;
+      function banner() { return window.privacyBanner && typeof window.privacyBanner.showPreferences === 'function'; }
+      function check() { if (banner()) button.hidden = false; }
+      check();
+      window.addEventListener('load', check);
+      setTimeout(check, 3000);
+      button.addEventListener('click', function () { if (banner()) window.privacyBanner.showPreferences(); });
+    })();
+  </script>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "Marcel footer",
@@ -147,7 +290,7 @@
       "footer"
     ]
   },
-  "max_blocks": 6,
+  "max_blocks": 8,
   "settings": [
     {
       "type": "image_picker",
@@ -236,6 +379,85 @@
       "default": "WhatsApp MARCEL Team"
     },
     {
+      "type": "header",
+      "content": "Company details"
+    },
+    {
+      "type": "text",
+      "id": "company_name",
+      "label": "Company name",
+      "default": "JanSuta Pharmaceuticals"
+    },
+    {
+      "type": "textarea",
+      "id": "address",
+      "label": "Address",
+      "default": "D-405, Sun Central Place\nS.P. Ring Road, Ahmedabad-380058, Gujarat"
+    },
+    {
+      "type": "text",
+      "id": "gst",
+      "label": "Registration line",
+      "info": "For example the GST number.",
+      "default": "GST No: 24AFGPB2002J1Z7"
+    },
+    {
+      "type": "checkbox",
+      "id": "company_logo_show",
+      "label": "Show the company logo",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "company_logo",
+      "label": "Company logo",
+      "info": "Leave empty to use the JanSuta Pharmaceuticals logo. It sits on a white card."
+    },
+    {
+      "type": "url",
+      "id": "company_logo_link",
+      "label": "Company logo link"
+    },
+    {
+      "type": "header",
+      "content": "Catch us on"
+    },
+    {
+      "type": "text",
+      "id": "social_heading",
+      "label": "Heading",
+      "default": "Catch us on:"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add the page links below. Empty ones are hidden. Instagram, X, Facebook and YouTube also use the links in Theme settings > Social media."
+    },
+    {
+      "type": "url",
+      "id": "social_instagram",
+      "label": "Instagram"
+    },
+    {
+      "type": "url",
+      "id": "social_linkedin",
+      "label": "LinkedIn"
+    },
+    {
+      "type": "url",
+      "id": "social_x",
+      "label": "X"
+    },
+    {
+      "type": "url",
+      "id": "social_facebook",
+      "label": "Facebook"
+    },
+    {
+      "type": "url",
+      "id": "social_youtube",
+      "label": "YouTube"
+    },
+    {
       "type": "richtext",
       "id": "disclaimer",
       "label": "Disclaimer",
@@ -266,11 +488,22 @@
       "default": "chatgpt, perplexity, google, claude, grok"
     },
     {
+      "type": "header",
+      "content": "Bottom line"
+    },
+    {
       "type": "text",
       "id": "copyright",
       "label": "Copyright text",
       "info": "[year] is replaced with the current year.",
       "default": "© [year] MARCEL OMR Therapy by JanSuta Pharmaceuticals. MARCEL® is a registered trademark of JanSuta Pharmaceuticals."
+    },
+    {
+      "type": "text",
+      "id": "cookie_label",
+      "label": "Cookie preferences link",
+      "info": "Shown only when Shopify's cookie banner is on (Settings > Customer privacy). Leave empty to never show it.",
+      "default": "Cookie preferences"
     },
     {
       "type": "text",
@@ -296,6 +529,16 @@
           "id": "menu",
           "label": "Menu",
           "default": "footer"
+        },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Show as",
+          "options": [
+            { "value": "column", "label": "Column in the top row" },
+            { "value": "line", "label": "Line of links under the top row" }
+          ],
+          "default": "column"
         }
       ]
     },
@@ -318,6 +561,40 @@
           "id": "menu",
           "label": "Extra links",
           "info": "Optional, shown after the policies."
+        }
+      ]
+    },
+    {
+      "type": "states",
+      "name": "Specialist states column",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Lists the states that have OSMF Specialist Doctors (from the osmf_specialist entries). Each state opens the specialist finder for that state."
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "OSMF Specialist Centres"
+        },
+        {
+          "type": "text",
+          "id": "page",
+          "label": "Specialist finder page",
+          "default": "/pages/find-osmf-specialist"
+        },
+        {
+          "type": "textarea",
+          "id": "states",
+          "label": "States",
+          "info": "Optional. One per line, to list these instead of the states found in the specialist entries."
+        },
+        {
+          "type": "text",
+          "id": "all_label",
+          "label": "Link to all specialists",
+          "default": "All OSMF Specialists"
         }
       ]
     }

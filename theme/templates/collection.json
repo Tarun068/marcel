@@ -30,6 +30,7 @@
       "type": "mt-main-collection",
       "settings": {
         "per_page": 24,
+        "pinned": "marcel-omr-therapy-protection-kit\nmarcel-omr-therapy™-foundation-kit\nmarcel-omr-therapy™-advance",
         "show_filters": true,
         "filter_label": "Filter products",
         "all_label": "All",

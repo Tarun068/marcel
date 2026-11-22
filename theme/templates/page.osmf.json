@@ -29,8 +29,823 @@
         "art": "osmf"
       }
     },
+    "nav": {
+      "type": "mt-page-nav",
+      "blocks": {
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "What Is OSMF",
+            "target": "what"
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Early Signs",
+            "target": "signs"
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Inside the Mouth",
+            "target": "inside"
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Risk Factors",
+            "target": "risks"
+          }
+        },
+        "link_5": {
+          "type": "link",
+          "settings": {
+            "label": "Stages",
+            "target": "stages"
+          }
+        },
+        "link_6": {
+          "type": "link",
+          "settings": {
+            "label": "What Helps",
+            "target": "helps"
+          }
+        },
+        "link_7": {
+          "type": "link",
+          "settings": {
+            "label": "Cancer Risk",
+            "target": "cancer"
+          }
+        },
+        "link_8": {
+          "type": "link",
+          "settings": {
+            "label": "Care Options",
+            "target": "care"
+          }
+        },
+        "link_9": {
+          "type": "link",
+          "settings": {
+            "label": "FAQs",
+            "target": "faq"
+          }
+        }
+      },
+      "block_order": [
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "link_5",
+        "link_6",
+        "link_7",
+        "link_8",
+        "link_9"
+      ],
+      "settings": {
+        "label": "On this page"
+      }
+    },
+    "what": {
+      "type": "mt-learn-media",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "art": "what-burn",
+            "tone": "rose",
+            "title": "Burning Sensation",
+            "text": "While eating spicy food"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "art": "what-open",
+            "tone": "sky",
+            "title": "Reduced Mouth Opening",
+            "text": "Over time"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "art": "what-areca",
+            "tone": "mint",
+            "title": "Key Risk Factors",
+            "text": "Areca nut products such as supari, gutkha and paan masala"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ],
+      "settings": {
+        "anchor": "what-is-osmf",
+        "heading": "What Is OSMF?",
+        "heading_mark": true,
+        "text": "<p><strong>Oral Submucous Fibrosis (OSMF)</strong> is a long-term condition in which tissues inside the mouth can become stiff and less flexible. It may cause burning while eating spicy food and gradually limit how widely the mouth opens.</p>",
+        "callout_icon": "shield-plus",
+        "link_to": "specialists",
+        "art": "what",
+        "image_alt": "A man gently pulling down his lower lip to look inside his mouth",
+        "media_shape": "arc",
+        "media_side": "right",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "insights": {
+      "type": "mt-learn-stats",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "art": "stat-areca",
+            "icon": "none",
+            "value": "87%",
+            "text": "of OSMF cases are linked to areca nut and tobacco use"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "art": "stat-layers",
+            "icon": "none",
+            "value": "3 layers",
+            "text": "of oral tissue can be affected: mucosal, submucosal and muscular planes"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "art": "stat-weeks",
+            "icon": "none",
+            "value": "6 to 8 weeks",
+            "text": "typical timeframe for a first noticeable improvement with consistent care"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "art": "stat-stage",
+            "icon": "none",
+            "value": "Stage 1",
+            "text": "is the optimal point of intervention, with outcomes significantly better than at Stage 3"
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4"
+      ],
+      "settings": {
+        "anchor": "key-insights",
+        "heading": "Four Key Insights About OSMF",
+        "show_heading": false,
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight"
+      }
+    },
+    "signs": {
+      "type": "mt-learn-cards",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "art": "sign-burn",
+            "icon": "none",
+            "tone": "teal",
+            "title": "Burning Sensation",
+            "text": "A burning feeling while eating spicy or hot food, often one of the earliest signs."
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "art": "sign-tight",
+            "icon": "none",
+            "tone": "teal",
+            "title": "Cheek Tightness",
+            "text": "Tightness or stiffness inside the cheeks. The mouth may feel like it doesn’t stretch normally."
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "art": "sign-open",
+            "icon": "none",
+            "tone": "teal",
+            "title": "Restricted Opening",
+            "text": "Difficulty opening the mouth fully. Yawning or eating feels harder than before."
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "art": "sign-patches",
+            "icon": "none",
+            "tone": "teal",
+            "title": "Pale or White Patches",
+            "text": "A pale or whitish look inside the cheeks, where the lining has lost its normal colour."
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ],
+      "settings": {
+        "anchor": "signs",
+        "eyebrow": "Early Signs",
+        "heading": "Early Signs to Watch",
+        "heading_mark": true,
+        "text": "Many people notice these signs but don’t connect them to OSMF. Recognising them early gives you the best chance to act.",
+        "head_art": "signs-head",
+        "card_style": "photo",
+        "columns": 4,
+        "picture_edge": "straight",
+        "numbered": false,
+        "aside_art": "none",
+        "note_icon": "target",
+        "callout_icon": "question",
+        "callout_title": "Why Does My Mouth Burn When I Eat Spicy Food?",
+        "callout_text": "Burning can happen when the lining of the mouth is irritated or sensitive. It can have several causes, including OSMF, so burning alone does not confirm the condition. If it keeps returning or occurs with cheek tightness or reduced mouth opening, arrange an assessment.",
+        "link_to": "test",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "inside": {
+      "type": "mt-learn-cards",
+      "blocks": {
+        "block_1": {
+          "type": "card",
+          "settings": {
+            "art": "change-bands",
+            "icon": "s-bands",
+            "tone": "rose",
+            "title": "Fibrotic Bands Develop",
+            "text": "Excess collagen builds up beneath the mouth lining, forming firm, fibrous bands within the oral tissues."
+          }
+        },
+        "block_2": {
+          "type": "card",
+          "settings": {
+            "art": "change-collagen",
+            "icon": "layers",
+            "tone": "amber",
+            "title": "Collagen Accumulates",
+            "text": "The normal balance between collagen production and breakdown becomes disturbed, allowing dense connective tissue to build up."
+          }
+        },
+        "block_3": {
+          "type": "card",
+          "settings": {
+            "art": "change-stiff",
+            "icon": "lock",
+            "tone": "amber",
+            "title": "Tissue Becomes Stiff",
+            "text": "As fibrosis increases, the normally flexible oral tissues become less elastic and harder to stretch."
+          }
+        },
+        "block_4": {
+          "type": "card",
+          "settings": {
+            "art": "change-vessels",
+            "icon": "vessel",
+            "tone": "teal",
+            "title": "Small Blood Vessels Are Affected",
+            "text": "Fibrotic changes can narrow or reduce small blood vessels, affecting circulation within the tissues."
+          }
+        },
+        "block_5": {
+          "type": "card",
+          "settings": {
+            "art": "change-deeper",
+            "icon": "layers",
+            "tone": "violet",
+            "title": "Deeper Tissues May Be Involved",
+            "text": "Fibrosis can extend beyond the surface lining into underlying connective tissues and, in advanced cases, may affect nearby muscle."
+          }
+        },
+        "block_6": {
+          "type": "card",
+          "settings": {
+            "art": "change-movement",
+            "icon": "arrows-h",
+            "tone": "rose",
+            "title": "Normal Mouth Movements Become Restricted",
+            "text": "As tissues stiffen and fibrous bands tighten, mouth opening and the movement of the cheeks and tongue can become increasingly difficult."
+          }
+        },
+        "block_7": {
+          "type": "label",
+          "settings": {
+            "title": "Mouth Lining",
+            "sub": "(mucosa)",
+            "x": 80,
+            "y": 14
+          }
+        },
+        "block_8": {
+          "type": "label",
+          "settings": {
+            "title": "Fibrous Tissue",
+            "sub": "(collagen build-up)",
+            "x": 73,
+            "y": 47
+          }
+        },
+        "block_9": {
+          "type": "label",
+          "settings": {
+            "title": "Small Blood Vessels",
+            "sub": "(affected)",
+            "x": 83,
+            "y": 88
+          }
+        }
+      },
+      "block_order": [
+        "block_1",
+        "block_2",
+        "block_3",
+        "block_4",
+        "block_5",
+        "block_6",
+        "block_7",
+        "block_8",
+        "block_9"
+      ],
+      "settings": {
+        "anchor": "inside-the-mouth",
+        "eyebrow": "OSMF Affects Deeper Tissues",
+        "heading": "What Really Changes Inside the Mouth?",
+        "heading_mark": true,
+        "text": "OSMF is not just a surface problem. It can cause gradual changes in the structure, function and health of the oral tissues.",
+        "head_art": "none",
+        "card_style": "icon",
+        "columns": 3,
+        "picture_edge": "straight",
+        "numbered": true,
+        "aside_art": "layers",
+        "aside_alt": "Illustration of the layers inside the cheek: the mouth lining, fibrous tissue beneath it and small blood vessels",
+        "note_icon": "target",
+        "note_title": "Why This Matters",
+        "note_text": "OSMF can progressively affect the flexibility and function of oral tissues. Recognising changes and seeking professional assessment are important steps in managing the condition.",
+        "callout_icon": "question",
+        "link_to": "test",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "risks": {
+      "type": "mt-learn-cards",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "art": "risk-areca",
+            "icon": "none",
+            "tone": "mint",
+            "title": "Areca Nut / Supari & Chewing Products",
+            "text": "Supari, gutkha, pan masala and mawa."
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "art": "risk-tobacco",
+            "icon": "none",
+            "tone": "amber",
+            "title": "Tobacco Products",
+            "text": "Khaini, chewing tobacco, tobacco with gutkha or pan masala, bidi and cigarettes."
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "art": "risk-chewing",
+            "icon": "none",
+            "tone": "rose",
+            "title": "Frequent & Long-Term Chewing",
+            "text": "The more often and longer you chew, the greater the risk."
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "art": "risk-genetic",
+            "icon": "none",
+            "tone": "violet",
+            "title": "Genetic Susceptibility",
+            "text": "Some people may be more vulnerable."
+          }
+        },
+        "card_5": {
+          "type": "card",
+          "settings": {
+            "art": "risk-hygiene",
+            "icon": "none",
+            "tone": "sky",
+            "title": "Poor Oral Hygiene",
+            "text": "Can contribute to poor overall oral health."
+          }
+        },
+        "card_6": {
+          "type": "card",
+          "settings": {
+            "art": "risk-nutrition",
+            "icon": "none",
+            "tone": "mint",
+            "title": "Poor Nutrition",
+            "text": "May make oral tissues more vulnerable."
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4",
+        "card_5",
+        "card_6"
+      ],
+      "settings": {
+        "anchor": "risk-factors",
+        "heading": "Risk Factors",
+        "heading_mark": true,
+        "head_art": "none",
+        "card_style": "split",
+        "columns": 3,
+        "picture_edge": "straight",
+        "numbered": false,
+        "aside_art": "none",
+        "note_icon": "target",
+        "callout_icon": "question",
+        "link_to": "test",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "stages": {
+      "type": "mt-learn-stages",
+      "blocks": {
+        "stage_1": {
+          "type": "stage",
+          "settings": {
+            "number": "1",
+            "name": "Stage 1: Normal",
+            "color": "#2B9759",
+            "title": "No Symptoms Yet, but Habits Matter",
+            "text": "Regular tobacco or gutkha use puts the tissues under stress. No restriction is felt, but biological changes may have begun. This is the best time to take action.",
+            "tags": "Mouth opens fully\nNo burning\nBuild awareness now",
+            "art": "stage-1",
+            "alt": "Wide mouth opening",
+            "fingers": "4 Fingers or More",
+            "range": "More than 35 mm"
+          }
+        },
+        "stage_2": {
+          "type": "stage",
+          "settings": {
+            "number": "2",
+            "name": "Stage 2: Moderate",
+            "color": "#C4860B",
+            "title": "Burning Sensation Begins",
+            "text": "Mild burning while eating spicy food. The cheeks may feel slightly tight. Mouth opening is slightly reduced but may go unnoticed day to day.",
+            "tags": "Burning sensation\nMild cheek tightness\nPale patches may appear\nAct early",
+            "art": "stage-2",
+            "alt": "Slightly reduced mouth opening",
+            "fingers": "3 Fingers",
+            "range": "26 to 35 mm"
+          }
+        },
+        "stage_3": {
+          "type": "stage",
+          "settings": {
+            "number": "3",
+            "name": "Stage 3: Severe",
+            "color": "#D5602A",
+            "title": "Noticeable Mouth Restriction",
+            "text": "Tightness is consistent. Eating certain foods becomes difficult. Mouth opening has visibly reduced and now clearly affects daily function.",
+            "tags": "Daily discomfort\nFood sensitivity\nGuided care needed",
+            "art": "stage-3",
+            "alt": "Clearly reduced mouth opening",
+            "fingers": "2 Fingers",
+            "range": "15 to 25 mm"
+          }
+        },
+        "stage_4": {
+          "type": "stage",
+          "settings": {
+            "number": "4",
+            "name": "Stage 4: Advance",
+            "color": "#C23838",
+            "title": "Significant Functional Limitation",
+            "text": "Mouth opening is severely reduced. Even soft foods are difficult. Fibrous bands are prominent. Expert guidance and structured care are critical at this stage.",
+            "tags": "Severe restriction\nLong-term progression\nExpert consultation and a complete care approach",
+            "art": "stage-4",
+            "alt": "Severely reduced mouth opening",
+            "fingers": "1 Finger or Less",
+            "range": "Less than 15 mm"
+          }
+        }
+      },
+      "block_order": [
+        "stage_1",
+        "stage_2",
+        "stage_3",
+        "stage_4"
+      ],
+      "settings": {
+        "anchor": "stages",
+        "heading": "How OSMF Progresses Over Time",
+        "heading_mark": true,
+        "text": "OSMF moves through recognisable stages. Each stage is associated with how far your mouth can open. Knowing your stage helps you take the right step.",
+        "measure_label": "Mouth opening",
+        "alert": "<strong>Stage 5: Critical</strong> is a separate category for mouth opening below 5 mm with a persistent mouth ulcer, or confirmed oral cancer. It needs an immediate specialist consultation.",
+        "cta_label": "Check your symptoms with the <strong>MARCEL OSMF Self-Check</strong>",
+        "cta_to": "test",
+        "note": "Only a qualified healthcare professional can confirm the diagnosis and stage.",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "unclear": {
+      "type": "mt-learn-cards",
+      "blocks": {
+        "block_1": {
+          "type": "card",
+          "settings": {
+            "art": "unclear-slow",
+            "icon": "none",
+            "tone": "sky",
+            "title": "Symptoms Appear Slowly",
+            "text": "A little burning one day and slight tightness another. Because the changes are gradual, they are often brushed off or put down to something else entirely."
+          }
+        },
+        "block_2": {
+          "type": "card",
+          "settings": {
+            "art": "unclear-advice",
+            "icon": "none",
+            "tone": "sky",
+            "title": "Different Advice Leads to Trying Multiple Things",
+            "text": "Friends, internet forums and other sources give conflicting information. Each attempt feels promising, then inconsistent, which only adds to the frustration."
+          }
+        },
+        "block_3": {
+          "type": "card",
+          "settings": {
+            "art": "unclear-results",
+            "icon": "none",
+            "tone": "sky",
+            "title": "Results Feel Inconsistent",
+            "text": "Without a stage-based approach, it’s hard to know if what you’re doing is working. Progress feels unpredictable, and many people give up too early."
+          }
+        },
+        "block_4": {
+          "type": "card",
+          "settings": {
+            "art": "unclear-helps",
+            "icon": "none",
+            "tone": "mint",
+            "title": "What Actually Helps: Clarity and Consistency",
+            "text": "A guided, step-by-step approach that matches your stage removes the guesswork. You know what to do and when to do it, and consistency becomes possible."
+          }
+        },
+        "block_5": {
+          "type": "list",
+          "settings": {
+            "style": "dont",
+            "art": "unclear-dont",
+            "title": "What Doesn’t Help",
+            "items": "Ignoring early signs\nTrying random home remedies\nFollowing multiple conflicting approaches\nStarting and stopping frequently\nExpecting instant results"
+          }
+        },
+        "block_6": {
+          "type": "list",
+          "settings": {
+            "style": "do",
+            "art": "unclear-do",
+            "title": "What Helps Instead",
+            "items": "Understanding your current stage\nFollowing a step-by-step approach\nA consistent daily routine\nTracking gradual changes\nSeeking guidance when needed"
+          }
+        }
+      },
+      "block_order": [
+        "block_1",
+        "block_2",
+        "block_3",
+        "block_4",
+        "block_5",
+        "block_6"
+      ],
+      "settings": {
+        "anchor": "why-it-feels-confusing",
+        "eyebrow": "Clearing the Confusion",
+        "heading": "Why OSMF Can Feel Confusing",
+        "heading_mark": true,
+        "text": "Symptoms appear slowly, and the path forward isn’t always obvious. Here’s why many people feel uncertain, and what actually helps.",
+        "head_art": "unclear-head",
+        "card_style": "row",
+        "columns": 1,
+        "picture_edge": "straight",
+        "numbered": false,
+        "aside_art": "none",
+        "note_icon": "target",
+        "callout_icon": "question",
+        "link_to": "test",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "helps": {
+      "type": "mt-learn-cards",
+      "blocks": {
+        "block_1": {
+          "type": "card",
+          "settings": {
+            "art": "help-stage",
+            "icon": "target",
+            "tone": "teal",
+            "title": "Know Your Stage",
+            "text": "Understand where you are with the MARCEL OSMF Self-Check."
+          }
+        },
+        "block_2": {
+          "type": "card",
+          "settings": {
+            "art": "help-routine",
+            "icon": "routine",
+            "tone": "amber",
+            "title": "Follow a Routine",
+            "text": "A step-by-step approach matched to your stage."
+          }
+        },
+        "block_3": {
+          "type": "card",
+          "settings": {
+            "art": "help-consistent",
+            "icon": "calendar",
+            "tone": "sky",
+            "title": "Stay Consistent",
+            "text": "Small daily actions over time, not quick fixes."
+          }
+        },
+        "block_4": {
+          "type": "card",
+          "settings": {
+            "art": "help-support",
+            "icon": "headset",
+            "tone": "violet",
+            "title": "Get Guided Support",
+            "text": "Expert guidance from MARCEL OSMF Consultants and OSMF Specialist Doctors when needed."
+          }
+        },
+        "block_5": {
+          "type": "step",
+          "settings": {
+            "icon": "search",
+            "tone": "teal",
+            "title": "Start",
+            "text": "Check stage",
+            "link_to": "none"
+          }
+        },
+        "block_6": {
+          "type": "step",
+          "settings": {
+            "icon": "calendar",
+            "tone": "amber",
+            "title": "Routine",
+            "text": "Daily care",
+            "link_to": "none"
+          }
+        },
+        "block_7": {
+          "type": "step",
+          "settings": {
+            "icon": "drop",
+            "tone": "rose",
+            "title": "Support",
+            "text": "Add comfort",
+            "link_to": "none"
+          }
+        },
+        "block_8": {
+          "type": "step",
+          "settings": {
+            "icon": "box",
+            "tone": "violet",
+            "title": "Complete",
+            "text": "Full approach",
+            "link_to": "none"
+          }
+        },
+        "block_9": {
+          "type": "step",
+          "settings": {
+            "icon": "chart",
+            "tone": "mint",
+            "title": "Improve",
+            "text": "Movement",
+            "link_to": "none"
+          }
+        }
+      },
+      "block_order": [
+        "block_1",
+        "block_2",
+        "block_3",
+        "block_4",
+        "block_5",
+        "block_6",
+        "block_7",
+        "block_8",
+        "block_9"
+      ],
+      "settings": {
+        "anchor": "what-helps",
+        "eyebrow": "A Clear Path",
+        "heading": "What Helps in Managing OSMF",
+        "heading_mark": true,
+        "text": "Instead of trying different approaches at random, a clear, structured path makes all the difference. <strong>MARCEL OMR Therapy</strong> provides this guided approach, which you can follow at home with guidance from MARCEL OSMF Consultants and OSMF Specialist Doctors.",
+        "head_art": "helps-head",
+        "card_style": "icon",
+        "columns": 4,
+        "picture_edge": "curve",
+        "numbered": false,
+        "aside_art": "none",
+        "note_icon": "target",
+        "callout_icon": "question",
+        "steps_title": "<strong>Your Care Journey</strong> with MARCEL OMR Therapy",
+        "link_to": "test",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "cancer": {
+      "type": "mt-learn-media",
+      "settings": {
+        "anchor": "cancer-risk",
+        "heading": "Can OSMF Turn into Oral Cancer?",
+        "heading_mark": true,
+        "text": "<p><strong>OSMF</strong> is recognised as an <strong>oral potentially malignant disorder</strong>, meaning it is associated with an increased risk of oral cancer. It does not mean that everyone with OSMF will develop cancer, but regular professional follow-up matters.</p>",
+        "callout_icon": "shield-plus",
+        "callout_text": "<strong>Get it assessed promptly</strong> if you notice a persistent ulcer, unexplained lump, bleeding or another unusual oral change.",
+        "link_to": "specialists",
+        "art": "cancer",
+        "image_alt": "Close-up of an open mouth with a pale, raised patch on the tongue",
+        "media_shape": "circle",
+        "media_side": "right",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "care": {
+      "type": "mt-learn-media",
+      "settings": {
+        "anchor": "care-options",
+        "heading": "Care Options & Specialist Guidance",
+        "heading_mark": true,
+        "text": "<p>Start with the MARCEL OSMF Self-Check for an initial indication, talk to a MARCEL OSMF Consultant about your next step, and see an OSMF Specialist Doctor for an examination, diagnosis and stage.</p>",
+        "callout_icon": "shield-plus",
+        "link_label": "Find an OSMF Specialist Doctor",
+        "link_to": "specialists",
+        "art": "none",
+        "media_shape": "arc",
+        "media_side": "right",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
     "guide": {
       "type": "mt-guide",
+      "disabled": true,
       "settings": {
         "show_toc": true,
         "toc_title": "On This Page",
@@ -332,8 +1147,19 @@
   },
   "order": [
     "hero",
-    "guide",
+    "nav",
+    "what",
+    "insights",
+    "signs",
+    "inside",
+    "risks",
+    "stages",
+    "unclear",
+    "helps",
+    "cancer",
+    "care",
     "faq",
-    "cta"
+    "cta",
+    "guide"
   ]
 }

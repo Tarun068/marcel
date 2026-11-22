@@ -1299,6 +1299,25 @@
     "products": {
       "type": "mt-products",
       "blocks": {
+        "kit_protection": {
+          "type": "product",
+          "settings": {
+            "product": "marcel-omr-therapy-protection-kit",
+            "variant": "",
+            "title": "MARCEL OMR Therapy Protection Kit",
+            "meta": "Mouthwash and toothpaste kit",
+            "badge": "none",
+            "step": "1",
+            "role": "Daily oral care",
+            "color": "#1e9e5a",
+            "benefits": "MARCEL OraLis Herbal Mouthwash\nMARCEL Smile Therapeutic Toothpaste\nFor everyday oral hygiene",
+            "best": "Everyday care",
+            "art": "kit-protection",
+            "link_to": "none",
+            "link": "",
+            "link_label": "View kit"
+          }
+        },
         "kit_foundation": {
           "type": "product",
           "settings": {
@@ -1415,6 +1434,7 @@
         }
       },
       "block_order": [
+        "kit_protection",
         "kit_foundation",
         "kit_advance",
         "product_1",
@@ -1528,11 +1548,11 @@
         "role": "OSMF Specialist",
         "member": "First Member of the OSMF Specialist Doctor Community",
         "name": "Dr. Hitendra H. Patel",
-        "qualification": "B.A.M.S.",
+        "qualification": "B.A.M.S., OSMF Specialist, Kahan Clinic, Dholka, Gujarat",
         "text": "<p>A long-standing association with MARCEL, bringing a clinician’s perspective to individual assessment and stage-appropriate OSMF care through MARCEL OMR Therapy.</p>",
         "points": "",
-        "clinic": "Kahan Clinic",
-        "location": "Dholka, Gujarat",
+        "clinic": "",
+        "location": "",
         "contact_label": "Contact",
         "phone": "",
         "badge": "",
@@ -1543,6 +1563,7 @@
         "quote_label": "In Dr. Patel’s words",
         "quote": "Having been associated with MARCEL for nearly seven years, I have witnessed its evolution into a structured, stage-based approach to OSMF care through MARCEL OMR Therapy. My clinical experience and patient feedback have been encouraging. I particularly value its emphasis on individual assessment and stage-appropriate treatment, helping ensure that patients receive care suited to their condition while avoiding unnecessary medication and financial burden.",
         "quote_credit": "",
+        "quote_details": false,
         "signoff": "Recognising clinical experience and collaborative care",
         "signoff_brand": "MARCEL OMR Therapy",
         "background": "mist",

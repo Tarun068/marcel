@@ -58,8 +58,42 @@
         </div>
 
         <div class="mt-pgrid mt-pgrid--cols-{{ grid_cols }}">
+          {%- liquid
+            # "Show these first": products listed by handle come first, in that order (client, 2026-11-22:
+            # Protection Kit, then Foundation Kit, then Advance Kit). Works within the page being shown.
+            assign pin_list = section.settings.pinned | newline_to_br | strip_newlines | replace: '<br />', ',' | split: ','
+            assign pinned_keys = ''
+            for pin in pin_list
+              assign pin_handle = pin | strip
+              if pin_handle != blank
+                assign pinned_keys = pinned_keys | append: '|' | append: pin_handle | append: '|'
+              endif
+            endfor
+          -%}
+          {%- for pin in pin_list -%}
+            {%- assign pin_handle = pin | strip -%}
+            {%- if pin_handle == blank -%}{%- continue -%}{%- endif -%}
+            {%- for product in collection.products -%}
+              {%- if product.handle != pin_handle -%}{%- continue -%}{%- endif -%}
+              {%- if product.tags contains 'mt-hidden' -%}{%- continue -%}{%- endif -%}
+              <div class="mt-filter-item" data-type="{{ product.type | handleize }}">
+                {%- render 'mt-product-card',
+                  product: product,
+                  section_id: section.id,
+                  add_label: section.settings.add_label,
+                  details_label: section.settings.details_label,
+                  sold_out_label: section.settings.sold_out_label,
+                  image_fit: section.settings.image_fit,
+                  sizes: card_sizes,
+                  compact: compact_cards
+                -%}
+              </div>
+            {%- endfor -%}
+          {%- endfor -%}
           {%- for product in collection.products -%}
             {%- if product.tags contains 'mt-hidden' -%}{%- continue -%}{%- endif -%}
+            {%- assign pin_key = '|' | append: product.handle | append: '|' -%}
+            {%- if pinned_keys contains pin_key -%}{%- continue -%}{%- endif -%}
             <div class="mt-filter-item" data-type="{{ product.type | handleize }}">
               {%- render 'mt-product-card',
                 product: product,
@@ -124,6 +158,12 @@
       "max": 48,
       "step": 3,
       "default": 24
+    },
+    {
+      "type": "textarea",
+      "id": "pinned",
+      "label": "Show these first",
+      "info": "Optional. One product handle per line, in the order to show them, for example the kits."
     },
     {
       "type": "header",

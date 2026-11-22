@@ -21,8 +21,17 @@
   .mt-founder-fact .mt-i { grid-row: span 2; width: 26px; height: 26px; color: var(--mt-teal); stroke-width: 1.7; }
   .mt-founder-fact b { color: var(--mt-ink); font-size: 16px; line-height: 1.3; }
   .mt-founder-fact span { font-size: 14.5px; line-height: 1.45; }
+  /* Photo no taller than the text beside it (client, 2026-11-21): the photo stretches to the text's height and
+     keeps the face in view. */
+  .mt-founder--fit { grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); align-items: stretch; }
+  .mt-founder--fit > .mt-founder-photo { aspect-ratio: auto; min-height: 320px; }
+  .mt-founder--fit > .mt-founder-photo img { object-position: 50% 20%; }
+  @media (min-width: 1200px) {
+    .mt-founder--fit { grid-template-columns: minmax(0, .56fr) minmax(0, 1.44fr); }
+  }
   @media (max-width: 920px) {
     .mt-founder { grid-template-columns: minmax(0, 1fr); }
+    .mt-founder--fit > .mt-founder-photo { aspect-ratio: 4 / 4; min-height: 0; }
     .mt-founder--reverse > .mt-founder-photo { order: 0; }
     .mt-founder-photo { max-width: 460px; aspect-ratio: 4 / 4; }
     .mt-founder-photo--empty { aspect-ratio: auto; max-width: none; background: none; overflow: visible; }
@@ -40,7 +49,7 @@
 -%}
 
 <section class="{% render 'mt-section-class', s: section.settings, extra: 'mt-founder-sec' %}">
-  <div class="mt-wrap mt-founder{% if section.settings.quote_position == 'right' %} mt-founder--reverse{% endif %}">
+  <div class="mt-wrap mt-founder{% if section.settings.quote_position == 'right' %} mt-founder--reverse{% endif %}{% if section.settings.photo_size == 'text' and section.settings.photo != blank %} mt-founder--fit{% endif %}">
     <figure class="mt-founder-photo{% if section.settings.photo == blank %} mt-founder-photo--empty{% endif %}">
       {%- if section.settings.photo != blank -%}
         {{ section.settings.photo | image_url: width: 1000 | image_tag: loading: 'lazy', alt: section.settings.name, sizes: '(min-width: 990px) 40vw, 92vw', widths: '400, 600, 800, 1000' }}
@@ -138,6 +147,16 @@
       "id": "photo",
       "label": "Photo",
       "info": "A portrait of the founder. Without one, the Marcel mark is shown."
+    },
+    {
+      "type": "select",
+      "id": "photo_size",
+      "label": "Photo height",
+      "options": [
+        { "value": "tall", "label": "Tall portrait" },
+        { "value": "text", "label": "Same height as the text" }
+      ],
+      "default": "tall"
     },
     {
       "type": "text",

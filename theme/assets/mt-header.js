@@ -103,7 +103,7 @@ if (!customElements.get('mt-header')) {
           el.classList.remove('is-bump');
           void el.offsetWidth;
           el.classList.add('is-bump');
-          if (this.cartLink) this.cartLink.setAttribute('aria-label', `Cart (${n})`);
+          if (this.cartLink) this.cartLink.setAttribute('aria-label', `${this.cartLink.dataset.label || 'Cart'} (${n})`);
         };
         if (cartData && typeof cartData.item_count === 'number') return apply(cartData.item_count);
         const url = (window.routes && window.routes.cart_url) || '/cart';

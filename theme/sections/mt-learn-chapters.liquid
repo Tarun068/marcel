@@ -1,0 +1,224 @@
+{{ 'mt-learn.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  Journey chapters (About page, client artwork 2026-11-21): a heading, an intro line in a soft pill, a labelled
+  rule ("The MARCEL Journey", "Four Connected Chapters") and numbered chapter cards with years, a title and a
+  short list, joined by arrows. Every word is live text; the soft waves are optional.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign count = section.blocks.size
+  assign extra = 'mt-lx mt-chap-sec'
+  if s.waves == 'top'
+    assign extra = extra | append: ' mt-lx-waves'
+  elsif s.waves == 'both'
+    assign extra = extra | append: ' mt-lx-waves mt-lx-waves--both'
+  endif
+-%}
+<section class="{% render 'mt-section-class', s: s, extra: extra %}"{% if s.anchor != blank %} id="{{ s.anchor | handleize }}"{% endif %}>
+  <div class="mt-wrap">
+    {%- render 'mt-learn-head', eyebrow: s.eyebrow, heading: s.heading, text: s.text, mark: s.heading_mark, center: s.center -%}
+
+    {%- if s.intro != blank -%}<p class="mt-chap-intro{% if s.center %} is-center{% endif %}">{{ s.intro }}</p>{%- endif -%}
+
+    {%- if s.bar_title != blank or s.bar_note != blank -%}
+      <div class="mt-chap-bar">
+        {%- if s.bar_title != blank -%}<p class="mt-chap-bar-title">{{ s.bar_title | escape }}</p>{%- endif -%}
+        {%- if s.bar_note != blank -%}<p class="mt-chap-bar-note">{{ s.bar_note | escape }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if count > 0 -%}
+      <ol class="mt-chap-list" style="--chap-n: {{ count | at_most: 4 }}">
+        {%- for block in section.blocks -%}
+          {%- assign b = block.settings -%}
+          <li class="mt-chap mt-tone-{{ b.tone }}" {{ block.shopify_attributes }}>
+            <span class="mt-chap-num" aria-hidden="true">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+            <div class="mt-chap-card">
+              {%- if b.years != blank -%}<span class="mt-chap-when">{{ b.years | escape }}</span>{%- endif -%}
+              {%- if b.title != blank -%}<h3 class="mt-h3 mt-chap-title">{{ b.title | escape }}</h3>{%- endif -%}
+              {%- if b.items != blank -%}
+                {%- assign items = b.items | newline_to_br | split: '<br />' -%}
+                <ul class="mt-chap-items">
+                  {%- for item in items -%}
+                    {%- assign line = item | strip -%}
+                    {%- if line != blank -%}<li>{{ line | escape }}</li>{%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel journey chapters",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Link name",
+      "info": "Links can jump here with #link-name, for example #our-journey."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The Journey of"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Science, Care & Innovation"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_mark",
+      "label": "Brush line under the heading",
+      "default": false
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Line under the heading",
+      "default": "26 years of development, clinical evaluation and continued research"
+    },
+    {
+      "type": "checkbox",
+      "id": "center",
+      "label": "Centre the heading",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "intro",
+      "label": "Intro in a soft box",
+      "default": "A journey shaped by a clinical need, years of development, institutional evaluation and an evolving approach to OSMF care."
+    },
+    {
+      "type": "text",
+      "id": "bar_title",
+      "label": "Label above the chapters",
+      "default": "The MARCEL Journey"
+    },
+    {
+      "type": "text",
+      "id": "bar_note",
+      "label": "Note on the right of the label",
+      "default": "Four Connected Chapters"
+    },
+    {
+      "type": "select",
+      "id": "waves",
+      "label": "Soft waves",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "top", "label": "Top corner" },
+        { "value": "both", "label": "Top and bottom corners" }
+      ],
+      "default": "both"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "paper", "label": "White" },
+        { "value": "mist", "label": "Light" },
+        { "value": "tint", "label": "Tinted" }
+      ],
+      "default": "mist"
+    },
+    {
+      "type": "checkbox",
+      "id": "sheet",
+      "label": "Rounded top edge",
+      "info": "Overlaps the section above, like stacked sheets.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "tight", "label": "Compact" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "normal"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "chapter",
+      "name": "Chapter",
+      "settings": [
+        {
+          "type": "text",
+          "id": "years",
+          "label": "Years",
+          "default": "2000 to 2008"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Chapter"
+        },
+        {
+          "type": "select",
+          "id": "tone",
+          "label": "Colour",
+          "options": [
+            { "value": "teal", "label": "Teal" },
+            { "value": "aqua", "label": "Aqua" },
+            { "value": "amber", "label": "Amber" },
+            { "value": "mint", "label": "Green" },
+            { "value": "sky", "label": "Blue" },
+            { "value": "violet", "label": "Violet" },
+            { "value": "rose", "label": "Rose" }
+          ],
+          "default": "teal"
+        },
+        {
+          "type": "textarea",
+          "id": "items",
+          "label": "Points",
+          "info": "One point per line."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Marcel journey chapters",
+      "blocks": [
+        {
+          "type": "chapter",
+          "settings": { "years": "2000 to 2008", "title": "Foundation", "tone": "teal", "items": "Clinical need identified\nTherapeutic concept\nCandidate screening\nLead formulation development\n2008 patent granted" }
+        },
+        {
+          "type": "chapter",
+          "settings": { "years": "2012 to 2022", "title": "Development", "tone": "aqua", "items": "Technical development & standardisation\nAlpha and beta product testing\nProduct maturation & scale-up\nMarket learning" }
+        },
+        {
+          "type": "chapter",
+          "settings": { "years": "2023 to 2025", "title": "Structured OSMF Care", "tone": "amber", "items": "MARCEL OMR Therapy\nFoundation and Advance Programmes\nFour-pillar care approach" }
+        },
+        {
+          "type": "chapter",
+          "settings": { "years": "2023 onward", "title": "Evidence & Research", "tone": "mint", "items": "Fibrosis reversal / remodelling programme\nScaling up OSMF Specialists Community\nCTRI-registered RCT in Nanded\nCTRI-registered RCT at R.A. Poddar, Mumbai" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

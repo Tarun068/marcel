@@ -1,31 +1,80 @@
-.mt-footer { position: relative; background: var(--mt-navy-3); color: rgba(255, 255, 255, .7); padding-block: clamp(56px, 7vw, 88px) 28px; font-size: 15px; border-radius: var(--mt-sheet-r) var(--mt-sheet-r) 0 0; }
-.mt-foot-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(var(--mt-foot-cols, 4), minmax(0, 1fr)); gap: 32px; }
-@media (max-width: 1000px) {
-  .mt-foot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .mt-foot-brand { grid-column: 1 / -1; }
-}
+/* Marcel footer, laid out after the client's sample (2026-11-21): a top row with the brand, link columns (Legal,
+   OSMF Specialist Centres) and the contact and company details; full-width lines of links (Products, Get Help,
+   Learn); then the social links, Ask AI links and the company logo; then the copyright line. */
+.mt-footer { position: relative; background: var(--mt-navy-3); color: rgba(255, 255, 255, .76); padding-block: clamp(56px, 7vw, 88px) 28px; font-size: 15.5px; border-radius: var(--mt-sheet-r) var(--mt-sheet-r) 0 0; }
+.mt-footer a { transition: color .2s, border-color .2s, background-color .2s; }
+
+/* ---------- Top row ---------- */
+.mt-foot-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr) minmax(0, 1.05fr); gap: 36px clamp(28px, 4vw, 64px); align-items: start; }
 .mt-foot-brand { display: grid; gap: 18px; align-content: start; max-width: 380px; }
 .mt-foot-logo { display: flex; align-items: center; width: fit-content; }
 .mt-foot-logo .mt-logo-img { height: var(--mt-foot-logo-h, 112px); width: auto; }
 /* A coloured logo on the navy footer is shown in white so it stays visible (setting "Show the logo in white"). */
 .mt-foot-logo--white .mt-logo-img { filter: brightness(0) invert(1); }
-@media (max-width: 760px) {
-  .mt-foot-logo .mt-logo-img { height: min(var(--mt-foot-logo-h, 112px), 96px); }
-}
+.mt-foot-brand p { line-height: 1.6; }
+
+.mt-foot-head { display: block; margin-bottom: 14px; color: var(--mt-on-dark); font-size: 18px; font-weight: 800; letter-spacing: -.005em; line-height: 1.3; }
+.mt-foot-cols { display: flex; flex-wrap: wrap; gap: 32px clamp(28px, 3.4vw, 56px); }
+.mt-foot-col { min-width: 140px; }
+.mt-foot-col--states { flex: 1 1 280px; }
+.mt-foot-links { display: grid; gap: 11px; align-content: start; }
+.mt-foot-links a, .mt-foot-line-links a { width: fit-content; color: rgba(255, 255, 255, .76); line-height: 1.4; }
+.mt-foot-links a:hover, .mt-foot-line-links a:hover { color: var(--mt-on-dark); text-decoration: underline; text-underline-offset: 3px; }
+.mt-foot-col--states .mt-foot-links { grid-template-columns: repeat(2, max-content); column-gap: 32px; }
+.mt .mt-foot-links .mt-foot-all { grid-column: 1 / -1; display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; color: var(--mt-mint); font-weight: 700; }
+.mt-foot-all .mt-i { width: 16px; height: 16px; stroke-width: 2.2; }
+
+.mt-foot-info { display: grid; gap: 20px; align-content: start; }
 .mt-foot-contact { display: grid; gap: 10px; }
-.mt-foot-contact a { display: inline-flex; align-items: center; gap: 10px; color: var(--mt-on-dark); font-weight: 700; width: fit-content; }
+.mt-foot-contact a { display: inline-flex; align-items: center; gap: 10px; width: fit-content; color: var(--mt-on-dark); font-weight: 700; }
 .mt-foot-contact a:hover { color: var(--mt-mint); }
 .mt-foot-contact .mt-i { width: 18px; height: 18px; color: var(--mt-mint); }
-.mt-foot-col { display: grid; gap: 11px; align-content: start; }
-.mt-foot-col b { color: var(--mt-on-dark); font-size: 13px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 4px; }
-.mt-foot-col a:hover { color: var(--mt-on-dark); text-decoration: underline; text-underline-offset: 3px; }
+.mt-foot-contact .mt-foot-phone { font-size: 18px; }
+.mt-foot-company { display: grid; gap: 6px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, .12); font-style: normal; line-height: 1.6; }
+.mt-foot-company strong { color: var(--mt-on-dark); font-size: 16px; }
+.mt-foot-gst { margin-top: 4px; color: rgba(255, 255, 255, .88); font-weight: 700; letter-spacing: .01em; }
+
+/* ---------- Lines of links ---------- */
+.mt-foot-lines { margin-top: clamp(34px, 4vw, 48px); border-top: 1px solid rgba(255, 255, 255, .12); }
+.mt-foot-line { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 8px 24px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid rgba(255, 255, 255, .08); }
+.mt-foot-line .mt-foot-head { margin: 0; font-size: 16px; }
+.mt-foot-line-links { display: flex; flex-wrap: wrap; gap: 8px 26px; }
+
+/* ---------- Social, Ask AI, company logo ---------- */
+.mt-foot-connect { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 24px clamp(28px, 4vw, 56px); margin-top: 30px; }
+.mt-foot-connect-label { display: block; margin-bottom: 12px; color: var(--mt-on-dark); font-size: 16px; font-weight: 700; }
+.mt-foot-social-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.mt-foot-social-links a { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .24); color: var(--mt-on-dark); }
+.mt-foot-social-links a:hover { border-color: var(--mt-mint); color: var(--mt-mint); }
+.mt-foot-social-links .mt-i { width: 20px; height: 20px; stroke-width: 1.7; }
+.mt-ai-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.mt-ai-links a { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, .22); background: rgba(255, 255, 255, .06); color: var(--mt-on-dark); font-size: 13.5px; font-weight: 700; }
+.mt-ai-links a:hover { border-color: var(--mt-mint); color: var(--mt-mint); }
+.mt-ai-links .mt-i { width: 15px; height: 15px; color: var(--mt-mint); }
+.mt-foot-company-logo { display: inline-flex; margin-left: auto; padding: 10px 16px; border-radius: 14px; background: #fff; }
+.mt-foot-company-img { display: block; height: 46px; width: auto; }
+
+/* ---------- Disclaimer and bottom line ---------- */
 .mt-disclaimer { margin-top: 28px; padding: 18px 20px; border-radius: var(--mt-r); background: rgba(255, 255, 255, .05); font-size: 13px; line-height: 1.6; color: rgba(255, 255, 255, .6); }
 .mt-disclaimer a { text-decoration: underline; }
-.mt-foot-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .12); font-size: 13.5px; color: rgba(255, 255, 255, .55); }
+.mt-foot-bottom { display: flex; justify-content: space-between; align-items: center; gap: 12px 16px; flex-wrap: wrap; margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .12); font-size: 13.5px; color: rgba(255, 255, 255, .58); }
+.mt .mt-foot-cookie { color: rgba(255, 255, 255, .78); font-size: 13.5px; text-decoration: underline; text-underline-offset: 3px; }
+.mt .mt-foot-cookie:hover { color: var(--mt-on-dark); }
 .mt-pay-row { display: flex; flex-wrap: wrap; gap: 6px; }
 .mt-pay-row span { padding: 5px 10px; border-radius: 99px; border: 1px solid rgba(255, 255, 255, .18); color: rgba(255, 255, 255, .8); font-weight: 700; font-size: 12px; letter-spacing: .04em; }
 
-.mt-ai-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 22px; font-size: 14px; font-weight: 700; color: rgba(255, 255, 255, .8); }
-.mt-ai-links { display: flex; flex-wrap: wrap; gap: 8px; }
-.mt-ai-links a { padding: 6px 12px; border-radius: 99px; border: 1px solid rgba(255, 255, 255, .22); font-size: 13px; font-weight: 700; color: var(--mt-on-dark); }
-.mt-ai-links a:hover { border-color: var(--mt-mint); color: var(--mt-mint); }
+/* ---------- Tablet and phone ---------- */
+@media (max-width: 1000px) {
+  .mt-foot-top { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mt-foot-brand { grid-column: 1 / -1; max-width: 560px; }
+}
+@media (max-width: 760px) {
+  .mt-foot-logo .mt-logo-img { height: min(var(--mt-foot-logo-h, 112px), 96px); }
+}
+@media (max-width: 640px) {
+  .mt-foot-top { grid-template-columns: minmax(0, 1fr); }
+  .mt-foot-line { grid-template-columns: minmax(0, 1fr); }
+  .mt-foot-line-links { gap: 8px 20px; }
+  .mt-foot-connect { align-items: flex-start; }
+  .mt-foot-company-logo { margin-left: 0; }
+}

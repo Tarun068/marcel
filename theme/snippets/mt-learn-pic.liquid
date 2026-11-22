@@ -1,0 +1,47 @@
+{%- comment -%}
+  Picture for the learning sections (mt-learn-*): a picture picked in the editor, or a built-in picture cut from
+  the client's references (assets/mt-osmf-<art>.webp for Understand OSMF, assets/mt-brand-*.webp for the
+  About page brand history).
+
+  Accepts:
+  - image: {Object} image from an image_picker setting (optional, wins over art)
+  - art: {String} built-in picture name, e.g. 'sign-burn' (optional)
+  - prefix: {String} file name start for built-in pictures (optional, default 'mt-osmf-'; brand pictures use 'mt-')
+  - alt: {String} alt text; leave blank for pictures that only decorate the text beside them
+  - sizes: {String} sizes attribute for picked images
+  - eager: {Boolean} load straight away instead of lazily
+
+  Usage:
+  {% render 'mt-learn-pic', image: block.settings.image, art: block.settings.art, alt: '', sizes: '320px' %}
+{%- endcomment -%}
+{%- liquid
+  assign loading = 'lazy'
+  if eager
+    assign loading = 'eager'
+  endif
+  if image != blank
+    assign img_alt = alt | default: image.alt | default: ''
+    echo image | image_url: width: 1400 | image_tag: loading: loading, sizes: sizes, widths: '240, 360, 480, 640, 800, 1000, 1200, 1400', alt: img_alt
+  elsif art != blank and art != 'none'
+    assign w = 0
+    assign h = 0
+    assign table = 'what:770x490|what-burn:320x320|what-open:320x320|what-areca:320x320|signs-head:512x310|sign-burn:560x255|sign-tight:560x255|sign-open:560x255|sign-patches:560x254|change-bands:600x198|change-collagen:600x198|change-stiff:600x198|change-vessels:600x187|change-deeper:600x188|change-movement:600x185|layers:430x644|risk-areca:400x531|risk-tobacco:400x576|risk-chewing:400x538|risk-genetic:400x469|risk-hygiene:400x496|risk-nutrition:400x412|stage-1:400x268|stage-2:400x242|stage-3:400x230|stage-4:400x234|unclear-head:440x330|unclear-slow:320x240|unclear-advice:320x238|unclear-results:320x242|unclear-helps:320x238|unclear-dont:360x403|unclear-do:360x357|helps-head:506x292|help-stage:600x298|help-routine:600x300|help-consistent:600x296|help-support:640x320|cancer:520x520|stat-areca:315x195|stat-layers:256x182|stat-weeks:270x200|stat-stage:220x198|brand-fibrex:480x386|brand-marcel:480x386|brand-jansuta:480x386|brand-orashield:480x386' | split: '|'
+    for row in table
+      assign pair = row | split: ':'
+      if pair[0] == art
+        assign dims = pair[1] | split: 'x'
+        assign w = dims[0]
+        assign h = dims[1]
+        break
+      endif
+    endfor
+    assign file = prefix | default: 'mt-osmf-' | append: art | append: '.webp'
+    assign src = file | asset_url
+    assign alt_safe = alt | escape
+    echo '<img src="' | append: src | append: '"'
+    if w != 0
+      echo ' width="' | append: w | append: '" height="' | append: h | append: '"'
+    endif
+    echo ' alt="' | append: alt_safe | append: '" loading="' | append: loading | append: '" decoding="async">'
+  endif
+-%}
