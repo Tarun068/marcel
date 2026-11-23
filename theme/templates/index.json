@@ -189,145 +189,22 @@
         "dot_label": "Show banner"
       }
     },
-    "hero": {
-      "type": "mt-hero",
-      "blocks": {
-        "pillar_1": {
-          "type": "pillar",
-          "settings": {
-            "icon": "shield",
-            "title": "Oral Mucosal Care",
-            "text": "Care for the mouth and support comfort"
-          }
-        },
-        "pillar_2": {
-          "type": "pillar",
-          "settings": {
-            "icon": "s-open",
-            "title": "Functional Support",
-            "text": "Support what matters in daily life: mouth opening, chewing and oral function."
-          }
-        },
-        "pillar_3": {
-          "type": "pillar",
-          "settings": {
-            "icon": "chart",
-            "title": "Guided Care & Progress",
-            "text": "Track your progress with support"
-          }
-        },
-        "pillar_4": {
-          "type": "pillar",
-          "settings": {
-            "icon": "bowl",
-            "title": "Dietary Guidance & Nutrition",
-            "text": "Make informed food choices through your care"
-          }
-        },
-        "trust_1": {
-          "type": "trust",
-          "settings": {
-            "icon": "flask",
-            "text": "Clinically evaluated"
-          }
-        },
-        "trust_2": {
-          "type": "trust",
-          "settings": {
-            "icon": "test",
-            "text": "CTRI-registered clinical study"
-          }
-        },
-        "trust_3": {
-          "type": "trust",
-          "settings": {
-            "icon": "calendar",
-            "text": "26-year development journey"
-          }
-        },
-        "trust_4": {
-          "type": "trust",
-          "settings": {
-            "icon": "patent",
-            "text": "Patent application filed"
-          }
-        }
-      },
-      "block_order": [
-        "pillar_1",
-        "pillar_2",
-        "pillar_3",
-        "pillar_4",
-        "trust_1",
-        "trust_2",
-        "trust_3",
-        "trust_4"
-      ],
-      "disabled": true,
+    "mt_picture_banner_qMX6zy": {
+      "type": "mt-picture-banner",
+      "name": "Marcel picture banner",
       "settings": {
-        "background": "fade",
-        "pattern": false,
-        "pill_icon": "shield",
-        "pill_text": "Care beyond teeth, gums & enamel",
-        "heading_font": "serif",
-        "heading": "A Structured Approach to <em>Oral Sub Mucous Fibrosis (OSMF)</em>",
-        "text": "Symptom management and functional improvement, supported by clinical evaluation and ongoing research.",
-        "tagline": "Restore, recover, renew",
-        "button_1_label": "Check Your OSMF Stage",
-        "button_1_to": "test",
-        "button_1_link": "",
-        "button_2_label": "Explore MARCEL OMR Therapy",
-        "button_2_to": "therapy",
-        "button_2_link": "",
-        "button_2_icon": "shield",
-        "image": "shopify://shop_images/df562fd0-b9e9-450b-a93a-23a73f0874f7.png",
-        "default_image": true,
-        "photo_note": "",
-        "card_title": "The MARCEL 4-⁠Pillar Approach",
-        "card_note": "Individual responses to care vary."
-      }
-    },
-    "stats": {
-      "type": "mt-stats",
-      "blocks": {
-        "stat_1": {
-          "type": "stat",
-          "settings": {
-            "value": "26",
-            "label": "Years of development, 2000 to 2026"
-          }
-        },
-        "stat_2": {
-          "type": "stat",
-          "settings": {
-            "value": "2008",
-            "label": "First patent granted"
-          }
-        },
-        "stat_3": {
-          "type": "stat",
-          "settings": {
-            "value": "2026",
-            "label": "CTRI-registered clinical study"
-          }
-        },
-        "stat_4": {
-          "type": "stat",
-          "settings": {
-            "value": "30",
-            "label": "Trademark applications filed"
-          }
-        }
-      },
-      "block_order": [
-        "stat_1",
-        "stat_2",
-        "stat_3",
-        "stat_4"
-      ],
-      "disabled": true,
-      "settings": {
-        "overlap": true
+        "art": "none",
+        "size": "picture",
+        "image": "shopify://shop_images/newbanner.png",
+        "mobile_image": "shopify://shop_images/newbanner.png",
+        "alt": "",
+        "lang": "page",
+        "link_to": "test",
+        "link": "",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight",
+        "join_next": false
       }
     },
     "symptom_banner": {
@@ -467,11 +344,13 @@
             "art": "cause-areca",
             "title": "Areca Nut / Supari & Chewing Products",
             "highlight": false,
+            "wide": false,
             "text": "Supari, gutkha, pan masala and mawa",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "card_2": {
@@ -481,11 +360,13 @@
             "art": "cause-tobacco",
             "title": "Tobacco Products",
             "highlight": false,
+            "wide": false,
             "text": "Khaini, chewing tobacco, tobacco mixed with gutkha or pan masala, bidi and cigarettes",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "card_3": {
@@ -495,11 +376,13 @@
             "art": "cause-chewing",
             "title": "Frequent & Long-Term Chewing",
             "highlight": false,
+            "wide": false,
             "text": "The more often and longer you chew, the greater the risk.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "card_4": {
@@ -509,11 +392,13 @@
             "art": "cause-nutrition",
             "title": "Poor Nutrition",
             "highlight": false,
+            "wide": false,
             "text": "May make oral tissues more vulnerable.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "card_5": {
@@ -523,11 +408,13 @@
             "art": "cause-genetic",
             "title": "Genetic Susceptibility",
             "highlight": false,
+            "wide": false,
             "text": "Some people may be more vulnerable.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "card_6": {
@@ -537,11 +424,13 @@
             "art": "cause-hygiene",
             "title": "Poor Oral Hygiene",
             "highlight": false,
+            "wide": false,
             "text": "Can contribute to poor overall oral health.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         }
       },
@@ -842,7 +731,8 @@
             "text_2": "A planned routine with appropriate products and exercises",
             "icon_3": "doctor",
             "text_3": "Supported by professional guidance",
-            "icon_4": "none"
+            "icon_4": "none",
+            "text_4": ""
           }
         },
         "is_not": {
@@ -856,7 +746,8 @@
             "text_2": "A guaranteed reversal of OSMF",
             "icon_3": "pill",
             "text_3": "A replacement for professional medical assessment and treatment",
-            "icon_4": "none"
+            "icon_4": "none",
+            "text_4": ""
           }
         },
         "keep_in_mind": {
@@ -870,7 +761,8 @@
             "text_2": "Follow the recommended care routine consistently",
             "icon_3": "person-care",
             "text_3": "Attend regular follow-ups as advised",
-            "icon_4": "none"
+            "icon_4": "none",
+            "text_4": ""
           }
         }
       },
@@ -885,6 +777,7 @@
         "heading": "What This Approach Is and Is Not",
         "heading_mark": false,
         "text": "A clear view of what MARCEL OMR Therapy offers, and what to keep in mind for the right expectations.",
+        "note": "",
         "waves": true,
         "background": "mist",
         "sheet": false,
@@ -901,11 +794,13 @@
             "art": "careplan",
             "title": "Personalised OSMF Care Plan",
             "highlight": false,
+            "wide": false,
             "text": "Care guidance based on your symptoms, mouth opening and OSMF stage.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "card_2": {
@@ -915,11 +810,13 @@
             "art": "therapy",
             "title": "MARCEL OMR Therapy",
             "highlight": false,
+            "wide": false,
             "text": "A structured therapy approach designed to support the management of OSMF.",
             "pill": "",
             "link_label": "Explore the therapy",
             "link_to": "therapy",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "card_3": {
@@ -929,11 +826,13 @@
             "art": "exercise",
             "title": "Mouth Opening Exercises",
             "highlight": false,
+            "wide": false,
             "text": "Guided exercises to support mouth opening and oral function.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "card_4": {
@@ -943,11 +842,13 @@
             "art": "diet",
             "title": "Personalised Diet Plan",
             "highlight": false,
+            "wide": false,
             "text": "Practical dietary guidance to support your oral health and therapy journey.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "card_5": {
@@ -957,11 +858,13 @@
             "art": "device",
             "title": "Mouth Opening Device",
             "highlight": false,
+            "wide": false,
             "text": "Optional adjunct device to support mouth opening as part of your therapy journey, when recommended.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "card_6": {
@@ -971,11 +874,13 @@
             "art": "consultant",
             "title": "MARCEL OSMF Consultants",
             "highlight": false,
+            "wide": false,
             "text": "Personalised guidance and follow-up from the MARCEL Team.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "card_7": {
@@ -985,11 +890,13 @@
             "art": "doctor",
             "title": "Personalised Care by OSMF Specialist Doctors",
             "highlight": false,
+            "wide": false,
             "text": "Clinical assessment and personalised care from OSMF Specialist Doctors.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "card_8": {
@@ -999,11 +906,13 @@
             "art": "tracker",
             "title": "Progress Tracking and Follow-Up",
             "highlight": false,
+            "wide": false,
             "text": "Record burning, eating comfort and mouth opening every week, and share your progress with the MARCEL Team for follow-up.",
             "pill": "",
             "link_label": "See the care journey",
             "link_to": "journey",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         }
       },
@@ -1281,11 +1190,13 @@
             "art": "none",
             "title": "3-Week Progress Tracker",
             "highlight": false,
+            "wide": false,
             "text": "With every MARCEL pack. Track symptoms and mouth-opening progress.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "card_2": {
@@ -1295,11 +1206,13 @@
             "art": "none",
             "title": "Regular Progress Reviews",
             "highlight": false,
+            "wide": false,
             "text": "Review your journey at Weeks 3, 6, 9 and 12.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "card_3": {
@@ -1309,11 +1222,13 @@
             "art": "none",
             "title": "Patient Education",
             "highlight": false,
+            "wide": false,
             "text": "Through our WhatsApp channel.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "card_4": {
@@ -1323,11 +1238,13 @@
             "art": "none",
             "title": "Personalised Guidance",
             "highlight": false,
+            "wide": false,
             "text": "From our MARCEL OSMF Consultants.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         }
       },
@@ -1786,11 +1703,13 @@
             "art": "none",
             "title": "Understand the Stages of OSMF",
             "highlight": false,
+            "wide": false,
             "text": "How mouth opening and symptoms are used to describe Stage 1 to Stage 5. General information, not an assessment of your condition.",
             "pill": "",
             "link_label": "Read about the stages",
             "link_to": "custom",
-            "link": "/pages/understand-osmf#stages"
+            "link": "/pages/understand-osmf#stages",
+            "downloads": ""
           }
         },
         "card_2": {
@@ -1800,11 +1719,13 @@
             "art": "none",
             "title": "How MARCEL OMR Therapy Works",
             "highlight": false,
+            "wide": false,
             "text": "The four pillars, the daily routine, mouth exercises and guided progress reviews.",
             "pill": "",
             "link_label": "See how the therapy works",
             "link_to": "therapy",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "card_3": {
@@ -1814,11 +1735,13 @@
             "art": "none",
             "title": "Can My Mouth Opening Improve?",
             "highlight": false,
+            "wide": false,
             "text": "Care may help manage symptoms and support mouth opening. How much changes differs from person to person, and a cure cannot be promised.",
             "pill": "",
             "link_label": "What to expect over 12 weeks",
             "link_to": "journey",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "card_4": {
@@ -1828,11 +1751,13 @@
             "art": "none",
             "title": "Patient Guide",
             "highlight": false,
+            "wide": false,
             "text": "Practical reads, from checking your mouth opening at home to quitting gutkha and supari.",
             "pill": "",
             "link_label": "Read the patient guide",
             "link_to": "custom",
-            "link": "/blogs/patient-guide"
+            "link": "/blogs/patient-guide",
+            "downloads": ""
           }
         }
       },
@@ -2053,8 +1978,7 @@
   },
   "order": [
     "banner",
-    "hero",
-    "stats",
+    "mt_picture_banner_qMX6zy",
     "symptom_banner",
     "symptoms",
     "causes",
