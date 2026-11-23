@@ -11,6 +11,34 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "guidance": {
+      "type": "mt-cta-band",
+      "settings": {
+        "style": "navy",
+        "eyebrow": "",
+        "heading": "Need Guidance? Talk to MARCEL Team.",
+        "text": "If you have questions about your oral health, your habits or the next steps, connect with MARCEL Team for guidance. A persistent ulcer or suspicious red or white patch needs prompt professional assessment.",
+        "button_1_label": "WhatsApp MARCEL Team",
+        "button_1_to": "whatsapp",
+        "button_1_link": "",
+        "button_2_label": "",
+        "button_2_to": "consult",
+        "button_2_link": "",
+        "form": true,
+        "name_label": "Name",
+        "name_placeholder": "Enter your name",
+        "mobile_label": "Mobile No.",
+        "mobile_placeholder": "Enter your mobile number",
+        "form_button": "Talk to MARCEL Team on WhatsApp",
+        "form_error": "Please enter your name and a 10 digit mobile number.",
+        "wa_intro": "Hello MARCEL Team, I would like guidance.",
+        "regarding_label": "Regarding",
+        "hide_on": "professionals",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
     "footer": {
       "type": "mt-footer",
       "blocks": {
@@ -50,6 +78,7 @@
           "settings": {
             "heading": "OSMF Specialist Centres",
             "page": "/pages/find-osmf-specialist",
+            "states": "",
             "all_label": "All OSMF Specialists"
           }
         }
@@ -78,13 +107,19 @@
         "address": "D-405, Sun Central Place\nS.P. Ring Road, Ahmedabad-380058, Gujarat",
         "gst": "GST No: 24AFGPB2002J1Z7",
         "company_logo_show": true,
+        "company_logo_link": "",
         "social_heading": "Catch us on:",
+        "social_instagram": "https://www.instagram.com/marceltherapy2019/",
+        "social_linkedin": "https://www.linkedin.com/company/marcel-omr-therapy-official/",
+        "social_x": "https://www.threads.com/@marceltherapy2019",
+        "social_facebook": "https://www.facebook.com/marcelomrtherapy",
+        "social_youtube": "https://www.youtube.com/@marceltherapy3714",
         "disclaimer": "",
-        "ai_heading": "Ask AI for a summary of MARCEL OMR Therapy:",
+        "ai_heading": "Ask AI:",
         "ai_prompt": "Summarise what MARCEL OMR Therapy (marceltherapy.com) is, who it is for, and how its OSMF Self-Check, MARCEL OSMF Consultant and OSMF Specialist support work.",
         "ai_tools": "chatgpt, perplexity, grok, google, claude",
-        "cookie_label": "Cookie preferences",
         "copyright": "© [year] MARCEL OMR Therapy by JanSuta Pharmaceuticals. MARCEL® is a registered trademark of JanSuta Pharmaceuticals.",
+        "cookie_label": "Cookie preferences",
         "payment_labels": "UPI, Cards, Net banking, Cash on delivery"
       }
     },
@@ -154,26 +189,6 @@
         "button_text": "",
         "label": "WhatsApp MARCEL Team",
         "hide_mobile": true
-      }
-    },
-    "guidance": {
-      "type": "mt-cta-band",
-      "settings": {
-        "style": "navy",
-        "eyebrow": "",
-        "heading": "Need Guidance? Talk to MARCEL Team.",
-        "hide_on": "professionals",
-        "text": "If you have questions about your oral health, your habits or the next steps, connect with MARCEL Team for guidance. A persistent ulcer or suspicious red or white patch needs prompt professional assessment.",
-        "form": true,
-        "button_1_label": "WhatsApp MARCEL Team",
-        "button_1_to": "whatsapp",
-        "button_1_link": "",
-        "button_2_label": "",
-        "button_2_to": "consult",
-        "button_2_link": "",
-        "background": "paper",
-        "sheet": false,
-        "spacing": "normal"
       }
     }
   },

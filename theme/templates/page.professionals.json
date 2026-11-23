@@ -13,53 +13,63 @@
       "type": "mt-page-hero",
       "settings": {
         "show_crumbs": true,
+        "align": "left",
         "home_label": "Home",
-        "button_1_to": "custom",
-        "button_2_to": "evidence",
-        "back_to": "therapy",
-        "background": "fade",
-        "sheet": false,
-        "spacing": "none",
+        "parent_label": "",
+        "parent_link": "",
         "current_label": "For healthcare professionals",
         "eyebrow": "For dentists and healthcare professionals",
         "heading": "MARCEL OMR Therapy for Healthcare Professionals",
         "text": "Information about the therapy, OSMF, clinical resources and the OSMF Specialist Doctor network.",
         "button_1_label": "Professional enquiry",
+        "button_1_to": "custom",
         "button_1_link": "#enquiry",
-        "button_2_label": ""
+        "button_2_label": "",
+        "button_2_to": "evidence",
+        "button_2_link": "",
+        "note": "",
+        "back_label": "",
+        "back_to": "therapy",
+        "back_link": "",
+        "art": "none",
+        "background": "fade",
+        "sheet": false,
+        "spacing": "none"
       }
     },
     "resources": {
       "type": "mt-icon-cards",
-      "settings": {
-        "eyebrow": "Professional pathway",
-        "heading": "Everything in One Place",
-        "center": false,
-        "columns": "3",
-        "background": "paper",
-        "sheet": false,
-        "spacing": "normal"
-      },
       "blocks": {
         "card_1": {
           "type": "card",
           "settings": {
             "icon": "shield",
+            "art": "none",
             "title": "MARCEL OMR Therapy Overview",
+            "highlight": false,
+            "wide": false,
             "text": "The 4-pillar approach, the Foundation Kit and Advance Kit pathways and the 12-week care journey.",
+            "pill": "",
+            "link_label": "Read the overview",
             "link_to": "therapy",
-            "link_label": "Read the overview"
+            "link": "",
+            "downloads": ""
           }
         },
         "card_2": {
           "type": "card",
           "settings": {
             "icon": "book",
+            "art": "none",
             "title": "OSMF Information",
+            "highlight": false,
+            "wide": false,
             "text": "Causes, risk factors, symptoms, mouth opening and stages.",
-            "link_to": "custom",
+            "pill": "",
             "link_label": "Understand OSMF",
-            "link": "/pages/understand-osmf"
+            "link_to": "custom",
+            "link": "/pages/understand-osmf",
+            "downloads": ""
           }
         },
         "card_3": {
@@ -67,10 +77,16 @@
           "disabled": true,
           "settings": {
             "icon": "test",
+            "art": "none",
             "title": "Clinical Evidence",
+            "highlight": false,
+            "wide": false,
             "text": "The 2026 CTRI-registered study and earlier clinical evaluations.",
+            "pill": "",
+            "link_label": "See the evidence",
             "link_to": "evidence",
-            "link_label": "See the evidence"
+            "link": "",
+            "downloads": ""
           }
         },
         "card_4": {
@@ -78,29 +94,47 @@
           "disabled": true,
           "settings": {
             "icon": "flask",
+            "art": "none",
             "title": "Research",
+            "highlight": false,
+            "wide": false,
             "text": "The ongoing MARCEL OSMF research programme and its status.",
-            "link_to": "custom",
+            "pill": "",
             "link_label": "View research",
-            "link": "/pages/clinical-evidence#research"
+            "link_to": "custom",
+            "link": "/pages/clinical-evidence#research",
+            "downloads": ""
           }
         },
         "card_5": {
           "type": "card",
           "settings": {
             "icon": "box",
+            "art": "none",
             "title": "Product Information",
+            "highlight": false,
+            "wide": false,
             "text": "MARCEL OraCare, OraShield, Smile and the MO Device.",
+            "pill": "",
+            "link_label": "View products",
             "link_to": "products",
-            "link_label": "View products"
+            "link": "",
+            "downloads": ""
           }
         },
         "clinical_resources": {
           "type": "card",
           "settings": {
             "icon": "file",
+            "art": "none",
             "title": "Clinical Resources",
+            "highlight": false,
+            "wide": false,
             "text": "Downloadable clinical references for healthcare professionals.",
+            "pill": "",
+            "link_label": "",
+            "link_to": "custom",
+            "link": "",
             "downloads": "Differential Clinical Response in Oral Submucous Fibrosis (OSMF) | mt-pro-differential-response.pdf\nClinical Briefing: MARCEL OMR Therapy | mt-pro-clinical-briefing.pdf"
           }
         },
@@ -108,12 +142,14 @@
           "type": "card",
           "settings": {
             "icon": "doctor",
+            "art": "none",
             "title": "OSMF Specialist Community",
             "highlight": true,
             "wide": true,
             "text": "Join the MARCEL OSMF Specialist Community, a network that helps patients find doctors with an interest in OSMF care. Onboarding is free and voluntary, and you appear in the specialist finder only with your consent.",
-            "link_to": "custom",
+            "pill": "",
             "link_label": "Register as an OSMF Specialist",
+            "link_to": "custom",
             "link": "https://forms.gle/xNUkeVxTvu1yvBPq6",
             "downloads": "Doctor Registration and Onboarding Form | mt-pro-specialist-form.pdf\nOSMF Specialist Community Introduction Letter | mt-pro-specialist-letter.pdf"
           }
@@ -127,7 +163,28 @@
         "card_5",
         "clinical_resources",
         "card_6"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "Professional pathway",
+        "heading": "Everything in One Place",
+        "subheading": "",
+        "text": "",
+        "center": false,
+        "columns": "3",
+        "media": "icon",
+        "card_style": "default",
+        "accent": "blue",
+        "intro_badge": "",
+        "intro_title": "",
+        "intro_text": "",
+        "intro_note": "",
+        "ticks": "",
+        "note": "",
+        "note_style": "plain",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
     },
     "challenges": {
       "type": "mt-learn-points",
@@ -189,17 +246,19 @@
         "quote_position": "left",
         "quote_eyebrow": "",
         "quote": "",
+        "photo_size": "tall",
         "name": "Dr. Niyati Thakker, BDS",
         "role": "MARCEL OSMF Clinical Consultant",
+        "story_eyebrow": "Your clinical contact",
         "heading_size": "large",
         "heading": "A Designated Clinical Contact for Participating Doctors",
         "text": "Dr. Niyati Thakker supports doctors in the OSMF Specialist Doctor network.",
+        "body": "<ul><li>A designated clinical contact for participating doctors</li><li>Orientation to the MARCEL OMR Therapy approach</li><li>Communication and professional coordination with the JanSuta team</li></ul>",
         "link_label": "",
+        "link": "",
         "background": "mist",
         "sheet": false,
-        "spacing": "normal",
-        "story_eyebrow": "Your clinical contact",
-        "body": "<ul><li>A designated clinical contact for participating doctors</li><li>Orientation to the MARCEL OMR Therapy approach</li><li>Communication and professional coordination with the JanSuta team</li></ul>"
+        "spacing": "normal"
       }
     },
     "enquiry": {
@@ -222,10 +281,12 @@
         "email_label": "Email ID",
         "city_label": "City",
         "state_label": "State",
+        "state_prompt": "Select your state",
+        "states": "Andaman and Nicobar Islands\nAndhra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChandigarh\nChhattisgarh\nDadra and Nagar Haveli and Daman and Diu\nDelhi\nGoa\nGujarat\nHaryana\nHimachal Pradesh\nJammu and Kashmir\nJharkhand\nKarnataka\nKerala\nLadakh\nLakshadweep\nMadhya Pradesh\nMaharashtra\nManipur\nMeghalaya\nMizoram\nNagaland\nOdisha\nPuducherry\nPunjab\nRajasthan\nSikkim\nTamil Nadu\nTelangana\nTripura\nUttar Pradesh\nUttarakhand\nWest Bengal\nOutside India",
         "message_label": "Your message",
-        "submit_label": "Send enquiry",
+        "submit_label": "Send Enquiry",
         "success_text": "Thank you. Your enquiry has reached the MARCEL Team.",
-        "fine": "Please do not send personal medical records through this form. For an examination, see an OSMF Specialist Doctor.",
+        "fine": "",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"

@@ -11,37 +11,6 @@
   "sections": {
     "hero": {
       "type": "mt-page-hero",
-      "blocks": {
-        "stat_1": {
-          "type": "stat",
-          "settings": {
-            "value": "26",
-            "icon": "patent",
-            "label": "Years of development, 2000 to 2026"
-          }
-        },
-        "stat_2": {
-          "type": "stat",
-          "settings": {
-            "value": "2008",
-            "icon": "patent",
-            "label": "First patent granted"
-          }
-        },
-        "stat_3": {
-          "type": "stat",
-          "settings": {
-            "value": "2026",
-            "icon": "patent",
-            "label": "CTRI-registered clinical study"
-          }
-        }
-      },
-      "block_order": [
-        "stat_1",
-        "stat_2",
-        "stat_3"
-      ],
       "settings": {
         "show_crumbs": true,
         "align": "left",
@@ -92,7 +61,6 @@
     },
     "timeline": {
       "type": "mt-journey",
-      "disabled": true,
       "blocks": {
         "phase_1": {
           "type": "phase",
@@ -217,6 +185,7 @@
         "phase_7",
         "phase_8"
       ],
+      "disabled": true,
       "settings": {
         "anchor": "",
         "eyebrow": "MARCEL OraShield",
@@ -235,6 +204,68 @@
         "status_done": "Completed",
         "status_now": "In progress",
         "status_next": "Coming next",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "chapters": {
+      "type": "mt-learn-chapters",
+      "blocks": {
+        "foundation": {
+          "type": "chapter",
+          "settings": {
+            "years": "2000 to 2008",
+            "title": "Foundation",
+            "tone": "teal",
+            "items": "Clinical need identified\nTherapeutic concept\nCandidate screening\nLead formulation development\n2008 patent granted"
+          }
+        },
+        "development": {
+          "type": "chapter",
+          "settings": {
+            "years": "2012 to 2022",
+            "title": "Development",
+            "tone": "aqua",
+            "items": "Technical development & standardisation\nAlpha and beta product testing\nProduct maturation & scale-up\nMarket learning"
+          }
+        },
+        "structured_care": {
+          "type": "chapter",
+          "settings": {
+            "years": "2023 to 2025",
+            "title": "Structured OSMF Care",
+            "tone": "amber",
+            "items": "MARCEL OMR Therapy\nFoundation and Advance Programmes\nFour-pillar care approach"
+          }
+        },
+        "evidence_research": {
+          "type": "chapter",
+          "settings": {
+            "years": "2023 onward",
+            "title": "Evidence & Research",
+            "tone": "mint",
+            "items": "Fibrosis reversal / remodelling programme\nScaling up OSMF Specialists Community\nCTRI-registered RCT in Nanded\nCTRI-registered RCT at R.A. Poddar, Mumbai"
+          }
+        }
+      },
+      "block_order": [
+        "foundation",
+        "development",
+        "structured_care",
+        "evidence_research"
+      ],
+      "settings": {
+        "anchor": "our-journey",
+        "eyebrow": "The Journey of",
+        "heading": "Science, Care & Innovation",
+        "heading_mark": false,
+        "text": "26 years of development, clinical evaluation and continued research",
+        "center": true,
+        "intro": "A journey shaped by a clinical need, years of development, institutional evaluation and an evolving approach to OSMF care.",
+        "bar_title": "The MARCEL Journey",
+        "bar_note": "Four Connected Chapters",
+        "waves": "both",
         "background": "mist",
         "sheet": false,
         "spacing": "normal"
@@ -338,10 +369,14 @@
             "icon": "shield",
             "art": "none",
             "title": "Clinical Responsibility",
+            "highlight": false,
+            "wide": false,
             "text": "OSMF is a complex condition requiring appropriate assessment, and individual responses to care can vary.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "card_2": {
@@ -350,10 +385,14 @@
             "icon": "flask",
             "art": "none",
             "title": "Evidence & Continued Research",
+            "highlight": false,
+            "wide": false,
             "text": "We value documented clinical observations, structured evaluation and continued research to better understand outcomes.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         },
         "card_3": {
@@ -362,10 +401,14 @@
             "icon": "heart",
             "art": "none",
             "title": "Patient-Centred Support",
+            "highlight": false,
+            "wide": false,
             "text": "We aim to help patients understand their symptoms, follow their care routine and track their progress with appropriate guidance.",
+            "pill": "",
             "link_label": "",
             "link_to": "custom",
-            "link": ""
+            "link": "",
+            "downloads": ""
           }
         }
       },
@@ -377,10 +420,20 @@
       "settings": {
         "eyebrow": "What guides us",
         "heading": "Care Built Around Responsibility, Transparency and Progress",
+        "subheading": "",
         "text": "",
         "center": false,
         "columns": "3",
         "media": "icon",
+        "card_style": "default",
+        "accent": "blue",
+        "intro_badge": "",
+        "intro_title": "",
+        "intro_text": "",
+        "intro_note": "",
+        "ticks": "",
+        "note": "",
+        "note_style": "plain",
         "background": "mist",
         "sheet": false,
         "spacing": "normal"
@@ -393,6 +446,7 @@
         "quote_eyebrow": "",
         "quote": "",
         "photo": "shopify://shop_images/df562fd0-b9e9-450b-a93a-23a73f0874f7.png",
+        "photo_size": "tall",
         "name": "",
         "role": "MARCEL OSMF Clinical Consultant",
         "story_eyebrow": "Our team",
@@ -409,7 +463,6 @@
     },
     "history": {
       "type": "mt-guide",
-      "disabled": true,
       "blocks": {
         "chapter_1": {
           "type": "chapter",
@@ -430,6 +483,7 @@
         "chapter_1",
         "text_1"
       ],
+      "disabled": true,
       "settings": {
         "show_toc": false,
         "toc_title": "On This Page",
@@ -444,68 +498,6 @@
         "spacing": "tight"
       }
     },
-    "chapters": {
-      "type": "mt-learn-chapters",
-      "blocks": {
-        "foundation": {
-          "type": "chapter",
-          "settings": {
-            "years": "2000 to 2008",
-            "title": "Foundation",
-            "tone": "teal",
-            "items": "Clinical need identified\nTherapeutic concept\nCandidate screening\nLead formulation development\n2008 patent granted"
-          }
-        },
-        "development": {
-          "type": "chapter",
-          "settings": {
-            "years": "2012 to 2022",
-            "title": "Development",
-            "tone": "aqua",
-            "items": "Technical development & standardisation\nAlpha and beta product testing\nProduct maturation & scale-up\nMarket learning"
-          }
-        },
-        "structured_care": {
-          "type": "chapter",
-          "settings": {
-            "years": "2023 to 2025",
-            "title": "Structured OSMF Care",
-            "tone": "amber",
-            "items": "MARCEL OMR Therapy\nFoundation and Advance Programmes\nFour-pillar care approach"
-          }
-        },
-        "evidence_research": {
-          "type": "chapter",
-          "settings": {
-            "years": "2023 onward",
-            "title": "Evidence & Research",
-            "tone": "mint",
-            "items": "Fibrosis reversal / remodelling programme\nScaling up OSMF Specialists Community\nCTRI-registered RCT in Nanded\nCTRI-registered RCT at R.A. Poddar, Mumbai"
-          }
-        }
-      },
-      "block_order": [
-        "foundation",
-        "development",
-        "structured_care",
-        "evidence_research"
-      ],
-      "settings": {
-        "anchor": "our-journey",
-        "eyebrow": "The Journey of",
-        "heading": "Science, Care & Innovation",
-        "heading_mark": false,
-        "text": "26 years of development, clinical evaluation and continued research",
-        "center": true,
-        "intro": "A journey shaped by a clinical need, years of development, institutional evaluation and an evolving approach to OSMF care.",
-        "bar_title": "The MARCEL Journey",
-        "bar_note": "Four Connected Chapters",
-        "waves": "both",
-        "background": "mist",
-        "sheet": false,
-        "spacing": "normal"
-      }
-    },
     "brand_history": {
       "type": "mt-learn-history",
       "blocks": {
@@ -516,6 +508,7 @@
             "alt": "Fibrex oral rinse pack and bottle",
             "when": "2003 to 2014",
             "title": "Fibrex",
+            "sub": "",
             "text": "Our original oral rinse, developed for oral mucosal care."
           }
         },
@@ -548,6 +541,7 @@
             "alt": "MARCEL OraShield therapeutic oral rinse pack and bottle",
             "when": "From 1 January 2026",
             "title": "MARCEL OraShield",
+            "sub": "",
             "text": "MARCEL® (Poly Herbal Oral Rinse) was re-branded as MARCEL OraShield, effective 1 January 2026."
           }
         }
@@ -575,6 +569,7 @@
     "cta": {
       "type": "mt-cta-band",
       "settings": {
+        "style": "teal",
         "eyebrow": "Care, function and guidance",
         "heading": "The Journey Continues",
         "text": "Our aim is to make the OSMF care journey more understandable, measurable and supportive, while recognising the importance of professional assessment and continued scientific evaluation.",
@@ -584,6 +579,16 @@
         "button_2_label": "",
         "button_2_to": "test",
         "button_2_link": "",
+        "form": false,
+        "name_label": "Name",
+        "name_placeholder": "Enter your name",
+        "mobile_label": "Mobile No.",
+        "mobile_placeholder": "Enter your mobile number",
+        "form_button": "Talk to MARCEL Team on WhatsApp",
+        "form_error": "Please enter your name and a 10 digit mobile number.",
+        "wa_intro": "Hello MARCEL Team, I would like guidance.",
+        "regarding_label": "Regarding",
+        "hide_on": "",
         "background": "paper",
         "sheet": false,
         "spacing": "tight"
