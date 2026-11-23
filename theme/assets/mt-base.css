@@ -8,6 +8,9 @@
    ========================================================================== */
 
 :root {
+  /* Light colours only: phone browsers in dark mode must not darken the site (the navy logo vanished on the
+     darkened header). Same as the color-scheme meta tag in layout/theme.liquid. */
+  color-scheme: only light;
   /* Type scale from the client: headings and page titles 34px (28px on phones), card and block titles 20px,
      body text 16px. Small labels, buttons, prices and fine print keep their own sizes. */
   --mt-fs-h: 34px;

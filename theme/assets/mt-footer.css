@@ -1,6 +1,7 @@
 /* Marcel footer, organised after the sample the user shared (2026-11-22): link columns on the left (Products,
    Get Help, Learn, OSMF Specialist Centres), the contact, company and legal details on the right, then one row with
-   the social links, the Ask AI links and the MARCEL and JanSuta logos. Brand navy, white headings, mint accents. */
+   the social links, the Ask AI links and the MARCEL logo (the JanSuta logo is switched off). Brand navy, white
+   headings, mint accents. */
 .mt-footer { position: relative; background: var(--mt-navy-3); color: rgba(255, 255, 255, .76); padding-block: clamp(56px, 7vw, 84px) clamp(30px, 4vw, 40px); font-size: 15px; border-radius: var(--mt-sheet-r) var(--mt-sheet-r) 0 0; }
 .mt-footer a { transition: color .2s, border-color .2s, background-color .2s, text-decoration-color .2s; }
 
@@ -34,6 +35,8 @@
 .mt-foot-copy { color: rgba(255, 255, 255, .76); }
 .mt-foot-company { display: grid; gap: 6px; font-style: normal; }
 .mt-foot-company b { color: var(--mt-on-dark); }
+/* The address starts on the line under the company name (client, 2026-11-23). */
+.mt-foot-company-name { display: block; }
 .mt-foot-gst { color: rgba(255, 255, 255, .9); font-weight: 700; letter-spacing: .01em; }
 .mt-foot-legal { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; }
 .mt-foot-legal b { color: var(--mt-on-dark); }
@@ -64,7 +67,8 @@
 .mt-ai-ico--google { background: #fff; }
 .mt-ai-ico--claude { background: #D97757; }
 .mt-ai-ico--claude .mt-bi { width: 21px; height: 21px; }
-/* MARCEL logo at the bottom right, as in the sample, with the JanSuta logo beside it after a thin rule. */
+/* MARCEL logo at the bottom right, as in the sample. The JanSuta logo card beside it (after a thin rule) is switched
+   off since 2026-11-23 (client: it looked like a patch; one logo at the bottom), but stays available in the settings. */
 .mt-foot-brands { display: flex; align-items: center; gap: 22px; margin-left: auto; }
 .mt-foot-logo { display: flex; align-items: center; width: fit-content; }
 .mt-foot-logo .mt-logo-img { height: var(--mt-foot-logo-h, 84px); width: auto; }
@@ -105,5 +109,6 @@
   .mt-foot-info { grid-template-columns: minmax(0, 1fr); }
   .mt-foot-bar { flex-direction: column; align-items: flex-start; }
   .mt-foot-brands { margin-left: 0; }
-  .mt-foot-logo .mt-logo-img { height: min(var(--mt-foot-logo-h, 84px), 76px); }
+  /* One logo now, so phones show it at the set height (84px), only capped for very large settings. */
+  .mt-foot-logo .mt-logo-img { height: min(var(--mt-foot-logo-h, 84px), 96px); }
 }

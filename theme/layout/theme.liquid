@@ -4,6 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    {%- comment -%}
+      The site has light colours only. Phone browsers in dark mode (Samsung Internet, Chrome's dark theme for sites)
+      darken it on their own: the white header turned black and the navy MARCEL logo almost disappeared (client,
+      2026-11-23). "only light" asks them to keep the site's colours. mt-base.css sets the same on :root.
+    {%- endcomment -%}
+    <meta name="color-scheme" content="only light">
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
 

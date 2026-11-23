@@ -168,9 +168,13 @@
           {%- if has_company -%}
             <address class="mt-foot-company">
               {%- if s.company_name != blank or s.address != blank -%}
+                {%- comment -%}
+                  Company name on its own line, then the address lines as typed in the Address box (client,
+                  2026-11-23).
+                {%- endcomment -%}
                 <p>
-                  {%- if s.company_name != blank -%}<b>{{ s.company_name | escape }}{% if s.address != blank %}:{% endif %}</b> {% endif -%}
-                  {{- s.address | escape | newline_to_br | strip_newlines | replace: '<br />', ', ' -}}
+                  {%- if s.company_name != blank -%}<b class="mt-foot-company-name">{{ s.company_name | escape }}</b>{%- endif -%}
+                  {{- s.address | strip | escape | newline_to_br | strip_newlines -}}
                 </p>
               {%- endif -%}
               {%- if s.gst != blank -%}<p class="mt-foot-gst">{{ s.gst | escape }}</p>{%- endif -%}
@@ -359,7 +363,7 @@
       "type": "range",
       "id": "logo_height",
       "label": "Logo height",
-      "info": "The logo sits at the bottom right, beside the company logo.",
+      "info": "The logo sits at the bottom right (at the bottom on phones).",
       "min": 40,
       "max": 160,
       "step": 4,
@@ -457,6 +461,7 @@
       "type": "textarea",
       "id": "address",
       "label": "Address",
+      "info": "Shown under the company name. Each line here starts a new line in the footer.",
       "default": "D-405, Sun Central Place\nS.P. Ring Road, Ahmedabad-380058, Gujarat"
     },
     {
