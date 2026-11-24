@@ -1,0 +1,189 @@
+{%- comment -%}
+  Booking details for the Appointo consultation page (client, 2026-11-24).
+  The visitor fills the old booking form here; Appointo then shows the calendar and sends them to checkout.
+  Appointo copies every field named properties[...] on the page into the order line, so these details
+  arrive on the order and in the Appointo booking. The Appointo button stays locked until the form is valid.
+{%- endcomment -%}
+{{ 'mt-pages.css' | asset_url | stylesheet_tag }}
+{{ 'mt-booking.css' | asset_url | stylesheet_tag }}
+{{ 'mt-appointo.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mt-booking-details.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign s = section.settings
+  assign required = s.required_mark | escape
+  assign optional = s.optional_label | escape
+  assign fee = s.fee_fallback
+  if product != blank
+    assign fee = product.selected_or_first_available_variant.price | money_without_trailing_zeros
+  endif
+  assign fee_title = s.fee_title | replace: '[fee]', fee
+  assign consent = s.consent_text | replace: '[fee]', fee
+  assign uid = section.id
+-%}
+
+<style>
+  .mt-bkd { display: block; max-width: 920px; margin-inline: auto; }
+  .mt-bkd .mt-book-main { gap: 22px; }
+  .mt-bkd .mt-book-nav { align-items: center; }
+  .mt-bkd [data-mt-bkd-error]:empty { display: none; }
+</style>
+
+<section id="booking-details" class="{% render 'mt-section-class', s: section.settings, extra: 'mt-booking mt-bkd-sec' %}">
+  <div class="mt-wrap">
+    <mt-booking-details
+      class="mt-bkd"
+      data-err-name="{{ s.err_name | escape }}"
+      data-err-age="{{ s.err_age | escape }}"
+      data-err-phone="{{ s.err_phone | escape }}"
+      data-err-email="{{ s.err_email | escape }}"
+      data-err-address="{{ s.err_address | escape }}"
+      data-err-pincode="{{ s.err_pincode | escape }}"
+      data-err-consent="{{ s.err_consent | escape }}"
+      data-err-calendar="{{ s.err_calendar | escape }}"
+    >
+      <div class="mt-book-main" data-mt-bkd-form>
+        <div class="mt-stack-sm">
+          <h2 class="mt-book-h">{{ s.details_heading | escape }}</h2>
+          {%- if s.details_text != blank -%}<p class="mt-muted">{{ s.details_text | escape }}</p>{%- endif -%}
+        </div>
+        <div class="mt-form-grid mt-form-grid--2">
+          <div class="mt-field">
+            <label for="MtBkdName-{{ uid }}">{{ s.name_label | escape }} <span class="mt-req">{{ required }}</span></label>
+            <input class="mt-input" id="MtBkdName-{{ uid }}" name="properties[{{ s.prop_name | escape }}]" autocomplete="name" required data-mt-bkd="name">
+          </div>
+          <div class="mt-field">
+            <label for="MtBkdAge-{{ uid }}">{{ s.age_label | escape }} <span class="mt-req">{{ required }}</span></label>
+            <input class="mt-input" id="MtBkdAge-{{ uid }}" name="properties[{{ s.prop_age | escape }}]" inputmode="numeric" maxlength="3" required data-mt-bkd="age">
+          </div>
+          <div class="mt-field">
+            <label for="MtBkdPhone-{{ uid }}">{{ s.phone_label | escape }} <span class="mt-req">{{ required }}</span></label>
+            <div class="mt-phone">
+              <span>+91</span>
+              <input class="mt-input" id="MtBkdPhone-{{ uid }}" name="properties[{{ s.prop_phone | escape }}]" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="10" placeholder="{{ s.phone_placeholder | escape }}" required data-mt-bkd="phone">
+            </div>
+          </div>
+          <div class="mt-field">
+            <label for="MtBkdEmail-{{ uid }}">{{ s.email_label | escape }} <span class="mt-opt-label">{{ optional }}</span></label>
+            <input class="mt-input" id="MtBkdEmail-{{ uid }}" name="properties[{{ s.prop_email | escape }}]" type="email" autocomplete="email" data-mt-bkd="email">
+          </div>
+        </div>
+        <fieldset class="mt-book-address">
+          {%- if s.address_label != blank -%}<legend class="mt-book-legend">{{ s.address_label | escape }}</legend>{%- endif -%}
+          <div class="mt-form-grid mt-form-grid--2">
+            <div class="mt-field">
+              <label for="MtBkdCity-{{ uid }}">{{ s.city_label | escape }} <span class="mt-req">{{ required }}</span></label>
+              <input class="mt-input" id="MtBkdCity-{{ uid }}" name="properties[{{ s.city_label | escape }}]" autocomplete="address-level2" required data-mt-bkd="city">
+            </div>
+            <div class="mt-field">
+              <label for="MtBkdTaluk-{{ uid }}">{{ s.taluk_label | escape }} <span class="mt-req">{{ required }}</span></label>
+              <input class="mt-input" id="MtBkdTaluk-{{ uid }}" name="properties[{{ s.taluk_label | escape }}]" autocomplete="address-level3" required data-mt-bkd="taluk">
+            </div>
+            <div class="mt-field">
+              <label for="MtBkdPin-{{ uid }}">{{ s.pincode_label | escape }} <span class="mt-req">{{ required }}</span></label>
+              <input class="mt-input" id="MtBkdPin-{{ uid }}" name="properties[{{ s.pincode_label | escape }}]" inputmode="numeric" maxlength="6" autocomplete="postal-code" required data-mt-bkd="pincode">
+            </div>
+            <div class="mt-field">
+              <label for="MtBkdState-{{ uid }}">{{ s.state_label | escape }} <span class="mt-req">{{ required }}</span></label>
+              <select class="mt-input" id="MtBkdState-{{ uid }}" name="properties[{{ s.state_label | escape }}]" autocomplete="address-level1" required data-mt-bkd="state">
+                <option value="">{{ s.state_placeholder | escape }}</option>
+                {%- assign mt_states = 'Andaman and Nicobar Islands|Andhra Pradesh|Arunachal Pradesh|Assam|Bihar|Chandigarh|Chhattisgarh|Dadra and Nagar Haveli and Daman and Diu|Delhi|Goa|Gujarat|Haryana|Himachal Pradesh|Jammu and Kashmir|Jharkhand|Karnataka|Kerala|Ladakh|Lakshadweep|Madhya Pradesh|Maharashtra|Manipur|Meghalaya|Mizoram|Nagaland|Odisha|Puducherry|Punjab|Rajasthan|Sikkim|Tamil Nadu|Telangana|Tripura|Uttar Pradesh|Uttarakhand|West Bengal' | split: '|' -%}
+                {%- for st in mt_states -%}<option value="{{ st }}">{{ st }}</option>{%- endfor -%}
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="mt-fee-box">
+          <b>{{ fee }}</b>
+          <span><strong>{{ fee_title | escape }}</strong>{% if s.fee_text != blank %}<small>{{ s.fee_text | escape }}</small>{% endif %}</span>
+        </div>
+        <label class="mt-check-row" for="MtBkdConsent-{{ uid }}">
+          <input type="checkbox" id="MtBkdConsent-{{ uid }}" required data-mt-bkd="consent">
+          <span>{{ consent | escape }} <span class="mt-req">{{ required }}</span></span>
+        </label>
+        <p class="mt-err" role="alert" data-mt-bkd-error></p>
+        <div class="mt-book-nav">
+          {%- if s.terms_note != blank -%}<p class="mt-fine">{{ s.terms_note | escape }}</p>{%- endif -%}
+          <button type="button" class="mt-btn mt-btn-primary" data-mt-bkd-go>
+            <span class="mt-btn-label">{{ s.button_label | escape }}{%- render 'mt-icon', icon: 'arrow-right' -%}</span>
+          </button>
+        </div>
+      </div>
+    </mt-booking-details>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcel booking details",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Use on the consultation booking product page with Appointo. The visitor fills these details first; the Appointo calendar opens only when they are complete, and the details are added to the order."
+    },
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "details_heading", "label": "Heading", "default": "Your Details" },
+    { "type": "textarea", "id": "details_text", "label": "Text", "default": "Please complete the required fields so a MARCEL OSMF Consultant can contact you." },
+    { "type": "text", "id": "name_label", "label": "Name label", "default": "Full name" },
+    { "type": "text", "id": "age_label", "label": "Age label", "default": "Age" },
+    { "type": "text", "id": "phone_label", "label": "Phone label", "default": "Phone number" },
+    { "type": "text", "id": "phone_placeholder", "label": "Phone placeholder", "default": "10-digit mobile" },
+    { "type": "text", "id": "email_label", "label": "Email label", "default": "Email ID" },
+    { "type": "text", "id": "address_label", "label": "Address heading", "default": "Address" },
+    { "type": "text", "id": "city_label", "label": "Town or city label", "default": "Town / City" },
+    { "type": "text", "id": "taluk_label", "label": "Taluk label", "default": "Taluk / Tehsil" },
+    { "type": "text", "id": "pincode_label", "label": "Pincode label", "default": "Pincode" },
+    { "type": "text", "id": "state_label", "label": "State label", "default": "State" },
+    { "type": "text", "id": "state_placeholder", "label": "State placeholder", "default": "Select your state" },
+    { "type": "text", "id": "optional_label", "label": "Optional mark", "default": "(optional)" },
+    { "type": "text", "id": "required_mark", "label": "Required mark", "default": "*" },
+    { "type": "header", "content": "Fee and consent" },
+    { "type": "text", "id": "fee_fallback", "label": "Fee shown without a product", "default": "₹50" },
+    { "type": "text", "id": "fee_title", "label": "Fee title", "default": "Consultation Booking Fee" },
+    { "type": "text", "id": "fee_text", "label": "Fee note", "default": "Adjusted against an eligible MARCEL product purchase*" },
+    { "type": "textarea", "id": "consent_text", "label": "Consent text", "info": "[fee] shows the booking fee.", "default": "I understand that a [fee] consultation fee is payable to reserve the slot and will be adjusted against an eligible MARCEL product purchase under the published terms. I agree that MARCEL may use my submitted details to manage this consultation request." },
+    { "type": "textarea", "id": "terms_note", "label": "Terms note", "default": "*Eligible products, the adjustment period and how to redeem it are set out in our consultation terms." },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Choose Your Slot" },
+    { "type": "header", "content": "Order line names" },
+    { "type": "text", "id": "prop_name", "label": "Name", "default": "Patient name" },
+    { "type": "text", "id": "prop_age", "label": "Age", "default": "Age" },
+    { "type": "text", "id": "prop_phone", "label": "Phone", "default": "Phone" },
+    { "type": "text", "id": "prop_email", "label": "Email", "default": "Email" },
+    { "type": "header", "content": "Messages" },
+    { "type": "text", "id": "err_name", "label": "Name missing", "default": "Enter your full name." },
+    { "type": "text", "id": "err_age", "label": "Age missing", "default": "Enter your age." },
+    { "type": "text", "id": "err_phone", "label": "Phone not valid", "default": "Enter a 10-digit mobile number." },
+    { "type": "text", "id": "err_email", "label": "Email not valid", "default": "Enter a valid email address, or leave it blank." },
+    { "type": "text", "id": "err_address", "label": "Address missing", "default": "Fill in your town or city, taluk or tehsil and state." },
+    { "type": "text", "id": "err_pincode", "label": "Pincode not valid", "default": "Enter a 6-digit pincode." },
+    { "type": "text", "id": "err_consent", "label": "Consent missing", "default": "Please accept the booking terms to continue." },
+    { "type": "text", "id": "err_calendar", "label": "Calendar not ready", "default": "The calendar is still loading. Please try again in a moment." },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "paper", "label": "White" },
+        { "value": "mist", "label": "Light" },
+        { "value": "tint", "label": "Tinted" },
+        { "value": "navy", "label": "Navy" }
+      ],
+      "default": "mist"
+    },
+    { "type": "checkbox", "id": "sheet", "label": "Rounded sheet", "default": false },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "tight", "label": "Tight" },
+        { "value": "normal", "label": "Normal" }
+      ],
+      "default": "normal"
+    }
+  ],
+  "presets": [{ "name": "Marcel booking details" }]
+}
+{% endschema %}

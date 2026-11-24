@@ -8,5 +8,5 @@
   .mt-mbar-ring { display: grid; place-items: center; width: 34px; height: 30px; margin-top: -2px; border-radius: 99px; background: var(--mt-teal); color: var(--mt-on-dark); }
   .mt-mbar-ring .mt-i { width: 18px; height: 18px; stroke-width: 2.2; }
   .mt-mbar-item--featured { color: var(--mt-navy); }
-  .mt-mbar-item--whatsapp .mt-i { color: #16A34A; }
+  .mt-mbar-item--whatsapp .mt-i { color: var(--mt-teal); }
 }

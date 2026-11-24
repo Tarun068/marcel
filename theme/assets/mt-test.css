@@ -116,7 +116,7 @@ mt-result { display: block; }
   .mt-report-row { grid-template-columns: minmax(0, 1fr); }
 }
 .mt-report-title { display: flex; align-items: center; gap: 8px; color: var(--mt-ink); }
-.mt-report-title .mt-i { color: #16A34A; }
+.mt-report-title .mt-i { color: var(--mt-teal); }
 .mt-report-form { display: flex; flex-wrap: wrap; gap: 10px; }
 .mt-report-form .mt-phone { flex: 1 1 220px; }
 .mt-report-form .mt-err, .mt-report-done { flex-basis: 100%; }

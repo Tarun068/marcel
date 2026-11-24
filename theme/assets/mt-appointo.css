@@ -1,0 +1,82 @@
+/*
+  Appointo booking popup in the MARCEL look (2026-11-24).
+  Appointo sets its accent through --vanilla-calendar-* variables written inline on <html>, so the
+  variables are overridden with !important. Only colours, type, borders and corners change here;
+  Appointo's own layout and sizes are left alone.
+*/
+:root {
+  --vanilla-calendar-selected-bg-color: #077C87 !important;
+  --vanilla-calendar-today-color: #077C87 !important;
+  --vanilla-toast-color: #077C87 !important;
+  --vanilla-calendar-selected-color: #FFFFFF !important;
+  --vanilla-calendar-border-color: #DCE7ED !important;
+  --vanilla-calendar-today-bg-color: #E3F3F5 !important;
+  --vanilla-calendar-selected-radius: 10px !important;
+  --vanilla-calendar-border-radius: 16px !important;
+}
+
+/* Backdrop and frame */
+#appointo-modal { background: rgba(11, 42, 69, .62); }
+#appointo-modal .appointo-modal-content {
+  border: 0;
+  border-radius: 28px;
+  box-shadow: 0 40px 90px -30px rgba(11, 42, 69, .7);
+}
+#appointo-modal,
+#appointo-modal :is(p, div, span, label, select, option, a, button, input) { font-family: var(--mt-font, inherit) !important; }
+
+/* Close button: a round white button with a navy cross */
+#appointo-modal .appointo-close { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #FFFFFF; color: #0B2A45; box-shadow: 0 8px 20px -8px rgba(11, 42, 69, .6); }
+#appointo-modal .appointo-close svg { width: 22px; height: 22px; }
+#appointo-modal .appointo-close svg :is(path, circle, line) { stroke: #0B2A45; }
+
+/* Left side: product name, note and the calendar */
+#appointo-modal .appointo-left { background: #F3F8FA; border-top-left-radius: 28px; }
+#appointo-modal .appointo-product-name { color: #0C2A3D; font-weight: 800; letter-spacing: -.01em; }
+#appointo-modal :is(.appointo-location, .appointo-date-selected, .appointo-calendar-tip-header, .appointo-variant-choose) { color: #3A5263; }
+#appointo-modal .vanilla-calendar { background: #FFFFFF; border: 1px solid #DCE7ED; border-radius: 16px; box-shadow: 0 14px 30px -24px rgba(11, 42, 69, .5); }
+#appointo-modal .vanilla-calendar-header__label { color: #0C2A3D; font-weight: 800; }
+#appointo-modal .vanilla-calendar-week span,
+#appointo-modal [class*="vanilla-calendar-week__day"] { color: #077C87; font-weight: 700; }
+#appointo-modal .vanilla-calendar-arrow,
+#appointo-modal [class*="vanilla-calendar-arrow"] { color: #077C87; }
+#appointo-modal .vanilla-calendar-date--selected,
+#appointo-modal .vanilla-calendar-date--selected:hover { background: #077C87; color: #FFFFFF; }
+#appointo-modal .vanilla-calendar-date--active:not(.vanilla-calendar-date--selected):hover { background: #E3F3F5; color: #077C87; }
+#appointo-modal .appointo-select { color: #0C2A3D; background-color: #FFFFFF; border-color: #C5D6DF; }
+
+/* Right side: time slots */
+#appointo-modal .appointo-timezone-select { color: #077C87; font-weight: 700; }
+#appointo-modal .appointo-slot {
+  color: #0C2A3D;
+  border: 1.5px solid #C5D6DF;
+  border-radius: 999px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  transition: background .15s, border-color .15s, color .15s;
+}
+#appointo-modal .appointo-slot:hover { border-color: #077C87; color: #077C87; background: #F3FAFB; }
+#appointo-modal .appointo-slot-selected,
+#appointo-modal .appointo-slot-selected:hover { background: #077C87; border-color: #077C87; color: #FFFFFF !important; }
+#appointo-modal .request-time-btn { background: #077C87; border-radius: 999px; }
+#appointo-modal .appointo-loader { color: #077C87; }
+
+/* Footer bar: white with a line above and the site's teal pill button (a navy bar vanished into the
+   backdrop over the navy hero). */
+#appointo-modal .appointo-footer { background: #FFFFFF; border-top: 1px solid #DCE7ED; border-bottom-left-radius: 28px; border-bottom-right-radius: 28px; }
+#appointo-modal .appointo-confirm {
+  background: #077C87;
+  color: #FFFFFF;
+  border-radius: 999px;
+  font-weight: 700;
+  box-shadow: none;
+}
+#appointo-modal .appointo-confirm:hover { background: #0B2A45; color: #FFFFFF; }
+#appointo-modal .appointo-footer-back { color: #0C2A3D; border-color: #C5D6DF; border-radius: 999px; }
+#appointo-modal :is(.appointo-branding, .appointo-company-name) { color: #5F7584; }
+
+@media (max-width: 960px) {
+  #appointo-modal .appointo-modal-content { border-radius: 22px; }
+  #appointo-modal .appointo-left { border-top-left-radius: 22px; border-top-right-radius: 22px; }
+  #appointo-modal .appointo-footer { border-bottom-left-radius: 22px; border-bottom-right-radius: 22px; }
+}

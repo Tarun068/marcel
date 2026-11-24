@@ -1,0 +1,181 @@
+{
+  "sections": {
+    "main": {
+      "type": "mt-main-product",
+      "settings": {
+        "headline": "",
+        "supporting": "Teleconsultation with a MARCEL OSMF Consultant",
+        "intro": "<p><strong>Share your details, pick a date and time that suits you, then pay the booking fee to confirm your slot.</strong></p><p>A MARCEL OSMF Consultant will call you at the booked time to talk through your symptoms, concerns and the MARCEL OMR Therapy care pathway. The fee is adjusted against an eligible MARCEL product purchase, subject to the published terms.</p>",
+        "details": "",
+        "how_lines": "",
+        "safety": "",
+        "cta_label": "WhatsApp MARCEL Team",
+        "cta_to": "whatsapp",
+        "cta_link": "",
+        "cta2_label": "",
+        "cta2_to": "help",
+        "cta2_link": "",
+        "shop_link": "",
+        "home_label": "Home",
+        "shop_label": "Get Help",
+        "image_fit": "cover",
+        "gallery_label": "Consultation picture",
+        "thumbs_label": "Choose a picture",
+        "prev_label": "Previous picture",
+        "next_label": "Next picture",
+        "thumbs_prev_label": "Earlier pictures",
+        "thumbs_next_label": "More pictures",
+        "best_prefix": "Best for",
+        "add_label": "Choose Your Slot",
+        "sold_out_label": "Bookings closed",
+        "variant_style": "cards",
+        "pack_label": "Option",
+        "pack_notes": "",
+        "show_buy_now": false,
+        "show_quantity": false,
+        "features_heading": "Key Features",
+        "qty_label": "Quantity",
+        "minus_label": "Decrease quantity",
+        "plus_label": "Increase quantity",
+        "show_description": false,
+        "background": "paper",
+        "sheet": false,
+        "spacing": "tight",
+        "style": "hero",
+        "hero_title": "Book Your OSMF Consultation",
+        "badge": "MARCEL OSMF Consultants",
+        "pack_size": "15 minutes",
+        "pack_size_label": "Duration",
+        "mrp_label": "Booking Fee",
+        "image_chips": false,
+        "hero_media": "image",
+        "badge_pill": true,
+        "hero_tone": "blue",
+        "hero_art": "card-consultant-wide",
+        "hero_frame": "card",
+        "hero_note": "Phone or video call, Monday to Saturday."
+      }
+    },
+    "steps": {
+      "type": "mt-use-steps",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Share Your Details",
+            "text": "Fill in your name, age, phone number and address in the form above."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Choose Your Slot",
+            "text": "Open the calendar, pick a date, then pick a time from the open slots."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Pay the Booking Fee",
+            "text": "Complete checkout. Your slot is confirmed once the payment goes through and the booking details reach you by email."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "Talk to the Consultant",
+            "text": "A MARCEL OSMF Consultant calls you at the booked time to discuss your concerns and guide your next step."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
+      "settings": {
+        "eyebrow": "How booking works",
+        "heading": "Four Simple Steps",
+        "text": "",
+        "note": "A MARCEL OSMF Consultant discusses your concerns and guides the next step. For an examination, diagnosis or treatment, please see an OSMF Specialist Doctor.",
+        "layout": "list",
+        "number_style": "plain",
+        "list_mark": "number",
+        "media_art": "none",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "faq": {
+      "type": "mt-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Which consultation should I choose?",
+            "answer": "<p>If you want to discuss your symptoms and understand how to proceed, start with the MARCEL OSMF Consultant on-call service. If you need a direct examination, have significant difficulty opening your mouth, or notice a persistent ulcer, unexplained lump, bleeding or another concerning change, arrange an in-clinic consultation with an OSMF Specialist Doctor.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Can I follow care from home if I cannot visit a clinic?",
+            "answer": "<p>An on-call consultation can help you discuss your symptoms and understand the next step without travelling first. If an examination is needed, the consultant can advise you to visit an OSMF Specialist Doctor in person.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use MARCEL OMR Therapy while receiving treatment from another doctor?",
+            "answer": "<p>Tell the MARCEL OSMF Consultant or your treating doctor about the medicines, procedures and oral products you are currently using. Do not stop or change prescribed treatment on your own. They can help you decide whether the approaches can be used together and whether an in-person assessment is needed.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "What happens to the booking fee?",
+            "answer": "<p>The booking fee reserves your slot. It is adjusted against an eligible MARCEL product purchase. Eligible products, the adjustment period and how to redeem it are set out in our consultation terms.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4"
+      ],
+      "settings": {
+        "eyebrow": "Before you book",
+        "heading": "Which Consultation Is Right for You?",
+        "open_first": false,
+        "one_at_a_time": false,
+        "schema_markup": true,
+        "show_help": false,
+        "help_title": "Have Questions?",
+        "help_text": "Our MARCEL OSMF Consultants can help with programme questions and your next step.",
+        "whatsapp_label": "WhatsApp MARCEL Team",
+        "link_label": "",
+        "link": "/pages/faq",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "details": {
+      "type": "mt-booking-details",
+      "settings": {
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "details",
+    "steps",
+    "faq"
+  ]
+}

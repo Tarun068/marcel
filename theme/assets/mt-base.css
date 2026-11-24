@@ -140,9 +140,9 @@ body { font-size: var(--mt-fs-body); }
 .mt .mt-btn-light:hover { background: var(--mt-tint); }
 .mt .mt-btn-outline-light { background: transparent; color: var(--mt-on-dark); box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .45); }
 .mt .mt-btn-outline-light:hover { box-shadow: inset 0 0 0 1.5px var(--mt-on-dark); }
-.mt .mt-btn-wa { background: var(--mt-wa-soft); color: var(--mt-wa-ink); box-shadow: inset 0 0 0 1.5px #BFE8CC; }
-.mt .mt-btn-wa:hover { background: #D7F2DF; }
-.mt-btn-wa .mt-i { color: #16A34A; }
+.mt .mt-btn-wa { background: var(--mt-wa-soft); color: var(--mt-wa-ink); box-shadow: inset 0 0 0 1.5px #B5DDE1; }
+.mt .mt-btn-wa:hover { background: #D3ECEF; }
+.mt-btn-wa .mt-i { color: var(--mt-teal); }
 .mt .mt-btn-sm { min-height: 42px; padding: 0 18px; font-size: 14.5px; }
 .mt .mt-btn-block { width: 100%; }
 .mt .mt-btn:is([disabled], [aria-disabled="true"]) { opacity: .4; cursor: not-allowed; transform: none; }

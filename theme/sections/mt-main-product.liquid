@@ -75,6 +75,9 @@
     when 'pd-oralis'
       assign art_w = 600
       assign art_h = 900
+    when 'card-consultant-wide'
+      assign art_w = 640
+      assign art_h = 480
     else
       assign art_w = 900
       assign art_h = 900
@@ -389,6 +392,7 @@
                 (with its label showing) and the two buttons stay side by side.
               {%- endcomment -%}
               <div class="mt-buy-row{% if section.settings.show_buy_now %} mt-buy-row--now{% endif %}">
+                {%- if section.settings.show_quantity -%}
                 <div class="mt-qty-wrap">
                   <label class="mt-qty-label" for="MtQty-{{ section.id }}">{{ section.settings.qty_label | escape }}</label>
                   <div class="mt-qty">
@@ -397,6 +401,7 @@
                     <button type="button" data-mt-qty="1" aria-label="{{ section.settings.plus_label | escape }}">{%- render 'mt-icon', icon: 'plus' -%}</button>
                   </div>
                 </div>
+                {%- endif -%}
                 <button
                   type="submit"
                   name="add"
@@ -699,6 +704,10 @@
         {
           "value": "life-smile",
           "label": "Photo: Smile on a bathroom counter"
+        },
+        {
+          "value": "card-consultant-wide",
+          "label": "Photo: MARCEL OSMF Consultant"
         }
       ],
       "default": "none",
@@ -1119,6 +1128,13 @@
       "type": "checkbox",
       "id": "show_buy_now",
       "label": "Show Buy it now button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quantity",
+      "label": "Show quantity",
+      "info": "Turn off for a booking product, where one slot is booked at a time.",
       "default": true
     },
     {
