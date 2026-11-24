@@ -79,7 +79,7 @@
         "hero_note": "",
         "headline": "Mouth-opening support device",
         "supporting": "Mouth Opening Device",
-        "intro": "<p><strong>An optional support device for guided mouth-opening exercises.</strong></p><p>MARCEL® MOFlex is designed to support gradual, controlled mouth-opening practice for selected individuals experiencing restricted mouth opening, including some people with Oral Submucous Fibrosis (OSMF), when recommended as part of an appropriate care plan.</p>",
+        "intro": "<p><strong>An optional support device for guided mouth-opening exercises.</strong></p><p>MARCEL MOFlex is designed to support gradual, controlled mouth-opening practice for selected individuals experiencing restricted mouth opening, including some people with Oral Submucous Fibrosis (OSMF), when recommended as part of an appropriate care plan.</p>",
         "details": "Use at home only after professional demonstration and training, or by following the official MARCEL training video if advised by your doctor. Do not force movement.",
         "how_lines": "",
         "safety": "",
@@ -324,7 +324,7 @@
         "eyebrow": "",
         "heading": "Key Benefits",
         "subheading": "Designed to Support a Gradual Exercise Routine",
-        "text": "MARCEL® MOFlex may be considered for selected individuals with restricted mouth opening, including some people with OSMF, when recommended as part of an appropriate care plan.",
+        "text": "MARCEL MOFlex may be considered for selected individuals with restricted mouth opening, including some people with OSMF, when recommended as part of an appropriate care plan.",
         "center": false,
         "columns": "3",
         "media": "icon",
@@ -386,7 +386,7 @@
       ],
       "settings": {
         "eyebrow": "",
-        "heading": "How to Use MARCEL® MOFlex",
+        "heading": "How to Use MARCEL MOFlex",
         "text": "Before using the device at home, receive a demonstration from your doctor or watch the official MARCEL training video if your doctor has advised this method. Follow the individual instructions provided for you.",
         "note": "<strong>Important:</strong> Stop using the device if you experience pain, bleeding, new or worsening discomfort, or any unexpected problem, and contact your healthcare professional. Never force movement or increase the opening beyond the range demonstrated and prescribed for you. A training video does not replace an initial clinical assessment and instruction.",
         "layout": "cards",
@@ -426,7 +426,7 @@
           "type": "row",
           "settings": {
             "label": "Product Name",
-            "value": "MARCEL® MOFlex"
+            "value": "MARCEL MOFlex"
           }
         },
         "row_2": {
@@ -476,7 +476,7 @@
       "settings": {
         "eyebrow": "At a glance",
         "heading": "Device Information",
-        "text": "Key details for MARCEL® MOFlex Mouth Opening Device.",
+        "text": "Key details for MARCEL MOFlex Mouth Opening Device.",
         "show_image": true,
         "art": "pd-moflex-features",
         "media_style": "plain",
@@ -759,7 +759,7 @@
         "question_1": {
           "type": "question",
           "settings": {
-            "question": "What is MARCEL® MOFlex?",
+            "question": "What is MARCEL MOFlex?",
             "answer": "<p>MARCEL® MOFlex is a Heister-type mouth-opening device designed to support guided mouth-opening exercises for selected individuals with restricted mouth opening.</p>"
           }
         },
@@ -773,7 +773,7 @@
         "question_3": {
           "type": "question",
           "settings": {
-            "question": "Can I use MARCEL® MOFlex at home?",
+            "question": "Can I use MARCEL MOFlex at home?",
             "answer": "<p>Home use is intended only after a doctor has demonstrated the correct technique and given you individual instructions, or where your doctor has advised the official MARCEL training video as your guide.</p>"
           }
         },
@@ -874,7 +874,7 @@
       "settings": {
         "style": "navy",
         "eyebrow": "",
-        "heading": "Need Guidance on Using MARCEL® MOFlex?",
+        "heading": "Need Guidance on Using MARCEL MOFlex?",
         "text": "Mouth-opening exercises should be appropriate to your individual condition and performed with proper instruction. Contact MARCEL Team for product information and guidance on the next step in your care journey.",
         "button_1_label": "WhatsApp MARCEL Team",
         "button_1_to": "whatsapp",
