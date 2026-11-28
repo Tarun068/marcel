@@ -91,7 +91,6 @@
         "states_1"
       ],
       "settings": {
-        "logo": "shopify://shop_images/Updated_Logo_0ab6a006-c98e-4448-960a-6fc46aad7f96.png",
         "logo_white": true,
         "logo_height": 84,
         "logo_trim_top": 10,
@@ -106,7 +105,8 @@
         "company_name": "JanSuta Pharmaceuticals",
         "address": "D-405, Sun Central Place. S.P. Ring Road\nAhmedabad – 380058, Gujarat, India",
         "gst": "GST No: 24AFGPB2002J1Z7",
-        "company_logo_show": false,
+        "company_logo_show": true,
+        "company_logo": "shopify://shop_images/JS_logo_final.png",
         "company_logo_link": "",
         "social_heading": "Catch us on:",
         "social_instagram": "https://www.instagram.com/marceltherapy2019/",

@@ -13,25 +13,98 @@
       "type": "mt-page-hero",
       "settings": {
         "show_crumbs": true,
+        "align": "left",
         "home_label": "Home",
-        "button_1_to": "test",
-        "button_2_to": "whatsapp",
-        "back_to": "therapy",
-        "background": "fade",
-        "sheet": false,
-        "spacing": "none",
+        "parent_label": "",
+        "parent_link": "",
         "current_label": "12-Week Care Journey",
         "eyebrow": "MARCEL OMR Therapy",
         "heading": "The 12-Week Care Journey",
         "text": "Four phases help organise your routine and follow-up, with progress reviews at Weeks 3, 6, 9 and 12. The phases are a care-planning framework, not a promise of a specific result by a fixed date.",
         "button_1_label": "Check Your OSMF Stage",
+        "button_1_to": "test",
+        "button_1_link": "",
         "button_2_label": "Talk to MARCEL Team",
-        "art": "journey"
+        "button_2_to": "whatsapp",
+        "button_2_link": "",
+        "note": "",
+        "back_label": "",
+        "back_to": "therapy",
+        "back_link": "",
+        "art": "journey",
+        "background": "fade",
+        "sheet": false,
+        "spacing": "none"
       }
     },
     "phases": {
       "type": "mt-journey",
+      "blocks": {
+        "phase_1": {
+          "type": "phase",
+          "settings": {
+            "when": "Weeks 1 and 2",
+            "icon": "calendar",
+            "tone": "",
+            "art": "none",
+            "status": "none",
+            "title": "Relief",
+            "text": "Establish the routine and focus on comfort.",
+            "points": "",
+            "foot": ""
+          }
+        },
+        "phase_2": {
+          "type": "phase",
+          "settings": {
+            "when": "Weeks 3 to 6",
+            "icon": "calendar",
+            "tone": "",
+            "art": "none",
+            "status": "none",
+            "title": "Activation",
+            "text": "Build consistency and follow prescribed exercises.",
+            "points": "",
+            "foot": ""
+          }
+        },
+        "phase_3": {
+          "type": "phase",
+          "settings": {
+            "when": "Weeks 6 to 10",
+            "icon": "calendar",
+            "tone": "",
+            "art": "none",
+            "status": "none",
+            "title": "Restoration",
+            "text": "Continue the routine and review comfort and function with professional guidance.",
+            "points": "",
+            "foot": ""
+          }
+        },
+        "phase_4": {
+          "type": "phase",
+          "settings": {
+            "when": "Weeks 11 and 12",
+            "icon": "calendar",
+            "tone": "",
+            "art": "none",
+            "status": "none",
+            "title": "Reinforcement",
+            "text": "Reinforce daily habits and follow-up.",
+            "points": "",
+            "foot": ""
+          }
+        }
+      },
+      "block_order": [
+        "phase_1",
+        "phase_2",
+        "phase_3",
+        "phase_4"
+      ],
       "settings": {
+        "anchor": "",
         "eyebrow": "The 12-Week Care Journey",
         "heading": "Four Phases to Organise Routine and Follow-Up",
         "text": "The phases are a care-planning framework, not a promise of a specific result by a fixed date.",
@@ -41,80 +114,29 @@
         "note": "Individual experiences vary. This is not a clinical-trial timeline or a guarantee of tissue restoration or specific improvement.",
         "button_label": "",
         "button_to": "journey",
+        "button_link": "",
+        "button2_label": "",
         "button2_to": "consult",
+        "button2_link": "",
+        "status_done": "Completed",
+        "status_now": "In progress",
+        "status_next": "Coming next",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"
-      },
-      "blocks": {
-        "phase_1": {
-          "type": "phase",
-          "settings": {
-            "when": "Weeks 1 and 2",
-            "icon": "calendar",
-            "title": "Relief",
-            "text": "Establish the routine and focus on comfort."
-          }
-        },
-        "phase_2": {
-          "type": "phase",
-          "settings": {
-            "when": "Weeks 3 to 6",
-            "icon": "calendar",
-            "title": "Activation",
-            "text": "Build consistency and follow prescribed exercises."
-          }
-        },
-        "phase_3": {
-          "type": "phase",
-          "settings": {
-            "when": "Weeks 6 to 10",
-            "icon": "calendar",
-            "title": "Restoration",
-            "text": "Continue the routine and review comfort and function with professional guidance."
-          }
-        },
-        "phase_4": {
-          "type": "phase",
-          "settings": {
-            "when": "Weeks 11 and 12",
-            "icon": "calendar",
-            "title": "Reinforcement",
-            "text": "Reinforce daily habits and follow-up."
-          }
-        }
-      },
-      "block_order": [
-        "phase_1",
-        "phase_2",
-        "phase_3",
-        "phase_4"
-      ]
+      }
     },
     "reviews": {
       "type": "mt-journey",
-      "settings": {
-        "eyebrow": "Progress reviews",
-        "heading": "When Can You Expect to See Progress?",
-        "text": "Every person’s progress is different. Regular assessment helps you understand your individual response.",
-        "center": false,
-        "layout": "cards",
-        "columns": 5,
-        "note": "<b>Progress varies from person to person.</b> MARCEL OMR Therapy does not promise a fixed timeline or outcome. Regular assessment by an OSMF Specialist Doctor or qualified healthcare professional helps you understand your individual progress and adjust care as needed.",
-        "button_label": "",
-        "button_to": "journey",
-        "button2_to": "consult",
-        "background": "mist",
-        "sheet": false,
-        "spacing": "normal"
-      },
       "blocks": {
         "phase_1": {
           "type": "phase",
           "settings": {
             "when": "Start",
             "icon": "ruler",
-            "tone": "#C9453A",
+            "tone": "#c9453a",
+            "art": "none",
+            "status": "none",
             "title": "Baseline",
             "text": "",
             "points": "Burning sensation\nTightness in cheeks\nDifficulty in eating\nDifficulty in speaking\nRestricted mouth opening",
@@ -126,7 +148,9 @@
           "settings": {
             "when": "Week 3",
             "icon": "chart",
-            "tone": "#C2551F",
+            "tone": "#c2551f",
+            "art": "none",
+            "status": "none",
             "title": "First Progress Review",
             "text": "",
             "points": "Burning sensation may reduce\nCheek tightness may be less\nEating may be easier\nSpeech may improve\nMouth opening may increase",
@@ -138,7 +162,9 @@
           "settings": {
             "when": "Week 6",
             "icon": "chart",
-            "tone": "#9C6604",
+            "tone": "#9c6604",
+            "art": "none",
+            "status": "none",
             "title": "Progress Check",
             "text": "",
             "points": "Burning may reduce further\nCheek tightness may ease\nEating may feel more comfortable\nSpeaking may be easier\nMouth opening may continue to change",
@@ -150,7 +176,9 @@
           "settings": {
             "when": "Week 9",
             "icon": "chart",
-            "tone": "#4E7F1A",
+            "tone": "#4e7f1a",
+            "art": "none",
+            "status": "none",
             "title": "Continue & Reassess",
             "text": "",
             "points": "Review burning and cheek comfort\nReview eating and speaking\nReview mouth opening",
@@ -162,7 +190,9 @@
           "settings": {
             "when": "Week 12",
             "icon": "target",
-            "tone": "#23804A",
+            "tone": "#23804a",
+            "art": "none",
+            "status": "none",
             "title": "Overall Progress Assessment",
             "text": "",
             "points": "Review comfort and daily function\nReview mouth opening against your baseline\nPlan your next steps",
@@ -176,59 +206,110 @@
         "phase_3",
         "phase_4",
         "phase_5"
-      ]
+      ],
+      "settings": {
+        "anchor": "",
+        "eyebrow": "Progress reviews",
+        "heading": "When Can You Expect to See Progress?",
+        "text": "Every person’s progress is different. Regular assessment helps you understand your individual response.",
+        "center": false,
+        "layout": "cards",
+        "columns": 5,
+        "note": "<b>Progress varies from person to person.</b> MARCEL OMR Therapy does not promise a fixed timeline or outcome. Regular assessment by an OSMF Specialist Doctor or qualified healthcare professional helps you understand your individual progress and adjust care as needed.",
+        "button_label": "",
+        "button_to": "journey",
+        "button_link": "",
+        "button2_label": "",
+        "button2_to": "consult",
+        "button2_link": "",
+        "status_done": "Completed",
+        "status_now": "In progress",
+        "status_next": "Coming next",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
+    },
+    "download": {
+      "type": "mt-download",
+      "settings": {
+        "eyebrow": "Track your progress",
+        "heading": "Your 3-Week Recovery Tracker",
+        "text": "Once a week, circle the number that best describes how you feel and note how many fingers fit comfortably when you open your mouth. At the end of each week, share a clear photo of the tracker with the MARCEL Team on WhatsApp so we can guide your next steps.",
+        "points": "Rate burning while eating, mouth tightness and eating comfort every week\nRecord your mouth opening with the finger guide, before therapy and each week\nTick off your daily routine, mouth opening exercises and habit goals",
+        "button_label": "Download the tracker (PDF)",
+        "file_link": "",
+        "note": "Measure only comfortable opening. Never force your mouth open.",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
     },
     "support": {
       "type": "mt-icon-cards",
-      "settings": {
-        "eyebrow": "12-week progress support",
-        "heading": "Track Your Progress, with Support Along the Way",
-        "center": false,
-        "columns": "4",
-        "background": "paper",
-        "sheet": false,
-        "spacing": "normal",
-        "media": "photo"
-      },
       "blocks": {
         "card_1": {
           "type": "card",
           "settings": {
             "icon": "chart",
+            "art": "tracker",
             "title": "3-Week Progress Tracker",
+            "highlight": false,
+            "wide": false,
             "text": "With every MARCEL pack. Track symptoms and mouth-opening progress.",
+            "pill": "",
+            "link_label": "",
             "link_to": "custom",
-            "art": "tracker"
+            "link": "",
+            "downloads": ""
           }
         },
         "card_2": {
           "type": "card",
           "settings": {
             "icon": "calendar",
+            "art": "none",
             "title": "Regular Progress Reviews",
+            "highlight": false,
+            "wide": false,
             "text": "Review your journey at Weeks 3, 6, 9 and 12.",
+            "pill": "",
+            "link_label": "",
             "link_to": "custom",
-            "art": "none"
+            "link": "",
+            "downloads": ""
           }
         },
         "card_3": {
           "type": "card",
           "settings": {
             "icon": "whatsapp",
+            "art": "none",
             "title": "Patient Education",
+            "highlight": false,
+            "wide": false,
             "text": "Through our WhatsApp channel.",
+            "pill": "",
+            "link_label": "",
             "link_to": "custom",
-            "art": "none"
+            "link": "",
+            "downloads": ""
           }
         },
         "card_4": {
           "type": "card",
           "settings": {
             "icon": "phone",
+            "art": "consultant",
             "title": "Personalised Guidance",
+            "highlight": false,
+            "wide": false,
             "text": "From our MARCEL OSMF Consultants.",
+            "pill": "",
+            "link_label": "",
             "link_to": "custom",
-            "art": "consultant"
+            "link": "",
+            "downloads": ""
           }
         }
       },
@@ -237,19 +318,31 @@
         "card_2",
         "card_3",
         "card_4"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "12-week progress support",
+        "heading": "Track Your Progress, with Support Along the Way",
+        "subheading": "",
+        "text": "",
+        "center": false,
+        "columns": "4",
+        "media": "photo",
+        "card_style": "default",
+        "accent": "blue",
+        "intro_badge": "",
+        "intro_title": "",
+        "intro_text": "",
+        "intro_note": "",
+        "ticks": "",
+        "note": "",
+        "note_style": "plain",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
     },
     "exercises": {
       "type": "mt-guide",
-      "settings": {
-        "show_toc": false,
-        "toc_title": "On This Page",
-        "read_label": "[n] min read",
-        "no_articles": "Articles will appear here once they are published.",
-        "background": "mist",
-        "sheet": false,
-        "spacing": "normal"
-      },
       "blocks": {
         "chapter_1": {
           "type": "chapter",
@@ -286,20 +379,23 @@
         "text_1",
         "callout_1",
         "link_1"
-      ]
+      ],
+      "settings": {
+        "show_toc": false,
+        "toc_title": "On This Page",
+        "read_label": "[n] min read",
+        "no_articles": "Articles will appear here once they are published.",
+        "card_media": "icon",
+        "video_url": "",
+        "video_title": "",
+        "video_shape": "landscape",
+        "background": "mist",
+        "sheet": false,
+        "spacing": "normal"
+      }
     },
     "pathways": {
       "type": "mt-pathways",
-      "settings": {
-        "eyebrow": "Your pathway",
-        "heading": "Explore the Foundation Kit or Advance Kit",
-        "text": "The care journey applies to both pathways. A qualified healthcare professional should confirm which pathway is appropriate.",
-        "center": false,
-        "note": "MARCEL OMR Therapy is intended to support OSMF management in appropriate patients. This information is for education only. Please consult an OSMF Specialist Doctor or a qualified healthcare professional for individual assessment and guidance.",
-        "background": "paper",
-        "sheet": false,
-        "spacing": "normal"
-      },
       "blocks": {
         "pathway_1": {
           "type": "pathway",
@@ -309,11 +405,12 @@
             "title": "MARCEL OMR Therapy Foundation Kit",
             "subtitle": "For earlier-stage OSMF symptoms and functional restriction.",
             "bands": "Stage 1: Normal | More than 35 mm, with symptoms\nStage 2: Moderate | 26 to 35 mm",
+            "art": "foundation",
             "points": "Burning or cheek tightness\nDifficulty chewing may be present\nModerate restriction in mouth opening at Stage 2",
             "summary": "May be considered based on individual assessment.",
             "button_label": "Explore Foundation Kit",
             "link_to": "foundation",
-            "art": "foundation"
+            "link": ""
           }
         },
         "pathway_2": {
@@ -324,47 +421,58 @@
             "title": "MARCEL OMR Therapy Advance Kit",
             "subtitle": "For greater restriction in mouth opening and oral function.",
             "bands": "Stage 3: Severe | 15 to 25 mm\nStage 4: Advance | Less than 15 mm",
+            "art": "advance",
             "points": "Greater restriction in mouth opening\nBurning and cheek tightness commonly present\nDifficulty chewing common\nDifficulty in tongue movement may be present",
             "summary": "May be considered with professional guidance.",
             "button_label": "Explore Advance Kit",
             "link_to": "advance",
-            "art": "advance"
+            "link": ""
           }
         }
       },
       "block_order": [
         "pathway_1",
         "pathway_2"
-      ]
+      ],
+      "settings": {
+        "anchor": "",
+        "eyebrow": "Your pathway",
+        "heading": "Explore the Foundation Kit or Advance Kit",
+        "text": "The care journey applies to both pathways. A qualified healthcare professional should confirm which pathway is appropriate.",
+        "center": false,
+        "note": "MARCEL OMR Therapy is intended to support OSMF management in appropriate patients. This information is for education only. Please consult an OSMF Specialist Doctor or a qualified healthcare professional for individual assessment and guidance.",
+        "background": "paper",
+        "sheet": false,
+        "spacing": "normal"
+      }
     },
     "cta": {
       "type": "mt-cta-band",
+      "disabled": true,
       "settings": {
+        "style": "teal",
         "eyebrow": "Need guidance?",
         "heading": "Not Sure What to Do Next?",
         "text": "Explore MARCEL OMR Therapy or connect with our team to understand the next steps.",
         "button_1_label": "Talk to MARCEL Team",
         "button_1_to": "whatsapp",
+        "button_1_link": "",
         "button_2_label": "WhatsApp MARCEL Team",
         "button_2_to": "whatsapp",
+        "button_2_link": "",
+        "form": false,
+        "name_label": "Name",
+        "name_placeholder": "Enter your name",
+        "mobile_label": "Mobile No.",
+        "mobile_placeholder": "Enter your mobile number",
+        "form_button": "Talk to MARCEL Team on WhatsApp",
+        "form_error": "Please enter your name and a 10 digit mobile number.",
+        "wa_intro": "Hello MARCEL Team, I would like guidance.",
+        "regarding_label": "Regarding",
+        "hide_on": "",
         "background": "paper",
         "sheet": false,
         "spacing": "tight"
-      }
-    },
-    "download": {
-      "type": "mt-download",
-      "settings": {
-        "eyebrow": "Track your progress",
-        "heading": "Your 3-Week Recovery Tracker",
-        "text": "Once a week, circle the number that best describes how you feel and note how many fingers fit comfortably when you open your mouth. At the end of each week, share a clear photo of the tracker with the MARCEL Team on WhatsApp so we can guide your next steps.",
-        "points": "Rate burning while eating, mouth tightness and eating comfort every week\nRecord your mouth opening with the finger guide, before therapy and each week\nTick off your daily routine, mouth opening exercises and habit goals",
-        "button_label": "Download the tracker (PDF)",
-        "file_link": "",
-        "note": "Measure only comfortable opening. Never force your mouth open.",
-        "background": "paper",
-        "sheet": false,
-        "spacing": "normal"
       }
     }
   },

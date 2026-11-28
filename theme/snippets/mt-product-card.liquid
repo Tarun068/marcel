@@ -100,7 +100,7 @@
     {%- render 'mt-pack-media', image: image, art: art, kit: mf.kit_items.value, alt: title, sizes: sizes, fit: fit -%}
   </a>
   <div class="mt-pbody">
-    <h3><a href="{{ url }}">{{ title | escape }}</a></h3>
+    <h3><a href="{{ url }}">{{ title | escape | replace: 'OMR Therapy', 'OMR&nbsp;Therapy' }}</a></h3>
     {%- if meta != blank -%}<p class="mt-pmeta">{{ meta | escape }}</p>{%- endif -%}
     {%- if block.settings.benefits != blank -%}
       {%- assign lines = block.settings.benefits | newline_to_br | split: '<br />' -%}

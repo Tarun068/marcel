@@ -537,6 +537,7 @@
         "orashield": {
           "type": "step",
           "settings": {
+            "image": "shopify://shop_images/MARCEL_3D_OraShield_05a61fb9-c8c8-40b6-b274-009c572e2162.png",
             "art": "brand-orashield",
             "alt": "MARCEL OraShield therapeutic oral rinse pack and bottle",
             "when": "From 1 January 2026",
