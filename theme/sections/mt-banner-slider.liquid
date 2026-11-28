@@ -25,9 +25,18 @@
     assign max_h = section.settings.max_height | append: 'px'
   endif
 
-  assign heading_tag = 'h2'
-  if section.settings.first_h1
-    assign heading_tag = 'h1'
+  # The page heading sits outside the banners (client QA 2026-11-28: "homepage H1 is empty"). Banners that are not
+  # showing are hidden, so once the first banner moved on, an H1 inside it read as empty to search tools and screen
+  # readers. Every banner heading is now an h2 and the H1 stays put: the first banner's heading, or the search
+  # engine title when the first banner is a picture with the text in it.
+  assign page_heading = first.settings.heading | strip_html | strip
+  if first.settings.style == 'image' or page_heading == blank
+    if section.settings.seo_heading != blank
+      assign page_heading = section.settings.seo_heading | escape
+    endif
+  endif
+  if page_heading == blank
+    assign page_heading = shop.name | escape
   endif
 
   # Full: edge to edge (the default). Page width: a rounded box in the page container.
@@ -46,8 +55,8 @@
   style="--bs-ratio-d: {{ ratio_d }}; --bs-ratio-m: {{ ratio_m }}; --bs-max: {{ max_h }}; --bs-interval: {{ section.settings.interval }}s;"
 >
   {%- if slides.size > 0 -%}
-    {%- if section.settings.first_h1 and first.settings.style == 'image' and section.settings.seo_heading != blank -%}
-      <h1 class="visually-hidden">{{ section.settings.seo_heading | escape }}</h1>
+    {%- if section.settings.first_h1 -%}
+      <h1 class="visually-hidden">{{ page_heading }}</h1>
     {%- endif -%}
     <div class="mt-bs-wrap{% if boxed %} mt-wrap{% endif %}">
     <mt-banner-slider
@@ -71,16 +80,20 @@
           if b.style == 'text'
             assign alt = ''
           endif
+          # Pictures of the banners that are not showing yet keep their addresses in data- attributes until
+          # mt-banner.js fills them in after the first banner's picture has loaded, so they do not compete with it
+          # on a slow phone connection (client QA 2026-11-28, page weight).
           assign loading = 'lazy'
           assign priority = 'auto'
+          assign src_attr = 'data-src'
+          assign srcset_attr = 'data-srcset'
           if forloop.first
             assign loading = 'eager'
             assign priority = 'high'
+            assign src_attr = 'src'
+            assign srcset_attr = 'srcset'
           endif
           assign tag = 'h2'
-          if forloop.first
-            assign tag = heading_tag
-          endif
         -%}
         {%- capture link -%}{% render 'mt-link-to', key: b.link_to, url: b.link %}{%- endcapture -%}
         {%- capture btn1_link -%}{% render 'mt-link-to', key: b.button_1_to, url: b.button_1_link %}{%- endcapture -%}
@@ -99,7 +112,7 @@
             {%- if mob != blank -%}
               <source
                 media="(max-width: 749px)"
-                srcset="{{ mob | image_url: width: 750 }} 750w, {{ mob | image_url: width: 1100 }} 1100w, {{ mob | image_url: width: 1500 }} 1500w"
+                {{ srcset_attr }}="{{ mob | image_url: width: 750 }} 750w, {{ mob | image_url: width: 1100 }} 1100w, {{ mob | image_url: width: 1500 }} 1500w"
                 sizes="{{ sizes_m }}"
                 width="{{ mob.width }}"
                 height="{{ mob.height }}"
@@ -107,29 +120,35 @@
             {%- elsif art != 'none' -%}
               <source
                 media="(max-width: 749px)"
-                srcset="{{ 'mt-banner-' | append: art | append: '-m-720.webp' | asset_url }} 720w, {{ 'mt-banner-' | append: art | append: '-m.webp' | asset_url }} 1080w"
+                {{ srcset_attr }}="{{ 'mt-banner-' | append: art | append: '-m-720.webp' | asset_url }} 720w, {{ 'mt-banner-' | append: art | append: '-m.webp' | asset_url }} 1080w"
                 sizes="{{ sizes_m }}"
                 width="1080"
                 height="1440"
               >
             {%- endif -%}
             {%- if img != blank -%}
-              {{
-                img
-                | image_url: width: 2880
-                | image_tag:
-                  class: 'mt-bs-img',
-                  alt: alt,
-                  loading: loading,
-                  fetchpriority: priority,
-                  sizes: sizes_d,
-                  widths: '750, 1100, 1500, 1920, 2240, 2880'
-              }}
+              {%- capture img_tag -%}
+                {{
+                  img
+                  | image_url: width: 2880
+                  | image_tag:
+                    class: 'mt-bs-img',
+                    alt: alt,
+                    loading: loading,
+                    fetchpriority: priority,
+                    sizes: sizes_d,
+                    widths: '750, 1100, 1500, 1920, 2240, 2880'
+                }}
+              {%- endcapture -%}
+              {%- unless forloop.first -%}
+                {%- assign img_tag = img_tag | replace: ' srcset="', ' data-srcset="' | replace: ' src="', ' data-src="' -%}
+              {%- endunless -%}
+              {{ img_tag }}
             {%- elsif art != 'none' -%}
               <img
                 class="mt-bs-img"
-                src="{{ 'mt-banner-' | append: art | append: '-d-1440.webp' | asset_url }}"
-                srcset="{{ 'mt-banner-' | append: art | append: '-d-1440.webp' | asset_url }} 1440w, {{ 'mt-banner-' | append: art | append: '-d.webp' | asset_url }} 2880w"
+                {{ src_attr }}="{{ 'mt-banner-' | append: art | append: '-d-1440.webp' | asset_url }}"
+                {{ srcset_attr }}="{{ 'mt-banner-' | append: art | append: '-d-1440.webp' | asset_url }} 1440w, {{ 'mt-banner-' | append: art | append: '-d.webp' | asset_url }} 2880w"
                 sizes="{{ sizes_d }}"
                 width="2880"
                 height="1080"
@@ -333,7 +352,7 @@
       "type": "checkbox",
       "id": "first_h1",
       "label": "Use the first banner's heading as the page title",
-      "info": "Keep this on when the banner slider is the first section of the home page.",
+      "info": "Keep this on when the banner slider is the first section of the home page. The heading stays in the page while the banners change.",
       "default": true
     },
     {

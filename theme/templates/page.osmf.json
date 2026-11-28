@@ -512,7 +512,7 @@
           "type": "stage",
           "settings": {
             "number": "1",
-            "name": "Stage 1: Normal",
+            "name": "Stage 1: Early",
             "color": "#2B9759",
             "title": "No Symptoms Yet, but Habits Matter",
             "text": "Regular tobacco or gutkha use puts the tissues under stress. No restriction is felt, but biological changes may have begun. This is the best time to take action.",
@@ -557,7 +557,7 @@
           "type": "stage",
           "settings": {
             "number": "4",
-            "name": "Stage 4: Advance",
+            "name": "Stage 4: Advanced",
             "color": "#C23838",
             "title": "Significant Functional Limitation",
             "text": "Mouth opening is severely reduced. Even soft foods are difficult. Fibrous bands are prominent. Expert guidance and structured care are critical at this stage.",

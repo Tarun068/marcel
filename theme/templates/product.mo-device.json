@@ -86,7 +86,7 @@
         "cta_label": "WhatsApp MARCEL Team",
         "cta_to": "whatsapp",
         "cta_link": "",
-        "cta2_label": "Explore MARCEL OMR Therapy Advance Programme",
+        "cta2_label": "Explore MARCEL OMR Therapy Advance Kit",
         "cta2_to": "advance",
         "cta2_link": "",
         "shop_link": "",
@@ -454,7 +454,7 @@
           "type": "row",
           "settings": {
             "label": "Therapy Association",
-            "value": "Optional support tool within MARCEL OMR Therapy Advance Programme, where clinically appropriate"
+            "value": "Optional support tool alongside the MARCEL OMR Therapy Advance Kit, where clinically appropriate"
           }
         },
         "row_6": {

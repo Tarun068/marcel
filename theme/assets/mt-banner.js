@@ -12,6 +12,7 @@ if (!customElements.get('mt-banner-slider')) {
         this.index = Math.max(0, this.slides.findIndex((s) => s.classList.contains('is-active')));
         this.dataset.tone = this.slides[this.index]?.dataset.tone || 'dark';
         if (this.slides.length < 2) return;
+        this.wakePictures();
 
         this.holds = new Set();
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -80,12 +81,46 @@ if (!customElements.get('mt-banner-slider')) {
         document.removeEventListener('shopify:block:deselect', this.onBlockDeselect);
       }
 
+      /* The hidden banners' pictures wait in data- attributes (mt-banner-slider.liquid). They are filled in once the
+         first banner's picture has loaded, so on a slow connection the browser fetches that one first. */
+      wakePictures() {
+        const img = this.slides[this.index].querySelector('img');
+        const wake = () => {
+          if (this.woke) return;
+          this.woke = true;
+          const run = () => this.slides.forEach((s) => this.hydrate(s));
+          if ('requestIdleCallback' in window) window.requestIdleCallback(run, { timeout: 2000 });
+          else setTimeout(run, 200);
+        };
+        if (!img || img.complete) {
+          wake();
+        } else {
+          img.addEventListener('load', wake, { once: true });
+          img.addEventListener('error', wake, { once: true });
+          window.addEventListener('load', wake, { once: true });
+        }
+      }
+
+      hydrate(slide) {
+        slide.querySelectorAll('source[data-srcset]').forEach((el) => {
+          el.srcset = el.dataset.srcset;
+          el.removeAttribute('data-srcset');
+        });
+        slide.querySelectorAll('img[data-src], img[data-srcset]').forEach((el) => {
+          if (el.dataset.srcset) el.srcset = el.dataset.srcset;
+          if (el.dataset.src) el.src = el.dataset.src;
+          el.removeAttribute('data-srcset');
+          el.removeAttribute('data-src');
+        });
+      }
+
       go(to) {
         const count = this.slides.length;
         const next = ((to % count) + count) % count;
         if (next === this.index) return;
         const prev = this.slides[this.index];
         const slide = this.slides[next];
+        this.hydrate(slide);
         prev.classList.remove('is-active');
         prev.setAttribute('aria-hidden', 'true');
         prev.inert = true;

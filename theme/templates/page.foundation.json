@@ -236,7 +236,7 @@
         "checklist_1": {
           "type": "checklist",
           "settings": {
-            "items": "Foundation Kit is intended for individuals assessed as having Stage 1 or Stage 2 OSMF. A qualified healthcare professional should confirm the diagnosis, stage and appropriate care pathway.\nThe programme does not replace professional diagnosis, treatment or follow-up.\nStopping gutkha, pan masala, supari, tobacco and other areca-nut products is an important part of OSMF management. Seek professional help if you need support to stop.",
+            "items": "Foundation Kit is intended for individuals assessed as having Stage 1 or Stage 2 OSMF. A qualified healthcare professional should confirm the diagnosis, stage and appropriate care pathway.\nThe kit does not replace professional diagnosis, treatment or follow-up.\nStopping gutkha, pan masala, supari, tobacco and other areca-nut products is an important part of OSMF management. Seek professional help if you need support to stop.",
             "columns": "1"
           }
         },

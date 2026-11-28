@@ -1,3 +1,20 @@
+{%- comment -%}
+  Dawn's header brings its own menu, search and language scripts. Since 2026-11-28 the layout no longer loads them
+  on every page, because the site uses mt-header.
+{%- endcomment -%}
+<script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
+{%- unless template.name == 'search' -%}
+  <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
+  {%- if settings.predictive_search_enabled -%}
+    <link rel="stylesheet" href="{{ 'component-predictive-search.css' | asset_url }}" media="print" onload="this.media='all'">
+    <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+{%- endunless -%}
+{%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
+  {{ 'component-localization-form.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">

@@ -25,7 +25,7 @@
         "current_label": "Advance Kit",
         "eyebrow": "MARCEL OMR Therapy Advance Kit for Stage 3 or 4 OSMF",
         "heading": "A Structured Approach to Advanced OSMF Care",
-        "text": "MARCEL OMR Therapy Advance Kit is intended for individuals assessed by a qualified healthcare professional as having Stage 3 or Stage 4 Oral Submucous Fibrosis (OSMF). The programme includes MARCEL OraShield Oral Rinse, MARCEL Smile Toothpaste, prescribed mouth/jaw exercises when advised, and the optional MARCEL® MO Device where recommended by a healthcare professional.",
+        "text": "MARCEL OMR Therapy Advance Kit is intended for individuals assessed by a qualified healthcare professional as having Stage 3 or Stage 4 Oral Submucous Fibrosis (OSMF). The kit includes MARCEL OraShield Oral Rinse and MARCEL Smile Toothpaste, used with prescribed mouth/jaw exercises when advised and the optional MARCEL® MO Device where recommended by a healthcare professional.",
         "button_1_label": "Talk to MARCEL Team",
         "button_2_label": "Check Your OSMF Stage",
         "note": "If you have not been assessed, the MARCEL OSMF SELF CHECK can provide an initial indication of your possible stage. It cannot diagnose OSMF or confirm your stage.",
@@ -252,7 +252,7 @@
         "checklist_1": {
           "type": "checklist",
           "settings": {
-            "items": "Advance Kit is intended for individuals assessed as having Stage 3 or Stage 4 OSMF. A qualified healthcare professional should confirm the diagnosis, stage and appropriate care pathway.\nThe programme does not replace professional diagnosis, treatment or follow-up.\nStopping gutkha, pan masala, supari, tobacco and other areca-nut products is an important part of OSMF management. Seek professional help if you need support to stop.\nDo not swallow the rinse. Follow the current approved product directions for dilution, duration, frequency and precautions.",
+            "items": "Advance Kit is intended for individuals assessed as having Stage 3 or Stage 4 OSMF. A qualified healthcare professional should confirm the diagnosis, stage and appropriate care pathway.\nThe kit does not replace professional diagnosis, treatment or follow-up.\nStopping gutkha, pan masala, supari, tobacco and other areca-nut products is an important part of OSMF management. Seek professional help if you need support to stop.\nDo not swallow the rinse. Follow the current approved product directions for dilution, duration, frequency and precautions.",
             "columns": "1"
           }
         },

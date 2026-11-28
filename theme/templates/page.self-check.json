@@ -123,6 +123,7 @@
         },
         "question_7": {
           "type": "question",
+          "disabled": true,
           "settings": {
             "qid": "open_difficulty",
             "short": "Difficulty opening mouth",

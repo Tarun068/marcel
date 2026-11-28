@@ -28,18 +28,31 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
+    {%- liquid
+      # Home page title: the Online Store > Preferences title when there is one; otherwise the title from
+      # Theme settings > Marcel search engines, because the shop name alone said nothing (client QA 2026-11-28).
+      assign mt_title = page_title | remove: '™'
+      assign mt_title_suffix = true
+      if request.page_type == 'index' and page_title == shop.name and settings.mt_seo_home_title != blank
+        assign mt_title = settings.mt_seo_home_title | remove: '™'
+        assign mt_title_suffix = false
+      endif
+    -%}
+    {%- capture mt_description -%}{% render 'mt-seo-description' %}{%- endcapture -%}
     <title>
-      {{ page_title | remove: '™' }}
+      {{ mt_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- if mt_title_suffix -%}
+        {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- endif -%}
     </title>
 
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | remove: '™' | escape }}">
-    {% endif %}
+    {%- if mt_description != blank %}
+      <meta name="description" content="{{ mt_description | escape }}">
+    {%- endif %}
 
-    {% render 'meta-tags' %}
+    {% render 'meta-tags', title: mt_title, description: mt_description %}
 
     <script type="module">
       import * as StandardEvents from 'https://cdn.shopify.com/storefront/standard-events.js';
@@ -71,9 +84,14 @@
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'cart-disclosure-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'cart-disclosure-tooltip.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
+    {%- comment -%}
+      Page weight (client QA 2026-11-28): Dawn's menu, modal, search and language scripts only serve Dawn's own header,
+      footer and announcement bar, which the site does not use (mt-header and mt-footer have their own), and the search
+      page. Those Dawn sections now load what they need themselves; the search page gets its two scripts below.
+    {%- endcomment -%}
+    {%- if template.name == 'search' -%}
+      <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
     <script src="{{ 'standard-actions-override.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'mt-global.js' | asset_url }}" defer="defer"></script>
 
@@ -308,23 +326,14 @@
       {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
 
-    {%- unless settings.type_body_font.system? -%}
-      {% comment %}theme-check-disable AssetPreload{% endcomment %}
-      <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
-      {% comment %}theme-check-enable AssetPreload{% endcomment %}
-    {%- endunless -%}
-    {%- unless settings.type_header_font.system? -%}
-      {% comment %}theme-check-disable AssetPreload{% endcomment %}
-      <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
-      {% comment %}theme-check-enable AssetPreload{% endcomment %}
-    {%- endunless -%}
+    {%- comment -%}
+      Dawn preloaded its theme font (Assistant) here. mt-head.liquid points both Dawn font variables at the MARCEL
+      font, so Assistant is never shown and the preload only downloaded it for nothing (client QA 2026-11-28).
+      The language switch (mt-lang-switch) is a plain Shopify form, so localization-form.js moved to Dawn's header,
+      footer and announcement bar sections, the only places that use it.
+    {%- endcomment -%}
 
-    {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
-      {{ 'component-localization-form.css' | asset_url | stylesheet_tag: preload: true }}
-      <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
-    {%- endif -%}
-
-    {%- if settings.predictive_search_enabled -%}
+    {%- if settings.predictive_search_enabled and template.name == 'search' -%}
       <link
         rel="stylesheet"
         href="{{ 'component-predictive-search.css' | asset_url }}"
@@ -416,7 +425,7 @@
       };
     </script>
 
-    {%- if settings.predictive_search_enabled -%}
+    {%- if settings.predictive_search_enabled and template.name == 'search' -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 

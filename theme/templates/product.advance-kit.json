@@ -65,8 +65,8 @@
       ],
       "settings": {
         "headline": "",
-        "supporting": "A structured care programme for Stage 3 & Stage 4 OSMF",
-        "intro": "<p><strong>Two core products in one structured oral-care programme.</strong></p><p>Designed for individuals assessed by a qualified healthcare professional as suitable within the Stage 3 and Stage 4 Oral Submucous Fibrosis (OSMF) care framework. The programme combines MARCEL OraShield Therapeutic Oral Rinse and MARCEL Smile Toothpaste. MARCEL® MOFlex is an optional adjunct where professionally recommended.</p>",
+        "supporting": "A structured care kit for Stage 3 & Stage 4 OSMF",
+        "intro": "<p><strong>Two core products in one structured oral-care kit.</strong></p><p>Designed for individuals assessed by a qualified healthcare professional as suitable within the Stage 3 and Stage 4 Oral Submucous Fibrosis (OSMF) care framework. The kit combines MARCEL OraShield Therapeutic Oral Rinse and MARCEL Smile Toothpaste. MARCEL® MOFlex is an optional adjunct where professionally recommended.</p>",
         "details": "",
         "how_lines": "",
         "safety": "",
@@ -124,7 +124,7 @@
         "pack_size_label": "Kit Contents",
         "mrp_label": "MRP",
         "image_chips": true,
-        "hero_title": "MARCEL OMR Therapy Advance Programme",
+        "hero_title": "MARCEL OMR Therapy Advance Kit",
         "badge": "Stage 3 & Stage 4 OSMF",
         "pack_size": "OraShield 10 mL + Smile 30 g",
         "hero_media": "image",
@@ -162,8 +162,8 @@
       "settings": {
         "style": "navy",
         "eyebrow": "",
-        "heading": "Need Guidance About MARCEL OMR Therapy Advance Programme?",
-        "text": "Every individual’s OSMF experience is different. Speak with the MARCEL Team to understand the Advance Programme, its two core products and the professional support pathways available.",
+        "heading": "Need Guidance About the MARCEL OMR Therapy Advance Kit?",
+        "text": "Every individual’s OSMF experience is different. Speak with the MARCEL Team to understand the Advance Kit, its two core products and the professional support pathways available.",
         "button_1_label": "WhatsApp MARCEL Team",
         "button_1_to": "whatsapp",
         "button_1_link": "",
@@ -182,8 +182,8 @@
         "question_1": {
           "type": "question",
           "settings": {
-            "question": "What is MARCEL OMR Therapy Advance Programme?",
-            "answer": "<p>It is a structured oral-care programme for patients assessed by their treating healthcare professional as suitable within the Stage 3 and Stage 4 OSMF framework. It brings together MARCEL OraShield Therapeutic Oral Rinse and MARCEL Smile Toothpaste.</p>"
+            "question": "What is the MARCEL OMR Therapy Advance Kit?",
+            "answer": "<p>It is a structured oral-care kit for patients assessed by their treating healthcare professional as suitable within the Stage 3 and Stage 4 OSMF framework. It brings together MARCEL OraShield Therapeutic Oral Rinse and MARCEL Smile Toothpaste.</p>"
           }
         },
         "question_2": {
@@ -204,7 +204,7 @@
           "type": "question",
           "settings": {
             "question": "What is the role of Smile Toothpaste?",
-            "answer": "<p>Smile is the daily oral-hygiene component of the programme. Brush thoroughly for at least two minutes, preferably twice daily or as directed by a dentist or physician.</p>"
+            "answer": "<p>Smile is the daily oral-hygiene component of the kit. Brush thoroughly for at least two minutes, preferably twice daily or as directed by a dentist or physician.</p>"
           }
         },
         "question_5": {
@@ -217,8 +217,8 @@
         "question_6": {
           "type": "question",
           "settings": {
-            "question": "Does the Advance Programme cure OSMF?",
-            "answer": "<p>No cure or guaranteed reversal claim is made. The programme is a structured oral-care approach and does not replace diagnosis, individualised treatment planning or indicated medical and dental management.</p>"
+            "question": "Does the Advance Kit cure OSMF?",
+            "answer": "<p>No cure or guaranteed reversal claim is made. The kit is part of a structured oral-care approach and does not replace diagnosis, individualised treatment planning or indicated medical and dental management.</p>"
           }
         },
         "question_7": {
@@ -390,7 +390,7 @@
             "art": "none",
             "title": "Stage-Focused Care",
             "highlight": false,
-            "text": "A programme framework intended for individuals assessed as suitable within Stage 3 and Stage 4 OSMF.",
+            "text": "A kit intended for individuals assessed as suitable within Stage 3 and Stage 4 OSMF.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
@@ -477,7 +477,7 @@
         "benefit_6"
       ],
       "settings": {
-        "eyebrow": "The programme at a glance",
+        "eyebrow": "The kit at a glance",
         "heading": "A Structured Approach to Advanced-Stage OSMF Care",
         "subheading": "Therapy First, Products Second",
         "text": "",
@@ -491,7 +491,7 @@
         "intro_text": "",
         "intro_note": "",
         "ticks": "",
-        "note": "<p>The programme is a structured oral-care approach. It is not a stand-alone cure for OSMF and does not guarantee reversal of fibrosis or a particular improvement in mouth opening.</p>",
+        "note": "<p>The kit is part of a structured oral-care approach. It is not a stand-alone cure for OSMF and does not guarantee reversal of fibrosis or a particular improvement in mouth opening.</p>",
         "note_style": "plain",
         "background": "paper",
         "sheet": false,
@@ -557,14 +557,14 @@
         "row_1": {
           "type": "row",
           "settings": {
-            "label": "Programme Name",
-            "value": "MARCEL OMR Therapy Advance Programme"
+            "label": "Kit Name",
+            "value": "MARCEL OMR Therapy Advance Kit"
           }
         },
         "row_2": {
           "type": "row",
           "settings": {
-            "label": "Intended Programme Framework",
+            "label": "Intended Stage Framework",
             "value": "Stage 3 & Stage 4 OSMF, subject to professional assessment"
           }
         },
@@ -631,8 +631,8 @@
       ],
       "settings": {
         "eyebrow": "At a glance",
-        "heading": "Advance Programme Information",
-        "text": "Core kit contents, intended programme association and key directions.",
+        "heading": "Advance Kit Information",
+        "text": "Core kit contents, intended stage framework and key directions.",
         "show_image": false,
         "art": "none",
         "media_style": "plain",
@@ -649,7 +649,7 @@
         "link_1": {
           "type": "link",
           "settings": {
-            "label": "The programme",
+            "label": "The kit",
             "target": "benefits"
           }
         },
@@ -691,7 +691,7 @@
         "link_7": {
           "type": "link",
           "settings": {
-            "label": "Programme information",
+            "label": "Kit information",
             "target": "info"
           }
         },
@@ -735,7 +735,7 @@
             "tag": "Core kit component",
             "title": "MARCEL OraShield",
             "subtitle": "Therapeutic Oral Rinse, 10 mL",
-            "text": "The oral-rinse component of the Advance Programme. Dilute as directed, rinse and gargle for 20 to 30 seconds, then spit out. Use twice daily or as advised by the treating professional.",
+            "text": "The oral-rinse component of the Advance Kit. Dilute as directed, rinse and gargle for 20 to 30 seconds, then spit out. Use twice daily or as advised by the treating professional.",
             "optional": false,
             "link_label": "View product",
             "link_to": "custom",
@@ -777,7 +777,7 @@
         "part_3"
       ],
       "settings": {
-        "eyebrow": "What the Advance Programme brings together",
+        "eyebrow": "What the Advance Kit brings together",
         "heading": "Two Core Products and One Optional Adjunct",
         "text": "The kit contains two core products. The optional MOFlex device is considered separately and should only be used when recommended following individual professional assessment.",
         "layout": "stack",
@@ -811,7 +811,7 @@
       ],
       "settings": {
         "eyebrow": "",
-        "heading": "The Daily Advance Programme Routine",
+        "heading": "The Daily Advance Kit Routine",
         "text": "Follow the directions on each product label and the care plan provided by your treating healthcare professional.",
         "note": "<p><strong>Exercises:</strong> Where prescribed, perform mouth and jaw exercises selected and demonstrated by the treating professional. Follow the advised technique and do not force movement or stretch into pain. Stop and seek guidance if an exercise causes pain or concerning symptoms.</p>",
         "background": "mist",
@@ -928,17 +928,17 @@
         "eyebrow": "Who this is for",
         "heading": "Honest Guidance: <em>Is This Kit Right for You?</em>",
         "text": "We want every patient to make an informed decision based on their diagnosis, stage and individual situation.",
-        "yes_title": "This programme may be suitable to discuss if:",
+        "yes_title": "This kit may be suitable to discuss if:",
         "yes_items": "A qualified healthcare professional has assessed you and considers you suitable within the Stage 3 and Stage 4 OSMF care framework.\nYou are looking for a structured oral-care routine rather than trying individual products without guidance.\nYou experience ongoing oral tightness, burning discomfort, restricted mouth opening or difficulties with eating and oral hygiene.\nYou want the two core products, MARCEL OraShield and MARCEL Smile, to form part of one organised daily routine.\nYou are prepared to follow the recommended routine and take part in the full 12-week care journey, with professional review as advised.",
         "no_title": "Consider getting guidance first if:",
-        "no_items": "You have not been examined or are unsure whether your symptoms are due to OSMF. Arrange a professional assessment before choosing a programme.\nYou are in an early stage, have mild symptoms or are unsure whether the Advance Programme is appropriate. The right approach depends on your clinical assessment.\nYou want to try one product on its own before choosing a kit. Discuss the most appropriate option with a healthcare professional.\nYou would like help understanding the products or programme. Contact MARCEL Team for general assistance, or request a teleconsultation with a MARCEL OSMF Consultant.\nYou have a persistent mouth ulcer, a red or white patch, a lump, unexplained bleeding or rapidly worsening symptoms. Seek prompt in-person examination rather than relying on a product kit.",
+        "no_items": "You have not been examined or are unsure whether your symptoms are due to OSMF. Arrange a professional assessment before choosing a kit.\nYou are in an early stage, have mild symptoms or are unsure whether the Advance Kit is appropriate. The right approach depends on your clinical assessment.\nYou want to try one product on its own before choosing a kit. Discuss the most appropriate option with a healthcare professional.\nYou would like help understanding the kit or its products. Contact MARCEL Team for general assistance, or request a teleconsultation with a MARCEL OSMF Consultant.\nYou have a persistent mouth ulcer, a red or white patch, a lump, unexplained bleeding or rapidly worsening symptoms. Seek prompt in-person examination rather than relying on a product kit.",
         "link_1_label": "Contact MARCEL Team",
         "link_1_to": "whatsapp",
         "link_1": "",
         "link_2_label": "Request teleconsultation",
         "link_2_to": "consult",
         "link_2": "",
-        "note": "Symptoms alone cannot confirm OSMF or determine its stage. The Advance Programme is intended for patients assessed by a qualified healthcare professional as suitable within the Stage 3 and Stage 4 framework. It does not replace diagnosis, individualised treatment planning, indicated medical or dental care, or referral.",
+        "note": "Symptoms alone cannot confirm OSMF or determine its stage. The Advance Kit is intended for patients assessed by a qualified healthcare professional as suitable within the Stage 3 and Stage 4 framework. It does not replace diagnosis, individualised treatment planning, indicated medical or dental care, or referral.",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"

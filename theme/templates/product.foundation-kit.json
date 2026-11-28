@@ -65,8 +65,8 @@
       ],
       "settings": {
         "headline": "",
-        "supporting": "A structured care programme for Stage 1 & Stage 2 OSMF",
-        "intro": "<p><strong>Two core products in one structured oral-care programme.</strong></p><p>Designed for individuals assessed by a qualified healthcare professional as suitable within the Stage 1 and Stage 2 Oral Submucous Fibrosis (OSMF) care framework. The programme brings together MARCEL OraCare Oral Spray and MARCEL Smile Toothpaste as part of a consistent daily oral-care routine. MARCEL® MOFlex may be considered separately as an optional adjunct where professionally recommended.</p>",
+        "supporting": "A structured care kit for Stage 1 & Stage 2 OSMF",
+        "intro": "<p><strong>Two core products in one structured oral-care kit.</strong></p><p>Designed for individuals assessed by a qualified healthcare professional as suitable within the Stage 1 and Stage 2 Oral Submucous Fibrosis (OSMF) care framework. The kit brings together MARCEL OraCare Oral Spray and MARCEL Smile Toothpaste as part of a consistent daily oral-care routine. MARCEL® MOFlex may be considered separately as an optional adjunct where professionally recommended.</p>",
         "details": "",
         "how_lines": "",
         "safety": "",
@@ -124,7 +124,7 @@
         "pack_size_label": "Kit Contents",
         "mrp_label": "MRP",
         "image_chips": true,
-        "hero_title": "MARCEL OMR Therapy Foundation Programme",
+        "hero_title": "MARCEL OMR Therapy Foundation Kit",
         "badge": "Stage 1 & Stage 2 OSMF",
         "pack_size": "OraCare 50 mL + Smile 30 g",
         "hero_media": "image",
@@ -162,8 +162,8 @@
       "settings": {
         "style": "navy",
         "eyebrow": "",
-        "heading": "Need Guidance About MARCEL OMR Therapy Foundation Programme?",
-        "text": "Every individual’s OSMF experience is different. Speak with the MARCEL Team to understand the Foundation Programme, its two core products and the professional support pathways available.",
+        "heading": "Need Guidance About the MARCEL OMR Therapy Foundation Kit?",
+        "text": "Every individual’s OSMF experience is different. Speak with the MARCEL Team to understand the Foundation Kit, its two core products and the professional support pathways available.",
         "button_1_label": "WhatsApp MARCEL Team",
         "button_1_to": "whatsapp",
         "button_1_link": "",
@@ -182,8 +182,8 @@
         "question_1": {
           "type": "question",
           "settings": {
-            "question": "What is MARCEL OMR Therapy Foundation Programme?",
-            "answer": "<p>It is a structured oral-care programme for patients assessed by their treating healthcare professional as suitable within the Stage 1 and Stage 2 OSMF framework. It brings together MARCEL OraCare Oral Spray and MARCEL Smile Toothpaste.</p>"
+            "question": "What is the MARCEL OMR Therapy Foundation Kit?",
+            "answer": "<p>It is a structured oral-care kit for patients assessed by their treating healthcare professional as suitable within the Stage 1 and Stage 2 OSMF framework. It brings together MARCEL OraCare Oral Spray and MARCEL Smile Toothpaste.</p>"
           }
         },
         "question_2": {
@@ -204,7 +204,7 @@
           "type": "question",
           "settings": {
             "question": "What is the role of Smile Toothpaste?",
-            "answer": "<p>Smile is the daily oral-hygiene component of the programme. Brush thoroughly for at least two minutes, preferably twice daily or as directed by an Oral Care Expert, dentist or physician. Rinse thoroughly after brushing and do not swallow.</p>"
+            "answer": "<p>Smile is the daily oral-hygiene component of the kit. Brush thoroughly for at least two minutes, preferably twice daily or as directed by an Oral Care Expert, dentist or physician. Rinse thoroughly after brushing and do not swallow.</p>"
           }
         },
         "question_5": {
@@ -217,8 +217,8 @@
         "question_6": {
           "type": "question",
           "settings": {
-            "question": "Does the Foundation Programme cure OSMF?",
-            "answer": "<p>No cure or guaranteed reversal claim is made. The programme is a structured oral-care approach and does not replace diagnosis, individualised treatment planning or indicated medical and dental management.</p>"
+            "question": "Does the Foundation Kit cure OSMF?",
+            "answer": "<p>No cure or guaranteed reversal claim is made. The kit is part of a structured oral-care approach and does not replace diagnosis, individualised treatment planning or indicated medical and dental management.</p>"
           }
         },
         "question_7": {
@@ -390,7 +390,7 @@
             "art": "none",
             "title": "Stage-Focused Care",
             "highlight": false,
-            "text": "A programme framework intended for individuals assessed as suitable within Stage 1 and Stage 2 OSMF.",
+            "text": "A kit intended for individuals assessed as suitable within Stage 1 and Stage 2 OSMF.",
             "pill": "",
             "link_label": "",
             "link_to": "custom",
@@ -477,7 +477,7 @@
         "benefit_6"
       ],
       "settings": {
-        "eyebrow": "The programme at a glance",
+        "eyebrow": "The kit at a glance",
         "heading": "A Structured Approach to Early-Stage OSMF Care",
         "subheading": "Therapy First, Products Second",
         "text": "",
@@ -491,7 +491,7 @@
         "intro_text": "",
         "intro_note": "",
         "ticks": "",
-        "note": "<p>The programme is a structured oral-care approach. It is not a stand-alone cure for OSMF and does not guarantee reversal of fibrosis or a particular improvement in mouth opening.</p>",
+        "note": "<p>The kit is part of a structured oral-care approach. It is not a stand-alone cure for OSMF and does not guarantee reversal of fibrosis or a particular improvement in mouth opening.</p>",
         "note_style": "plain",
         "background": "paper",
         "sheet": false,
@@ -557,14 +557,14 @@
         "row_1": {
           "type": "row",
           "settings": {
-            "label": "Programme Name",
-            "value": "MARCEL OMR Therapy Foundation Programme"
+            "label": "Kit Name",
+            "value": "MARCEL OMR Therapy Foundation Kit"
           }
         },
         "row_2": {
           "type": "row",
           "settings": {
-            "label": "Intended Programme Framework",
+            "label": "Intended Stage Framework",
             "value": "Stage 1 & Stage 2 OSMF, subject to professional assessment"
           }
         },
@@ -631,8 +631,8 @@
       ],
       "settings": {
         "eyebrow": "At a glance",
-        "heading": "Foundation Programme Information",
-        "text": "Core kit contents, intended programme association and key directions.",
+        "heading": "Foundation Kit Information",
+        "text": "Core kit contents, intended stage framework and key directions.",
         "show_image": false,
         "art": "none",
         "media_style": "plain",
@@ -649,7 +649,7 @@
         "link_1": {
           "type": "link",
           "settings": {
-            "label": "The programme",
+            "label": "The kit",
             "target": "benefits"
           }
         },
@@ -691,7 +691,7 @@
         "link_7": {
           "type": "link",
           "settings": {
-            "label": "Programme information",
+            "label": "Kit information",
             "target": "info"
           }
         },
@@ -735,7 +735,7 @@
             "tag": "Core kit component",
             "title": "MARCEL OraCare",
             "subtitle": "Therapeutic Oral Spray, 50 mL",
-            "text": "The core spray component of the Foundation Programme. Apply 6 to 7 puffs evenly throughout the mouth to ensure complete coverage of the oral tissues. Use twice daily.",
+            "text": "The core spray component of the Foundation Kit. Apply 6 to 7 puffs evenly throughout the mouth to ensure complete coverage of the oral tissues. Use twice daily.",
             "optional": false,
             "link_label": "View product",
             "link_to": "custom",
@@ -777,7 +777,7 @@
         "part_3"
       ],
       "settings": {
-        "eyebrow": "What the Foundation Programme brings together",
+        "eyebrow": "What the Foundation Kit brings together",
         "heading": "Two Core Products and One Optional Adjunct",
         "text": "The Foundation Kit contains two core products. The optional MOFlex device is considered separately and should only be used when recommended following individual professional assessment.",
         "layout": "stack",
@@ -811,9 +811,9 @@
       ],
       "settings": {
         "eyebrow": "",
-        "heading": "The Daily Foundation Programme Routine",
+        "heading": "The Daily Foundation Kit Routine",
         "text": "Follow the directions on each product label and the care plan provided by your treating healthcare professional.",
-        "note": "<p><strong>Exercises:</strong> Where prescribed, perform mouth and jaw exercises selected and demonstrated by the treating professional. The Foundation Programme guide describes a gentle warm-up, side-to-side stretch and assisted mouth opening. Follow the advised technique and do not force movement or stretch into pain.</p>",
+        "note": "<p><strong>Exercises:</strong> Where prescribed, perform mouth and jaw exercises selected and demonstrated by the treating professional. The Foundation Kit guide describes a gentle warm-up, side-to-side stretch and assisted mouth opening. Follow the advised technique and do not force movement or stretch into pain.</p>",
         "background": "mist",
         "sheet": false,
         "spacing": "normal"
@@ -927,18 +927,18 @@
       "settings": {
         "eyebrow": "Who this is for",
         "heading": "Honest Guidance: <em>Is This Kit Right for You?</em>",
-        "text": "The Foundation Programme is intended for people assessed as having Stage 1 or Stage 2 OSMF, where symptoms and functional changes may still be relatively early.",
-        "yes_title": "This programme may be suitable to discuss if:",
+        "text": "The Foundation Kit is intended for people assessed as having Stage 1 or Stage 2 OSMF, where symptoms and functional changes may still be relatively early.",
+        "yes_title": "This kit may be suitable to discuss if:",
         "yes_items": "A qualified healthcare professional has assessed you and considers your condition consistent with Stage 1 or Stage 2 OSMF.\nYou experience burning mainly when eating spicy or hot food.\nYou have early cheek sensitivity, mild tightness or a feeling that the inner cheek lining is less flexible.\nYou have noticed subtle changes in mouth opening, without assuming that this alone confirms OSMF or its stage.\nYou want a structured daily routine built around MARCEL OraCare Oral Spray and MARCEL Smile Toothpaste, as part of professionally guided care.",
         "no_title": "Consider getting guidance first if:",
-        "no_items": "You have not been examined or are unsure whether your symptoms are due to OSMF. Arrange a professional assessment first.\nYour mouth opening is markedly restricted, cheek or tongue movement is significantly affected, or symptoms are progressing. Seek clinical review to find the right care pathway.\nYou are unsure whether the Foundation Programme is appropriate. Contact MARCEL Team for product information or request a teleconsultation with a MARCEL OSMF Consultant.\nYou have a persistent mouth ulcer, red or white patch, lump, unexplained bleeding or worsening symptoms. Seek prompt in-person examination rather than relying on a product kit.",
+        "no_items": "You have not been examined or are unsure whether your symptoms are due to OSMF. Arrange a professional assessment first.\nYour mouth opening is markedly restricted, cheek or tongue movement is significantly affected, or symptoms are progressing. Seek clinical review to find the right care pathway.\nYou are unsure whether the Foundation Kit is appropriate. Contact MARCEL Team for product information or request a teleconsultation with a MARCEL OSMF Consultant.\nYou have a persistent mouth ulcer, red or white patch, lump, unexplained bleeding or worsening symptoms. Seek prompt in-person examination rather than relying on a product kit.",
         "link_1_label": "Contact MARCEL Team",
         "link_1_to": "whatsapp",
         "link_1": "",
         "link_2_label": "Request teleconsultation",
         "link_2_to": "consult",
         "link_2": "",
-        "note": "Symptoms alone cannot confirm OSMF or determine its stage. Programme suitability should be based on examination by a qualified healthcare professional. The Foundation Programme does not replace diagnosis, individualised treatment planning or indicated medical and dental care.",
+        "note": "Symptoms alone cannot confirm OSMF or determine its stage. Suitability for the kit should be based on examination by a qualified healthcare professional. The Foundation Kit does not replace diagnosis, individualised treatment planning or indicated medical and dental care.",
         "background": "paper",
         "sheet": false,
         "spacing": "normal"

@@ -277,9 +277,19 @@
     }),
       Object.defineProperty(t, '__esModule', { value: !0 });
   });
-  document.addEventListener('DOMContentLoaded', function () {
-    $(document).one('mousemove touchstart wheel', function () {
-      window.yett.unblock('/gp/,/onsite/,/payment-sheet/,/cdn.judge.me/,/shopify_chat/');
+  // Release the held scripts on the first interaction. This used jQuery's $(document).one(), but the site has no
+  // jQuery, so it threw "$ is not defined" on every page and the scripts were never released (client QA
+  // 2026-11-28). unblock() with no arguments releases every held script; a single comma-joined string matched none.
+  (function () {
+    var events = ['mousemove', 'touchstart', 'wheel', 'keydown'];
+    var release = function () {
+      events.forEach(function (name) {
+        window.removeEventListener(name, release, true);
+      });
+      if (window.yett) window.yett.unblock();
+    };
+    events.forEach(function (name) {
+      window.addEventListener(name, release, { capture: true, passive: true });
     });
-  });
+  })();
 </script>

@@ -81,6 +81,8 @@ if (!customElements.get('mt-self-test')) {
           this.form.querySelectorAll('.mt-input').forEach((input) =>
             input.addEventListener('input', () => this.fieldError(input, false))
           );
+          const consent = this.form.querySelector('[data-mt-consent]');
+          if (consent) consent.addEventListener('change', () => this.fieldError(consent, false));
         }
         this.render();
       }
@@ -120,7 +122,7 @@ if (!customElements.get('mt-self-test')) {
           )
           .join('');
         const head = `<div class="mt-stack-sm"><span class="mt-eyebrow">${this.esc(this.fill(this.copy.question, this.step + 1, total))}</span>
-          <h1 class="mt-test-title">${this.esc(q.q)}</h1>${q.help ? `<p class="mt-test-help">${this.esc(q.help)}</p>` : ''}</div>`;
+          <h2 class="mt-test-title">${this.esc(q.q)}</h2>${q.help ? `<p class="mt-test-help">${this.esc(q.help)}</p>` : ''}</div>`;
 
         if (q.id === 'opening') {
           this.box.innerHTML = `${head}<div class="mt-finger-layout"><div data-mt-gauge-slot></div><div class="mt-test-opts">${opts}</div></div>`;
@@ -185,7 +187,11 @@ if (!customElements.get('mt-self-test')) {
       compute() {
         const a = this.answers;
         const opening = a.opening || 'gt35';
-        const symptoms = SYMPTOMS.map((id) => a[id] || 'no');
+        // Only the symptom questions that are on the page count. A question switched off in the editor (the
+        // "difficult to open your mouth fully" question repeated the finger count, client QA 2026-11-28) must not
+        // count as a "No" answer, or it would pull the summary down.
+        const asked = this.questions.filter((q) => SYMPTOMS.includes(q.id)).map((q) => q.id);
+        const symptoms = asked.map((id) => a[id] || 'no');
         // Stage 5 is the special-attention category: confirmed oral cancer, or under 5 mm with a persistent ulcer.
         // (Both questions are asked only after the "barely opens" answer.)
         if (a.carcinoma === 'yes' || (opening === 'lt5' && a.ulcer === 'yes')) {
@@ -197,7 +203,7 @@ if (!customElements.get('mt-self-test')) {
       /* Symptom summary: No = mild, Occasional = moderate, Yes / Often = extreme. Never changes the stage. */
       severity(symptoms) {
         const t = this.copy.severity || {};
-        if (symptoms.every((s) => s === 'no')) return t.none || 'No symptoms reported';
+        if (!symptoms.length || symptoms.every((s) => s === 'no')) return t.none || 'No symptoms reported';
         const names = [t.mild || 'Mild', t.moderate || 'Moderate', t.extreme || 'Extreme'];
         const levels = symptoms.map((s) => LEVEL[s] || 0);
         const low = Math.min(...levels);
@@ -225,12 +231,14 @@ if (!customElements.get('mt-self-test')) {
         if (msg) msg.hidden = !on;
       }
 
-      // Name and WhatsApp number are required; email is optional but must look right when given.
+      // Name and WhatsApp number are required; email is optional but must look right when given. The consent box
+      // must be ticked before anything is sent.
       submitLead() {
         if (this.sending) return;
         const nameInput = this.form.querySelector('[name="contact[name]"]');
         const phoneInput = this.form.querySelector('[name="contact[phone]"]');
         const emailInput = this.form.querySelector('#MtLeadEmail');
+        const consent = this.form.querySelector('[data-mt-consent]');
         const name = nameInput ? nameInput.value.trim() : '';
         const phone = phoneInput ? phoneInput.value.replace(/\D/g, '') : '';
         const email = emailInput ? emailInput.value.trim() : '';
@@ -238,7 +246,8 @@ if (!customElements.get('mt-self-test')) {
         if (!name) bad.push(nameInput);
         if (!/^[6-9]\d{9}$/.test(phone)) bad.push(phoneInput);
         if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) bad.push(emailInput);
-        [nameInput, phoneInput, emailInput].forEach((input) => this.fieldError(input, bad.includes(input)));
+        if (consent && !consent.checked) bad.push(consent);
+        [nameInput, phoneInput, emailInput, consent].forEach((input) => this.fieldError(input, bad.includes(input)));
         if (bad.length) {
           if (bad[0]) bad[0].focus();
           return;

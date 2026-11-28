@@ -79,14 +79,14 @@
         "hero_note": "",
         "headline": "Foundational oral support",
         "supporting": "Therapeutic Oral Spray",
-        "intro": "<p><strong>A core component of MARCEL OMR Therapy Foundation Programme.</strong></p><p>Developed to support oral comfort and the management of symptoms such as burning sensation and oral tightness associated with Stage 1 and Stage 2 Oral Submucous Fibrosis (OSMF).</p>",
+        "intro": "<p><strong>A core component of the MARCEL OMR Therapy Foundation Kit.</strong></p><p>Developed to support oral comfort and the management of symptoms such as burning sensation and oral tightness associated with Stage 1 and Stage 2 Oral Submucous Fibrosis (OSMF).</p>",
         "details": "",
         "how_lines": "Spray 6 to 7 puffs evenly throughout the mouth.\nUse twice daily, or as directed by your physician or MARCEL OSMF Consultant.\nAfter each spray, do the prescribed mouth and jaw exercises.",
         "safety": "Safety: Keep out of reach of children. Avoid contact with the eyes.",
         "cta_label": "WhatsApp MARCEL Team",
         "cta_to": "whatsapp",
         "cta_link": "",
-        "cta2_label": "Explore MARCEL OMR Therapy Foundation Programme",
+        "cta2_label": "Explore MARCEL OMR Therapy Foundation Kit",
         "cta2_to": "foundation",
         "cta2_link": "",
         "shop_link": "",
@@ -324,7 +324,7 @@
         "eyebrow": "",
         "heading": "Key Benefits",
         "subheading": "Support for Concerns Associated with Stage 1 & Stage 2 OSMF",
-        "text": "MARCEL OraCare is a core component of MARCEL OMR Therapy Foundation Programme. Its supportive benefit areas include:",
+        "text": "MARCEL OraCare is a core component of the MARCEL OMR Therapy Foundation Kit. Its supportive benefit areas include:",
         "center": false,
         "columns": "3",
         "media": "icon",
@@ -420,7 +420,7 @@
           "type": "row",
           "settings": {
             "label": "Therapy Association",
-            "value": "MARCEL OMR Therapy Foundation Programme"
+            "value": "MARCEL OMR Therapy Foundation Kit"
           }
         },
         "row_5": {
@@ -525,14 +525,14 @@
           "type": "question",
           "settings": {
             "question": "What is MARCEL OraCare?",
-            "answer": "<p>MARCEL OraCare is a therapeutic oral spray included in MARCEL OMR Therapy Foundation Programme for people experiencing Stage 1 or Stage 2 OSMF.</p>"
+            "answer": "<p>MARCEL OraCare is a therapeutic oral spray included in the MARCEL OMR Therapy Foundation Kit for people experiencing Stage 1 or Stage 2 OSMF.</p>"
           }
         },
         "question_2": {
           "type": "question",
           "settings": {
             "question": "Who is MARCEL OraCare intended for?",
-            "answer": "<p>It is part of the Foundation Programme, intended for people experiencing Stage 1 or Stage 2 OSMF, subject to appropriate clinical evaluation.</p>"
+            "answer": "<p>It is part of the Foundation Kit, intended for people experiencing Stage 1 or Stage 2 OSMF, subject to appropriate clinical evaluation.</p>"
           }
         },
         "question_3": {
@@ -553,7 +553,7 @@
           "type": "question",
           "settings": {
             "question": "Can MARCEL OraCare be used as a standalone treatment for OSMF?",
-            "answer": "<p>No. MARCEL OraCare is one component of MARCEL OMR Therapy Foundation Programme. It is not a standalone cure and does not replace professional OSMF evaluation and care.</p>"
+            "answer": "<p>No. MARCEL OraCare is one component of the MARCEL OMR Therapy Foundation Kit. It is not a standalone cure and does not replace professional OSMF evaluation and care.</p>"
           }
         },
         "question_6": {
@@ -604,7 +604,7 @@
         "style": "navy",
         "eyebrow": "",
         "heading": "Need Guidance? Talk to MARCEL Team.",
-        "text": "Every individual’s OSMF experience is different. If you are experiencing burning while eating, tightness inside your cheeks, dryness of the mouth or difficulty opening your mouth, connect with the MARCEL Team to understand MARCEL OraCare and its role in MARCEL OMR Therapy Foundation Programme.",
+        "text": "Every individual’s OSMF experience is different. If you are experiencing burning while eating, tightness inside your cheeks, dryness of the mouth or difficulty opening your mouth, connect with the MARCEL Team to understand MARCEL OraCare and its role in the MARCEL OMR Therapy Foundation Kit.",
         "button_1_label": "WhatsApp MARCEL Team",
         "button_1_to": "whatsapp",
         "button_1_link": "",

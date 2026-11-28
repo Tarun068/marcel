@@ -1808,5 +1808,41 @@
         "default": "Hi MARCEL team, I would like to know more about"
       }
     ]
+  },
+  {
+    "name": "Marcel search engines",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Titles and descriptions shown in Google and in shared links. A meta description set in the Shopify admin (Search engine listing on a page, product or collection, or Online Store > Preferences for the home page) always wins over these."
+      },
+      {
+        "type": "text",
+        "id": "mt_seo_home_title",
+        "label": "Home page title",
+        "info": "Used while Online Store > Preferences has no home page title.",
+        "default": "MARCEL OMR Therapy: A Structured Approach to OSMF Care"
+      },
+      {
+        "type": "textarea",
+        "id": "mt_seo_home_description",
+        "label": "Home page description",
+        "info": "Used while Online Store > Preferences has no home page meta description. About 150 characters reads best.",
+        "default": "MARCEL OMR Therapy combines oral mucosal care, functional support, guided progress and dietary guidance for people living with Oral Submucous Fibrosis (OSMF)."
+      },
+      {
+        "type": "textarea",
+        "id": "mt_seo_descriptions",
+        "label": "Page descriptions",
+        "info": "One line per page, product or collection: its handle (the end of its address), a | and the description.",
+        "default": "osmf-self-check | Answer simple questions about your mouth opening and symptoms to see your possible OSMF stage and the next step. The self-check cannot diagnose OSMF.\nself-check-result | Your MARCEL OSMF Self-Check result: your possible stage, a summary of your answers and the next step. A doctor must confirm the diagnosis.\nfind-osmf-specialist | Find an OSMF Specialist Doctor near you. Search by city, PIN code or state to see clinic addresses, contact numbers and registration numbers.\nmarcel-omr-therapy | MARCEL OMR Therapy is a planned framework for OSMF care that brings together oral mucosal care, functional support, guided progress and dietary guidance.\nabout | How MARCEL OMR Therapy grew from years of development, clinical assessment and work on Oral Submucous Fibrosis (OSMF) at JanSuta Pharmaceuticals.\nfaq | Answers to common questions about OSMF, MARCEL OMR Therapy, consultations with MARCEL OSMF Consultants and OSMF Specialist Doctors, and products.\nfoundation-kit | The MARCEL OMR Therapy Foundation Kit, with OraCare Oral Spray and Smile Toothpaste, is intended for people assessed as having Stage 1 or 2 OSMF.\nadvance-kit | The MARCEL OMR Therapy Advance Kit, with OraShield Oral Rinse and Smile Toothpaste, is intended for people assessed as having Stage 3 or 4 OSMF.\n12-week-care-journey | How the 12-week MARCEL care journey works: four phases that organise your routine and follow-up, with progress reviews at Weeks 3, 6, 9 and 12.\nget-help | Three ways to get help with OSMF: the MARCEL Team for information, a MARCEL OSMF Consultant by phone or video, and OSMF Specialist Doctors in person.\nunderstand-osmf | Understand Oral Submucous Fibrosis (OSMF): what it is, the early signs, risk factors such as areca nut and tobacco, its stages and when to seek care.\nhealthcare-professionals | Information for dentists and doctors about MARCEL OMR Therapy and OSMF, with clinical resources to download and the OSMF Specialist Doctor network.\ncontact | Contact the MARCEL Team with questions about OSMF, MARCEL OMR Therapy, our products, your order or a consultation.\nall | Shop MARCEL oral care for OSMF: the Protection, Foundation and Advance Kits, OraCare Oral Spray, OraShield Oral Rinse, Smile Toothpaste, OraLis and MOFlex.\nfrontpage | Shop MARCEL oral care for OSMF: the Protection, Foundation and Advance Kits, OraCare Oral Spray, OraShield Oral Rinse, Smile Toothpaste, OraLis and MOFlex.\nmarcel-omr-therapy™-foundation-kit | The MARCEL OMR Therapy Foundation Kit combines OraCare Oral Spray and Smile Toothpaste for people assessed as having Stage 1 or 2 OSMF.\nmarcel-omr-therapy™-advance | The MARCEL OMR Therapy Advance Kit combines OraShield Oral Rinse and Smile Toothpaste for people assessed as having Stage 3 or 4 OSMF.\nmarcel-oralis | MARCEL OraLis Herbal Mouthwash is pH balanced and antibacterial, for fresh breath and a cooling feel as part of your daily oral care."
+      },
+      {
+        "type": "textarea",
+        "id": "mt_seo_default_description",
+        "label": "Description for any other page",
+        "default": "A structured approach to oral mucosal care for people living with Oral Submucous Fibrosis (OSMF), from the MARCEL Team at JanSuta Pharmaceuticals."
+      }
+    ]
   }
 ]

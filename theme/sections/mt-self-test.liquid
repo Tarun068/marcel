@@ -89,7 +89,8 @@
       <div class="mt-test-card" data-mt-lead hidden>
         <div class="mt-stack-sm">
           <span class="mt-eyebrow">{{ section.settings.lead_eyebrow | escape }}</span>
-          <h1 class="mt-test-title">{{ section.settings.lead_heading | escape }}</h1>
+          {%- comment -%} h2: the page hero holds the page's one H1 (client QA 2026-11-28, SEO). {%- endcomment -%}
+          <h2 class="mt-test-title">{{ section.settings.lead_heading | escape }}</h2>
           <p class="mt-test-help">{{ section.settings.lead_text | escape }}</p>
         </div>
         {%- comment -%}
@@ -126,6 +127,20 @@
               <p class="mt-err" id="MtLeadEmailErr" data-mt-error="email" hidden>{{ section.settings.email_error | escape }}</p>
             </div>
           </div>
+          {%- comment -%}
+            Consent before any details leave the browser (client QA 2026-11-28: health answers need consent under the
+            DPDP Act). The policy opens in a new tab so the answers on this page are not lost.
+          {%- endcomment -%}
+          {%- if section.settings.send_leads -%}
+            {%- capture privacy_link -%}<a href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}" target="_blank" rel="noopener">{{ section.settings.privacy_label | escape }}</a>{%- endcapture -%}
+            <div class="mt-field mt-consent">
+              <label class="mt-check-row" for="MtLeadConsent">
+                <input type="checkbox" id="MtLeadConsent" name="contact[consent]" value="Yes" required aria-describedby="MtLeadConsentErr" data-mt-consent>
+                <span>{{ section.settings.consent_text | escape | replace: '[privacy]', privacy_link }}</span>
+              </label>
+              <p class="mt-err" id="MtLeadConsentErr" hidden>{{ section.settings.consent_error | escape }}</p>
+            </div>
+          {%- endif -%}
           <div class="mt-btn-row">
             <button class="mt-btn mt-btn-primary" type="submit">
               {{- section.settings.submit_label | escape -}}
@@ -282,7 +297,7 @@
     },
     {
       "type": "paragraph",
-      "content": "Answers to the five symptom questions: No = mild, Occasional = moderate, Yes / Often = extreme. The summary never changes the stage."
+      "content": "Answers to the symptom questions: No = mild, Occasional = moderate, Yes / Often = extreme. A hidden question is left out of the summary. The summary never changes the stage."
     },
     {
       "type": "text",
@@ -410,6 +425,25 @@
       "id": "email_error",
       "label": "Email error",
       "default": "Enter a valid email address, or leave it blank."
+    },
+    {
+      "type": "textarea",
+      "id": "consent_text",
+      "label": "Consent text",
+      "info": "Shown with a box the visitor must tick before the details are sent. [privacy] becomes a link to the store's privacy policy.",
+      "default": "I agree that the MARCEL Team may use my self-check answers and contact details to send my result and contact me about it, as explained in the [privacy]."
+    },
+    {
+      "type": "text",
+      "id": "privacy_label",
+      "label": "Privacy policy link text",
+      "default": "Privacy Policy"
+    },
+    {
+      "type": "text",
+      "id": "consent_error",
+      "label": "Consent error",
+      "default": "Please tick the box to agree before we show your result."
     },
     {
       "type": "text",

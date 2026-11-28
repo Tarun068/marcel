@@ -1,14 +1,17 @@
 {%- doc -%}
   Renders Open Graph and Twitter metadata for the current page.
 
+  @param {string} [title] - Page title worked out in the layout (the home page title from theme settings)
+  @param {string} [description] - Meta description from mt-seo-description
+
   @example
-  {% render 'meta-tags' %}
+  {% render 'meta-tags', title: mt_title, description: mt_description %}
 {%- enddoc -%}
 {%- liquid
-  assign og_title = page_title | default: shop.name | remove: '™'
+  assign og_title = title | default: page_title | default: shop.name | remove: '™'
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
-  assign og_description = page_description | default: shop.description | default: shop.name | remove: '™'
+  assign og_description = description | default: page_description | default: shop.description | default: shop.name | remove: '™'
 
   if request.page_type == 'product'
     assign og_type = 'product'
